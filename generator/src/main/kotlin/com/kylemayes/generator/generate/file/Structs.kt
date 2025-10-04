@@ -11,6 +11,7 @@ import com.kylemayes.generator.registry.Registry
 import com.kylemayes.generator.registry.Structure
 import com.kylemayes.generator.registry.getIdentifier
 import com.kylemayes.generator.registry.isPlatformPointer
+import com.kylemayes.generator.registry.isPointer
 
 /** Generates Rust structs for Vulkan structs. */
 fun Registry.generateStructs(): String {
@@ -45,6 +46,8 @@ private fun Registry.generateStruct(struct: Structure): String {
         bitfields.add(generateBitfield(name, members))
     }
 
+    val pointers = struct.members.any { m -> m.type.isPointer() }
+
     return """
 ${bitfields.joinToString("")}
 
@@ -57,6 +60,9 @@ pub struct ${struct.name} {
 
 ${if (!derives.contains("Debug")) generateDebugImpl(struct) else ""}
 ${if (!derives.contains("Default")) generateDefaultImpl(struct) else ""}
+
+${if (pointers) "unsafe impl Send for ${struct.name} {}" else ""}
+${if (pointers) "unsafe impl Sync for ${struct.name} {}" else ""}
     """
 }
 

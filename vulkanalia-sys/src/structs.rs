@@ -74,6 +74,9 @@ impl Default for AccelerationStructureBuildGeometryInfoKHR {
     }
 }
 
+unsafe impl Send for AccelerationStructureBuildGeometryInfoKHR {}
+unsafe impl Sync for AccelerationStructureBuildGeometryInfoKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAccelerationStructureBuildRangeInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
@@ -108,6 +111,9 @@ impl Default for AccelerationStructureBuildSizesInfoKHR {
     }
 }
 
+unsafe impl Send for AccelerationStructureBuildSizesInfoKHR {}
+unsafe impl Sync for AccelerationStructureBuildSizesInfoKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAccelerationStructureCaptureDescriptorDataInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -129,6 +135,9 @@ impl Default for AccelerationStructureCaptureDescriptorDataInfoEXT {
         }
     }
 }
+
+unsafe impl Send for AccelerationStructureCaptureDescriptorDataInfoEXT {}
+unsafe impl Sync for AccelerationStructureCaptureDescriptorDataInfoEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAccelerationStructureCreateInfoKHR.html>
 #[repr(C)]
@@ -160,6 +169,9 @@ impl Default for AccelerationStructureCreateInfoKHR {
     }
 }
 
+unsafe impl Send for AccelerationStructureCreateInfoKHR {}
+unsafe impl Sync for AccelerationStructureCreateInfoKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAccelerationStructureCreateInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -181,6 +193,9 @@ impl Default for AccelerationStructureCreateInfoNV {
         }
     }
 }
+
+unsafe impl Send for AccelerationStructureCreateInfoNV {}
+unsafe impl Sync for AccelerationStructureCreateInfoNV {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAccelerationStructureDenseGeometryFormatTrianglesDataAMDX.html>
 #[repr(C)]
@@ -214,6 +229,9 @@ impl Default for AccelerationStructureDenseGeometryFormatTrianglesDataAMDX {
     }
 }
 
+unsafe impl Send for AccelerationStructureDenseGeometryFormatTrianglesDataAMDX {}
+unsafe impl Sync for AccelerationStructureDenseGeometryFormatTrianglesDataAMDX {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAccelerationStructureDeviceAddressInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -233,6 +251,9 @@ impl Default for AccelerationStructureDeviceAddressInfoKHR {
         }
     }
 }
+
+unsafe impl Send for AccelerationStructureDeviceAddressInfoKHR {}
+unsafe impl Sync for AccelerationStructureDeviceAddressInfoKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAccelerationStructureGeometryAabbsDataKHR.html>
 #[repr(C)]
@@ -256,6 +277,9 @@ impl Default for AccelerationStructureGeometryAabbsDataKHR {
     }
 }
 
+unsafe impl Send for AccelerationStructureGeometryAabbsDataKHR {}
+unsafe impl Sync for AccelerationStructureGeometryAabbsDataKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAccelerationStructureGeometryInstancesDataKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug)]
@@ -277,6 +301,9 @@ impl Default for AccelerationStructureGeometryInstancesDataKHR {
         }
     }
 }
+
+unsafe impl Send for AccelerationStructureGeometryInstancesDataKHR {}
+unsafe impl Sync for AccelerationStructureGeometryInstancesDataKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAccelerationStructureGeometryKHR.html>
 #[repr(C)]
@@ -301,6 +328,9 @@ impl Default for AccelerationStructureGeometryKHR {
         }
     }
 }
+
+unsafe impl Send for AccelerationStructureGeometryKHR {}
+unsafe impl Sync for AccelerationStructureGeometryKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAccelerationStructureGeometryLinearSweptSpheresDataNV.html>
 #[repr(C)]
@@ -342,6 +372,9 @@ impl Default for AccelerationStructureGeometryLinearSweptSpheresDataNV {
     }
 }
 
+unsafe impl Send for AccelerationStructureGeometryLinearSweptSpheresDataNV {}
+unsafe impl Sync for AccelerationStructureGeometryLinearSweptSpheresDataNV {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAccelerationStructureGeometryMotionTrianglesDataNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug)]
@@ -361,6 +394,9 @@ impl Default for AccelerationStructureGeometryMotionTrianglesDataNV {
         }
     }
 }
+
+unsafe impl Send for AccelerationStructureGeometryMotionTrianglesDataNV {}
+unsafe impl Sync for AccelerationStructureGeometryMotionTrianglesDataNV {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAccelerationStructureGeometrySpheresDataNV.html>
 #[repr(C)]
@@ -398,6 +434,9 @@ impl Default for AccelerationStructureGeometrySpheresDataNV {
     }
 }
 
+unsafe impl Send for AccelerationStructureGeometrySpheresDataNV {}
+unsafe impl Sync for AccelerationStructureGeometrySpheresDataNV {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAccelerationStructureGeometryTrianglesDataKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug)]
@@ -430,6 +469,9 @@ impl Default for AccelerationStructureGeometryTrianglesDataKHR {
     }
 }
 
+unsafe impl Send for AccelerationStructureGeometryTrianglesDataKHR {}
+unsafe impl Sync for AccelerationStructureGeometryTrianglesDataKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAccelerationStructureInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -457,6 +499,9 @@ impl Default for AccelerationStructureInfoNV {
         }
     }
 }
+
+unsafe impl Send for AccelerationStructureInfoNV {}
+unsafe impl Sync for AccelerationStructureInfoNV {}
 
 bitfields32! {
     struct AccelerationStructureInstanceKHRBitfields0 {
@@ -529,6 +574,9 @@ impl Default for AccelerationStructureMemoryRequirementsInfoNV {
     }
 }
 
+unsafe impl Send for AccelerationStructureMemoryRequirementsInfoNV {}
+unsafe impl Sync for AccelerationStructureMemoryRequirementsInfoNV {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAccelerationStructureMotionInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -550,6 +598,9 @@ impl Default for AccelerationStructureMotionInfoNV {
         }
     }
 }
+
+unsafe impl Send for AccelerationStructureMotionInfoNV {}
+unsafe impl Sync for AccelerationStructureMotionInfoNV {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAccelerationStructureMotionInstanceNV.html>
 #[repr(C)]
@@ -635,6 +686,9 @@ impl Default for AccelerationStructureTrianglesDisplacementMicromapNV {
     }
 }
 
+unsafe impl Send for AccelerationStructureTrianglesDisplacementMicromapNV {}
+unsafe impl Sync for AccelerationStructureTrianglesDisplacementMicromapNV {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAccelerationStructureTrianglesOpacityMicromapEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug)]
@@ -669,6 +723,9 @@ impl Default for AccelerationStructureTrianglesOpacityMicromapEXT {
     }
 }
 
+unsafe impl Send for AccelerationStructureTrianglesOpacityMicromapEXT {}
+unsafe impl Sync for AccelerationStructureTrianglesOpacityMicromapEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAccelerationStructureVersionInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -688,6 +745,9 @@ impl Default for AccelerationStructureVersionInfoKHR {
         }
     }
 }
+
+unsafe impl Send for AccelerationStructureVersionInfoKHR {}
+unsafe impl Sync for AccelerationStructureVersionInfoKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAcquireNextImageInfoKHR.html>
 #[repr(C)]
@@ -717,6 +777,9 @@ impl Default for AcquireNextImageInfoKHR {
     }
 }
 
+unsafe impl Send for AcquireNextImageInfoKHR {}
+unsafe impl Sync for AcquireNextImageInfoKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAcquireProfilingLockInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -738,6 +801,9 @@ impl Default for AcquireProfilingLockInfoKHR {
         }
     }
 }
+
+unsafe impl Send for AcquireProfilingLockInfoKHR {}
+unsafe impl Sync for AcquireProfilingLockInfoKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAllocationCallbacks.html>
 #[repr(C)]
@@ -784,6 +850,9 @@ impl Default for AllocationCallbacks {
     }
 }
 
+unsafe impl Send for AllocationCallbacks {}
+unsafe impl Sync for AllocationCallbacks {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAmigoProfilingSubmitInfoSEC.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -805,6 +874,9 @@ impl Default for AmigoProfilingSubmitInfoSEC {
         }
     }
 }
+
+unsafe impl Send for AmigoProfilingSubmitInfoSEC {}
+unsafe impl Sync for AmigoProfilingSubmitInfoSEC {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAndroidHardwareBufferFormatProperties2ANDROID.html>
 #[repr(C)]
@@ -840,6 +912,9 @@ impl Default for AndroidHardwareBufferFormatProperties2ANDROID {
     }
 }
 
+unsafe impl Send for AndroidHardwareBufferFormatProperties2ANDROID {}
+unsafe impl Sync for AndroidHardwareBufferFormatProperties2ANDROID {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAndroidHardwareBufferFormatPropertiesANDROID.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -874,6 +949,9 @@ impl Default for AndroidHardwareBufferFormatPropertiesANDROID {
     }
 }
 
+unsafe impl Send for AndroidHardwareBufferFormatPropertiesANDROID {}
+unsafe impl Sync for AndroidHardwareBufferFormatPropertiesANDROID {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAndroidHardwareBufferFormatResolvePropertiesANDROID.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -893,6 +971,9 @@ impl Default for AndroidHardwareBufferFormatResolvePropertiesANDROID {
         }
     }
 }
+
+unsafe impl Send for AndroidHardwareBufferFormatResolvePropertiesANDROID {}
+unsafe impl Sync for AndroidHardwareBufferFormatResolvePropertiesANDROID {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAndroidHardwareBufferPropertiesANDROID.html>
 #[repr(C)]
@@ -916,6 +997,9 @@ impl Default for AndroidHardwareBufferPropertiesANDROID {
     }
 }
 
+unsafe impl Send for AndroidHardwareBufferPropertiesANDROID {}
+unsafe impl Sync for AndroidHardwareBufferPropertiesANDROID {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAndroidHardwareBufferUsageANDROID.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -935,6 +1019,9 @@ impl Default for AndroidHardwareBufferUsageANDROID {
         }
     }
 }
+
+unsafe impl Send for AndroidHardwareBufferUsageANDROID {}
+unsafe impl Sync for AndroidHardwareBufferUsageANDROID {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAndroidSurfaceCreateInfoKHR.html>
 #[repr(C)]
@@ -957,6 +1044,9 @@ impl Default for AndroidSurfaceCreateInfoKHR {
         }
     }
 }
+
+unsafe impl Send for AndroidSurfaceCreateInfoKHR {}
+unsafe impl Sync for AndroidSurfaceCreateInfoKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAntiLagDataAMD.html>
 #[repr(C)]
@@ -982,6 +1072,9 @@ impl Default for AntiLagDataAMD {
     }
 }
 
+unsafe impl Send for AntiLagDataAMD {}
+unsafe impl Sync for AntiLagDataAMD {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAntiLagPresentationInfoAMD.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -1003,6 +1096,9 @@ impl Default for AntiLagPresentationInfoAMD {
         }
     }
 }
+
+unsafe impl Send for AntiLagPresentationInfoAMD {}
+unsafe impl Sync for AntiLagPresentationInfoAMD {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkApplicationInfo.html>
 #[repr(C)]
@@ -1032,6 +1128,9 @@ impl Default for ApplicationInfo {
     }
 }
 
+unsafe impl Send for ApplicationInfo {}
+unsafe impl Sync for ApplicationInfo {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkApplicationParametersEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -1057,6 +1156,9 @@ impl Default for ApplicationParametersEXT {
         }
     }
 }
+
+unsafe impl Send for ApplicationParametersEXT {}
+unsafe impl Sync for ApplicationParametersEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAttachmentDescription.html>
 #[repr(C)]
@@ -1109,6 +1211,9 @@ impl Default for AttachmentDescription2 {
     }
 }
 
+unsafe impl Send for AttachmentDescription2 {}
+unsafe impl Sync for AttachmentDescription2 {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAttachmentDescriptionStencilLayout.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -1131,6 +1236,9 @@ impl Default for AttachmentDescriptionStencilLayout {
     }
 }
 
+unsafe impl Send for AttachmentDescriptionStencilLayout {}
+unsafe impl Sync for AttachmentDescriptionStencilLayout {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAttachmentFeedbackLoopInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -1150,6 +1258,9 @@ impl Default for AttachmentFeedbackLoopInfoEXT {
         }
     }
 }
+
+unsafe impl Send for AttachmentFeedbackLoopInfoEXT {}
+unsafe impl Sync for AttachmentFeedbackLoopInfoEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAttachmentReference.html>
 #[repr(C)]
@@ -1183,6 +1294,9 @@ impl Default for AttachmentReference2 {
     }
 }
 
+unsafe impl Send for AttachmentReference2 {}
+unsafe impl Sync for AttachmentReference2 {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAttachmentReferenceStencilLayout.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -1202,6 +1316,9 @@ impl Default for AttachmentReferenceStencilLayout {
         }
     }
 }
+
+unsafe impl Send for AttachmentReferenceStencilLayout {}
+unsafe impl Sync for AttachmentReferenceStencilLayout {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAttachmentSampleCountInfoAMD.html>
 #[repr(C)]
@@ -1226,6 +1343,9 @@ impl Default for AttachmentSampleCountInfoAMD {
         }
     }
 }
+
+unsafe impl Send for AttachmentSampleCountInfoAMD {}
+unsafe impl Sync for AttachmentSampleCountInfoAMD {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAttachmentSampleLocationsEXT.html>
 #[repr(C)]
@@ -1253,6 +1373,9 @@ impl Default for BaseInStructure {
     }
 }
 
+unsafe impl Send for BaseInStructure {}
+unsafe impl Sync for BaseInStructure {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBaseOutStructure.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -1270,6 +1393,9 @@ impl Default for BaseOutStructure {
         }
     }
 }
+
+unsafe impl Send for BaseOutStructure {}
+unsafe impl Sync for BaseOutStructure {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBindAccelerationStructureMemoryInfoNV.html>
 #[repr(C)]
@@ -1299,6 +1425,9 @@ impl Default for BindAccelerationStructureMemoryInfoNV {
     }
 }
 
+unsafe impl Send for BindAccelerationStructureMemoryInfoNV {}
+unsafe impl Sync for BindAccelerationStructureMemoryInfoNV {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBindBufferMemoryDeviceGroupInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -1320,6 +1449,9 @@ impl Default for BindBufferMemoryDeviceGroupInfo {
         }
     }
 }
+
+unsafe impl Send for BindBufferMemoryDeviceGroupInfo {}
+unsafe impl Sync for BindBufferMemoryDeviceGroupInfo {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBindBufferMemoryInfo.html>
 #[repr(C)]
@@ -1344,6 +1476,9 @@ impl Default for BindBufferMemoryInfo {
         }
     }
 }
+
+unsafe impl Send for BindBufferMemoryInfo {}
+unsafe impl Sync for BindBufferMemoryInfo {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBindDataGraphPipelineSessionMemoryInfoARM.html>
 #[repr(C)]
@@ -1373,6 +1508,9 @@ impl Default for BindDataGraphPipelineSessionMemoryInfoARM {
     }
 }
 
+unsafe impl Send for BindDataGraphPipelineSessionMemoryInfoARM {}
+unsafe impl Sync for BindDataGraphPipelineSessionMemoryInfoARM {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBindDescriptorBufferEmbeddedSamplersInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -1396,6 +1534,9 @@ impl Default for BindDescriptorBufferEmbeddedSamplersInfoEXT {
         }
     }
 }
+
+unsafe impl Send for BindDescriptorBufferEmbeddedSamplersInfoEXT {}
+unsafe impl Sync for BindDescriptorBufferEmbeddedSamplersInfoEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBindDescriptorSetsInfo.html>
 #[repr(C)]
@@ -1429,6 +1570,9 @@ impl Default for BindDescriptorSetsInfo {
     }
 }
 
+unsafe impl Send for BindDescriptorSetsInfo {}
+unsafe impl Sync for BindDescriptorSetsInfo {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBindImageMemoryDeviceGroupInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -1455,6 +1599,9 @@ impl Default for BindImageMemoryDeviceGroupInfo {
     }
 }
 
+unsafe impl Send for BindImageMemoryDeviceGroupInfo {}
+unsafe impl Sync for BindImageMemoryDeviceGroupInfo {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBindImageMemoryInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -1479,6 +1626,9 @@ impl Default for BindImageMemoryInfo {
     }
 }
 
+unsafe impl Send for BindImageMemoryInfo {}
+unsafe impl Sync for BindImageMemoryInfo {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBindImageMemorySwapchainInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -1501,6 +1651,9 @@ impl Default for BindImageMemorySwapchainInfoKHR {
     }
 }
 
+unsafe impl Send for BindImageMemorySwapchainInfoKHR {}
+unsafe impl Sync for BindImageMemorySwapchainInfoKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBindImagePlaneMemoryInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -1520,6 +1673,9 @@ impl Default for BindImagePlaneMemoryInfo {
         }
     }
 }
+
+unsafe impl Send for BindImagePlaneMemoryInfo {}
+unsafe impl Sync for BindImagePlaneMemoryInfo {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBindIndexBufferIndirectCommandEXT.html>
 #[repr(C)]
@@ -1558,6 +1714,9 @@ impl Default for BindMemoryStatus {
         }
     }
 }
+
+unsafe impl Send for BindMemoryStatus {}
+unsafe impl Sync for BindMemoryStatus {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBindPipelineIndirectCommandNV.html>
 #[repr(C)]
@@ -1611,6 +1770,9 @@ impl Default for BindSparseInfo {
     }
 }
 
+unsafe impl Send for BindSparseInfo {}
+unsafe impl Sync for BindSparseInfo {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBindTensorMemoryInfoARM.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -1634,6 +1796,9 @@ impl Default for BindTensorMemoryInfoARM {
         }
     }
 }
+
+unsafe impl Send for BindTensorMemoryInfoARM {}
+unsafe impl Sync for BindTensorMemoryInfoARM {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBindVertexBufferIndirectCommandEXT.html>
 #[repr(C)]
@@ -1679,6 +1844,9 @@ impl Default for BindVideoSessionMemoryInfoKHR {
     }
 }
 
+unsafe impl Send for BindVideoSessionMemoryInfoKHR {}
+unsafe impl Sync for BindVideoSessionMemoryInfoKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBlitImageCubicWeightsInfoQCOM.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -1698,6 +1866,9 @@ impl Default for BlitImageCubicWeightsInfoQCOM {
         }
     }
 }
+
+unsafe impl Send for BlitImageCubicWeightsInfoQCOM {}
+unsafe impl Sync for BlitImageCubicWeightsInfoQCOM {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBlitImageInfo2.html>
 #[repr(C)]
@@ -1731,6 +1902,9 @@ impl Default for BlitImageInfo2 {
     }
 }
 
+unsafe impl Send for BlitImageInfo2 {}
+unsafe impl Sync for BlitImageInfo2 {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBufferCaptureDescriptorDataInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -1750,6 +1924,9 @@ impl Default for BufferCaptureDescriptorDataInfoEXT {
         }
     }
 }
+
+unsafe impl Send for BufferCaptureDescriptorDataInfoEXT {}
+unsafe impl Sync for BufferCaptureDescriptorDataInfoEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBufferCollectionBufferCreateInfoFUCHSIA.html>
 #[repr(C)]
@@ -1772,6 +1949,9 @@ impl Default for BufferCollectionBufferCreateInfoFUCHSIA {
         }
     }
 }
+
+unsafe impl Send for BufferCollectionBufferCreateInfoFUCHSIA {}
+unsafe impl Sync for BufferCollectionBufferCreateInfoFUCHSIA {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBufferCollectionConstraintsInfoFUCHSIA.html>
 #[repr(C)]
@@ -1801,6 +1981,9 @@ impl Default for BufferCollectionConstraintsInfoFUCHSIA {
     }
 }
 
+unsafe impl Send for BufferCollectionConstraintsInfoFUCHSIA {}
+unsafe impl Sync for BufferCollectionConstraintsInfoFUCHSIA {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBufferCollectionCreateInfoFUCHSIA.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -1820,6 +2003,9 @@ impl Default for BufferCollectionCreateInfoFUCHSIA {
         }
     }
 }
+
+unsafe impl Send for BufferCollectionCreateInfoFUCHSIA {}
+unsafe impl Sync for BufferCollectionCreateInfoFUCHSIA {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBufferCollectionImageCreateInfoFUCHSIA.html>
 #[repr(C)]
@@ -1842,6 +2028,9 @@ impl Default for BufferCollectionImageCreateInfoFUCHSIA {
         }
     }
 }
+
+unsafe impl Send for BufferCollectionImageCreateInfoFUCHSIA {}
+unsafe impl Sync for BufferCollectionImageCreateInfoFUCHSIA {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBufferCollectionPropertiesFUCHSIA.html>
 #[repr(C)]
@@ -1883,6 +2072,9 @@ impl Default for BufferCollectionPropertiesFUCHSIA {
     }
 }
 
+unsafe impl Send for BufferCollectionPropertiesFUCHSIA {}
+unsafe impl Sync for BufferCollectionPropertiesFUCHSIA {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBufferConstraintsInfoFUCHSIA.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -1906,6 +2098,9 @@ impl Default for BufferConstraintsInfoFUCHSIA {
         }
     }
 }
+
+unsafe impl Send for BufferConstraintsInfoFUCHSIA {}
+unsafe impl Sync for BufferConstraintsInfoFUCHSIA {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBufferCopy.html>
 #[repr(C)]
@@ -1940,6 +2135,9 @@ impl Default for BufferCopy2 {
     }
 }
 
+unsafe impl Send for BufferCopy2 {}
+unsafe impl Sync for BufferCopy2 {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBufferCreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -1970,6 +2168,9 @@ impl Default for BufferCreateInfo {
     }
 }
 
+unsafe impl Send for BufferCreateInfo {}
+unsafe impl Sync for BufferCreateInfo {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBufferDeviceAddressCreateInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -1990,6 +2191,9 @@ impl Default for BufferDeviceAddressCreateInfoEXT {
     }
 }
 
+unsafe impl Send for BufferDeviceAddressCreateInfoEXT {}
+unsafe impl Sync for BufferDeviceAddressCreateInfoEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBufferDeviceAddressInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -2009,6 +2213,9 @@ impl Default for BufferDeviceAddressInfo {
         }
     }
 }
+
+unsafe impl Send for BufferDeviceAddressInfo {}
+unsafe impl Sync for BufferDeviceAddressInfo {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBufferImageCopy.html>
 #[repr(C)]
@@ -2052,6 +2259,9 @@ impl Default for BufferImageCopy2 {
     }
 }
 
+unsafe impl Send for BufferImageCopy2 {}
+unsafe impl Sync for BufferImageCopy2 {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBufferMemoryBarrier.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -2083,6 +2293,9 @@ impl Default for BufferMemoryBarrier {
         }
     }
 }
+
+unsafe impl Send for BufferMemoryBarrier {}
+unsafe impl Sync for BufferMemoryBarrier {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBufferMemoryBarrier2.html>
 #[repr(C)]
@@ -2120,6 +2333,9 @@ impl Default for BufferMemoryBarrier2 {
     }
 }
 
+unsafe impl Send for BufferMemoryBarrier2 {}
+unsafe impl Sync for BufferMemoryBarrier2 {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBufferMemoryRequirementsInfo2.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -2139,6 +2355,9 @@ impl Default for BufferMemoryRequirementsInfo2 {
         }
     }
 }
+
+unsafe impl Send for BufferMemoryRequirementsInfo2 {}
+unsafe impl Sync for BufferMemoryRequirementsInfo2 {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBufferOpaqueCaptureAddressCreateInfo.html>
 #[repr(C)]
@@ -2160,6 +2379,9 @@ impl Default for BufferOpaqueCaptureAddressCreateInfo {
     }
 }
 
+unsafe impl Send for BufferOpaqueCaptureAddressCreateInfo {}
+unsafe impl Sync for BufferOpaqueCaptureAddressCreateInfo {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBufferUsageFlags2CreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -2179,6 +2401,9 @@ impl Default for BufferUsageFlags2CreateInfo {
         }
     }
 }
+
+unsafe impl Send for BufferUsageFlags2CreateInfo {}
+unsafe impl Sync for BufferUsageFlags2CreateInfo {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBufferViewCreateInfo.html>
 #[repr(C)]
@@ -2207,6 +2432,9 @@ impl Default for BufferViewCreateInfo {
         }
     }
 }
+
+unsafe impl Send for BufferViewCreateInfo {}
+unsafe impl Sync for BufferViewCreateInfo {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBuildPartitionedAccelerationStructureIndirectCommandNV.html>
 #[repr(C)]
@@ -2247,6 +2475,9 @@ impl Default for BuildPartitionedAccelerationStructureInfoNV {
     }
 }
 
+unsafe impl Send for BuildPartitionedAccelerationStructureInfoNV {}
+unsafe impl Sync for BuildPartitionedAccelerationStructureInfoNV {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCalibratedTimestampInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -2266,6 +2497,9 @@ impl Default for CalibratedTimestampInfoKHR {
         }
     }
 }
+
+unsafe impl Send for CalibratedTimestampInfoKHR {}
+unsafe impl Sync for CalibratedTimestampInfoKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCheckpointData2NV.html>
 #[repr(C)]
@@ -2289,6 +2523,9 @@ impl Default for CheckpointData2NV {
     }
 }
 
+unsafe impl Send for CheckpointData2NV {}
+unsafe impl Sync for CheckpointData2NV {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCheckpointDataNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -2310,6 +2547,9 @@ impl Default for CheckpointDataNV {
         }
     }
 }
+
+unsafe impl Send for CheckpointDataNV {}
+unsafe impl Sync for CheckpointDataNV {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkClearAttachment.html>
 #[repr(C)]
@@ -2429,6 +2669,9 @@ impl Default for ClusterAccelerationStructureClustersBottomLevelInputNV {
     }
 }
 
+unsafe impl Send for ClusterAccelerationStructureClustersBottomLevelInputNV {}
+unsafe impl Sync for ClusterAccelerationStructureClustersBottomLevelInputNV {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkClusterAccelerationStructureCommandsInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug)]
@@ -2463,6 +2706,9 @@ impl Default for ClusterAccelerationStructureCommandsInfoNV {
         }
     }
 }
+
+unsafe impl Send for ClusterAccelerationStructureCommandsInfoNV {}
+unsafe impl Sync for ClusterAccelerationStructureCommandsInfoNV {}
 
 bitfields32! {
     struct ClusterAccelerationStructureGeometryIndexAndGeometryFlagsNVBitfields0 {
@@ -2514,6 +2760,9 @@ impl Default for ClusterAccelerationStructureInputInfoNV {
     }
 }
 
+unsafe impl Send for ClusterAccelerationStructureInputInfoNV {}
+unsafe impl Sync for ClusterAccelerationStructureInputInfoNV {}
+
 bitfields32! {
     struct ClusterAccelerationStructureInstantiateClusterInfoNVBitfields0 {
         (geometry_index_offset, with_geometry_index_offset)[0 .. 24],
@@ -2562,6 +2811,9 @@ impl Default for ClusterAccelerationStructureMoveObjectsInputNV {
     }
 }
 
+unsafe impl Send for ClusterAccelerationStructureMoveObjectsInputNV {}
+unsafe impl Sync for ClusterAccelerationStructureMoveObjectsInputNV {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkClusterAccelerationStructureTriangleClusterInputNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -2596,6 +2848,9 @@ impl Default for ClusterAccelerationStructureTriangleClusterInputNV {
     }
 }
 
+unsafe impl Send for ClusterAccelerationStructureTriangleClusterInputNV {}
+unsafe impl Sync for ClusterAccelerationStructureTriangleClusterInputNV {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCoarseSampleLocationNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
@@ -2626,6 +2881,9 @@ impl Default for CoarseSampleOrderCustomNV {
         }
     }
 }
+
+unsafe impl Send for CoarseSampleOrderCustomNV {}
+unsafe impl Sync for CoarseSampleOrderCustomNV {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkColorBlendAdvancedEXT.html>
 #[repr(C)]
@@ -2674,6 +2932,9 @@ impl Default for CommandBufferAllocateInfo {
     }
 }
 
+unsafe impl Send for CommandBufferAllocateInfo {}
+unsafe impl Sync for CommandBufferAllocateInfo {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCommandBufferBeginInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -2696,6 +2957,9 @@ impl Default for CommandBufferBeginInfo {
     }
 }
 
+unsafe impl Send for CommandBufferBeginInfo {}
+unsafe impl Sync for CommandBufferBeginInfo {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCommandBufferInheritanceConditionalRenderingInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -2715,6 +2979,9 @@ impl Default for CommandBufferInheritanceConditionalRenderingInfoEXT {
         }
     }
 }
+
+unsafe impl Send for CommandBufferInheritanceConditionalRenderingInfoEXT {}
+unsafe impl Sync for CommandBufferInheritanceConditionalRenderingInfoEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCommandBufferInheritanceInfo.html>
 #[repr(C)]
@@ -2746,6 +3013,9 @@ impl Default for CommandBufferInheritanceInfo {
     }
 }
 
+unsafe impl Send for CommandBufferInheritanceInfo {}
+unsafe impl Sync for CommandBufferInheritanceInfo {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCommandBufferInheritanceRenderPassTransformInfoQCOM.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -2767,6 +3037,9 @@ impl Default for CommandBufferInheritanceRenderPassTransformInfoQCOM {
         }
     }
 }
+
+unsafe impl Send for CommandBufferInheritanceRenderPassTransformInfoQCOM {}
+unsafe impl Sync for CommandBufferInheritanceRenderPassTransformInfoQCOM {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCommandBufferInheritanceRenderingInfo.html>
 #[repr(C)]
@@ -2800,6 +3073,9 @@ impl Default for CommandBufferInheritanceRenderingInfo {
     }
 }
 
+unsafe impl Send for CommandBufferInheritanceRenderingInfo {}
+unsafe impl Sync for CommandBufferInheritanceRenderingInfo {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCommandBufferInheritanceViewportScissorInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -2824,6 +3100,9 @@ impl Default for CommandBufferInheritanceViewportScissorInfoNV {
     }
 }
 
+unsafe impl Send for CommandBufferInheritanceViewportScissorInfoNV {}
+unsafe impl Sync for CommandBufferInheritanceViewportScissorInfoNV {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCommandBufferSubmitInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -2846,6 +3125,9 @@ impl Default for CommandBufferSubmitInfo {
     }
 }
 
+unsafe impl Send for CommandBufferSubmitInfo {}
+unsafe impl Sync for CommandBufferSubmitInfo {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCommandPoolCreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -2867,6 +3149,9 @@ impl Default for CommandPoolCreateInfo {
         }
     }
 }
+
+unsafe impl Send for CommandPoolCreateInfo {}
+unsafe impl Sync for CommandPoolCreateInfo {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkComponentMapping.html>
 #[repr(C)]
@@ -2906,6 +3191,9 @@ impl Default for ComputePipelineCreateInfo {
     }
 }
 
+unsafe impl Send for ComputePipelineCreateInfo {}
+unsafe impl Sync for ComputePipelineCreateInfo {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkComputePipelineIndirectBufferInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -2930,6 +3218,9 @@ impl Default for ComputePipelineIndirectBufferInfoNV {
     }
 }
 
+unsafe impl Send for ComputePipelineIndirectBufferInfoNV {}
+unsafe impl Sync for ComputePipelineIndirectBufferInfoNV {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkConditionalRenderingBeginInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -2953,6 +3244,9 @@ impl Default for ConditionalRenderingBeginInfoEXT {
         }
     }
 }
+
+unsafe impl Send for ConditionalRenderingBeginInfoEXT {}
+unsafe impl Sync for ConditionalRenderingBeginInfoEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkConformanceVersion.html>
 #[repr(C)]
@@ -3006,6 +3300,9 @@ impl Default for ConvertCooperativeVectorMatrixInfoNV {
     }
 }
 
+unsafe impl Send for ConvertCooperativeVectorMatrixInfoNV {}
+unsafe impl Sync for ConvertCooperativeVectorMatrixInfoNV {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCooperativeMatrixFlexibleDimensionsPropertiesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -3044,6 +3341,9 @@ impl Default for CooperativeMatrixFlexibleDimensionsPropertiesNV {
     }
 }
 
+unsafe impl Send for CooperativeMatrixFlexibleDimensionsPropertiesNV {}
+unsafe impl Sync for CooperativeMatrixFlexibleDimensionsPropertiesNV {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCooperativeMatrixPropertiesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -3080,6 +3380,9 @@ impl Default for CooperativeMatrixPropertiesKHR {
     }
 }
 
+unsafe impl Send for CooperativeMatrixPropertiesKHR {}
+unsafe impl Sync for CooperativeMatrixPropertiesKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCooperativeMatrixPropertiesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -3114,6 +3417,9 @@ impl Default for CooperativeMatrixPropertiesNV {
     }
 }
 
+unsafe impl Send for CooperativeMatrixPropertiesNV {}
+unsafe impl Sync for CooperativeMatrixPropertiesNV {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCooperativeVectorPropertiesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -3144,6 +3450,9 @@ impl Default for CooperativeVectorPropertiesNV {
     }
 }
 
+unsafe impl Send for CooperativeVectorPropertiesNV {}
+unsafe impl Sync for CooperativeVectorPropertiesNV {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCopyAccelerationStructureInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -3168,6 +3477,9 @@ impl Default for CopyAccelerationStructureInfoKHR {
     }
 }
 
+unsafe impl Send for CopyAccelerationStructureInfoKHR {}
+unsafe impl Sync for CopyAccelerationStructureInfoKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCopyAccelerationStructureToMemoryInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug)]
@@ -3191,6 +3503,9 @@ impl Default for CopyAccelerationStructureToMemoryInfoKHR {
         }
     }
 }
+
+unsafe impl Send for CopyAccelerationStructureToMemoryInfoKHR {}
+unsafe impl Sync for CopyAccelerationStructureToMemoryInfoKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCopyBufferInfo2.html>
 #[repr(C)]
@@ -3217,6 +3532,9 @@ impl Default for CopyBufferInfo2 {
         }
     }
 }
+
+unsafe impl Send for CopyBufferInfo2 {}
+unsafe impl Sync for CopyBufferInfo2 {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCopyBufferToImageInfo2.html>
 #[repr(C)]
@@ -3246,6 +3564,9 @@ impl Default for CopyBufferToImageInfo2 {
     }
 }
 
+unsafe impl Send for CopyBufferToImageInfo2 {}
+unsafe impl Sync for CopyBufferToImageInfo2 {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCopyCommandTransformInfoQCOM.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -3265,6 +3586,9 @@ impl Default for CopyCommandTransformInfoQCOM {
         }
     }
 }
+
+unsafe impl Send for CopyCommandTransformInfoQCOM {}
+unsafe impl Sync for CopyCommandTransformInfoQCOM {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCopyDescriptorSet.html>
 #[repr(C)]
@@ -3298,6 +3622,9 @@ impl Default for CopyDescriptorSet {
     }
 }
 
+unsafe impl Send for CopyDescriptorSet {}
+unsafe impl Sync for CopyDescriptorSet {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCopyImageInfo2.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -3328,6 +3655,9 @@ impl Default for CopyImageInfo2 {
     }
 }
 
+unsafe impl Send for CopyImageInfo2 {}
+unsafe impl Sync for CopyImageInfo2 {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCopyImageToBufferInfo2.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -3355,6 +3685,9 @@ impl Default for CopyImageToBufferInfo2 {
         }
     }
 }
+
+unsafe impl Send for CopyImageToBufferInfo2 {}
+unsafe impl Sync for CopyImageToBufferInfo2 {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCopyImageToImageInfo.html>
 #[repr(C)]
@@ -3388,6 +3721,9 @@ impl Default for CopyImageToImageInfo {
     }
 }
 
+unsafe impl Send for CopyImageToImageInfo {}
+unsafe impl Sync for CopyImageToImageInfo {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCopyImageToMemoryInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -3415,6 +3751,9 @@ impl Default for CopyImageToMemoryInfo {
         }
     }
 }
+
+unsafe impl Send for CopyImageToMemoryInfo {}
+unsafe impl Sync for CopyImageToMemoryInfo {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCopyMemoryIndirectCommandKHR.html>
 #[repr(C)]
@@ -3451,6 +3790,9 @@ impl Default for CopyMemoryIndirectInfoKHR {
     }
 }
 
+unsafe impl Send for CopyMemoryIndirectInfoKHR {}
+unsafe impl Sync for CopyMemoryIndirectInfoKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCopyMemoryToAccelerationStructureInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug)]
@@ -3474,6 +3816,9 @@ impl Default for CopyMemoryToAccelerationStructureInfoKHR {
         }
     }
 }
+
+unsafe impl Send for CopyMemoryToAccelerationStructureInfoKHR {}
+unsafe impl Sync for CopyMemoryToAccelerationStructureInfoKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCopyMemoryToImageIndirectCommandKHR.html>
 #[repr(C)]
@@ -3517,6 +3862,9 @@ impl Default for CopyMemoryToImageIndirectInfoKHR {
     }
 }
 
+unsafe impl Send for CopyMemoryToImageIndirectInfoKHR {}
+unsafe impl Sync for CopyMemoryToImageIndirectInfoKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCopyMemoryToImageInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -3545,6 +3893,9 @@ impl Default for CopyMemoryToImageInfo {
     }
 }
 
+unsafe impl Send for CopyMemoryToImageInfo {}
+unsafe impl Sync for CopyMemoryToImageInfo {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCopyMemoryToMicromapInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug)]
@@ -3568,6 +3919,9 @@ impl Default for CopyMemoryToMicromapInfoEXT {
         }
     }
 }
+
+unsafe impl Send for CopyMemoryToMicromapInfoEXT {}
+unsafe impl Sync for CopyMemoryToMicromapInfoEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCopyMicromapInfoEXT.html>
 #[repr(C)]
@@ -3593,6 +3947,9 @@ impl Default for CopyMicromapInfoEXT {
     }
 }
 
+unsafe impl Send for CopyMicromapInfoEXT {}
+unsafe impl Sync for CopyMicromapInfoEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCopyMicromapToMemoryInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug)]
@@ -3616,6 +3973,9 @@ impl Default for CopyMicromapToMemoryInfoEXT {
         }
     }
 }
+
+unsafe impl Send for CopyMicromapToMemoryInfoEXT {}
+unsafe impl Sync for CopyMicromapToMemoryInfoEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCopyTensorInfoARM.html>
 #[repr(C)]
@@ -3643,6 +4003,9 @@ impl Default for CopyTensorInfoARM {
     }
 }
 
+unsafe impl Send for CopyTensorInfoARM {}
+unsafe impl Sync for CopyTensorInfoARM {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCuFunctionCreateInfoNVX.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -3664,6 +4027,9 @@ impl Default for CuFunctionCreateInfoNVX {
         }
     }
 }
+
+unsafe impl Send for CuFunctionCreateInfoNVX {}
+unsafe impl Sync for CuFunctionCreateInfoNVX {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCuLaunchInfoNVX.html>
 #[repr(C)]
@@ -3707,6 +4073,9 @@ impl Default for CuLaunchInfoNVX {
     }
 }
 
+unsafe impl Send for CuLaunchInfoNVX {}
+unsafe impl Sync for CuLaunchInfoNVX {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCuModuleCreateInfoNVX.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -3729,6 +4098,9 @@ impl Default for CuModuleCreateInfoNVX {
     }
 }
 
+unsafe impl Send for CuModuleCreateInfoNVX {}
+unsafe impl Sync for CuModuleCreateInfoNVX {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCuModuleTexturingModeCreateInfoNVX.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -3748,6 +4120,9 @@ impl Default for CuModuleTexturingModeCreateInfoNVX {
         }
     }
 }
+
+unsafe impl Send for CuModuleTexturingModeCreateInfoNVX {}
+unsafe impl Sync for CuModuleTexturingModeCreateInfoNVX {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCudaFunctionCreateInfoNV.html>
 #[repr(C)]
@@ -3770,6 +4145,9 @@ impl Default for CudaFunctionCreateInfoNV {
         }
     }
 }
+
+unsafe impl Send for CudaFunctionCreateInfoNV {}
+unsafe impl Sync for CudaFunctionCreateInfoNV {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCudaLaunchInfoNV.html>
 #[repr(C)]
@@ -3813,6 +4191,9 @@ impl Default for CudaLaunchInfoNV {
     }
 }
 
+unsafe impl Send for CudaLaunchInfoNV {}
+unsafe impl Sync for CudaLaunchInfoNV {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCudaModuleCreateInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -3834,6 +4215,9 @@ impl Default for CudaModuleCreateInfoNV {
         }
     }
 }
+
+unsafe impl Send for CudaModuleCreateInfoNV {}
+unsafe impl Sync for CudaModuleCreateInfoNV {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkD3D12FenceSubmitInfoKHR.html>
 #[repr(C)]
@@ -3861,6 +4245,9 @@ impl Default for D3D12FenceSubmitInfoKHR {
     }
 }
 
+unsafe impl Send for D3D12FenceSubmitInfoKHR {}
+unsafe impl Sync for D3D12FenceSubmitInfoKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDataGraphPipelineCompilerControlCreateInfoARM.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -3880,6 +4267,9 @@ impl Default for DataGraphPipelineCompilerControlCreateInfoARM {
         }
     }
 }
+
+unsafe impl Send for DataGraphPipelineCompilerControlCreateInfoARM {}
+unsafe impl Sync for DataGraphPipelineCompilerControlCreateInfoARM {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDataGraphPipelineConstantARM.html>
 #[repr(C)]
@@ -3902,6 +4292,9 @@ impl Default for DataGraphPipelineConstantARM {
         }
     }
 }
+
+unsafe impl Send for DataGraphPipelineConstantARM {}
+unsafe impl Sync for DataGraphPipelineConstantARM {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDataGraphPipelineConstantTensorSemiStructuredSparsityInfoARM.html>
 #[repr(C)]
@@ -3927,6 +4320,9 @@ impl Default for DataGraphPipelineConstantTensorSemiStructuredSparsityInfoARM {
         }
     }
 }
+
+unsafe impl Send for DataGraphPipelineConstantTensorSemiStructuredSparsityInfoARM {}
+unsafe impl Sync for DataGraphPipelineConstantTensorSemiStructuredSparsityInfoARM {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDataGraphPipelineCreateInfoARM.html>
 #[repr(C)]
@@ -3954,6 +4350,9 @@ impl Default for DataGraphPipelineCreateInfoARM {
     }
 }
 
+unsafe impl Send for DataGraphPipelineCreateInfoARM {}
+unsafe impl Sync for DataGraphPipelineCreateInfoARM {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDataGraphPipelineDispatchInfoARM.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -3973,6 +4372,9 @@ impl Default for DataGraphPipelineDispatchInfoARM {
         }
     }
 }
+
+unsafe impl Send for DataGraphPipelineDispatchInfoARM {}
+unsafe impl Sync for DataGraphPipelineDispatchInfoARM {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDataGraphPipelineIdentifierCreateInfoARM.html>
 #[repr(C)]
@@ -3996,6 +4398,9 @@ impl Default for DataGraphPipelineIdentifierCreateInfoARM {
     }
 }
 
+unsafe impl Send for DataGraphPipelineIdentifierCreateInfoARM {}
+unsafe impl Sync for DataGraphPipelineIdentifierCreateInfoARM {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDataGraphPipelineInfoARM.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -4015,6 +4420,9 @@ impl Default for DataGraphPipelineInfoARM {
         }
     }
 }
+
+unsafe impl Send for DataGraphPipelineInfoARM {}
+unsafe impl Sync for DataGraphPipelineInfoARM {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDataGraphPipelinePropertyQueryResultARM.html>
 #[repr(C)]
@@ -4042,6 +4450,9 @@ impl Default for DataGraphPipelinePropertyQueryResultARM {
     }
 }
 
+unsafe impl Send for DataGraphPipelinePropertyQueryResultARM {}
+unsafe impl Sync for DataGraphPipelinePropertyQueryResultARM {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDataGraphPipelineResourceInfoARM.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -4065,6 +4476,9 @@ impl Default for DataGraphPipelineResourceInfoARM {
         }
     }
 }
+
+unsafe impl Send for DataGraphPipelineResourceInfoARM {}
+unsafe impl Sync for DataGraphPipelineResourceInfoARM {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDataGraphPipelineSessionBindPointRequirementARM.html>
 #[repr(C)]
@@ -4090,6 +4504,9 @@ impl Default for DataGraphPipelineSessionBindPointRequirementARM {
     }
 }
 
+unsafe impl Send for DataGraphPipelineSessionBindPointRequirementARM {}
+unsafe impl Sync for DataGraphPipelineSessionBindPointRequirementARM {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDataGraphPipelineSessionBindPointRequirementsInfoARM.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -4109,6 +4526,9 @@ impl Default for DataGraphPipelineSessionBindPointRequirementsInfoARM {
         }
     }
 }
+
+unsafe impl Send for DataGraphPipelineSessionBindPointRequirementsInfoARM {}
+unsafe impl Sync for DataGraphPipelineSessionBindPointRequirementsInfoARM {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDataGraphPipelineSessionCreateInfoARM.html>
 #[repr(C)]
@@ -4131,6 +4551,9 @@ impl Default for DataGraphPipelineSessionCreateInfoARM {
         }
     }
 }
+
+unsafe impl Send for DataGraphPipelineSessionCreateInfoARM {}
+unsafe impl Sync for DataGraphPipelineSessionCreateInfoARM {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDataGraphPipelineSessionMemoryRequirementsInfoARM.html>
 #[repr(C)]
@@ -4155,6 +4578,9 @@ impl Default for DataGraphPipelineSessionMemoryRequirementsInfoARM {
         }
     }
 }
+
+unsafe impl Send for DataGraphPipelineSessionMemoryRequirementsInfoARM {}
+unsafe impl Sync for DataGraphPipelineSessionMemoryRequirementsInfoARM {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDataGraphPipelineShaderModuleCreateInfoARM.html>
 #[repr(C)]
@@ -4184,6 +4610,9 @@ impl Default for DataGraphPipelineShaderModuleCreateInfoARM {
     }
 }
 
+unsafe impl Send for DataGraphPipelineShaderModuleCreateInfoARM {}
+unsafe impl Sync for DataGraphPipelineShaderModuleCreateInfoARM {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDataGraphProcessingEngineCreateInfoARM.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -4206,6 +4635,9 @@ impl Default for DataGraphProcessingEngineCreateInfoARM {
     }
 }
 
+unsafe impl Send for DataGraphProcessingEngineCreateInfoARM {}
+unsafe impl Sync for DataGraphProcessingEngineCreateInfoARM {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDebugMarkerMarkerInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, PartialEq)]
@@ -4227,6 +4659,9 @@ impl Default for DebugMarkerMarkerInfoEXT {
         }
     }
 }
+
+unsafe impl Send for DebugMarkerMarkerInfoEXT {}
+unsafe impl Sync for DebugMarkerMarkerInfoEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDebugMarkerObjectNameInfoEXT.html>
 #[repr(C)]
@@ -4251,6 +4686,9 @@ impl Default for DebugMarkerObjectNameInfoEXT {
         }
     }
 }
+
+unsafe impl Send for DebugMarkerObjectNameInfoEXT {}
+unsafe impl Sync for DebugMarkerObjectNameInfoEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDebugMarkerObjectTagInfoEXT.html>
 #[repr(C)]
@@ -4279,6 +4717,9 @@ impl Default for DebugMarkerObjectTagInfoEXT {
         }
     }
 }
+
+unsafe impl Send for DebugMarkerObjectTagInfoEXT {}
+unsafe impl Sync for DebugMarkerObjectTagInfoEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDebugReportCallbackCreateInfoEXT.html>
 #[repr(C)]
@@ -4316,6 +4757,9 @@ impl Default for DebugReportCallbackCreateInfoEXT {
     }
 }
 
+unsafe impl Send for DebugReportCallbackCreateInfoEXT {}
+unsafe impl Sync for DebugReportCallbackCreateInfoEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDebugUtilsLabelEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, PartialEq)]
@@ -4337,6 +4781,9 @@ impl Default for DebugUtilsLabelEXT {
         }
     }
 }
+
+unsafe impl Send for DebugUtilsLabelEXT {}
+unsafe impl Sync for DebugUtilsLabelEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDebugUtilsMessengerCallbackDataEXT.html>
 #[repr(C)]
@@ -4375,6 +4822,9 @@ impl Default for DebugUtilsMessengerCallbackDataEXT {
         }
     }
 }
+
+unsafe impl Send for DebugUtilsMessengerCallbackDataEXT {}
+unsafe impl Sync for DebugUtilsMessengerCallbackDataEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDebugUtilsMessengerCreateInfoEXT.html>
 #[repr(C)]
@@ -4421,6 +4871,9 @@ impl Default for DebugUtilsMessengerCreateInfoEXT {
     }
 }
 
+unsafe impl Send for DebugUtilsMessengerCreateInfoEXT {}
+unsafe impl Sync for DebugUtilsMessengerCreateInfoEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDebugUtilsObjectNameInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -4444,6 +4897,9 @@ impl Default for DebugUtilsObjectNameInfoEXT {
         }
     }
 }
+
+unsafe impl Send for DebugUtilsObjectNameInfoEXT {}
+unsafe impl Sync for DebugUtilsObjectNameInfoEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDebugUtilsObjectTagInfoEXT.html>
 #[repr(C)]
@@ -4472,6 +4928,9 @@ impl Default for DebugUtilsObjectTagInfoEXT {
         }
     }
 }
+
+unsafe impl Send for DebugUtilsObjectTagInfoEXT {}
+unsafe impl Sync for DebugUtilsObjectTagInfoEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDecompressMemoryRegionNV.html>
 #[repr(C)]
@@ -4504,6 +4963,9 @@ impl Default for DedicatedAllocationBufferCreateInfoNV {
     }
 }
 
+unsafe impl Send for DedicatedAllocationBufferCreateInfoNV {}
+unsafe impl Sync for DedicatedAllocationBufferCreateInfoNV {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDedicatedAllocationImageCreateInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -4523,6 +4985,9 @@ impl Default for DedicatedAllocationImageCreateInfoNV {
         }
     }
 }
+
+unsafe impl Send for DedicatedAllocationImageCreateInfoNV {}
+unsafe impl Sync for DedicatedAllocationImageCreateInfoNV {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDedicatedAllocationMemoryAllocateInfoNV.html>
 #[repr(C)]
@@ -4545,6 +5010,9 @@ impl Default for DedicatedAllocationMemoryAllocateInfoNV {
         }
     }
 }
+
+unsafe impl Send for DedicatedAllocationMemoryAllocateInfoNV {}
+unsafe impl Sync for DedicatedAllocationMemoryAllocateInfoNV {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDependencyInfo.html>
 #[repr(C)]
@@ -4578,6 +5046,9 @@ impl Default for DependencyInfo {
     }
 }
 
+unsafe impl Send for DependencyInfo {}
+unsafe impl Sync for DependencyInfo {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDepthBiasInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, PartialEq)]
@@ -4602,6 +5073,9 @@ impl Default for DepthBiasInfoEXT {
     }
 }
 
+unsafe impl Send for DepthBiasInfoEXT {}
+unsafe impl Sync for DepthBiasInfoEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDepthBiasRepresentationInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -4623,6 +5097,9 @@ impl Default for DepthBiasRepresentationInfoEXT {
         }
     }
 }
+
+unsafe impl Send for DepthBiasRepresentationInfoEXT {}
+unsafe impl Sync for DepthBiasRepresentationInfoEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDepthClampRangeEXT.html>
 #[repr(C)]
@@ -4656,6 +5133,9 @@ impl Default for DescriptorAddressInfoEXT {
     }
 }
 
+unsafe impl Send for DescriptorAddressInfoEXT {}
+unsafe impl Sync for DescriptorAddressInfoEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDescriptorBufferBindingInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -4678,6 +5158,9 @@ impl Default for DescriptorBufferBindingInfoEXT {
     }
 }
 
+unsafe impl Send for DescriptorBufferBindingInfoEXT {}
+unsafe impl Sync for DescriptorBufferBindingInfoEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDescriptorBufferBindingPushDescriptorBufferHandleEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -4697,6 +5180,9 @@ impl Default for DescriptorBufferBindingPushDescriptorBufferHandleEXT {
         }
     }
 }
+
+unsafe impl Send for DescriptorBufferBindingPushDescriptorBufferHandleEXT {}
+unsafe impl Sync for DescriptorBufferBindingPushDescriptorBufferHandleEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDescriptorBufferInfo.html>
 #[repr(C)]
@@ -4729,6 +5215,9 @@ impl Default for DescriptorGetInfoEXT {
     }
 }
 
+unsafe impl Send for DescriptorGetInfoEXT {}
+unsafe impl Sync for DescriptorGetInfoEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDescriptorGetTensorInfoARM.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -4748,6 +5237,9 @@ impl Default for DescriptorGetTensorInfoARM {
         }
     }
 }
+
+unsafe impl Send for DescriptorGetTensorInfoARM {}
+unsafe impl Sync for DescriptorGetTensorInfoARM {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDescriptorImageInfo.html>
 #[repr(C)]
@@ -4784,6 +5276,9 @@ impl Default for DescriptorPoolCreateInfo {
     }
 }
 
+unsafe impl Send for DescriptorPoolCreateInfo {}
+unsafe impl Sync for DescriptorPoolCreateInfo {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDescriptorPoolInlineUniformBlockCreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -4803,6 +5298,9 @@ impl Default for DescriptorPoolInlineUniformBlockCreateInfo {
         }
     }
 }
+
+unsafe impl Send for DescriptorPoolInlineUniformBlockCreateInfo {}
+unsafe impl Sync for DescriptorPoolInlineUniformBlockCreateInfo {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDescriptorPoolSize.html>
 #[repr(C)]
@@ -4836,6 +5334,9 @@ impl Default for DescriptorSetAllocateInfo {
     }
 }
 
+unsafe impl Send for DescriptorSetAllocateInfo {}
+unsafe impl Sync for DescriptorSetAllocateInfo {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDescriptorSetBindingReferenceVALVE.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -4857,6 +5358,9 @@ impl Default for DescriptorSetBindingReferenceVALVE {
         }
     }
 }
+
+unsafe impl Send for DescriptorSetBindingReferenceVALVE {}
+unsafe impl Sync for DescriptorSetBindingReferenceVALVE {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDescriptorSetLayoutBinding.html>
 #[repr(C)]
@@ -4882,6 +5386,9 @@ impl Default for DescriptorSetLayoutBinding {
     }
 }
 
+unsafe impl Send for DescriptorSetLayoutBinding {}
+unsafe impl Sync for DescriptorSetLayoutBinding {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDescriptorSetLayoutBindingFlagsCreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -4903,6 +5410,9 @@ impl Default for DescriptorSetLayoutBindingFlagsCreateInfo {
         }
     }
 }
+
+unsafe impl Send for DescriptorSetLayoutBindingFlagsCreateInfo {}
+unsafe impl Sync for DescriptorSetLayoutBindingFlagsCreateInfo {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDescriptorSetLayoutCreateInfo.html>
 #[repr(C)]
@@ -4928,6 +5438,9 @@ impl Default for DescriptorSetLayoutCreateInfo {
     }
 }
 
+unsafe impl Send for DescriptorSetLayoutCreateInfo {}
+unsafe impl Sync for DescriptorSetLayoutCreateInfo {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDescriptorSetLayoutHostMappingInfoVALVE.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -4950,6 +5463,9 @@ impl Default for DescriptorSetLayoutHostMappingInfoVALVE {
     }
 }
 
+unsafe impl Send for DescriptorSetLayoutHostMappingInfoVALVE {}
+unsafe impl Sync for DescriptorSetLayoutHostMappingInfoVALVE {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDescriptorSetLayoutSupport.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -4969,6 +5485,9 @@ impl Default for DescriptorSetLayoutSupport {
         }
     }
 }
+
+unsafe impl Send for DescriptorSetLayoutSupport {}
+unsafe impl Sync for DescriptorSetLayoutSupport {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDescriptorSetVariableDescriptorCountAllocateInfo.html>
 #[repr(C)]
@@ -4992,6 +5511,9 @@ impl Default for DescriptorSetVariableDescriptorCountAllocateInfo {
     }
 }
 
+unsafe impl Send for DescriptorSetVariableDescriptorCountAllocateInfo {}
+unsafe impl Sync for DescriptorSetVariableDescriptorCountAllocateInfo {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDescriptorSetVariableDescriptorCountLayoutSupport.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -5011,6 +5533,9 @@ impl Default for DescriptorSetVariableDescriptorCountLayoutSupport {
         }
     }
 }
+
+unsafe impl Send for DescriptorSetVariableDescriptorCountLayoutSupport {}
+unsafe impl Sync for DescriptorSetVariableDescriptorCountLayoutSupport {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDescriptorUpdateTemplateCreateInfo.html>
 #[repr(C)]
@@ -5045,6 +5570,9 @@ impl Default for DescriptorUpdateTemplateCreateInfo {
         }
     }
 }
+
+unsafe impl Send for DescriptorUpdateTemplateCreateInfo {}
+unsafe impl Sync for DescriptorUpdateTemplateCreateInfo {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDescriptorUpdateTemplateEntry.html>
 #[repr(C)]
@@ -5084,6 +5612,9 @@ impl Default for DeviceAddressBindingCallbackDataEXT {
     }
 }
 
+unsafe impl Send for DeviceAddressBindingCallbackDataEXT {}
+unsafe impl Sync for DeviceAddressBindingCallbackDataEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceBufferMemoryRequirements.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -5103,6 +5634,9 @@ impl Default for DeviceBufferMemoryRequirements {
         }
     }
 }
+
+unsafe impl Send for DeviceBufferMemoryRequirements {}
+unsafe impl Sync for DeviceBufferMemoryRequirements {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceCreateInfo.html>
 #[repr(C)]
@@ -5137,6 +5671,9 @@ impl Default for DeviceCreateInfo {
         }
     }
 }
+
+unsafe impl Send for DeviceCreateInfo {}
+unsafe impl Sync for DeviceCreateInfo {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceDeviceMemoryReportCreateInfoEXT.html>
 #[repr(C)]
@@ -5177,6 +5714,9 @@ impl Default for DeviceDeviceMemoryReportCreateInfoEXT {
     }
 }
 
+unsafe impl Send for DeviceDeviceMemoryReportCreateInfoEXT {}
+unsafe impl Sync for DeviceDeviceMemoryReportCreateInfoEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceDiagnosticsConfigCreateInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -5197,6 +5737,9 @@ impl Default for DeviceDiagnosticsConfigCreateInfoNV {
     }
 }
 
+unsafe impl Send for DeviceDiagnosticsConfigCreateInfoNV {}
+unsafe impl Sync for DeviceDiagnosticsConfigCreateInfoNV {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceEventInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -5216,6 +5759,9 @@ impl Default for DeviceEventInfoEXT {
         }
     }
 }
+
+unsafe impl Send for DeviceEventInfoEXT {}
+unsafe impl Sync for DeviceEventInfoEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceFaultAddressInfoEXT.html>
 #[repr(C)]
@@ -5250,6 +5796,9 @@ impl Default for DeviceFaultCountsEXT {
     }
 }
 
+unsafe impl Send for DeviceFaultCountsEXT {}
+unsafe impl Sync for DeviceFaultCountsEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceFaultInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -5275,6 +5824,9 @@ impl Default for DeviceFaultInfoEXT {
         }
     }
 }
+
+unsafe impl Send for DeviceFaultInfoEXT {}
+unsafe impl Sync for DeviceFaultInfoEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceFaultVendorBinaryHeaderVersionOneEXT.html>
 #[repr(C)]
@@ -5324,6 +5876,9 @@ impl Default for DeviceGroupBindSparseInfo {
     }
 }
 
+unsafe impl Send for DeviceGroupBindSparseInfo {}
+unsafe impl Sync for DeviceGroupBindSparseInfo {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceGroupCommandBufferBeginInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -5343,6 +5898,9 @@ impl Default for DeviceGroupCommandBufferBeginInfo {
         }
     }
 }
+
+unsafe impl Send for DeviceGroupCommandBufferBeginInfo {}
+unsafe impl Sync for DeviceGroupCommandBufferBeginInfo {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceGroupDeviceCreateInfo.html>
 #[repr(C)]
@@ -5366,6 +5924,9 @@ impl Default for DeviceGroupDeviceCreateInfo {
     }
 }
 
+unsafe impl Send for DeviceGroupDeviceCreateInfo {}
+unsafe impl Sync for DeviceGroupDeviceCreateInfo {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceGroupPresentCapabilitiesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -5387,6 +5948,9 @@ impl Default for DeviceGroupPresentCapabilitiesKHR {
         }
     }
 }
+
+unsafe impl Send for DeviceGroupPresentCapabilitiesKHR {}
+unsafe impl Sync for DeviceGroupPresentCapabilitiesKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceGroupPresentInfoKHR.html>
 #[repr(C)]
@@ -5412,6 +5976,9 @@ impl Default for DeviceGroupPresentInfoKHR {
     }
 }
 
+unsafe impl Send for DeviceGroupPresentInfoKHR {}
+unsafe impl Sync for DeviceGroupPresentInfoKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceGroupRenderPassBeginInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -5435,6 +6002,9 @@ impl Default for DeviceGroupRenderPassBeginInfo {
         }
     }
 }
+
+unsafe impl Send for DeviceGroupRenderPassBeginInfo {}
+unsafe impl Sync for DeviceGroupRenderPassBeginInfo {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceGroupSubmitInfo.html>
 #[repr(C)]
@@ -5466,6 +6036,9 @@ impl Default for DeviceGroupSubmitInfo {
     }
 }
 
+unsafe impl Send for DeviceGroupSubmitInfo {}
+unsafe impl Sync for DeviceGroupSubmitInfo {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceGroupSwapchainCreateInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -5485,6 +6058,9 @@ impl Default for DeviceGroupSwapchainCreateInfoKHR {
         }
     }
 }
+
+unsafe impl Send for DeviceGroupSwapchainCreateInfoKHR {}
+unsafe impl Sync for DeviceGroupSwapchainCreateInfoKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceImageMemoryRequirements.html>
 #[repr(C)]
@@ -5508,6 +6084,9 @@ impl Default for DeviceImageMemoryRequirements {
     }
 }
 
+unsafe impl Send for DeviceImageMemoryRequirements {}
+unsafe impl Sync for DeviceImageMemoryRequirements {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceImageSubresourceInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -5530,6 +6109,9 @@ impl Default for DeviceImageSubresourceInfo {
     }
 }
 
+unsafe impl Send for DeviceImageSubresourceInfo {}
+unsafe impl Sync for DeviceImageSubresourceInfo {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceMemoryOpaqueCaptureAddressInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -5550,6 +6132,9 @@ impl Default for DeviceMemoryOpaqueCaptureAddressInfo {
     }
 }
 
+unsafe impl Send for DeviceMemoryOpaqueCaptureAddressInfo {}
+unsafe impl Sync for DeviceMemoryOpaqueCaptureAddressInfo {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceMemoryOverallocationCreateInfoAMD.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -5569,6 +6154,9 @@ impl Default for DeviceMemoryOverallocationCreateInfoAMD {
         }
     }
 }
+
+unsafe impl Send for DeviceMemoryOverallocationCreateInfoAMD {}
+unsafe impl Sync for DeviceMemoryOverallocationCreateInfoAMD {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceMemoryReportCallbackDataEXT.html>
 #[repr(C)]
@@ -5602,6 +6190,9 @@ impl Default for DeviceMemoryReportCallbackDataEXT {
     }
 }
 
+unsafe impl Send for DeviceMemoryReportCallbackDataEXT {}
+unsafe impl Sync for DeviceMemoryReportCallbackDataEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDevicePipelineBinaryInternalCacheControlKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -5622,6 +6213,9 @@ impl Default for DevicePipelineBinaryInternalCacheControlKHR {
     }
 }
 
+unsafe impl Send for DevicePipelineBinaryInternalCacheControlKHR {}
+unsafe impl Sync for DevicePipelineBinaryInternalCacheControlKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDevicePrivateDataCreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -5641,6 +6235,9 @@ impl Default for DevicePrivateDataCreateInfo {
         }
     }
 }
+
+unsafe impl Send for DevicePrivateDataCreateInfo {}
+unsafe impl Sync for DevicePrivateDataCreateInfo {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceQueueCreateInfo.html>
 #[repr(C)]
@@ -5668,6 +6265,9 @@ impl Default for DeviceQueueCreateInfo {
     }
 }
 
+unsafe impl Send for DeviceQueueCreateInfo {}
+unsafe impl Sync for DeviceQueueCreateInfo {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceQueueGlobalPriorityCreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -5687,6 +6287,9 @@ impl Default for DeviceQueueGlobalPriorityCreateInfo {
         }
     }
 }
+
+unsafe impl Send for DeviceQueueGlobalPriorityCreateInfo {}
+unsafe impl Sync for DeviceQueueGlobalPriorityCreateInfo {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceQueueInfo2.html>
 #[repr(C)]
@@ -5712,6 +6315,9 @@ impl Default for DeviceQueueInfo2 {
     }
 }
 
+unsafe impl Send for DeviceQueueInfo2 {}
+unsafe impl Sync for DeviceQueueInfo2 {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceQueueShaderCoreControlCreateInfoARM.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -5731,6 +6337,9 @@ impl Default for DeviceQueueShaderCoreControlCreateInfoARM {
         }
     }
 }
+
+unsafe impl Send for DeviceQueueShaderCoreControlCreateInfoARM {}
+unsafe impl Sync for DeviceQueueShaderCoreControlCreateInfoARM {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceSemaphoreSciSyncPoolReservationCreateInfoNV.html>
 #[repr(C)]
@@ -5752,6 +6361,9 @@ impl Default for DeviceSemaphoreSciSyncPoolReservationCreateInfoNV {
     }
 }
 
+unsafe impl Send for DeviceSemaphoreSciSyncPoolReservationCreateInfoNV {}
+unsafe impl Sync for DeviceSemaphoreSciSyncPoolReservationCreateInfoNV {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceTensorMemoryRequirementsARM.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -5771,6 +6383,9 @@ impl Default for DeviceTensorMemoryRequirementsARM {
         }
     }
 }
+
+unsafe impl Send for DeviceTensorMemoryRequirementsARM {}
+unsafe impl Sync for DeviceTensorMemoryRequirementsARM {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDirectDriverLoadingInfoLUNARG.html>
 #[repr(C)]
@@ -5808,6 +6423,9 @@ impl Default for DirectDriverLoadingInfoLUNARG {
     }
 }
 
+unsafe impl Send for DirectDriverLoadingInfoLUNARG {}
+unsafe impl Sync for DirectDriverLoadingInfoLUNARG {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDirectDriverLoadingListLUNARG.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -5832,6 +6450,9 @@ impl Default for DirectDriverLoadingListLUNARG {
     }
 }
 
+unsafe impl Send for DirectDriverLoadingListLUNARG {}
+unsafe impl Sync for DirectDriverLoadingListLUNARG {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDirectFBSurfaceCreateInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -5855,6 +6476,9 @@ impl Default for DirectFBSurfaceCreateInfoEXT {
         }
     }
 }
+
+unsafe impl Send for DirectFBSurfaceCreateInfoEXT {}
+unsafe impl Sync for DirectFBSurfaceCreateInfoEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDispatchGraphCountInfoAMDX.html>
 #[repr(C)]
@@ -5902,6 +6526,9 @@ impl Default for DispatchTileInfoQCOM {
     }
 }
 
+unsafe impl Send for DispatchTileInfoQCOM {}
+unsafe impl Sync for DispatchTileInfoQCOM {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDisplayEventInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -5921,6 +6548,9 @@ impl Default for DisplayEventInfoEXT {
         }
     }
 }
+
+unsafe impl Send for DisplayEventInfoEXT {}
+unsafe impl Sync for DisplayEventInfoEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDisplayModeCreateInfoKHR.html>
 #[repr(C)]
@@ -5943,6 +6573,9 @@ impl Default for DisplayModeCreateInfoKHR {
         }
     }
 }
+
+unsafe impl Send for DisplayModeCreateInfoKHR {}
+unsafe impl Sync for DisplayModeCreateInfoKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDisplayModeParametersKHR.html>
 #[repr(C)]
@@ -5972,6 +6605,9 @@ impl Default for DisplayModeProperties2KHR {
     }
 }
 
+unsafe impl Send for DisplayModeProperties2KHR {}
+unsafe impl Sync for DisplayModeProperties2KHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDisplayModePropertiesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
@@ -6000,6 +6636,9 @@ impl Default for DisplayModeStereoPropertiesNV {
     }
 }
 
+unsafe impl Send for DisplayModeStereoPropertiesNV {}
+unsafe impl Sync for DisplayModeStereoPropertiesNV {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDisplayNativeHdrSurfaceCapabilitiesAMD.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -6020,6 +6659,9 @@ impl Default for DisplayNativeHdrSurfaceCapabilitiesAMD {
     }
 }
 
+unsafe impl Send for DisplayNativeHdrSurfaceCapabilitiesAMD {}
+unsafe impl Sync for DisplayNativeHdrSurfaceCapabilitiesAMD {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDisplayPlaneCapabilities2KHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -6039,6 +6681,9 @@ impl Default for DisplayPlaneCapabilities2KHR {
         }
     }
 }
+
+unsafe impl Send for DisplayPlaneCapabilities2KHR {}
+unsafe impl Sync for DisplayPlaneCapabilities2KHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDisplayPlaneCapabilitiesKHR.html>
 #[repr(C)]
@@ -6077,6 +6722,9 @@ impl Default for DisplayPlaneInfo2KHR {
     }
 }
 
+unsafe impl Send for DisplayPlaneInfo2KHR {}
+unsafe impl Sync for DisplayPlaneInfo2KHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDisplayPlaneProperties2KHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -6096,6 +6744,9 @@ impl Default for DisplayPlaneProperties2KHR {
         }
     }
 }
+
+unsafe impl Send for DisplayPlaneProperties2KHR {}
+unsafe impl Sync for DisplayPlaneProperties2KHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDisplayPlanePropertiesKHR.html>
 #[repr(C)]
@@ -6125,6 +6776,9 @@ impl Default for DisplayPowerInfoEXT {
     }
 }
 
+unsafe impl Send for DisplayPowerInfoEXT {}
+unsafe impl Sync for DisplayPowerInfoEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDisplayPresentInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -6149,6 +6803,9 @@ impl Default for DisplayPresentInfoKHR {
     }
 }
 
+unsafe impl Send for DisplayPresentInfoKHR {}
+unsafe impl Sync for DisplayPresentInfoKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDisplayProperties2KHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -6168,6 +6825,9 @@ impl Default for DisplayProperties2KHR {
         }
     }
 }
+
+unsafe impl Send for DisplayProperties2KHR {}
+unsafe impl Sync for DisplayProperties2KHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDisplayPropertiesKHR.html>
 #[repr(C)]
@@ -6196,6 +6856,9 @@ impl Default for DisplayPropertiesKHR {
         }
     }
 }
+
+unsafe impl Send for DisplayPropertiesKHR {}
+unsafe impl Sync for DisplayPropertiesKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDisplaySurfaceCreateInfoKHR.html>
 #[repr(C)]
@@ -6231,6 +6894,9 @@ impl Default for DisplaySurfaceCreateInfoKHR {
     }
 }
 
+unsafe impl Send for DisplaySurfaceCreateInfoKHR {}
+unsafe impl Sync for DisplaySurfaceCreateInfoKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDisplaySurfaceStereoCreateInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -6250,6 +6916,9 @@ impl Default for DisplaySurfaceStereoCreateInfoNV {
         }
     }
 }
+
+unsafe impl Send for DisplaySurfaceStereoCreateInfoNV {}
+unsafe impl Sync for DisplaySurfaceStereoCreateInfoNV {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDrawIndexedIndirectCommand.html>
 #[repr(C)]
@@ -6338,6 +7007,9 @@ impl Default for DrmFormatModifierPropertiesList2EXT {
     }
 }
 
+unsafe impl Send for DrmFormatModifierPropertiesList2EXT {}
+unsafe impl Sync for DrmFormatModifierPropertiesList2EXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDrmFormatModifierPropertiesListEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -6360,6 +7032,9 @@ impl Default for DrmFormatModifierPropertiesListEXT {
     }
 }
 
+unsafe impl Send for DrmFormatModifierPropertiesListEXT {}
+unsafe impl Sync for DrmFormatModifierPropertiesListEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkEventCreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -6379,6 +7054,9 @@ impl Default for EventCreateInfo {
         }
     }
 }
+
+unsafe impl Send for EventCreateInfo {}
+unsafe impl Sync for EventCreateInfo {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkExecutionGraphPipelineCreateInfoAMDX.html>
 #[repr(C)]
@@ -6412,6 +7090,9 @@ impl Default for ExecutionGraphPipelineCreateInfoAMDX {
     }
 }
 
+unsafe impl Send for ExecutionGraphPipelineCreateInfoAMDX {}
+unsafe impl Sync for ExecutionGraphPipelineCreateInfoAMDX {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkExecutionGraphPipelineScratchSizeAMDX.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -6436,6 +7117,9 @@ impl Default for ExecutionGraphPipelineScratchSizeAMDX {
     }
 }
 
+unsafe impl Send for ExecutionGraphPipelineScratchSizeAMDX {}
+unsafe impl Sync for ExecutionGraphPipelineScratchSizeAMDX {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkExportFenceCreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -6456,6 +7140,9 @@ impl Default for ExportFenceCreateInfo {
     }
 }
 
+unsafe impl Send for ExportFenceCreateInfo {}
+unsafe impl Sync for ExportFenceCreateInfo {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkExportFenceSciSyncInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -6475,6 +7162,9 @@ impl Default for ExportFenceSciSyncInfoNV {
         }
     }
 }
+
+unsafe impl Send for ExportFenceSciSyncInfoNV {}
+unsafe impl Sync for ExportFenceSciSyncInfoNV {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkExportFenceWin32HandleInfoKHR.html>
 #[repr(C)]
@@ -6500,6 +7190,9 @@ impl Default for ExportFenceWin32HandleInfoKHR {
     }
 }
 
+unsafe impl Send for ExportFenceWin32HandleInfoKHR {}
+unsafe impl Sync for ExportFenceWin32HandleInfoKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkExportMemoryAllocateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -6519,6 +7212,9 @@ impl Default for ExportMemoryAllocateInfo {
         }
     }
 }
+
+unsafe impl Send for ExportMemoryAllocateInfo {}
+unsafe impl Sync for ExportMemoryAllocateInfo {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkExportMemoryAllocateInfoNV.html>
 #[repr(C)]
@@ -6540,6 +7236,9 @@ impl Default for ExportMemoryAllocateInfoNV {
     }
 }
 
+unsafe impl Send for ExportMemoryAllocateInfoNV {}
+unsafe impl Sync for ExportMemoryAllocateInfoNV {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkExportMemorySciBufInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -6559,6 +7258,9 @@ impl Default for ExportMemorySciBufInfoNV {
         }
     }
 }
+
+unsafe impl Send for ExportMemorySciBufInfoNV {}
+unsafe impl Sync for ExportMemorySciBufInfoNV {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkExportMemoryWin32HandleInfoKHR.html>
 #[repr(C)]
@@ -6584,6 +7286,9 @@ impl Default for ExportMemoryWin32HandleInfoKHR {
     }
 }
 
+unsafe impl Send for ExportMemoryWin32HandleInfoKHR {}
+unsafe impl Sync for ExportMemoryWin32HandleInfoKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkExportMemoryWin32HandleInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -6605,6 +7310,9 @@ impl Default for ExportMemoryWin32HandleInfoNV {
         }
     }
 }
+
+unsafe impl Send for ExportMemoryWin32HandleInfoNV {}
+unsafe impl Sync for ExportMemoryWin32HandleInfoNV {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkExportMetalBufferInfoEXT.html>
 #[repr(C)]
@@ -6628,6 +7336,9 @@ impl Default for ExportMetalBufferInfoEXT {
     }
 }
 
+unsafe impl Send for ExportMetalBufferInfoEXT {}
+unsafe impl Sync for ExportMetalBufferInfoEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkExportMetalCommandQueueInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -6650,6 +7361,9 @@ impl Default for ExportMetalCommandQueueInfoEXT {
     }
 }
 
+unsafe impl Send for ExportMetalCommandQueueInfoEXT {}
+unsafe impl Sync for ExportMetalCommandQueueInfoEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkExportMetalDeviceInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -6669,6 +7383,9 @@ impl Default for ExportMetalDeviceInfoEXT {
         }
     }
 }
+
+unsafe impl Send for ExportMetalDeviceInfoEXT {}
+unsafe impl Sync for ExportMetalDeviceInfoEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkExportMetalIOSurfaceInfoEXT.html>
 #[repr(C)]
@@ -6692,6 +7409,9 @@ impl Default for ExportMetalIOSurfaceInfoEXT {
     }
 }
 
+unsafe impl Send for ExportMetalIOSurfaceInfoEXT {}
+unsafe impl Sync for ExportMetalIOSurfaceInfoEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkExportMetalObjectCreateInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -6712,6 +7432,9 @@ impl Default for ExportMetalObjectCreateInfoEXT {
     }
 }
 
+unsafe impl Send for ExportMetalObjectCreateInfoEXT {}
+unsafe impl Sync for ExportMetalObjectCreateInfoEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkExportMetalObjectsInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -6729,6 +7452,9 @@ impl Default for ExportMetalObjectsInfoEXT {
         }
     }
 }
+
+unsafe impl Send for ExportMetalObjectsInfoEXT {}
+unsafe impl Sync for ExportMetalObjectsInfoEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkExportMetalSharedEventInfoEXT.html>
 #[repr(C)]
@@ -6753,6 +7479,9 @@ impl Default for ExportMetalSharedEventInfoEXT {
         }
     }
 }
+
+unsafe impl Send for ExportMetalSharedEventInfoEXT {}
+unsafe impl Sync for ExportMetalSharedEventInfoEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkExportMetalTextureInfoEXT.html>
 #[repr(C)]
@@ -6782,6 +7511,9 @@ impl Default for ExportMetalTextureInfoEXT {
     }
 }
 
+unsafe impl Send for ExportMetalTextureInfoEXT {}
+unsafe impl Sync for ExportMetalTextureInfoEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkExportSemaphoreCreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -6802,6 +7534,9 @@ impl Default for ExportSemaphoreCreateInfo {
     }
 }
 
+unsafe impl Send for ExportSemaphoreCreateInfo {}
+unsafe impl Sync for ExportSemaphoreCreateInfo {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkExportSemaphoreSciSyncInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -6821,6 +7556,9 @@ impl Default for ExportSemaphoreSciSyncInfoNV {
         }
     }
 }
+
+unsafe impl Send for ExportSemaphoreSciSyncInfoNV {}
+unsafe impl Sync for ExportSemaphoreSciSyncInfoNV {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkExportSemaphoreWin32HandleInfoKHR.html>
 #[repr(C)]
@@ -6845,6 +7583,9 @@ impl Default for ExportSemaphoreWin32HandleInfoKHR {
         }
     }
 }
+
+unsafe impl Send for ExportSemaphoreWin32HandleInfoKHR {}
+unsafe impl Sync for ExportSemaphoreWin32HandleInfoKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkExtensionProperties.html>
 #[repr(C)]
@@ -6891,6 +7632,9 @@ impl Default for ExternalBufferProperties {
     }
 }
 
+unsafe impl Send for ExternalBufferProperties {}
+unsafe impl Sync for ExternalBufferProperties {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkExternalComputeQueueCreateInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -6910,6 +7654,9 @@ impl Default for ExternalComputeQueueCreateInfoNV {
         }
     }
 }
+
+unsafe impl Send for ExternalComputeQueueCreateInfoNV {}
+unsafe impl Sync for ExternalComputeQueueCreateInfoNV {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkExternalComputeQueueDataParamsNV.html>
 #[repr(C)]
@@ -6931,6 +7678,9 @@ impl Default for ExternalComputeQueueDataParamsNV {
     }
 }
 
+unsafe impl Send for ExternalComputeQueueDataParamsNV {}
+unsafe impl Sync for ExternalComputeQueueDataParamsNV {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkExternalComputeQueueDeviceCreateInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -6950,6 +7700,9 @@ impl Default for ExternalComputeQueueDeviceCreateInfoNV {
         }
     }
 }
+
+unsafe impl Send for ExternalComputeQueueDeviceCreateInfoNV {}
+unsafe impl Sync for ExternalComputeQueueDeviceCreateInfoNV {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkExternalFenceProperties.html>
 #[repr(C)]
@@ -6975,6 +7728,9 @@ impl Default for ExternalFenceProperties {
     }
 }
 
+unsafe impl Send for ExternalFenceProperties {}
+unsafe impl Sync for ExternalFenceProperties {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkExternalFormatANDROID.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -6994,6 +7750,9 @@ impl Default for ExternalFormatANDROID {
         }
     }
 }
+
+unsafe impl Send for ExternalFormatANDROID {}
+unsafe impl Sync for ExternalFormatANDROID {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkExternalFormatQNX.html>
 #[repr(C)]
@@ -7015,6 +7774,9 @@ impl Default for ExternalFormatQNX {
     }
 }
 
+unsafe impl Send for ExternalFormatQNX {}
+unsafe impl Sync for ExternalFormatQNX {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkExternalImageFormatProperties.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -7034,6 +7796,9 @@ impl Default for ExternalImageFormatProperties {
         }
     }
 }
+
+unsafe impl Send for ExternalImageFormatProperties {}
+unsafe impl Sync for ExternalImageFormatProperties {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkExternalImageFormatPropertiesNV.html>
 #[repr(C)]
@@ -7065,6 +7830,9 @@ impl Default for ExternalMemoryAcquireUnmodifiedEXT {
     }
 }
 
+unsafe impl Send for ExternalMemoryAcquireUnmodifiedEXT {}
+unsafe impl Sync for ExternalMemoryAcquireUnmodifiedEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkExternalMemoryBufferCreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -7084,6 +7852,9 @@ impl Default for ExternalMemoryBufferCreateInfo {
         }
     }
 }
+
+unsafe impl Send for ExternalMemoryBufferCreateInfo {}
+unsafe impl Sync for ExternalMemoryBufferCreateInfo {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkExternalMemoryImageCreateInfo.html>
 #[repr(C)]
@@ -7105,6 +7876,9 @@ impl Default for ExternalMemoryImageCreateInfo {
     }
 }
 
+unsafe impl Send for ExternalMemoryImageCreateInfo {}
+unsafe impl Sync for ExternalMemoryImageCreateInfo {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkExternalMemoryImageCreateInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -7124,6 +7898,9 @@ impl Default for ExternalMemoryImageCreateInfoNV {
         }
     }
 }
+
+unsafe impl Send for ExternalMemoryImageCreateInfoNV {}
+unsafe impl Sync for ExternalMemoryImageCreateInfoNV {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkExternalMemoryProperties.html>
 #[repr(C)]
@@ -7154,6 +7931,9 @@ impl Default for ExternalMemoryTensorCreateInfoARM {
     }
 }
 
+unsafe impl Send for ExternalMemoryTensorCreateInfoARM {}
+unsafe impl Sync for ExternalMemoryTensorCreateInfoARM {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkExternalSemaphoreProperties.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -7178,6 +7958,9 @@ impl Default for ExternalSemaphoreProperties {
     }
 }
 
+unsafe impl Send for ExternalSemaphoreProperties {}
+unsafe impl Sync for ExternalSemaphoreProperties {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkExternalTensorPropertiesARM.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -7198,6 +7981,9 @@ impl Default for ExternalTensorPropertiesARM {
     }
 }
 
+unsafe impl Send for ExternalTensorPropertiesARM {}
+unsafe impl Sync for ExternalTensorPropertiesARM {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkFenceCreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -7217,6 +8003,9 @@ impl Default for FenceCreateInfo {
         }
     }
 }
+
+unsafe impl Send for FenceCreateInfo {}
+unsafe impl Sync for FenceCreateInfo {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkFenceGetFdInfoKHR.html>
 #[repr(C)]
@@ -7240,6 +8029,9 @@ impl Default for FenceGetFdInfoKHR {
     }
 }
 
+unsafe impl Send for FenceGetFdInfoKHR {}
+unsafe impl Sync for FenceGetFdInfoKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkFenceGetSciSyncInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -7261,6 +8053,9 @@ impl Default for FenceGetSciSyncInfoNV {
         }
     }
 }
+
+unsafe impl Send for FenceGetSciSyncInfoNV {}
+unsafe impl Sync for FenceGetSciSyncInfoNV {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkFenceGetWin32HandleInfoKHR.html>
 #[repr(C)]
@@ -7284,6 +8079,9 @@ impl Default for FenceGetWin32HandleInfoKHR {
     }
 }
 
+unsafe impl Send for FenceGetWin32HandleInfoKHR {}
+unsafe impl Sync for FenceGetWin32HandleInfoKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkFilterCubicImageViewImageFormatPropertiesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -7305,6 +8103,9 @@ impl Default for FilterCubicImageViewImageFormatPropertiesEXT {
         }
     }
 }
+
+unsafe impl Send for FilterCubicImageViewImageFormatPropertiesEXT {}
+unsafe impl Sync for FilterCubicImageViewImageFormatPropertiesEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkFormatProperties.html>
 #[repr(C)]
@@ -7335,6 +8136,9 @@ impl Default for FormatProperties2 {
     }
 }
 
+unsafe impl Send for FormatProperties2 {}
+unsafe impl Sync for FormatProperties2 {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkFormatProperties3.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -7359,6 +8163,9 @@ impl Default for FormatProperties3 {
     }
 }
 
+unsafe impl Send for FormatProperties3 {}
+unsafe impl Sync for FormatProperties3 {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkFragmentShadingRateAttachmentInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -7380,6 +8187,9 @@ impl Default for FragmentShadingRateAttachmentInfoKHR {
         }
     }
 }
+
+unsafe impl Send for FragmentShadingRateAttachmentInfoKHR {}
+unsafe impl Sync for FragmentShadingRateAttachmentInfoKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkFrameBoundaryEXT.html>
 #[repr(C)]
@@ -7417,6 +8227,9 @@ impl Default for FrameBoundaryEXT {
     }
 }
 
+unsafe impl Send for FrameBoundaryEXT {}
+unsafe impl Sync for FrameBoundaryEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkFrameBoundaryTensorsARM.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -7438,6 +8251,9 @@ impl Default for FrameBoundaryTensorsARM {
         }
     }
 }
+
+unsafe impl Send for FrameBoundaryTensorsARM {}
+unsafe impl Sync for FrameBoundaryTensorsARM {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkFramebufferAttachmentImageInfo.html>
 #[repr(C)]
@@ -7471,6 +8287,9 @@ impl Default for FramebufferAttachmentImageInfo {
     }
 }
 
+unsafe impl Send for FramebufferAttachmentImageInfo {}
+unsafe impl Sync for FramebufferAttachmentImageInfo {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkFramebufferAttachmentsCreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -7492,6 +8311,9 @@ impl Default for FramebufferAttachmentsCreateInfo {
         }
     }
 }
+
+unsafe impl Send for FramebufferAttachmentsCreateInfo {}
+unsafe impl Sync for FramebufferAttachmentsCreateInfo {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkFramebufferCreateInfo.html>
 #[repr(C)]
@@ -7525,6 +8347,9 @@ impl Default for FramebufferCreateInfo {
     }
 }
 
+unsafe impl Send for FramebufferCreateInfo {}
+unsafe impl Sync for FramebufferCreateInfo {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkFramebufferMixedSamplesCombinationNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -7550,6 +8375,9 @@ impl Default for FramebufferMixedSamplesCombinationNV {
         }
     }
 }
+
+unsafe impl Send for FramebufferMixedSamplesCombinationNV {}
+unsafe impl Sync for FramebufferMixedSamplesCombinationNV {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkGeneratedCommandsInfoEXT.html>
 #[repr(C)]
@@ -7588,6 +8416,9 @@ impl Default for GeneratedCommandsInfoEXT {
         }
     }
 }
+
+unsafe impl Send for GeneratedCommandsInfoEXT {}
+unsafe impl Sync for GeneratedCommandsInfoEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkGeneratedCommandsInfoNV.html>
 #[repr(C)]
@@ -7633,6 +8464,9 @@ impl Default for GeneratedCommandsInfoNV {
     }
 }
 
+unsafe impl Send for GeneratedCommandsInfoNV {}
+unsafe impl Sync for GeneratedCommandsInfoNV {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkGeneratedCommandsMemoryRequirementsInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -7658,6 +8492,9 @@ impl Default for GeneratedCommandsMemoryRequirementsInfoEXT {
         }
     }
 }
+
+unsafe impl Send for GeneratedCommandsMemoryRequirementsInfoEXT {}
+unsafe impl Sync for GeneratedCommandsMemoryRequirementsInfoEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkGeneratedCommandsMemoryRequirementsInfoNV.html>
 #[repr(C)]
@@ -7685,6 +8522,9 @@ impl Default for GeneratedCommandsMemoryRequirementsInfoNV {
     }
 }
 
+unsafe impl Send for GeneratedCommandsMemoryRequirementsInfoNV {}
+unsafe impl Sync for GeneratedCommandsMemoryRequirementsInfoNV {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkGeneratedCommandsPipelineInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -7704,6 +8544,9 @@ impl Default for GeneratedCommandsPipelineInfoEXT {
         }
     }
 }
+
+unsafe impl Send for GeneratedCommandsPipelineInfoEXT {}
+unsafe impl Sync for GeneratedCommandsPipelineInfoEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkGeneratedCommandsShaderInfoEXT.html>
 #[repr(C)]
@@ -7726,6 +8569,9 @@ impl Default for GeneratedCommandsShaderInfoEXT {
         }
     }
 }
+
+unsafe impl Send for GeneratedCommandsShaderInfoEXT {}
+unsafe impl Sync for GeneratedCommandsShaderInfoEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkGeometryAABBNV.html>
 #[repr(C)]
@@ -7752,6 +8598,9 @@ impl Default for GeometryAABBNV {
         }
     }
 }
+
+unsafe impl Send for GeometryAABBNV {}
+unsafe impl Sync for GeometryAABBNV {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkGeometryDataNV.html>
 #[repr(C)]
@@ -7784,6 +8633,9 @@ impl Default for GeometryNV {
         }
     }
 }
+
+unsafe impl Send for GeometryNV {}
+unsafe impl Sync for GeometryNV {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkGeometryTrianglesNV.html>
 #[repr(C)]
@@ -7825,6 +8677,9 @@ impl Default for GeometryTrianglesNV {
     }
 }
 
+unsafe impl Send for GeometryTrianglesNV {}
+unsafe impl Sync for GeometryTrianglesNV {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkGetLatencyMarkerInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -7846,6 +8701,9 @@ impl Default for GetLatencyMarkerInfoNV {
         }
     }
 }
+
+unsafe impl Send for GetLatencyMarkerInfoNV {}
+unsafe impl Sync for GetLatencyMarkerInfoNV {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkGraphicsPipelineCreateInfo.html>
 #[repr(C)]
@@ -7899,6 +8757,9 @@ impl Default for GraphicsPipelineCreateInfo {
     }
 }
 
+unsafe impl Send for GraphicsPipelineCreateInfo {}
+unsafe impl Sync for GraphicsPipelineCreateInfo {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkGraphicsPipelineLibraryCreateInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -7918,6 +8779,9 @@ impl Default for GraphicsPipelineLibraryCreateInfoEXT {
         }
     }
 }
+
+unsafe impl Send for GraphicsPipelineLibraryCreateInfoEXT {}
+unsafe impl Sync for GraphicsPipelineLibraryCreateInfoEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkGraphicsPipelineShaderGroupsCreateInfoNV.html>
 #[repr(C)]
@@ -7945,6 +8809,9 @@ impl Default for GraphicsPipelineShaderGroupsCreateInfoNV {
     }
 }
 
+unsafe impl Send for GraphicsPipelineShaderGroupsCreateInfoNV {}
+unsafe impl Sync for GraphicsPipelineShaderGroupsCreateInfoNV {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkGraphicsShaderGroupCreateInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -7970,6 +8837,9 @@ impl Default for GraphicsShaderGroupCreateInfoNV {
         }
     }
 }
+
+unsafe impl Send for GraphicsShaderGroupCreateInfoNV {}
+unsafe impl Sync for GraphicsShaderGroupCreateInfoNV {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkHdrMetadataEXT.html>
 #[repr(C)]
@@ -8005,6 +8875,9 @@ impl Default for HdrMetadataEXT {
     }
 }
 
+unsafe impl Send for HdrMetadataEXT {}
+unsafe impl Sync for HdrMetadataEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkHdrVividDynamicMetadataHUAWEI.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -8027,6 +8900,9 @@ impl Default for HdrVividDynamicMetadataHUAWEI {
     }
 }
 
+unsafe impl Send for HdrVividDynamicMetadataHUAWEI {}
+unsafe impl Sync for HdrVividDynamicMetadataHUAWEI {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkHeadlessSurfaceCreateInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -8046,6 +8922,9 @@ impl Default for HeadlessSurfaceCreateInfoEXT {
         }
     }
 }
+
+unsafe impl Send for HeadlessSurfaceCreateInfoEXT {}
+unsafe impl Sync for HeadlessSurfaceCreateInfoEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkHostImageCopyDevicePerformanceQuery.html>
 #[repr(C)]
@@ -8068,6 +8947,9 @@ impl Default for HostImageCopyDevicePerformanceQuery {
         }
     }
 }
+
+unsafe impl Send for HostImageCopyDevicePerformanceQuery {}
+unsafe impl Sync for HostImageCopyDevicePerformanceQuery {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkHostImageLayoutTransitionInfo.html>
 #[repr(C)]
@@ -8095,6 +8977,9 @@ impl Default for HostImageLayoutTransitionInfo {
     }
 }
 
+unsafe impl Send for HostImageLayoutTransitionInfo {}
+unsafe impl Sync for HostImageLayoutTransitionInfo {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkIOSSurfaceCreateInfoMVK.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -8117,6 +9002,9 @@ impl Default for IOSSurfaceCreateInfoMVK {
     }
 }
 
+unsafe impl Send for IOSSurfaceCreateInfoMVK {}
+unsafe impl Sync for IOSSurfaceCreateInfoMVK {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImageAlignmentControlCreateInfoMESA.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -8136,6 +9024,9 @@ impl Default for ImageAlignmentControlCreateInfoMESA {
         }
     }
 }
+
+unsafe impl Send for ImageAlignmentControlCreateInfoMESA {}
+unsafe impl Sync for ImageAlignmentControlCreateInfoMESA {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImageBlit.html>
 #[repr(C)]
@@ -8173,6 +9064,9 @@ impl Default for ImageBlit2 {
     }
 }
 
+unsafe impl Send for ImageBlit2 {}
+unsafe impl Sync for ImageBlit2 {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImageCaptureDescriptorDataInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -8192,6 +9086,9 @@ impl Default for ImageCaptureDescriptorDataInfoEXT {
         }
     }
 }
+
+unsafe impl Send for ImageCaptureDescriptorDataInfoEXT {}
+unsafe impl Sync for ImageCaptureDescriptorDataInfoEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImageCompressionControlEXT.html>
 #[repr(C)]
@@ -8217,6 +9114,9 @@ impl Default for ImageCompressionControlEXT {
     }
 }
 
+unsafe impl Send for ImageCompressionControlEXT {}
+unsafe impl Sync for ImageCompressionControlEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImageCompressionPropertiesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -8238,6 +9138,9 @@ impl Default for ImageCompressionPropertiesEXT {
         }
     }
 }
+
+unsafe impl Send for ImageCompressionPropertiesEXT {}
+unsafe impl Sync for ImageCompressionPropertiesEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImageConstraintsInfoFUCHSIA.html>
 #[repr(C)]
@@ -8264,6 +9167,9 @@ impl Default for ImageConstraintsInfoFUCHSIA {
         }
     }
 }
+
+unsafe impl Send for ImageConstraintsInfoFUCHSIA {}
+unsafe impl Sync for ImageConstraintsInfoFUCHSIA {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImageCopy.html>
 #[repr(C)]
@@ -8303,6 +9209,9 @@ impl Default for ImageCopy2 {
         }
     }
 }
+
+unsafe impl Send for ImageCopy2 {}
+unsafe impl Sync for ImageCopy2 {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImageCreateInfo.html>
 #[repr(C)]
@@ -8348,6 +9257,9 @@ impl Default for ImageCreateInfo {
     }
 }
 
+unsafe impl Send for ImageCreateInfo {}
+unsafe impl Sync for ImageCreateInfo {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImageDrmFormatModifierExplicitCreateInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -8372,6 +9284,9 @@ impl Default for ImageDrmFormatModifierExplicitCreateInfoEXT {
     }
 }
 
+unsafe impl Send for ImageDrmFormatModifierExplicitCreateInfoEXT {}
+unsafe impl Sync for ImageDrmFormatModifierExplicitCreateInfoEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImageDrmFormatModifierListCreateInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -8394,6 +9309,9 @@ impl Default for ImageDrmFormatModifierListCreateInfoEXT {
     }
 }
 
+unsafe impl Send for ImageDrmFormatModifierListCreateInfoEXT {}
+unsafe impl Sync for ImageDrmFormatModifierListCreateInfoEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImageDrmFormatModifierPropertiesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -8413,6 +9331,9 @@ impl Default for ImageDrmFormatModifierPropertiesEXT {
         }
     }
 }
+
+unsafe impl Send for ImageDrmFormatModifierPropertiesEXT {}
+unsafe impl Sync for ImageDrmFormatModifierPropertiesEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImageFormatConstraintsInfoFUCHSIA.html>
 #[repr(C)]
@@ -8444,6 +9365,9 @@ impl Default for ImageFormatConstraintsInfoFUCHSIA {
     }
 }
 
+unsafe impl Send for ImageFormatConstraintsInfoFUCHSIA {}
+unsafe impl Sync for ImageFormatConstraintsInfoFUCHSIA {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImageFormatListCreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -8465,6 +9389,9 @@ impl Default for ImageFormatListCreateInfo {
         }
     }
 }
+
+unsafe impl Send for ImageFormatListCreateInfo {}
+unsafe impl Sync for ImageFormatListCreateInfo {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImageFormatProperties.html>
 #[repr(C)]
@@ -8496,6 +9423,9 @@ impl Default for ImageFormatProperties2 {
         }
     }
 }
+
+unsafe impl Send for ImageFormatProperties2 {}
+unsafe impl Sync for ImageFormatProperties2 {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImageMemoryBarrier.html>
 #[repr(C)]
@@ -8530,6 +9460,9 @@ impl Default for ImageMemoryBarrier {
         }
     }
 }
+
+unsafe impl Send for ImageMemoryBarrier {}
+unsafe impl Sync for ImageMemoryBarrier {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImageMemoryBarrier2.html>
 #[repr(C)]
@@ -8569,6 +9502,9 @@ impl Default for ImageMemoryBarrier2 {
     }
 }
 
+unsafe impl Send for ImageMemoryBarrier2 {}
+unsafe impl Sync for ImageMemoryBarrier2 {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImageMemoryRequirementsInfo2.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -8588,6 +9524,9 @@ impl Default for ImageMemoryRequirementsInfo2 {
         }
     }
 }
+
+unsafe impl Send for ImageMemoryRequirementsInfo2 {}
+unsafe impl Sync for ImageMemoryRequirementsInfo2 {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImagePipeSurfaceCreateInfoFUCHSIA.html>
 #[repr(C)]
@@ -8611,6 +9550,9 @@ impl Default for ImagePipeSurfaceCreateInfoFUCHSIA {
     }
 }
 
+unsafe impl Send for ImagePipeSurfaceCreateInfoFUCHSIA {}
+unsafe impl Sync for ImagePipeSurfaceCreateInfoFUCHSIA {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImagePlaneMemoryRequirementsInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -8630,6 +9572,9 @@ impl Default for ImagePlaneMemoryRequirementsInfo {
         }
     }
 }
+
+unsafe impl Send for ImagePlaneMemoryRequirementsInfo {}
+unsafe impl Sync for ImagePlaneMemoryRequirementsInfo {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImageResolve.html>
 #[repr(C)]
@@ -8670,6 +9615,9 @@ impl Default for ImageResolve2 {
     }
 }
 
+unsafe impl Send for ImageResolve2 {}
+unsafe impl Sync for ImageResolve2 {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImageSparseMemoryRequirementsInfo2.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -8690,6 +9638,9 @@ impl Default for ImageSparseMemoryRequirementsInfo2 {
     }
 }
 
+unsafe impl Send for ImageSparseMemoryRequirementsInfo2 {}
+unsafe impl Sync for ImageSparseMemoryRequirementsInfo2 {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImageStencilUsageCreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -8709,6 +9660,9 @@ impl Default for ImageStencilUsageCreateInfo {
         }
     }
 }
+
+unsafe impl Send for ImageStencilUsageCreateInfo {}
+unsafe impl Sync for ImageStencilUsageCreateInfo {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImageSubresource.html>
 #[repr(C)]
@@ -8738,6 +9692,9 @@ impl Default for ImageSubresource2 {
         }
     }
 }
+
+unsafe impl Send for ImageSubresource2 {}
+unsafe impl Sync for ImageSubresource2 {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImageSubresourceLayers.html>
 #[repr(C)]
@@ -8780,6 +9737,9 @@ impl Default for ImageSwapchainCreateInfoKHR {
     }
 }
 
+unsafe impl Send for ImageSwapchainCreateInfoKHR {}
+unsafe impl Sync for ImageSwapchainCreateInfoKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImageToMemoryCopy.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -8810,6 +9770,9 @@ impl Default for ImageToMemoryCopy {
     }
 }
 
+unsafe impl Send for ImageToMemoryCopy {}
+unsafe impl Sync for ImageToMemoryCopy {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImageViewASTCDecodeModeEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -8829,6 +9792,9 @@ impl Default for ImageViewASTCDecodeModeEXT {
         }
     }
 }
+
+unsafe impl Send for ImageViewASTCDecodeModeEXT {}
+unsafe impl Sync for ImageViewASTCDecodeModeEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImageViewAddressPropertiesNVX.html>
 #[repr(C)]
@@ -8852,6 +9818,9 @@ impl Default for ImageViewAddressPropertiesNVX {
     }
 }
 
+unsafe impl Send for ImageViewAddressPropertiesNVX {}
+unsafe impl Sync for ImageViewAddressPropertiesNVX {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImageViewCaptureDescriptorDataInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -8871,6 +9840,9 @@ impl Default for ImageViewCaptureDescriptorDataInfoEXT {
         }
     }
 }
+
+unsafe impl Send for ImageViewCaptureDescriptorDataInfoEXT {}
+unsafe impl Sync for ImageViewCaptureDescriptorDataInfoEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImageViewCreateInfo.html>
 #[repr(C)]
@@ -8902,6 +9874,9 @@ impl Default for ImageViewCreateInfo {
     }
 }
 
+unsafe impl Send for ImageViewCreateInfo {}
+unsafe impl Sync for ImageViewCreateInfo {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImageViewHandleInfoNVX.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -8926,6 +9901,9 @@ impl Default for ImageViewHandleInfoNVX {
     }
 }
 
+unsafe impl Send for ImageViewHandleInfoNVX {}
+unsafe impl Sync for ImageViewHandleInfoNVX {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImageViewMinLodCreateInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, PartialEq)]
@@ -8945,6 +9923,9 @@ impl Default for ImageViewMinLodCreateInfoEXT {
         }
     }
 }
+
+unsafe impl Send for ImageViewMinLodCreateInfoEXT {}
+unsafe impl Sync for ImageViewMinLodCreateInfoEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImageViewSampleWeightCreateInfoQCOM.html>
 #[repr(C)]
@@ -8970,6 +9951,9 @@ impl Default for ImageViewSampleWeightCreateInfoQCOM {
     }
 }
 
+unsafe impl Send for ImageViewSampleWeightCreateInfoQCOM {}
+unsafe impl Sync for ImageViewSampleWeightCreateInfoQCOM {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImageViewSlicedCreateInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -8992,6 +9976,9 @@ impl Default for ImageViewSlicedCreateInfoEXT {
     }
 }
 
+unsafe impl Send for ImageViewSlicedCreateInfoEXT {}
+unsafe impl Sync for ImageViewSlicedCreateInfoEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImageViewUsageCreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -9012,6 +9999,9 @@ impl Default for ImageViewUsageCreateInfo {
     }
 }
 
+unsafe impl Send for ImageViewUsageCreateInfo {}
+unsafe impl Sync for ImageViewUsageCreateInfo {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImportAndroidHardwareBufferInfoANDROID.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -9031,6 +10021,9 @@ impl Default for ImportAndroidHardwareBufferInfoANDROID {
         }
     }
 }
+
+unsafe impl Send for ImportAndroidHardwareBufferInfoANDROID {}
+unsafe impl Sync for ImportAndroidHardwareBufferInfoANDROID {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImportFenceFdInfoKHR.html>
 #[repr(C)]
@@ -9058,6 +10051,9 @@ impl Default for ImportFenceFdInfoKHR {
     }
 }
 
+unsafe impl Send for ImportFenceFdInfoKHR {}
+unsafe impl Sync for ImportFenceFdInfoKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImportFenceSciSyncInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -9081,6 +10077,9 @@ impl Default for ImportFenceSciSyncInfoNV {
         }
     }
 }
+
+unsafe impl Send for ImportFenceSciSyncInfoNV {}
+unsafe impl Sync for ImportFenceSciSyncInfoNV {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImportFenceWin32HandleInfoKHR.html>
 #[repr(C)]
@@ -9110,6 +10109,9 @@ impl Default for ImportFenceWin32HandleInfoKHR {
     }
 }
 
+unsafe impl Send for ImportFenceWin32HandleInfoKHR {}
+unsafe impl Sync for ImportFenceWin32HandleInfoKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImportMemoryBufferCollectionFUCHSIA.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -9131,6 +10133,9 @@ impl Default for ImportMemoryBufferCollectionFUCHSIA {
         }
     }
 }
+
+unsafe impl Send for ImportMemoryBufferCollectionFUCHSIA {}
+unsafe impl Sync for ImportMemoryBufferCollectionFUCHSIA {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImportMemoryFdInfoKHR.html>
 #[repr(C)]
@@ -9154,6 +10159,9 @@ impl Default for ImportMemoryFdInfoKHR {
     }
 }
 
+unsafe impl Send for ImportMemoryFdInfoKHR {}
+unsafe impl Sync for ImportMemoryFdInfoKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImportMemoryHostPointerInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -9175,6 +10183,9 @@ impl Default for ImportMemoryHostPointerInfoEXT {
         }
     }
 }
+
+unsafe impl Send for ImportMemoryHostPointerInfoEXT {}
+unsafe impl Sync for ImportMemoryHostPointerInfoEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImportMemoryMetalHandleInfoEXT.html>
 #[repr(C)]
@@ -9198,6 +10209,9 @@ impl Default for ImportMemoryMetalHandleInfoEXT {
     }
 }
 
+unsafe impl Send for ImportMemoryMetalHandleInfoEXT {}
+unsafe impl Sync for ImportMemoryMetalHandleInfoEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImportMemorySciBufInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -9219,6 +10233,9 @@ impl Default for ImportMemorySciBufInfoNV {
         }
     }
 }
+
+unsafe impl Send for ImportMemorySciBufInfoNV {}
+unsafe impl Sync for ImportMemorySciBufInfoNV {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImportMemoryWin32HandleInfoKHR.html>
 #[repr(C)]
@@ -9244,6 +10261,9 @@ impl Default for ImportMemoryWin32HandleInfoKHR {
     }
 }
 
+unsafe impl Send for ImportMemoryWin32HandleInfoKHR {}
+unsafe impl Sync for ImportMemoryWin32HandleInfoKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImportMemoryWin32HandleInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -9265,6 +10285,9 @@ impl Default for ImportMemoryWin32HandleInfoNV {
         }
     }
 }
+
+unsafe impl Send for ImportMemoryWin32HandleInfoNV {}
+unsafe impl Sync for ImportMemoryWin32HandleInfoNV {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImportMemoryZirconHandleInfoFUCHSIA.html>
 #[repr(C)]
@@ -9288,6 +10311,9 @@ impl Default for ImportMemoryZirconHandleInfoFUCHSIA {
     }
 }
 
+unsafe impl Send for ImportMemoryZirconHandleInfoFUCHSIA {}
+unsafe impl Sync for ImportMemoryZirconHandleInfoFUCHSIA {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImportMetalBufferInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -9307,6 +10333,9 @@ impl Default for ImportMetalBufferInfoEXT {
         }
     }
 }
+
+unsafe impl Send for ImportMetalBufferInfoEXT {}
+unsafe impl Sync for ImportMetalBufferInfoEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImportMetalIOSurfaceInfoEXT.html>
 #[repr(C)]
@@ -9328,6 +10357,9 @@ impl Default for ImportMetalIOSurfaceInfoEXT {
     }
 }
 
+unsafe impl Send for ImportMetalIOSurfaceInfoEXT {}
+unsafe impl Sync for ImportMetalIOSurfaceInfoEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImportMetalSharedEventInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -9347,6 +10379,9 @@ impl Default for ImportMetalSharedEventInfoEXT {
         }
     }
 }
+
+unsafe impl Send for ImportMetalSharedEventInfoEXT {}
+unsafe impl Sync for ImportMetalSharedEventInfoEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImportMetalTextureInfoEXT.html>
 #[repr(C)]
@@ -9370,6 +10405,9 @@ impl Default for ImportMetalTextureInfoEXT {
     }
 }
 
+unsafe impl Send for ImportMetalTextureInfoEXT {}
+unsafe impl Sync for ImportMetalTextureInfoEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImportScreenBufferInfoQNX.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -9389,6 +10427,9 @@ impl Default for ImportScreenBufferInfoQNX {
         }
     }
 }
+
+unsafe impl Send for ImportScreenBufferInfoQNX {}
+unsafe impl Sync for ImportScreenBufferInfoQNX {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImportSemaphoreFdInfoKHR.html>
 #[repr(C)]
@@ -9416,6 +10457,9 @@ impl Default for ImportSemaphoreFdInfoKHR {
     }
 }
 
+unsafe impl Send for ImportSemaphoreFdInfoKHR {}
+unsafe impl Sync for ImportSemaphoreFdInfoKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImportSemaphoreSciSyncInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -9439,6 +10483,9 @@ impl Default for ImportSemaphoreSciSyncInfoNV {
         }
     }
 }
+
+unsafe impl Send for ImportSemaphoreSciSyncInfoNV {}
+unsafe impl Sync for ImportSemaphoreSciSyncInfoNV {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImportSemaphoreWin32HandleInfoKHR.html>
 #[repr(C)]
@@ -9468,6 +10515,9 @@ impl Default for ImportSemaphoreWin32HandleInfoKHR {
     }
 }
 
+unsafe impl Send for ImportSemaphoreWin32HandleInfoKHR {}
+unsafe impl Sync for ImportSemaphoreWin32HandleInfoKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImportSemaphoreZirconHandleInfoFUCHSIA.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -9493,6 +10543,9 @@ impl Default for ImportSemaphoreZirconHandleInfoFUCHSIA {
         }
     }
 }
+
+unsafe impl Send for ImportSemaphoreZirconHandleInfoFUCHSIA {}
+unsafe impl Sync for ImportSemaphoreZirconHandleInfoFUCHSIA {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkIndirectCommandsExecutionSetTokenEXT.html>
 #[repr(C)]
@@ -9539,6 +10592,9 @@ impl Default for IndirectCommandsLayoutCreateInfoEXT {
     }
 }
 
+unsafe impl Send for IndirectCommandsLayoutCreateInfoEXT {}
+unsafe impl Sync for IndirectCommandsLayoutCreateInfoEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkIndirectCommandsLayoutCreateInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -9569,6 +10625,9 @@ impl Default for IndirectCommandsLayoutCreateInfoNV {
     }
 }
 
+unsafe impl Send for IndirectCommandsLayoutCreateInfoNV {}
+unsafe impl Sync for IndirectCommandsLayoutCreateInfoNV {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkIndirectCommandsLayoutTokenEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug)]
@@ -9592,6 +10651,9 @@ impl Default for IndirectCommandsLayoutTokenEXT {
         }
     }
 }
+
+unsafe impl Send for IndirectCommandsLayoutTokenEXT {}
+unsafe impl Sync for IndirectCommandsLayoutTokenEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkIndirectCommandsLayoutTokenNV.html>
 #[repr(C)]
@@ -9637,6 +10699,9 @@ impl Default for IndirectCommandsLayoutTokenNV {
     }
 }
 
+unsafe impl Send for IndirectCommandsLayoutTokenNV {}
+unsafe impl Sync for IndirectCommandsLayoutTokenNV {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkIndirectCommandsPushConstantTokenEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
@@ -9681,6 +10746,9 @@ impl Default for IndirectExecutionSetCreateInfoEXT {
     }
 }
 
+unsafe impl Send for IndirectExecutionSetCreateInfoEXT {}
+unsafe impl Sync for IndirectExecutionSetCreateInfoEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkIndirectExecutionSetPipelineInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -9702,6 +10770,9 @@ impl Default for IndirectExecutionSetPipelineInfoEXT {
         }
     }
 }
+
+unsafe impl Send for IndirectExecutionSetPipelineInfoEXT {}
+unsafe impl Sync for IndirectExecutionSetPipelineInfoEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkIndirectExecutionSetShaderInfoEXT.html>
 #[repr(C)]
@@ -9733,6 +10804,9 @@ impl Default for IndirectExecutionSetShaderInfoEXT {
     }
 }
 
+unsafe impl Send for IndirectExecutionSetShaderInfoEXT {}
+unsafe impl Sync for IndirectExecutionSetShaderInfoEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkIndirectExecutionSetShaderLayoutInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -9755,6 +10829,9 @@ impl Default for IndirectExecutionSetShaderLayoutInfoEXT {
     }
 }
 
+unsafe impl Send for IndirectExecutionSetShaderLayoutInfoEXT {}
+unsafe impl Sync for IndirectExecutionSetShaderLayoutInfoEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkInitializePerformanceApiInfoINTEL.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -9774,6 +10851,9 @@ impl Default for InitializePerformanceApiInfoINTEL {
         }
     }
 }
+
+unsafe impl Send for InitializePerformanceApiInfoINTEL {}
+unsafe impl Sync for InitializePerformanceApiInfoINTEL {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkInputAttachmentAspectReference.html>
 #[repr(C)]
@@ -9814,6 +10894,9 @@ impl Default for InstanceCreateInfo {
     }
 }
 
+unsafe impl Send for InstanceCreateInfo {}
+unsafe impl Sync for InstanceCreateInfo {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkLatencySleepInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -9835,6 +10918,9 @@ impl Default for LatencySleepInfoNV {
         }
     }
 }
+
+unsafe impl Send for LatencySleepInfoNV {}
+unsafe impl Sync for LatencySleepInfoNV {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkLatencySleepModeInfoNV.html>
 #[repr(C)]
@@ -9860,6 +10946,9 @@ impl Default for LatencySleepModeInfoNV {
     }
 }
 
+unsafe impl Send for LatencySleepModeInfoNV {}
+unsafe impl Sync for LatencySleepModeInfoNV {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkLatencySubmissionPresentIdNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -9879,6 +10968,9 @@ impl Default for LatencySubmissionPresentIdNV {
         }
     }
 }
+
+unsafe impl Send for LatencySubmissionPresentIdNV {}
+unsafe impl Sync for LatencySubmissionPresentIdNV {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkLatencySurfaceCapabilitiesNV.html>
 #[repr(C)]
@@ -9901,6 +10993,9 @@ impl Default for LatencySurfaceCapabilitiesNV {
         }
     }
 }
+
+unsafe impl Send for LatencySurfaceCapabilitiesNV {}
+unsafe impl Sync for LatencySurfaceCapabilitiesNV {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkLatencyTimingsFrameReportNV.html>
 #[repr(C)]
@@ -9948,6 +11043,9 @@ impl Default for LatencyTimingsFrameReportNV {
     }
 }
 
+unsafe impl Send for LatencyTimingsFrameReportNV {}
+unsafe impl Sync for LatencyTimingsFrameReportNV {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkLayerProperties.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
@@ -9982,6 +11080,9 @@ impl Default for LayerSettingEXT {
     }
 }
 
+unsafe impl Send for LayerSettingEXT {}
+unsafe impl Sync for LayerSettingEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkLayerSettingsCreateInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -10004,6 +11105,9 @@ impl Default for LayerSettingsCreateInfoEXT {
     }
 }
 
+unsafe impl Send for LayerSettingsCreateInfoEXT {}
+unsafe impl Sync for LayerSettingsCreateInfoEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMacOSSurfaceCreateInfoMVK.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -10025,6 +11129,9 @@ impl Default for MacOSSurfaceCreateInfoMVK {
         }
     }
 }
+
+unsafe impl Send for MacOSSurfaceCreateInfoMVK {}
+unsafe impl Sync for MacOSSurfaceCreateInfoMVK {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMappedMemoryRange.html>
 #[repr(C)]
@@ -10050,6 +11157,9 @@ impl Default for MappedMemoryRange {
     }
 }
 
+unsafe impl Send for MappedMemoryRange {}
+unsafe impl Sync for MappedMemoryRange {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMemoryAllocateFlagsInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -10071,6 +11181,9 @@ impl Default for MemoryAllocateFlagsInfo {
         }
     }
 }
+
+unsafe impl Send for MemoryAllocateFlagsInfo {}
+unsafe impl Sync for MemoryAllocateFlagsInfo {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMemoryAllocateInfo.html>
 #[repr(C)]
@@ -10094,6 +11207,9 @@ impl Default for MemoryAllocateInfo {
     }
 }
 
+unsafe impl Send for MemoryAllocateInfo {}
+unsafe impl Sync for MemoryAllocateInfo {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMemoryBarrier.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -10115,6 +11231,9 @@ impl Default for MemoryBarrier {
         }
     }
 }
+
+unsafe impl Send for MemoryBarrier {}
+unsafe impl Sync for MemoryBarrier {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMemoryBarrier2.html>
 #[repr(C)]
@@ -10142,6 +11261,9 @@ impl Default for MemoryBarrier2 {
     }
 }
 
+unsafe impl Send for MemoryBarrier2 {}
+unsafe impl Sync for MemoryBarrier2 {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMemoryBarrierAccessFlags3KHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -10163,6 +11285,9 @@ impl Default for MemoryBarrierAccessFlags3KHR {
         }
     }
 }
+
+unsafe impl Send for MemoryBarrierAccessFlags3KHR {}
+unsafe impl Sync for MemoryBarrierAccessFlags3KHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMemoryDedicatedAllocateInfo.html>
 #[repr(C)]
@@ -10186,6 +11311,9 @@ impl Default for MemoryDedicatedAllocateInfo {
     }
 }
 
+unsafe impl Send for MemoryDedicatedAllocateInfo {}
+unsafe impl Sync for MemoryDedicatedAllocateInfo {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMemoryDedicatedAllocateInfoTensorARM.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -10205,6 +11333,9 @@ impl Default for MemoryDedicatedAllocateInfoTensorARM {
         }
     }
 }
+
+unsafe impl Send for MemoryDedicatedAllocateInfoTensorARM {}
+unsafe impl Sync for MemoryDedicatedAllocateInfoTensorARM {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMemoryDedicatedRequirements.html>
 #[repr(C)]
@@ -10228,6 +11359,9 @@ impl Default for MemoryDedicatedRequirements {
     }
 }
 
+unsafe impl Send for MemoryDedicatedRequirements {}
+unsafe impl Sync for MemoryDedicatedRequirements {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMemoryFdPropertiesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -10248,6 +11382,9 @@ impl Default for MemoryFdPropertiesKHR {
     }
 }
 
+unsafe impl Send for MemoryFdPropertiesKHR {}
+unsafe impl Sync for MemoryFdPropertiesKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMemoryGetAndroidHardwareBufferInfoANDROID.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -10267,6 +11404,9 @@ impl Default for MemoryGetAndroidHardwareBufferInfoANDROID {
         }
     }
 }
+
+unsafe impl Send for MemoryGetAndroidHardwareBufferInfoANDROID {}
+unsafe impl Sync for MemoryGetAndroidHardwareBufferInfoANDROID {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMemoryGetFdInfoKHR.html>
 #[repr(C)]
@@ -10290,6 +11430,9 @@ impl Default for MemoryGetFdInfoKHR {
     }
 }
 
+unsafe impl Send for MemoryGetFdInfoKHR {}
+unsafe impl Sync for MemoryGetFdInfoKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMemoryGetMetalHandleInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -10311,6 +11454,9 @@ impl Default for MemoryGetMetalHandleInfoEXT {
         }
     }
 }
+
+unsafe impl Send for MemoryGetMetalHandleInfoEXT {}
+unsafe impl Sync for MemoryGetMetalHandleInfoEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMemoryGetRemoteAddressInfoNV.html>
 #[repr(C)]
@@ -10334,6 +11480,9 @@ impl Default for MemoryGetRemoteAddressInfoNV {
     }
 }
 
+unsafe impl Send for MemoryGetRemoteAddressInfoNV {}
+unsafe impl Sync for MemoryGetRemoteAddressInfoNV {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMemoryGetSciBufInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -10355,6 +11504,9 @@ impl Default for MemoryGetSciBufInfoNV {
         }
     }
 }
+
+unsafe impl Send for MemoryGetSciBufInfoNV {}
+unsafe impl Sync for MemoryGetSciBufInfoNV {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMemoryGetWin32HandleInfoKHR.html>
 #[repr(C)]
@@ -10378,6 +11530,9 @@ impl Default for MemoryGetWin32HandleInfoKHR {
     }
 }
 
+unsafe impl Send for MemoryGetWin32HandleInfoKHR {}
+unsafe impl Sync for MemoryGetWin32HandleInfoKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMemoryGetZirconHandleInfoFUCHSIA.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -10399,6 +11554,9 @@ impl Default for MemoryGetZirconHandleInfoFUCHSIA {
         }
     }
 }
+
+unsafe impl Send for MemoryGetZirconHandleInfoFUCHSIA {}
+unsafe impl Sync for MemoryGetZirconHandleInfoFUCHSIA {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMemoryHeap.html>
 #[repr(C)]
@@ -10428,6 +11586,9 @@ impl Default for MemoryHostPointerPropertiesEXT {
     }
 }
 
+unsafe impl Send for MemoryHostPointerPropertiesEXT {}
+unsafe impl Sync for MemoryHostPointerPropertiesEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMemoryMapInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -10454,6 +11615,9 @@ impl Default for MemoryMapInfo {
     }
 }
 
+unsafe impl Send for MemoryMapInfo {}
+unsafe impl Sync for MemoryMapInfo {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMemoryMapPlacedInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -10473,6 +11637,9 @@ impl Default for MemoryMapPlacedInfoEXT {
         }
     }
 }
+
+unsafe impl Send for MemoryMapPlacedInfoEXT {}
+unsafe impl Sync for MemoryMapPlacedInfoEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMemoryMetalHandlePropertiesEXT.html>
 #[repr(C)]
@@ -10494,6 +11661,9 @@ impl Default for MemoryMetalHandlePropertiesEXT {
     }
 }
 
+unsafe impl Send for MemoryMetalHandlePropertiesEXT {}
+unsafe impl Sync for MemoryMetalHandlePropertiesEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMemoryOpaqueCaptureAddressAllocateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -10514,6 +11684,9 @@ impl Default for MemoryOpaqueCaptureAddressAllocateInfo {
     }
 }
 
+unsafe impl Send for MemoryOpaqueCaptureAddressAllocateInfo {}
+unsafe impl Sync for MemoryOpaqueCaptureAddressAllocateInfo {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMemoryPriorityAllocateInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, PartialEq)]
@@ -10533,6 +11706,9 @@ impl Default for MemoryPriorityAllocateInfoEXT {
         }
     }
 }
+
+unsafe impl Send for MemoryPriorityAllocateInfoEXT {}
+unsafe impl Sync for MemoryPriorityAllocateInfoEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMemoryRequirements.html>
 #[repr(C)]
@@ -10563,6 +11739,9 @@ impl Default for MemoryRequirements2 {
     }
 }
 
+unsafe impl Send for MemoryRequirements2 {}
+unsafe impl Sync for MemoryRequirements2 {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMemorySciBufPropertiesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -10582,6 +11761,9 @@ impl Default for MemorySciBufPropertiesNV {
         }
     }
 }
+
+unsafe impl Send for MemorySciBufPropertiesNV {}
+unsafe impl Sync for MemorySciBufPropertiesNV {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMemoryToImageCopy.html>
 #[repr(C)]
@@ -10613,6 +11795,9 @@ impl Default for MemoryToImageCopy {
     }
 }
 
+unsafe impl Send for MemoryToImageCopy {}
+unsafe impl Sync for MemoryToImageCopy {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMemoryType.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
@@ -10643,6 +11828,9 @@ impl Default for MemoryUnmapInfo {
     }
 }
 
+unsafe impl Send for MemoryUnmapInfo {}
+unsafe impl Sync for MemoryUnmapInfo {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMemoryWin32HandlePropertiesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -10663,6 +11851,9 @@ impl Default for MemoryWin32HandlePropertiesKHR {
     }
 }
 
+unsafe impl Send for MemoryWin32HandlePropertiesKHR {}
+unsafe impl Sync for MemoryWin32HandlePropertiesKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMemoryZirconHandlePropertiesFUCHSIA.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -10682,6 +11873,9 @@ impl Default for MemoryZirconHandlePropertiesFUCHSIA {
         }
     }
 }
+
+unsafe impl Send for MemoryZirconHandlePropertiesFUCHSIA {}
+unsafe impl Sync for MemoryZirconHandlePropertiesFUCHSIA {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMetalSurfaceCreateInfoEXT.html>
 #[repr(C)]
@@ -10704,6 +11898,9 @@ impl Default for MetalSurfaceCreateInfoEXT {
         }
     }
 }
+
+unsafe impl Send for MetalSurfaceCreateInfoEXT {}
+unsafe impl Sync for MetalSurfaceCreateInfoEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMicromapBuildInfoEXT.html>
 #[repr(C)]
@@ -10745,6 +11942,9 @@ impl Default for MicromapBuildInfoEXT {
     }
 }
 
+unsafe impl Send for MicromapBuildInfoEXT {}
+unsafe impl Sync for MicromapBuildInfoEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMicromapBuildSizesInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -10768,6 +11968,9 @@ impl Default for MicromapBuildSizesInfoEXT {
         }
     }
 }
+
+unsafe impl Send for MicromapBuildSizesInfoEXT {}
+unsafe impl Sync for MicromapBuildSizesInfoEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMicromapCreateInfoEXT.html>
 #[repr(C)]
@@ -10798,6 +12001,9 @@ impl Default for MicromapCreateInfoEXT {
         }
     }
 }
+
+unsafe impl Send for MicromapCreateInfoEXT {}
+unsafe impl Sync for MicromapCreateInfoEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMicromapTriangleEXT.html>
 #[repr(C)]
@@ -10837,6 +12043,9 @@ impl Default for MicromapVersionInfoEXT {
     }
 }
 
+unsafe impl Send for MicromapVersionInfoEXT {}
+unsafe impl Sync for MicromapVersionInfoEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMultiDrawIndexedInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
@@ -10874,6 +12083,9 @@ impl Default for MultisamplePropertiesEXT {
     }
 }
 
+unsafe impl Send for MultisamplePropertiesEXT {}
+unsafe impl Sync for MultisamplePropertiesEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMultisampledRenderToSingleSampledInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -10895,6 +12107,9 @@ impl Default for MultisampledRenderToSingleSampledInfoEXT {
         }
     }
 }
+
+unsafe impl Send for MultisampledRenderToSingleSampledInfoEXT {}
+unsafe impl Sync for MultisampledRenderToSingleSampledInfoEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMultiviewPerViewAttributesInfoNVX.html>
 #[repr(C)]
@@ -10918,6 +12133,9 @@ impl Default for MultiviewPerViewAttributesInfoNVX {
     }
 }
 
+unsafe impl Send for MultiviewPerViewAttributesInfoNVX {}
+unsafe impl Sync for MultiviewPerViewAttributesInfoNVX {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMultiviewPerViewRenderAreasRenderPassBeginInfoQCOM.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -10939,6 +12157,9 @@ impl Default for MultiviewPerViewRenderAreasRenderPassBeginInfoQCOM {
         }
     }
 }
+
+unsafe impl Send for MultiviewPerViewRenderAreasRenderPassBeginInfoQCOM {}
+unsafe impl Sync for MultiviewPerViewRenderAreasRenderPassBeginInfoQCOM {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMutableDescriptorTypeCreateInfoEXT.html>
 #[repr(C)]
@@ -10962,6 +12183,9 @@ impl Default for MutableDescriptorTypeCreateInfoEXT {
     }
 }
 
+unsafe impl Send for MutableDescriptorTypeCreateInfoEXT {}
+unsafe impl Sync for MutableDescriptorTypeCreateInfoEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMutableDescriptorTypeListEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -10979,6 +12203,9 @@ impl Default for MutableDescriptorTypeListEXT {
         }
     }
 }
+
+unsafe impl Send for MutableDescriptorTypeListEXT {}
+unsafe impl Sync for MutableDescriptorTypeListEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkOffset2D.html>
 #[repr(C)]
@@ -11017,6 +12244,9 @@ impl Default for OpaqueCaptureDescriptorDataCreateInfoEXT {
     }
 }
 
+unsafe impl Send for OpaqueCaptureDescriptorDataCreateInfoEXT {}
+unsafe impl Sync for OpaqueCaptureDescriptorDataCreateInfoEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkOpticalFlowExecuteInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -11041,6 +12271,9 @@ impl Default for OpticalFlowExecuteInfoNV {
     }
 }
 
+unsafe impl Send for OpticalFlowExecuteInfoNV {}
+unsafe impl Sync for OpticalFlowExecuteInfoNV {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkOpticalFlowImageFormatInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -11061,6 +12294,9 @@ impl Default for OpticalFlowImageFormatInfoNV {
     }
 }
 
+unsafe impl Send for OpticalFlowImageFormatInfoNV {}
+unsafe impl Sync for OpticalFlowImageFormatInfoNV {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkOpticalFlowImageFormatPropertiesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -11080,6 +12316,9 @@ impl Default for OpticalFlowImageFormatPropertiesNV {
         }
     }
 }
+
+unsafe impl Send for OpticalFlowImageFormatPropertiesNV {}
+unsafe impl Sync for OpticalFlowImageFormatPropertiesNV {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkOpticalFlowSessionCreateInfoNV.html>
 #[repr(C)]
@@ -11117,6 +12356,9 @@ impl Default for OpticalFlowSessionCreateInfoNV {
     }
 }
 
+unsafe impl Send for OpticalFlowSessionCreateInfoNV {}
+unsafe impl Sync for OpticalFlowSessionCreateInfoNV {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkOpticalFlowSessionCreatePrivateDataInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -11141,6 +12383,9 @@ impl Default for OpticalFlowSessionCreatePrivateDataInfoNV {
     }
 }
 
+unsafe impl Send for OpticalFlowSessionCreatePrivateDataInfoNV {}
+unsafe impl Sync for OpticalFlowSessionCreatePrivateDataInfoNV {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkOutOfBandQueueTypeInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -11161,6 +12406,9 @@ impl Default for OutOfBandQueueTypeInfoNV {
     }
 }
 
+unsafe impl Send for OutOfBandQueueTypeInfoNV {}
+unsafe impl Sync for OutOfBandQueueTypeInfoNV {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPartitionedAccelerationStructureFlagsNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -11180,6 +12428,9 @@ impl Default for PartitionedAccelerationStructureFlagsNV {
         }
     }
 }
+
+unsafe impl Send for PartitionedAccelerationStructureFlagsNV {}
+unsafe impl Sync for PartitionedAccelerationStructureFlagsNV {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPartitionedAccelerationStructureInstancesInputNV.html>
 #[repr(C)]
@@ -11208,6 +12459,9 @@ impl Default for PartitionedAccelerationStructureInstancesInputNV {
         }
     }
 }
+
+unsafe impl Send for PartitionedAccelerationStructureInstancesInputNV {}
+unsafe impl Sync for PartitionedAccelerationStructureInstancesInputNV {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPartitionedAccelerationStructureUpdateInstanceDataNV.html>
 #[repr(C)]
@@ -11270,6 +12524,9 @@ impl Default for PerTileBeginInfoQCOM {
     }
 }
 
+unsafe impl Send for PerTileBeginInfoQCOM {}
+unsafe impl Sync for PerTileBeginInfoQCOM {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPerTileEndInfoQCOM.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -11287,6 +12544,9 @@ impl Default for PerTileEndInfoQCOM {
         }
     }
 }
+
+unsafe impl Send for PerTileEndInfoQCOM {}
+unsafe impl Sync for PerTileEndInfoQCOM {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPerformanceConfigurationAcquireInfoINTEL.html>
 #[repr(C)]
@@ -11307,6 +12567,9 @@ impl Default for PerformanceConfigurationAcquireInfoINTEL {
         }
     }
 }
+
+unsafe impl Send for PerformanceConfigurationAcquireInfoINTEL {}
+unsafe impl Sync for PerformanceConfigurationAcquireInfoINTEL {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPerformanceCounterDescriptionKHR.html>
 #[repr(C)]
@@ -11334,6 +12597,9 @@ impl Default for PerformanceCounterDescriptionKHR {
     }
 }
 
+unsafe impl Send for PerformanceCounterDescriptionKHR {}
+unsafe impl Sync for PerformanceCounterDescriptionKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPerformanceCounterKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -11360,6 +12626,9 @@ impl Default for PerformanceCounterKHR {
     }
 }
 
+unsafe impl Send for PerformanceCounterKHR {}
+unsafe impl Sync for PerformanceCounterKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPerformanceMarkerInfoINTEL.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -11379,6 +12648,9 @@ impl Default for PerformanceMarkerInfoINTEL {
         }
     }
 }
+
+unsafe impl Send for PerformanceMarkerInfoINTEL {}
+unsafe impl Sync for PerformanceMarkerInfoINTEL {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPerformanceOverrideInfoINTEL.html>
 #[repr(C)]
@@ -11404,6 +12676,9 @@ impl Default for PerformanceOverrideInfoINTEL {
     }
 }
 
+unsafe impl Send for PerformanceOverrideInfoINTEL {}
+unsafe impl Sync for PerformanceOverrideInfoINTEL {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPerformanceQueryReservationInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -11423,6 +12698,9 @@ impl Default for PerformanceQueryReservationInfoKHR {
         }
     }
 }
+
+unsafe impl Send for PerformanceQueryReservationInfoKHR {}
+unsafe impl Sync for PerformanceQueryReservationInfoKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPerformanceQuerySubmitInfoKHR.html>
 #[repr(C)]
@@ -11444,6 +12722,9 @@ impl Default for PerformanceQuerySubmitInfoKHR {
     }
 }
 
+unsafe impl Send for PerformanceQuerySubmitInfoKHR {}
+unsafe impl Sync for PerformanceQuerySubmitInfoKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPerformanceStreamMarkerInfoINTEL.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -11463,6 +12744,9 @@ impl Default for PerformanceStreamMarkerInfoINTEL {
         }
     }
 }
+
+unsafe impl Send for PerformanceStreamMarkerInfoINTEL {}
+unsafe impl Sync for PerformanceStreamMarkerInfoINTEL {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPerformanceValueINTEL.html>
 #[repr(C)]
@@ -11498,6 +12782,9 @@ impl Default for PhysicalDevice16BitStorageFeatures {
     }
 }
 
+unsafe impl Send for PhysicalDevice16BitStorageFeatures {}
+unsafe impl Sync for PhysicalDevice16BitStorageFeatures {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDevice4444FormatsFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -11519,6 +12806,9 @@ impl Default for PhysicalDevice4444FormatsFeaturesEXT {
         }
     }
 }
+
+unsafe impl Send for PhysicalDevice4444FormatsFeaturesEXT {}
+unsafe impl Sync for PhysicalDevice4444FormatsFeaturesEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDevice8BitStorageFeatures.html>
 #[repr(C)]
@@ -11544,6 +12834,9 @@ impl Default for PhysicalDevice8BitStorageFeatures {
     }
 }
 
+unsafe impl Send for PhysicalDevice8BitStorageFeatures {}
+unsafe impl Sync for PhysicalDevice8BitStorageFeatures {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceASTCDecodeFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -11563,6 +12856,9 @@ impl Default for PhysicalDeviceASTCDecodeFeaturesEXT {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceASTCDecodeFeaturesEXT {}
+unsafe impl Sync for PhysicalDeviceASTCDecodeFeaturesEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceAccelerationStructureFeaturesKHR.html>
 #[repr(C)]
@@ -11591,6 +12887,9 @@ impl Default for PhysicalDeviceAccelerationStructureFeaturesKHR {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceAccelerationStructureFeaturesKHR {}
+unsafe impl Sync for PhysicalDeviceAccelerationStructureFeaturesKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceAccelerationStructurePropertiesKHR.html>
 #[repr(C)]
@@ -11626,6 +12925,9 @@ impl Default for PhysicalDeviceAccelerationStructurePropertiesKHR {
     }
 }
 
+unsafe impl Send for PhysicalDeviceAccelerationStructurePropertiesKHR {}
+unsafe impl Sync for PhysicalDeviceAccelerationStructurePropertiesKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceAddressBindingReportFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -11645,6 +12947,9 @@ impl Default for PhysicalDeviceAddressBindingReportFeaturesEXT {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceAddressBindingReportFeaturesEXT {}
+unsafe impl Sync for PhysicalDeviceAddressBindingReportFeaturesEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceAmigoProfilingFeaturesSEC.html>
 #[repr(C)]
@@ -11666,6 +12971,9 @@ impl Default for PhysicalDeviceAmigoProfilingFeaturesSEC {
     }
 }
 
+unsafe impl Send for PhysicalDeviceAmigoProfilingFeaturesSEC {}
+unsafe impl Sync for PhysicalDeviceAmigoProfilingFeaturesSEC {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceAntiLagFeaturesAMD.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -11685,6 +12993,9 @@ impl Default for PhysicalDeviceAntiLagFeaturesAMD {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceAntiLagFeaturesAMD {}
+unsafe impl Sync for PhysicalDeviceAntiLagFeaturesAMD {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT.html>
 #[repr(C)]
@@ -11707,6 +13018,9 @@ impl Default for PhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT {
     }
 }
 
+unsafe impl Send for PhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT {}
+unsafe impl Sync for PhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -11727,6 +13041,9 @@ impl Default for PhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT {
     }
 }
 
+unsafe impl Send for PhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT {}
+unsafe impl Sync for PhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -11746,6 +13063,9 @@ impl Default for PhysicalDeviceBlendOperationAdvancedFeaturesEXT {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceBlendOperationAdvancedFeaturesEXT {}
+unsafe impl Sync for PhysicalDeviceBlendOperationAdvancedFeaturesEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT.html>
 #[repr(C)]
@@ -11777,6 +13097,9 @@ impl Default for PhysicalDeviceBlendOperationAdvancedPropertiesEXT {
     }
 }
 
+unsafe impl Send for PhysicalDeviceBlendOperationAdvancedPropertiesEXT {}
+unsafe impl Sync for PhysicalDeviceBlendOperationAdvancedPropertiesEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceBorderColorSwizzleFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -11798,6 +13121,9 @@ impl Default for PhysicalDeviceBorderColorSwizzleFeaturesEXT {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceBorderColorSwizzleFeaturesEXT {}
+unsafe impl Sync for PhysicalDeviceBorderColorSwizzleFeaturesEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceBufferDeviceAddressFeatures.html>
 #[repr(C)]
@@ -11823,6 +13149,9 @@ impl Default for PhysicalDeviceBufferDeviceAddressFeatures {
     }
 }
 
+unsafe impl Send for PhysicalDeviceBufferDeviceAddressFeatures {}
+unsafe impl Sync for PhysicalDeviceBufferDeviceAddressFeatures {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceBufferDeviceAddressFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -11847,6 +13176,9 @@ impl Default for PhysicalDeviceBufferDeviceAddressFeaturesEXT {
     }
 }
 
+unsafe impl Send for PhysicalDeviceBufferDeviceAddressFeaturesEXT {}
+unsafe impl Sync for PhysicalDeviceBufferDeviceAddressFeaturesEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceClusterAccelerationStructureFeaturesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -11866,6 +13198,9 @@ impl Default for PhysicalDeviceClusterAccelerationStructureFeaturesNV {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceClusterAccelerationStructureFeaturesNV {}
+unsafe impl Sync for PhysicalDeviceClusterAccelerationStructureFeaturesNV {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceClusterAccelerationStructurePropertiesNV.html>
 #[repr(C)]
@@ -11901,6 +13236,9 @@ impl Default for PhysicalDeviceClusterAccelerationStructurePropertiesNV {
     }
 }
 
+unsafe impl Send for PhysicalDeviceClusterAccelerationStructurePropertiesNV {}
+unsafe impl Sync for PhysicalDeviceClusterAccelerationStructurePropertiesNV {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceClusterCullingShaderFeaturesHUAWEI.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -11922,6 +13260,9 @@ impl Default for PhysicalDeviceClusterCullingShaderFeaturesHUAWEI {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceClusterCullingShaderFeaturesHUAWEI {}
+unsafe impl Sync for PhysicalDeviceClusterCullingShaderFeaturesHUAWEI {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceClusterCullingShaderPropertiesHUAWEI.html>
 #[repr(C)]
@@ -11949,6 +13290,9 @@ impl Default for PhysicalDeviceClusterCullingShaderPropertiesHUAWEI {
     }
 }
 
+unsafe impl Send for PhysicalDeviceClusterCullingShaderPropertiesHUAWEI {}
+unsafe impl Sync for PhysicalDeviceClusterCullingShaderPropertiesHUAWEI {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceClusterCullingShaderVrsFeaturesHUAWEI.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -11968,6 +13312,9 @@ impl Default for PhysicalDeviceClusterCullingShaderVrsFeaturesHUAWEI {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceClusterCullingShaderVrsFeaturesHUAWEI {}
+unsafe impl Sync for PhysicalDeviceClusterCullingShaderVrsFeaturesHUAWEI {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceCoherentMemoryFeaturesAMD.html>
 #[repr(C)]
@@ -11989,6 +13336,9 @@ impl Default for PhysicalDeviceCoherentMemoryFeaturesAMD {
     }
 }
 
+unsafe impl Send for PhysicalDeviceCoherentMemoryFeaturesAMD {}
+unsafe impl Sync for PhysicalDeviceCoherentMemoryFeaturesAMD {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceColorWriteEnableFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -12009,6 +13359,9 @@ impl Default for PhysicalDeviceColorWriteEnableFeaturesEXT {
     }
 }
 
+unsafe impl Send for PhysicalDeviceColorWriteEnableFeaturesEXT {}
+unsafe impl Sync for PhysicalDeviceColorWriteEnableFeaturesEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceCommandBufferInheritanceFeaturesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -12028,6 +13381,9 @@ impl Default for PhysicalDeviceCommandBufferInheritanceFeaturesNV {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceCommandBufferInheritanceFeaturesNV {}
+unsafe impl Sync for PhysicalDeviceCommandBufferInheritanceFeaturesNV {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceComputeShaderDerivativesFeaturesKHR.html>
 #[repr(C)]
@@ -12051,6 +13407,9 @@ impl Default for PhysicalDeviceComputeShaderDerivativesFeaturesKHR {
     }
 }
 
+unsafe impl Send for PhysicalDeviceComputeShaderDerivativesFeaturesKHR {}
+unsafe impl Sync for PhysicalDeviceComputeShaderDerivativesFeaturesKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceComputeShaderDerivativesPropertiesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -12070,6 +13429,9 @@ impl Default for PhysicalDeviceComputeShaderDerivativesPropertiesKHR {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceComputeShaderDerivativesPropertiesKHR {}
+unsafe impl Sync for PhysicalDeviceComputeShaderDerivativesPropertiesKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceConditionalRenderingFeaturesEXT.html>
 #[repr(C)]
@@ -12092,6 +13454,9 @@ impl Default for PhysicalDeviceConditionalRenderingFeaturesEXT {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceConditionalRenderingFeaturesEXT {}
+unsafe impl Sync for PhysicalDeviceConditionalRenderingFeaturesEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceConservativeRasterizationPropertiesEXT.html>
 #[repr(C)]
@@ -12129,6 +13494,9 @@ impl Default for PhysicalDeviceConservativeRasterizationPropertiesEXT {
     }
 }
 
+unsafe impl Send for PhysicalDeviceConservativeRasterizationPropertiesEXT {}
+unsafe impl Sync for PhysicalDeviceConservativeRasterizationPropertiesEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceCooperativeMatrix2FeaturesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -12161,6 +13529,9 @@ impl Default for PhysicalDeviceCooperativeMatrix2FeaturesNV {
     }
 }
 
+unsafe impl Send for PhysicalDeviceCooperativeMatrix2FeaturesNV {}
+unsafe impl Sync for PhysicalDeviceCooperativeMatrix2FeaturesNV {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceCooperativeMatrix2PropertiesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -12185,6 +13556,9 @@ impl Default for PhysicalDeviceCooperativeMatrix2PropertiesNV {
     }
 }
 
+unsafe impl Send for PhysicalDeviceCooperativeMatrix2PropertiesNV {}
+unsafe impl Sync for PhysicalDeviceCooperativeMatrix2PropertiesNV {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceCooperativeMatrixFeaturesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -12206,6 +13580,9 @@ impl Default for PhysicalDeviceCooperativeMatrixFeaturesKHR {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceCooperativeMatrixFeaturesKHR {}
+unsafe impl Sync for PhysicalDeviceCooperativeMatrixFeaturesKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceCooperativeMatrixFeaturesNV.html>
 #[repr(C)]
@@ -12229,6 +13606,9 @@ impl Default for PhysicalDeviceCooperativeMatrixFeaturesNV {
     }
 }
 
+unsafe impl Send for PhysicalDeviceCooperativeMatrixFeaturesNV {}
+unsafe impl Sync for PhysicalDeviceCooperativeMatrixFeaturesNV {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceCooperativeMatrixPropertiesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -12249,6 +13629,9 @@ impl Default for PhysicalDeviceCooperativeMatrixPropertiesKHR {
     }
 }
 
+unsafe impl Send for PhysicalDeviceCooperativeMatrixPropertiesKHR {}
+unsafe impl Sync for PhysicalDeviceCooperativeMatrixPropertiesKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceCooperativeMatrixPropertiesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -12268,6 +13651,9 @@ impl Default for PhysicalDeviceCooperativeMatrixPropertiesNV {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceCooperativeMatrixPropertiesNV {}
+unsafe impl Sync for PhysicalDeviceCooperativeMatrixPropertiesNV {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceCooperativeVectorFeaturesNV.html>
 #[repr(C)]
@@ -12290,6 +13676,9 @@ impl Default for PhysicalDeviceCooperativeVectorFeaturesNV {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceCooperativeVectorFeaturesNV {}
+unsafe impl Sync for PhysicalDeviceCooperativeVectorFeaturesNV {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceCooperativeVectorPropertiesNV.html>
 #[repr(C)]
@@ -12317,6 +13706,9 @@ impl Default for PhysicalDeviceCooperativeVectorPropertiesNV {
     }
 }
 
+unsafe impl Send for PhysicalDeviceCooperativeVectorPropertiesNV {}
+unsafe impl Sync for PhysicalDeviceCooperativeVectorPropertiesNV {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceCopyMemoryIndirectFeaturesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -12339,6 +13731,9 @@ impl Default for PhysicalDeviceCopyMemoryIndirectFeaturesKHR {
     }
 }
 
+unsafe impl Send for PhysicalDeviceCopyMemoryIndirectFeaturesKHR {}
+unsafe impl Sync for PhysicalDeviceCopyMemoryIndirectFeaturesKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceCopyMemoryIndirectFeaturesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -12358,6 +13753,9 @@ impl Default for PhysicalDeviceCopyMemoryIndirectFeaturesNV {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceCopyMemoryIndirectFeaturesNV {}
+unsafe impl Sync for PhysicalDeviceCopyMemoryIndirectFeaturesNV {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceCopyMemoryIndirectPropertiesKHR.html>
 #[repr(C)]
@@ -12379,6 +13777,9 @@ impl Default for PhysicalDeviceCopyMemoryIndirectPropertiesKHR {
     }
 }
 
+unsafe impl Send for PhysicalDeviceCopyMemoryIndirectPropertiesKHR {}
+unsafe impl Sync for PhysicalDeviceCopyMemoryIndirectPropertiesKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceCornerSampledImageFeaturesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -12398,6 +13799,9 @@ impl Default for PhysicalDeviceCornerSampledImageFeaturesNV {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceCornerSampledImageFeaturesNV {}
+unsafe impl Sync for PhysicalDeviceCornerSampledImageFeaturesNV {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceCoverageReductionModeFeaturesNV.html>
 #[repr(C)]
@@ -12419,6 +13823,9 @@ impl Default for PhysicalDeviceCoverageReductionModeFeaturesNV {
     }
 }
 
+unsafe impl Send for PhysicalDeviceCoverageReductionModeFeaturesNV {}
+unsafe impl Sync for PhysicalDeviceCoverageReductionModeFeaturesNV {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceCubicClampFeaturesQCOM.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -12438,6 +13845,9 @@ impl Default for PhysicalDeviceCubicClampFeaturesQCOM {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceCubicClampFeaturesQCOM {}
+unsafe impl Sync for PhysicalDeviceCubicClampFeaturesQCOM {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceCubicWeightsFeaturesQCOM.html>
 #[repr(C)]
@@ -12459,6 +13869,9 @@ impl Default for PhysicalDeviceCubicWeightsFeaturesQCOM {
     }
 }
 
+unsafe impl Send for PhysicalDeviceCubicWeightsFeaturesQCOM {}
+unsafe impl Sync for PhysicalDeviceCubicWeightsFeaturesQCOM {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceCudaKernelLaunchFeaturesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -12478,6 +13891,9 @@ impl Default for PhysicalDeviceCudaKernelLaunchFeaturesNV {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceCudaKernelLaunchFeaturesNV {}
+unsafe impl Sync for PhysicalDeviceCudaKernelLaunchFeaturesNV {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceCudaKernelLaunchPropertiesNV.html>
 #[repr(C)]
@@ -12501,6 +13917,9 @@ impl Default for PhysicalDeviceCudaKernelLaunchPropertiesNV {
     }
 }
 
+unsafe impl Send for PhysicalDeviceCudaKernelLaunchPropertiesNV {}
+unsafe impl Sync for PhysicalDeviceCudaKernelLaunchPropertiesNV {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceCustomBorderColorFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -12523,6 +13942,9 @@ impl Default for PhysicalDeviceCustomBorderColorFeaturesEXT {
     }
 }
 
+unsafe impl Send for PhysicalDeviceCustomBorderColorFeaturesEXT {}
+unsafe impl Sync for PhysicalDeviceCustomBorderColorFeaturesEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceCustomBorderColorPropertiesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -12542,6 +13964,9 @@ impl Default for PhysicalDeviceCustomBorderColorPropertiesEXT {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceCustomBorderColorPropertiesEXT {}
+unsafe impl Sync for PhysicalDeviceCustomBorderColorPropertiesEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceDataGraphFeaturesARM.html>
 #[repr(C)]
@@ -12570,6 +13995,9 @@ impl Default for PhysicalDeviceDataGraphFeaturesARM {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceDataGraphFeaturesARM {}
+unsafe impl Sync for PhysicalDeviceDataGraphFeaturesARM {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceDataGraphOperationSupportARM.html>
 #[repr(C)]
@@ -12608,6 +14036,9 @@ impl Default for PhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV {
     }
 }
 
+unsafe impl Send for PhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV {}
+unsafe impl Sync for PhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceDenseGeometryFormatFeaturesAMDX.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -12627,6 +14058,9 @@ impl Default for PhysicalDeviceDenseGeometryFormatFeaturesAMDX {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceDenseGeometryFormatFeaturesAMDX {}
+unsafe impl Sync for PhysicalDeviceDenseGeometryFormatFeaturesAMDX {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceDepthBiasControlFeaturesEXT.html>
 #[repr(C)]
@@ -12654,6 +14088,9 @@ impl Default for PhysicalDeviceDepthBiasControlFeaturesEXT {
     }
 }
 
+unsafe impl Send for PhysicalDeviceDepthBiasControlFeaturesEXT {}
+unsafe impl Sync for PhysicalDeviceDepthBiasControlFeaturesEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceDepthClampControlFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -12673,6 +14110,9 @@ impl Default for PhysicalDeviceDepthClampControlFeaturesEXT {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceDepthClampControlFeaturesEXT {}
+unsafe impl Sync for PhysicalDeviceDepthClampControlFeaturesEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceDepthClampZeroOneFeaturesKHR.html>
 #[repr(C)]
@@ -12694,6 +14134,9 @@ impl Default for PhysicalDeviceDepthClampZeroOneFeaturesKHR {
     }
 }
 
+unsafe impl Send for PhysicalDeviceDepthClampZeroOneFeaturesKHR {}
+unsafe impl Sync for PhysicalDeviceDepthClampZeroOneFeaturesKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceDepthClipControlFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -12714,6 +14157,9 @@ impl Default for PhysicalDeviceDepthClipControlFeaturesEXT {
     }
 }
 
+unsafe impl Send for PhysicalDeviceDepthClipControlFeaturesEXT {}
+unsafe impl Sync for PhysicalDeviceDepthClipControlFeaturesEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceDepthClipEnableFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -12733,6 +14179,9 @@ impl Default for PhysicalDeviceDepthClipEnableFeaturesEXT {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceDepthClipEnableFeaturesEXT {}
+unsafe impl Sync for PhysicalDeviceDepthClipEnableFeaturesEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceDepthStencilResolveProperties.html>
 #[repr(C)]
@@ -12760,6 +14209,9 @@ impl Default for PhysicalDeviceDepthStencilResolveProperties {
     }
 }
 
+unsafe impl Send for PhysicalDeviceDepthStencilResolveProperties {}
+unsafe impl Sync for PhysicalDeviceDepthStencilResolveProperties {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceDescriptorBufferDensityMapPropertiesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -12779,6 +14231,9 @@ impl Default for PhysicalDeviceDescriptorBufferDensityMapPropertiesEXT {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceDescriptorBufferDensityMapPropertiesEXT {}
+unsafe impl Sync for PhysicalDeviceDescriptorBufferDensityMapPropertiesEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceDescriptorBufferFeaturesEXT.html>
 #[repr(C)]
@@ -12805,6 +14260,9 @@ impl Default for PhysicalDeviceDescriptorBufferFeaturesEXT {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceDescriptorBufferFeaturesEXT {}
+unsafe impl Sync for PhysicalDeviceDescriptorBufferFeaturesEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceDescriptorBufferPropertiesEXT.html>
 #[repr(C)]
@@ -12890,6 +14348,9 @@ impl Default for PhysicalDeviceDescriptorBufferPropertiesEXT {
     }
 }
 
+unsafe impl Send for PhysicalDeviceDescriptorBufferPropertiesEXT {}
+unsafe impl Sync for PhysicalDeviceDescriptorBufferPropertiesEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceDescriptorBufferTensorFeaturesARM.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -12909,6 +14370,9 @@ impl Default for PhysicalDeviceDescriptorBufferTensorFeaturesARM {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceDescriptorBufferTensorFeaturesARM {}
+unsafe impl Sync for PhysicalDeviceDescriptorBufferTensorFeaturesARM {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceDescriptorBufferTensorPropertiesARM.html>
 #[repr(C)]
@@ -12933,6 +14397,9 @@ impl Default for PhysicalDeviceDescriptorBufferTensorPropertiesARM {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceDescriptorBufferTensorPropertiesARM {}
+unsafe impl Sync for PhysicalDeviceDescriptorBufferTensorPropertiesARM {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceDescriptorIndexingFeatures.html>
 #[repr(C)]
@@ -12991,6 +14458,9 @@ impl Default for PhysicalDeviceDescriptorIndexingFeatures {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceDescriptorIndexingFeatures {}
+unsafe impl Sync for PhysicalDeviceDescriptorIndexingFeatures {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceDescriptorIndexingProperties.html>
 #[repr(C)]
@@ -13056,6 +14526,9 @@ impl Default for PhysicalDeviceDescriptorIndexingProperties {
     }
 }
 
+unsafe impl Send for PhysicalDeviceDescriptorIndexingProperties {}
+unsafe impl Sync for PhysicalDeviceDescriptorIndexingProperties {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceDescriptorPoolOverallocationFeaturesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -13076,6 +14549,9 @@ impl Default for PhysicalDeviceDescriptorPoolOverallocationFeaturesNV {
     }
 }
 
+unsafe impl Send for PhysicalDeviceDescriptorPoolOverallocationFeaturesNV {}
+unsafe impl Sync for PhysicalDeviceDescriptorPoolOverallocationFeaturesNV {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceDescriptorSetHostMappingFeaturesVALVE.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -13095,6 +14571,9 @@ impl Default for PhysicalDeviceDescriptorSetHostMappingFeaturesVALVE {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceDescriptorSetHostMappingFeaturesVALVE {}
+unsafe impl Sync for PhysicalDeviceDescriptorSetHostMappingFeaturesVALVE {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceDeviceGeneratedCommandsComputeFeaturesNV.html>
 #[repr(C)]
@@ -13120,6 +14599,9 @@ impl Default for PhysicalDeviceDeviceGeneratedCommandsComputeFeaturesNV {
     }
 }
 
+unsafe impl Send for PhysicalDeviceDeviceGeneratedCommandsComputeFeaturesNV {}
+unsafe impl Sync for PhysicalDeviceDeviceGeneratedCommandsComputeFeaturesNV {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceDeviceGeneratedCommandsFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -13142,6 +14624,9 @@ impl Default for PhysicalDeviceDeviceGeneratedCommandsFeaturesEXT {
     }
 }
 
+unsafe impl Send for PhysicalDeviceDeviceGeneratedCommandsFeaturesEXT {}
+unsafe impl Sync for PhysicalDeviceDeviceGeneratedCommandsFeaturesEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -13161,6 +14646,9 @@ impl Default for PhysicalDeviceDeviceGeneratedCommandsFeaturesNV {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceDeviceGeneratedCommandsFeaturesNV {}
+unsafe impl Sync for PhysicalDeviceDeviceGeneratedCommandsFeaturesNV {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT.html>
 #[repr(C)]
@@ -13204,6 +14692,9 @@ impl Default for PhysicalDeviceDeviceGeneratedCommandsPropertiesEXT {
     }
 }
 
+unsafe impl Send for PhysicalDeviceDeviceGeneratedCommandsPropertiesEXT {}
+unsafe impl Sync for PhysicalDeviceDeviceGeneratedCommandsPropertiesEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -13240,6 +14731,9 @@ impl Default for PhysicalDeviceDeviceGeneratedCommandsPropertiesNV {
     }
 }
 
+unsafe impl Send for PhysicalDeviceDeviceGeneratedCommandsPropertiesNV {}
+unsafe impl Sync for PhysicalDeviceDeviceGeneratedCommandsPropertiesNV {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceDeviceMemoryReportFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -13259,6 +14753,9 @@ impl Default for PhysicalDeviceDeviceMemoryReportFeaturesEXT {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceDeviceMemoryReportFeaturesEXT {}
+unsafe impl Sync for PhysicalDeviceDeviceMemoryReportFeaturesEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceDiagnosticsConfigFeaturesNV.html>
 #[repr(C)]
@@ -13280,6 +14777,9 @@ impl Default for PhysicalDeviceDiagnosticsConfigFeaturesNV {
     }
 }
 
+unsafe impl Send for PhysicalDeviceDiagnosticsConfigFeaturesNV {}
+unsafe impl Sync for PhysicalDeviceDiagnosticsConfigFeaturesNV {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceDiscardRectanglePropertiesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -13299,6 +14799,9 @@ impl Default for PhysicalDeviceDiscardRectanglePropertiesEXT {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceDiscardRectanglePropertiesEXT {}
+unsafe impl Sync for PhysicalDeviceDiscardRectanglePropertiesEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceDisplacementMicromapFeaturesNV.html>
 #[repr(C)]
@@ -13320,6 +14823,9 @@ impl Default for PhysicalDeviceDisplacementMicromapFeaturesNV {
     }
 }
 
+unsafe impl Send for PhysicalDeviceDisplacementMicromapFeaturesNV {}
+unsafe impl Sync for PhysicalDeviceDisplacementMicromapFeaturesNV {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceDisplacementMicromapPropertiesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -13339,6 +14845,9 @@ impl Default for PhysicalDeviceDisplacementMicromapPropertiesNV {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceDisplacementMicromapPropertiesNV {}
+unsafe impl Sync for PhysicalDeviceDisplacementMicromapPropertiesNV {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceDriverProperties.html>
 #[repr(C)]
@@ -13365,6 +14874,9 @@ impl Default for PhysicalDeviceDriverProperties {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceDriverProperties {}
+unsafe impl Sync for PhysicalDeviceDriverProperties {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceDrmPropertiesEXT.html>
 #[repr(C)]
@@ -13396,6 +14908,9 @@ impl Default for PhysicalDeviceDrmPropertiesEXT {
     }
 }
 
+unsafe impl Send for PhysicalDeviceDrmPropertiesEXT {}
+unsafe impl Sync for PhysicalDeviceDrmPropertiesEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceDynamicRenderingFeatures.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -13416,6 +14931,9 @@ impl Default for PhysicalDeviceDynamicRenderingFeatures {
     }
 }
 
+unsafe impl Send for PhysicalDeviceDynamicRenderingFeatures {}
+unsafe impl Sync for PhysicalDeviceDynamicRenderingFeatures {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceDynamicRenderingLocalReadFeatures.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -13435,6 +14953,9 @@ impl Default for PhysicalDeviceDynamicRenderingLocalReadFeatures {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceDynamicRenderingLocalReadFeatures {}
+unsafe impl Sync for PhysicalDeviceDynamicRenderingLocalReadFeatures {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT.html>
 #[repr(C)]
@@ -13457,6 +14978,9 @@ impl Default for PhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT {
     }
 }
 
+unsafe impl Send for PhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT {}
+unsafe impl Sync for PhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceExclusiveScissorFeaturesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -13476,6 +15000,9 @@ impl Default for PhysicalDeviceExclusiveScissorFeaturesNV {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceExclusiveScissorFeaturesNV {}
+unsafe impl Sync for PhysicalDeviceExclusiveScissorFeaturesNV {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceExtendedDynamicState2FeaturesEXT.html>
 #[repr(C)]
@@ -13500,6 +15027,9 @@ impl Default for PhysicalDeviceExtendedDynamicState2FeaturesEXT {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceExtendedDynamicState2FeaturesEXT {}
+unsafe impl Sync for PhysicalDeviceExtendedDynamicState2FeaturesEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.html>
 #[repr(C)]
@@ -13581,6 +15111,9 @@ impl Default for PhysicalDeviceExtendedDynamicState3FeaturesEXT {
     }
 }
 
+unsafe impl Send for PhysicalDeviceExtendedDynamicState3FeaturesEXT {}
+unsafe impl Sync for PhysicalDeviceExtendedDynamicState3FeaturesEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceExtendedDynamicState3PropertiesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -13600,6 +15133,9 @@ impl Default for PhysicalDeviceExtendedDynamicState3PropertiesEXT {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceExtendedDynamicState3PropertiesEXT {}
+unsafe impl Sync for PhysicalDeviceExtendedDynamicState3PropertiesEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceExtendedDynamicStateFeaturesEXT.html>
 #[repr(C)]
@@ -13621,6 +15157,9 @@ impl Default for PhysicalDeviceExtendedDynamicStateFeaturesEXT {
     }
 }
 
+unsafe impl Send for PhysicalDeviceExtendedDynamicStateFeaturesEXT {}
+unsafe impl Sync for PhysicalDeviceExtendedDynamicStateFeaturesEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceExtendedSparseAddressSpaceFeaturesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -13640,6 +15179,9 @@ impl Default for PhysicalDeviceExtendedSparseAddressSpaceFeaturesNV {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceExtendedSparseAddressSpaceFeaturesNV {}
+unsafe impl Sync for PhysicalDeviceExtendedSparseAddressSpaceFeaturesNV {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceExtendedSparseAddressSpacePropertiesNV.html>
 #[repr(C)]
@@ -13665,6 +15207,9 @@ impl Default for PhysicalDeviceExtendedSparseAddressSpacePropertiesNV {
     }
 }
 
+unsafe impl Send for PhysicalDeviceExtendedSparseAddressSpacePropertiesNV {}
+unsafe impl Sync for PhysicalDeviceExtendedSparseAddressSpacePropertiesNV {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceExternalBufferInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -13689,6 +15234,9 @@ impl Default for PhysicalDeviceExternalBufferInfo {
     }
 }
 
+unsafe impl Send for PhysicalDeviceExternalBufferInfo {}
+unsafe impl Sync for PhysicalDeviceExternalBufferInfo {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceExternalComputeQueuePropertiesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -13711,6 +15259,9 @@ impl Default for PhysicalDeviceExternalComputeQueuePropertiesNV {
     }
 }
 
+unsafe impl Send for PhysicalDeviceExternalComputeQueuePropertiesNV {}
+unsafe impl Sync for PhysicalDeviceExternalComputeQueuePropertiesNV {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceExternalFenceInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -13731,6 +15282,9 @@ impl Default for PhysicalDeviceExternalFenceInfo {
     }
 }
 
+unsafe impl Send for PhysicalDeviceExternalFenceInfo {}
+unsafe impl Sync for PhysicalDeviceExternalFenceInfo {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceExternalFormatResolveFeaturesANDROID.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -13750,6 +15304,9 @@ impl Default for PhysicalDeviceExternalFormatResolveFeaturesANDROID {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceExternalFormatResolveFeaturesANDROID {}
+unsafe impl Sync for PhysicalDeviceExternalFormatResolveFeaturesANDROID {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceExternalFormatResolvePropertiesANDROID.html>
 #[repr(C)]
@@ -13775,6 +15332,9 @@ impl Default for PhysicalDeviceExternalFormatResolvePropertiesANDROID {
     }
 }
 
+unsafe impl Send for PhysicalDeviceExternalFormatResolvePropertiesANDROID {}
+unsafe impl Sync for PhysicalDeviceExternalFormatResolvePropertiesANDROID {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceExternalImageFormatInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -13794,6 +15354,9 @@ impl Default for PhysicalDeviceExternalImageFormatInfo {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceExternalImageFormatInfo {}
+unsafe impl Sync for PhysicalDeviceExternalImageFormatInfo {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceExternalMemoryHostPropertiesEXT.html>
 #[repr(C)]
@@ -13815,6 +15378,9 @@ impl Default for PhysicalDeviceExternalMemoryHostPropertiesEXT {
     }
 }
 
+unsafe impl Send for PhysicalDeviceExternalMemoryHostPropertiesEXT {}
+unsafe impl Sync for PhysicalDeviceExternalMemoryHostPropertiesEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceExternalMemoryRDMAFeaturesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -13834,6 +15400,9 @@ impl Default for PhysicalDeviceExternalMemoryRDMAFeaturesNV {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceExternalMemoryRDMAFeaturesNV {}
+unsafe impl Sync for PhysicalDeviceExternalMemoryRDMAFeaturesNV {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceExternalMemorySciBufFeaturesNV.html>
 #[repr(C)]
@@ -13857,6 +15426,9 @@ impl Default for PhysicalDeviceExternalMemorySciBufFeaturesNV {
     }
 }
 
+unsafe impl Send for PhysicalDeviceExternalMemorySciBufFeaturesNV {}
+unsafe impl Sync for PhysicalDeviceExternalMemorySciBufFeaturesNV {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceExternalMemoryScreenBufferFeaturesQNX.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -13876,6 +15448,9 @@ impl Default for PhysicalDeviceExternalMemoryScreenBufferFeaturesQNX {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceExternalMemoryScreenBufferFeaturesQNX {}
+unsafe impl Sync for PhysicalDeviceExternalMemoryScreenBufferFeaturesQNX {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceExternalSciSync2FeaturesNV.html>
 #[repr(C)]
@@ -13903,6 +15478,9 @@ impl Default for PhysicalDeviceExternalSciSync2FeaturesNV {
     }
 }
 
+unsafe impl Send for PhysicalDeviceExternalSciSync2FeaturesNV {}
+unsafe impl Sync for PhysicalDeviceExternalSciSync2FeaturesNV {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceExternalSciSyncFeaturesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -13929,6 +15507,9 @@ impl Default for PhysicalDeviceExternalSciSyncFeaturesNV {
     }
 }
 
+unsafe impl Send for PhysicalDeviceExternalSciSyncFeaturesNV {}
+unsafe impl Sync for PhysicalDeviceExternalSciSyncFeaturesNV {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceExternalSemaphoreInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -13948,6 +15529,9 @@ impl Default for PhysicalDeviceExternalSemaphoreInfo {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceExternalSemaphoreInfo {}
+unsafe impl Sync for PhysicalDeviceExternalSemaphoreInfo {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceExternalTensorInfoARM.html>
 #[repr(C)]
@@ -13973,6 +15557,9 @@ impl Default for PhysicalDeviceExternalTensorInfoARM {
     }
 }
 
+unsafe impl Send for PhysicalDeviceExternalTensorInfoARM {}
+unsafe impl Sync for PhysicalDeviceExternalTensorInfoARM {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceFaultFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -13994,6 +15581,9 @@ impl Default for PhysicalDeviceFaultFeaturesEXT {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceFaultFeaturesEXT {}
+unsafe impl Sync for PhysicalDeviceFaultFeaturesEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceFeatures.html>
 #[repr(C)]
@@ -14076,6 +15666,9 @@ impl Default for PhysicalDeviceFeatures2 {
     }
 }
 
+unsafe impl Send for PhysicalDeviceFeatures2 {}
+unsafe impl Sync for PhysicalDeviceFeatures2 {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceFloatControlsProperties.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -14128,6 +15721,9 @@ impl Default for PhysicalDeviceFloatControlsProperties {
     }
 }
 
+unsafe impl Send for PhysicalDeviceFloatControlsProperties {}
+unsafe impl Sync for PhysicalDeviceFloatControlsProperties {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceFormatPackFeaturesARM.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -14148,6 +15744,9 @@ impl Default for PhysicalDeviceFormatPackFeaturesARM {
     }
 }
 
+unsafe impl Send for PhysicalDeviceFormatPackFeaturesARM {}
+unsafe impl Sync for PhysicalDeviceFormatPackFeaturesARM {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceFragmentDensityMap2FeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -14167,6 +15766,9 @@ impl Default for PhysicalDeviceFragmentDensityMap2FeaturesEXT {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceFragmentDensityMap2FeaturesEXT {}
+unsafe impl Sync for PhysicalDeviceFragmentDensityMap2FeaturesEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceFragmentDensityMap2PropertiesEXT.html>
 #[repr(C)]
@@ -14194,6 +15796,9 @@ impl Default for PhysicalDeviceFragmentDensityMap2PropertiesEXT {
     }
 }
 
+unsafe impl Send for PhysicalDeviceFragmentDensityMap2PropertiesEXT {}
+unsafe impl Sync for PhysicalDeviceFragmentDensityMap2PropertiesEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceFragmentDensityMapFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -14218,6 +15823,9 @@ impl Default for PhysicalDeviceFragmentDensityMapFeaturesEXT {
     }
 }
 
+unsafe impl Send for PhysicalDeviceFragmentDensityMapFeaturesEXT {}
+unsafe impl Sync for PhysicalDeviceFragmentDensityMapFeaturesEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceFragmentDensityMapLayeredFeaturesVALVE.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -14237,6 +15845,9 @@ impl Default for PhysicalDeviceFragmentDensityMapLayeredFeaturesVALVE {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceFragmentDensityMapLayeredFeaturesVALVE {}
+unsafe impl Sync for PhysicalDeviceFragmentDensityMapLayeredFeaturesVALVE {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceFragmentDensityMapLayeredPropertiesVALVE.html>
 #[repr(C)]
@@ -14258,6 +15869,9 @@ impl Default for PhysicalDeviceFragmentDensityMapLayeredPropertiesVALVE {
     }
 }
 
+unsafe impl Send for PhysicalDeviceFragmentDensityMapLayeredPropertiesVALVE {}
+unsafe impl Sync for PhysicalDeviceFragmentDensityMapLayeredPropertiesVALVE {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceFragmentDensityMapOffsetFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -14278,6 +15892,9 @@ impl Default for PhysicalDeviceFragmentDensityMapOffsetFeaturesEXT {
     }
 }
 
+unsafe impl Send for PhysicalDeviceFragmentDensityMapOffsetFeaturesEXT {}
+unsafe impl Sync for PhysicalDeviceFragmentDensityMapOffsetFeaturesEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceFragmentDensityMapOffsetPropertiesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -14297,6 +15914,9 @@ impl Default for PhysicalDeviceFragmentDensityMapOffsetPropertiesEXT {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceFragmentDensityMapOffsetPropertiesEXT {}
+unsafe impl Sync for PhysicalDeviceFragmentDensityMapOffsetPropertiesEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceFragmentDensityMapPropertiesEXT.html>
 #[repr(C)]
@@ -14322,6 +15942,9 @@ impl Default for PhysicalDeviceFragmentDensityMapPropertiesEXT {
     }
 }
 
+unsafe impl Send for PhysicalDeviceFragmentDensityMapPropertiesEXT {}
+unsafe impl Sync for PhysicalDeviceFragmentDensityMapPropertiesEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceFragmentShaderBarycentricFeaturesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -14342,6 +15965,9 @@ impl Default for PhysicalDeviceFragmentShaderBarycentricFeaturesKHR {
     }
 }
 
+unsafe impl Send for PhysicalDeviceFragmentShaderBarycentricFeaturesKHR {}
+unsafe impl Sync for PhysicalDeviceFragmentShaderBarycentricFeaturesKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceFragmentShaderBarycentricPropertiesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -14361,6 +15987,9 @@ impl Default for PhysicalDeviceFragmentShaderBarycentricPropertiesKHR {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceFragmentShaderBarycentricPropertiesKHR {}
+unsafe impl Sync for PhysicalDeviceFragmentShaderBarycentricPropertiesKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT.html>
 #[repr(C)]
@@ -14386,6 +16015,9 @@ impl Default for PhysicalDeviceFragmentShaderInterlockFeaturesEXT {
     }
 }
 
+unsafe impl Send for PhysicalDeviceFragmentShaderInterlockFeaturesEXT {}
+unsafe impl Sync for PhysicalDeviceFragmentShaderInterlockFeaturesEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -14410,6 +16042,9 @@ impl Default for PhysicalDeviceFragmentShadingRateEnumsFeaturesNV {
     }
 }
 
+unsafe impl Send for PhysicalDeviceFragmentShadingRateEnumsFeaturesNV {}
+unsafe impl Sync for PhysicalDeviceFragmentShadingRateEnumsFeaturesNV {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceFragmentShadingRateEnumsPropertiesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -14429,6 +16064,9 @@ impl Default for PhysicalDeviceFragmentShadingRateEnumsPropertiesNV {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceFragmentShadingRateEnumsPropertiesNV {}
+unsafe impl Sync for PhysicalDeviceFragmentShadingRateEnumsPropertiesNV {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceFragmentShadingRateFeaturesKHR.html>
 #[repr(C)]
@@ -14454,6 +16092,9 @@ impl Default for PhysicalDeviceFragmentShadingRateFeaturesKHR {
     }
 }
 
+unsafe impl Send for PhysicalDeviceFragmentShadingRateFeaturesKHR {}
+unsafe impl Sync for PhysicalDeviceFragmentShadingRateFeaturesKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceFragmentShadingRateKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -14475,6 +16116,9 @@ impl Default for PhysicalDeviceFragmentShadingRateKHR {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceFragmentShadingRateKHR {}
+unsafe impl Sync for PhysicalDeviceFragmentShadingRateKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceFragmentShadingRatePropertiesKHR.html>
 #[repr(C)]
@@ -14528,6 +16172,9 @@ impl Default for PhysicalDeviceFragmentShadingRatePropertiesKHR {
     }
 }
 
+unsafe impl Send for PhysicalDeviceFragmentShadingRatePropertiesKHR {}
+unsafe impl Sync for PhysicalDeviceFragmentShadingRatePropertiesKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceFrameBoundaryFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -14547,6 +16194,9 @@ impl Default for PhysicalDeviceFrameBoundaryFeaturesEXT {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceFrameBoundaryFeaturesEXT {}
+unsafe impl Sync for PhysicalDeviceFrameBoundaryFeaturesEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceGlobalPriorityQueryFeatures.html>
 #[repr(C)]
@@ -14568,6 +16218,9 @@ impl Default for PhysicalDeviceGlobalPriorityQueryFeatures {
     }
 }
 
+unsafe impl Send for PhysicalDeviceGlobalPriorityQueryFeatures {}
+unsafe impl Sync for PhysicalDeviceGlobalPriorityQueryFeatures {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceGraphicsPipelineLibraryFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -14587,6 +16240,9 @@ impl Default for PhysicalDeviceGraphicsPipelineLibraryFeaturesEXT {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceGraphicsPipelineLibraryFeaturesEXT {}
+unsafe impl Sync for PhysicalDeviceGraphicsPipelineLibraryFeaturesEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceGraphicsPipelineLibraryPropertiesEXT.html>
 #[repr(C)]
@@ -14609,6 +16265,9 @@ impl Default for PhysicalDeviceGraphicsPipelineLibraryPropertiesEXT {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceGraphicsPipelineLibraryPropertiesEXT {}
+unsafe impl Sync for PhysicalDeviceGraphicsPipelineLibraryPropertiesEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceGroupProperties.html>
 #[repr(C)]
@@ -14634,6 +16293,9 @@ impl Default for PhysicalDeviceGroupProperties {
     }
 }
 
+unsafe impl Send for PhysicalDeviceGroupProperties {}
+unsafe impl Sync for PhysicalDeviceGroupProperties {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceHdrVividFeaturesHUAWEI.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -14654,6 +16316,9 @@ impl Default for PhysicalDeviceHdrVividFeaturesHUAWEI {
     }
 }
 
+unsafe impl Send for PhysicalDeviceHdrVividFeaturesHUAWEI {}
+unsafe impl Sync for PhysicalDeviceHdrVividFeaturesHUAWEI {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceHostImageCopyFeatures.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -14673,6 +16338,9 @@ impl Default for PhysicalDeviceHostImageCopyFeatures {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceHostImageCopyFeatures {}
+unsafe impl Sync for PhysicalDeviceHostImageCopyFeatures {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceHostImageCopyProperties.html>
 #[repr(C)]
@@ -14704,6 +16372,9 @@ impl Default for PhysicalDeviceHostImageCopyProperties {
     }
 }
 
+unsafe impl Send for PhysicalDeviceHostImageCopyProperties {}
+unsafe impl Sync for PhysicalDeviceHostImageCopyProperties {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceHostQueryResetFeatures.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -14723,6 +16394,9 @@ impl Default for PhysicalDeviceHostQueryResetFeatures {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceHostQueryResetFeatures {}
+unsafe impl Sync for PhysicalDeviceHostQueryResetFeatures {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceIDProperties.html>
 #[repr(C)]
@@ -14752,6 +16426,9 @@ impl Default for PhysicalDeviceIDProperties {
     }
 }
 
+unsafe impl Send for PhysicalDeviceIDProperties {}
+unsafe impl Sync for PhysicalDeviceIDProperties {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceImage2DViewOf3DFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -14774,6 +16451,9 @@ impl Default for PhysicalDeviceImage2DViewOf3DFeaturesEXT {
     }
 }
 
+unsafe impl Send for PhysicalDeviceImage2DViewOf3DFeaturesEXT {}
+unsafe impl Sync for PhysicalDeviceImage2DViewOf3DFeaturesEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceImageAlignmentControlFeaturesMESA.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -14793,6 +16473,9 @@ impl Default for PhysicalDeviceImageAlignmentControlFeaturesMESA {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceImageAlignmentControlFeaturesMESA {}
+unsafe impl Sync for PhysicalDeviceImageAlignmentControlFeaturesMESA {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceImageAlignmentControlPropertiesMESA.html>
 #[repr(C)]
@@ -14814,6 +16497,9 @@ impl Default for PhysicalDeviceImageAlignmentControlPropertiesMESA {
     }
 }
 
+unsafe impl Send for PhysicalDeviceImageAlignmentControlPropertiesMESA {}
+unsafe impl Sync for PhysicalDeviceImageAlignmentControlPropertiesMESA {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceImageCompressionControlFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -14834,6 +16520,9 @@ impl Default for PhysicalDeviceImageCompressionControlFeaturesEXT {
     }
 }
 
+unsafe impl Send for PhysicalDeviceImageCompressionControlFeaturesEXT {}
+unsafe impl Sync for PhysicalDeviceImageCompressionControlFeaturesEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceImageCompressionControlSwapchainFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -14853,6 +16542,9 @@ impl Default for PhysicalDeviceImageCompressionControlSwapchainFeaturesEXT {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceImageCompressionControlSwapchainFeaturesEXT {}
+unsafe impl Sync for PhysicalDeviceImageCompressionControlSwapchainFeaturesEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceImageDrmFormatModifierInfoEXT.html>
 #[repr(C)]
@@ -14879,6 +16571,9 @@ impl Default for PhysicalDeviceImageDrmFormatModifierInfoEXT {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceImageDrmFormatModifierInfoEXT {}
+unsafe impl Sync for PhysicalDeviceImageDrmFormatModifierInfoEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceImageFormatInfo2.html>
 #[repr(C)]
@@ -14908,6 +16603,9 @@ impl Default for PhysicalDeviceImageFormatInfo2 {
     }
 }
 
+unsafe impl Send for PhysicalDeviceImageFormatInfo2 {}
+unsafe impl Sync for PhysicalDeviceImageFormatInfo2 {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceImageProcessing2FeaturesQCOM.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -14928,6 +16626,9 @@ impl Default for PhysicalDeviceImageProcessing2FeaturesQCOM {
     }
 }
 
+unsafe impl Send for PhysicalDeviceImageProcessing2FeaturesQCOM {}
+unsafe impl Sync for PhysicalDeviceImageProcessing2FeaturesQCOM {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceImageProcessing2PropertiesQCOM.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -14947,6 +16648,9 @@ impl Default for PhysicalDeviceImageProcessing2PropertiesQCOM {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceImageProcessing2PropertiesQCOM {}
+unsafe impl Sync for PhysicalDeviceImageProcessing2PropertiesQCOM {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceImageProcessingFeaturesQCOM.html>
 #[repr(C)]
@@ -14971,6 +16675,9 @@ impl Default for PhysicalDeviceImageProcessingFeaturesQCOM {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceImageProcessingFeaturesQCOM {}
+unsafe impl Sync for PhysicalDeviceImageProcessingFeaturesQCOM {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceImageProcessingPropertiesQCOM.html>
 #[repr(C)]
@@ -14998,6 +16705,9 @@ impl Default for PhysicalDeviceImageProcessingPropertiesQCOM {
     }
 }
 
+unsafe impl Send for PhysicalDeviceImageProcessingPropertiesQCOM {}
+unsafe impl Sync for PhysicalDeviceImageProcessingPropertiesQCOM {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceImageRobustnessFeatures.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -15017,6 +16727,9 @@ impl Default for PhysicalDeviceImageRobustnessFeatures {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceImageRobustnessFeatures {}
+unsafe impl Sync for PhysicalDeviceImageRobustnessFeatures {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceImageSlicedViewOf3DFeaturesEXT.html>
 #[repr(C)]
@@ -15038,6 +16751,9 @@ impl Default for PhysicalDeviceImageSlicedViewOf3DFeaturesEXT {
     }
 }
 
+unsafe impl Send for PhysicalDeviceImageSlicedViewOf3DFeaturesEXT {}
+unsafe impl Sync for PhysicalDeviceImageSlicedViewOf3DFeaturesEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceImageViewImageFormatInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -15057,6 +16773,9 @@ impl Default for PhysicalDeviceImageViewImageFormatInfoEXT {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceImageViewImageFormatInfoEXT {}
+unsafe impl Sync for PhysicalDeviceImageViewImageFormatInfoEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceImageViewMinLodFeaturesEXT.html>
 #[repr(C)]
@@ -15078,6 +16797,9 @@ impl Default for PhysicalDeviceImageViewMinLodFeaturesEXT {
     }
 }
 
+unsafe impl Send for PhysicalDeviceImageViewMinLodFeaturesEXT {}
+unsafe impl Sync for PhysicalDeviceImageViewMinLodFeaturesEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceImagelessFramebufferFeatures.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -15097,6 +16819,9 @@ impl Default for PhysicalDeviceImagelessFramebufferFeatures {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceImagelessFramebufferFeatures {}
+unsafe impl Sync for PhysicalDeviceImagelessFramebufferFeatures {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceIndexTypeUint8Features.html>
 #[repr(C)]
@@ -15118,6 +16843,9 @@ impl Default for PhysicalDeviceIndexTypeUint8Features {
     }
 }
 
+unsafe impl Send for PhysicalDeviceIndexTypeUint8Features {}
+unsafe impl Sync for PhysicalDeviceIndexTypeUint8Features {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceInheritedViewportScissorFeaturesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -15137,6 +16865,9 @@ impl Default for PhysicalDeviceInheritedViewportScissorFeaturesNV {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceInheritedViewportScissorFeaturesNV {}
+unsafe impl Sync for PhysicalDeviceInheritedViewportScissorFeaturesNV {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceInlineUniformBlockFeatures.html>
 #[repr(C)]
@@ -15159,6 +16890,9 @@ impl Default for PhysicalDeviceInlineUniformBlockFeatures {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceInlineUniformBlockFeatures {}
+unsafe impl Sync for PhysicalDeviceInlineUniformBlockFeatures {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceInlineUniformBlockProperties.html>
 #[repr(C)]
@@ -15188,6 +16922,9 @@ impl Default for PhysicalDeviceInlineUniformBlockProperties {
     }
 }
 
+unsafe impl Send for PhysicalDeviceInlineUniformBlockProperties {}
+unsafe impl Sync for PhysicalDeviceInlineUniformBlockProperties {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceInvocationMaskFeaturesHUAWEI.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -15207,6 +16944,9 @@ impl Default for PhysicalDeviceInvocationMaskFeaturesHUAWEI {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceInvocationMaskFeaturesHUAWEI {}
+unsafe impl Sync for PhysicalDeviceInvocationMaskFeaturesHUAWEI {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceLayeredApiPropertiesKHR.html>
 #[repr(C)]
@@ -15234,6 +16974,9 @@ impl Default for PhysicalDeviceLayeredApiPropertiesKHR {
     }
 }
 
+unsafe impl Send for PhysicalDeviceLayeredApiPropertiesKHR {}
+unsafe impl Sync for PhysicalDeviceLayeredApiPropertiesKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceLayeredApiPropertiesListKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -15256,6 +16999,9 @@ impl Default for PhysicalDeviceLayeredApiPropertiesListKHR {
     }
 }
 
+unsafe impl Send for PhysicalDeviceLayeredApiPropertiesListKHR {}
+unsafe impl Sync for PhysicalDeviceLayeredApiPropertiesListKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceLayeredApiVulkanPropertiesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, PartialEq)]
@@ -15275,6 +17021,9 @@ impl Default for PhysicalDeviceLayeredApiVulkanPropertiesKHR {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceLayeredApiVulkanPropertiesKHR {}
+unsafe impl Sync for PhysicalDeviceLayeredApiVulkanPropertiesKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceLayeredDriverPropertiesMSFT.html>
 #[repr(C)]
@@ -15296,6 +17045,9 @@ impl Default for PhysicalDeviceLayeredDriverPropertiesMSFT {
     }
 }
 
+unsafe impl Send for PhysicalDeviceLayeredDriverPropertiesMSFT {}
+unsafe impl Sync for PhysicalDeviceLayeredDriverPropertiesMSFT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceLegacyDitheringFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -15315,6 +17067,9 @@ impl Default for PhysicalDeviceLegacyDitheringFeaturesEXT {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceLegacyDitheringFeaturesEXT {}
+unsafe impl Sync for PhysicalDeviceLegacyDitheringFeaturesEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceLegacyVertexAttributesFeaturesEXT.html>
 #[repr(C)]
@@ -15336,6 +17091,9 @@ impl Default for PhysicalDeviceLegacyVertexAttributesFeaturesEXT {
     }
 }
 
+unsafe impl Send for PhysicalDeviceLegacyVertexAttributesFeaturesEXT {}
+unsafe impl Sync for PhysicalDeviceLegacyVertexAttributesFeaturesEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceLegacyVertexAttributesPropertiesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -15355,6 +17113,9 @@ impl Default for PhysicalDeviceLegacyVertexAttributesPropertiesEXT {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceLegacyVertexAttributesPropertiesEXT {}
+unsafe impl Sync for PhysicalDeviceLegacyVertexAttributesPropertiesEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceLimits.html>
 #[repr(C)]
@@ -15498,6 +17259,9 @@ impl Default for PhysicalDeviceLineRasterizationFeatures {
     }
 }
 
+unsafe impl Send for PhysicalDeviceLineRasterizationFeatures {}
+unsafe impl Sync for PhysicalDeviceLineRasterizationFeatures {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceLineRasterizationProperties.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -15518,6 +17282,9 @@ impl Default for PhysicalDeviceLineRasterizationProperties {
     }
 }
 
+unsafe impl Send for PhysicalDeviceLineRasterizationProperties {}
+unsafe impl Sync for PhysicalDeviceLineRasterizationProperties {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceLinearColorAttachmentFeaturesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -15537,6 +17304,9 @@ impl Default for PhysicalDeviceLinearColorAttachmentFeaturesNV {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceLinearColorAttachmentFeaturesNV {}
+unsafe impl Sync for PhysicalDeviceLinearColorAttachmentFeaturesNV {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceMaintenance3Properties.html>
 #[repr(C)]
@@ -15560,6 +17330,9 @@ impl Default for PhysicalDeviceMaintenance3Properties {
     }
 }
 
+unsafe impl Send for PhysicalDeviceMaintenance3Properties {}
+unsafe impl Sync for PhysicalDeviceMaintenance3Properties {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceMaintenance4Features.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -15579,6 +17352,9 @@ impl Default for PhysicalDeviceMaintenance4Features {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceMaintenance4Features {}
+unsafe impl Sync for PhysicalDeviceMaintenance4Features {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceMaintenance4Properties.html>
 #[repr(C)]
@@ -15600,6 +17376,9 @@ impl Default for PhysicalDeviceMaintenance4Properties {
     }
 }
 
+unsafe impl Send for PhysicalDeviceMaintenance4Properties {}
+unsafe impl Sync for PhysicalDeviceMaintenance4Properties {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceMaintenance5Features.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -15619,6 +17398,9 @@ impl Default for PhysicalDeviceMaintenance5Features {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceMaintenance5Features {}
+unsafe impl Sync for PhysicalDeviceMaintenance5Features {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceMaintenance5Properties.html>
 #[repr(C)]
@@ -15650,6 +17432,9 @@ impl Default for PhysicalDeviceMaintenance5Properties {
     }
 }
 
+unsafe impl Send for PhysicalDeviceMaintenance5Properties {}
+unsafe impl Sync for PhysicalDeviceMaintenance5Properties {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceMaintenance6Features.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -15669,6 +17454,9 @@ impl Default for PhysicalDeviceMaintenance6Features {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceMaintenance6Features {}
+unsafe impl Sync for PhysicalDeviceMaintenance6Features {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceMaintenance6Properties.html>
 #[repr(C)]
@@ -15694,6 +17482,9 @@ impl Default for PhysicalDeviceMaintenance6Properties {
     }
 }
 
+unsafe impl Send for PhysicalDeviceMaintenance6Properties {}
+unsafe impl Sync for PhysicalDeviceMaintenance6Properties {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceMaintenance7FeaturesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -15713,6 +17504,9 @@ impl Default for PhysicalDeviceMaintenance7FeaturesKHR {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceMaintenance7FeaturesKHR {}
+unsafe impl Sync for PhysicalDeviceMaintenance7FeaturesKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceMaintenance7PropertiesKHR.html>
 #[repr(C)]
@@ -15748,6 +17542,9 @@ impl Default for PhysicalDeviceMaintenance7PropertiesKHR {
     }
 }
 
+unsafe impl Send for PhysicalDeviceMaintenance7PropertiesKHR {}
+unsafe impl Sync for PhysicalDeviceMaintenance7PropertiesKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceMaintenance8FeaturesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -15768,6 +17565,9 @@ impl Default for PhysicalDeviceMaintenance8FeaturesKHR {
     }
 }
 
+unsafe impl Send for PhysicalDeviceMaintenance8FeaturesKHR {}
+unsafe impl Sync for PhysicalDeviceMaintenance8FeaturesKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceMaintenance9FeaturesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -15787,6 +17587,9 @@ impl Default for PhysicalDeviceMaintenance9FeaturesKHR {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceMaintenance9FeaturesKHR {}
+unsafe impl Sync for PhysicalDeviceMaintenance9FeaturesKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceMaintenance9PropertiesKHR.html>
 #[repr(C)]
@@ -15809,6 +17612,9 @@ impl Default for PhysicalDeviceMaintenance9PropertiesKHR {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceMaintenance9PropertiesKHR {}
+unsafe impl Sync for PhysicalDeviceMaintenance9PropertiesKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceMapMemoryPlacedFeaturesEXT.html>
 #[repr(C)]
@@ -15834,6 +17640,9 @@ impl Default for PhysicalDeviceMapMemoryPlacedFeaturesEXT {
     }
 }
 
+unsafe impl Send for PhysicalDeviceMapMemoryPlacedFeaturesEXT {}
+unsafe impl Sync for PhysicalDeviceMapMemoryPlacedFeaturesEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceMapMemoryPlacedPropertiesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -15853,6 +17662,9 @@ impl Default for PhysicalDeviceMapMemoryPlacedPropertiesEXT {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceMapMemoryPlacedPropertiesEXT {}
+unsafe impl Sync for PhysicalDeviceMapMemoryPlacedPropertiesEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceMemoryBudgetPropertiesEXT.html>
 #[repr(C)]
@@ -15876,6 +17688,9 @@ impl Default for PhysicalDeviceMemoryBudgetPropertiesEXT {
     }
 }
 
+unsafe impl Send for PhysicalDeviceMemoryBudgetPropertiesEXT {}
+unsafe impl Sync for PhysicalDeviceMemoryBudgetPropertiesEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceMemoryDecompressionFeaturesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -15895,6 +17710,9 @@ impl Default for PhysicalDeviceMemoryDecompressionFeaturesNV {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceMemoryDecompressionFeaturesNV {}
+unsafe impl Sync for PhysicalDeviceMemoryDecompressionFeaturesNV {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceMemoryDecompressionPropertiesNV.html>
 #[repr(C)]
@@ -15918,6 +17736,9 @@ impl Default for PhysicalDeviceMemoryDecompressionPropertiesNV {
     }
 }
 
+unsafe impl Send for PhysicalDeviceMemoryDecompressionPropertiesNV {}
+unsafe impl Sync for PhysicalDeviceMemoryDecompressionPropertiesNV {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceMemoryPriorityFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -15937,6 +17758,9 @@ impl Default for PhysicalDeviceMemoryPriorityFeaturesEXT {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceMemoryPriorityFeaturesEXT {}
+unsafe impl Sync for PhysicalDeviceMemoryPriorityFeaturesEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceMemoryProperties.html>
 #[repr(C)]
@@ -15968,6 +17792,9 @@ impl Default for PhysicalDeviceMemoryProperties2 {
     }
 }
 
+unsafe impl Send for PhysicalDeviceMemoryProperties2 {}
+unsafe impl Sync for PhysicalDeviceMemoryProperties2 {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceMeshShaderFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -15996,6 +17823,9 @@ impl Default for PhysicalDeviceMeshShaderFeaturesEXT {
     }
 }
 
+unsafe impl Send for PhysicalDeviceMeshShaderFeaturesEXT {}
+unsafe impl Sync for PhysicalDeviceMeshShaderFeaturesEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceMeshShaderFeaturesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -16017,6 +17847,9 @@ impl Default for PhysicalDeviceMeshShaderFeaturesNV {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceMeshShaderFeaturesNV {}
+unsafe impl Sync for PhysicalDeviceMeshShaderFeaturesNV {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceMeshShaderPropertiesEXT.html>
 #[repr(C)]
@@ -16092,6 +17925,9 @@ impl Default for PhysicalDeviceMeshShaderPropertiesEXT {
     }
 }
 
+unsafe impl Send for PhysicalDeviceMeshShaderPropertiesEXT {}
+unsafe impl Sync for PhysicalDeviceMeshShaderPropertiesEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceMeshShaderPropertiesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -16136,6 +17972,9 @@ impl Default for PhysicalDeviceMeshShaderPropertiesNV {
     }
 }
 
+unsafe impl Send for PhysicalDeviceMeshShaderPropertiesNV {}
+unsafe impl Sync for PhysicalDeviceMeshShaderPropertiesNV {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceMultiDrawFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -16155,6 +17994,9 @@ impl Default for PhysicalDeviceMultiDrawFeaturesEXT {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceMultiDrawFeaturesEXT {}
+unsafe impl Sync for PhysicalDeviceMultiDrawFeaturesEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceMultiDrawPropertiesEXT.html>
 #[repr(C)]
@@ -16176,6 +18018,9 @@ impl Default for PhysicalDeviceMultiDrawPropertiesEXT {
     }
 }
 
+unsafe impl Send for PhysicalDeviceMultiDrawPropertiesEXT {}
+unsafe impl Sync for PhysicalDeviceMultiDrawPropertiesEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -16196,6 +18041,9 @@ impl Default for PhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXT {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXT {}
+unsafe impl Sync for PhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceMultiviewFeatures.html>
 #[repr(C)]
@@ -16221,6 +18069,9 @@ impl Default for PhysicalDeviceMultiviewFeatures {
     }
 }
 
+unsafe impl Send for PhysicalDeviceMultiviewFeatures {}
+unsafe impl Sync for PhysicalDeviceMultiviewFeatures {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -16240,6 +18091,9 @@ impl Default for PhysicalDeviceMultiviewPerViewAttributesPropertiesNVX {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceMultiviewPerViewAttributesPropertiesNVX {}
+unsafe impl Sync for PhysicalDeviceMultiviewPerViewAttributesPropertiesNVX {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOM.html>
 #[repr(C)]
@@ -16261,6 +18115,9 @@ impl Default for PhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOM {
     }
 }
 
+unsafe impl Send for PhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOM {}
+unsafe impl Sync for PhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOM {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -16280,6 +18137,9 @@ impl Default for PhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM {}
+unsafe impl Sync for PhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceMultiviewProperties.html>
 #[repr(C)]
@@ -16303,6 +18163,9 @@ impl Default for PhysicalDeviceMultiviewProperties {
     }
 }
 
+unsafe impl Send for PhysicalDeviceMultiviewProperties {}
+unsafe impl Sync for PhysicalDeviceMultiviewProperties {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceMutableDescriptorTypeFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -16322,6 +18185,9 @@ impl Default for PhysicalDeviceMutableDescriptorTypeFeaturesEXT {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceMutableDescriptorTypeFeaturesEXT {}
+unsafe impl Sync for PhysicalDeviceMutableDescriptorTypeFeaturesEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceNestedCommandBufferFeaturesEXT.html>
 #[repr(C)]
@@ -16347,6 +18213,9 @@ impl Default for PhysicalDeviceNestedCommandBufferFeaturesEXT {
     }
 }
 
+unsafe impl Send for PhysicalDeviceNestedCommandBufferFeaturesEXT {}
+unsafe impl Sync for PhysicalDeviceNestedCommandBufferFeaturesEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceNestedCommandBufferPropertiesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -16367,6 +18236,9 @@ impl Default for PhysicalDeviceNestedCommandBufferPropertiesEXT {
     }
 }
 
+unsafe impl Send for PhysicalDeviceNestedCommandBufferPropertiesEXT {}
+unsafe impl Sync for PhysicalDeviceNestedCommandBufferPropertiesEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceNonSeamlessCubeMapFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -16386,6 +18258,9 @@ impl Default for PhysicalDeviceNonSeamlessCubeMapFeaturesEXT {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceNonSeamlessCubeMapFeaturesEXT {}
+unsafe impl Sync for PhysicalDeviceNonSeamlessCubeMapFeaturesEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceOpacityMicromapFeaturesEXT.html>
 #[repr(C)]
@@ -16411,6 +18286,9 @@ impl Default for PhysicalDeviceOpacityMicromapFeaturesEXT {
     }
 }
 
+unsafe impl Send for PhysicalDeviceOpacityMicromapFeaturesEXT {}
+unsafe impl Sync for PhysicalDeviceOpacityMicromapFeaturesEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceOpacityMicromapPropertiesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -16433,6 +18311,9 @@ impl Default for PhysicalDeviceOpacityMicromapPropertiesEXT {
     }
 }
 
+unsafe impl Send for PhysicalDeviceOpacityMicromapPropertiesEXT {}
+unsafe impl Sync for PhysicalDeviceOpacityMicromapPropertiesEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceOpticalFlowFeaturesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -16452,6 +18333,9 @@ impl Default for PhysicalDeviceOpticalFlowFeaturesNV {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceOpticalFlowFeaturesNV {}
+unsafe impl Sync for PhysicalDeviceOpticalFlowFeaturesNV {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceOpticalFlowPropertiesNV.html>
 #[repr(C)]
@@ -16493,6 +18377,9 @@ impl Default for PhysicalDeviceOpticalFlowPropertiesNV {
     }
 }
 
+unsafe impl Send for PhysicalDeviceOpticalFlowPropertiesNV {}
+unsafe impl Sync for PhysicalDeviceOpticalFlowPropertiesNV {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDevicePCIBusInfoPropertiesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -16519,6 +18406,9 @@ impl Default for PhysicalDevicePCIBusInfoPropertiesEXT {
     }
 }
 
+unsafe impl Send for PhysicalDevicePCIBusInfoPropertiesEXT {}
+unsafe impl Sync for PhysicalDevicePCIBusInfoPropertiesEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -16538,6 +18428,9 @@ impl Default for PhysicalDevicePageableDeviceLocalMemoryFeaturesEXT {
         }
     }
 }
+
+unsafe impl Send for PhysicalDevicePageableDeviceLocalMemoryFeaturesEXT {}
+unsafe impl Sync for PhysicalDevicePageableDeviceLocalMemoryFeaturesEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDevicePartitionedAccelerationStructureFeaturesNV.html>
 #[repr(C)]
@@ -16559,6 +18452,9 @@ impl Default for PhysicalDevicePartitionedAccelerationStructureFeaturesNV {
     }
 }
 
+unsafe impl Send for PhysicalDevicePartitionedAccelerationStructureFeaturesNV {}
+unsafe impl Sync for PhysicalDevicePartitionedAccelerationStructureFeaturesNV {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDevicePartitionedAccelerationStructurePropertiesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -16578,6 +18474,9 @@ impl Default for PhysicalDevicePartitionedAccelerationStructurePropertiesNV {
         }
     }
 }
+
+unsafe impl Send for PhysicalDevicePartitionedAccelerationStructurePropertiesNV {}
+unsafe impl Sync for PhysicalDevicePartitionedAccelerationStructurePropertiesNV {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDevicePerStageDescriptorSetFeaturesNV.html>
 #[repr(C)]
@@ -16601,6 +18500,9 @@ impl Default for PhysicalDevicePerStageDescriptorSetFeaturesNV {
     }
 }
 
+unsafe impl Send for PhysicalDevicePerStageDescriptorSetFeaturesNV {}
+unsafe impl Sync for PhysicalDevicePerStageDescriptorSetFeaturesNV {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDevicePerformanceQueryFeaturesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -16623,6 +18525,9 @@ impl Default for PhysicalDevicePerformanceQueryFeaturesKHR {
     }
 }
 
+unsafe impl Send for PhysicalDevicePerformanceQueryFeaturesKHR {}
+unsafe impl Sync for PhysicalDevicePerformanceQueryFeaturesKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDevicePerformanceQueryPropertiesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -16643,6 +18548,9 @@ impl Default for PhysicalDevicePerformanceQueryPropertiesKHR {
     }
 }
 
+unsafe impl Send for PhysicalDevicePerformanceQueryPropertiesKHR {}
+unsafe impl Sync for PhysicalDevicePerformanceQueryPropertiesKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDevicePipelineBinaryFeaturesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -16662,6 +18570,9 @@ impl Default for PhysicalDevicePipelineBinaryFeaturesKHR {
         }
     }
 }
+
+unsafe impl Send for PhysicalDevicePipelineBinaryFeaturesKHR {}
+unsafe impl Sync for PhysicalDevicePipelineBinaryFeaturesKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDevicePipelineBinaryPropertiesKHR.html>
 #[repr(C)]
@@ -16691,6 +18602,9 @@ impl Default for PhysicalDevicePipelineBinaryPropertiesKHR {
     }
 }
 
+unsafe impl Send for PhysicalDevicePipelineBinaryPropertiesKHR {}
+unsafe impl Sync for PhysicalDevicePipelineBinaryPropertiesKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDevicePipelineCacheIncrementalModeFeaturesSEC.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -16710,6 +18624,9 @@ impl Default for PhysicalDevicePipelineCacheIncrementalModeFeaturesSEC {
         }
     }
 }
+
+unsafe impl Send for PhysicalDevicePipelineCacheIncrementalModeFeaturesSEC {}
+unsafe impl Sync for PhysicalDevicePipelineCacheIncrementalModeFeaturesSEC {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDevicePipelineCreationCacheControlFeatures.html>
 #[repr(C)]
@@ -16731,6 +18648,9 @@ impl Default for PhysicalDevicePipelineCreationCacheControlFeatures {
     }
 }
 
+unsafe impl Send for PhysicalDevicePipelineCreationCacheControlFeatures {}
+unsafe impl Sync for PhysicalDevicePipelineCreationCacheControlFeatures {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -16750,6 +18670,9 @@ impl Default for PhysicalDevicePipelineExecutablePropertiesFeaturesKHR {
         }
     }
 }
+
+unsafe impl Send for PhysicalDevicePipelineExecutablePropertiesFeaturesKHR {}
+unsafe impl Sync for PhysicalDevicePipelineExecutablePropertiesFeaturesKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDevicePipelineLibraryGroupHandlesFeaturesEXT.html>
 #[repr(C)]
@@ -16771,6 +18694,9 @@ impl Default for PhysicalDevicePipelineLibraryGroupHandlesFeaturesEXT {
     }
 }
 
+unsafe impl Send for PhysicalDevicePipelineLibraryGroupHandlesFeaturesEXT {}
+unsafe impl Sync for PhysicalDevicePipelineLibraryGroupHandlesFeaturesEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDevicePipelineOpacityMicromapFeaturesARM.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -16790,6 +18716,9 @@ impl Default for PhysicalDevicePipelineOpacityMicromapFeaturesARM {
         }
     }
 }
+
+unsafe impl Send for PhysicalDevicePipelineOpacityMicromapFeaturesARM {}
+unsafe impl Sync for PhysicalDevicePipelineOpacityMicromapFeaturesARM {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDevicePipelinePropertiesFeaturesEXT.html>
 #[repr(C)]
@@ -16811,6 +18740,9 @@ impl Default for PhysicalDevicePipelinePropertiesFeaturesEXT {
     }
 }
 
+unsafe impl Send for PhysicalDevicePipelinePropertiesFeaturesEXT {}
+unsafe impl Sync for PhysicalDevicePipelinePropertiesFeaturesEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDevicePipelineProtectedAccessFeatures.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -16831,6 +18763,9 @@ impl Default for PhysicalDevicePipelineProtectedAccessFeatures {
     }
 }
 
+unsafe impl Send for PhysicalDevicePipelineProtectedAccessFeatures {}
+unsafe impl Sync for PhysicalDevicePipelineProtectedAccessFeatures {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDevicePipelineRobustnessFeatures.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -16850,6 +18785,9 @@ impl Default for PhysicalDevicePipelineRobustnessFeatures {
         }
     }
 }
+
+unsafe impl Send for PhysicalDevicePipelineRobustnessFeatures {}
+unsafe impl Sync for PhysicalDevicePipelineRobustnessFeatures {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDevicePipelineRobustnessProperties.html>
 #[repr(C)]
@@ -16877,6 +18815,9 @@ impl Default for PhysicalDevicePipelineRobustnessProperties {
     }
 }
 
+unsafe impl Send for PhysicalDevicePipelineRobustnessProperties {}
+unsafe impl Sync for PhysicalDevicePipelineRobustnessProperties {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDevicePointClippingProperties.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -16896,6 +18837,9 @@ impl Default for PhysicalDevicePointClippingProperties {
         }
     }
 }
+
+unsafe impl Send for PhysicalDevicePointClippingProperties {}
+unsafe impl Sync for PhysicalDevicePointClippingProperties {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDevicePortabilitySubsetFeaturesKHR.html>
 #[repr(C)]
@@ -16945,6 +18889,9 @@ impl Default for PhysicalDevicePortabilitySubsetFeaturesKHR {
     }
 }
 
+unsafe impl Send for PhysicalDevicePortabilitySubsetFeaturesKHR {}
+unsafe impl Sync for PhysicalDevicePortabilitySubsetFeaturesKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDevicePortabilitySubsetPropertiesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -16964,6 +18911,9 @@ impl Default for PhysicalDevicePortabilitySubsetPropertiesKHR {
         }
     }
 }
+
+unsafe impl Send for PhysicalDevicePortabilitySubsetPropertiesKHR {}
+unsafe impl Sync for PhysicalDevicePortabilitySubsetPropertiesKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDevicePresentBarrierFeaturesNV.html>
 #[repr(C)]
@@ -16985,6 +18935,9 @@ impl Default for PhysicalDevicePresentBarrierFeaturesNV {
     }
 }
 
+unsafe impl Send for PhysicalDevicePresentBarrierFeaturesNV {}
+unsafe impl Sync for PhysicalDevicePresentBarrierFeaturesNV {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDevicePresentId2FeaturesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -17004,6 +18957,9 @@ impl Default for PhysicalDevicePresentId2FeaturesKHR {
         }
     }
 }
+
+unsafe impl Send for PhysicalDevicePresentId2FeaturesKHR {}
+unsafe impl Sync for PhysicalDevicePresentId2FeaturesKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDevicePresentIdFeaturesKHR.html>
 #[repr(C)]
@@ -17025,6 +18981,9 @@ impl Default for PhysicalDevicePresentIdFeaturesKHR {
     }
 }
 
+unsafe impl Send for PhysicalDevicePresentIdFeaturesKHR {}
+unsafe impl Sync for PhysicalDevicePresentIdFeaturesKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDevicePresentMeteringFeaturesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -17044,6 +19003,9 @@ impl Default for PhysicalDevicePresentMeteringFeaturesNV {
         }
     }
 }
+
+unsafe impl Send for PhysicalDevicePresentMeteringFeaturesNV {}
+unsafe impl Sync for PhysicalDevicePresentMeteringFeaturesNV {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDevicePresentModeFifoLatestReadyFeaturesKHR.html>
 #[repr(C)]
@@ -17065,6 +19027,9 @@ impl Default for PhysicalDevicePresentModeFifoLatestReadyFeaturesKHR {
     }
 }
 
+unsafe impl Send for PhysicalDevicePresentModeFifoLatestReadyFeaturesKHR {}
+unsafe impl Sync for PhysicalDevicePresentModeFifoLatestReadyFeaturesKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDevicePresentWait2FeaturesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -17085,6 +19050,9 @@ impl Default for PhysicalDevicePresentWait2FeaturesKHR {
     }
 }
 
+unsafe impl Send for PhysicalDevicePresentWait2FeaturesKHR {}
+unsafe impl Sync for PhysicalDevicePresentWait2FeaturesKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDevicePresentWaitFeaturesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -17104,6 +19072,9 @@ impl Default for PhysicalDevicePresentWaitFeaturesKHR {
         }
     }
 }
+
+unsafe impl Send for PhysicalDevicePresentWaitFeaturesKHR {}
+unsafe impl Sync for PhysicalDevicePresentWaitFeaturesKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDevicePrimitiveTopologyListRestartFeaturesEXT.html>
 #[repr(C)]
@@ -17126,6 +19097,9 @@ impl Default for PhysicalDevicePrimitiveTopologyListRestartFeaturesEXT {
         }
     }
 }
+
+unsafe impl Send for PhysicalDevicePrimitiveTopologyListRestartFeaturesEXT {}
+unsafe impl Sync for PhysicalDevicePrimitiveTopologyListRestartFeaturesEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT.html>
 #[repr(C)]
@@ -17151,6 +19125,9 @@ impl Default for PhysicalDevicePrimitivesGeneratedQueryFeaturesEXT {
     }
 }
 
+unsafe impl Send for PhysicalDevicePrimitivesGeneratedQueryFeaturesEXT {}
+unsafe impl Sync for PhysicalDevicePrimitivesGeneratedQueryFeaturesEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDevicePrivateDataFeatures.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -17170,6 +19147,9 @@ impl Default for PhysicalDevicePrivateDataFeatures {
         }
     }
 }
+
+unsafe impl Send for PhysicalDevicePrivateDataFeatures {}
+unsafe impl Sync for PhysicalDevicePrivateDataFeatures {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceProperties.html>
 #[repr(C)]
@@ -17206,6 +19186,9 @@ impl Default for PhysicalDeviceProperties2 {
     }
 }
 
+unsafe impl Send for PhysicalDeviceProperties2 {}
+unsafe impl Sync for PhysicalDeviceProperties2 {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceProtectedMemoryFeatures.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -17226,6 +19209,9 @@ impl Default for PhysicalDeviceProtectedMemoryFeatures {
     }
 }
 
+unsafe impl Send for PhysicalDeviceProtectedMemoryFeatures {}
+unsafe impl Sync for PhysicalDeviceProtectedMemoryFeatures {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceProtectedMemoryProperties.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -17245,6 +19231,9 @@ impl Default for PhysicalDeviceProtectedMemoryProperties {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceProtectedMemoryProperties {}
+unsafe impl Sync for PhysicalDeviceProtectedMemoryProperties {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceProvokingVertexFeaturesEXT.html>
 #[repr(C)]
@@ -17268,6 +19257,9 @@ impl Default for PhysicalDeviceProvokingVertexFeaturesEXT {
     }
 }
 
+unsafe impl Send for PhysicalDeviceProvokingVertexFeaturesEXT {}
+unsafe impl Sync for PhysicalDeviceProvokingVertexFeaturesEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceProvokingVertexPropertiesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -17290,6 +19282,9 @@ impl Default for PhysicalDeviceProvokingVertexPropertiesEXT {
     }
 }
 
+unsafe impl Send for PhysicalDeviceProvokingVertexPropertiesEXT {}
+unsafe impl Sync for PhysicalDeviceProvokingVertexPropertiesEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDevicePushDescriptorProperties.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -17309,6 +19304,9 @@ impl Default for PhysicalDevicePushDescriptorProperties {
         }
     }
 }
+
+unsafe impl Send for PhysicalDevicePushDescriptorProperties {}
+unsafe impl Sync for PhysicalDevicePushDescriptorProperties {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceQueueFamilyDataGraphProcessingEngineInfoARM.html>
 #[repr(C)]
@@ -17333,6 +19331,9 @@ impl Default for PhysicalDeviceQueueFamilyDataGraphProcessingEngineInfoARM {
     }
 }
 
+unsafe impl Send for PhysicalDeviceQueueFamilyDataGraphProcessingEngineInfoARM {}
+unsafe impl Sync for PhysicalDeviceQueueFamilyDataGraphProcessingEngineInfoARM {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -17352,6 +19353,9 @@ impl Default for PhysicalDeviceRGBA10X6FormatsFeaturesEXT {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceRGBA10X6FormatsFeaturesEXT {}
+unsafe impl Sync for PhysicalDeviceRGBA10X6FormatsFeaturesEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesEXT.html>
 #[repr(C)]
@@ -17378,6 +19382,9 @@ impl Default for PhysicalDeviceRasterizationOrderAttachmentAccessFeaturesEXT {
     }
 }
 
+unsafe impl Send for PhysicalDeviceRasterizationOrderAttachmentAccessFeaturesEXT {}
+unsafe impl Sync for PhysicalDeviceRasterizationOrderAttachmentAccessFeaturesEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceRawAccessChainsFeaturesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -17397,6 +19404,9 @@ impl Default for PhysicalDeviceRawAccessChainsFeaturesNV {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceRawAccessChainsFeaturesNV {}
+unsafe impl Sync for PhysicalDeviceRawAccessChainsFeaturesNV {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceRayQueryFeaturesKHR.html>
 #[repr(C)]
@@ -17418,6 +19428,9 @@ impl Default for PhysicalDeviceRayQueryFeaturesKHR {
     }
 }
 
+unsafe impl Send for PhysicalDeviceRayQueryFeaturesKHR {}
+unsafe impl Sync for PhysicalDeviceRayQueryFeaturesKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceRayTracingInvocationReorderFeaturesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -17437,6 +19450,9 @@ impl Default for PhysicalDeviceRayTracingInvocationReorderFeaturesNV {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceRayTracingInvocationReorderFeaturesNV {}
+unsafe impl Sync for PhysicalDeviceRayTracingInvocationReorderFeaturesNV {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV.html>
 #[repr(C)]
@@ -17458,6 +19474,9 @@ impl Default for PhysicalDeviceRayTracingInvocationReorderPropertiesNV {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceRayTracingInvocationReorderPropertiesNV {}
+unsafe impl Sync for PhysicalDeviceRayTracingInvocationReorderPropertiesNV {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceRayTracingLinearSweptSpheresFeaturesNV.html>
 #[repr(C)]
@@ -17481,6 +19500,9 @@ impl Default for PhysicalDeviceRayTracingLinearSweptSpheresFeaturesNV {
     }
 }
 
+unsafe impl Send for PhysicalDeviceRayTracingLinearSweptSpheresFeaturesNV {}
+unsafe impl Sync for PhysicalDeviceRayTracingLinearSweptSpheresFeaturesNV {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceRayTracingMaintenance1FeaturesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -17503,6 +19525,9 @@ impl Default for PhysicalDeviceRayTracingMaintenance1FeaturesKHR {
     }
 }
 
+unsafe impl Send for PhysicalDeviceRayTracingMaintenance1FeaturesKHR {}
+unsafe impl Sync for PhysicalDeviceRayTracingMaintenance1FeaturesKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceRayTracingMotionBlurFeaturesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -17524,6 +19549,9 @@ impl Default for PhysicalDeviceRayTracingMotionBlurFeaturesNV {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceRayTracingMotionBlurFeaturesNV {}
+unsafe impl Sync for PhysicalDeviceRayTracingMotionBlurFeaturesNV {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceRayTracingPipelineFeaturesKHR.html>
 #[repr(C)]
@@ -17552,6 +19580,9 @@ impl Default for PhysicalDeviceRayTracingPipelineFeaturesKHR {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceRayTracingPipelineFeaturesKHR {}
+unsafe impl Sync for PhysicalDeviceRayTracingPipelineFeaturesKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceRayTracingPipelinePropertiesKHR.html>
 #[repr(C)]
@@ -17587,6 +19618,9 @@ impl Default for PhysicalDeviceRayTracingPipelinePropertiesKHR {
     }
 }
 
+unsafe impl Send for PhysicalDeviceRayTracingPipelinePropertiesKHR {}
+unsafe impl Sync for PhysicalDeviceRayTracingPipelinePropertiesKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceRayTracingPositionFetchFeaturesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -17606,6 +19640,9 @@ impl Default for PhysicalDeviceRayTracingPositionFetchFeaturesKHR {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceRayTracingPositionFetchFeaturesKHR {}
+unsafe impl Sync for PhysicalDeviceRayTracingPositionFetchFeaturesKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceRayTracingPropertiesNV.html>
 #[repr(C)]
@@ -17641,6 +19678,9 @@ impl Default for PhysicalDeviceRayTracingPropertiesNV {
     }
 }
 
+unsafe impl Send for PhysicalDeviceRayTracingPropertiesNV {}
+unsafe impl Sync for PhysicalDeviceRayTracingPropertiesNV {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceRayTracingValidationFeaturesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -17660,6 +19700,9 @@ impl Default for PhysicalDeviceRayTracingValidationFeaturesNV {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceRayTracingValidationFeaturesNV {}
+unsafe impl Sync for PhysicalDeviceRayTracingValidationFeaturesNV {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceRelaxedLineRasterizationFeaturesIMG.html>
 #[repr(C)]
@@ -17681,6 +19724,9 @@ impl Default for PhysicalDeviceRelaxedLineRasterizationFeaturesIMG {
     }
 }
 
+unsafe impl Send for PhysicalDeviceRelaxedLineRasterizationFeaturesIMG {}
+unsafe impl Sync for PhysicalDeviceRelaxedLineRasterizationFeaturesIMG {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceRenderPassStripedFeaturesARM.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -17700,6 +19746,9 @@ impl Default for PhysicalDeviceRenderPassStripedFeaturesARM {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceRenderPassStripedFeaturesARM {}
+unsafe impl Sync for PhysicalDeviceRenderPassStripedFeaturesARM {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceRenderPassStripedPropertiesARM.html>
 #[repr(C)]
@@ -17723,6 +19772,9 @@ impl Default for PhysicalDeviceRenderPassStripedPropertiesARM {
     }
 }
 
+unsafe impl Send for PhysicalDeviceRenderPassStripedPropertiesARM {}
+unsafe impl Sync for PhysicalDeviceRenderPassStripedPropertiesARM {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -17742,6 +19794,9 @@ impl Default for PhysicalDeviceRepresentativeFragmentTestFeaturesNV {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceRepresentativeFragmentTestFeaturesNV {}
+unsafe impl Sync for PhysicalDeviceRepresentativeFragmentTestFeaturesNV {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceRobustness2FeaturesKHR.html>
 #[repr(C)]
@@ -17767,6 +19822,9 @@ impl Default for PhysicalDeviceRobustness2FeaturesKHR {
     }
 }
 
+unsafe impl Send for PhysicalDeviceRobustness2FeaturesKHR {}
+unsafe impl Sync for PhysicalDeviceRobustness2FeaturesKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceRobustness2PropertiesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -17788,6 +19846,9 @@ impl Default for PhysicalDeviceRobustness2PropertiesKHR {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceRobustness2PropertiesKHR {}
+unsafe impl Sync for PhysicalDeviceRobustness2PropertiesKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceSampleLocationsPropertiesEXT.html>
 #[repr(C)]
@@ -17817,6 +19878,9 @@ impl Default for PhysicalDeviceSampleLocationsPropertiesEXT {
     }
 }
 
+unsafe impl Send for PhysicalDeviceSampleLocationsPropertiesEXT {}
+unsafe impl Sync for PhysicalDeviceSampleLocationsPropertiesEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceSamplerFilterMinmaxProperties.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -17839,6 +19903,9 @@ impl Default for PhysicalDeviceSamplerFilterMinmaxProperties {
     }
 }
 
+unsafe impl Send for PhysicalDeviceSamplerFilterMinmaxProperties {}
+unsafe impl Sync for PhysicalDeviceSamplerFilterMinmaxProperties {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceSamplerYcbcrConversionFeatures.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -17858,6 +19925,9 @@ impl Default for PhysicalDeviceSamplerYcbcrConversionFeatures {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceSamplerYcbcrConversionFeatures {}
+unsafe impl Sync for PhysicalDeviceSamplerYcbcrConversionFeatures {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceScalarBlockLayoutFeatures.html>
 #[repr(C)]
@@ -17879,6 +19949,9 @@ impl Default for PhysicalDeviceScalarBlockLayoutFeatures {
     }
 }
 
+unsafe impl Send for PhysicalDeviceScalarBlockLayoutFeatures {}
+unsafe impl Sync for PhysicalDeviceScalarBlockLayoutFeatures {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceSchedulingControlsFeaturesARM.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -17898,6 +19971,9 @@ impl Default for PhysicalDeviceSchedulingControlsFeaturesARM {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceSchedulingControlsFeaturesARM {}
+unsafe impl Sync for PhysicalDeviceSchedulingControlsFeaturesARM {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceSchedulingControlsPropertiesARM.html>
 #[repr(C)]
@@ -17919,6 +19995,9 @@ impl Default for PhysicalDeviceSchedulingControlsPropertiesARM {
     }
 }
 
+unsafe impl Send for PhysicalDeviceSchedulingControlsPropertiesARM {}
+unsafe impl Sync for PhysicalDeviceSchedulingControlsPropertiesARM {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -17939,6 +20018,9 @@ impl Default for PhysicalDeviceSeparateDepthStencilLayoutsFeatures {
     }
 }
 
+unsafe impl Send for PhysicalDeviceSeparateDepthStencilLayoutsFeatures {}
+unsafe impl Sync for PhysicalDeviceSeparateDepthStencilLayoutsFeatures {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderAtomicFloat16VectorFeaturesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -17958,6 +20040,9 @@ impl Default for PhysicalDeviceShaderAtomicFloat16VectorFeaturesNV {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceShaderAtomicFloat16VectorFeaturesNV {}
+unsafe impl Sync for PhysicalDeviceShaderAtomicFloat16VectorFeaturesNV {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT.html>
 #[repr(C)]
@@ -18001,6 +20086,9 @@ impl Default for PhysicalDeviceShaderAtomicFloat2FeaturesEXT {
     }
 }
 
+unsafe impl Send for PhysicalDeviceShaderAtomicFloat2FeaturesEXT {}
+unsafe impl Sync for PhysicalDeviceShaderAtomicFloat2FeaturesEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderAtomicFloatFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -18043,6 +20131,9 @@ impl Default for PhysicalDeviceShaderAtomicFloatFeaturesEXT {
     }
 }
 
+unsafe impl Send for PhysicalDeviceShaderAtomicFloatFeaturesEXT {}
+unsafe impl Sync for PhysicalDeviceShaderAtomicFloatFeaturesEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderAtomicInt64Features.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -18064,6 +20155,9 @@ impl Default for PhysicalDeviceShaderAtomicInt64Features {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceShaderAtomicInt64Features {}
+unsafe impl Sync for PhysicalDeviceShaderAtomicInt64Features {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderBfloat16FeaturesKHR.html>
 #[repr(C)]
@@ -18089,6 +20183,9 @@ impl Default for PhysicalDeviceShaderBfloat16FeaturesKHR {
     }
 }
 
+unsafe impl Send for PhysicalDeviceShaderBfloat16FeaturesKHR {}
+unsafe impl Sync for PhysicalDeviceShaderBfloat16FeaturesKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderClockFeaturesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -18111,6 +20208,9 @@ impl Default for PhysicalDeviceShaderClockFeaturesKHR {
     }
 }
 
+unsafe impl Send for PhysicalDeviceShaderClockFeaturesKHR {}
+unsafe impl Sync for PhysicalDeviceShaderClockFeaturesKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderCoreBuiltinsFeaturesARM.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -18130,6 +20230,9 @@ impl Default for PhysicalDeviceShaderCoreBuiltinsFeaturesARM {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceShaderCoreBuiltinsFeaturesARM {}
+unsafe impl Sync for PhysicalDeviceShaderCoreBuiltinsFeaturesARM {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderCoreBuiltinsPropertiesARM.html>
 #[repr(C)]
@@ -18155,6 +20258,9 @@ impl Default for PhysicalDeviceShaderCoreBuiltinsPropertiesARM {
     }
 }
 
+unsafe impl Send for PhysicalDeviceShaderCoreBuiltinsPropertiesARM {}
+unsafe impl Sync for PhysicalDeviceShaderCoreBuiltinsPropertiesARM {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderCoreProperties2AMD.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -18176,6 +20282,9 @@ impl Default for PhysicalDeviceShaderCoreProperties2AMD {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceShaderCoreProperties2AMD {}
+unsafe impl Sync for PhysicalDeviceShaderCoreProperties2AMD {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderCorePropertiesAMD.html>
 #[repr(C)]
@@ -18223,6 +20332,9 @@ impl Default for PhysicalDeviceShaderCorePropertiesAMD {
     }
 }
 
+unsafe impl Send for PhysicalDeviceShaderCorePropertiesAMD {}
+unsafe impl Sync for PhysicalDeviceShaderCorePropertiesAMD {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderCorePropertiesARM.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -18247,6 +20359,9 @@ impl Default for PhysicalDeviceShaderCorePropertiesARM {
     }
 }
 
+unsafe impl Send for PhysicalDeviceShaderCorePropertiesARM {}
+unsafe impl Sync for PhysicalDeviceShaderCorePropertiesARM {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderDemoteToHelperInvocationFeatures.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -18267,6 +20382,9 @@ impl Default for PhysicalDeviceShaderDemoteToHelperInvocationFeatures {
     }
 }
 
+unsafe impl Send for PhysicalDeviceShaderDemoteToHelperInvocationFeatures {}
+unsafe impl Sync for PhysicalDeviceShaderDemoteToHelperInvocationFeatures {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderDrawParametersFeatures.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -18286,6 +20404,9 @@ impl Default for PhysicalDeviceShaderDrawParametersFeatures {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceShaderDrawParametersFeatures {}
+unsafe impl Sync for PhysicalDeviceShaderDrawParametersFeatures {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD.html>
 #[repr(C)]
@@ -18308,6 +20429,9 @@ impl Default for PhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD {
     }
 }
 
+unsafe impl Send for PhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD {}
+unsafe impl Sync for PhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderEnqueueFeaturesAMDX.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -18329,6 +20453,9 @@ impl Default for PhysicalDeviceShaderEnqueueFeaturesAMDX {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceShaderEnqueueFeaturesAMDX {}
+unsafe impl Sync for PhysicalDeviceShaderEnqueueFeaturesAMDX {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderEnqueuePropertiesAMDX.html>
 #[repr(C)]
@@ -18362,6 +20489,9 @@ impl Default for PhysicalDeviceShaderEnqueuePropertiesAMDX {
     }
 }
 
+unsafe impl Send for PhysicalDeviceShaderEnqueuePropertiesAMDX {}
+unsafe impl Sync for PhysicalDeviceShaderEnqueuePropertiesAMDX {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderExpectAssumeFeatures.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -18381,6 +20511,9 @@ impl Default for PhysicalDeviceShaderExpectAssumeFeatures {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceShaderExpectAssumeFeatures {}
+unsafe impl Sync for PhysicalDeviceShaderExpectAssumeFeatures {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderFloat16Int8Features.html>
 #[repr(C)]
@@ -18404,6 +20537,9 @@ impl Default for PhysicalDeviceShaderFloat16Int8Features {
     }
 }
 
+unsafe impl Send for PhysicalDeviceShaderFloat16Int8Features {}
+unsafe impl Sync for PhysicalDeviceShaderFloat16Int8Features {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderFloat8FeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -18426,6 +20562,9 @@ impl Default for PhysicalDeviceShaderFloat8FeaturesEXT {
     }
 }
 
+unsafe impl Send for PhysicalDeviceShaderFloat8FeaturesEXT {}
+unsafe impl Sync for PhysicalDeviceShaderFloat8FeaturesEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderFloatControls2Features.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -18445,6 +20584,9 @@ impl Default for PhysicalDeviceShaderFloatControls2Features {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceShaderFloatControls2Features {}
+unsafe impl Sync for PhysicalDeviceShaderFloatControls2Features {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT.html>
 #[repr(C)]
@@ -18468,6 +20610,9 @@ impl Default for PhysicalDeviceShaderImageAtomicInt64FeaturesEXT {
     }
 }
 
+unsafe impl Send for PhysicalDeviceShaderImageAtomicInt64FeaturesEXT {}
+unsafe impl Sync for PhysicalDeviceShaderImageAtomicInt64FeaturesEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderImageFootprintFeaturesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -18488,6 +20633,9 @@ impl Default for PhysicalDeviceShaderImageFootprintFeaturesNV {
     }
 }
 
+unsafe impl Send for PhysicalDeviceShaderImageFootprintFeaturesNV {}
+unsafe impl Sync for PhysicalDeviceShaderImageFootprintFeaturesNV {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderIntegerDotProductFeatures.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -18507,6 +20655,9 @@ impl Default for PhysicalDeviceShaderIntegerDotProductFeatures {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceShaderIntegerDotProductFeatures {}
+unsafe impl Sync for PhysicalDeviceShaderIntegerDotProductFeatures {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderIntegerDotProductProperties.html>
 #[repr(C)]
@@ -18554,6 +20705,9 @@ impl Default for PhysicalDeviceShaderIntegerDotProductProperties {
     }
 }
 
+unsafe impl Send for PhysicalDeviceShaderIntegerDotProductProperties {}
+unsafe impl Sync for PhysicalDeviceShaderIntegerDotProductProperties {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -18573,6 +20727,9 @@ impl Default for PhysicalDeviceShaderIntegerFunctions2FeaturesINTEL {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceShaderIntegerFunctions2FeaturesINTEL {}
+unsafe impl Sync for PhysicalDeviceShaderIntegerFunctions2FeaturesINTEL {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderMaximalReconvergenceFeaturesKHR.html>
 #[repr(C)]
@@ -18594,6 +20751,9 @@ impl Default for PhysicalDeviceShaderMaximalReconvergenceFeaturesKHR {
     }
 }
 
+unsafe impl Send for PhysicalDeviceShaderMaximalReconvergenceFeaturesKHR {}
+unsafe impl Sync for PhysicalDeviceShaderMaximalReconvergenceFeaturesKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -18613,6 +20773,9 @@ impl Default for PhysicalDeviceShaderModuleIdentifierFeaturesEXT {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceShaderModuleIdentifierFeaturesEXT {}
+unsafe impl Sync for PhysicalDeviceShaderModuleIdentifierFeaturesEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderModuleIdentifierPropertiesEXT.html>
 #[repr(C)]
@@ -18634,6 +20797,9 @@ impl Default for PhysicalDeviceShaderModuleIdentifierPropertiesEXT {
     }
 }
 
+unsafe impl Send for PhysicalDeviceShaderModuleIdentifierPropertiesEXT {}
+unsafe impl Sync for PhysicalDeviceShaderModuleIdentifierPropertiesEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderObjectFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -18653,6 +20819,9 @@ impl Default for PhysicalDeviceShaderObjectFeaturesEXT {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceShaderObjectFeaturesEXT {}
+unsafe impl Sync for PhysicalDeviceShaderObjectFeaturesEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderObjectPropertiesEXT.html>
 #[repr(C)]
@@ -18676,6 +20845,9 @@ impl Default for PhysicalDeviceShaderObjectPropertiesEXT {
     }
 }
 
+unsafe impl Send for PhysicalDeviceShaderObjectPropertiesEXT {}
+unsafe impl Sync for PhysicalDeviceShaderObjectPropertiesEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderQuadControlFeaturesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -18695,6 +20867,9 @@ impl Default for PhysicalDeviceShaderQuadControlFeaturesKHR {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceShaderQuadControlFeaturesKHR {}
+unsafe impl Sync for PhysicalDeviceShaderQuadControlFeaturesKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHR.html>
 #[repr(C)]
@@ -18716,6 +20891,9 @@ impl Default for PhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHR {
     }
 }
 
+unsafe impl Send for PhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHR {}
+unsafe impl Sync for PhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderReplicatedCompositesFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -18736,6 +20914,9 @@ impl Default for PhysicalDeviceShaderReplicatedCompositesFeaturesEXT {
     }
 }
 
+unsafe impl Send for PhysicalDeviceShaderReplicatedCompositesFeaturesEXT {}
+unsafe impl Sync for PhysicalDeviceShaderReplicatedCompositesFeaturesEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderSMBuiltinsFeaturesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -18755,6 +20936,9 @@ impl Default for PhysicalDeviceShaderSMBuiltinsFeaturesNV {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceShaderSMBuiltinsFeaturesNV {}
+unsafe impl Sync for PhysicalDeviceShaderSMBuiltinsFeaturesNV {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderSMBuiltinsPropertiesNV.html>
 #[repr(C)]
@@ -18778,6 +20962,9 @@ impl Default for PhysicalDeviceShaderSMBuiltinsPropertiesNV {
     }
 }
 
+unsafe impl Send for PhysicalDeviceShaderSMBuiltinsPropertiesNV {}
+unsafe impl Sync for PhysicalDeviceShaderSMBuiltinsPropertiesNV {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -18797,6 +20984,9 @@ impl Default for PhysicalDeviceShaderSubgroupExtendedTypesFeatures {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceShaderSubgroupExtendedTypesFeatures {}
+unsafe impl Sync for PhysicalDeviceShaderSubgroupExtendedTypesFeatures {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderSubgroupRotateFeatures.html>
 #[repr(C)]
@@ -18820,6 +21010,9 @@ impl Default for PhysicalDeviceShaderSubgroupRotateFeatures {
     }
 }
 
+unsafe impl Send for PhysicalDeviceShaderSubgroupRotateFeatures {}
+unsafe impl Sync for PhysicalDeviceShaderSubgroupRotateFeatures {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -18841,6 +21034,9 @@ impl Default for PhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR {
     }
 }
 
+unsafe impl Send for PhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR {}
+unsafe impl Sync for PhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderTerminateInvocationFeatures.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -18860,6 +21056,9 @@ impl Default for PhysicalDeviceShaderTerminateInvocationFeatures {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceShaderTerminateInvocationFeatures {}
+unsafe impl Sync for PhysicalDeviceShaderTerminateInvocationFeatures {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderTileImageFeaturesEXT.html>
 #[repr(C)]
@@ -18885,6 +21084,9 @@ impl Default for PhysicalDeviceShaderTileImageFeaturesEXT {
     }
 }
 
+unsafe impl Send for PhysicalDeviceShaderTileImageFeaturesEXT {}
+unsafe impl Sync for PhysicalDeviceShaderTileImageFeaturesEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderTileImagePropertiesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -18909,6 +21111,9 @@ impl Default for PhysicalDeviceShaderTileImagePropertiesEXT {
     }
 }
 
+unsafe impl Send for PhysicalDeviceShaderTileImagePropertiesEXT {}
+unsafe impl Sync for PhysicalDeviceShaderTileImagePropertiesEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderUntypedPointersFeaturesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -18928,6 +21133,9 @@ impl Default for PhysicalDeviceShaderUntypedPointersFeaturesKHR {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceShaderUntypedPointersFeaturesKHR {}
+unsafe impl Sync for PhysicalDeviceShaderUntypedPointersFeaturesKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShadingRateImageFeaturesNV.html>
 #[repr(C)]
@@ -18950,6 +21158,9 @@ impl Default for PhysicalDeviceShadingRateImageFeaturesNV {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceShadingRateImageFeaturesNV {}
+unsafe impl Sync for PhysicalDeviceShadingRateImageFeaturesNV {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShadingRateImagePropertiesNV.html>
 #[repr(C)]
@@ -18974,6 +21185,9 @@ impl Default for PhysicalDeviceShadingRateImagePropertiesNV {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceShadingRateImagePropertiesNV {}
+unsafe impl Sync for PhysicalDeviceShadingRateImagePropertiesNV {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceSparseImageFormatInfo2.html>
 #[repr(C)]
@@ -19002,6 +21216,9 @@ impl Default for PhysicalDeviceSparseImageFormatInfo2 {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceSparseImageFormatInfo2 {}
+unsafe impl Sync for PhysicalDeviceSparseImageFormatInfo2 {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceSparseProperties.html>
 #[repr(C)]
@@ -19040,6 +21257,9 @@ impl Default for PhysicalDeviceSubgroupProperties {
     }
 }
 
+unsafe impl Send for PhysicalDeviceSubgroupProperties {}
+unsafe impl Sync for PhysicalDeviceSubgroupProperties {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceSubgroupSizeControlFeatures.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -19061,6 +21281,9 @@ impl Default for PhysicalDeviceSubgroupSizeControlFeatures {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceSubgroupSizeControlFeatures {}
+unsafe impl Sync for PhysicalDeviceSubgroupSizeControlFeatures {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceSubgroupSizeControlProperties.html>
 #[repr(C)]
@@ -19088,6 +21311,9 @@ impl Default for PhysicalDeviceSubgroupSizeControlProperties {
     }
 }
 
+unsafe impl Send for PhysicalDeviceSubgroupSizeControlProperties {}
+unsafe impl Sync for PhysicalDeviceSubgroupSizeControlProperties {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -19107,6 +21333,9 @@ impl Default for PhysicalDeviceSubpassMergeFeedbackFeaturesEXT {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceSubpassMergeFeedbackFeaturesEXT {}
+unsafe impl Sync for PhysicalDeviceSubpassMergeFeedbackFeaturesEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceSubpassShadingFeaturesHUAWEI.html>
 #[repr(C)]
@@ -19128,6 +21357,9 @@ impl Default for PhysicalDeviceSubpassShadingFeaturesHUAWEI {
     }
 }
 
+unsafe impl Send for PhysicalDeviceSubpassShadingFeaturesHUAWEI {}
+unsafe impl Sync for PhysicalDeviceSubpassShadingFeaturesHUAWEI {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceSubpassShadingPropertiesHUAWEI.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -19147,6 +21379,9 @@ impl Default for PhysicalDeviceSubpassShadingPropertiesHUAWEI {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceSubpassShadingPropertiesHUAWEI {}
+unsafe impl Sync for PhysicalDeviceSubpassShadingPropertiesHUAWEI {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceSurfaceInfo2KHR.html>
 #[repr(C)]
@@ -19168,6 +21403,9 @@ impl Default for PhysicalDeviceSurfaceInfo2KHR {
     }
 }
 
+unsafe impl Send for PhysicalDeviceSurfaceInfo2KHR {}
+unsafe impl Sync for PhysicalDeviceSurfaceInfo2KHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceSwapchainMaintenance1FeaturesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -19188,6 +21426,9 @@ impl Default for PhysicalDeviceSwapchainMaintenance1FeaturesKHR {
     }
 }
 
+unsafe impl Send for PhysicalDeviceSwapchainMaintenance1FeaturesKHR {}
+unsafe impl Sync for PhysicalDeviceSwapchainMaintenance1FeaturesKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceSynchronization2Features.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -19207,6 +21448,9 @@ impl Default for PhysicalDeviceSynchronization2Features {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceSynchronization2Features {}
+unsafe impl Sync for PhysicalDeviceSynchronization2Features {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceTensorFeaturesARM.html>
 #[repr(C)]
@@ -19237,6 +21481,9 @@ impl Default for PhysicalDeviceTensorFeaturesARM {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceTensorFeaturesARM {}
+unsafe impl Sync for PhysicalDeviceTensorFeaturesARM {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceTensorPropertiesARM.html>
 #[repr(C)]
@@ -19282,6 +21529,9 @@ impl Default for PhysicalDeviceTensorPropertiesARM {
     }
 }
 
+unsafe impl Send for PhysicalDeviceTensorPropertiesARM {}
+unsafe impl Sync for PhysicalDeviceTensorPropertiesARM {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -19301,6 +21551,9 @@ impl Default for PhysicalDeviceTexelBufferAlignmentFeaturesEXT {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceTexelBufferAlignmentFeaturesEXT {}
+unsafe impl Sync for PhysicalDeviceTexelBufferAlignmentFeaturesEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceTexelBufferAlignmentProperties.html>
 #[repr(C)]
@@ -19328,6 +21581,9 @@ impl Default for PhysicalDeviceTexelBufferAlignmentProperties {
     }
 }
 
+unsafe impl Send for PhysicalDeviceTexelBufferAlignmentProperties {}
+unsafe impl Sync for PhysicalDeviceTexelBufferAlignmentProperties {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceTextureCompressionASTCHDRFeatures.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -19348,6 +21604,9 @@ impl Default for PhysicalDeviceTextureCompressionASTCHDRFeatures {
     }
 }
 
+unsafe impl Send for PhysicalDeviceTextureCompressionASTCHDRFeatures {}
+unsafe impl Sync for PhysicalDeviceTextureCompressionASTCHDRFeatures {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceTileMemoryHeapFeaturesQCOM.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -19367,6 +21626,9 @@ impl Default for PhysicalDeviceTileMemoryHeapFeaturesQCOM {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceTileMemoryHeapFeaturesQCOM {}
+unsafe impl Sync for PhysicalDeviceTileMemoryHeapFeaturesQCOM {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceTileMemoryHeapPropertiesQCOM.html>
 #[repr(C)]
@@ -19390,6 +21652,9 @@ impl Default for PhysicalDeviceTileMemoryHeapPropertiesQCOM {
     }
 }
 
+unsafe impl Send for PhysicalDeviceTileMemoryHeapPropertiesQCOM {}
+unsafe impl Sync for PhysicalDeviceTileMemoryHeapPropertiesQCOM {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceTilePropertiesFeaturesQCOM.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -19409,6 +21674,9 @@ impl Default for PhysicalDeviceTilePropertiesFeaturesQCOM {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceTilePropertiesFeaturesQCOM {}
+unsafe impl Sync for PhysicalDeviceTilePropertiesFeaturesQCOM {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceTileShadingFeaturesQCOM.html>
 #[repr(C)]
@@ -19456,6 +21724,9 @@ impl Default for PhysicalDeviceTileShadingFeaturesQCOM {
     }
 }
 
+unsafe impl Send for PhysicalDeviceTileShadingFeaturesQCOM {}
+unsafe impl Sync for PhysicalDeviceTileShadingFeaturesQCOM {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceTileShadingPropertiesQCOM.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -19482,6 +21753,9 @@ impl Default for PhysicalDeviceTileShadingPropertiesQCOM {
     }
 }
 
+unsafe impl Send for PhysicalDeviceTileShadingPropertiesQCOM {}
+unsafe impl Sync for PhysicalDeviceTileShadingPropertiesQCOM {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceTimelineSemaphoreFeatures.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -19502,6 +21776,9 @@ impl Default for PhysicalDeviceTimelineSemaphoreFeatures {
     }
 }
 
+unsafe impl Send for PhysicalDeviceTimelineSemaphoreFeatures {}
+unsafe impl Sync for PhysicalDeviceTimelineSemaphoreFeatures {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceTimelineSemaphoreProperties.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -19521,6 +21798,9 @@ impl Default for PhysicalDeviceTimelineSemaphoreProperties {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceTimelineSemaphoreProperties {}
+unsafe impl Sync for PhysicalDeviceTimelineSemaphoreProperties {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceToolProperties.html>
 #[repr(C)]
@@ -19550,6 +21830,9 @@ impl Default for PhysicalDeviceToolProperties {
     }
 }
 
+unsafe impl Send for PhysicalDeviceToolProperties {}
+unsafe impl Sync for PhysicalDeviceToolProperties {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceTransformFeedbackFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -19571,6 +21854,9 @@ impl Default for PhysicalDeviceTransformFeedbackFeaturesEXT {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceTransformFeedbackFeaturesEXT {}
+unsafe impl Sync for PhysicalDeviceTransformFeedbackFeaturesEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceTransformFeedbackPropertiesEXT.html>
 #[repr(C)]
@@ -19610,6 +21896,9 @@ impl Default for PhysicalDeviceTransformFeedbackPropertiesEXT {
     }
 }
 
+unsafe impl Send for PhysicalDeviceTransformFeedbackPropertiesEXT {}
+unsafe impl Sync for PhysicalDeviceTransformFeedbackPropertiesEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceUnifiedImageLayoutsFeaturesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -19632,6 +21921,9 @@ impl Default for PhysicalDeviceUnifiedImageLayoutsFeaturesKHR {
     }
 }
 
+unsafe impl Send for PhysicalDeviceUnifiedImageLayoutsFeaturesKHR {}
+unsafe impl Sync for PhysicalDeviceUnifiedImageLayoutsFeaturesKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceUniformBufferStandardLayoutFeatures.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -19651,6 +21943,9 @@ impl Default for PhysicalDeviceUniformBufferStandardLayoutFeatures {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceUniformBufferStandardLayoutFeatures {}
+unsafe impl Sync for PhysicalDeviceUniformBufferStandardLayoutFeatures {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceVariablePointersFeatures.html>
 #[repr(C)]
@@ -19674,6 +21969,9 @@ impl Default for PhysicalDeviceVariablePointersFeatures {
     }
 }
 
+unsafe impl Send for PhysicalDeviceVariablePointersFeatures {}
+unsafe impl Sync for PhysicalDeviceVariablePointersFeatures {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceVertexAttributeDivisorFeatures.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -19695,6 +21993,9 @@ impl Default for PhysicalDeviceVertexAttributeDivisorFeatures {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceVertexAttributeDivisorFeatures {}
+unsafe impl Sync for PhysicalDeviceVertexAttributeDivisorFeatures {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceVertexAttributeDivisorProperties.html>
 #[repr(C)]
@@ -19718,6 +22019,9 @@ impl Default for PhysicalDeviceVertexAttributeDivisorProperties {
     }
 }
 
+unsafe impl Send for PhysicalDeviceVertexAttributeDivisorProperties {}
+unsafe impl Sync for PhysicalDeviceVertexAttributeDivisorProperties {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -19737,6 +22041,9 @@ impl Default for PhysicalDeviceVertexAttributeDivisorPropertiesEXT {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceVertexAttributeDivisorPropertiesEXT {}
+unsafe impl Sync for PhysicalDeviceVertexAttributeDivisorPropertiesEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceVertexAttributeRobustnessFeaturesEXT.html>
 #[repr(C)]
@@ -19758,6 +22065,9 @@ impl Default for PhysicalDeviceVertexAttributeRobustnessFeaturesEXT {
     }
 }
 
+unsafe impl Send for PhysicalDeviceVertexAttributeRobustnessFeaturesEXT {}
+unsafe impl Sync for PhysicalDeviceVertexAttributeRobustnessFeaturesEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -19777,6 +22087,9 @@ impl Default for PhysicalDeviceVertexInputDynamicStateFeaturesEXT {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceVertexInputDynamicStateFeaturesEXT {}
+unsafe impl Sync for PhysicalDeviceVertexInputDynamicStateFeaturesEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceVideoDecodeVP9FeaturesKHR.html>
 #[repr(C)]
@@ -19798,6 +22111,9 @@ impl Default for PhysicalDeviceVideoDecodeVP9FeaturesKHR {
     }
 }
 
+unsafe impl Send for PhysicalDeviceVideoDecodeVP9FeaturesKHR {}
+unsafe impl Sync for PhysicalDeviceVideoDecodeVP9FeaturesKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceVideoEncodeAV1FeaturesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -19818,6 +22134,9 @@ impl Default for PhysicalDeviceVideoEncodeAV1FeaturesKHR {
     }
 }
 
+unsafe impl Send for PhysicalDeviceVideoEncodeAV1FeaturesKHR {}
+unsafe impl Sync for PhysicalDeviceVideoEncodeAV1FeaturesKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceVideoEncodeIntraRefreshFeaturesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -19837,6 +22156,9 @@ impl Default for PhysicalDeviceVideoEncodeIntraRefreshFeaturesKHR {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceVideoEncodeIntraRefreshFeaturesKHR {}
+unsafe impl Sync for PhysicalDeviceVideoEncodeIntraRefreshFeaturesKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR.html>
 #[repr(C)]
@@ -19860,6 +22182,9 @@ impl Default for PhysicalDeviceVideoEncodeQualityLevelInfoKHR {
     }
 }
 
+unsafe impl Send for PhysicalDeviceVideoEncodeQualityLevelInfoKHR {}
+unsafe impl Sync for PhysicalDeviceVideoEncodeQualityLevelInfoKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceVideoEncodeQuantizationMapFeaturesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -19879,6 +22204,9 @@ impl Default for PhysicalDeviceVideoEncodeQuantizationMapFeaturesKHR {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceVideoEncodeQuantizationMapFeaturesKHR {}
+unsafe impl Sync for PhysicalDeviceVideoEncodeQuantizationMapFeaturesKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceVideoEncodeRgbConversionFeaturesVALVE.html>
 #[repr(C)]
@@ -19900,6 +22228,9 @@ impl Default for PhysicalDeviceVideoEncodeRgbConversionFeaturesVALVE {
     }
 }
 
+unsafe impl Send for PhysicalDeviceVideoEncodeRgbConversionFeaturesVALVE {}
+unsafe impl Sync for PhysicalDeviceVideoEncodeRgbConversionFeaturesVALVE {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceVideoFormatInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -19919,6 +22250,9 @@ impl Default for PhysicalDeviceVideoFormatInfoKHR {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceVideoFormatInfoKHR {}
+unsafe impl Sync for PhysicalDeviceVideoFormatInfoKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceVideoMaintenance1FeaturesKHR.html>
 #[repr(C)]
@@ -19940,6 +22274,9 @@ impl Default for PhysicalDeviceVideoMaintenance1FeaturesKHR {
     }
 }
 
+unsafe impl Send for PhysicalDeviceVideoMaintenance1FeaturesKHR {}
+unsafe impl Sync for PhysicalDeviceVideoMaintenance1FeaturesKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceVideoMaintenance2FeaturesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -19959,6 +22296,9 @@ impl Default for PhysicalDeviceVideoMaintenance2FeaturesKHR {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceVideoMaintenance2FeaturesKHR {}
+unsafe impl Sync for PhysicalDeviceVideoMaintenance2FeaturesKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceVulkan11Features.html>
 #[repr(C)]
@@ -20001,6 +22341,9 @@ impl Default for PhysicalDeviceVulkan11Features {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceVulkan11Features {}
+unsafe impl Sync for PhysicalDeviceVulkan11Features {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceVulkan11Properties.html>
 #[repr(C)]
@@ -20049,6 +22392,9 @@ impl Default for PhysicalDeviceVulkan11Properties {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceVulkan11Properties {}
+unsafe impl Sync for PhysicalDeviceVulkan11Properties {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceVulkan12Features.html>
 #[repr(C)]
@@ -20161,6 +22507,9 @@ impl Default for PhysicalDeviceVulkan12Features {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceVulkan12Features {}
+unsafe impl Sync for PhysicalDeviceVulkan12Features {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceVulkan12Properties.html>
 #[repr(C)]
@@ -20284,6 +22633,9 @@ impl Default for PhysicalDeviceVulkan12Properties {
     }
 }
 
+unsafe impl Send for PhysicalDeviceVulkan12Properties {}
+unsafe impl Sync for PhysicalDeviceVulkan12Properties {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceVulkan13Features.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -20331,6 +22683,9 @@ impl Default for PhysicalDeviceVulkan13Features {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceVulkan13Features {}
+unsafe impl Sync for PhysicalDeviceVulkan13Features {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceVulkan13Properties.html>
 #[repr(C)]
@@ -20393,6 +22748,9 @@ impl Default for PhysicalDeviceVulkan13Properties {
     }
 }
 
+unsafe impl Send for PhysicalDeviceVulkan13Properties {}
+unsafe impl Sync for PhysicalDeviceVulkan13Properties {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceVulkan14Features.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -20452,6 +22810,9 @@ impl Default for PhysicalDeviceVulkan14Features {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceVulkan14Features {}
+unsafe impl Sync for PhysicalDeviceVulkan14Features {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceVulkan14Properties.html>
 #[repr(C)]
@@ -20521,6 +22882,9 @@ impl Default for PhysicalDeviceVulkan14Properties {
     }
 }
 
+unsafe impl Send for PhysicalDeviceVulkan14Properties {}
+unsafe impl Sync for PhysicalDeviceVulkan14Properties {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceVulkanMemoryModelFeatures.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -20544,6 +22908,9 @@ impl Default for PhysicalDeviceVulkanMemoryModelFeatures {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceVulkanMemoryModelFeatures {}
+unsafe impl Sync for PhysicalDeviceVulkanMemoryModelFeatures {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR.html>
 #[repr(C)]
@@ -20571,6 +22938,9 @@ impl Default for PhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR {
     }
 }
 
+unsafe impl Send for PhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR {}
+unsafe impl Sync for PhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -20590,6 +22960,9 @@ impl Default for PhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT {}
+unsafe impl Sync for PhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceYcbcrDegammaFeaturesQCOM.html>
 #[repr(C)]
@@ -20611,6 +22984,9 @@ impl Default for PhysicalDeviceYcbcrDegammaFeaturesQCOM {
     }
 }
 
+unsafe impl Send for PhysicalDeviceYcbcrDegammaFeaturesQCOM {}
+unsafe impl Sync for PhysicalDeviceYcbcrDegammaFeaturesQCOM {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceYcbcrImageArraysFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -20630,6 +23006,9 @@ impl Default for PhysicalDeviceYcbcrImageArraysFeaturesEXT {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceYcbcrImageArraysFeaturesEXT {}
+unsafe impl Sync for PhysicalDeviceYcbcrImageArraysFeaturesEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceZeroInitializeDeviceMemoryFeaturesEXT.html>
 #[repr(C)]
@@ -20651,6 +23030,9 @@ impl Default for PhysicalDeviceZeroInitializeDeviceMemoryFeaturesEXT {
     }
 }
 
+unsafe impl Send for PhysicalDeviceZeroInitializeDeviceMemoryFeaturesEXT {}
+unsafe impl Sync for PhysicalDeviceZeroInitializeDeviceMemoryFeaturesEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeatures.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -20670,6 +23052,9 @@ impl Default for PhysicalDeviceZeroInitializeWorkgroupMemoryFeatures {
         }
     }
 }
+
+unsafe impl Send for PhysicalDeviceZeroInitializeWorkgroupMemoryFeatures {}
+unsafe impl Sync for PhysicalDeviceZeroInitializeWorkgroupMemoryFeatures {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineBinaryCreateInfoKHR.html>
 #[repr(C)]
@@ -20695,6 +23080,9 @@ impl Default for PipelineBinaryCreateInfoKHR {
     }
 }
 
+unsafe impl Send for PipelineBinaryCreateInfoKHR {}
+unsafe impl Sync for PipelineBinaryCreateInfoKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineBinaryDataInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -20715,6 +23103,9 @@ impl Default for PipelineBinaryDataInfoKHR {
     }
 }
 
+unsafe impl Send for PipelineBinaryDataInfoKHR {}
+unsafe impl Sync for PipelineBinaryDataInfoKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineBinaryDataKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -20732,6 +23123,9 @@ impl Default for PipelineBinaryDataKHR {
         }
     }
 }
+
+unsafe impl Send for PipelineBinaryDataKHR {}
+unsafe impl Sync for PipelineBinaryDataKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineBinaryHandlesInfoKHR.html>
 #[repr(C)]
@@ -20755,6 +23149,9 @@ impl Default for PipelineBinaryHandlesInfoKHR {
     }
 }
 
+unsafe impl Send for PipelineBinaryHandlesInfoKHR {}
+unsafe impl Sync for PipelineBinaryHandlesInfoKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineBinaryInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -20776,6 +23173,9 @@ impl Default for PipelineBinaryInfoKHR {
         }
     }
 }
+
+unsafe impl Send for PipelineBinaryInfoKHR {}
+unsafe impl Sync for PipelineBinaryInfoKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineBinaryKeyKHR.html>
 #[repr(C)]
@@ -20799,6 +23199,9 @@ impl Default for PipelineBinaryKeyKHR {
     }
 }
 
+unsafe impl Send for PipelineBinaryKeyKHR {}
+unsafe impl Sync for PipelineBinaryKeyKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineBinaryKeysAndDataKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -20818,6 +23221,9 @@ impl Default for PipelineBinaryKeysAndDataKHR {
         }
     }
 }
+
+unsafe impl Send for PipelineBinaryKeysAndDataKHR {}
+unsafe impl Sync for PipelineBinaryKeysAndDataKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineCacheCreateInfo.html>
 #[repr(C)]
@@ -20842,6 +23248,9 @@ impl Default for PipelineCacheCreateInfo {
         }
     }
 }
+
+unsafe impl Send for PipelineCacheCreateInfo {}
+unsafe impl Sync for PipelineCacheCreateInfo {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineCacheHeaderVersionOne.html>
 #[repr(C)]
@@ -20877,6 +23286,9 @@ impl Default for PipelineColorBlendAdvancedStateCreateInfoEXT {
         }
     }
 }
+
+unsafe impl Send for PipelineColorBlendAdvancedStateCreateInfoEXT {}
+unsafe impl Sync for PipelineColorBlendAdvancedStateCreateInfoEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineColorBlendAttachmentState.html>
 #[repr(C)]
@@ -20922,6 +23334,9 @@ impl Default for PipelineColorBlendStateCreateInfo {
     }
 }
 
+unsafe impl Send for PipelineColorBlendStateCreateInfo {}
+unsafe impl Sync for PipelineColorBlendStateCreateInfo {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineColorWriteCreateInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -20944,6 +23359,9 @@ impl Default for PipelineColorWriteCreateInfoEXT {
     }
 }
 
+unsafe impl Send for PipelineColorWriteCreateInfoEXT {}
+unsafe impl Sync for PipelineColorWriteCreateInfoEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineCompilerControlCreateInfoAMD.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -20963,6 +23381,9 @@ impl Default for PipelineCompilerControlCreateInfoAMD {
         }
     }
 }
+
+unsafe impl Send for PipelineCompilerControlCreateInfoAMD {}
+unsafe impl Sync for PipelineCompilerControlCreateInfoAMD {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineCoverageModulationStateCreateInfoNV.html>
 #[repr(C)]
@@ -20992,6 +23413,9 @@ impl Default for PipelineCoverageModulationStateCreateInfoNV {
     }
 }
 
+unsafe impl Send for PipelineCoverageModulationStateCreateInfoNV {}
+unsafe impl Sync for PipelineCoverageModulationStateCreateInfoNV {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineCoverageReductionStateCreateInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -21013,6 +23437,9 @@ impl Default for PipelineCoverageReductionStateCreateInfoNV {
         }
     }
 }
+
+unsafe impl Send for PipelineCoverageReductionStateCreateInfoNV {}
+unsafe impl Sync for PipelineCoverageReductionStateCreateInfoNV {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineCoverageToColorStateCreateInfoNV.html>
 #[repr(C)]
@@ -21038,6 +23465,9 @@ impl Default for PipelineCoverageToColorStateCreateInfoNV {
     }
 }
 
+unsafe impl Send for PipelineCoverageToColorStateCreateInfoNV {}
+unsafe impl Sync for PipelineCoverageToColorStateCreateInfoNV {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineCreateFlags2CreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -21058,6 +23488,9 @@ impl Default for PipelineCreateFlags2CreateInfo {
     }
 }
 
+unsafe impl Send for PipelineCreateFlags2CreateInfo {}
+unsafe impl Sync for PipelineCreateFlags2CreateInfo {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineCreateInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -21075,6 +23508,9 @@ impl Default for PipelineCreateInfoKHR {
         }
     }
 }
+
+unsafe impl Send for PipelineCreateInfoKHR {}
+unsafe impl Sync for PipelineCreateInfoKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineCreationFeedback.html>
 #[repr(C)]
@@ -21107,6 +23543,9 @@ impl Default for PipelineCreationFeedbackCreateInfo {
         }
     }
 }
+
+unsafe impl Send for PipelineCreationFeedbackCreateInfo {}
+unsafe impl Sync for PipelineCreationFeedbackCreateInfo {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineDepthStencilStateCreateInfo.html>
 #[repr(C)]
@@ -21146,6 +23585,9 @@ impl Default for PipelineDepthStencilStateCreateInfo {
     }
 }
 
+unsafe impl Send for PipelineDepthStencilStateCreateInfo {}
+unsafe impl Sync for PipelineDepthStencilStateCreateInfo {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineDiscardRectangleStateCreateInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -21172,6 +23614,9 @@ impl Default for PipelineDiscardRectangleStateCreateInfoEXT {
     }
 }
 
+unsafe impl Send for PipelineDiscardRectangleStateCreateInfoEXT {}
+unsafe impl Sync for PipelineDiscardRectangleStateCreateInfoEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineDynamicStateCreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -21196,6 +23641,9 @@ impl Default for PipelineDynamicStateCreateInfo {
     }
 }
 
+unsafe impl Send for PipelineDynamicStateCreateInfo {}
+unsafe impl Sync for PipelineDynamicStateCreateInfo {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineExecutableInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -21217,6 +23665,9 @@ impl Default for PipelineExecutableInfoKHR {
         }
     }
 }
+
+unsafe impl Send for PipelineExecutableInfoKHR {}
+unsafe impl Sync for PipelineExecutableInfoKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineExecutableInternalRepresentationKHR.html>
 #[repr(C)]
@@ -21246,6 +23697,9 @@ impl Default for PipelineExecutableInternalRepresentationKHR {
     }
 }
 
+unsafe impl Send for PipelineExecutableInternalRepresentationKHR {}
+unsafe impl Sync for PipelineExecutableInternalRepresentationKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineExecutablePropertiesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -21271,6 +23725,9 @@ impl Default for PipelineExecutablePropertiesKHR {
         }
     }
 }
+
+unsafe impl Send for PipelineExecutablePropertiesKHR {}
+unsafe impl Sync for PipelineExecutablePropertiesKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineExecutableStatisticKHR.html>
 #[repr(C)]
@@ -21298,6 +23755,9 @@ impl Default for PipelineExecutableStatisticKHR {
     }
 }
 
+unsafe impl Send for PipelineExecutableStatisticKHR {}
+unsafe impl Sync for PipelineExecutableStatisticKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineFragmentDensityMapLayeredCreateInfoVALVE.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -21317,6 +23777,9 @@ impl Default for PipelineFragmentDensityMapLayeredCreateInfoVALVE {
         }
     }
 }
+
+unsafe impl Send for PipelineFragmentDensityMapLayeredCreateInfoVALVE {}
+unsafe impl Sync for PipelineFragmentDensityMapLayeredCreateInfoVALVE {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineFragmentShadingRateEnumStateCreateInfoNV.html>
 #[repr(C)]
@@ -21342,6 +23805,9 @@ impl Default for PipelineFragmentShadingRateEnumStateCreateInfoNV {
     }
 }
 
+unsafe impl Send for PipelineFragmentShadingRateEnumStateCreateInfoNV {}
+unsafe impl Sync for PipelineFragmentShadingRateEnumStateCreateInfoNV {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineFragmentShadingRateStateCreateInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -21363,6 +23829,9 @@ impl Default for PipelineFragmentShadingRateStateCreateInfoKHR {
         }
     }
 }
+
+unsafe impl Send for PipelineFragmentShadingRateStateCreateInfoKHR {}
+unsafe impl Sync for PipelineFragmentShadingRateStateCreateInfoKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineIndirectDeviceAddressInfoNV.html>
 #[repr(C)]
@@ -21386,6 +23855,9 @@ impl Default for PipelineIndirectDeviceAddressInfoNV {
     }
 }
 
+unsafe impl Send for PipelineIndirectDeviceAddressInfoNV {}
+unsafe impl Sync for PipelineIndirectDeviceAddressInfoNV {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -21405,6 +23877,9 @@ impl Default for PipelineInfoKHR {
         }
     }
 }
+
+unsafe impl Send for PipelineInfoKHR {}
+unsafe impl Sync for PipelineInfoKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineInputAssemblyStateCreateInfo.html>
 #[repr(C)]
@@ -21429,6 +23904,9 @@ impl Default for PipelineInputAssemblyStateCreateInfo {
         }
     }
 }
+
+unsafe impl Send for PipelineInputAssemblyStateCreateInfo {}
+unsafe impl Sync for PipelineInputAssemblyStateCreateInfo {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineLayoutCreateInfo.html>
 #[repr(C)]
@@ -21458,6 +23936,9 @@ impl Default for PipelineLayoutCreateInfo {
     }
 }
 
+unsafe impl Send for PipelineLayoutCreateInfo {}
+unsafe impl Sync for PipelineLayoutCreateInfo {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineLibraryCreateInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -21479,6 +23960,9 @@ impl Default for PipelineLibraryCreateInfoKHR {
         }
     }
 }
+
+unsafe impl Send for PipelineLibraryCreateInfoKHR {}
+unsafe impl Sync for PipelineLibraryCreateInfoKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineMultisampleStateCreateInfo.html>
 #[repr(C)]
@@ -21512,6 +23996,9 @@ impl Default for PipelineMultisampleStateCreateInfo {
     }
 }
 
+unsafe impl Send for PipelineMultisampleStateCreateInfo {}
+unsafe impl Sync for PipelineMultisampleStateCreateInfo {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelinePropertiesIdentifierEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -21531,6 +24018,9 @@ impl Default for PipelinePropertiesIdentifierEXT {
         }
     }
 }
+
+unsafe impl Send for PipelinePropertiesIdentifierEXT {}
+unsafe impl Sync for PipelinePropertiesIdentifierEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineRasterizationConservativeStateCreateInfoEXT.html>
 #[repr(C)]
@@ -21556,6 +24046,9 @@ impl Default for PipelineRasterizationConservativeStateCreateInfoEXT {
     }
 }
 
+unsafe impl Send for PipelineRasterizationConservativeStateCreateInfoEXT {}
+unsafe impl Sync for PipelineRasterizationConservativeStateCreateInfoEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineRasterizationDepthClipStateCreateInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -21577,6 +24070,9 @@ impl Default for PipelineRasterizationDepthClipStateCreateInfoEXT {
         }
     }
 }
+
+unsafe impl Send for PipelineRasterizationDepthClipStateCreateInfoEXT {}
+unsafe impl Sync for PipelineRasterizationDepthClipStateCreateInfoEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineRasterizationLineStateCreateInfo.html>
 #[repr(C)]
@@ -21604,6 +24100,9 @@ impl Default for PipelineRasterizationLineStateCreateInfo {
     }
 }
 
+unsafe impl Send for PipelineRasterizationLineStateCreateInfo {}
+unsafe impl Sync for PipelineRasterizationLineStateCreateInfo {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineRasterizationProvokingVertexStateCreateInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -21623,6 +24122,9 @@ impl Default for PipelineRasterizationProvokingVertexStateCreateInfoEXT {
         }
     }
 }
+
+unsafe impl Send for PipelineRasterizationProvokingVertexStateCreateInfoEXT {}
+unsafe impl Sync for PipelineRasterizationProvokingVertexStateCreateInfoEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineRasterizationStateCreateInfo.html>
 #[repr(C)]
@@ -21664,6 +24166,9 @@ impl Default for PipelineRasterizationStateCreateInfo {
     }
 }
 
+unsafe impl Send for PipelineRasterizationStateCreateInfo {}
+unsafe impl Sync for PipelineRasterizationStateCreateInfo {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineRasterizationStateRasterizationOrderAMD.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -21683,6 +24188,9 @@ impl Default for PipelineRasterizationStateRasterizationOrderAMD {
         }
     }
 }
+
+unsafe impl Send for PipelineRasterizationStateRasterizationOrderAMD {}
+unsafe impl Sync for PipelineRasterizationStateRasterizationOrderAMD {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineRasterizationStateStreamCreateInfoEXT.html>
 #[repr(C)]
@@ -21705,6 +24213,9 @@ impl Default for PipelineRasterizationStateStreamCreateInfoEXT {
         }
     }
 }
+
+unsafe impl Send for PipelineRasterizationStateStreamCreateInfoEXT {}
+unsafe impl Sync for PipelineRasterizationStateStreamCreateInfoEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineRenderingCreateInfo.html>
 #[repr(C)]
@@ -21734,6 +24245,9 @@ impl Default for PipelineRenderingCreateInfo {
     }
 }
 
+unsafe impl Send for PipelineRenderingCreateInfo {}
+unsafe impl Sync for PipelineRenderingCreateInfo {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineRepresentativeFragmentTestStateCreateInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -21753,6 +24267,9 @@ impl Default for PipelineRepresentativeFragmentTestStateCreateInfoNV {
         }
     }
 }
+
+unsafe impl Send for PipelineRepresentativeFragmentTestStateCreateInfoNV {}
+unsafe impl Sync for PipelineRepresentativeFragmentTestStateCreateInfoNV {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineRobustnessCreateInfo.html>
 #[repr(C)]
@@ -21780,6 +24297,9 @@ impl Default for PipelineRobustnessCreateInfo {
     }
 }
 
+unsafe impl Send for PipelineRobustnessCreateInfo {}
+unsafe impl Sync for PipelineRobustnessCreateInfo {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineSampleLocationsStateCreateInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -21801,6 +24321,9 @@ impl Default for PipelineSampleLocationsStateCreateInfoEXT {
         }
     }
 }
+
+unsafe impl Send for PipelineSampleLocationsStateCreateInfoEXT {}
+unsafe impl Sync for PipelineSampleLocationsStateCreateInfoEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineShaderStageCreateInfo.html>
 #[repr(C)]
@@ -21830,6 +24353,9 @@ impl Default for PipelineShaderStageCreateInfo {
     }
 }
 
+unsafe impl Send for PipelineShaderStageCreateInfo {}
+unsafe impl Sync for PipelineShaderStageCreateInfo {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineShaderStageModuleIdentifierCreateInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -21851,6 +24377,9 @@ impl Default for PipelineShaderStageModuleIdentifierCreateInfoEXT {
         }
     }
 }
+
+unsafe impl Send for PipelineShaderStageModuleIdentifierCreateInfoEXT {}
+unsafe impl Sync for PipelineShaderStageModuleIdentifierCreateInfoEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineShaderStageNodeCreateInfoAMDX.html>
 #[repr(C)]
@@ -21874,6 +24403,9 @@ impl Default for PipelineShaderStageNodeCreateInfoAMDX {
     }
 }
 
+unsafe impl Send for PipelineShaderStageNodeCreateInfoAMDX {}
+unsafe impl Sync for PipelineShaderStageNodeCreateInfoAMDX {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineShaderStageRequiredSubgroupSizeCreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -21894,6 +24426,9 @@ impl Default for PipelineShaderStageRequiredSubgroupSizeCreateInfo {
     }
 }
 
+unsafe impl Send for PipelineShaderStageRequiredSubgroupSizeCreateInfo {}
+unsafe impl Sync for PipelineShaderStageRequiredSubgroupSizeCreateInfo {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineTessellationDomainOriginStateCreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -21913,6 +24448,9 @@ impl Default for PipelineTessellationDomainOriginStateCreateInfo {
         }
     }
 }
+
+unsafe impl Send for PipelineTessellationDomainOriginStateCreateInfo {}
+unsafe impl Sync for PipelineTessellationDomainOriginStateCreateInfo {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineTessellationStateCreateInfo.html>
 #[repr(C)]
@@ -21936,6 +24474,9 @@ impl Default for PipelineTessellationStateCreateInfo {
     }
 }
 
+unsafe impl Send for PipelineTessellationStateCreateInfo {}
+unsafe impl Sync for PipelineTessellationStateCreateInfo {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineVertexInputDivisorStateCreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -21957,6 +24498,9 @@ impl Default for PipelineVertexInputDivisorStateCreateInfo {
         }
     }
 }
+
+unsafe impl Send for PipelineVertexInputDivisorStateCreateInfo {}
+unsafe impl Sync for PipelineVertexInputDivisorStateCreateInfo {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineVertexInputStateCreateInfo.html>
 #[repr(C)]
@@ -21986,6 +24530,9 @@ impl Default for PipelineVertexInputStateCreateInfo {
     }
 }
 
+unsafe impl Send for PipelineVertexInputStateCreateInfo {}
+unsafe impl Sync for PipelineVertexInputStateCreateInfo {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineViewportCoarseSampleOrderStateCreateInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -22010,6 +24557,9 @@ impl Default for PipelineViewportCoarseSampleOrderStateCreateInfoNV {
     }
 }
 
+unsafe impl Send for PipelineViewportCoarseSampleOrderStateCreateInfoNV {}
+unsafe impl Sync for PipelineViewportCoarseSampleOrderStateCreateInfoNV {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineViewportDepthClampControlCreateInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -22032,6 +24582,9 @@ impl Default for PipelineViewportDepthClampControlCreateInfoEXT {
     }
 }
 
+unsafe impl Send for PipelineViewportDepthClampControlCreateInfoEXT {}
+unsafe impl Sync for PipelineViewportDepthClampControlCreateInfoEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineViewportDepthClipControlCreateInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -22051,6 +24604,9 @@ impl Default for PipelineViewportDepthClipControlCreateInfoEXT {
         }
     }
 }
+
+unsafe impl Send for PipelineViewportDepthClipControlCreateInfoEXT {}
+unsafe impl Sync for PipelineViewportDepthClipControlCreateInfoEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineViewportExclusiveScissorStateCreateInfoNV.html>
 #[repr(C)]
@@ -22073,6 +24629,9 @@ impl Default for PipelineViewportExclusiveScissorStateCreateInfoNV {
         }
     }
 }
+
+unsafe impl Send for PipelineViewportExclusiveScissorStateCreateInfoNV {}
+unsafe impl Sync for PipelineViewportExclusiveScissorStateCreateInfoNV {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineViewportShadingRateImageStateCreateInfoNV.html>
 #[repr(C)]
@@ -22097,6 +24656,9 @@ impl Default for PipelineViewportShadingRateImageStateCreateInfoNV {
         }
     }
 }
+
+unsafe impl Send for PipelineViewportShadingRateImageStateCreateInfoNV {}
+unsafe impl Sync for PipelineViewportShadingRateImageStateCreateInfoNV {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineViewportStateCreateInfo.html>
 #[repr(C)]
@@ -22126,6 +24688,9 @@ impl Default for PipelineViewportStateCreateInfo {
     }
 }
 
+unsafe impl Send for PipelineViewportStateCreateInfo {}
+unsafe impl Sync for PipelineViewportStateCreateInfo {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineViewportSwizzleStateCreateInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -22149,6 +24714,9 @@ impl Default for PipelineViewportSwizzleStateCreateInfoNV {
         }
     }
 }
+
+unsafe impl Send for PipelineViewportSwizzleStateCreateInfoNV {}
+unsafe impl Sync for PipelineViewportSwizzleStateCreateInfoNV {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineViewportWScalingStateCreateInfoNV.html>
 #[repr(C)]
@@ -22174,6 +24742,9 @@ impl Default for PipelineViewportWScalingStateCreateInfoNV {
     }
 }
 
+unsafe impl Send for PipelineViewportWScalingStateCreateInfoNV {}
+unsafe impl Sync for PipelineViewportWScalingStateCreateInfoNV {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPresentFrameTokenGGP.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -22193,6 +24764,9 @@ impl Default for PresentFrameTokenGGP {
         }
     }
 }
+
+unsafe impl Send for PresentFrameTokenGGP {}
+unsafe impl Sync for PresentFrameTokenGGP {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPresentId2KHR.html>
 #[repr(C)]
@@ -22216,6 +24790,9 @@ impl Default for PresentId2KHR {
     }
 }
 
+unsafe impl Send for PresentId2KHR {}
+unsafe impl Sync for PresentId2KHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPresentIdKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -22237,6 +24814,9 @@ impl Default for PresentIdKHR {
         }
     }
 }
+
+unsafe impl Send for PresentIdKHR {}
+unsafe impl Sync for PresentIdKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPresentInfoKHR.html>
 #[repr(C)]
@@ -22268,6 +24848,9 @@ impl Default for PresentInfoKHR {
     }
 }
 
+unsafe impl Send for PresentInfoKHR {}
+unsafe impl Sync for PresentInfoKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPresentRegionKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -22285,6 +24868,9 @@ impl Default for PresentRegionKHR {
         }
     }
 }
+
+unsafe impl Send for PresentRegionKHR {}
+unsafe impl Sync for PresentRegionKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPresentRegionsKHR.html>
 #[repr(C)]
@@ -22307,6 +24893,9 @@ impl Default for PresentRegionsKHR {
         }
     }
 }
+
+unsafe impl Send for PresentRegionsKHR {}
+unsafe impl Sync for PresentRegionsKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPresentTimeGOOGLE.html>
 #[repr(C)]
@@ -22338,6 +24927,9 @@ impl Default for PresentTimesInfoGOOGLE {
     }
 }
 
+unsafe impl Send for PresentTimesInfoGOOGLE {}
+unsafe impl Sync for PresentTimesInfoGOOGLE {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPresentWait2InfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -22360,6 +24952,9 @@ impl Default for PresentWait2InfoKHR {
     }
 }
 
+unsafe impl Send for PresentWait2InfoKHR {}
+unsafe impl Sync for PresentWait2InfoKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPrivateDataSlotCreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -22380,6 +24975,9 @@ impl Default for PrivateDataSlotCreateInfo {
     }
 }
 
+unsafe impl Send for PrivateDataSlotCreateInfo {}
+unsafe impl Sync for PrivateDataSlotCreateInfo {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkProtectedSubmitInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -22399,6 +24997,9 @@ impl Default for ProtectedSubmitInfo {
         }
     }
 }
+
+unsafe impl Send for ProtectedSubmitInfo {}
+unsafe impl Sync for ProtectedSubmitInfo {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPushConstantRange.html>
 #[repr(C)]
@@ -22437,6 +25038,9 @@ impl Default for PushConstantsInfo {
     }
 }
 
+unsafe impl Send for PushConstantsInfo {}
+unsafe impl Sync for PushConstantsInfo {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPushDescriptorSetInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -22465,6 +25069,9 @@ impl Default for PushDescriptorSetInfo {
     }
 }
 
+unsafe impl Send for PushDescriptorSetInfo {}
+unsafe impl Sync for PushDescriptorSetInfo {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPushDescriptorSetWithTemplateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -22491,6 +25098,9 @@ impl Default for PushDescriptorSetWithTemplateInfo {
     }
 }
 
+unsafe impl Send for PushDescriptorSetWithTemplateInfo {}
+unsafe impl Sync for PushDescriptorSetWithTemplateInfo {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkQueryLowLatencySupportNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -22510,6 +25120,9 @@ impl Default for QueryLowLatencySupportNV {
         }
     }
 }
+
+unsafe impl Send for QueryLowLatencySupportNV {}
+unsafe impl Sync for QueryLowLatencySupportNV {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkQueryPoolCreateInfo.html>
 #[repr(C)]
@@ -22537,6 +25150,9 @@ impl Default for QueryPoolCreateInfo {
     }
 }
 
+unsafe impl Send for QueryPoolCreateInfo {}
+unsafe impl Sync for QueryPoolCreateInfo {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkQueryPoolPerformanceCreateInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -22561,6 +25177,9 @@ impl Default for QueryPoolPerformanceCreateInfoKHR {
     }
 }
 
+unsafe impl Send for QueryPoolPerformanceCreateInfoKHR {}
+unsafe impl Sync for QueryPoolPerformanceCreateInfoKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkQueryPoolPerformanceQueryCreateInfoINTEL.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -22580,6 +25199,9 @@ impl Default for QueryPoolPerformanceQueryCreateInfoINTEL {
         }
     }
 }
+
+unsafe impl Send for QueryPoolPerformanceQueryCreateInfoINTEL {}
+unsafe impl Sync for QueryPoolPerformanceQueryCreateInfoINTEL {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkQueryPoolVideoEncodeFeedbackCreateInfoKHR.html>
 #[repr(C)]
@@ -22601,6 +25223,9 @@ impl Default for QueryPoolVideoEncodeFeedbackCreateInfoKHR {
     }
 }
 
+unsafe impl Send for QueryPoolVideoEncodeFeedbackCreateInfoKHR {}
+unsafe impl Sync for QueryPoolVideoEncodeFeedbackCreateInfoKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkQueueFamilyCheckpointProperties2NV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -22621,6 +25246,9 @@ impl Default for QueueFamilyCheckpointProperties2NV {
     }
 }
 
+unsafe impl Send for QueueFamilyCheckpointProperties2NV {}
+unsafe impl Sync for QueueFamilyCheckpointProperties2NV {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkQueueFamilyCheckpointPropertiesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -22640,6 +25268,9 @@ impl Default for QueueFamilyCheckpointPropertiesNV {
         }
     }
 }
+
+unsafe impl Send for QueueFamilyCheckpointPropertiesNV {}
+unsafe impl Sync for QueueFamilyCheckpointPropertiesNV {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkQueueFamilyDataGraphProcessingEnginePropertiesARM.html>
 #[repr(C)]
@@ -22663,6 +25294,9 @@ impl Default for QueueFamilyDataGraphProcessingEnginePropertiesARM {
     }
 }
 
+unsafe impl Send for QueueFamilyDataGraphProcessingEnginePropertiesARM {}
+unsafe impl Sync for QueueFamilyDataGraphProcessingEnginePropertiesARM {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkQueueFamilyDataGraphPropertiesARM.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -22684,6 +25318,9 @@ impl Default for QueueFamilyDataGraphPropertiesARM {
         }
     }
 }
+
+unsafe impl Send for QueueFamilyDataGraphPropertiesARM {}
+unsafe impl Sync for QueueFamilyDataGraphPropertiesARM {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkQueueFamilyGlobalPriorityProperties.html>
 #[repr(C)]
@@ -22707,6 +25344,9 @@ impl Default for QueueFamilyGlobalPriorityProperties {
     }
 }
 
+unsafe impl Send for QueueFamilyGlobalPriorityProperties {}
+unsafe impl Sync for QueueFamilyGlobalPriorityProperties {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkQueueFamilyOwnershipTransferPropertiesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -22726,6 +25366,9 @@ impl Default for QueueFamilyOwnershipTransferPropertiesKHR {
         }
     }
 }
+
+unsafe impl Send for QueueFamilyOwnershipTransferPropertiesKHR {}
+unsafe impl Sync for QueueFamilyOwnershipTransferPropertiesKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkQueueFamilyProperties.html>
 #[repr(C)]
@@ -22757,6 +25400,9 @@ impl Default for QueueFamilyProperties2 {
     }
 }
 
+unsafe impl Send for QueueFamilyProperties2 {}
+unsafe impl Sync for QueueFamilyProperties2 {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkQueueFamilyQueryResultStatusPropertiesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -22776,6 +25422,9 @@ impl Default for QueueFamilyQueryResultStatusPropertiesKHR {
         }
     }
 }
+
+unsafe impl Send for QueueFamilyQueryResultStatusPropertiesKHR {}
+unsafe impl Sync for QueueFamilyQueryResultStatusPropertiesKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkQueueFamilyVideoPropertiesKHR.html>
 #[repr(C)]
@@ -22797,6 +25446,9 @@ impl Default for QueueFamilyVideoPropertiesKHR {
     }
 }
 
+unsafe impl Send for QueueFamilyVideoPropertiesKHR {}
+unsafe impl Sync for QueueFamilyVideoPropertiesKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRayTracingPipelineClusterAccelerationStructureCreateInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -22817,6 +25469,9 @@ impl Default for RayTracingPipelineClusterAccelerationStructureCreateInfoNV {
         }
     }
 }
+
+unsafe impl Send for RayTracingPipelineClusterAccelerationStructureCreateInfoNV {}
+unsafe impl Sync for RayTracingPipelineClusterAccelerationStructureCreateInfoNV {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRayTracingPipelineCreateInfoKHR.html>
 #[repr(C)]
@@ -22860,6 +25515,9 @@ impl Default for RayTracingPipelineCreateInfoKHR {
     }
 }
 
+unsafe impl Send for RayTracingPipelineCreateInfoKHR {}
+unsafe impl Sync for RayTracingPipelineCreateInfoKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRayTracingPipelineCreateInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -22896,6 +25554,9 @@ impl Default for RayTracingPipelineCreateInfoNV {
     }
 }
 
+unsafe impl Send for RayTracingPipelineCreateInfoNV {}
+unsafe impl Sync for RayTracingPipelineCreateInfoNV {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRayTracingPipelineInterfaceCreateInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -22917,6 +25578,9 @@ impl Default for RayTracingPipelineInterfaceCreateInfoKHR {
         }
     }
 }
+
+unsafe impl Send for RayTracingPipelineInterfaceCreateInfoKHR {}
+unsafe impl Sync for RayTracingPipelineInterfaceCreateInfoKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRayTracingShaderGroupCreateInfoKHR.html>
 #[repr(C)]
@@ -22948,6 +25612,9 @@ impl Default for RayTracingShaderGroupCreateInfoKHR {
     }
 }
 
+unsafe impl Send for RayTracingShaderGroupCreateInfoKHR {}
+unsafe impl Sync for RayTracingShaderGroupCreateInfoKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRayTracingShaderGroupCreateInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -22975,6 +25642,9 @@ impl Default for RayTracingShaderGroupCreateInfoNV {
         }
     }
 }
+
+unsafe impl Send for RayTracingShaderGroupCreateInfoNV {}
+unsafe impl Sync for RayTracingShaderGroupCreateInfoNV {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRect2D.html>
 #[repr(C)]
@@ -23031,6 +25701,9 @@ impl Default for RefreshObjectListKHR {
     }
 }
 
+unsafe impl Send for RefreshObjectListKHR {}
+unsafe impl Sync for RefreshObjectListKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkReleaseCapturedPipelineDataInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -23050,6 +25723,9 @@ impl Default for ReleaseCapturedPipelineDataInfoKHR {
         }
     }
 }
+
+unsafe impl Send for ReleaseCapturedPipelineDataInfoKHR {}
+unsafe impl Sync for ReleaseCapturedPipelineDataInfoKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkReleaseSwapchainImagesInfoKHR.html>
 #[repr(C)]
@@ -23075,6 +25751,9 @@ impl Default for ReleaseSwapchainImagesInfoKHR {
     }
 }
 
+unsafe impl Send for ReleaseSwapchainImagesInfoKHR {}
+unsafe impl Sync for ReleaseSwapchainImagesInfoKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRenderPassAttachmentBeginInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -23096,6 +25775,9 @@ impl Default for RenderPassAttachmentBeginInfo {
         }
     }
 }
+
+unsafe impl Send for RenderPassAttachmentBeginInfo {}
+unsafe impl Sync for RenderPassAttachmentBeginInfo {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRenderPassBeginInfo.html>
 #[repr(C)]
@@ -23124,6 +25806,9 @@ impl Default for RenderPassBeginInfo {
         }
     }
 }
+
+unsafe impl Send for RenderPassBeginInfo {}
+unsafe impl Sync for RenderPassBeginInfo {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRenderPassCreateInfo.html>
 #[repr(C)]
@@ -23156,6 +25841,9 @@ impl Default for RenderPassCreateInfo {
         }
     }
 }
+
+unsafe impl Send for RenderPassCreateInfo {}
+unsafe impl Sync for RenderPassCreateInfo {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRenderPassCreateInfo2.html>
 #[repr(C)]
@@ -23193,6 +25881,9 @@ impl Default for RenderPassCreateInfo2 {
     }
 }
 
+unsafe impl Send for RenderPassCreateInfo2 {}
+unsafe impl Sync for RenderPassCreateInfo2 {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRenderPassCreationControlEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -23213,6 +25904,9 @@ impl Default for RenderPassCreationControlEXT {
     }
 }
 
+unsafe impl Send for RenderPassCreationControlEXT {}
+unsafe impl Sync for RenderPassCreationControlEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRenderPassCreationFeedbackCreateInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -23232,6 +25926,9 @@ impl Default for RenderPassCreationFeedbackCreateInfoEXT {
         }
     }
 }
+
+unsafe impl Send for RenderPassCreationFeedbackCreateInfoEXT {}
+unsafe impl Sync for RenderPassCreationFeedbackCreateInfoEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRenderPassCreationFeedbackInfoEXT.html>
 #[repr(C)]
@@ -23260,6 +25957,9 @@ impl Default for RenderPassFragmentDensityMapCreateInfoEXT {
     }
 }
 
+unsafe impl Send for RenderPassFragmentDensityMapCreateInfoEXT {}
+unsafe impl Sync for RenderPassFragmentDensityMapCreateInfoEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRenderPassFragmentDensityMapOffsetEndInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -23282,6 +25982,9 @@ impl Default for RenderPassFragmentDensityMapOffsetEndInfoEXT {
     }
 }
 
+unsafe impl Send for RenderPassFragmentDensityMapOffsetEndInfoEXT {}
+unsafe impl Sync for RenderPassFragmentDensityMapOffsetEndInfoEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRenderPassInputAttachmentAspectCreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -23303,6 +26006,9 @@ impl Default for RenderPassInputAttachmentAspectCreateInfo {
         }
     }
 }
+
+unsafe impl Send for RenderPassInputAttachmentAspectCreateInfo {}
+unsafe impl Sync for RenderPassInputAttachmentAspectCreateInfo {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRenderPassMultiviewCreateInfo.html>
 #[repr(C)]
@@ -23334,6 +26040,9 @@ impl Default for RenderPassMultiviewCreateInfo {
     }
 }
 
+unsafe impl Send for RenderPassMultiviewCreateInfo {}
+unsafe impl Sync for RenderPassMultiviewCreateInfo {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRenderPassSampleLocationsBeginInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -23360,6 +26069,9 @@ impl Default for RenderPassSampleLocationsBeginInfoEXT {
     }
 }
 
+unsafe impl Send for RenderPassSampleLocationsBeginInfoEXT {}
+unsafe impl Sync for RenderPassSampleLocationsBeginInfoEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRenderPassStripeBeginInfoARM.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -23382,6 +26094,9 @@ impl Default for RenderPassStripeBeginInfoARM {
     }
 }
 
+unsafe impl Send for RenderPassStripeBeginInfoARM {}
+unsafe impl Sync for RenderPassStripeBeginInfoARM {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRenderPassStripeInfoARM.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -23401,6 +26116,9 @@ impl Default for RenderPassStripeInfoARM {
         }
     }
 }
+
+unsafe impl Send for RenderPassStripeInfoARM {}
+unsafe impl Sync for RenderPassStripeInfoARM {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRenderPassStripeSubmitInfoARM.html>
 #[repr(C)]
@@ -23424,6 +26142,9 @@ impl Default for RenderPassStripeSubmitInfoARM {
     }
 }
 
+unsafe impl Send for RenderPassStripeSubmitInfoARM {}
+unsafe impl Sync for RenderPassStripeSubmitInfoARM {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRenderPassSubpassFeedbackCreateInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -23443,6 +26164,9 @@ impl Default for RenderPassSubpassFeedbackCreateInfoEXT {
         }
     }
 }
+
+unsafe impl Send for RenderPassSubpassFeedbackCreateInfoEXT {}
+unsafe impl Sync for RenderPassSubpassFeedbackCreateInfoEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRenderPassSubpassFeedbackInfoEXT.html>
 #[repr(C)]
@@ -23475,6 +26199,9 @@ impl Default for RenderPassTileShadingCreateInfoQCOM {
     }
 }
 
+unsafe impl Send for RenderPassTileShadingCreateInfoQCOM {}
+unsafe impl Sync for RenderPassTileShadingCreateInfoQCOM {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRenderPassTransformBeginInfoQCOM.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -23494,6 +26221,9 @@ impl Default for RenderPassTransformBeginInfoQCOM {
         }
     }
 }
+
+unsafe impl Send for RenderPassTransformBeginInfoQCOM {}
+unsafe impl Sync for RenderPassTransformBeginInfoQCOM {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRenderingAreaInfo.html>
 #[repr(C)]
@@ -23522,6 +26252,9 @@ impl Default for RenderingAreaInfo {
         }
     }
 }
+
+unsafe impl Send for RenderingAreaInfo {}
+unsafe impl Sync for RenderingAreaInfo {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRenderingAttachmentInfo.html>
 #[repr(C)]
@@ -23557,6 +26290,9 @@ impl Default for RenderingAttachmentInfo {
     }
 }
 
+unsafe impl Send for RenderingAttachmentInfo {}
+unsafe impl Sync for RenderingAttachmentInfo {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRenderingAttachmentLocationInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -23579,6 +26315,9 @@ impl Default for RenderingAttachmentLocationInfo {
     }
 }
 
+unsafe impl Send for RenderingAttachmentLocationInfo {}
+unsafe impl Sync for RenderingAttachmentLocationInfo {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRenderingEndInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -23596,6 +26335,9 @@ impl Default for RenderingEndInfoEXT {
         }
     }
 }
+
+unsafe impl Send for RenderingEndInfoEXT {}
+unsafe impl Sync for RenderingEndInfoEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRenderingFragmentDensityMapAttachmentInfoEXT.html>
 #[repr(C)]
@@ -23618,6 +26360,9 @@ impl Default for RenderingFragmentDensityMapAttachmentInfoEXT {
         }
     }
 }
+
+unsafe impl Send for RenderingFragmentDensityMapAttachmentInfoEXT {}
+unsafe impl Sync for RenderingFragmentDensityMapAttachmentInfoEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRenderingFragmentShadingRateAttachmentInfoKHR.html>
 #[repr(C)]
@@ -23642,6 +26387,9 @@ impl Default for RenderingFragmentShadingRateAttachmentInfoKHR {
         }
     }
 }
+
+unsafe impl Send for RenderingFragmentShadingRateAttachmentInfoKHR {}
+unsafe impl Sync for RenderingFragmentShadingRateAttachmentInfoKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRenderingInfo.html>
 #[repr(C)]
@@ -23677,6 +26425,9 @@ impl Default for RenderingInfo {
     }
 }
 
+unsafe impl Send for RenderingInfo {}
+unsafe impl Sync for RenderingInfo {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRenderingInputAttachmentIndexInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -23702,6 +26453,9 @@ impl Default for RenderingInputAttachmentIndexInfo {
         }
     }
 }
+
+unsafe impl Send for RenderingInputAttachmentIndexInfo {}
+unsafe impl Sync for RenderingInputAttachmentIndexInfo {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkResolveImageInfo2.html>
 #[repr(C)]
@@ -23732,6 +26486,9 @@ impl Default for ResolveImageInfo2 {
         }
     }
 }
+
+unsafe impl Send for ResolveImageInfo2 {}
+unsafe impl Sync for ResolveImageInfo2 {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSRTDataNV.html>
 #[repr(C)]
@@ -23789,6 +26546,9 @@ impl Default for SampleLocationsInfoEXT {
     }
 }
 
+unsafe impl Send for SampleLocationsInfoEXT {}
+unsafe impl Sync for SampleLocationsInfoEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSamplerBlockMatchWindowCreateInfoQCOM.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -23810,6 +26570,9 @@ impl Default for SamplerBlockMatchWindowCreateInfoQCOM {
         }
     }
 }
+
+unsafe impl Send for SamplerBlockMatchWindowCreateInfoQCOM {}
+unsafe impl Sync for SamplerBlockMatchWindowCreateInfoQCOM {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSamplerBorderColorComponentMappingCreateInfoEXT.html>
 #[repr(C)]
@@ -23833,6 +26596,9 @@ impl Default for SamplerBorderColorComponentMappingCreateInfoEXT {
     }
 }
 
+unsafe impl Send for SamplerBorderColorComponentMappingCreateInfoEXT {}
+unsafe impl Sync for SamplerBorderColorComponentMappingCreateInfoEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSamplerCaptureDescriptorDataInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -23852,6 +26618,9 @@ impl Default for SamplerCaptureDescriptorDataInfoEXT {
         }
     }
 }
+
+unsafe impl Send for SamplerCaptureDescriptorDataInfoEXT {}
+unsafe impl Sync for SamplerCaptureDescriptorDataInfoEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSamplerCreateInfo.html>
 #[repr(C)]
@@ -23903,6 +26672,9 @@ impl Default for SamplerCreateInfo {
     }
 }
 
+unsafe impl Send for SamplerCreateInfo {}
+unsafe impl Sync for SamplerCreateInfo {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSamplerCubicWeightsCreateInfoQCOM.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -23922,6 +26694,9 @@ impl Default for SamplerCubicWeightsCreateInfoQCOM {
         }
     }
 }
+
+unsafe impl Send for SamplerCubicWeightsCreateInfoQCOM {}
+unsafe impl Sync for SamplerCubicWeightsCreateInfoQCOM {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSamplerCustomBorderColorCreateInfoEXT.html>
 #[repr(C)]
@@ -23945,6 +26720,9 @@ impl Default for SamplerCustomBorderColorCreateInfoEXT {
     }
 }
 
+unsafe impl Send for SamplerCustomBorderColorCreateInfoEXT {}
+unsafe impl Sync for SamplerCustomBorderColorCreateInfoEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSamplerReductionModeCreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -23964,6 +26742,9 @@ impl Default for SamplerReductionModeCreateInfo {
         }
     }
 }
+
+unsafe impl Send for SamplerReductionModeCreateInfo {}
+unsafe impl Sync for SamplerReductionModeCreateInfo {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSamplerYcbcrConversionCreateInfo.html>
 #[repr(C)]
@@ -23999,6 +26780,9 @@ impl Default for SamplerYcbcrConversionCreateInfo {
     }
 }
 
+unsafe impl Send for SamplerYcbcrConversionCreateInfo {}
+unsafe impl Sync for SamplerYcbcrConversionCreateInfo {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSamplerYcbcrConversionImageFormatProperties.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -24019,6 +26803,9 @@ impl Default for SamplerYcbcrConversionImageFormatProperties {
     }
 }
 
+unsafe impl Send for SamplerYcbcrConversionImageFormatProperties {}
+unsafe impl Sync for SamplerYcbcrConversionImageFormatProperties {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSamplerYcbcrConversionInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -24038,6 +26825,9 @@ impl Default for SamplerYcbcrConversionInfo {
         }
     }
 }
+
+unsafe impl Send for SamplerYcbcrConversionInfo {}
+unsafe impl Sync for SamplerYcbcrConversionInfo {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSamplerYcbcrConversionYcbcrDegammaCreateInfoQCOM.html>
 #[repr(C)]
@@ -24061,6 +26851,9 @@ impl Default for SamplerYcbcrConversionYcbcrDegammaCreateInfoQCOM {
     }
 }
 
+unsafe impl Send for SamplerYcbcrConversionYcbcrDegammaCreateInfoQCOM {}
+unsafe impl Sync for SamplerYcbcrConversionYcbcrDegammaCreateInfoQCOM {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSciSyncAttributesInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -24082,6 +26875,9 @@ impl Default for SciSyncAttributesInfoNV {
         }
     }
 }
+
+unsafe impl Send for SciSyncAttributesInfoNV {}
+unsafe impl Sync for SciSyncAttributesInfoNV {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkScreenBufferFormatPropertiesQNX.html>
 #[repr(C)]
@@ -24119,6 +26915,9 @@ impl Default for ScreenBufferFormatPropertiesQNX {
     }
 }
 
+unsafe impl Send for ScreenBufferFormatPropertiesQNX {}
+unsafe impl Sync for ScreenBufferFormatPropertiesQNX {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkScreenBufferPropertiesQNX.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -24140,6 +26939,9 @@ impl Default for ScreenBufferPropertiesQNX {
         }
     }
 }
+
+unsafe impl Send for ScreenBufferPropertiesQNX {}
+unsafe impl Sync for ScreenBufferPropertiesQNX {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkScreenSurfaceCreateInfoQNX.html>
 #[repr(C)]
@@ -24165,6 +26967,9 @@ impl Default for ScreenSurfaceCreateInfoQNX {
     }
 }
 
+unsafe impl Send for ScreenSurfaceCreateInfoQNX {}
+unsafe impl Sync for ScreenSurfaceCreateInfoQNX {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSemaphoreCreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -24184,6 +26989,9 @@ impl Default for SemaphoreCreateInfo {
         }
     }
 }
+
+unsafe impl Send for SemaphoreCreateInfo {}
+unsafe impl Sync for SemaphoreCreateInfo {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSemaphoreGetFdInfoKHR.html>
 #[repr(C)]
@@ -24207,6 +27015,9 @@ impl Default for SemaphoreGetFdInfoKHR {
     }
 }
 
+unsafe impl Send for SemaphoreGetFdInfoKHR {}
+unsafe impl Sync for SemaphoreGetFdInfoKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSemaphoreGetSciSyncInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -24228,6 +27039,9 @@ impl Default for SemaphoreGetSciSyncInfoNV {
         }
     }
 }
+
+unsafe impl Send for SemaphoreGetSciSyncInfoNV {}
+unsafe impl Sync for SemaphoreGetSciSyncInfoNV {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSemaphoreGetWin32HandleInfoKHR.html>
 #[repr(C)]
@@ -24251,6 +27065,9 @@ impl Default for SemaphoreGetWin32HandleInfoKHR {
     }
 }
 
+unsafe impl Send for SemaphoreGetWin32HandleInfoKHR {}
+unsafe impl Sync for SemaphoreGetWin32HandleInfoKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSemaphoreGetZirconHandleInfoFUCHSIA.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -24272,6 +27089,9 @@ impl Default for SemaphoreGetZirconHandleInfoFUCHSIA {
         }
     }
 }
+
+unsafe impl Send for SemaphoreGetZirconHandleInfoFUCHSIA {}
+unsafe impl Sync for SemaphoreGetZirconHandleInfoFUCHSIA {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSemaphoreSciSyncCreateInfoNV.html>
 #[repr(C)]
@@ -24295,6 +27115,9 @@ impl Default for SemaphoreSciSyncCreateInfoNV {
     }
 }
 
+unsafe impl Send for SemaphoreSciSyncCreateInfoNV {}
+unsafe impl Sync for SemaphoreSciSyncCreateInfoNV {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSemaphoreSciSyncPoolCreateInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -24314,6 +27137,9 @@ impl Default for SemaphoreSciSyncPoolCreateInfoNV {
         }
     }
 }
+
+unsafe impl Send for SemaphoreSciSyncPoolCreateInfoNV {}
+unsafe impl Sync for SemaphoreSciSyncPoolCreateInfoNV {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSemaphoreSignalInfo.html>
 #[repr(C)]
@@ -24336,6 +27162,9 @@ impl Default for SemaphoreSignalInfo {
         }
     }
 }
+
+unsafe impl Send for SemaphoreSignalInfo {}
+unsafe impl Sync for SemaphoreSignalInfo {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSemaphoreSubmitInfo.html>
 #[repr(C)]
@@ -24363,6 +27192,9 @@ impl Default for SemaphoreSubmitInfo {
     }
 }
 
+unsafe impl Send for SemaphoreSubmitInfo {}
+unsafe impl Sync for SemaphoreSubmitInfo {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSemaphoreTypeCreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -24384,6 +27216,9 @@ impl Default for SemaphoreTypeCreateInfo {
         }
     }
 }
+
+unsafe impl Send for SemaphoreTypeCreateInfo {}
+unsafe impl Sync for SemaphoreTypeCreateInfo {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSemaphoreWaitInfo.html>
 #[repr(C)]
@@ -24410,6 +27245,9 @@ impl Default for SemaphoreWaitInfo {
         }
     }
 }
+
+unsafe impl Send for SemaphoreWaitInfo {}
+unsafe impl Sync for SemaphoreWaitInfo {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSetDescriptorBufferOffsetsInfoEXT.html>
 #[repr(C)]
@@ -24441,6 +27279,9 @@ impl Default for SetDescriptorBufferOffsetsInfoEXT {
     }
 }
 
+unsafe impl Send for SetDescriptorBufferOffsetsInfoEXT {}
+unsafe impl Sync for SetDescriptorBufferOffsetsInfoEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSetLatencyMarkerInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -24463,6 +27304,9 @@ impl Default for SetLatencyMarkerInfoNV {
     }
 }
 
+unsafe impl Send for SetLatencyMarkerInfoNV {}
+unsafe impl Sync for SetLatencyMarkerInfoNV {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSetPresentConfigNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -24484,6 +27328,9 @@ impl Default for SetPresentConfigNV {
         }
     }
 }
+
+unsafe impl Send for SetPresentConfigNV {}
+unsafe impl Sync for SetPresentConfigNV {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSetStateFlagsIndirectCommandNV.html>
 #[repr(C)]
@@ -24534,6 +27381,9 @@ impl Default for ShaderCreateInfoEXT {
     }
 }
 
+unsafe impl Send for ShaderCreateInfoEXT {}
+unsafe impl Sync for ShaderCreateInfoEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkShaderModuleCreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -24558,6 +27408,9 @@ impl Default for ShaderModuleCreateInfo {
     }
 }
 
+unsafe impl Send for ShaderModuleCreateInfo {}
+unsafe impl Sync for ShaderModuleCreateInfo {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkShaderModuleIdentifierEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -24580,6 +27433,9 @@ impl Default for ShaderModuleIdentifierEXT {
     }
 }
 
+unsafe impl Send for ShaderModuleIdentifierEXT {}
+unsafe impl Sync for ShaderModuleIdentifierEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkShaderModuleValidationCacheCreateInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -24599,6 +27455,9 @@ impl Default for ShaderModuleValidationCacheCreateInfoEXT {
         }
     }
 }
+
+unsafe impl Send for ShaderModuleValidationCacheCreateInfoEXT {}
+unsafe impl Sync for ShaderModuleValidationCacheCreateInfoEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkShaderResourceUsageAMD.html>
 #[repr(C)]
@@ -24642,6 +27501,9 @@ impl Default for ShadingRatePaletteNV {
     }
 }
 
+unsafe impl Send for ShadingRatePaletteNV {}
+unsafe impl Sync for ShadingRatePaletteNV {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSharedPresentSurfaceCapabilitiesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -24662,6 +27524,9 @@ impl Default for SharedPresentSurfaceCapabilitiesKHR {
     }
 }
 
+unsafe impl Send for SharedPresentSurfaceCapabilitiesKHR {}
+unsafe impl Sync for SharedPresentSurfaceCapabilitiesKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSparseBufferMemoryBindInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -24681,6 +27546,9 @@ impl Default for SparseBufferMemoryBindInfo {
         }
     }
 }
+
+unsafe impl Send for SparseBufferMemoryBindInfo {}
+unsafe impl Sync for SparseBufferMemoryBindInfo {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSparseImageFormatProperties.html>
 #[repr(C)]
@@ -24710,6 +27578,9 @@ impl Default for SparseImageFormatProperties2 {
         }
     }
 }
+
+unsafe impl Send for SparseImageFormatProperties2 {}
+unsafe impl Sync for SparseImageFormatProperties2 {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSparseImageMemoryBind.html>
 #[repr(C)]
@@ -24743,6 +27614,9 @@ impl Default for SparseImageMemoryBindInfo {
     }
 }
 
+unsafe impl Send for SparseImageMemoryBindInfo {}
+unsafe impl Sync for SparseImageMemoryBindInfo {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSparseImageMemoryRequirements.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
@@ -24774,6 +27648,9 @@ impl Default for SparseImageMemoryRequirements2 {
     }
 }
 
+unsafe impl Send for SparseImageMemoryRequirements2 {}
+unsafe impl Sync for SparseImageMemoryRequirements2 {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSparseImageOpaqueMemoryBindInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -24793,6 +27670,9 @@ impl Default for SparseImageOpaqueMemoryBindInfo {
         }
     }
 }
+
+unsafe impl Send for SparseImageOpaqueMemoryBindInfo {}
+unsafe impl Sync for SparseImageOpaqueMemoryBindInfo {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSparseMemoryBind.html>
 #[repr(C)]
@@ -24826,6 +27706,9 @@ impl Default for SpecializationInfo {
         }
     }
 }
+
+unsafe impl Send for SpecializationInfo {}
+unsafe impl Sync for SpecializationInfo {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSpecializationMapEntry.html>
 #[repr(C)]
@@ -24870,6 +27753,9 @@ impl Default for StreamDescriptorSurfaceCreateInfoGGP {
         }
     }
 }
+
+unsafe impl Send for StreamDescriptorSurfaceCreateInfoGGP {}
+unsafe impl Sync for StreamDescriptorSurfaceCreateInfoGGP {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkStridedDeviceAddressNV.html>
 #[repr(C)]
@@ -24929,6 +27815,9 @@ impl Default for SubmitInfo {
     }
 }
 
+unsafe impl Send for SubmitInfo {}
+unsafe impl Sync for SubmitInfo {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSubmitInfo2.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -24961,6 +27850,9 @@ impl Default for SubmitInfo2 {
     }
 }
 
+unsafe impl Send for SubmitInfo2 {}
+unsafe impl Sync for SubmitInfo2 {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSubpassBeginInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -24980,6 +27872,9 @@ impl Default for SubpassBeginInfo {
         }
     }
 }
+
+unsafe impl Send for SubpassBeginInfo {}
+unsafe impl Sync for SubpassBeginInfo {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSubpassDependency.html>
 #[repr(C)]
@@ -25028,6 +27923,9 @@ impl Default for SubpassDependency2 {
     }
 }
 
+unsafe impl Send for SubpassDependency2 {}
+unsafe impl Sync for SubpassDependency2 {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSubpassDescription.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -25061,6 +27959,9 @@ impl Default for SubpassDescription {
         }
     }
 }
+
+unsafe impl Send for SubpassDescription {}
+unsafe impl Sync for SubpassDescription {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSubpassDescription2.html>
 #[repr(C)]
@@ -25102,6 +28003,9 @@ impl Default for SubpassDescription2 {
     }
 }
 
+unsafe impl Send for SubpassDescription2 {}
+unsafe impl Sync for SubpassDescription2 {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSubpassDescriptionDepthStencilResolve.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -25126,6 +28030,9 @@ impl Default for SubpassDescriptionDepthStencilResolve {
     }
 }
 
+unsafe impl Send for SubpassDescriptionDepthStencilResolve {}
+unsafe impl Sync for SubpassDescriptionDepthStencilResolve {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSubpassEndInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -25143,6 +28050,9 @@ impl Default for SubpassEndInfo {
         }
     }
 }
+
+unsafe impl Send for SubpassEndInfo {}
+unsafe impl Sync for SubpassEndInfo {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSubpassResolvePerformanceQueryEXT.html>
 #[repr(C)]
@@ -25163,6 +28073,9 @@ impl Default for SubpassResolvePerformanceQueryEXT {
         }
     }
 }
+
+unsafe impl Send for SubpassResolvePerformanceQueryEXT {}
+unsafe impl Sync for SubpassResolvePerformanceQueryEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSubpassSampleLocationsEXT.html>
 #[repr(C)]
@@ -25194,6 +28107,9 @@ impl Default for SubpassShadingPipelineCreateInfoHUAWEI {
     }
 }
 
+unsafe impl Send for SubpassShadingPipelineCreateInfoHUAWEI {}
+unsafe impl Sync for SubpassShadingPipelineCreateInfoHUAWEI {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSubresourceHostMemcpySize.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -25213,6 +28129,9 @@ impl Default for SubresourceHostMemcpySize {
         }
     }
 }
+
+unsafe impl Send for SubresourceHostMemcpySize {}
+unsafe impl Sync for SubresourceHostMemcpySize {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSubresourceLayout.html>
 #[repr(C)]
@@ -25244,6 +28163,9 @@ impl Default for SubresourceLayout2 {
         }
     }
 }
+
+unsafe impl Send for SubresourceLayout2 {}
+unsafe impl Sync for SubresourceLayout2 {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSurfaceCapabilities2EXT.html>
 #[repr(C)]
@@ -25285,6 +28207,9 @@ impl Default for SurfaceCapabilities2EXT {
     }
 }
 
+unsafe impl Send for SurfaceCapabilities2EXT {}
+unsafe impl Sync for SurfaceCapabilities2EXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSurfaceCapabilities2KHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -25305,6 +28230,9 @@ impl Default for SurfaceCapabilities2KHR {
     }
 }
 
+unsafe impl Send for SurfaceCapabilities2KHR {}
+unsafe impl Sync for SurfaceCapabilities2KHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSurfaceCapabilitiesFullScreenExclusiveEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -25324,6 +28252,9 @@ impl Default for SurfaceCapabilitiesFullScreenExclusiveEXT {
         }
     }
 }
+
+unsafe impl Send for SurfaceCapabilitiesFullScreenExclusiveEXT {}
+unsafe impl Sync for SurfaceCapabilitiesFullScreenExclusiveEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSurfaceCapabilitiesKHR.html>
 #[repr(C)]
@@ -25361,6 +28292,9 @@ impl Default for SurfaceCapabilitiesPresentBarrierNV {
     }
 }
 
+unsafe impl Send for SurfaceCapabilitiesPresentBarrierNV {}
+unsafe impl Sync for SurfaceCapabilitiesPresentBarrierNV {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSurfaceCapabilitiesPresentId2KHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -25381,6 +28315,9 @@ impl Default for SurfaceCapabilitiesPresentId2KHR {
     }
 }
 
+unsafe impl Send for SurfaceCapabilitiesPresentId2KHR {}
+unsafe impl Sync for SurfaceCapabilitiesPresentId2KHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSurfaceCapabilitiesPresentWait2KHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -25400,6 +28337,9 @@ impl Default for SurfaceCapabilitiesPresentWait2KHR {
         }
     }
 }
+
+unsafe impl Send for SurfaceCapabilitiesPresentWait2KHR {}
+unsafe impl Sync for SurfaceCapabilitiesPresentWait2KHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSurfaceCreateInfoOHOS.html>
 #[repr(C)]
@@ -25423,6 +28363,9 @@ impl Default for SurfaceCreateInfoOHOS {
     }
 }
 
+unsafe impl Send for SurfaceCreateInfoOHOS {}
+unsafe impl Sync for SurfaceCreateInfoOHOS {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSurfaceFormat2KHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -25442,6 +28385,9 @@ impl Default for SurfaceFormat2KHR {
         }
     }
 }
+
+unsafe impl Send for SurfaceFormat2KHR {}
+unsafe impl Sync for SurfaceFormat2KHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSurfaceFormatKHR.html>
 #[repr(C)]
@@ -25471,6 +28417,9 @@ impl Default for SurfaceFullScreenExclusiveInfoEXT {
     }
 }
 
+unsafe impl Send for SurfaceFullScreenExclusiveInfoEXT {}
+unsafe impl Sync for SurfaceFullScreenExclusiveInfoEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSurfaceFullScreenExclusiveWin32InfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -25490,6 +28439,9 @@ impl Default for SurfaceFullScreenExclusiveWin32InfoEXT {
         }
     }
 }
+
+unsafe impl Send for SurfaceFullScreenExclusiveWin32InfoEXT {}
+unsafe impl Sync for SurfaceFullScreenExclusiveWin32InfoEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSurfacePresentModeCompatibilityKHR.html>
 #[repr(C)]
@@ -25513,6 +28465,9 @@ impl Default for SurfacePresentModeCompatibilityKHR {
     }
 }
 
+unsafe impl Send for SurfacePresentModeCompatibilityKHR {}
+unsafe impl Sync for SurfacePresentModeCompatibilityKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSurfacePresentModeKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -25532,6 +28487,9 @@ impl Default for SurfacePresentModeKHR {
         }
     }
 }
+
+unsafe impl Send for SurfacePresentModeKHR {}
+unsafe impl Sync for SurfacePresentModeKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSurfacePresentScalingCapabilitiesKHR.html>
 #[repr(C)]
@@ -25561,6 +28519,9 @@ impl Default for SurfacePresentScalingCapabilitiesKHR {
     }
 }
 
+unsafe impl Send for SurfacePresentScalingCapabilitiesKHR {}
+unsafe impl Sync for SurfacePresentScalingCapabilitiesKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSurfaceProtectedCapabilitiesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -25581,6 +28542,9 @@ impl Default for SurfaceProtectedCapabilitiesKHR {
     }
 }
 
+unsafe impl Send for SurfaceProtectedCapabilitiesKHR {}
+unsafe impl Sync for SurfaceProtectedCapabilitiesKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSwapchainCounterCreateInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -25600,6 +28564,9 @@ impl Default for SwapchainCounterCreateInfoEXT {
         }
     }
 }
+
+unsafe impl Send for SwapchainCounterCreateInfoEXT {}
+unsafe impl Sync for SwapchainCounterCreateInfoEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSwapchainCreateInfoKHR.html>
 #[repr(C)]
@@ -25651,6 +28618,9 @@ impl Default for SwapchainCreateInfoKHR {
     }
 }
 
+unsafe impl Send for SwapchainCreateInfoKHR {}
+unsafe impl Sync for SwapchainCreateInfoKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSwapchainDisplayNativeHdrCreateInfoAMD.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -25670,6 +28640,9 @@ impl Default for SwapchainDisplayNativeHdrCreateInfoAMD {
         }
     }
 }
+
+unsafe impl Send for SwapchainDisplayNativeHdrCreateInfoAMD {}
+unsafe impl Sync for SwapchainDisplayNativeHdrCreateInfoAMD {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSwapchainLatencyCreateInfoNV.html>
 #[repr(C)]
@@ -25691,6 +28664,9 @@ impl Default for SwapchainLatencyCreateInfoNV {
     }
 }
 
+unsafe impl Send for SwapchainLatencyCreateInfoNV {}
+unsafe impl Sync for SwapchainLatencyCreateInfoNV {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSwapchainPresentBarrierCreateInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -25710,6 +28686,9 @@ impl Default for SwapchainPresentBarrierCreateInfoNV {
         }
     }
 }
+
+unsafe impl Send for SwapchainPresentBarrierCreateInfoNV {}
+unsafe impl Sync for SwapchainPresentBarrierCreateInfoNV {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSwapchainPresentFenceInfoKHR.html>
 #[repr(C)]
@@ -25733,6 +28712,9 @@ impl Default for SwapchainPresentFenceInfoKHR {
     }
 }
 
+unsafe impl Send for SwapchainPresentFenceInfoKHR {}
+unsafe impl Sync for SwapchainPresentFenceInfoKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSwapchainPresentModeInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -25755,6 +28737,9 @@ impl Default for SwapchainPresentModeInfoKHR {
     }
 }
 
+unsafe impl Send for SwapchainPresentModeInfoKHR {}
+unsafe impl Sync for SwapchainPresentModeInfoKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSwapchainPresentModesCreateInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -25776,6 +28761,9 @@ impl Default for SwapchainPresentModesCreateInfoKHR {
         }
     }
 }
+
+unsafe impl Send for SwapchainPresentModesCreateInfoKHR {}
+unsafe impl Sync for SwapchainPresentModesCreateInfoKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSwapchainPresentScalingCreateInfoKHR.html>
 #[repr(C)]
@@ -25801,6 +28789,9 @@ impl Default for SwapchainPresentScalingCreateInfoKHR {
     }
 }
 
+unsafe impl Send for SwapchainPresentScalingCreateInfoKHR {}
+unsafe impl Sync for SwapchainPresentScalingCreateInfoKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSysmemColorSpaceFUCHSIA.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -25821,6 +28812,9 @@ impl Default for SysmemColorSpaceFUCHSIA {
     }
 }
 
+unsafe impl Send for SysmemColorSpaceFUCHSIA {}
+unsafe impl Sync for SysmemColorSpaceFUCHSIA {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkTensorCaptureDescriptorDataInfoARM.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -25840,6 +28834,9 @@ impl Default for TensorCaptureDescriptorDataInfoARM {
         }
     }
 }
+
+unsafe impl Send for TensorCaptureDescriptorDataInfoARM {}
+unsafe impl Sync for TensorCaptureDescriptorDataInfoARM {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkTensorCopyARM.html>
 #[repr(C)]
@@ -25866,6 +28863,9 @@ impl Default for TensorCopyARM {
         }
     }
 }
+
+unsafe impl Send for TensorCopyARM {}
+unsafe impl Sync for TensorCopyARM {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkTensorCreateInfoARM.html>
 #[repr(C)]
@@ -25895,6 +28895,9 @@ impl Default for TensorCreateInfoARM {
     }
 }
 
+unsafe impl Send for TensorCreateInfoARM {}
+unsafe impl Sync for TensorCreateInfoARM {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkTensorDependencyInfoARM.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -25916,6 +28919,9 @@ impl Default for TensorDependencyInfoARM {
         }
     }
 }
+
+unsafe impl Send for TensorDependencyInfoARM {}
+unsafe impl Sync for TensorDependencyInfoARM {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkTensorDescriptionARM.html>
 #[repr(C)]
@@ -25947,6 +28953,9 @@ impl Default for TensorDescriptionARM {
     }
 }
 
+unsafe impl Send for TensorDescriptionARM {}
+unsafe impl Sync for TensorDescriptionARM {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkTensorFormatPropertiesARM.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -25968,6 +28977,9 @@ impl Default for TensorFormatPropertiesARM {
         }
     }
 }
+
+unsafe impl Send for TensorFormatPropertiesARM {}
+unsafe impl Sync for TensorFormatPropertiesARM {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkTensorMemoryBarrierARM.html>
 #[repr(C)]
@@ -26001,6 +29013,9 @@ impl Default for TensorMemoryBarrierARM {
     }
 }
 
+unsafe impl Send for TensorMemoryBarrierARM {}
+unsafe impl Sync for TensorMemoryBarrierARM {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkTensorMemoryRequirementsInfoARM.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -26021,6 +29036,9 @@ impl Default for TensorMemoryRequirementsInfoARM {
     }
 }
 
+unsafe impl Send for TensorMemoryRequirementsInfoARM {}
+unsafe impl Sync for TensorMemoryRequirementsInfoARM {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkTensorViewCaptureDescriptorDataInfoARM.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -26040,6 +29058,9 @@ impl Default for TensorViewCaptureDescriptorDataInfoARM {
         }
     }
 }
+
+unsafe impl Send for TensorViewCaptureDescriptorDataInfoARM {}
+unsafe impl Sync for TensorViewCaptureDescriptorDataInfoARM {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkTensorViewCreateInfoARM.html>
 #[repr(C)]
@@ -26065,6 +29086,9 @@ impl Default for TensorViewCreateInfoARM {
     }
 }
 
+unsafe impl Send for TensorViewCreateInfoARM {}
+unsafe impl Sync for TensorViewCreateInfoARM {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkTextureLODGatherFormatPropertiesAMD.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -26085,6 +29109,9 @@ impl Default for TextureLODGatherFormatPropertiesAMD {
     }
 }
 
+unsafe impl Send for TextureLODGatherFormatPropertiesAMD {}
+unsafe impl Sync for TextureLODGatherFormatPropertiesAMD {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkTileMemoryBindInfoQCOM.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -26104,6 +29131,9 @@ impl Default for TileMemoryBindInfoQCOM {
         }
     }
 }
+
+unsafe impl Send for TileMemoryBindInfoQCOM {}
+unsafe impl Sync for TileMemoryBindInfoQCOM {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkTileMemoryRequirementsQCOM.html>
 #[repr(C)]
@@ -26127,6 +29157,9 @@ impl Default for TileMemoryRequirementsQCOM {
     }
 }
 
+unsafe impl Send for TileMemoryRequirementsQCOM {}
+unsafe impl Sync for TileMemoryRequirementsQCOM {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkTileMemorySizeInfoQCOM.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -26146,6 +29179,9 @@ impl Default for TileMemorySizeInfoQCOM {
         }
     }
 }
+
+unsafe impl Send for TileMemorySizeInfoQCOM {}
+unsafe impl Sync for TileMemorySizeInfoQCOM {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkTilePropertiesQCOM.html>
 #[repr(C)]
@@ -26170,6 +29206,9 @@ impl Default for TilePropertiesQCOM {
         }
     }
 }
+
+unsafe impl Send for TilePropertiesQCOM {}
+unsafe impl Sync for TilePropertiesQCOM {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkTimelineSemaphoreSubmitInfo.html>
 #[repr(C)]
@@ -26196,6 +29235,9 @@ impl Default for TimelineSemaphoreSubmitInfo {
         }
     }
 }
+
+unsafe impl Send for TimelineSemaphoreSubmitInfo {}
+unsafe impl Sync for TimelineSemaphoreSubmitInfo {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkTraceRaysIndirectCommand2KHR.html>
 #[repr(C)]
@@ -26257,6 +29299,9 @@ impl Default for ValidationCacheCreateInfoEXT {
     }
 }
 
+unsafe impl Send for ValidationCacheCreateInfoEXT {}
+unsafe impl Sync for ValidationCacheCreateInfoEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkValidationFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -26283,6 +29328,9 @@ impl Default for ValidationFeaturesEXT {
     }
 }
 
+unsafe impl Send for ValidationFeaturesEXT {}
+unsafe impl Sync for ValidationFeaturesEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkValidationFlagsEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -26304,6 +29352,9 @@ impl Default for ValidationFlagsEXT {
         }
     }
 }
+
+unsafe impl Send for ValidationFlagsEXT {}
+unsafe impl Sync for ValidationFlagsEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVertexInputAttributeDescription.html>
 #[repr(C)]
@@ -26341,6 +29392,9 @@ impl Default for VertexInputAttributeDescription2EXT {
     }
 }
 
+unsafe impl Send for VertexInputAttributeDescription2EXT {}
+unsafe impl Sync for VertexInputAttributeDescription2EXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVertexInputBindingDescription.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
@@ -26376,6 +29430,9 @@ impl Default for VertexInputBindingDescription2EXT {
     }
 }
 
+unsafe impl Send for VertexInputBindingDescription2EXT {}
+unsafe impl Sync for VertexInputBindingDescription2EXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVertexInputBindingDivisorDescription.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
@@ -26406,6 +29463,9 @@ impl Default for ViSurfaceCreateInfoNN {
     }
 }
 
+unsafe impl Send for ViSurfaceCreateInfoNN {}
+unsafe impl Sync for ViSurfaceCreateInfoNN {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoBeginCodingInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -26433,6 +29493,9 @@ impl Default for VideoBeginCodingInfoKHR {
         }
     }
 }
+
+unsafe impl Send for VideoBeginCodingInfoKHR {}
+unsafe impl Sync for VideoBeginCodingInfoKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoCapabilitiesKHR.html>
 #[repr(C)]
@@ -26470,6 +29533,9 @@ impl Default for VideoCapabilitiesKHR {
     }
 }
 
+unsafe impl Send for VideoCapabilitiesKHR {}
+unsafe impl Sync for VideoCapabilitiesKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoCodingControlInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -26489,6 +29555,9 @@ impl Default for VideoCodingControlInfoKHR {
         }
     }
 }
+
+unsafe impl Send for VideoCodingControlInfoKHR {}
+unsafe impl Sync for VideoCodingControlInfoKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoDecodeAV1CapabilitiesKHR.html>
 #[repr(C)]
@@ -26510,6 +29579,9 @@ impl Default for VideoDecodeAV1CapabilitiesKHR {
     }
 }
 
+unsafe impl Send for VideoDecodeAV1CapabilitiesKHR {}
+unsafe impl Sync for VideoDecodeAV1CapabilitiesKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoDecodeAV1DpbSlotInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -26530,6 +29602,9 @@ impl Default for VideoDecodeAV1DpbSlotInfoKHR {
     }
 }
 
+unsafe impl Send for VideoDecodeAV1DpbSlotInfoKHR {}
+unsafe impl Sync for VideoDecodeAV1DpbSlotInfoKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoDecodeAV1InlineSessionParametersInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -26549,6 +29624,9 @@ impl Default for VideoDecodeAV1InlineSessionParametersInfoKHR {
         }
     }
 }
+
+unsafe impl Send for VideoDecodeAV1InlineSessionParametersInfoKHR {}
+unsafe impl Sync for VideoDecodeAV1InlineSessionParametersInfoKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoDecodeAV1PictureInfoKHR.html>
 #[repr(C)]
@@ -26580,6 +29658,9 @@ impl Default for VideoDecodeAV1PictureInfoKHR {
     }
 }
 
+unsafe impl Send for VideoDecodeAV1PictureInfoKHR {}
+unsafe impl Sync for VideoDecodeAV1PictureInfoKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoDecodeAV1ProfileInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -26602,6 +29683,9 @@ impl Default for VideoDecodeAV1ProfileInfoKHR {
     }
 }
 
+unsafe impl Send for VideoDecodeAV1ProfileInfoKHR {}
+unsafe impl Sync for VideoDecodeAV1ProfileInfoKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoDecodeAV1SessionParametersCreateInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -26622,6 +29706,9 @@ impl Default for VideoDecodeAV1SessionParametersCreateInfoKHR {
     }
 }
 
+unsafe impl Send for VideoDecodeAV1SessionParametersCreateInfoKHR {}
+unsafe impl Sync for VideoDecodeAV1SessionParametersCreateInfoKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoDecodeCapabilitiesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -26641,6 +29728,9 @@ impl Default for VideoDecodeCapabilitiesKHR {
         }
     }
 }
+
+unsafe impl Send for VideoDecodeCapabilitiesKHR {}
+unsafe impl Sync for VideoDecodeCapabilitiesKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoDecodeH264CapabilitiesKHR.html>
 #[repr(C)]
@@ -26664,6 +29754,9 @@ impl Default for VideoDecodeH264CapabilitiesKHR {
     }
 }
 
+unsafe impl Send for VideoDecodeH264CapabilitiesKHR {}
+unsafe impl Sync for VideoDecodeH264CapabilitiesKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoDecodeH264DpbSlotInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -26683,6 +29776,9 @@ impl Default for VideoDecodeH264DpbSlotInfoKHR {
         }
     }
 }
+
+unsafe impl Send for VideoDecodeH264DpbSlotInfoKHR {}
+unsafe impl Sync for VideoDecodeH264DpbSlotInfoKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoDecodeH264InlineSessionParametersInfoKHR.html>
 #[repr(C)]
@@ -26705,6 +29801,9 @@ impl Default for VideoDecodeH264InlineSessionParametersInfoKHR {
         }
     }
 }
+
+unsafe impl Send for VideoDecodeH264InlineSessionParametersInfoKHR {}
+unsafe impl Sync for VideoDecodeH264InlineSessionParametersInfoKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoDecodeH264PictureInfoKHR.html>
 #[repr(C)]
@@ -26730,6 +29829,9 @@ impl Default for VideoDecodeH264PictureInfoKHR {
     }
 }
 
+unsafe impl Send for VideoDecodeH264PictureInfoKHR {}
+unsafe impl Sync for VideoDecodeH264PictureInfoKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoDecodeH264ProfileInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -26751,6 +29853,9 @@ impl Default for VideoDecodeH264ProfileInfoKHR {
         }
     }
 }
+
+unsafe impl Send for VideoDecodeH264ProfileInfoKHR {}
+unsafe impl Sync for VideoDecodeH264ProfileInfoKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoDecodeH264SessionParametersAddInfoKHR.html>
 #[repr(C)]
@@ -26778,6 +29883,9 @@ impl Default for VideoDecodeH264SessionParametersAddInfoKHR {
     }
 }
 
+unsafe impl Send for VideoDecodeH264SessionParametersAddInfoKHR {}
+unsafe impl Sync for VideoDecodeH264SessionParametersAddInfoKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoDecodeH264SessionParametersCreateInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -26802,6 +29910,9 @@ impl Default for VideoDecodeH264SessionParametersCreateInfoKHR {
     }
 }
 
+unsafe impl Send for VideoDecodeH264SessionParametersCreateInfoKHR {}
+unsafe impl Sync for VideoDecodeH264SessionParametersCreateInfoKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoDecodeH265CapabilitiesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -26822,6 +29933,9 @@ impl Default for VideoDecodeH265CapabilitiesKHR {
     }
 }
 
+unsafe impl Send for VideoDecodeH265CapabilitiesKHR {}
+unsafe impl Sync for VideoDecodeH265CapabilitiesKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoDecodeH265DpbSlotInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -26841,6 +29955,9 @@ impl Default for VideoDecodeH265DpbSlotInfoKHR {
         }
     }
 }
+
+unsafe impl Send for VideoDecodeH265DpbSlotInfoKHR {}
+unsafe impl Sync for VideoDecodeH265DpbSlotInfoKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoDecodeH265InlineSessionParametersInfoKHR.html>
 #[repr(C)]
@@ -26866,6 +29983,9 @@ impl Default for VideoDecodeH265InlineSessionParametersInfoKHR {
     }
 }
 
+unsafe impl Send for VideoDecodeH265InlineSessionParametersInfoKHR {}
+unsafe impl Sync for VideoDecodeH265InlineSessionParametersInfoKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoDecodeH265PictureInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -26890,6 +30010,9 @@ impl Default for VideoDecodeH265PictureInfoKHR {
     }
 }
 
+unsafe impl Send for VideoDecodeH265PictureInfoKHR {}
+unsafe impl Sync for VideoDecodeH265PictureInfoKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoDecodeH265ProfileInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -26909,6 +30032,9 @@ impl Default for VideoDecodeH265ProfileInfoKHR {
         }
     }
 }
+
+unsafe impl Send for VideoDecodeH265ProfileInfoKHR {}
+unsafe impl Sync for VideoDecodeH265ProfileInfoKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoDecodeH265SessionParametersAddInfoKHR.html>
 #[repr(C)]
@@ -26940,6 +30066,9 @@ impl Default for VideoDecodeH265SessionParametersAddInfoKHR {
     }
 }
 
+unsafe impl Send for VideoDecodeH265SessionParametersAddInfoKHR {}
+unsafe impl Sync for VideoDecodeH265SessionParametersAddInfoKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoDecodeH265SessionParametersCreateInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -26965,6 +30094,9 @@ impl Default for VideoDecodeH265SessionParametersCreateInfoKHR {
         }
     }
 }
+
+unsafe impl Send for VideoDecodeH265SessionParametersCreateInfoKHR {}
+unsafe impl Sync for VideoDecodeH265SessionParametersCreateInfoKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoDecodeInfoKHR.html>
 #[repr(C)]
@@ -27000,6 +30132,9 @@ impl Default for VideoDecodeInfoKHR {
     }
 }
 
+unsafe impl Send for VideoDecodeInfoKHR {}
+unsafe impl Sync for VideoDecodeInfoKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoDecodeUsageInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -27020,6 +30155,9 @@ impl Default for VideoDecodeUsageInfoKHR {
     }
 }
 
+unsafe impl Send for VideoDecodeUsageInfoKHR {}
+unsafe impl Sync for VideoDecodeUsageInfoKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoDecodeVP9CapabilitiesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -27039,6 +30177,9 @@ impl Default for VideoDecodeVP9CapabilitiesKHR {
         }
     }
 }
+
+unsafe impl Send for VideoDecodeVP9CapabilitiesKHR {}
+unsafe impl Sync for VideoDecodeVP9CapabilitiesKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoDecodeVP9PictureInfoKHR.html>
 #[repr(C)]
@@ -27068,6 +30209,9 @@ impl Default for VideoDecodeVP9PictureInfoKHR {
     }
 }
 
+unsafe impl Send for VideoDecodeVP9PictureInfoKHR {}
+unsafe impl Sync for VideoDecodeVP9PictureInfoKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoDecodeVP9ProfileInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -27087,6 +30231,9 @@ impl Default for VideoDecodeVP9ProfileInfoKHR {
         }
     }
 }
+
+unsafe impl Send for VideoDecodeVP9ProfileInfoKHR {}
+unsafe impl Sync for VideoDecodeVP9ProfileInfoKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeAV1CapabilitiesKHR.html>
 #[repr(C)]
@@ -27154,6 +30301,9 @@ impl Default for VideoEncodeAV1CapabilitiesKHR {
     }
 }
 
+unsafe impl Send for VideoEncodeAV1CapabilitiesKHR {}
+unsafe impl Sync for VideoEncodeAV1CapabilitiesKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeAV1DpbSlotInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -27173,6 +30323,9 @@ impl Default for VideoEncodeAV1DpbSlotInfoKHR {
         }
     }
 }
+
+unsafe impl Send for VideoEncodeAV1DpbSlotInfoKHR {}
+unsafe impl Sync for VideoEncodeAV1DpbSlotInfoKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeAV1FrameSizeKHR.html>
 #[repr(C)]
@@ -27209,6 +30362,9 @@ impl Default for VideoEncodeAV1GopRemainingFrameInfoKHR {
     }
 }
 
+unsafe impl Send for VideoEncodeAV1GopRemainingFrameInfoKHR {}
+unsafe impl Sync for VideoEncodeAV1GopRemainingFrameInfoKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeAV1PictureInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -27241,6 +30397,9 @@ impl Default for VideoEncodeAV1PictureInfoKHR {
     }
 }
 
+unsafe impl Send for VideoEncodeAV1PictureInfoKHR {}
+unsafe impl Sync for VideoEncodeAV1PictureInfoKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeAV1ProfileInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -27260,6 +30419,9 @@ impl Default for VideoEncodeAV1ProfileInfoKHR {
         }
     }
 }
+
+unsafe impl Send for VideoEncodeAV1ProfileInfoKHR {}
+unsafe impl Sync for VideoEncodeAV1ProfileInfoKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeAV1QIndexKHR.html>
 #[repr(C)]
@@ -27318,6 +30480,9 @@ impl Default for VideoEncodeAV1QualityLevelPropertiesKHR {
     }
 }
 
+unsafe impl Send for VideoEncodeAV1QualityLevelPropertiesKHR {}
+unsafe impl Sync for VideoEncodeAV1QualityLevelPropertiesKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeAV1QuantizationMapCapabilitiesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -27339,6 +30504,9 @@ impl Default for VideoEncodeAV1QuantizationMapCapabilitiesKHR {
         }
     }
 }
+
+unsafe impl Send for VideoEncodeAV1QuantizationMapCapabilitiesKHR {}
+unsafe impl Sync for VideoEncodeAV1QuantizationMapCapabilitiesKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeAV1RateControlInfoKHR.html>
 #[repr(C)]
@@ -27367,6 +30535,9 @@ impl Default for VideoEncodeAV1RateControlInfoKHR {
         }
     }
 }
+
+unsafe impl Send for VideoEncodeAV1RateControlInfoKHR {}
+unsafe impl Sync for VideoEncodeAV1RateControlInfoKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeAV1RateControlLayerInfoKHR.html>
 #[repr(C)]
@@ -27398,6 +30569,9 @@ impl Default for VideoEncodeAV1RateControlLayerInfoKHR {
     }
 }
 
+unsafe impl Send for VideoEncodeAV1RateControlLayerInfoKHR {}
+unsafe impl Sync for VideoEncodeAV1RateControlLayerInfoKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeAV1SessionCreateInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -27419,6 +30593,9 @@ impl Default for VideoEncodeAV1SessionCreateInfoKHR {
         }
     }
 }
+
+unsafe impl Send for VideoEncodeAV1SessionCreateInfoKHR {}
+unsafe impl Sync for VideoEncodeAV1SessionCreateInfoKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeAV1SessionParametersCreateInfoKHR.html>
 #[repr(C)]
@@ -27445,6 +30622,9 @@ impl Default for VideoEncodeAV1SessionParametersCreateInfoKHR {
         }
     }
 }
+
+unsafe impl Send for VideoEncodeAV1SessionParametersCreateInfoKHR {}
+unsafe impl Sync for VideoEncodeAV1SessionParametersCreateInfoKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeCapabilitiesKHR.html>
 #[repr(C)]
@@ -27477,6 +30657,9 @@ impl Default for VideoEncodeCapabilitiesKHR {
         }
     }
 }
+
+unsafe impl Send for VideoEncodeCapabilitiesKHR {}
+unsafe impl Sync for VideoEncodeCapabilitiesKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeH264CapabilitiesKHR.html>
 #[repr(C)]
@@ -27522,6 +30705,9 @@ impl Default for VideoEncodeH264CapabilitiesKHR {
     }
 }
 
+unsafe impl Send for VideoEncodeH264CapabilitiesKHR {}
+unsafe impl Sync for VideoEncodeH264CapabilitiesKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeH264DpbSlotInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -27541,6 +30727,9 @@ impl Default for VideoEncodeH264DpbSlotInfoKHR {
         }
     }
 }
+
+unsafe impl Send for VideoEncodeH264DpbSlotInfoKHR {}
+unsafe impl Sync for VideoEncodeH264DpbSlotInfoKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeH264FrameSizeKHR.html>
 #[repr(C)]
@@ -27577,6 +30766,9 @@ impl Default for VideoEncodeH264GopRemainingFrameInfoKHR {
     }
 }
 
+unsafe impl Send for VideoEncodeH264GopRemainingFrameInfoKHR {}
+unsafe impl Sync for VideoEncodeH264GopRemainingFrameInfoKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeH264NaluSliceInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -27598,6 +30790,9 @@ impl Default for VideoEncodeH264NaluSliceInfoKHR {
         }
     }
 }
+
+unsafe impl Send for VideoEncodeH264NaluSliceInfoKHR {}
+unsafe impl Sync for VideoEncodeH264NaluSliceInfoKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeH264PictureInfoKHR.html>
 #[repr(C)]
@@ -27625,6 +30820,9 @@ impl Default for VideoEncodeH264PictureInfoKHR {
     }
 }
 
+unsafe impl Send for VideoEncodeH264PictureInfoKHR {}
+unsafe impl Sync for VideoEncodeH264PictureInfoKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeH264ProfileInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -27644,6 +30842,9 @@ impl Default for VideoEncodeH264ProfileInfoKHR {
         }
     }
 }
+
+unsafe impl Send for VideoEncodeH264ProfileInfoKHR {}
+unsafe impl Sync for VideoEncodeH264ProfileInfoKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeH264QpKHR.html>
 #[repr(C)]
@@ -27690,6 +30891,9 @@ impl Default for VideoEncodeH264QualityLevelPropertiesKHR {
     }
 }
 
+unsafe impl Send for VideoEncodeH264QualityLevelPropertiesKHR {}
+unsafe impl Sync for VideoEncodeH264QualityLevelPropertiesKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeH264QuantizationMapCapabilitiesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -27711,6 +30915,9 @@ impl Default for VideoEncodeH264QuantizationMapCapabilitiesKHR {
         }
     }
 }
+
+unsafe impl Send for VideoEncodeH264QuantizationMapCapabilitiesKHR {}
+unsafe impl Sync for VideoEncodeH264QuantizationMapCapabilitiesKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeH264RateControlInfoKHR.html>
 #[repr(C)]
@@ -27739,6 +30946,9 @@ impl Default for VideoEncodeH264RateControlInfoKHR {
         }
     }
 }
+
+unsafe impl Send for VideoEncodeH264RateControlInfoKHR {}
+unsafe impl Sync for VideoEncodeH264RateControlInfoKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeH264RateControlLayerInfoKHR.html>
 #[repr(C)]
@@ -27770,6 +30980,9 @@ impl Default for VideoEncodeH264RateControlLayerInfoKHR {
     }
 }
 
+unsafe impl Send for VideoEncodeH264RateControlLayerInfoKHR {}
+unsafe impl Sync for VideoEncodeH264RateControlLayerInfoKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeH264SessionCreateInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -27791,6 +31004,9 @@ impl Default for VideoEncodeH264SessionCreateInfoKHR {
         }
     }
 }
+
+unsafe impl Send for VideoEncodeH264SessionCreateInfoKHR {}
+unsafe impl Sync for VideoEncodeH264SessionCreateInfoKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeH264SessionParametersAddInfoKHR.html>
 #[repr(C)]
@@ -27818,6 +31034,9 @@ impl Default for VideoEncodeH264SessionParametersAddInfoKHR {
     }
 }
 
+unsafe impl Send for VideoEncodeH264SessionParametersAddInfoKHR {}
+unsafe impl Sync for VideoEncodeH264SessionParametersAddInfoKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeH264SessionParametersCreateInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -27842,6 +31061,9 @@ impl Default for VideoEncodeH264SessionParametersCreateInfoKHR {
     }
 }
 
+unsafe impl Send for VideoEncodeH264SessionParametersCreateInfoKHR {}
+unsafe impl Sync for VideoEncodeH264SessionParametersCreateInfoKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeH264SessionParametersFeedbackInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -27863,6 +31085,9 @@ impl Default for VideoEncodeH264SessionParametersFeedbackInfoKHR {
         }
     }
 }
+
+unsafe impl Send for VideoEncodeH264SessionParametersFeedbackInfoKHR {}
+unsafe impl Sync for VideoEncodeH264SessionParametersFeedbackInfoKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeH264SessionParametersGetInfoKHR.html>
 #[repr(C)]
@@ -27889,6 +31114,9 @@ impl Default for VideoEncodeH264SessionParametersGetInfoKHR {
         }
     }
 }
+
+unsafe impl Send for VideoEncodeH264SessionParametersGetInfoKHR {}
+unsafe impl Sync for VideoEncodeH264SessionParametersGetInfoKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeH265CapabilitiesKHR.html>
 #[repr(C)]
@@ -27940,6 +31168,9 @@ impl Default for VideoEncodeH265CapabilitiesKHR {
     }
 }
 
+unsafe impl Send for VideoEncodeH265CapabilitiesKHR {}
+unsafe impl Sync for VideoEncodeH265CapabilitiesKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeH265DpbSlotInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -27959,6 +31190,9 @@ impl Default for VideoEncodeH265DpbSlotInfoKHR {
         }
     }
 }
+
+unsafe impl Send for VideoEncodeH265DpbSlotInfoKHR {}
+unsafe impl Sync for VideoEncodeH265DpbSlotInfoKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeH265FrameSizeKHR.html>
 #[repr(C)]
@@ -27995,6 +31229,9 @@ impl Default for VideoEncodeH265GopRemainingFrameInfoKHR {
     }
 }
 
+unsafe impl Send for VideoEncodeH265GopRemainingFrameInfoKHR {}
+unsafe impl Sync for VideoEncodeH265GopRemainingFrameInfoKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeH265NaluSliceSegmentInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -28016,6 +31253,9 @@ impl Default for VideoEncodeH265NaluSliceSegmentInfoKHR {
         }
     }
 }
+
+unsafe impl Send for VideoEncodeH265NaluSliceSegmentInfoKHR {}
+unsafe impl Sync for VideoEncodeH265NaluSliceSegmentInfoKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeH265PictureInfoKHR.html>
 #[repr(C)]
@@ -28041,6 +31281,9 @@ impl Default for VideoEncodeH265PictureInfoKHR {
     }
 }
 
+unsafe impl Send for VideoEncodeH265PictureInfoKHR {}
+unsafe impl Sync for VideoEncodeH265PictureInfoKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeH265ProfileInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -28060,6 +31303,9 @@ impl Default for VideoEncodeH265ProfileInfoKHR {
         }
     }
 }
+
+unsafe impl Send for VideoEncodeH265ProfileInfoKHR {}
+unsafe impl Sync for VideoEncodeH265ProfileInfoKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeH265QpKHR.html>
 #[repr(C)]
@@ -28104,6 +31350,9 @@ impl Default for VideoEncodeH265QualityLevelPropertiesKHR {
     }
 }
 
+unsafe impl Send for VideoEncodeH265QualityLevelPropertiesKHR {}
+unsafe impl Sync for VideoEncodeH265QualityLevelPropertiesKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeH265QuantizationMapCapabilitiesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -28125,6 +31374,9 @@ impl Default for VideoEncodeH265QuantizationMapCapabilitiesKHR {
         }
     }
 }
+
+unsafe impl Send for VideoEncodeH265QuantizationMapCapabilitiesKHR {}
+unsafe impl Sync for VideoEncodeH265QuantizationMapCapabilitiesKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeH265RateControlInfoKHR.html>
 #[repr(C)]
@@ -28153,6 +31405,9 @@ impl Default for VideoEncodeH265RateControlInfoKHR {
         }
     }
 }
+
+unsafe impl Send for VideoEncodeH265RateControlInfoKHR {}
+unsafe impl Sync for VideoEncodeH265RateControlInfoKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeH265RateControlLayerInfoKHR.html>
 #[repr(C)]
@@ -28184,6 +31439,9 @@ impl Default for VideoEncodeH265RateControlLayerInfoKHR {
     }
 }
 
+unsafe impl Send for VideoEncodeH265RateControlLayerInfoKHR {}
+unsafe impl Sync for VideoEncodeH265RateControlLayerInfoKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeH265SessionCreateInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -28205,6 +31463,9 @@ impl Default for VideoEncodeH265SessionCreateInfoKHR {
         }
     }
 }
+
+unsafe impl Send for VideoEncodeH265SessionCreateInfoKHR {}
+unsafe impl Sync for VideoEncodeH265SessionCreateInfoKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeH265SessionParametersAddInfoKHR.html>
 #[repr(C)]
@@ -28236,6 +31497,9 @@ impl Default for VideoEncodeH265SessionParametersAddInfoKHR {
     }
 }
 
+unsafe impl Send for VideoEncodeH265SessionParametersAddInfoKHR {}
+unsafe impl Sync for VideoEncodeH265SessionParametersAddInfoKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeH265SessionParametersCreateInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -28262,6 +31526,9 @@ impl Default for VideoEncodeH265SessionParametersCreateInfoKHR {
     }
 }
 
+unsafe impl Send for VideoEncodeH265SessionParametersCreateInfoKHR {}
+unsafe impl Sync for VideoEncodeH265SessionParametersCreateInfoKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeH265SessionParametersFeedbackInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -28285,6 +31552,9 @@ impl Default for VideoEncodeH265SessionParametersFeedbackInfoKHR {
         }
     }
 }
+
+unsafe impl Send for VideoEncodeH265SessionParametersFeedbackInfoKHR {}
+unsafe impl Sync for VideoEncodeH265SessionParametersFeedbackInfoKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeH265SessionParametersGetInfoKHR.html>
 #[repr(C)]
@@ -28315,6 +31585,9 @@ impl Default for VideoEncodeH265SessionParametersGetInfoKHR {
         }
     }
 }
+
+unsafe impl Send for VideoEncodeH265SessionParametersGetInfoKHR {}
+unsafe impl Sync for VideoEncodeH265SessionParametersGetInfoKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeInfoKHR.html>
 #[repr(C)]
@@ -28352,6 +31625,9 @@ impl Default for VideoEncodeInfoKHR {
     }
 }
 
+unsafe impl Send for VideoEncodeInfoKHR {}
+unsafe impl Sync for VideoEncodeInfoKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeIntraRefreshCapabilitiesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -28380,6 +31656,9 @@ impl Default for VideoEncodeIntraRefreshCapabilitiesKHR {
     }
 }
 
+unsafe impl Send for VideoEncodeIntraRefreshCapabilitiesKHR {}
+unsafe impl Sync for VideoEncodeIntraRefreshCapabilitiesKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeIntraRefreshInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -28402,6 +31681,9 @@ impl Default for VideoEncodeIntraRefreshInfoKHR {
     }
 }
 
+unsafe impl Send for VideoEncodeIntraRefreshInfoKHR {}
+unsafe impl Sync for VideoEncodeIntraRefreshInfoKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeProfileRgbConversionInfoVALVE.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -28422,6 +31704,9 @@ impl Default for VideoEncodeProfileRgbConversionInfoVALVE {
     }
 }
 
+unsafe impl Send for VideoEncodeProfileRgbConversionInfoVALVE {}
+unsafe impl Sync for VideoEncodeProfileRgbConversionInfoVALVE {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeQualityLevelInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -28441,6 +31726,9 @@ impl Default for VideoEncodeQualityLevelInfoKHR {
         }
     }
 }
+
+unsafe impl Send for VideoEncodeQualityLevelInfoKHR {}
+unsafe impl Sync for VideoEncodeQualityLevelInfoKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeQualityLevelPropertiesKHR.html>
 #[repr(C)]
@@ -28464,6 +31752,9 @@ impl Default for VideoEncodeQualityLevelPropertiesKHR {
     }
 }
 
+unsafe impl Send for VideoEncodeQualityLevelPropertiesKHR {}
+unsafe impl Sync for VideoEncodeQualityLevelPropertiesKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeQuantizationMapCapabilitiesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -28483,6 +31774,9 @@ impl Default for VideoEncodeQuantizationMapCapabilitiesKHR {
         }
     }
 }
+
+unsafe impl Send for VideoEncodeQuantizationMapCapabilitiesKHR {}
+unsafe impl Sync for VideoEncodeQuantizationMapCapabilitiesKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeQuantizationMapInfoKHR.html>
 #[repr(C)]
@@ -28506,6 +31800,9 @@ impl Default for VideoEncodeQuantizationMapInfoKHR {
     }
 }
 
+unsafe impl Send for VideoEncodeQuantizationMapInfoKHR {}
+unsafe impl Sync for VideoEncodeQuantizationMapInfoKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeQuantizationMapSessionParametersCreateInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -28525,6 +31822,9 @@ impl Default for VideoEncodeQuantizationMapSessionParametersCreateInfoKHR {
         }
     }
 }
+
+unsafe impl Send for VideoEncodeQuantizationMapSessionParametersCreateInfoKHR {}
+unsafe impl Sync for VideoEncodeQuantizationMapSessionParametersCreateInfoKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeRateControlInfoKHR.html>
 #[repr(C)]
@@ -28556,6 +31856,9 @@ impl Default for VideoEncodeRateControlInfoKHR {
     }
 }
 
+unsafe impl Send for VideoEncodeRateControlInfoKHR {}
+unsafe impl Sync for VideoEncodeRateControlInfoKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeRateControlLayerInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -28581,6 +31884,9 @@ impl Default for VideoEncodeRateControlLayerInfoKHR {
         }
     }
 }
+
+unsafe impl Send for VideoEncodeRateControlLayerInfoKHR {}
+unsafe impl Sync for VideoEncodeRateControlLayerInfoKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeRgbConversionCapabilitiesVALVE.html>
 #[repr(C)]
@@ -28608,6 +31914,9 @@ impl Default for VideoEncodeRgbConversionCapabilitiesVALVE {
     }
 }
 
+unsafe impl Send for VideoEncodeRgbConversionCapabilitiesVALVE {}
+unsafe impl Sync for VideoEncodeRgbConversionCapabilitiesVALVE {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeSessionIntraRefreshCreateInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -28627,6 +31936,9 @@ impl Default for VideoEncodeSessionIntraRefreshCreateInfoKHR {
         }
     }
 }
+
+unsafe impl Send for VideoEncodeSessionIntraRefreshCreateInfoKHR {}
+unsafe impl Sync for VideoEncodeSessionIntraRefreshCreateInfoKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeSessionParametersFeedbackInfoKHR.html>
 #[repr(C)]
@@ -28648,6 +31960,9 @@ impl Default for VideoEncodeSessionParametersFeedbackInfoKHR {
     }
 }
 
+unsafe impl Send for VideoEncodeSessionParametersFeedbackInfoKHR {}
+unsafe impl Sync for VideoEncodeSessionParametersFeedbackInfoKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeSessionParametersGetInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -28667,6 +31982,9 @@ impl Default for VideoEncodeSessionParametersGetInfoKHR {
         }
     }
 }
+
+unsafe impl Send for VideoEncodeSessionParametersGetInfoKHR {}
+unsafe impl Sync for VideoEncodeSessionParametersGetInfoKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeSessionRgbConversionCreateInfoVALVE.html>
 #[repr(C)]
@@ -28694,6 +32012,9 @@ impl Default for VideoEncodeSessionRgbConversionCreateInfoVALVE {
     }
 }
 
+unsafe impl Send for VideoEncodeSessionRgbConversionCreateInfoVALVE {}
+unsafe impl Sync for VideoEncodeSessionRgbConversionCreateInfoVALVE {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeUsageInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -28718,6 +32039,9 @@ impl Default for VideoEncodeUsageInfoKHR {
     }
 }
 
+unsafe impl Send for VideoEncodeUsageInfoKHR {}
+unsafe impl Sync for VideoEncodeUsageInfoKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEndCodingInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -28737,6 +32061,9 @@ impl Default for VideoEndCodingInfoKHR {
         }
     }
 }
+
+unsafe impl Send for VideoEndCodingInfoKHR {}
+unsafe impl Sync for VideoEndCodingInfoKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoFormatAV1QuantizationMapPropertiesKHR.html>
 #[repr(C)]
@@ -28758,6 +32085,9 @@ impl Default for VideoFormatAV1QuantizationMapPropertiesKHR {
     }
 }
 
+unsafe impl Send for VideoFormatAV1QuantizationMapPropertiesKHR {}
+unsafe impl Sync for VideoFormatAV1QuantizationMapPropertiesKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoFormatH265QuantizationMapPropertiesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -28777,6 +32107,9 @@ impl Default for VideoFormatH265QuantizationMapPropertiesKHR {
         }
     }
 }
+
+unsafe impl Send for VideoFormatH265QuantizationMapPropertiesKHR {}
+unsafe impl Sync for VideoFormatH265QuantizationMapPropertiesKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoFormatPropertiesKHR.html>
 #[repr(C)]
@@ -28808,6 +32141,9 @@ impl Default for VideoFormatPropertiesKHR {
     }
 }
 
+unsafe impl Send for VideoFormatPropertiesKHR {}
+unsafe impl Sync for VideoFormatPropertiesKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoFormatQuantizationMapPropertiesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -28827,6 +32163,9 @@ impl Default for VideoFormatQuantizationMapPropertiesKHR {
         }
     }
 }
+
+unsafe impl Send for VideoFormatQuantizationMapPropertiesKHR {}
+unsafe impl Sync for VideoFormatQuantizationMapPropertiesKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoInlineQueryInfoKHR.html>
 #[repr(C)]
@@ -28851,6 +32190,9 @@ impl Default for VideoInlineQueryInfoKHR {
         }
     }
 }
+
+unsafe impl Send for VideoInlineQueryInfoKHR {}
+unsafe impl Sync for VideoInlineQueryInfoKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoPictureResourceInfoKHR.html>
 #[repr(C)]
@@ -28878,6 +32220,9 @@ impl Default for VideoPictureResourceInfoKHR {
     }
 }
 
+unsafe impl Send for VideoPictureResourceInfoKHR {}
+unsafe impl Sync for VideoPictureResourceInfoKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoProfileInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -28904,6 +32249,9 @@ impl Default for VideoProfileInfoKHR {
     }
 }
 
+unsafe impl Send for VideoProfileInfoKHR {}
+unsafe impl Sync for VideoProfileInfoKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoProfileListInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -28926,6 +32274,9 @@ impl Default for VideoProfileListInfoKHR {
     }
 }
 
+unsafe impl Send for VideoProfileListInfoKHR {}
+unsafe impl Sync for VideoProfileListInfoKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoReferenceIntraRefreshInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -28945,6 +32296,9 @@ impl Default for VideoReferenceIntraRefreshInfoKHR {
         }
     }
 }
+
+unsafe impl Send for VideoReferenceIntraRefreshInfoKHR {}
+unsafe impl Sync for VideoReferenceIntraRefreshInfoKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoReferenceSlotInfoKHR.html>
 #[repr(C)]
@@ -28967,6 +32321,9 @@ impl Default for VideoReferenceSlotInfoKHR {
         }
     }
 }
+
+unsafe impl Send for VideoReferenceSlotInfoKHR {}
+unsafe impl Sync for VideoReferenceSlotInfoKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoSessionCreateInfoKHR.html>
 #[repr(C)]
@@ -29004,6 +32361,9 @@ impl Default for VideoSessionCreateInfoKHR {
     }
 }
 
+unsafe impl Send for VideoSessionCreateInfoKHR {}
+unsafe impl Sync for VideoSessionCreateInfoKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoSessionMemoryRequirementsKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -29025,6 +32385,9 @@ impl Default for VideoSessionMemoryRequirementsKHR {
         }
     }
 }
+
+unsafe impl Send for VideoSessionMemoryRequirementsKHR {}
+unsafe impl Sync for VideoSessionMemoryRequirementsKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoSessionParametersCreateInfoKHR.html>
 #[repr(C)]
@@ -29050,6 +32413,9 @@ impl Default for VideoSessionParametersCreateInfoKHR {
     }
 }
 
+unsafe impl Send for VideoSessionParametersCreateInfoKHR {}
+unsafe impl Sync for VideoSessionParametersCreateInfoKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoSessionParametersUpdateInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -29069,6 +32435,9 @@ impl Default for VideoSessionParametersUpdateInfoKHR {
         }
     }
 }
+
+unsafe impl Send for VideoSessionParametersUpdateInfoKHR {}
+unsafe impl Sync for VideoSessionParametersUpdateInfoKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkViewport.html>
 #[repr(C)]
@@ -29124,6 +32493,9 @@ impl Default for WaylandSurfaceCreateInfoKHR {
     }
 }
 
+unsafe impl Send for WaylandSurfaceCreateInfoKHR {}
+unsafe impl Sync for WaylandSurfaceCreateInfoKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkWin32KeyedMutexAcquireReleaseInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -29155,6 +32527,9 @@ impl Default for Win32KeyedMutexAcquireReleaseInfoKHR {
         }
     }
 }
+
+unsafe impl Send for Win32KeyedMutexAcquireReleaseInfoKHR {}
+unsafe impl Sync for Win32KeyedMutexAcquireReleaseInfoKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkWin32KeyedMutexAcquireReleaseInfoNV.html>
 #[repr(C)]
@@ -29188,6 +32563,9 @@ impl Default for Win32KeyedMutexAcquireReleaseInfoNV {
     }
 }
 
+unsafe impl Send for Win32KeyedMutexAcquireReleaseInfoNV {}
+unsafe impl Sync for Win32KeyedMutexAcquireReleaseInfoNV {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkWin32SurfaceCreateInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -29211,6 +32589,9 @@ impl Default for Win32SurfaceCreateInfoKHR {
         }
     }
 }
+
+unsafe impl Send for Win32SurfaceCreateInfoKHR {}
+unsafe impl Sync for Win32SurfaceCreateInfoKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkWriteDescriptorSet.html>
 #[repr(C)]
@@ -29246,6 +32627,9 @@ impl Default for WriteDescriptorSet {
     }
 }
 
+unsafe impl Send for WriteDescriptorSet {}
+unsafe impl Sync for WriteDescriptorSet {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkWriteDescriptorSetAccelerationStructureKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -29267,6 +32651,9 @@ impl Default for WriteDescriptorSetAccelerationStructureKHR {
         }
     }
 }
+
+unsafe impl Send for WriteDescriptorSetAccelerationStructureKHR {}
+unsafe impl Sync for WriteDescriptorSetAccelerationStructureKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkWriteDescriptorSetAccelerationStructureNV.html>
 #[repr(C)]
@@ -29290,6 +32677,9 @@ impl Default for WriteDescriptorSetAccelerationStructureNV {
     }
 }
 
+unsafe impl Send for WriteDescriptorSetAccelerationStructureNV {}
+unsafe impl Sync for WriteDescriptorSetAccelerationStructureNV {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkWriteDescriptorSetInlineUniformBlock.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -29311,6 +32701,9 @@ impl Default for WriteDescriptorSetInlineUniformBlock {
         }
     }
 }
+
+unsafe impl Send for WriteDescriptorSetInlineUniformBlock {}
+unsafe impl Sync for WriteDescriptorSetInlineUniformBlock {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkWriteDescriptorSetPartitionedAccelerationStructureNV.html>
 #[repr(C)]
@@ -29334,6 +32727,9 @@ impl Default for WriteDescriptorSetPartitionedAccelerationStructureNV {
     }
 }
 
+unsafe impl Send for WriteDescriptorSetPartitionedAccelerationStructureNV {}
+unsafe impl Sync for WriteDescriptorSetPartitionedAccelerationStructureNV {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkWriteDescriptorSetTensorARM.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -29355,6 +32751,9 @@ impl Default for WriteDescriptorSetTensorARM {
         }
     }
 }
+
+unsafe impl Send for WriteDescriptorSetTensorARM {}
+unsafe impl Sync for WriteDescriptorSetTensorARM {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkWriteIndirectExecutionSetPipelineEXT.html>
 #[repr(C)]
@@ -29378,6 +32777,9 @@ impl Default for WriteIndirectExecutionSetPipelineEXT {
     }
 }
 
+unsafe impl Send for WriteIndirectExecutionSetPipelineEXT {}
+unsafe impl Sync for WriteIndirectExecutionSetPipelineEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkWriteIndirectExecutionSetShaderEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -29399,6 +32801,9 @@ impl Default for WriteIndirectExecutionSetShaderEXT {
         }
     }
 }
+
+unsafe impl Send for WriteIndirectExecutionSetShaderEXT {}
+unsafe impl Sync for WriteIndirectExecutionSetShaderEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkXYColorEXT.html>
 #[repr(C)]
@@ -29432,6 +32837,9 @@ impl Default for XcbSurfaceCreateInfoKHR {
     }
 }
 
+unsafe impl Send for XcbSurfaceCreateInfoKHR {}
+unsafe impl Sync for XcbSurfaceCreateInfoKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkXlibSurfaceCreateInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -29455,6 +32863,9 @@ impl Default for XlibSurfaceCreateInfoKHR {
         }
     }
 }
+
+unsafe impl Send for XlibSurfaceCreateInfoKHR {}
+unsafe impl Sync for XlibSurfaceCreateInfoKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAabbPositionsNV.html>
 pub type AabbPositionsNV = AabbPositionsKHR;
