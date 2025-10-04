@@ -1,6 +1,7 @@
 ## [0.30.0] - UNRELEASED
 
 ### Added
+- Added `DispatchableHandle` and `NonDispatchableHandle` trait aliases for `Handle` trait
 - Added `Send` and `Sync` implementations for Vulkan structs containing pointers
 
 ### Changed

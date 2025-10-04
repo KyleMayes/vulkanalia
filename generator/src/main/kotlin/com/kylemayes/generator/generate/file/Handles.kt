@@ -37,6 +37,20 @@ pub trait Handle: Copy + Clone + fmt::Debug + PartialEq + Eq + Hash + Default + 
     fn is_null(self) -> bool;
 }
 
+/// A [`Handle`] with a representation of `usize` (a pointer to an opaque type).
+///
+/// https://docs.vulkan.org/spec/latest/chapters/fundamentals.html#fundamentals-objectmodel-overview
+pub trait DispatchableHandle: Handle<Repr = usize> {}
+
+impl<H: Handle<Repr = usize>> DispatchableHandle for H {}
+
+/// A [`Handle`] with a representation of `u64` (a value with an implementation-dependent meaning).
+///
+/// https://docs.vulkan.org/spec/latest/chapters/fundamentals.html#fundamentals-objectmodel-overview
+pub trait NonDispatchableHandle: Handle<Repr = u64> {}
+
+impl<H: Handle<Repr = u64>> NonDispatchableHandle for H {}
+
 ${handles.values
         .sortedBy { it.name }
         .joinToString("\n") { generateHandle(it) }}
