@@ -326,7 +326,7 @@ private fun Registry.generateInputSliceTypeAndCast(pointer: PointerType): Pair<S
             )
         pointer.pointee is PointerType ->
             Pair(
-                "&${pointer.pointee.pointee.generate()}",
+                "&[${generateInputSliceTypeAndCast(pointer.pointee).first}]",
                 ".cast()",
             )
         else -> Pair(pointer.pointee.generate(), "")

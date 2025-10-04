@@ -6747,7 +6747,7 @@ pub trait KhrAccelerationStructureExtension: DeviceV1_0 {
         &self,
         deferred_operation: DeferredOperationKHR,
         infos: &[impl Cast<Target = AccelerationStructureBuildGeometryInfoKHR>],
-        build_range_infos: &[&AccelerationStructureBuildRangeInfoKHR],
+        build_range_infos: &[&[impl Cast<Target = AccelerationStructureBuildRangeInfoKHR>]],
     ) -> crate::VkResult<SuccessCode> {
         let __result = (self.commands().build_acceleration_structures_khr)(
             self.handle(),
@@ -6772,7 +6772,7 @@ pub trait KhrAccelerationStructureExtension: DeviceV1_0 {
         infos: &[impl Cast<Target = AccelerationStructureBuildGeometryInfoKHR>],
         indirect_device_addresses: &[DeviceAddress],
         indirect_strides: &[u32],
-        max_primitive_counts: &[&u32],
+        max_primitive_counts: &[&[u32]],
     ) {
         let __result = (self
             .commands()
@@ -6792,7 +6792,7 @@ pub trait KhrAccelerationStructureExtension: DeviceV1_0 {
         &self,
         command_buffer: CommandBuffer,
         infos: &[impl Cast<Target = AccelerationStructureBuildGeometryInfoKHR>],
-        build_range_infos: &[&AccelerationStructureBuildRangeInfoKHR],
+        build_range_infos: &[&[impl Cast<Target = AccelerationStructureBuildRangeInfoKHR>]],
     ) {
         let __result = (self.commands().cmd_build_acceleration_structures_khr)(
             command_buffer,
