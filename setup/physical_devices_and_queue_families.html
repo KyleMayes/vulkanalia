@@ -134,7 +134,7 @@
                     <main>
                         <h1 id="physical-devices-and-queue-families"><a class="header" href="#physical-devices-and-queue-families">Physical devices and queue families</a></h1>
 <p><strong>Code:</strong> <a href="https://github.com/KyleMayes/vulkanalia/tree/master/tutorial/src/03_physical_device_selection.rs">main.rs</a></p>
-<p>After initializing the Vulkan library through an <a href="https://docs.rs/vulkanalia/0.29.0/vulkanalia/struct.Instance.html"><code class="hljs">Instance</code></a> we need to look for and select a graphics card in the system that supports the features we need. In fact we can select any number of graphics cards and use them simultaneously, but in this tutorial we'll stick to the first graphics card that suits our needs.</p>
+<p>After initializing the Vulkan library through an <a href="https://docs.rs/vulkanalia/0.30.0/vulkanalia/struct.Instance.html"><code class="hljs">Instance</code></a> we need to look for and select a graphics card in the system that supports the features we need. In fact we can select any number of graphics cards and use them simultaneously, but in this tutorial we'll stick to the first graphics card that suits our needs.</p>
 <p>We'll add a <code>pick_physical_device</code> function which will accomplish this task and write the physical device and related information to the <code>AppData</code> instance. This function and the functions it calls will use a custom error type (<code>SuitabilityError</code>) to signal that a physical device does not satisfy the requirements of the application. This error type will use the <code>thiserror</code> crate to automatically implement all the necessary boilerplate for an error type.</p>
 <pre><code class="language-rust noplaypen">use thiserror::Error;
 
@@ -154,7 +154,7 @@ unsafe fn pick_physical_device(instance: &amp;Instance, data: &amp;mut AppData) 
     Ok(())
 }
 </code></pre>
-<p>The graphics card that we'll end up selecting will be stored in a <a href="https://docs.rs/vulkanalia/0.29.0/vulkanalia/vk/struct.PhysicalDevice.html"><code class="hljs">vk::PhysicalDevice</code></a> handle that is added as a new field to the <code>AppData</code> struct. This object will be implicitly destroyed when the <a href="https://docs.rs/vulkanalia/0.29.0/vulkanalia/struct.Instance.html"><code class="hljs">Instance</code></a> is destroyed, so we won't need to do anything new in the <code>App::destroy</code> method.</p>
+<p>The graphics card that we'll end up selecting will be stored in a <a href="https://docs.rs/vulkanalia/0.30.0/vulkanalia/vk/struct.PhysicalDevice.html"><code class="hljs">vk::PhysicalDevice</code></a> handle that is added as a new field to the <code>AppData</code> struct. This object will be implicitly destroyed when the <a href="https://docs.rs/vulkanalia/0.30.0/vulkanalia/struct.Instance.html"><code class="hljs">Instance</code></a> is destroyed, so we won't need to do anything new in the <code>App::destroy</code> method.</p>
 <pre><code class="language-rust noplaypen">struct AppData {
     // ...
     physical_device: vk::PhysicalDevice,
@@ -170,11 +170,11 @@ unsafe fn pick_physical_device(instance: &amp;Instance, data: &amp;mut AppData) 
     Ok(())
 }
 </code></pre>
-<p>To evaluate whether a physical device meets our needs we can start by querying for some details. Basic device properties like the name, type, and supported Vulkan version can be queried using <a href="https://docs.rs/vulkanalia/0.29.0/vulkanalia/vk/trait.InstanceV1_0.html#method.get_physical_device_properties"><code class="hljs">get_physical_device_properties</code></a>:</p>
+<p>To evaluate whether a physical device meets our needs we can start by querying for some details. Basic device properties like the name, type, and supported Vulkan version can be queried using <a href="https://docs.rs/vulkanalia/0.30.0/vulkanalia/vk/trait.InstanceV1_0.html#method.get_physical_device_properties"><code class="hljs">get_physical_device_properties</code></a>:</p>
 <pre><code class="language-rust noplaypen">let properties = instance
     .get_physical_device_properties(physical_device);
 </code></pre>
-<p>The support for optional features like texture compression, 64 bit floats, and multi-viewport rendering (useful for VR) can be queried using <a href="https://docs.rs/vulkanalia/0.29.0/vulkanalia/vk/trait.InstanceV1_0.html#method.get_physical_device_features"><code class="hljs">get_physical_device_features</code></a>:</p>
+<p>The support for optional features like texture compression, 64 bit floats, and multi-viewport rendering (useful for VR) can be queried using <a href="https://docs.rs/vulkanalia/0.30.0/vulkanalia/vk/trait.InstanceV1_0.html#method.get_physical_device_features"><code class="hljs">get_physical_device_features</code></a>:</p>
 <pre><code class="language-rust noplaypen">let features = instance
     .get_physical_device_features(physical_device);
 </code></pre>
@@ -231,7 +231,7 @@ impl QueueFamilyIndices {
     }
 }
 </code></pre>
-<p>The queue properties returned by <a href="https://docs.rs/vulkanalia/0.29.0/vulkanalia/vk/trait.InstanceV1_0.html#method.get_physical_device_queue_family_properties"><code class="hljs">get_physical_device_queue_family_properties</code></a> contains various details about the queue families supported by the physical device, including the type of operations supported and the number of queues that can be created based on that family. Here we are looking for the first queue family that supports graphics operations as indicated by <a href="https://docs.rs/vulkanalia/0.29.0/vulkanalia/vk/struct.QueueFlags.html#associatedconstant.GRAPHICS"><code class="hljs">vk::QueueFlags::GRAPHICS</code></a>.</p>
+<p>The queue properties returned by <a href="https://docs.rs/vulkanalia/0.30.0/vulkanalia/vk/trait.InstanceV1_0.html#method.get_physical_device_queue_family_properties"><code class="hljs">get_physical_device_queue_family_properties</code></a> contains various details about the queue families supported by the physical device, including the type of operations supported and the number of queues that can be created based on that family. Here we are looking for the first queue family that supports graphics operations as indicated by <a href="https://docs.rs/vulkanalia/0.30.0/vulkanalia/vk/struct.QueueFlags.html#associatedconstant.GRAPHICS"><code class="hljs">vk::QueueFlags::GRAPHICS</code></a>.</p>
 <p>Now that we have this fancy queue family lookup method, we can use it as a check in the <code>check_physical_device</code> function to ensure the device can process the commands we want to use:</p>
 <pre><code class="language-rust noplaypen">unsafe fn check_physical_device(
     instance: &amp;Instance,
