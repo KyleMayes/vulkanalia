@@ -52,4 +52,4 @@ pub const SHADER_UNUSED_KHR: u32 = !0;
 pub const SUBPASS_EXTERNAL: u32 = !0;
 pub const TRUE: u32 = 1;
 pub const UUID_SIZE: usize = 16;
-pub const WHOLE_SIZE: usize = !0;
+pub const WHOLE_SIZE: u64 = !0;
