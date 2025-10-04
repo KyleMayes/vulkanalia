@@ -1,5 +1,8 @@
 ## [0.30.0] - UNRELEASED
 
+### Added
+- Added `Send` and `Sync` implementations for Vulkan structs containing pointers
+
 ### Changed
 - Bumped `cocoa` to `0.26`
 - Bumped `metao` to `0.32`
