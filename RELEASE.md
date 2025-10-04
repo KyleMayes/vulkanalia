@@ -8,24 +8,28 @@
 
 4. Update `vulkanalia-sys` dependency version for `vulkanalia` crate
 
-5. Update `vulkanalia` dependency version for `vulkanalia-vma` crate
+5. Update `vulkanalia-vma` crate version
 
-6. Update `vulkanalia` versions in tutorial
+6. Update `vulkanalia` dependency version for `vulkanalia-vma` crate
+
+7. Update `vulkanalia` versions in tutorial
     - Version used in tutorial crate
     - Version used in development environment chapter
     - Version used for documentation links in preprocessor
 
-7. Push changes to `master` (ideally via pull request)
+8. Push changes to `master` (ideally via pull request)
 
-8. Run `cargo publish` for `vulkanalia-sys` crate
+9. Run `cargo publish` for `vulkanalia-sys` crate
 
-9. Run `cargo publish` for `vulkanalia` crate
+10. Run `cargo publish` for `vulkanalia` crate
 
-10. Create release on GitHub with `CHANGELOG.md` entry
+11. Run `cargo publish` for `vulkanalia-vma` crate
 
-11. ???
+12. Create release on GitHub with `CHANGELOG.md` entry
 
-12. Profit!
+13. ???
+
+14. Profit!
 
 # MSRV Update Checklist
 
