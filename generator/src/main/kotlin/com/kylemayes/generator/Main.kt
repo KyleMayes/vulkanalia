@@ -24,6 +24,7 @@ import org.eclipse.jgit.transport.RefSpec
 import org.eclipse.jgit.transport.RemoteRefUpdate
 import org.eclipse.jgit.transport.UsernamePasswordCredentialsProvider
 import org.kohsuke.github.GitHub
+import java.io.File
 import java.nio.file.Files
 import java.nio.file.Path
 import java.security.MessageDigest
@@ -46,9 +47,20 @@ data class GeneratorContext(
 class Generator : CliktCommand(help = "Manages generated Vulkan bindings") {
     private val directory by option(help = "Vulkanalia directory").required()
     private val token by option(help = "GitHub personal access token")
+    private val tokenFile by option(help = "GitHub personal access token file")
 
     private val context by findOrSetObject {
         val directory = Path.of(directory).toAbsolutePath().normalize()
+
+        val token =
+            if (this.token != null) {
+                this.token
+            } else if (tokenFile != null) {
+                File(tokenFile!!).readText().trim()
+            } else {
+                null
+            }
+
         if (token != null) {
             GeneratorContext(directory, GitHub.connectUsingOAuth(token), token)
         } else {
