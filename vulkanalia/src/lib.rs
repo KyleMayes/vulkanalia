@@ -77,7 +77,7 @@ use core::slice;
 
 use self::loader::{Loader, LoaderError};
 use self::prelude::v1_0::*;
-use self::vk::{DeviceCommands, EntryCommands, InstanceCommands};
+use self::vk::{DeviceCommands, EntryCommands, InstanceCommands, StaticCommands};
 
 /// Preludes.
 pub mod prelude {
@@ -213,13 +213,25 @@ impl From<Version> for (u32, u32, u32) {
 /// A Vulkan entry point.
 #[derive(Clone)]
 pub struct Entry {
-    _loader: Arc<dyn Loader>,
-    get_instance: vk::PFN_vkGetInstanceProcAddr,
-    get_device: vk::PFN_vkGetDeviceProcAddr,
+    _loader: Option<Arc<dyn Loader>>,
+    static_commands: StaticCommands,
     commands: EntryCommands,
 }
 
 impl Entry {
+    /// Loads a Vulkan entry point from pre-existing commands.
+    #[inline]
+    pub unsafe fn from_existing(static_commands: &StaticCommands) -> Self {
+        let load = |n| (static_commands.get_instance_proc_addr)(vk::Instance::null(), n);
+        let commands = EntryCommands::load(load);
+
+        Self {
+            _loader: None,
+            static_commands: *static_commands,
+            commands,
+        }
+    }
+
     /// Loads a Vulkan entry point using a Vulkan function loader.
     ///
     /// # Safety
@@ -237,13 +249,17 @@ impl Entry {
         let raw = loader.load(b"vkGetDeviceProcAddr")?;
         let get_device = mem::transmute::<F, vk::PFN_vkGetDeviceProcAddr>(raw);
 
+        let static_commands = StaticCommands {
+            get_instance_proc_addr: get_instance,
+            get_device_proc_addr: get_device,
+        };
+
         let load = |n| get_instance(vk::Instance::null(), n);
         let commands = EntryCommands::load(load);
 
         Ok(Self {
-            _loader: loader,
-            get_instance,
-            get_device,
+            _loader: Some(loader),
+            static_commands,
             commands,
         })
     }
@@ -251,18 +267,7 @@ impl Entry {
     /// Gets the instance-level version of this Vulkan entry point.
     #[inline]
     pub fn version(&self) -> VkResult<Version> {
-        let name = c"vkEnumerateInstanceVersion".as_ptr();
-        let raw = unsafe { (self.get_instance)(vk::Instance::null(), name) };
-        let enumerate: Option<vk::PFN_vkEnumerateInstanceVersion> = unsafe { mem::transmute(raw) };
-        if let Some(enumerate) = enumerate {
-            let mut version = 0;
-            match unsafe { enumerate(&mut version) } {
-                vk::Result::SUCCESS => Ok(Version::from(version)),
-                error => Err(error.into()),
-            }
-        } else {
-            Ok(Version::V1_0_0)
-        }
+        unsafe { get_version(self.static_commands.get_instance_proc_addr) }
     }
 
     /// Creates a Vulkan instance using this Vulkan entry point.
@@ -279,17 +284,20 @@ impl Entry {
         info: &vk::InstanceCreateInfo,
         allocator: Option<&vk::AllocationCallbacks>,
     ) -> VkResult<Instance> {
-        let handle = EntryV1_0::create_instance(self, info, allocator)?;
-        let instance_load = |n| (self.get_instance)(handle, n);
-        let commands = InstanceCommands::load(instance_load);
+        let instance = EntryV1_0::create_instance(self, info, allocator)?;
+
+        let load = |n| (self.static_commands.get_instance_proc_addr)(instance, n);
+        let instance_commands = InstanceCommands::load(load);
+
         let version = self.version()?;
+
         let extensions = get_names(info.enabled_extension_count, info.enabled_extension_names);
         let layers = get_names(info.enabled_layer_count, info.enabled_layer_names);
+
         Ok(Instance {
-            get_instance: self.get_instance,
-            get_device: self.get_device,
-            handle,
-            commands,
+            static_commands: self.static_commands,
+            handle: instance,
+            commands: instance_commands,
             version,
             extensions,
             layers,
@@ -309,8 +317,7 @@ unsafe impl Sync for Entry {}
 /// A Vulkan instance.
 #[derive(Clone)]
 pub struct Instance {
-    get_instance: vk::PFN_vkGetInstanceProcAddr,
-    get_device: vk::PFN_vkGetDeviceProcAddr,
+    static_commands: StaticCommands,
     handle: vk::Instance,
     commands: InstanceCommands,
     version: Version,
@@ -319,6 +326,39 @@ pub struct Instance {
 }
 
 impl Instance {
+    /// Loads a Vulkan instance from pre-existing commands and handle.
+    #[inline]
+    pub unsafe fn from_existing(
+        static_commands: &StaticCommands,
+        entry_commands: &EntryCommands,
+        instance: vk::Instance,
+    ) -> VkResult<Self> {
+        let load = |n| (static_commands.get_instance_proc_addr)(instance, n);
+        let commands = InstanceCommands::load(load);
+
+        let version = get_version(static_commands.get_instance_proc_addr)?;
+
+        let extensions = entry_commands
+            .enumerate_instance_extension_properties(None)?
+            .iter()
+            .map(|e| e.extension_name)
+            .collect::<BTreeSet<_>>();
+        let layers = entry_commands
+            .enumerate_instance_layer_properties()?
+            .iter()
+            .map(|l| l.layer_name)
+            .collect::<BTreeSet<_>>();
+
+        Ok(Instance {
+            static_commands: *static_commands,
+            handle: instance,
+            commands,
+            version,
+            extensions,
+            layers,
+        })
+    }
+
     /// Gets the version for this Vulkan instance.
     #[inline]
     pub fn version(&self) -> Version {
@@ -352,12 +392,13 @@ impl Instance {
         allocator: Option<&vk::AllocationCallbacks>,
     ) -> VkResult<Device> {
         let handle = InstanceV1_0::create_device(self, physical_device, info, allocator)?;
-        let instance_load = |n| (self.get_instance)(self.handle, n);
-        let device_load = |n| (self.get_device)(handle, n);
+        let instance_load = |n| (self.static_commands.get_instance_proc_addr)(self.handle, n);
+        let device_load = |n| (self.static_commands.get_device_proc_addr)(handle, n);
         let commands = DeviceCommands::load(instance_load, device_load);
         let extensions = get_names(info.enabled_extension_count, info.enabled_extension_names);
         let layers = get_names(info.enabled_layer_count, info.enabled_layer_names);
         Ok(Device {
+            physical_device,
             handle,
             commands,
             extensions,
@@ -382,6 +423,7 @@ unsafe impl Sync for Instance {}
 /// A Vulkan device.
 #[derive(Clone)]
 pub struct Device {
+    physical_device: vk::PhysicalDevice,
     handle: vk::Device,
     commands: DeviceCommands,
     extensions: BTreeSet<vk::ExtensionName>,
@@ -389,6 +431,45 @@ pub struct Device {
 }
 
 impl Device {
+    /// Loads a Vulkan instance from pre-existing commands and handles.
+    #[inline]
+    pub unsafe fn from_existing(
+        static_commands: &StaticCommands,
+        instance_commands: &InstanceCommands,
+        instance: vk::Instance,
+        physical_device: vk::PhysicalDevice,
+        device: vk::Device,
+    ) -> VkResult<Self> {
+        let instance_load = |n| (static_commands.get_instance_proc_addr)(instance, n);
+        let device_load = |n| (static_commands.get_device_proc_addr)(device, n);
+        let commands = DeviceCommands::load(instance_load, device_load);
+
+        let extensions = (*instance_commands, instance)
+            .enumerate_device_extension_properties(physical_device, None)?
+            .iter()
+            .map(|e| e.extension_name)
+            .collect::<BTreeSet<_>>();
+        let layers = (*instance_commands, instance)
+            .enumerate_device_layer_properties(physical_device)?
+            .iter()
+            .map(|l| l.layer_name)
+            .collect::<BTreeSet<_>>();
+
+        Ok(Self {
+            physical_device,
+            handle: device,
+            commands,
+            extensions,
+            layers,
+        })
+    }
+
+    /// Gets the physical device used for this Vulkan device.
+    #[inline]
+    pub fn physical_device(&self) -> vk::PhysicalDevice {
+        self.physical_device
+    }
+
     /// Gets the loaded extensions for this Vulkan device.
     #[inline]
     pub fn extensions(&self) -> &BTreeSet<vk::ExtensionName> {
@@ -414,6 +495,22 @@ impl fmt::Debug for Device {
 
 unsafe impl Send for Device {}
 unsafe impl Sync for Device {}
+
+#[inline]
+unsafe fn get_version(get_instance_prod_addr: vk::PFN_vkGetInstanceProcAddr) -> VkResult<Version> {
+    let name = c"vkEnumerateInstanceVersion".as_ptr();
+    let raw = (get_instance_prod_addr)(vk::Instance::null(), name);
+    let enumerate: Option<vk::PFN_vkEnumerateInstanceVersion> = mem::transmute(raw);
+    if let Some(enumerate) = enumerate {
+        let mut version = 0;
+        match unsafe { enumerate(&mut version) } {
+            vk::Result::SUCCESS => Ok(Version::from(version)),
+            error => Err(error.into()),
+        }
+    } else {
+        Ok(Version::V1_0_0)
+    }
+}
 
 #[inline]
 unsafe fn get_names(

@@ -4,6 +4,9 @@
 - Implemented `vk::EntryV1_0` and friends for `vk::EntryCommands`
 - Implemented `vk::InstanceV1_0` and friends for `(vk::InstanceCommands, vk::Instance)`
 - Implemented `vk::DeviceV1_0` and friends for `(vk::DeviceCommands, vk::Device)`
+- Added `Entry::from_existing` constructor function
+- Added `Instance::from_existing` constructor function
+- Added `Device::from_existing` constructor function
 
 ## [0.30.0] - 2025-10-04
 
