@@ -1,3 +1,10 @@
+## [0.31.0] - UNRELEASED
+
+### Added
+- Implemented `vk::EntryV1_0` and friends for `vk::EntryCommands`
+- Implemented `vk::InstanceV1_0` and friends for `(vk::InstanceCommands, vk::Instance)`
+- Implemented `vk::DeviceV1_0` and friends for `(vk::DeviceCommands, vk::Device)`
+
 ## [0.30.0] - 2025-10-04
 
 ### Added

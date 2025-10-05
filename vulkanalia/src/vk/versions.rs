@@ -117,6 +117,13 @@ impl EntryV1_0 for crate::Entry {
     }
 }
 
+impl EntryV1_0 for EntryCommands {
+    #[inline]
+    fn commands(&self) -> &EntryCommands {
+        self
+    }
+}
+
 /// Vulkan 1.0 instance command wrappers.
 pub trait InstanceV1_0 {
     fn commands(&self) -> &InstanceCommands;
@@ -429,6 +436,18 @@ impl InstanceV1_0 for crate::Instance {
     #[inline]
     fn handle(&self) -> Instance {
         self.handle
+    }
+}
+
+impl InstanceV1_0 for (InstanceCommands, Instance) {
+    #[inline]
+    fn commands(&self) -> &InstanceCommands {
+        &self.0
+    }
+
+    #[inline]
+    fn handle(&self) -> Instance {
+        self.1
     }
 }
 
@@ -2523,6 +2542,18 @@ impl DeviceV1_0 for crate::Device {
     }
 }
 
+impl DeviceV1_0 for (DeviceCommands, Device) {
+    #[inline]
+    fn commands(&self) -> &DeviceCommands {
+        &self.0
+    }
+
+    #[inline]
+    fn handle(&self) -> Device {
+        self.1
+    }
+}
+
 /// Vulkan 1.1 entry command wrappers.
 pub trait EntryV1_1: EntryV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkEnumerateInstanceVersion.html>
@@ -2541,6 +2572,8 @@ pub trait EntryV1_1: EntryV1_0 {
 }
 
 impl EntryV1_1 for crate::Entry {}
+
+impl EntryV1_1 for EntryCommands {}
 
 /// Vulkan 1.1 instance command wrappers.
 pub trait InstanceV1_1: InstanceV1_0 {
@@ -2764,6 +2797,8 @@ pub trait InstanceV1_1: InstanceV1_0 {
 }
 
 impl InstanceV1_1 for crate::Instance {}
+
+impl InstanceV1_1 for (InstanceCommands, Instance) {}
 
 /// Vulkan 1.1 device command wrappers.
 pub trait DeviceV1_1: DeviceV1_0 {
@@ -3040,15 +3075,21 @@ pub trait DeviceV1_1: DeviceV1_0 {
 
 impl DeviceV1_1 for crate::Device {}
 
+impl DeviceV1_1 for (DeviceCommands, Device) {}
+
 /// Vulkan 1.2 entry command wrappers.
 pub trait EntryV1_2: EntryV1_1 {}
 
 impl EntryV1_2 for crate::Entry {}
 
+impl EntryV1_2 for EntryCommands {}
+
 /// Vulkan 1.2 instance command wrappers.
 pub trait InstanceV1_2: InstanceV1_1 {}
 
 impl InstanceV1_2 for crate::Instance {}
+
+impl InstanceV1_2 for (InstanceCommands, Instance) {}
 
 /// Vulkan 1.2 device command wrappers.
 pub trait DeviceV1_2: DeviceV1_1 {
@@ -3245,10 +3286,14 @@ pub trait DeviceV1_2: DeviceV1_1 {
 
 impl DeviceV1_2 for crate::Device {}
 
+impl DeviceV1_2 for (DeviceCommands, Device) {}
+
 /// Vulkan 1.3 entry command wrappers.
 pub trait EntryV1_3: EntryV1_2 {}
 
 impl EntryV1_3 for crate::Entry {}
+
+impl EntryV1_3 for EntryCommands {}
 
 /// Vulkan 1.3 instance command wrappers.
 pub trait InstanceV1_3: InstanceV1_2 {
@@ -3286,6 +3331,8 @@ pub trait InstanceV1_3: InstanceV1_2 {
 }
 
 impl InstanceV1_3 for crate::Instance {}
+
+impl InstanceV1_3 for (InstanceCommands, Instance) {}
 
 /// Vulkan 1.3 device command wrappers.
 pub trait DeviceV1_3: DeviceV1_2 {
@@ -3791,15 +3838,21 @@ pub trait DeviceV1_3: DeviceV1_2 {
 
 impl DeviceV1_3 for crate::Device {}
 
+impl DeviceV1_3 for (DeviceCommands, Device) {}
+
 /// Vulkan 1.4 entry command wrappers.
 pub trait EntryV1_4: EntryV1_3 {}
 
 impl EntryV1_4 for crate::Entry {}
 
+impl EntryV1_4 for EntryCommands {}
+
 /// Vulkan 1.4 instance command wrappers.
 pub trait InstanceV1_4: InstanceV1_3 {}
 
 impl InstanceV1_4 for crate::Instance {}
+
+impl InstanceV1_4 for (InstanceCommands, Instance) {}
 
 /// Vulkan 1.4 device command wrappers.
 pub trait DeviceV1_4: DeviceV1_3 {
@@ -4085,3 +4138,5 @@ pub trait DeviceV1_4: DeviceV1_3 {
 }
 
 impl DeviceV1_4 for crate::Device {}
+
+impl DeviceV1_4 for (DeviceCommands, Device) {}

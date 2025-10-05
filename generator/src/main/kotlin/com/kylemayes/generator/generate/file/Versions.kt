@@ -73,7 +73,15 @@ private fun Registry.generateVersionTrait(
     name: String,
     extends: String?,
     handle: Boolean,
-) = """
+): String {
+    val (directType, directCommands) =
+        if (handle) {
+            "(${type.display}Commands, ${type.display})" to "&self.0"
+        } else {
+            "${type.display}Commands" to "self"
+        }
+
+    return """
 /// Vulkan ${version.number} ${type.display.lowercase()} command wrappers.
 pub trait $name${extends?.let { ": $it" } ?: ""} {
     ${if (extends == null) "fn commands(&self) -> &${type.display}Commands;\n" else ""}
@@ -85,4 +93,10 @@ impl $name for crate::${type.display} {
     ${if (extends == null) "#[inline] fn commands(&self) -> &${type.display}Commands { &self.commands }\n" else ""}
     ${if (handle && extends == null) "#[inline] fn handle(&self) -> ${type.display} { self.handle }\n" else ""}
 }
+
+impl $name for $directType {
+    ${if (extends == null) "#[inline] fn commands(&self) -> &${type.display}Commands { $directCommands }\n" else ""}
+    ${if (handle && extends == null) "#[inline] fn handle(&self) -> ${type.display} { self.1 }\n" else ""}
+}
     """
+}
