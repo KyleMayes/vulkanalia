@@ -2540,7 +2540,7 @@ pub trait EntryV1_1: EntryV1_0 {
     }
 }
 
-impl EntryV1_1 for crate::Entry {}
+impl<C: EntryV1_0> EntryV1_1 for C {}
 
 /// Vulkan 1.1 instance command wrappers.
 pub trait InstanceV1_1: InstanceV1_0 {
@@ -2763,7 +2763,7 @@ pub trait InstanceV1_1: InstanceV1_0 {
     }
 }
 
-impl InstanceV1_1 for crate::Instance {}
+impl<C: InstanceV1_0> InstanceV1_1 for C {}
 
 /// Vulkan 1.1 device command wrappers.
 pub trait DeviceV1_1: DeviceV1_0 {
@@ -3038,17 +3038,17 @@ pub trait DeviceV1_1: DeviceV1_0 {
     }
 }
 
-impl DeviceV1_1 for crate::Device {}
+impl<C: DeviceV1_0> DeviceV1_1 for C {}
 
 /// Vulkan 1.2 entry command wrappers.
 pub trait EntryV1_2: EntryV1_1 {}
 
-impl EntryV1_2 for crate::Entry {}
+impl<C: EntryV1_0> EntryV1_2 for C {}
 
 /// Vulkan 1.2 instance command wrappers.
 pub trait InstanceV1_2: InstanceV1_1 {}
 
-impl InstanceV1_2 for crate::Instance {}
+impl<C: InstanceV1_0> InstanceV1_2 for C {}
 
 /// Vulkan 1.2 device command wrappers.
 pub trait DeviceV1_2: DeviceV1_1 {
@@ -3243,12 +3243,12 @@ pub trait DeviceV1_2: DeviceV1_1 {
     }
 }
 
-impl DeviceV1_2 for crate::Device {}
+impl<C: DeviceV1_0> DeviceV1_2 for C {}
 
 /// Vulkan 1.3 entry command wrappers.
 pub trait EntryV1_3: EntryV1_2 {}
 
-impl EntryV1_3 for crate::Entry {}
+impl<C: EntryV1_0> EntryV1_3 for C {}
 
 /// Vulkan 1.3 instance command wrappers.
 pub trait InstanceV1_3: InstanceV1_2 {
@@ -3285,7 +3285,7 @@ pub trait InstanceV1_3: InstanceV1_2 {
     }
 }
 
-impl InstanceV1_3 for crate::Instance {}
+impl<C: InstanceV1_0> InstanceV1_3 for C {}
 
 /// Vulkan 1.3 device command wrappers.
 pub trait DeviceV1_3: DeviceV1_2 {
@@ -3789,17 +3789,17 @@ pub trait DeviceV1_3: DeviceV1_2 {
     }
 }
 
-impl DeviceV1_3 for crate::Device {}
+impl<C: DeviceV1_0> DeviceV1_3 for C {}
 
 /// Vulkan 1.4 entry command wrappers.
 pub trait EntryV1_4: EntryV1_3 {}
 
-impl EntryV1_4 for crate::Entry {}
+impl<C: EntryV1_0> EntryV1_4 for C {}
 
 /// Vulkan 1.4 instance command wrappers.
 pub trait InstanceV1_4: InstanceV1_3 {}
 
-impl InstanceV1_4 for crate::Instance {}
+impl<C: InstanceV1_0> InstanceV1_4 for C {}
 
 /// Vulkan 1.4 device command wrappers.
 pub trait DeviceV1_4: DeviceV1_3 {
@@ -4084,4 +4084,4 @@ pub trait DeviceV1_4: DeviceV1_3 {
     }
 }
 
-impl DeviceV1_4 for crate::Device {}
+impl<C: DeviceV1_0> DeviceV1_4 for C {}
