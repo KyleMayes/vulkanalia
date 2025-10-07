@@ -97,7 +97,7 @@ fun Changelog.generateMarkdown(): String {
 
     markdown.append("## [0.1.0] - 2020-10-19\n- Initial release\n")
 
-    return markdown.toString().replace("\n", System.lineSeparator())
+    return markdown.toString().replace("\r?\n", System.lineSeparator())
 }
 
 /** Adds or extends a `Bindings Updates` section to this changelog. */
