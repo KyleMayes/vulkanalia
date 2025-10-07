@@ -55,7 +55,7 @@
 //! ```no_run
 //! # use vulkanalia::prelude::v1_0::*;
 //! # use vulkanalia::chain::output_chain;
-//! # use vk::KhrGetPhysicalDeviceProperties2Extension;
+//! # use vk::KhrGetPhysicalDeviceProperties2ExtensionInstanceCommands;
 //! # let instance: Instance = panic!();
 //! # let physical_device: vk::PhysicalDevice = panic!();
 //! // Call a command that populates an output pointer chain.
@@ -78,7 +78,7 @@
 //! let base = unsafe { structs[0].as_base_ref() };
 //! assert_eq!(base.s_type, vk::StructureType::PHYSICAL_DEVICE_VULKAN_1_2_FEATURES);
 //! let full = unsafe { structs[0].as_ref::<vk::PhysicalDeviceVulkan12Features>() };
-//! assert_eq!(full.descriptor_indexing, 1);       
+//! assert_eq!(full.descriptor_indexing, 1);
 //!
 //! let base = unsafe { structs[1].as_base_ref() };
 //! assert_eq!(base.s_type, vk::StructureType::PHYSICAL_DEVICE_VULKAN_1_1_FEATURES);

@@ -24,7 +24,8 @@ use winit::event::{Event, WindowEvent};
 use winit::event_loop::EventLoop;
 use winit::window::{Window, WindowBuilder};
 
-use vk::{KhrSurfaceExtension, KhrSwapchainExtension};
+use vk::KhrSurfaceExtensionInstanceCommands;
+use vk::KhrSwapchainExtensionDeviceCommands;
 
 /// The required instance and device layer if validation is enabled.
 const VALIDATION_LAYER: vk::ExtensionName = vk::ExtensionName::from_bytes(b"VK_LAYER_KHRONOS_validation");

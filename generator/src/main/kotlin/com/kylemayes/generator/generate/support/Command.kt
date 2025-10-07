@@ -29,6 +29,10 @@ enum class CommandType(val display: String) {
 
 /** Gets the command type of a Vulkan command. */
 fun Registry.getCommandType(command: Command): CommandType {
+    if (isInstanceLevelDeviceExtensionCommand(command)) {
+        return CommandType.INSTANCE
+    }
+
     val extensionCommandTypes = getExtensionCommandTypes()
     return when {
         STATIC.contains(command.name.original) -> CommandType.STATIC
@@ -55,6 +59,16 @@ private val getExtensionCommandTypes =
             .flatMap { e -> e.require.commands.map { c -> Pair(e, c) } }
             .associate { (e, c) -> c to CommandType.valueOf(e.type!!.uppercase()) }
     }
+
+/** Returns whether a command is an instance-level command despite being added by a device extension. */
+fun Registry.isInstanceLevelDeviceExtensionCommand(command: Command): Boolean {
+    if (getExtensionCommandTypes()[command.name] != CommandType.DEVICE) {
+        return false
+    }
+
+    val first = command.params.getOrNull(0)?.type?.getIdentifier()?.value
+    return first == "PhysicalDevice"
+}
 
 /** Gets the non-`SUCCESS` and non-`INCOMPLETE` success codes for a Vulkan command. */
 val getCommandSuccessCodes =

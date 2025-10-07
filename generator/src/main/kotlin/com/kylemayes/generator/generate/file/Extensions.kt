@@ -2,9 +2,11 @@
 
 package com.kylemayes.generator.generate.file
 
+import com.kylemayes.generator.generate.support.ExtensionTrait
 import com.kylemayes.generator.generate.support.generateCommandWrapper
 import com.kylemayes.generator.generate.support.generateManualUrl
 import com.kylemayes.generator.generate.support.getExtensionGroups
+import com.kylemayes.generator.generate.support.getExtensionTraits
 import com.kylemayes.generator.registry.Extension
 import com.kylemayes.generator.registry.Registry
 import com.kylemayes.generator.registry.intern
@@ -114,21 +116,16 @@ use core::ptr;
 
 use super::*;
 
-${getExtensionGroups().values
-        .flatten()
-        .sortedBy { it.name }
-        .joinToString("") { generateExtensionTrait(it) }}
+${getExtensionTraits().joinToString("") { generateExtensionTrait(it) }}
     """
 
 /** Generates a Rust trait and implementation for a Vulkan extension. */
-private fun Registry.generateExtensionTrait(extension: Extension): String {
-    val provisional = if (extension.provisional) PROVISIONAL else ""
+private fun Registry.generateExtensionTrait(trait: ExtensionTrait): String {
+    val (type, extension, commands) = trait
+
     val deprecation = generateDeprecation(extension)?.let { "\n$it" } ?: ""
 
     val name = "${extension.name.value.toPascalCase()}Extension"
-    val type = extension.type!!.replaceFirstChar { it.uppercase() }
-
-    val commands = extension.require.commands.mapNotNull { commands[it] }.sortedBy { it.name }
 
     val implAttributes =
         listOf(
@@ -137,17 +134,13 @@ private fun Registry.generateExtensionTrait(extension: Extension): String {
         ).filter { it.isNotBlank() }.joinToString("\n")
 
     return """
-/// <${generateManualUrl(extension)}>$provisional$deprecation
-pub trait $name: ${type}V1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = ${extension.name}_EXTENSION;
-
+/// The ${type.display.lowercase()}-level commands added by [`${extension.name}_EXTENSION`].
+pub trait $name${type.display}Commands: ${type.display}V1_0 {
     ${commands.joinToString("") { generateCommandWrapper(it) }}
 }
 
 $implAttributes
-impl $name for crate::$type { }
+impl<C: ${type.display}V1_0> $name${type.display}Commands for C { }
     """
 }
 

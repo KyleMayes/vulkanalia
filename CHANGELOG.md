@@ -1,3 +1,18 @@
+## [0.31.0] - UNRELEASED
+
+### Changed
+- **BREAKING:** `vk::DeviceCommands::load` no longer takes an instance-level loader function
+- **BREAKING:** Moved instance-level commands added by device extensions from `DeviceCommands` to `InstanceCommands`
+- **BREAKING:** Replaced extension traits with one extension commands trait per extension and type of command added by the extension
+  - For example:
+    - `vk::KhrSurfaceExtension` is replaced by **one** trait (since this extension only adds instance-level commands):
+      - `vk::KhrSurfaceExtensionInstanceCommands`
+    - `vk::ExtMultiDrawExtension` is replaced by **one** trait (since this extension only adds device-level commands)
+      - `vk::ExtMultiDrawExtensionDeviceCommands`
+    - `vk::KhrSwapchainExtension` is replaced by **two** traits (since this extension adds instance-level _and_ device-level commands):
+      - `vk::KhrSwapchainExtensionInstanceCommands` (provides instance-level commands)
+      - `vk::KhrSwapchainExtensionDeviceCommands` (provides device-level commands)
+
 ## [0.30.0] - 2025-10-04
 
 ### Added
