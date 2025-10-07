@@ -1,5 +1,6 @@
 package com.kylemayes.generator.support
 
+import org.apache.commons.text.StringEscapeUtils
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
@@ -18,7 +19,7 @@ class ChangelogTest {
     fun `Round Trip`() {
         val markdown = Files.readString(Path.of("../CHANGELOG.md"))
         val changelog = parseMarkdown(markdown)
-        assertEquals(markdown, changelog.generateMarkdown())
+        assertEscapeEquals(markdown, changelog.generateMarkdown())
     }
 
     @ParameterizedTest
@@ -37,6 +38,15 @@ class ChangelogTest {
 
         val changelog = parseMarkdown(load("initial/$name.md"))
         changelog.addBindingsUpdates(commit)
-        assertEquals(load("expected/$name.md"), changelog.generateMarkdown())
+        assertEscapeEquals(load("expected/$name.md"), changelog.generateMarkdown())
+    }
+
+    private fun assertEscapeEquals(
+        expected: String,
+        actual: String,
+    ) {
+        val expectedEscape = StringEscapeUtils.escapeJava(expected.replace(Regex("\r?\n"), "\n"))
+        val actualEscape = StringEscapeUtils.escapeJava(actual.replace(Regex("\r?\n"), "\n"))
+        assertEquals(expectedEscape, actualEscape)
     }
 }
