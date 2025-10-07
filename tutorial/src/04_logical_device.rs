@@ -24,7 +24,7 @@ use winit::event::{Event, WindowEvent};
 use winit::event_loop::EventLoop;
 use winit::window::{Window, WindowBuilder};
 
-use vulkanalia::vk::ExtDebugUtilsExtension;
+use vulkanalia::vk::ExtDebugUtilsExtensionInstanceCommands;
 
 /// Whether the validation layers should be enabled.
 const VALIDATION_ENABLED: bool = cfg!(debug_assertions);

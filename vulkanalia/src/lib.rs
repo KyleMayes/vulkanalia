@@ -286,7 +286,6 @@ impl Entry {
         let extensions = get_names(info.enabled_extension_count, info.enabled_extension_names);
         let layers = get_names(info.enabled_layer_count, info.enabled_layer_names);
         Ok(Instance {
-            get_instance: self.get_instance,
             get_device: self.get_device,
             handle,
             commands,
@@ -309,7 +308,6 @@ unsafe impl Sync for Entry {}
 /// A Vulkan instance.
 #[derive(Clone)]
 pub struct Instance {
-    get_instance: vk::PFN_vkGetInstanceProcAddr,
     get_device: vk::PFN_vkGetDeviceProcAddr,
     handle: vk::Instance,
     commands: InstanceCommands,
@@ -352,9 +350,8 @@ impl Instance {
         allocator: Option<&vk::AllocationCallbacks>,
     ) -> VkResult<Device> {
         let handle = InstanceV1_0::create_device(self, physical_device, info, allocator)?;
-        let instance_load = |n| (self.get_instance)(self.handle, n);
         let device_load = |n| (self.get_device)(handle, n);
-        let commands = DeviceCommands::load(instance_load, device_load);
+        let commands = DeviceCommands::load(device_load);
         let extensions = get_names(info.enabled_extension_count, info.enabled_extension_names);
         let layers = get_names(info.enabled_layer_count, info.enabled_layer_names);
         Ok(Device {

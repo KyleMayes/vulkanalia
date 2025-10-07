@@ -33,9 +33,9 @@ use winit::event_loop::EventLoop;
 use winit::keyboard::{KeyCode, PhysicalKey};
 use winit::window::{Window, WindowBuilder};
 
-use vulkanalia::vk::ExtDebugUtilsExtension;
-use vulkanalia::vk::KhrSurfaceExtension;
-use vulkanalia::vk::KhrSwapchainExtension;
+use vulkanalia::vk::ExtDebugUtilsExtensionInstanceCommands;
+use vulkanalia::vk::KhrSurfaceExtensionInstanceCommands;
+use vulkanalia::vk::KhrSwapchainExtensionDeviceCommands;
 
 /// Whether the validation layers should be enabled.
 const VALIDATION_ENABLED: bool = cfg!(debug_assertions);

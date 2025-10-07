@@ -94,10 +94,12 @@ pub unsafe fn create_surface(
             target_os = "openbsd"
         ))]
         (Ok(RawDisplayHandle::Wayland(display)), Ok(RawWindowHandle::Wayland(window))) => {
-            use vk::KhrWaylandSurfaceExtension;
+            use vk::KhrWaylandSurfaceExtensionInstanceCommands;
+
             let info = vk::WaylandSurfaceCreateInfoKHR::builder()
                 .display(display.display.as_ptr())
                 .surface(window.surface.as_ptr());
+
             instance.create_wayland_surface_khr(&info, None)
         }
         #[cfg(any(
@@ -108,7 +110,7 @@ pub unsafe fn create_surface(
             target_os = "openbsd"
         ))]
         (Ok(RawDisplayHandle::Xcb(display)), Ok(RawWindowHandle::Xcb(window))) => {
-            use vk::KhrXcbSurfaceExtension;
+            use vk::KhrXcbSurfaceExtensionInstanceCommands;
 
             let connection_ptr = display
                 .connection
@@ -118,6 +120,7 @@ pub unsafe fn create_surface(
             let info = vk::XcbSurfaceCreateInfoKHR::builder()
                 .connection(connection_ptr)
                 .window(window.window.get() as _);
+
             instance.create_xcb_surface_khr(&info, None)
         }
         #[cfg(any(
@@ -128,7 +131,7 @@ pub unsafe fn create_surface(
             target_os = "openbsd"
         ))]
         (Ok(RawDisplayHandle::Xlib(display)), Ok(RawWindowHandle::Xlib(window))) => {
-            use vk::KhrXlibSurfaceExtension;
+            use vk::KhrXlibSurfaceExtensionInstanceCommands;
 
             let display_ptr = display
                 .display
@@ -150,7 +153,7 @@ pub unsafe fn create_surface(
             use cocoa::base::id;
             use metal::{MetalLayer, MetalLayerRef};
             use objc::runtime::YES;
-            use vk::ExtMetalSurfaceExtension;
+            use vk::ExtMetalSurfaceExtensionInstanceCommands;
 
             let layer = {
                 let view = window.ns_view.as_ptr() as id;
@@ -175,7 +178,7 @@ pub unsafe fn create_surface(
         // Windows
         #[cfg(target_os = "windows")]
         (Ok(RawDisplayHandle::Windows(_)), Ok(RawWindowHandle::Win32(window))) => {
-            use vk::KhrWin32SurfaceExtension;
+            use vk::KhrWin32SurfaceExtensionInstanceCommands;
 
             let hinstance_ptr = window
                 .hinstance
@@ -192,11 +195,9 @@ pub unsafe fn create_surface(
         // Android
         #[cfg(target_os = "android")]
         (Ok(RawDisplayHandle::Android(_)), Ok(RawWindowHandle::AndroidNdk(window))) => {
-            use vk::KhrAndroidSurfaceExtension;
+            use vk::KhrAndroidSurfaceExtensionInstanceCommands;
 
-            // let flags : AndroidSurfaceCreateFlagsKHR::default(); // reserved for future use
             let info = vk::AndroidSurfaceCreateInfoKHR::builder()
-                // .flags(flags)
                 .window(window.a_native_window.cast().as_mut());
 
             instance.create_android_surface_khr(&info, None)

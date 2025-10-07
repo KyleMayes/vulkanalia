@@ -27,38 +27,8 @@ use core::ptr;
 
 use super::*;
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_AMDX_dense_geometry_format.html>
-///
-/// ## WARNING
-///
-/// This is a
-/// [provisional extension](https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/provisional-headers.html).
-/// Provisional extensions are not guaranteed to be backwards compatible and are
-/// not intended to be used in production applications.
-#[cfg(feature = "provisional")]
-pub trait AmdxDenseGeometryFormatExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = AMDX_DENSE_GEOMETRY_FORMAT_EXTENSION;
-}
-
-#[cfg(feature = "provisional")]
-impl AmdxDenseGeometryFormatExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_AMDX_shader_enqueue.html>
-///
-/// ## WARNING
-///
-/// This is a
-/// [provisional extension](https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/provisional-headers.html).
-/// Provisional extensions are not guaranteed to be backwards compatible and are
-/// not intended to be used in production applications.
-#[cfg(feature = "provisional")]
-pub trait AmdxShaderEnqueueExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = AMDX_SHADER_ENQUEUE_EXTENSION;
-
+/// The device-level commands added by [`AMDX_SHADER_ENQUEUE_EXTENSION`].
+pub trait AmdxShaderEnqueueExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdDispatchGraphAMDX.html>
     #[inline]
     unsafe fn cmd_dispatch_graph_amdx(
@@ -202,14 +172,10 @@ pub trait AmdxShaderEnqueueExtension: DeviceV1_0 {
 }
 
 #[cfg(feature = "provisional")]
-impl AmdxShaderEnqueueExtension for crate::Device {}
+impl<C: DeviceV1_0> AmdxShaderEnqueueExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_AMD_anti_lag.html>
-pub trait AmdAntiLagExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = AMD_ANTI_LAG_EXTENSION;
-
+/// The device-level commands added by [`AMD_ANTI_LAG_EXTENSION`].
+pub trait AmdAntiLagExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkAntiLagUpdateAMD.html>
     #[inline]
     unsafe fn anti_lag_update_amd(&self, data: &AntiLagDataAMD) {
@@ -217,14 +183,10 @@ pub trait AmdAntiLagExtension: DeviceV1_0 {
     }
 }
 
-impl AmdAntiLagExtension for crate::Device {}
+impl<C: DeviceV1_0> AmdAntiLagExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_AMD_buffer_marker.html>
-pub trait AmdBufferMarkerExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = AMD_BUFFER_MARKER_EXTENSION;
-
+/// The device-level commands added by [`AMD_BUFFER_MARKER_EXTENSION`].
+pub trait AmdBufferMarkerExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdWriteBufferMarker2AMD.html>
     #[inline]
     unsafe fn cmd_write_buffer_marker2_amd(
@@ -264,23 +226,10 @@ pub trait AmdBufferMarkerExtension: DeviceV1_0 {
     }
 }
 
-impl AmdBufferMarkerExtension for crate::Device {}
+impl<C: DeviceV1_0> AmdBufferMarkerExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_AMD_device_coherent_memory.html>
-pub trait AmdDeviceCoherentMemoryExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = AMD_DEVICE_COHERENT_MEMORY_EXTENSION;
-}
-
-impl AmdDeviceCoherentMemoryExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_AMD_display_native_hdr.html>
-pub trait AmdDisplayNativeHdrExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = AMD_DISPLAY_NATIVE_HDR_EXTENSION;
-
+/// The device-level commands added by [`AMD_DISPLAY_NATIVE_HDR_EXTENSION`].
+pub trait AmdDisplayNativeHdrExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkSetLocalDimmingAMD.html>
     #[inline]
     unsafe fn set_local_dimming_amd(&self, swap_chain: SwapchainKHR, local_dimming_enable: bool) {
@@ -292,14 +241,10 @@ pub trait AmdDisplayNativeHdrExtension: DeviceV1_0 {
     }
 }
 
-impl AmdDisplayNativeHdrExtension for crate::Device {}
+impl<C: DeviceV1_0> AmdDisplayNativeHdrExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_AMD_draw_indirect_count.html>
-pub trait AmdDrawIndirectCountExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = AMD_DRAW_INDIRECT_COUNT_EXTENSION;
-
+/// The device-level commands added by [`AMD_DRAW_INDIRECT_COUNT_EXTENSION`].
+pub trait AmdDrawIndirectCountExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdDrawIndexedIndirectCountAMD.html>
     #[inline]
     unsafe fn cmd_draw_indexed_indirect_count_amd(
@@ -347,153 +292,10 @@ pub trait AmdDrawIndirectCountExtension: DeviceV1_0 {
     }
 }
 
-impl AmdDrawIndirectCountExtension for crate::Device {}
+impl<C: DeviceV1_0> AmdDrawIndirectCountExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_AMD_gcn_shader.html>
-pub trait AmdGcnShaderExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = AMD_GCN_SHADER_EXTENSION;
-}
-
-impl AmdGcnShaderExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_AMD_gpu_shader_half_float.html>
-#[deprecated(note = "deprecated in favor of `VK_KHR_shader_float16_int8`")]
-pub trait AmdGpuShaderHalfFloatExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = AMD_GPU_SHADER_HALF_FLOAT_EXTENSION;
-}
-
-#[allow(deprecated)]
-impl AmdGpuShaderHalfFloatExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_AMD_gpu_shader_int16.html>
-#[deprecated(note = "deprecated in favor of `VK_KHR_shader_float16_int8`")]
-pub trait AmdGpuShaderInt16Extension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = AMD_GPU_SHADER_INT16_EXTENSION;
-}
-
-#[allow(deprecated)]
-impl AmdGpuShaderInt16Extension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_AMD_memory_overallocation_behavior.html>
-pub trait AmdMemoryOverallocationBehaviorExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = AMD_MEMORY_OVERALLOCATION_BEHAVIOR_EXTENSION;
-}
-
-impl AmdMemoryOverallocationBehaviorExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_AMD_mixed_attachment_samples.html>
-pub trait AmdMixedAttachmentSamplesExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = AMD_MIXED_ATTACHMENT_SAMPLES_EXTENSION;
-}
-
-impl AmdMixedAttachmentSamplesExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_AMD_negative_viewport_height.html>
-pub trait AmdNegativeViewportHeightExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = AMD_NEGATIVE_VIEWPORT_HEIGHT_EXTENSION;
-}
-
-impl AmdNegativeViewportHeightExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_AMD_pipeline_compiler_control.html>
-pub trait AmdPipelineCompilerControlExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = AMD_PIPELINE_COMPILER_CONTROL_EXTENSION;
-}
-
-impl AmdPipelineCompilerControlExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_AMD_rasterization_order.html>
-pub trait AmdRasterizationOrderExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = AMD_RASTERIZATION_ORDER_EXTENSION;
-}
-
-impl AmdRasterizationOrderExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_AMD_shader_ballot.html>
-pub trait AmdShaderBallotExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = AMD_SHADER_BALLOT_EXTENSION;
-}
-
-impl AmdShaderBallotExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_AMD_shader_core_properties.html>
-pub trait AmdShaderCorePropertiesExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = AMD_SHADER_CORE_PROPERTIES_EXTENSION;
-}
-
-impl AmdShaderCorePropertiesExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_AMD_shader_core_properties2.html>
-pub trait AmdShaderCoreProperties2Extension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = AMD_SHADER_CORE_PROPERTIES2_EXTENSION;
-}
-
-impl AmdShaderCoreProperties2Extension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_AMD_shader_early_and_late_fragment_tests.html>
-pub trait AmdShaderEarlyAndLateFragmentTestsExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = AMD_SHADER_EARLY_AND_LATE_FRAGMENT_TESTS_EXTENSION;
-}
-
-impl AmdShaderEarlyAndLateFragmentTestsExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_AMD_shader_explicit_vertex_parameter.html>
-pub trait AmdShaderExplicitVertexParameterExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = AMD_SHADER_EXPLICIT_VERTEX_PARAMETER_EXTENSION;
-}
-
-impl AmdShaderExplicitVertexParameterExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_AMD_shader_fragment_mask.html>
-pub trait AmdShaderFragmentMaskExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = AMD_SHADER_FRAGMENT_MASK_EXTENSION;
-}
-
-impl AmdShaderFragmentMaskExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_AMD_shader_image_load_store_lod.html>
-pub trait AmdShaderImageLoadStoreLodExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = AMD_SHADER_IMAGE_LOAD_STORE_LOD_EXTENSION;
-}
-
-impl AmdShaderImageLoadStoreLodExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_AMD_shader_info.html>
-pub trait AmdShaderInfoExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = AMD_SHADER_INFO_EXTENSION;
-
+/// The device-level commands added by [`AMD_SHADER_INFO_EXTENSION`].
+pub trait AmdShaderInfoExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetShaderInfoAMD.html>
     #[inline]
     unsafe fn get_shader_info_amd(
@@ -535,41 +337,10 @@ pub trait AmdShaderInfoExtension: DeviceV1_0 {
     }
 }
 
-impl AmdShaderInfoExtension for crate::Device {}
+impl<C: DeviceV1_0> AmdShaderInfoExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_AMD_shader_trinary_minmax.html>
-pub trait AmdShaderTrinaryMinmaxExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = AMD_SHADER_TRINARY_MINMAX_EXTENSION;
-}
-
-impl AmdShaderTrinaryMinmaxExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_AMD_texture_gather_bias_lod.html>
-pub trait AmdTextureGatherBiasLodExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = AMD_TEXTURE_GATHER_BIAS_LOD_EXTENSION;
-}
-
-impl AmdTextureGatherBiasLodExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_ANDROID_external_format_resolve.html>
-pub trait AndroidExternalFormatResolveExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = ANDROID_EXTERNAL_FORMAT_RESOLVE_EXTENSION;
-}
-
-impl AndroidExternalFormatResolveExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_ANDROID_external_memory_android_hardware_buffer.html>
-pub trait AndroidExternalMemoryAndroidHardwareBufferExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = ANDROID_EXTERNAL_MEMORY_ANDROID_HARDWARE_BUFFER_EXTENSION;
-
+/// The device-level commands added by [`ANDROID_EXTERNAL_MEMORY_ANDROID_HARDWARE_BUFFER_EXTENSION`].
+pub trait AndroidExternalMemoryAndroidHardwareBufferExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetAndroidHardwareBufferPropertiesANDROID.html>
     #[inline]
     unsafe fn get_android_hardware_buffer_properties_android(
@@ -612,14 +383,10 @@ pub trait AndroidExternalMemoryAndroidHardwareBufferExtension: DeviceV1_0 {
     }
 }
 
-impl AndroidExternalMemoryAndroidHardwareBufferExtension for crate::Device {}
+impl<C: DeviceV1_0> AndroidExternalMemoryAndroidHardwareBufferExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_ARM_data_graph.html>
-pub trait ArmDataGraphExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = ARM_DATA_GRAPH_EXTENSION;
-
+/// The device-level commands added by [`ARM_DATA_GRAPH_EXTENSION`].
+pub trait ArmDataGraphExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkBindDataGraphPipelineSessionMemoryARM.html>
     #[inline]
     unsafe fn bind_data_graph_pipeline_session_memory_arm(
@@ -833,7 +600,12 @@ pub trait ArmDataGraphExtension: DeviceV1_0 {
             memory_requirements,
         );
     }
+}
 
+impl<C: DeviceV1_0> ArmDataGraphExtensionDeviceCommands for C {}
+
+/// The instance-level commands added by [`ARM_DATA_GRAPH_EXTENSION`].
+pub trait ArmDataGraphExtensionInstanceCommands: InstanceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetPhysicalDeviceQueueFamilyDataGraphProcessingEnginePropertiesARM.html>
     #[inline]
     unsafe fn get_physical_device_queue_family_data_graph_processing_engine_properties_arm(
@@ -895,77 +667,10 @@ pub trait ArmDataGraphExtension: DeviceV1_0 {
     }
 }
 
-impl ArmDataGraphExtension for crate::Device {}
+impl<C: InstanceV1_0> ArmDataGraphExtensionInstanceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_ARM_format_pack.html>
-pub trait ArmFormatPackExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = ARM_FORMAT_PACK_EXTENSION;
-}
-
-impl ArmFormatPackExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_ARM_pipeline_opacity_micromap.html>
-pub trait ArmPipelineOpacityMicromapExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = ARM_PIPELINE_OPACITY_MICROMAP_EXTENSION;
-}
-
-impl ArmPipelineOpacityMicromapExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_ARM_rasterization_order_attachment_access.html>
-pub trait ArmRasterizationOrderAttachmentAccessExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = ARM_RASTERIZATION_ORDER_ATTACHMENT_ACCESS_EXTENSION;
-}
-
-impl ArmRasterizationOrderAttachmentAccessExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_ARM_render_pass_striped.html>
-pub trait ArmRenderPassStripedExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = ARM_RENDER_PASS_STRIPED_EXTENSION;
-}
-
-impl ArmRenderPassStripedExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_ARM_scheduling_controls.html>
-pub trait ArmSchedulingControlsExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = ARM_SCHEDULING_CONTROLS_EXTENSION;
-}
-
-impl ArmSchedulingControlsExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_ARM_shader_core_builtins.html>
-pub trait ArmShaderCoreBuiltinsExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = ARM_SHADER_CORE_BUILTINS_EXTENSION;
-}
-
-impl ArmShaderCoreBuiltinsExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_ARM_shader_core_properties.html>
-pub trait ArmShaderCorePropertiesExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = ARM_SHADER_CORE_PROPERTIES_EXTENSION;
-}
-
-impl ArmShaderCorePropertiesExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_ARM_tensors.html>
-pub trait ArmTensorsExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = ARM_TENSORS_EXTENSION;
-
+/// The device-level commands added by [`ARM_TENSORS_EXTENSION`].
+pub trait ArmTensorsExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkBindTensorMemoryARM.html>
     #[inline]
     unsafe fn bind_tensor_memory_arm(
@@ -1083,23 +788,6 @@ pub trait ArmTensorsExtension: DeviceV1_0 {
         );
     }
 
-    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetPhysicalDeviceExternalTensorPropertiesARM.html>
-    #[inline]
-    unsafe fn get_physical_device_external_tensor_properties_arm(
-        &self,
-        physical_device: PhysicalDevice,
-        external_tensor_info: &PhysicalDeviceExternalTensorInfoARM,
-        external_tensor_properties: &mut ExternalTensorPropertiesARM,
-    ) {
-        let __result = (self
-            .commands()
-            .get_physical_device_external_tensor_properties_arm)(
-            physical_device,
-            external_tensor_info,
-            external_tensor_properties,
-        );
-    }
-
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetTensorMemoryRequirementsARM.html>
     #[inline]
     unsafe fn get_tensor_memory_requirements_arm(
@@ -1159,23 +847,32 @@ pub trait ArmTensorsExtension: DeviceV1_0 {
     }
 }
 
-impl ArmTensorsExtension for crate::Device {}
+impl<C: DeviceV1_0> ArmTensorsExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_4444_formats.html>
-pub trait Ext4444FormatsExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_4444_FORMATS_EXTENSION;
+/// The instance-level commands added by [`ARM_TENSORS_EXTENSION`].
+pub trait ArmTensorsExtensionInstanceCommands: InstanceV1_0 {
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetPhysicalDeviceExternalTensorPropertiesARM.html>
+    #[inline]
+    unsafe fn get_physical_device_external_tensor_properties_arm(
+        &self,
+        physical_device: PhysicalDevice,
+        external_tensor_info: &PhysicalDeviceExternalTensorInfoARM,
+        external_tensor_properties: &mut ExternalTensorPropertiesARM,
+    ) {
+        let __result = (self
+            .commands()
+            .get_physical_device_external_tensor_properties_arm)(
+            physical_device,
+            external_tensor_info,
+            external_tensor_properties,
+        );
+    }
 }
 
-impl Ext4444FormatsExtension for crate::Device {}
+impl<C: InstanceV1_0> ArmTensorsExtensionInstanceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_acquire_drm_display.html>
-pub trait ExtAcquireDrmDisplayExtension: InstanceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_ACQUIRE_DRM_DISPLAY_EXTENSION;
-
+/// The instance-level commands added by [`EXT_ACQUIRE_DRM_DISPLAY_EXTENSION`].
+pub trait ExtAcquireDrmDisplayExtensionInstanceCommands: InstanceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkAcquireDrmDisplayEXT.html>
     #[inline]
     unsafe fn acquire_drm_display_ext(
@@ -1218,14 +915,10 @@ pub trait ExtAcquireDrmDisplayExtension: InstanceV1_0 {
     }
 }
 
-impl ExtAcquireDrmDisplayExtension for crate::Instance {}
+impl<C: InstanceV1_0> ExtAcquireDrmDisplayExtensionInstanceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_acquire_xlib_display.html>
-pub trait ExtAcquireXlibDisplayExtension: InstanceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_ACQUIRE_XLIB_DISPLAY_EXTENSION;
-
+/// The instance-level commands added by [`EXT_ACQUIRE_XLIB_DISPLAY_EXTENSION`].
+pub trait ExtAcquireXlibDisplayExtensionInstanceCommands: InstanceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkAcquireXlibDisplayEXT.html>
     #[inline]
     unsafe fn acquire_xlib_display_ext(
@@ -1270,32 +963,10 @@ pub trait ExtAcquireXlibDisplayExtension: InstanceV1_0 {
     }
 }
 
-impl ExtAcquireXlibDisplayExtension for crate::Instance {}
+impl<C: InstanceV1_0> ExtAcquireXlibDisplayExtensionInstanceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_application_parameters.html>
-pub trait ExtApplicationParametersExtension: InstanceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_APPLICATION_PARAMETERS_EXTENSION;
-}
-
-impl ExtApplicationParametersExtension for crate::Instance {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_astc_decode_mode.html>
-pub trait ExtAstcDecodeModeExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_ASTC_DECODE_MODE_EXTENSION;
-}
-
-impl ExtAstcDecodeModeExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_attachment_feedback_loop_dynamic_state.html>
-pub trait ExtAttachmentFeedbackLoopDynamicStateExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_ATTACHMENT_FEEDBACK_LOOP_DYNAMIC_STATE_EXTENSION;
-
+/// The device-level commands added by [`EXT_ATTACHMENT_FEEDBACK_LOOP_DYNAMIC_STATE_EXTENSION`].
+pub trait ExtAttachmentFeedbackLoopDynamicStateExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdSetAttachmentFeedbackLoopEnableEXT.html>
     #[inline]
     unsafe fn cmd_set_attachment_feedback_loop_enable_ext(
@@ -1310,42 +981,10 @@ pub trait ExtAttachmentFeedbackLoopDynamicStateExtension: DeviceV1_0 {
     }
 }
 
-impl ExtAttachmentFeedbackLoopDynamicStateExtension for crate::Device {}
+impl<C: DeviceV1_0> ExtAttachmentFeedbackLoopDynamicStateExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_attachment_feedback_loop_layout.html>
-pub trait ExtAttachmentFeedbackLoopLayoutExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_ATTACHMENT_FEEDBACK_LOOP_LAYOUT_EXTENSION;
-}
-
-impl ExtAttachmentFeedbackLoopLayoutExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_blend_operation_advanced.html>
-pub trait ExtBlendOperationAdvancedExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_BLEND_OPERATION_ADVANCED_EXTENSION;
-}
-
-impl ExtBlendOperationAdvancedExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_border_color_swizzle.html>
-pub trait ExtBorderColorSwizzleExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_BORDER_COLOR_SWIZZLE_EXTENSION;
-}
-
-impl ExtBorderColorSwizzleExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_buffer_device_address.html>
-#[deprecated(note = "deprecated in favor of `VK_KHR_buffer_device_address`")]
-pub trait ExtBufferDeviceAddressExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_BUFFER_DEVICE_ADDRESS_EXTENSION;
-
+/// The device-level commands added by [`EXT_BUFFER_DEVICE_ADDRESS_EXTENSION`].
+pub trait ExtBufferDeviceAddressExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetBufferDeviceAddressEXT.html>
     #[inline]
     unsafe fn get_buffer_device_address_ext(
@@ -1359,14 +998,10 @@ pub trait ExtBufferDeviceAddressExtension: DeviceV1_0 {
 }
 
 #[allow(deprecated)]
-impl ExtBufferDeviceAddressExtension for crate::Device {}
+impl<C: DeviceV1_0> ExtBufferDeviceAddressExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_calibrated_timestamps.html>
-pub trait ExtCalibratedTimestampsExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_CALIBRATED_TIMESTAMPS_EXTENSION;
-
+/// The device-level commands added by [`EXT_CALIBRATED_TIMESTAMPS_EXTENSION`].
+pub trait ExtCalibratedTimestampsExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetCalibratedTimestampsEXT.html>
     #[inline]
     unsafe fn get_calibrated_timestamps_ext(
@@ -1393,7 +1028,12 @@ pub trait ExtCalibratedTimestampsExtension: DeviceV1_0 {
             Err(__result.into())
         }
     }
+}
 
+impl<C: DeviceV1_0> ExtCalibratedTimestampsExtensionDeviceCommands for C {}
+
+/// The instance-level commands added by [`EXT_CALIBRATED_TIMESTAMPS_EXTENSION`].
+pub trait ExtCalibratedTimestampsExtensionInstanceCommands: InstanceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetPhysicalDeviceCalibrateableTimeDomainsEXT.html>
     #[inline]
     unsafe fn get_physical_device_calibrateable_time_domains_ext(
@@ -1431,14 +1071,10 @@ pub trait ExtCalibratedTimestampsExtension: DeviceV1_0 {
     }
 }
 
-impl ExtCalibratedTimestampsExtension for crate::Device {}
+impl<C: InstanceV1_0> ExtCalibratedTimestampsExtensionInstanceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_color_write_enable.html>
-pub trait ExtColorWriteEnableExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_COLOR_WRITE_ENABLE_EXTENSION;
-
+/// The device-level commands added by [`EXT_COLOR_WRITE_ENABLE_EXTENSION`].
+pub trait ExtColorWriteEnableExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdSetColorWriteEnableEXT.html>
     #[inline]
     unsafe fn cmd_set_color_write_enable_ext(
@@ -1454,14 +1090,10 @@ pub trait ExtColorWriteEnableExtension: DeviceV1_0 {
     }
 }
 
-impl ExtColorWriteEnableExtension for crate::Device {}
+impl<C: DeviceV1_0> ExtColorWriteEnableExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_conditional_rendering.html>
-pub trait ExtConditionalRenderingExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_CONDITIONAL_RENDERING_EXTENSION;
-
+/// The device-level commands added by [`EXT_CONDITIONAL_RENDERING_EXTENSION`].
+pub trait ExtConditionalRenderingExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdBeginConditionalRenderingEXT.html>
     #[inline]
     unsafe fn cmd_begin_conditional_rendering_ext(
@@ -1482,32 +1114,10 @@ pub trait ExtConditionalRenderingExtension: DeviceV1_0 {
     }
 }
 
-impl ExtConditionalRenderingExtension for crate::Device {}
+impl<C: DeviceV1_0> ExtConditionalRenderingExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_conservative_rasterization.html>
-pub trait ExtConservativeRasterizationExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_CONSERVATIVE_RASTERIZATION_EXTENSION;
-}
-
-impl ExtConservativeRasterizationExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_custom_border_color.html>
-pub trait ExtCustomBorderColorExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_CUSTOM_BORDER_COLOR_EXTENSION;
-}
-
-impl ExtCustomBorderColorExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_debug_marker.html>
-pub trait ExtDebugMarkerExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_DEBUG_MARKER_EXTENSION;
-
+/// The device-level commands added by [`EXT_DEBUG_MARKER_EXTENSION`].
+pub trait ExtDebugMarkerExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdDebugMarkerBeginEXT.html>
     #[inline]
     unsafe fn cmd_debug_marker_begin_ext(
@@ -1565,15 +1175,10 @@ pub trait ExtDebugMarkerExtension: DeviceV1_0 {
     }
 }
 
-impl ExtDebugMarkerExtension for crate::Device {}
+impl<C: DeviceV1_0> ExtDebugMarkerExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_debug_report.html>
-#[deprecated(note = "deprecated in favor of `VK_EXT_debug_utils`")]
-pub trait ExtDebugReportExtension: InstanceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_DEBUG_REPORT_EXTENSION;
-
+/// The instance-level commands added by [`EXT_DEBUG_REPORT_EXTENSION`].
+pub trait ExtDebugReportExtensionInstanceCommands: InstanceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCreateDebugReportCallbackEXT.html>
     #[inline]
     unsafe fn create_debug_report_callback_ext(
@@ -1637,14 +1242,10 @@ pub trait ExtDebugReportExtension: InstanceV1_0 {
 }
 
 #[allow(deprecated)]
-impl ExtDebugReportExtension for crate::Instance {}
+impl<C: InstanceV1_0> ExtDebugReportExtensionInstanceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_debug_utils.html>
-pub trait ExtDebugUtilsExtension: InstanceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_DEBUG_UTILS_EXTENSION;
-
+/// The instance-level commands added by [`EXT_DEBUG_UTILS_EXTENSION`].
+pub trait ExtDebugUtilsExtensionInstanceCommands: InstanceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdBeginDebugUtilsLabelEXT.html>
     #[inline]
     unsafe fn cmd_begin_debug_utils_label_ext(
@@ -1785,14 +1386,10 @@ pub trait ExtDebugUtilsExtension: InstanceV1_0 {
     }
 }
 
-impl ExtDebugUtilsExtension for crate::Instance {}
+impl<C: InstanceV1_0> ExtDebugUtilsExtensionInstanceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_depth_bias_control.html>
-pub trait ExtDepthBiasControlExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_DEPTH_BIAS_CONTROL_EXTENSION;
-
+/// The device-level commands added by [`EXT_DEPTH_BIAS_CONTROL_EXTENSION`].
+pub trait ExtDepthBiasControlExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdSetDepthBias2EXT.html>
     #[inline]
     unsafe fn cmd_set_depth_bias2_ext(
@@ -1804,14 +1401,10 @@ pub trait ExtDepthBiasControlExtension: DeviceV1_0 {
     }
 }
 
-impl ExtDepthBiasControlExtension for crate::Device {}
+impl<C: DeviceV1_0> ExtDepthBiasControlExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_depth_clamp_control.html>
-pub trait ExtDepthClampControlExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_DEPTH_CLAMP_CONTROL_EXTENSION;
-
+/// The device-level commands added by [`EXT_DEPTH_CLAMP_CONTROL_EXTENSION`].
+pub trait ExtDepthClampControlExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdSetDepthClampRangeEXT.html>
     #[inline]
     unsafe fn cmd_set_depth_clamp_range_ext(
@@ -1828,50 +1421,10 @@ pub trait ExtDepthClampControlExtension: DeviceV1_0 {
     }
 }
 
-impl ExtDepthClampControlExtension for crate::Device {}
+impl<C: DeviceV1_0> ExtDepthClampControlExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_depth_clamp_zero_one.html>
-pub trait ExtDepthClampZeroOneExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_DEPTH_CLAMP_ZERO_ONE_EXTENSION;
-}
-
-impl ExtDepthClampZeroOneExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_depth_clip_control.html>
-pub trait ExtDepthClipControlExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_DEPTH_CLIP_CONTROL_EXTENSION;
-}
-
-impl ExtDepthClipControlExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_depth_clip_enable.html>
-pub trait ExtDepthClipEnableExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_DEPTH_CLIP_ENABLE_EXTENSION;
-}
-
-impl ExtDepthClipEnableExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_depth_range_unrestricted.html>
-pub trait ExtDepthRangeUnrestrictedExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_DEPTH_RANGE_UNRESTRICTED_EXTENSION;
-}
-
-impl ExtDepthRangeUnrestrictedExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_descriptor_buffer.html>
-pub trait ExtDescriptorBufferExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_DESCRIPTOR_BUFFER_EXTENSION;
-
+/// The device-level commands added by [`EXT_DESCRIPTOR_BUFFER_EXTENSION`].
+pub trait ExtDescriptorBufferExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdBindDescriptorBufferEmbeddedSamplersEXT.html>
     #[inline]
     unsafe fn cmd_bind_descriptor_buffer_embedded_samplers_ext(
@@ -2087,32 +1640,10 @@ pub trait ExtDescriptorBufferExtension: DeviceV1_0 {
     }
 }
 
-impl ExtDescriptorBufferExtension for crate::Device {}
+impl<C: DeviceV1_0> ExtDescriptorBufferExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_descriptor_indexing.html>
-pub trait ExtDescriptorIndexingExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_DESCRIPTOR_INDEXING_EXTENSION;
-}
-
-impl ExtDescriptorIndexingExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_device_address_binding_report.html>
-pub trait ExtDeviceAddressBindingReportExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_DEVICE_ADDRESS_BINDING_REPORT_EXTENSION;
-}
-
-impl ExtDeviceAddressBindingReportExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_device_fault.html>
-pub trait ExtDeviceFaultExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_DEVICE_FAULT_EXTENSION;
-
+/// The device-level commands added by [`EXT_DEVICE_FAULT_EXTENSION`].
+pub trait ExtDeviceFaultExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetDeviceFaultInfoEXT.html>
     #[inline]
     unsafe fn get_device_fault_info_ext(
@@ -2134,14 +1665,10 @@ pub trait ExtDeviceFaultExtension: DeviceV1_0 {
     }
 }
 
-impl ExtDeviceFaultExtension for crate::Device {}
+impl<C: DeviceV1_0> ExtDeviceFaultExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_device_generated_commands.html>
-pub trait ExtDeviceGeneratedCommandsExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_DEVICE_GENERATED_COMMANDS_EXTENSION;
-
+/// The device-level commands added by [`EXT_DEVICE_GENERATED_COMMANDS_EXTENSION`].
+pub trait ExtDeviceGeneratedCommandsExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdExecuteGeneratedCommandsEXT.html>
     #[inline]
     unsafe fn cmd_execute_generated_commands_ext(
@@ -2293,23 +1820,10 @@ pub trait ExtDeviceGeneratedCommandsExtension: DeviceV1_0 {
     }
 }
 
-impl ExtDeviceGeneratedCommandsExtension for crate::Device {}
+impl<C: DeviceV1_0> ExtDeviceGeneratedCommandsExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_device_memory_report.html>
-pub trait ExtDeviceMemoryReportExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_DEVICE_MEMORY_REPORT_EXTENSION;
-}
-
-impl ExtDeviceMemoryReportExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_direct_mode_display.html>
-pub trait ExtDirectModeDisplayExtension: InstanceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_DIRECT_MODE_DISPLAY_EXTENSION;
-
+/// The instance-level commands added by [`EXT_DIRECT_MODE_DISPLAY_EXTENSION`].
+pub trait ExtDirectModeDisplayExtensionInstanceCommands: InstanceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkReleaseDisplayEXT.html>
     #[inline]
     unsafe fn release_display_ext(
@@ -2327,14 +1841,10 @@ pub trait ExtDirectModeDisplayExtension: InstanceV1_0 {
     }
 }
 
-impl ExtDirectModeDisplayExtension for crate::Instance {}
+impl<C: InstanceV1_0> ExtDirectModeDisplayExtensionInstanceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_directfb_surface.html>
-pub trait ExtDirectfbSurfaceExtension: InstanceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_DIRECTFB_SURFACE_EXTENSION;
-
+/// The instance-level commands added by [`EXT_DIRECTFB_SURFACE_EXTENSION`].
+pub trait ExtDirectfbSurfaceExtensionInstanceCommands: InstanceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCreateDirectFBSurfaceEXT.html>
     #[inline]
     unsafe fn create_direct_fb_surface_ext(
@@ -2378,14 +1888,10 @@ pub trait ExtDirectfbSurfaceExtension: InstanceV1_0 {
     }
 }
 
-impl ExtDirectfbSurfaceExtension for crate::Instance {}
+impl<C: InstanceV1_0> ExtDirectfbSurfaceExtensionInstanceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_discard_rectangles.html>
-pub trait ExtDiscardRectanglesExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_DISCARD_RECTANGLES_EXTENSION;
-
+/// The device-level commands added by [`EXT_DISCARD_RECTANGLES_EXTENSION`].
+pub trait ExtDiscardRectanglesExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdSetDiscardRectangleEXT.html>
     #[inline]
     unsafe fn cmd_set_discard_rectangle_ext(
@@ -2429,14 +1935,10 @@ pub trait ExtDiscardRectanglesExtension: DeviceV1_0 {
     }
 }
 
-impl ExtDiscardRectanglesExtension for crate::Device {}
+impl<C: DeviceV1_0> ExtDiscardRectanglesExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_display_control.html>
-pub trait ExtDisplayControlExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_DISPLAY_CONTROL_EXTENSION;
-
+/// The device-level commands added by [`EXT_DISPLAY_CONTROL_EXTENSION`].
+pub trait ExtDisplayControlExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkDisplayPowerControlEXT.html>
     #[inline]
     unsafe fn display_power_control_ext(
@@ -2526,14 +2028,10 @@ pub trait ExtDisplayControlExtension: DeviceV1_0 {
     }
 }
 
-impl ExtDisplayControlExtension for crate::Device {}
+impl<C: DeviceV1_0> ExtDisplayControlExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_display_surface_counter.html>
-pub trait ExtDisplaySurfaceCounterExtension: InstanceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_DISPLAY_SURFACE_COUNTER_EXTENSION;
-
+/// The instance-level commands added by [`EXT_DISPLAY_SURFACE_COUNTER_EXTENSION`].
+pub trait ExtDisplaySurfaceCounterExtensionInstanceCommands: InstanceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetPhysicalDeviceSurfaceCapabilities2EXT.html>
     #[inline]
     unsafe fn get_physical_device_surface_capabilities2_ext(
@@ -2558,23 +2056,10 @@ pub trait ExtDisplaySurfaceCounterExtension: InstanceV1_0 {
     }
 }
 
-impl ExtDisplaySurfaceCounterExtension for crate::Instance {}
+impl<C: InstanceV1_0> ExtDisplaySurfaceCounterExtensionInstanceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_dynamic_rendering_unused_attachments.html>
-pub trait ExtDynamicRenderingUnusedAttachmentsExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_DYNAMIC_RENDERING_UNUSED_ATTACHMENTS_EXTENSION;
-}
-
-impl ExtDynamicRenderingUnusedAttachmentsExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_extended_dynamic_state.html>
-pub trait ExtExtendedDynamicStateExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_EXTENDED_DYNAMIC_STATE_EXTENSION;
-
+/// The device-level commands added by [`EXT_EXTENDED_DYNAMIC_STATE_EXTENSION`].
+pub trait ExtExtendedDynamicStateExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdBindVertexBuffers2EXT.html>
     #[inline]
     unsafe fn cmd_bind_vertex_buffers2_ext(
@@ -2737,14 +2222,10 @@ pub trait ExtExtendedDynamicStateExtension: DeviceV1_0 {
     }
 }
 
-impl ExtExtendedDynamicStateExtension for crate::Device {}
+impl<C: DeviceV1_0> ExtExtendedDynamicStateExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_extended_dynamic_state2.html>
-pub trait ExtExtendedDynamicState2Extension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_EXTENDED_DYNAMIC_STATE2_EXTENSION;
-
+/// The device-level commands added by [`EXT_EXTENDED_DYNAMIC_STATE2_EXTENSION`].
+pub trait ExtExtendedDynamicState2ExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdSetDepthBiasEnableEXT.html>
     #[inline]
     unsafe fn cmd_set_depth_bias_enable_ext(
@@ -2804,14 +2285,10 @@ pub trait ExtExtendedDynamicState2Extension: DeviceV1_0 {
     }
 }
 
-impl ExtExtendedDynamicState2Extension for crate::Device {}
+impl<C: DeviceV1_0> ExtExtendedDynamicState2ExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_extended_dynamic_state3.html>
-pub trait ExtExtendedDynamicState3Extension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_EXTENDED_DYNAMIC_STATE3_EXTENSION;
-
+/// The device-level commands added by [`EXT_EXTENDED_DYNAMIC_STATE3_EXTENSION`].
+pub trait ExtExtendedDynamicState3ExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdSetAlphaToCoverageEnableEXT.html>
     #[inline]
     unsafe fn cmd_set_alpha_to_coverage_enable_ext(
@@ -3230,32 +2707,10 @@ pub trait ExtExtendedDynamicState3Extension: DeviceV1_0 {
     }
 }
 
-impl ExtExtendedDynamicState3Extension for crate::Device {}
+impl<C: DeviceV1_0> ExtExtendedDynamicState3ExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_external_memory_acquire_unmodified.html>
-pub trait ExtExternalMemoryAcquireUnmodifiedExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_EXTERNAL_MEMORY_ACQUIRE_UNMODIFIED_EXTENSION;
-}
-
-impl ExtExternalMemoryAcquireUnmodifiedExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_external_memory_dma_buf.html>
-pub trait ExtExternalMemoryDmaBufExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_EXTERNAL_MEMORY_DMA_BUF_EXTENSION;
-}
-
-impl ExtExternalMemoryDmaBufExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_external_memory_host.html>
-pub trait ExtExternalMemoryHostExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_EXTERNAL_MEMORY_HOST_EXTENSION;
-
+/// The device-level commands added by [`EXT_EXTERNAL_MEMORY_HOST_EXTENSION`].
+pub trait ExtExternalMemoryHostExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetMemoryHostPointerPropertiesEXT.html>
     #[inline]
     unsafe fn get_memory_host_pointer_properties_ext(
@@ -3279,14 +2734,10 @@ pub trait ExtExternalMemoryHostExtension: DeviceV1_0 {
     }
 }
 
-impl ExtExternalMemoryHostExtension for crate::Device {}
+impl<C: DeviceV1_0> ExtExternalMemoryHostExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_external_memory_metal.html>
-pub trait ExtExternalMemoryMetalExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_EXTERNAL_MEMORY_METAL_EXTENSION;
-
+/// The device-level commands added by [`EXT_EXTERNAL_MEMORY_METAL_EXTENSION`].
+pub trait ExtExternalMemoryMetalExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetMemoryMetalHandleEXT.html>
     #[inline]
     unsafe fn get_memory_metal_handle_ext(
@@ -3331,41 +2782,10 @@ pub trait ExtExternalMemoryMetalExtension: DeviceV1_0 {
     }
 }
 
-impl ExtExternalMemoryMetalExtension for crate::Device {}
+impl<C: DeviceV1_0> ExtExternalMemoryMetalExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_filter_cubic.html>
-pub trait ExtFilterCubicExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_FILTER_CUBIC_EXTENSION;
-}
-
-impl ExtFilterCubicExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_fragment_density_map.html>
-pub trait ExtFragmentDensityMapExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_FRAGMENT_DENSITY_MAP_EXTENSION;
-}
-
-impl ExtFragmentDensityMapExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_fragment_density_map2.html>
-pub trait ExtFragmentDensityMap2Extension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_FRAGMENT_DENSITY_MAP2_EXTENSION;
-}
-
-impl ExtFragmentDensityMap2Extension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_fragment_density_map_offset.html>
-pub trait ExtFragmentDensityMapOffsetExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_FRAGMENT_DENSITY_MAP_OFFSET_EXTENSION;
-
+/// The device-level commands added by [`EXT_FRAGMENT_DENSITY_MAP_OFFSET_EXTENSION`].
+pub trait ExtFragmentDensityMapOffsetExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdEndRendering2EXT.html>
     #[inline]
     unsafe fn cmd_end_rendering2_ext(
@@ -3380,32 +2800,10 @@ pub trait ExtFragmentDensityMapOffsetExtension: DeviceV1_0 {
     }
 }
 
-impl ExtFragmentDensityMapOffsetExtension for crate::Device {}
+impl<C: DeviceV1_0> ExtFragmentDensityMapOffsetExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_fragment_shader_interlock.html>
-pub trait ExtFragmentShaderInterlockExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_FRAGMENT_SHADER_INTERLOCK_EXTENSION;
-}
-
-impl ExtFragmentShaderInterlockExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_frame_boundary.html>
-pub trait ExtFrameBoundaryExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_FRAME_BOUNDARY_EXTENSION;
-}
-
-impl ExtFrameBoundaryExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_full_screen_exclusive.html>
-pub trait ExtFullScreenExclusiveExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_FULL_SCREEN_EXCLUSIVE_EXTENSION;
-
+/// The device-level commands added by [`EXT_FULL_SCREEN_EXCLUSIVE_EXTENSION`].
+pub trait ExtFullScreenExclusiveExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkAcquireFullScreenExclusiveModeEXT.html>
     #[inline]
     unsafe fn acquire_full_screen_exclusive_mode_ext(
@@ -3443,6 +2841,27 @@ pub trait ExtFullScreenExclusiveExtension: DeviceV1_0 {
         }
     }
 
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkReleaseFullScreenExclusiveModeEXT.html>
+    #[inline]
+    unsafe fn release_full_screen_exclusive_mode_ext(
+        &self,
+        swapchain: SwapchainKHR,
+    ) -> crate::VkResult<()> {
+        let __result =
+            (self.commands().release_full_screen_exclusive_mode_ext)(self.handle(), swapchain);
+
+        if __result == Result::SUCCESS {
+            Ok(())
+        } else {
+            Err(__result.into())
+        }
+    }
+}
+
+impl<C: DeviceV1_0> ExtFullScreenExclusiveExtensionDeviceCommands for C {}
+
+/// The instance-level commands added by [`EXT_FULL_SCREEN_EXCLUSIVE_EXTENSION`].
+pub trait ExtFullScreenExclusiveExtensionInstanceCommands: InstanceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetPhysicalDeviceSurfacePresentModes2EXT.html>
     #[inline]
     unsafe fn get_physical_device_surface_present_modes2_ext(
@@ -3481,59 +2900,12 @@ pub trait ExtFullScreenExclusiveExtension: DeviceV1_0 {
             Err(__result.into())
         }
     }
-
-    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkReleaseFullScreenExclusiveModeEXT.html>
-    #[inline]
-    unsafe fn release_full_screen_exclusive_mode_ext(
-        &self,
-        swapchain: SwapchainKHR,
-    ) -> crate::VkResult<()> {
-        let __result =
-            (self.commands().release_full_screen_exclusive_mode_ext)(self.handle(), swapchain);
-
-        if __result == Result::SUCCESS {
-            Ok(())
-        } else {
-            Err(__result.into())
-        }
-    }
 }
 
-impl ExtFullScreenExclusiveExtension for crate::Device {}
+impl<C: InstanceV1_0> ExtFullScreenExclusiveExtensionInstanceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_global_priority.html>
-pub trait ExtGlobalPriorityExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_GLOBAL_PRIORITY_EXTENSION;
-}
-
-impl ExtGlobalPriorityExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_global_priority_query.html>
-pub trait ExtGlobalPriorityQueryExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_GLOBAL_PRIORITY_QUERY_EXTENSION;
-}
-
-impl ExtGlobalPriorityQueryExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_graphics_pipeline_library.html>
-pub trait ExtGraphicsPipelineLibraryExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_GRAPHICS_PIPELINE_LIBRARY_EXTENSION;
-}
-
-impl ExtGraphicsPipelineLibraryExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_hdr_metadata.html>
-pub trait ExtHdrMetadataExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_HDR_METADATA_EXTENSION;
-
+/// The device-level commands added by [`EXT_HDR_METADATA_EXTENSION`].
+pub trait ExtHdrMetadataExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkSetHdrMetadataEXT.html>
     #[inline]
     unsafe fn set_hdr_metadata_ext(
@@ -3550,14 +2922,10 @@ pub trait ExtHdrMetadataExtension: DeviceV1_0 {
     }
 }
 
-impl ExtHdrMetadataExtension for crate::Device {}
+impl<C: DeviceV1_0> ExtHdrMetadataExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_headless_surface.html>
-pub trait ExtHeadlessSurfaceExtension: InstanceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_HEADLESS_SURFACE_EXTENSION;
-
+/// The instance-level commands added by [`EXT_HEADLESS_SURFACE_EXTENSION`].
+pub trait ExtHeadlessSurfaceExtensionInstanceCommands: InstanceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCreateHeadlessSurfaceEXT.html>
     #[inline]
     unsafe fn create_headless_surface_ext(
@@ -3582,14 +2950,10 @@ pub trait ExtHeadlessSurfaceExtension: InstanceV1_0 {
     }
 }
 
-impl ExtHeadlessSurfaceExtension for crate::Instance {}
+impl<C: InstanceV1_0> ExtHeadlessSurfaceExtensionInstanceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_host_image_copy.html>
-pub trait ExtHostImageCopyExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_HOST_IMAGE_COPY_EXTENSION;
-
+/// The device-level commands added by [`EXT_HOST_IMAGE_COPY_EXTENSION`].
+pub trait ExtHostImageCopyExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCopyImageToImageEXT.html>
     #[inline]
     unsafe fn copy_image_to_image_ext(
@@ -3674,14 +3038,10 @@ pub trait ExtHostImageCopyExtension: DeviceV1_0 {
     }
 }
 
-impl ExtHostImageCopyExtension for crate::Device {}
+impl<C: DeviceV1_0> ExtHostImageCopyExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_host_query_reset.html>
-pub trait ExtHostQueryResetExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_HOST_QUERY_RESET_EXTENSION;
-
+/// The device-level commands added by [`EXT_HOST_QUERY_RESET_EXTENSION`].
+pub trait ExtHostQueryResetExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkResetQueryPoolEXT.html>
     #[inline]
     unsafe fn reset_query_pool_ext(
@@ -3699,23 +3059,10 @@ pub trait ExtHostQueryResetExtension: DeviceV1_0 {
     }
 }
 
-impl ExtHostQueryResetExtension for crate::Device {}
+impl<C: DeviceV1_0> ExtHostQueryResetExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_image_2d_view_of_3d.html>
-pub trait ExtImage2dViewOf3dExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_IMAGE_2D_VIEW_OF_3D_EXTENSION;
-}
-
-impl ExtImage2dViewOf3dExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_image_compression_control.html>
-pub trait ExtImageCompressionControlExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_IMAGE_COMPRESSION_CONTROL_EXTENSION;
-
+/// The device-level commands added by [`EXT_IMAGE_COMPRESSION_CONTROL_EXTENSION`].
+pub trait ExtImageCompressionControlExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetImageSubresourceLayout2EXT.html>
     #[inline]
     unsafe fn get_image_subresource_layout2_ext(
@@ -3733,23 +3080,10 @@ pub trait ExtImageCompressionControlExtension: DeviceV1_0 {
     }
 }
 
-impl ExtImageCompressionControlExtension for crate::Device {}
+impl<C: DeviceV1_0> ExtImageCompressionControlExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_image_compression_control_swapchain.html>
-pub trait ExtImageCompressionControlSwapchainExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_IMAGE_COMPRESSION_CONTROL_SWAPCHAIN_EXTENSION;
-}
-
-impl ExtImageCompressionControlSwapchainExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_image_drm_format_modifier.html>
-pub trait ExtImageDrmFormatModifierExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_IMAGE_DRM_FORMAT_MODIFIER_EXTENSION;
-
+/// The device-level commands added by [`EXT_IMAGE_DRM_FORMAT_MODIFIER_EXTENSION`].
+pub trait ExtImageDrmFormatModifierExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetImageDrmFormatModifierPropertiesEXT.html>
     #[inline]
     unsafe fn get_image_drm_format_modifier_properties_ext(
@@ -3771,86 +3105,10 @@ pub trait ExtImageDrmFormatModifierExtension: DeviceV1_0 {
     }
 }
 
-impl ExtImageDrmFormatModifierExtension for crate::Device {}
+impl<C: DeviceV1_0> ExtImageDrmFormatModifierExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_image_robustness.html>
-pub trait ExtImageRobustnessExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_IMAGE_ROBUSTNESS_EXTENSION;
-}
-
-impl ExtImageRobustnessExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_image_sliced_view_of_3d.html>
-pub trait ExtImageSlicedViewOf3dExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_IMAGE_SLICED_VIEW_OF_3D_EXTENSION;
-}
-
-impl ExtImageSlicedViewOf3dExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_image_view_min_lod.html>
-pub trait ExtImageViewMinLodExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_IMAGE_VIEW_MIN_LOD_EXTENSION;
-}
-
-impl ExtImageViewMinLodExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_index_type_uint8.html>
-pub trait ExtIndexTypeUint8Extension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_INDEX_TYPE_UINT8_EXTENSION;
-}
-
-impl ExtIndexTypeUint8Extension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_inline_uniform_block.html>
-pub trait ExtInlineUniformBlockExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_INLINE_UNIFORM_BLOCK_EXTENSION;
-}
-
-impl ExtInlineUniformBlockExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_layer_settings.html>
-pub trait ExtLayerSettingsExtension: InstanceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_LAYER_SETTINGS_EXTENSION;
-}
-
-impl ExtLayerSettingsExtension for crate::Instance {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_legacy_dithering.html>
-pub trait ExtLegacyDitheringExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_LEGACY_DITHERING_EXTENSION;
-}
-
-impl ExtLegacyDitheringExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_legacy_vertex_attributes.html>
-pub trait ExtLegacyVertexAttributesExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_LEGACY_VERTEX_ATTRIBUTES_EXTENSION;
-}
-
-impl ExtLegacyVertexAttributesExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_line_rasterization.html>
-pub trait ExtLineRasterizationExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_LINE_RASTERIZATION_EXTENSION;
-
+/// The device-level commands added by [`EXT_LINE_RASTERIZATION_EXTENSION`].
+pub trait ExtLineRasterizationExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdSetLineStippleEXT.html>
     #[inline]
     unsafe fn cmd_set_line_stipple_ext(
@@ -3867,50 +3125,10 @@ pub trait ExtLineRasterizationExtension: DeviceV1_0 {
     }
 }
 
-impl ExtLineRasterizationExtension for crate::Device {}
+impl<C: DeviceV1_0> ExtLineRasterizationExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_load_store_op_none.html>
-pub trait ExtLoadStoreOpNoneExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_LOAD_STORE_OP_NONE_EXTENSION;
-}
-
-impl ExtLoadStoreOpNoneExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_map_memory_placed.html>
-pub trait ExtMapMemoryPlacedExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_MAP_MEMORY_PLACED_EXTENSION;
-}
-
-impl ExtMapMemoryPlacedExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_memory_budget.html>
-pub trait ExtMemoryBudgetExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_MEMORY_BUDGET_EXTENSION;
-}
-
-impl ExtMemoryBudgetExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_memory_priority.html>
-pub trait ExtMemoryPriorityExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_MEMORY_PRIORITY_EXTENSION;
-}
-
-impl ExtMemoryPriorityExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_mesh_shader.html>
-pub trait ExtMeshShaderExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_MESH_SHADER_EXTENSION;
-
+/// The device-level commands added by [`EXT_MESH_SHADER_EXTENSION`].
+pub trait ExtMeshShaderExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdDrawMeshTasksEXT.html>
     #[inline]
     unsafe fn cmd_draw_mesh_tasks_ext(
@@ -3971,14 +3189,10 @@ pub trait ExtMeshShaderExtension: DeviceV1_0 {
     }
 }
 
-impl ExtMeshShaderExtension for crate::Device {}
+impl<C: DeviceV1_0> ExtMeshShaderExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_metal_objects.html>
-pub trait ExtMetalObjectsExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_METAL_OBJECTS_EXTENSION;
-
+/// The device-level commands added by [`EXT_METAL_OBJECTS_EXTENSION`].
+pub trait ExtMetalObjectsExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkExportMetalObjectsEXT.html>
     #[inline]
     unsafe fn export_metal_objects_ext(&self, metal_objects_info: &mut ExportMetalObjectsInfoEXT) {
@@ -3987,14 +3201,10 @@ pub trait ExtMetalObjectsExtension: DeviceV1_0 {
     }
 }
 
-impl ExtMetalObjectsExtension for crate::Device {}
+impl<C: DeviceV1_0> ExtMetalObjectsExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_metal_surface.html>
-pub trait ExtMetalSurfaceExtension: InstanceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_METAL_SURFACE_EXTENSION;
-
+/// The instance-level commands added by [`EXT_METAL_SURFACE_EXTENSION`].
+pub trait ExtMetalSurfaceExtensionInstanceCommands: InstanceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCreateMetalSurfaceEXT.html>
     #[inline]
     unsafe fn create_metal_surface_ext(
@@ -4019,14 +3229,10 @@ pub trait ExtMetalSurfaceExtension: InstanceV1_0 {
     }
 }
 
-impl ExtMetalSurfaceExtension for crate::Instance {}
+impl<C: InstanceV1_0> ExtMetalSurfaceExtensionInstanceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_multi_draw.html>
-pub trait ExtMultiDrawExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_MULTI_DRAW_EXTENSION;
-
+/// The device-level commands added by [`EXT_MULTI_DRAW_EXTENSION`].
+pub trait ExtMultiDrawExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdDrawMultiEXT.html>
     #[inline]
     unsafe fn cmd_draw_multi_ext(
@@ -4070,50 +3276,10 @@ pub trait ExtMultiDrawExtension: DeviceV1_0 {
     }
 }
 
-impl ExtMultiDrawExtension for crate::Device {}
+impl<C: DeviceV1_0> ExtMultiDrawExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_multisampled_render_to_single_sampled.html>
-pub trait ExtMultisampledRenderToSingleSampledExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_MULTISAMPLED_RENDER_TO_SINGLE_SAMPLED_EXTENSION;
-}
-
-impl ExtMultisampledRenderToSingleSampledExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_mutable_descriptor_type.html>
-pub trait ExtMutableDescriptorTypeExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_MUTABLE_DESCRIPTOR_TYPE_EXTENSION;
-}
-
-impl ExtMutableDescriptorTypeExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_nested_command_buffer.html>
-pub trait ExtNestedCommandBufferExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_NESTED_COMMAND_BUFFER_EXTENSION;
-}
-
-impl ExtNestedCommandBufferExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_non_seamless_cube_map.html>
-pub trait ExtNonSeamlessCubeMapExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_NON_SEAMLESS_CUBE_MAP_EXTENSION;
-}
-
-impl ExtNonSeamlessCubeMapExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_opacity_micromap.html>
-pub trait ExtOpacityMicromapExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_OPACITY_MICROMAP_EXTENSION;
-
+/// The device-level commands added by [`EXT_OPACITY_MICROMAP_EXTENSION`].
+pub trait ExtOpacityMicromapExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkBuildMicromapsEXT.html>
     #[inline]
     unsafe fn build_micromaps_ext(
@@ -4346,14 +3512,10 @@ pub trait ExtOpacityMicromapExtension: DeviceV1_0 {
     }
 }
 
-impl ExtOpacityMicromapExtension for crate::Device {}
+impl<C: DeviceV1_0> ExtOpacityMicromapExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_pageable_device_local_memory.html>
-pub trait ExtPageableDeviceLocalMemoryExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_PAGEABLE_DEVICE_LOCAL_MEMORY_EXTENSION;
-
+/// The device-level commands added by [`EXT_PAGEABLE_DEVICE_LOCAL_MEMORY_EXTENSION`].
+pub trait ExtPageableDeviceLocalMemoryExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkSetDeviceMemoryPriorityEXT.html>
     #[inline]
     unsafe fn set_device_memory_priority_ext(&self, memory: DeviceMemory, priority: f32) {
@@ -4362,59 +3524,10 @@ pub trait ExtPageableDeviceLocalMemoryExtension: DeviceV1_0 {
     }
 }
 
-impl ExtPageableDeviceLocalMemoryExtension for crate::Device {}
+impl<C: DeviceV1_0> ExtPageableDeviceLocalMemoryExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_pci_bus_info.html>
-pub trait ExtPciBusInfoExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_PCI_BUS_INFO_EXTENSION;
-}
-
-impl ExtPciBusInfoExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_physical_device_drm.html>
-pub trait ExtPhysicalDeviceDrmExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_PHYSICAL_DEVICE_DRM_EXTENSION;
-}
-
-impl ExtPhysicalDeviceDrmExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_pipeline_creation_cache_control.html>
-pub trait ExtPipelineCreationCacheControlExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_PIPELINE_CREATION_CACHE_CONTROL_EXTENSION;
-}
-
-impl ExtPipelineCreationCacheControlExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_pipeline_creation_feedback.html>
-pub trait ExtPipelineCreationFeedbackExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_PIPELINE_CREATION_FEEDBACK_EXTENSION;
-}
-
-impl ExtPipelineCreationFeedbackExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_pipeline_library_group_handles.html>
-pub trait ExtPipelineLibraryGroupHandlesExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_PIPELINE_LIBRARY_GROUP_HANDLES_EXTENSION;
-}
-
-impl ExtPipelineLibraryGroupHandlesExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_pipeline_properties.html>
-pub trait ExtPipelinePropertiesExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_PIPELINE_PROPERTIES_EXTENSION;
-
+/// The device-level commands added by [`EXT_PIPELINE_PROPERTIES_EXTENSION`].
+pub trait ExtPipelinePropertiesExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetPipelinePropertiesEXT.html>
     #[inline]
     unsafe fn get_pipeline_properties_ext(
@@ -4437,68 +3550,10 @@ pub trait ExtPipelinePropertiesExtension: DeviceV1_0 {
     }
 }
 
-impl ExtPipelinePropertiesExtension for crate::Device {}
+impl<C: DeviceV1_0> ExtPipelinePropertiesExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_pipeline_protected_access.html>
-pub trait ExtPipelineProtectedAccessExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_PIPELINE_PROTECTED_ACCESS_EXTENSION;
-}
-
-impl ExtPipelineProtectedAccessExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_pipeline_robustness.html>
-pub trait ExtPipelineRobustnessExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_PIPELINE_ROBUSTNESS_EXTENSION;
-}
-
-impl ExtPipelineRobustnessExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_post_depth_coverage.html>
-pub trait ExtPostDepthCoverageExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_POST_DEPTH_COVERAGE_EXTENSION;
-}
-
-impl ExtPostDepthCoverageExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_present_mode_fifo_latest_ready.html>
-pub trait ExtPresentModeFifoLatestReadyExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_PRESENT_MODE_FIFO_LATEST_READY_EXTENSION;
-}
-
-impl ExtPresentModeFifoLatestReadyExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_primitive_topology_list_restart.html>
-pub trait ExtPrimitiveTopologyListRestartExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_PRIMITIVE_TOPOLOGY_LIST_RESTART_EXTENSION;
-}
-
-impl ExtPrimitiveTopologyListRestartExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_primitives_generated_query.html>
-pub trait ExtPrimitivesGeneratedQueryExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_PRIMITIVES_GENERATED_QUERY_EXTENSION;
-}
-
-impl ExtPrimitivesGeneratedQueryExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_private_data.html>
-pub trait ExtPrivateDataExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_PRIVATE_DATA_EXTENSION;
-
+/// The device-level commands added by [`EXT_PRIVATE_DATA_EXTENSION`].
+pub trait ExtPrivateDataExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCreatePrivateDataSlotEXT.html>
     #[inline]
     unsafe fn create_private_data_slot_ext(
@@ -4582,59 +3637,10 @@ pub trait ExtPrivateDataExtension: DeviceV1_0 {
     }
 }
 
-impl ExtPrivateDataExtension for crate::Device {}
+impl<C: DeviceV1_0> ExtPrivateDataExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_provoking_vertex.html>
-pub trait ExtProvokingVertexExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_PROVOKING_VERTEX_EXTENSION;
-}
-
-impl ExtProvokingVertexExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_queue_family_foreign.html>
-pub trait ExtQueueFamilyForeignExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_QUEUE_FAMILY_FOREIGN_EXTENSION;
-}
-
-impl ExtQueueFamilyForeignExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_rasterization_order_attachment_access.html>
-pub trait ExtRasterizationOrderAttachmentAccessExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_RASTERIZATION_ORDER_ATTACHMENT_ACCESS_EXTENSION;
-}
-
-impl ExtRasterizationOrderAttachmentAccessExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_rgba10x6_formats.html>
-pub trait ExtRgba10x6FormatsExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_RGBA10X6_FORMATS_EXTENSION;
-}
-
-impl ExtRgba10x6FormatsExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_robustness2.html>
-pub trait ExtRobustness2Extension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_ROBUSTNESS2_EXTENSION;
-}
-
-impl ExtRobustness2Extension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_sample_locations.html>
-pub trait ExtSampleLocationsExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_SAMPLE_LOCATIONS_EXTENSION;
-
+/// The device-level commands added by [`EXT_SAMPLE_LOCATIONS_EXTENSION`].
+pub trait ExtSampleLocationsExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdSetSampleLocationsEXT.html>
     #[inline]
     unsafe fn cmd_set_sample_locations_ext(
@@ -4645,7 +3651,12 @@ pub trait ExtSampleLocationsExtension: DeviceV1_0 {
         let __result =
             (self.commands().cmd_set_sample_locations_ext)(command_buffer, sample_locations_info);
     }
+}
 
+impl<C: DeviceV1_0> ExtSampleLocationsExtensionDeviceCommands for C {}
+
+/// The instance-level commands added by [`EXT_SAMPLE_LOCATIONS_EXTENSION`].
+pub trait ExtSampleLocationsExtensionInstanceCommands: InstanceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetPhysicalDeviceMultisamplePropertiesEXT.html>
     #[inline]
     unsafe fn get_physical_device_multisample_properties_ext(
@@ -4664,86 +3675,10 @@ pub trait ExtSampleLocationsExtension: DeviceV1_0 {
     }
 }
 
-impl ExtSampleLocationsExtension for crate::Device {}
+impl<C: InstanceV1_0> ExtSampleLocationsExtensionInstanceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_sampler_filter_minmax.html>
-pub trait ExtSamplerFilterMinmaxExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_SAMPLER_FILTER_MINMAX_EXTENSION;
-}
-
-impl ExtSamplerFilterMinmaxExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_scalar_block_layout.html>
-pub trait ExtScalarBlockLayoutExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_SCALAR_BLOCK_LAYOUT_EXTENSION;
-}
-
-impl ExtScalarBlockLayoutExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_separate_stencil_usage.html>
-pub trait ExtSeparateStencilUsageExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_SEPARATE_STENCIL_USAGE_EXTENSION;
-}
-
-impl ExtSeparateStencilUsageExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_shader_atomic_float.html>
-pub trait ExtShaderAtomicFloatExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_SHADER_ATOMIC_FLOAT_EXTENSION;
-}
-
-impl ExtShaderAtomicFloatExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_shader_atomic_float2.html>
-pub trait ExtShaderAtomicFloat2Extension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_SHADER_ATOMIC_FLOAT2_EXTENSION;
-}
-
-impl ExtShaderAtomicFloat2Extension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_shader_demote_to_helper_invocation.html>
-pub trait ExtShaderDemoteToHelperInvocationExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_SHADER_DEMOTE_TO_HELPER_INVOCATION_EXTENSION;
-}
-
-impl ExtShaderDemoteToHelperInvocationExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_shader_float8.html>
-pub trait ExtShaderFloat8Extension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_SHADER_FLOAT8_EXTENSION;
-}
-
-impl ExtShaderFloat8Extension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_shader_image_atomic_int64.html>
-pub trait ExtShaderImageAtomicInt64Extension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_SHADER_IMAGE_ATOMIC_INT64_EXTENSION;
-}
-
-impl ExtShaderImageAtomicInt64Extension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_shader_module_identifier.html>
-pub trait ExtShaderModuleIdentifierExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_SHADER_MODULE_IDENTIFIER_EXTENSION;
-
+/// The device-level commands added by [`EXT_SHADER_MODULE_IDENTIFIER_EXTENSION`].
+pub trait ExtShaderModuleIdentifierExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetShaderModuleCreateInfoIdentifierEXT.html>
     #[inline]
     unsafe fn get_shader_module_create_info_identifier_ext(
@@ -4773,14 +3708,10 @@ pub trait ExtShaderModuleIdentifierExtension: DeviceV1_0 {
     }
 }
 
-impl ExtShaderModuleIdentifierExtension for crate::Device {}
+impl<C: DeviceV1_0> ExtShaderModuleIdentifierExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_shader_object.html>
-pub trait ExtShaderObjectExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_SHADER_OBJECT_EXTENSION;
-
+/// The device-level commands added by [`EXT_SHADER_OBJECT_EXTENSION`].
+pub trait ExtShaderObjectExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdBindShadersEXT.html>
     #[inline]
     unsafe fn cmd_bind_shaders_ext(
@@ -5537,108 +4468,10 @@ pub trait ExtShaderObjectExtension: DeviceV1_0 {
     }
 }
 
-impl ExtShaderObjectExtension for crate::Device {}
+impl<C: DeviceV1_0> ExtShaderObjectExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_shader_replicated_composites.html>
-pub trait ExtShaderReplicatedCompositesExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_SHADER_REPLICATED_COMPOSITES_EXTENSION;
-}
-
-impl ExtShaderReplicatedCompositesExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_shader_stencil_export.html>
-pub trait ExtShaderStencilExportExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_SHADER_STENCIL_EXPORT_EXTENSION;
-}
-
-impl ExtShaderStencilExportExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_shader_subgroup_ballot.html>
-#[deprecated(note = "deprecated in favor of `VK_VERSION_1_2`")]
-pub trait ExtShaderSubgroupBallotExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_SHADER_SUBGROUP_BALLOT_EXTENSION;
-}
-
-#[allow(deprecated)]
-impl ExtShaderSubgroupBallotExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_shader_subgroup_vote.html>
-#[deprecated(note = "deprecated in favor of `VK_VERSION_1_1`")]
-pub trait ExtShaderSubgroupVoteExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_SHADER_SUBGROUP_VOTE_EXTENSION;
-}
-
-#[allow(deprecated)]
-impl ExtShaderSubgroupVoteExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_shader_tile_image.html>
-pub trait ExtShaderTileImageExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_SHADER_TILE_IMAGE_EXTENSION;
-}
-
-impl ExtShaderTileImageExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_shader_viewport_index_layer.html>
-pub trait ExtShaderViewportIndexLayerExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_SHADER_VIEWPORT_INDEX_LAYER_EXTENSION;
-}
-
-impl ExtShaderViewportIndexLayerExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_subgroup_size_control.html>
-pub trait ExtSubgroupSizeControlExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_SUBGROUP_SIZE_CONTROL_EXTENSION;
-}
-
-impl ExtSubgroupSizeControlExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_subpass_merge_feedback.html>
-pub trait ExtSubpassMergeFeedbackExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_SUBPASS_MERGE_FEEDBACK_EXTENSION;
-}
-
-impl ExtSubpassMergeFeedbackExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_surface_maintenance1.html>
-pub trait ExtSurfaceMaintenance1Extension: InstanceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_SURFACE_MAINTENANCE1_EXTENSION;
-}
-
-impl ExtSurfaceMaintenance1Extension for crate::Instance {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_swapchain_colorspace.html>
-pub trait ExtSwapchainColorspaceExtension: InstanceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_SWAPCHAIN_COLORSPACE_EXTENSION;
-}
-
-impl ExtSwapchainColorspaceExtension for crate::Instance {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_swapchain_maintenance1.html>
-pub trait ExtSwapchainMaintenance1Extension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_SWAPCHAIN_MAINTENANCE1_EXTENSION;
-
+/// The device-level commands added by [`EXT_SWAPCHAIN_MAINTENANCE1_EXTENSION`].
+pub trait ExtSwapchainMaintenance1ExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkReleaseSwapchainImagesEXT.html>
     #[inline]
     unsafe fn release_swapchain_images_ext(
@@ -5655,32 +4488,10 @@ pub trait ExtSwapchainMaintenance1Extension: DeviceV1_0 {
     }
 }
 
-impl ExtSwapchainMaintenance1Extension for crate::Device {}
+impl<C: DeviceV1_0> ExtSwapchainMaintenance1ExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_texel_buffer_alignment.html>
-pub trait ExtTexelBufferAlignmentExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_TEXEL_BUFFER_ALIGNMENT_EXTENSION;
-}
-
-impl ExtTexelBufferAlignmentExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_texture_compression_astc_hdr.html>
-pub trait ExtTextureCompressionAstcHdrExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_TEXTURE_COMPRESSION_ASTC_HDR_EXTENSION;
-}
-
-impl ExtTextureCompressionAstcHdrExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_tooling_info.html>
-pub trait ExtToolingInfoExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_TOOLING_INFO_EXTENSION;
-
+/// The instance-level commands added by [`EXT_TOOLING_INFO_EXTENSION`].
+pub trait ExtToolingInfoExtensionInstanceCommands: InstanceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetPhysicalDeviceToolPropertiesEXT.html>
     #[inline]
     unsafe fn get_physical_device_tool_properties_ext(
@@ -5714,14 +4525,10 @@ pub trait ExtToolingInfoExtension: DeviceV1_0 {
     }
 }
 
-impl ExtToolingInfoExtension for crate::Device {}
+impl<C: InstanceV1_0> ExtToolingInfoExtensionInstanceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_transform_feedback.html>
-pub trait ExtTransformFeedbackExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_TRANSFORM_FEEDBACK_EXTENSION;
-
+/// The device-level commands added by [`EXT_TRANSFORM_FEEDBACK_EXTENSION`].
+pub trait ExtTransformFeedbackExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdBeginQueryIndexedEXT.html>
     #[inline]
     unsafe fn cmd_begin_query_indexed_ext(
@@ -5834,14 +4641,10 @@ pub trait ExtTransformFeedbackExtension: DeviceV1_0 {
     }
 }
 
-impl ExtTransformFeedbackExtension for crate::Device {}
+impl<C: DeviceV1_0> ExtTransformFeedbackExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_validation_cache.html>
-pub trait ExtValidationCacheExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_VALIDATION_CACHE_EXTENSION;
-
+/// The device-level commands added by [`EXT_VALIDATION_CACHE_EXTENSION`].
+pub trait ExtValidationCacheExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCreateValidationCacheEXT.html>
     #[inline]
     unsafe fn create_validation_cache_ext(
@@ -5935,54 +4738,10 @@ pub trait ExtValidationCacheExtension: DeviceV1_0 {
     }
 }
 
-impl ExtValidationCacheExtension for crate::Device {}
+impl<C: DeviceV1_0> ExtValidationCacheExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_validation_features.html>
-#[deprecated(note = "deprecated in favor of `VK_EXT_layer_settings`")]
-pub trait ExtValidationFeaturesExtension: InstanceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_VALIDATION_FEATURES_EXTENSION;
-}
-
-#[allow(deprecated)]
-impl ExtValidationFeaturesExtension for crate::Instance {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_validation_flags.html>
-#[deprecated(note = "deprecated in favor of `VK_EXT_layer_settings`")]
-pub trait ExtValidationFlagsExtension: InstanceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_VALIDATION_FLAGS_EXTENSION;
-}
-
-#[allow(deprecated)]
-impl ExtValidationFlagsExtension for crate::Instance {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_vertex_attribute_divisor.html>
-pub trait ExtVertexAttributeDivisorExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_VERTEX_ATTRIBUTE_DIVISOR_EXTENSION;
-}
-
-impl ExtVertexAttributeDivisorExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_vertex_attribute_robustness.html>
-pub trait ExtVertexAttributeRobustnessExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_VERTEX_ATTRIBUTE_ROBUSTNESS_EXTENSION;
-}
-
-impl ExtVertexAttributeRobustnessExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_vertex_input_dynamic_state.html>
-pub trait ExtVertexInputDynamicStateExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_VERTEX_INPUT_DYNAMIC_STATE_EXTENSION;
-
+/// The device-level commands added by [`EXT_VERTEX_INPUT_DYNAMIC_STATE_EXTENSION`].
+pub trait ExtVertexInputDynamicStateExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdSetVertexInputEXT.html>
     #[inline]
     unsafe fn cmd_set_vertex_input_ext(
@@ -6001,41 +4760,10 @@ pub trait ExtVertexInputDynamicStateExtension: DeviceV1_0 {
     }
 }
 
-impl ExtVertexInputDynamicStateExtension for crate::Device {}
+impl<C: DeviceV1_0> ExtVertexInputDynamicStateExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_ycbcr_2plane_444_formats.html>
-pub trait ExtYcbcr2plane444FormatsExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_YCBCR_2PLANE_444_FORMATS_EXTENSION;
-}
-
-impl ExtYcbcr2plane444FormatsExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_ycbcr_image_arrays.html>
-pub trait ExtYcbcrImageArraysExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_YCBCR_IMAGE_ARRAYS_EXTENSION;
-}
-
-impl ExtYcbcrImageArraysExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_zero_initialize_device_memory.html>
-pub trait ExtZeroInitializeDeviceMemoryExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = EXT_ZERO_INITIALIZE_DEVICE_MEMORY_EXTENSION;
-}
-
-impl ExtZeroInitializeDeviceMemoryExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_FUCHSIA_buffer_collection.html>
-pub trait FuchsiaBufferCollectionExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = FUCHSIA_BUFFER_COLLECTION_EXTENSION;
-
+/// The device-level commands added by [`FUCHSIA_BUFFER_COLLECTION_EXTENSION`].
+pub trait FuchsiaBufferCollectionExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCreateBufferCollectionFUCHSIA.html>
     #[inline]
     unsafe fn create_buffer_collection_fuchsia(
@@ -6138,14 +4866,10 @@ pub trait FuchsiaBufferCollectionExtension: DeviceV1_0 {
     }
 }
 
-impl FuchsiaBufferCollectionExtension for crate::Device {}
+impl<C: DeviceV1_0> FuchsiaBufferCollectionExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_FUCHSIA_external_memory.html>
-pub trait FuchsiaExternalMemoryExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = FUCHSIA_EXTERNAL_MEMORY_EXTENSION;
-
+/// The device-level commands added by [`FUCHSIA_EXTERNAL_MEMORY_EXTENSION`].
+pub trait FuchsiaExternalMemoryExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetMemoryZirconHandleFUCHSIA.html>
     #[inline]
     unsafe fn get_memory_zircon_handle_fuchsia(
@@ -6190,14 +4914,10 @@ pub trait FuchsiaExternalMemoryExtension: DeviceV1_0 {
     }
 }
 
-impl FuchsiaExternalMemoryExtension for crate::Device {}
+impl<C: DeviceV1_0> FuchsiaExternalMemoryExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_FUCHSIA_external_semaphore.html>
-pub trait FuchsiaExternalSemaphoreExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = FUCHSIA_EXTERNAL_SEMAPHORE_EXTENSION;
-
+/// The device-level commands added by [`FUCHSIA_EXTERNAL_SEMAPHORE_EXTENSION`].
+pub trait FuchsiaExternalSemaphoreExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetSemaphoreZirconHandleFUCHSIA.html>
     #[inline]
     unsafe fn get_semaphore_zircon_handle_fuchsia(
@@ -6238,14 +4958,10 @@ pub trait FuchsiaExternalSemaphoreExtension: DeviceV1_0 {
     }
 }
 
-impl FuchsiaExternalSemaphoreExtension for crate::Device {}
+impl<C: DeviceV1_0> FuchsiaExternalSemaphoreExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_FUCHSIA_imagepipe_surface.html>
-pub trait FuchsiaImagepipeSurfaceExtension: InstanceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = FUCHSIA_IMAGEPIPE_SURFACE_EXTENSION;
-
+/// The instance-level commands added by [`FUCHSIA_IMAGEPIPE_SURFACE_EXTENSION`].
+pub trait FuchsiaImagepipeSurfaceExtensionInstanceCommands: InstanceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCreateImagePipeSurfaceFUCHSIA.html>
     #[inline]
     unsafe fn create_image_pipe_surface_fuchsia(
@@ -6270,23 +4986,10 @@ pub trait FuchsiaImagepipeSurfaceExtension: InstanceV1_0 {
     }
 }
 
-impl FuchsiaImagepipeSurfaceExtension for crate::Instance {}
+impl<C: InstanceV1_0> FuchsiaImagepipeSurfaceExtensionInstanceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_GGP_frame_token.html>
-pub trait GgpFrameTokenExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = GGP_FRAME_TOKEN_EXTENSION;
-}
-
-impl GgpFrameTokenExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_GGP_stream_descriptor_surface.html>
-pub trait GgpStreamDescriptorSurfaceExtension: InstanceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = GGP_STREAM_DESCRIPTOR_SURFACE_EXTENSION;
-
+/// The instance-level commands added by [`GGP_STREAM_DESCRIPTOR_SURFACE_EXTENSION`].
+pub trait GgpStreamDescriptorSurfaceExtensionInstanceCommands: InstanceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCreateStreamDescriptorSurfaceGGP.html>
     #[inline]
     unsafe fn create_stream_descriptor_surface_ggp(
@@ -6311,23 +5014,10 @@ pub trait GgpStreamDescriptorSurfaceExtension: InstanceV1_0 {
     }
 }
 
-impl GgpStreamDescriptorSurfaceExtension for crate::Instance {}
+impl<C: InstanceV1_0> GgpStreamDescriptorSurfaceExtensionInstanceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_GOOGLE_decorate_string.html>
-pub trait GoogleDecorateStringExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = GOOGLE_DECORATE_STRING_EXTENSION;
-}
-
-impl GoogleDecorateStringExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_GOOGLE_display_timing.html>
-pub trait GoogleDisplayTimingExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = GOOGLE_DISPLAY_TIMING_EXTENSION;
-
+/// The device-level commands added by [`GOOGLE_DISPLAY_TIMING_EXTENSION`].
+pub trait GoogleDisplayTimingExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetPastPresentationTimingGOOGLE.html>
     #[inline]
     unsafe fn get_past_presentation_timing_google(
@@ -6384,41 +5074,10 @@ pub trait GoogleDisplayTimingExtension: DeviceV1_0 {
     }
 }
 
-impl GoogleDisplayTimingExtension for crate::Device {}
+impl<C: DeviceV1_0> GoogleDisplayTimingExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_GOOGLE_hlsl_functionality1.html>
-pub trait GoogleHlslFunctionality1Extension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = GOOGLE_HLSL_FUNCTIONALITY1_EXTENSION;
-}
-
-impl GoogleHlslFunctionality1Extension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_GOOGLE_surfaceless_query.html>
-pub trait GoogleSurfacelessQueryExtension: InstanceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = GOOGLE_SURFACELESS_QUERY_EXTENSION;
-}
-
-impl GoogleSurfacelessQueryExtension for crate::Instance {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_GOOGLE_user_type.html>
-pub trait GoogleUserTypeExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = GOOGLE_USER_TYPE_EXTENSION;
-}
-
-impl GoogleUserTypeExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_HUAWEI_cluster_culling_shader.html>
-pub trait HuaweiClusterCullingShaderExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = HUAWEI_CLUSTER_CULLING_SHADER_EXTENSION;
-
+/// The device-level commands added by [`HUAWEI_CLUSTER_CULLING_SHADER_EXTENSION`].
+pub trait HuaweiClusterCullingShaderExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdDrawClusterHUAWEI.html>
     #[inline]
     unsafe fn cmd_draw_cluster_huawei(
@@ -6449,23 +5108,10 @@ pub trait HuaweiClusterCullingShaderExtension: DeviceV1_0 {
     }
 }
 
-impl HuaweiClusterCullingShaderExtension for crate::Device {}
+impl<C: DeviceV1_0> HuaweiClusterCullingShaderExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_HUAWEI_hdr_vivid.html>
-pub trait HuaweiHdrVividExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = HUAWEI_HDR_VIVID_EXTENSION;
-}
-
-impl HuaweiHdrVividExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_HUAWEI_invocation_mask.html>
-pub trait HuaweiInvocationMaskExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = HUAWEI_INVOCATION_MASK_EXTENSION;
-
+/// The device-level commands added by [`HUAWEI_INVOCATION_MASK_EXTENSION`].
+pub trait HuaweiInvocationMaskExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdBindInvocationMaskHUAWEI.html>
     #[inline]
     unsafe fn cmd_bind_invocation_mask_huawei(
@@ -6482,14 +5128,10 @@ pub trait HuaweiInvocationMaskExtension: DeviceV1_0 {
     }
 }
 
-impl HuaweiInvocationMaskExtension for crate::Device {}
+impl<C: DeviceV1_0> HuaweiInvocationMaskExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_HUAWEI_subpass_shading.html>
-pub trait HuaweiSubpassShadingExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = HUAWEI_SUBPASS_SHADING_EXTENSION;
-
+/// The device-level commands added by [`HUAWEI_SUBPASS_SHADING_EXTENSION`].
+pub trait HuaweiSubpassShadingExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdSubpassShadingHUAWEI.html>
     #[inline]
     unsafe fn cmd_subpass_shading_huawei(&self, command_buffer: CommandBuffer) {
@@ -6520,43 +5162,10 @@ pub trait HuaweiSubpassShadingExtension: DeviceV1_0 {
     }
 }
 
-impl HuaweiSubpassShadingExtension for crate::Device {}
+impl<C: DeviceV1_0> HuaweiSubpassShadingExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_IMG_filter_cubic.html>
-pub trait ImgFilterCubicExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = IMG_FILTER_CUBIC_EXTENSION;
-}
-
-impl ImgFilterCubicExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_IMG_format_pvrtc.html>
-#[deprecated]
-pub trait ImgFormatPvrtcExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = IMG_FORMAT_PVRTC_EXTENSION;
-}
-
-#[allow(deprecated)]
-impl ImgFormatPvrtcExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_IMG_relaxed_line_rasterization.html>
-pub trait ImgRelaxedLineRasterizationExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = IMG_RELAXED_LINE_RASTERIZATION_EXTENSION;
-}
-
-impl ImgRelaxedLineRasterizationExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_INTEL_performance_query.html>
-pub trait IntelPerformanceQueryExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = INTEL_PERFORMANCE_QUERY_EXTENSION;
-
+/// The device-level commands added by [`INTEL_PERFORMANCE_QUERY_EXTENSION`].
+pub trait IntelPerformanceQueryExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkAcquirePerformanceConfigurationINTEL.html>
     #[inline]
     unsafe fn acquire_performance_configuration_intel(
@@ -6706,41 +5315,10 @@ pub trait IntelPerformanceQueryExtension: DeviceV1_0 {
     }
 }
 
-impl IntelPerformanceQueryExtension for crate::Device {}
+impl<C: DeviceV1_0> IntelPerformanceQueryExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_INTEL_shader_integer_functions2.html>
-pub trait IntelShaderIntegerFunctions2Extension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = INTEL_SHADER_INTEGER_FUNCTIONS2_EXTENSION;
-}
-
-impl IntelShaderIntegerFunctions2Extension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_16bit_storage.html>
-pub trait Khr16bitStorageExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_16BIT_STORAGE_EXTENSION;
-}
-
-impl Khr16bitStorageExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_8bit_storage.html>
-pub trait Khr8bitStorageExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_8BIT_STORAGE_EXTENSION;
-}
-
-impl Khr8bitStorageExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_acceleration_structure.html>
-pub trait KhrAccelerationStructureExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_ACCELERATION_STRUCTURE_EXTENSION;
-
+/// The device-level commands added by [`KHR_ACCELERATION_STRUCTURE_EXTENSION`].
+pub trait KhrAccelerationStructureExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkBuildAccelerationStructuresKHR.html>
     #[inline]
     unsafe fn build_acceleration_structures_khr(
@@ -7035,14 +5613,10 @@ pub trait KhrAccelerationStructureExtension: DeviceV1_0 {
     }
 }
 
-impl KhrAccelerationStructureExtension for crate::Device {}
+impl<C: DeviceV1_0> KhrAccelerationStructureExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_android_surface.html>
-pub trait KhrAndroidSurfaceExtension: InstanceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_ANDROID_SURFACE_EXTENSION;
-
+/// The instance-level commands added by [`KHR_ANDROID_SURFACE_EXTENSION`].
+pub trait KhrAndroidSurfaceExtensionInstanceCommands: InstanceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCreateAndroidSurfaceKHR.html>
     #[inline]
     unsafe fn create_android_surface_khr(
@@ -7067,14 +5641,10 @@ pub trait KhrAndroidSurfaceExtension: InstanceV1_0 {
     }
 }
 
-impl KhrAndroidSurfaceExtension for crate::Instance {}
+impl<C: InstanceV1_0> KhrAndroidSurfaceExtensionInstanceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_bind_memory2.html>
-pub trait KhrBindMemory2Extension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_BIND_MEMORY2_EXTENSION;
-
+/// The device-level commands added by [`KHR_BIND_MEMORY2_EXTENSION`].
+pub trait KhrBindMemory2ExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkBindBufferMemory2KHR.html>
     #[inline]
     unsafe fn bind_buffer_memory2_khr(
@@ -7114,14 +5684,10 @@ pub trait KhrBindMemory2Extension: DeviceV1_0 {
     }
 }
 
-impl KhrBindMemory2Extension for crate::Device {}
+impl<C: DeviceV1_0> KhrBindMemory2ExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_buffer_device_address.html>
-pub trait KhrBufferDeviceAddressExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_BUFFER_DEVICE_ADDRESS_EXTENSION;
-
+/// The device-level commands added by [`KHR_BUFFER_DEVICE_ADDRESS_EXTENSION`].
+pub trait KhrBufferDeviceAddressExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetBufferDeviceAddressKHR.html>
     #[inline]
     unsafe fn get_buffer_device_address_khr(
@@ -7154,14 +5720,10 @@ pub trait KhrBufferDeviceAddressExtension: DeviceV1_0 {
     }
 }
 
-impl KhrBufferDeviceAddressExtension for crate::Device {}
+impl<C: DeviceV1_0> KhrBufferDeviceAddressExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_calibrated_timestamps.html>
-pub trait KhrCalibratedTimestampsExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_CALIBRATED_TIMESTAMPS_EXTENSION;
-
+/// The device-level commands added by [`KHR_CALIBRATED_TIMESTAMPS_EXTENSION`].
+pub trait KhrCalibratedTimestampsExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetCalibratedTimestampsKHR.html>
     #[inline]
     unsafe fn get_calibrated_timestamps_khr(
@@ -7188,7 +5750,12 @@ pub trait KhrCalibratedTimestampsExtension: DeviceV1_0 {
             Err(__result.into())
         }
     }
+}
 
+impl<C: DeviceV1_0> KhrCalibratedTimestampsExtensionDeviceCommands for C {}
+
+/// The instance-level commands added by [`KHR_CALIBRATED_TIMESTAMPS_EXTENSION`].
+pub trait KhrCalibratedTimestampsExtensionInstanceCommands: InstanceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetPhysicalDeviceCalibrateableTimeDomainsKHR.html>
     #[inline]
     unsafe fn get_physical_device_calibrateable_time_domains_khr(
@@ -7226,23 +5793,10 @@ pub trait KhrCalibratedTimestampsExtension: DeviceV1_0 {
     }
 }
 
-impl KhrCalibratedTimestampsExtension for crate::Device {}
+impl<C: InstanceV1_0> KhrCalibratedTimestampsExtensionInstanceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_compute_shader_derivatives.html>
-pub trait KhrComputeShaderDerivativesExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_COMPUTE_SHADER_DERIVATIVES_EXTENSION;
-}
-
-impl KhrComputeShaderDerivativesExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_cooperative_matrix.html>
-pub trait KhrCooperativeMatrixExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_COOPERATIVE_MATRIX_EXTENSION;
-
+/// The instance-level commands added by [`KHR_COOPERATIVE_MATRIX_EXTENSION`].
+pub trait KhrCooperativeMatrixExtensionInstanceCommands: InstanceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetPhysicalDeviceCooperativeMatrixPropertiesKHR.html>
     #[inline]
     unsafe fn get_physical_device_cooperative_matrix_properties_khr(
@@ -7280,14 +5834,10 @@ pub trait KhrCooperativeMatrixExtension: DeviceV1_0 {
     }
 }
 
-impl KhrCooperativeMatrixExtension for crate::Device {}
+impl<C: InstanceV1_0> KhrCooperativeMatrixExtensionInstanceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_copy_commands2.html>
-pub trait KhrCopyCommands2Extension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_COPY_COMMANDS2_EXTENSION;
-
+/// The device-level commands added by [`KHR_COPY_COMMANDS2_EXTENSION`].
+pub trait KhrCopyCommands2ExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdBlitImage2KHR.html>
     #[inline]
     unsafe fn cmd_blit_image2_khr(
@@ -7355,14 +5905,10 @@ pub trait KhrCopyCommands2Extension: DeviceV1_0 {
     }
 }
 
-impl KhrCopyCommands2Extension for crate::Device {}
+impl<C: DeviceV1_0> KhrCopyCommands2ExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_copy_memory_indirect.html>
-pub trait KhrCopyMemoryIndirectExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_COPY_MEMORY_INDIRECT_EXTENSION;
-
+/// The device-level commands added by [`KHR_COPY_MEMORY_INDIRECT_EXTENSION`].
+pub trait KhrCopyMemoryIndirectExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdCopyMemoryIndirectKHR.html>
     #[inline]
     unsafe fn cmd_copy_memory_indirect_khr(
@@ -7390,14 +5936,10 @@ pub trait KhrCopyMemoryIndirectExtension: DeviceV1_0 {
     }
 }
 
-impl KhrCopyMemoryIndirectExtension for crate::Device {}
+impl<C: DeviceV1_0> KhrCopyMemoryIndirectExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_create_renderpass2.html>
-pub trait KhrCreateRenderpass2Extension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_CREATE_RENDERPASS2_EXTENSION;
-
+/// The device-level commands added by [`KHR_CREATE_RENDERPASS2_EXTENSION`].
+pub trait KhrCreateRenderpass2ExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdBeginRenderPass2KHR.html>
     #[inline]
     unsafe fn cmd_begin_render_pass2_khr(
@@ -7462,23 +6004,10 @@ pub trait KhrCreateRenderpass2Extension: DeviceV1_0 {
     }
 }
 
-impl KhrCreateRenderpass2Extension for crate::Device {}
+impl<C: DeviceV1_0> KhrCreateRenderpass2ExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_dedicated_allocation.html>
-pub trait KhrDedicatedAllocationExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_DEDICATED_ALLOCATION_EXTENSION;
-}
-
-impl KhrDedicatedAllocationExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_deferred_host_operations.html>
-pub trait KhrDeferredHostOperationsExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_DEFERRED_HOST_OPERATIONS_EXTENSION;
-
+/// The device-level commands added by [`KHR_DEFERRED_HOST_OPERATIONS_EXTENSION`].
+pub trait KhrDeferredHostOperationsExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCreateDeferredOperationKHR.html>
     #[inline]
     unsafe fn create_deferred_operation_khr(
@@ -7558,32 +6087,10 @@ pub trait KhrDeferredHostOperationsExtension: DeviceV1_0 {
     }
 }
 
-impl KhrDeferredHostOperationsExtension for crate::Device {}
+impl<C: DeviceV1_0> KhrDeferredHostOperationsExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_depth_clamp_zero_one.html>
-pub trait KhrDepthClampZeroOneExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_DEPTH_CLAMP_ZERO_ONE_EXTENSION;
-}
-
-impl KhrDepthClampZeroOneExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_depth_stencil_resolve.html>
-pub trait KhrDepthStencilResolveExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_DEPTH_STENCIL_RESOLVE_EXTENSION;
-}
-
-impl KhrDepthStencilResolveExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_descriptor_update_template.html>
-pub trait KhrDescriptorUpdateTemplateExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_DESCRIPTOR_UPDATE_TEMPLATE_EXTENSION;
-
+/// The device-level commands added by [`KHR_DESCRIPTOR_UPDATE_TEMPLATE_EXTENSION`].
+pub trait KhrDescriptorUpdateTemplateExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdPushDescriptorSetWithTemplateKHR.html>
     #[inline]
     unsafe fn cmd_push_descriptor_set_with_template_khr(
@@ -7657,14 +6164,10 @@ pub trait KhrDescriptorUpdateTemplateExtension: DeviceV1_0 {
     }
 }
 
-impl KhrDescriptorUpdateTemplateExtension for crate::Device {}
+impl<C: DeviceV1_0> KhrDescriptorUpdateTemplateExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_device_group.html>
-pub trait KhrDeviceGroupExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_DEVICE_GROUP_EXTENSION;
-
+/// The device-level commands added by [`KHR_DEVICE_GROUP_EXTENSION`].
+pub trait KhrDeviceGroupExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkAcquireNextImage2KHR.html>
     #[inline]
     unsafe fn acquire_next_image2_khr(
@@ -7774,7 +6277,12 @@ pub trait KhrDeviceGroupExtension: DeviceV1_0 {
             Err(__result.into())
         }
     }
+}
 
+impl<C: DeviceV1_0> KhrDeviceGroupExtensionDeviceCommands for C {}
+
+/// The instance-level commands added by [`KHR_DEVICE_GROUP_EXTENSION`].
+pub trait KhrDeviceGroupExtensionInstanceCommands: InstanceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetPhysicalDevicePresentRectanglesKHR.html>
     #[inline]
     unsafe fn get_physical_device_present_rectangles_khr(
@@ -7811,14 +6319,10 @@ pub trait KhrDeviceGroupExtension: DeviceV1_0 {
     }
 }
 
-impl KhrDeviceGroupExtension for crate::Device {}
+impl<C: InstanceV1_0> KhrDeviceGroupExtensionInstanceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_device_group_creation.html>
-pub trait KhrDeviceGroupCreationExtension: InstanceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_DEVICE_GROUP_CREATION_EXTENSION;
-
+/// The instance-level commands added by [`KHR_DEVICE_GROUP_CREATION_EXTENSION`].
+pub trait KhrDeviceGroupCreationExtensionInstanceCommands: InstanceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkEnumeratePhysicalDeviceGroupsKHR.html>
     #[inline]
     unsafe fn enumerate_physical_device_groups_khr(
@@ -7854,14 +6358,10 @@ pub trait KhrDeviceGroupCreationExtension: InstanceV1_0 {
     }
 }
 
-impl KhrDeviceGroupCreationExtension for crate::Instance {}
+impl<C: InstanceV1_0> KhrDeviceGroupCreationExtensionInstanceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_display.html>
-pub trait KhrDisplayExtension: InstanceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_DISPLAY_EXTENSION;
-
+/// The instance-level commands added by [`KHR_DISPLAY_EXTENSION`].
+pub trait KhrDisplayExtensionInstanceCommands: InstanceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCreateDisplayModeKHR.html>
     #[inline]
     unsafe fn create_display_mode_khr(
@@ -8074,14 +6574,10 @@ pub trait KhrDisplayExtension: InstanceV1_0 {
     }
 }
 
-impl KhrDisplayExtension for crate::Instance {}
+impl<C: InstanceV1_0> KhrDisplayExtensionInstanceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_display_swapchain.html>
-pub trait KhrDisplaySwapchainExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_DISPLAY_SWAPCHAIN_EXTENSION;
-
+/// The device-level commands added by [`KHR_DISPLAY_SWAPCHAIN_EXTENSION`].
+pub trait KhrDisplaySwapchainExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCreateSharedSwapchainsKHR.html>
     #[inline]
     unsafe fn create_shared_swapchains_khr(
@@ -8109,14 +6605,10 @@ pub trait KhrDisplaySwapchainExtension: DeviceV1_0 {
     }
 }
 
-impl KhrDisplaySwapchainExtension for crate::Device {}
+impl<C: DeviceV1_0> KhrDisplaySwapchainExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_draw_indirect_count.html>
-pub trait KhrDrawIndirectCountExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_DRAW_INDIRECT_COUNT_EXTENSION;
-
+/// The device-level commands added by [`KHR_DRAW_INDIRECT_COUNT_EXTENSION`].
+pub trait KhrDrawIndirectCountExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdDrawIndexedIndirectCountKHR.html>
     #[inline]
     unsafe fn cmd_draw_indexed_indirect_count_khr(
@@ -8164,23 +6656,10 @@ pub trait KhrDrawIndirectCountExtension: DeviceV1_0 {
     }
 }
 
-impl KhrDrawIndirectCountExtension for crate::Device {}
+impl<C: DeviceV1_0> KhrDrawIndirectCountExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_driver_properties.html>
-pub trait KhrDriverPropertiesExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_DRIVER_PROPERTIES_EXTENSION;
-}
-
-impl KhrDriverPropertiesExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_dynamic_rendering.html>
-pub trait KhrDynamicRenderingExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_DYNAMIC_RENDERING_EXTENSION;
-
+/// The device-level commands added by [`KHR_DYNAMIC_RENDERING_EXTENSION`].
+pub trait KhrDynamicRenderingExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdBeginRenderingKHR.html>
     #[inline]
     unsafe fn cmd_begin_rendering_khr(
@@ -8198,14 +6677,10 @@ pub trait KhrDynamicRenderingExtension: DeviceV1_0 {
     }
 }
 
-impl KhrDynamicRenderingExtension for crate::Device {}
+impl<C: DeviceV1_0> KhrDynamicRenderingExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_dynamic_rendering_local_read.html>
-pub trait KhrDynamicRenderingLocalReadExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_DYNAMIC_RENDERING_LOCAL_READ_EXTENSION;
-
+/// The device-level commands added by [`KHR_DYNAMIC_RENDERING_LOCAL_READ_EXTENSION`].
+pub trait KhrDynamicRenderingLocalReadExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdSetRenderingAttachmentLocationsKHR.html>
     #[inline]
     unsafe fn cmd_set_rendering_attachment_locations_khr(
@@ -8235,23 +6710,10 @@ pub trait KhrDynamicRenderingLocalReadExtension: DeviceV1_0 {
     }
 }
 
-impl KhrDynamicRenderingLocalReadExtension for crate::Device {}
+impl<C: DeviceV1_0> KhrDynamicRenderingLocalReadExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_external_fence.html>
-pub trait KhrExternalFenceExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_EXTERNAL_FENCE_EXTENSION;
-}
-
-impl KhrExternalFenceExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_external_fence_capabilities.html>
-pub trait KhrExternalFenceCapabilitiesExtension: InstanceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_EXTERNAL_FENCE_CAPABILITIES_EXTENSION;
-
+/// The instance-level commands added by [`KHR_EXTERNAL_FENCE_CAPABILITIES_EXTENSION`].
+pub trait KhrExternalFenceCapabilitiesExtensionInstanceCommands: InstanceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetPhysicalDeviceExternalFencePropertiesKHR.html>
     #[inline]
     unsafe fn get_physical_device_external_fence_properties_khr(
@@ -8270,14 +6732,10 @@ pub trait KhrExternalFenceCapabilitiesExtension: InstanceV1_0 {
     }
 }
 
-impl KhrExternalFenceCapabilitiesExtension for crate::Instance {}
+impl<C: InstanceV1_0> KhrExternalFenceCapabilitiesExtensionInstanceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_external_fence_fd.html>
-pub trait KhrExternalFenceFdExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_EXTERNAL_FENCE_FD_EXTENSION;
-
+/// The device-level commands added by [`KHR_EXTERNAL_FENCE_FD_EXTENSION`].
+pub trait KhrExternalFenceFdExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetFenceFdKHR.html>
     #[inline]
     unsafe fn get_fence_fd_khr(&self, get_fd_info: &FenceGetFdInfoKHR) -> crate::VkResult<c_int> {
@@ -8309,14 +6767,10 @@ pub trait KhrExternalFenceFdExtension: DeviceV1_0 {
     }
 }
 
-impl KhrExternalFenceFdExtension for crate::Device {}
+impl<C: DeviceV1_0> KhrExternalFenceFdExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_external_fence_win32.html>
-pub trait KhrExternalFenceWin32Extension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_EXTERNAL_FENCE_WIN32_EXTENSION;
-
+/// The device-level commands added by [`KHR_EXTERNAL_FENCE_WIN32_EXTENSION`].
+pub trait KhrExternalFenceWin32ExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetFenceWin32HandleKHR.html>
     #[inline]
     unsafe fn get_fence_win32_handle_khr(
@@ -8357,23 +6811,10 @@ pub trait KhrExternalFenceWin32Extension: DeviceV1_0 {
     }
 }
 
-impl KhrExternalFenceWin32Extension for crate::Device {}
+impl<C: DeviceV1_0> KhrExternalFenceWin32ExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_external_memory.html>
-pub trait KhrExternalMemoryExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_EXTERNAL_MEMORY_EXTENSION;
-}
-
-impl KhrExternalMemoryExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_external_memory_capabilities.html>
-pub trait KhrExternalMemoryCapabilitiesExtension: InstanceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_EXTERNAL_MEMORY_CAPABILITIES_EXTENSION;
-
+/// The instance-level commands added by [`KHR_EXTERNAL_MEMORY_CAPABILITIES_EXTENSION`].
+pub trait KhrExternalMemoryCapabilitiesExtensionInstanceCommands: InstanceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetPhysicalDeviceExternalBufferPropertiesKHR.html>
     #[inline]
     unsafe fn get_physical_device_external_buffer_properties_khr(
@@ -8392,14 +6833,10 @@ pub trait KhrExternalMemoryCapabilitiesExtension: InstanceV1_0 {
     }
 }
 
-impl KhrExternalMemoryCapabilitiesExtension for crate::Instance {}
+impl<C: InstanceV1_0> KhrExternalMemoryCapabilitiesExtensionInstanceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_external_memory_fd.html>
-pub trait KhrExternalMemoryFdExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_EXTERNAL_MEMORY_FD_EXTENSION;
-
+/// The device-level commands added by [`KHR_EXTERNAL_MEMORY_FD_EXTENSION`].
+pub trait KhrExternalMemoryFdExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetMemoryFdKHR.html>
     #[inline]
     unsafe fn get_memory_fd_khr(&self, get_fd_info: &MemoryGetFdInfoKHR) -> crate::VkResult<c_int> {
@@ -8438,14 +6875,10 @@ pub trait KhrExternalMemoryFdExtension: DeviceV1_0 {
     }
 }
 
-impl KhrExternalMemoryFdExtension for crate::Device {}
+impl<C: DeviceV1_0> KhrExternalMemoryFdExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_external_memory_win32.html>
-pub trait KhrExternalMemoryWin32Extension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_EXTERNAL_MEMORY_WIN32_EXTENSION;
-
+/// The device-level commands added by [`KHR_EXTERNAL_MEMORY_WIN32_EXTENSION`].
+pub trait KhrExternalMemoryWin32ExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetMemoryWin32HandleKHR.html>
     #[inline]
     unsafe fn get_memory_win32_handle_khr(
@@ -8490,23 +6923,10 @@ pub trait KhrExternalMemoryWin32Extension: DeviceV1_0 {
     }
 }
 
-impl KhrExternalMemoryWin32Extension for crate::Device {}
+impl<C: DeviceV1_0> KhrExternalMemoryWin32ExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_external_semaphore.html>
-pub trait KhrExternalSemaphoreExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_EXTERNAL_SEMAPHORE_EXTENSION;
-}
-
-impl KhrExternalSemaphoreExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_external_semaphore_capabilities.html>
-pub trait KhrExternalSemaphoreCapabilitiesExtension: InstanceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_EXTERNAL_SEMAPHORE_CAPABILITIES_EXTENSION;
-
+/// The instance-level commands added by [`KHR_EXTERNAL_SEMAPHORE_CAPABILITIES_EXTENSION`].
+pub trait KhrExternalSemaphoreCapabilitiesExtensionInstanceCommands: InstanceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetPhysicalDeviceExternalSemaphorePropertiesKHR.html>
     #[inline]
     unsafe fn get_physical_device_external_semaphore_properties_khr(
@@ -8525,14 +6945,10 @@ pub trait KhrExternalSemaphoreCapabilitiesExtension: InstanceV1_0 {
     }
 }
 
-impl KhrExternalSemaphoreCapabilitiesExtension for crate::Instance {}
+impl<C: InstanceV1_0> KhrExternalSemaphoreCapabilitiesExtensionInstanceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_external_semaphore_fd.html>
-pub trait KhrExternalSemaphoreFdExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_EXTERNAL_SEMAPHORE_FD_EXTENSION;
-
+/// The device-level commands added by [`KHR_EXTERNAL_SEMAPHORE_FD_EXTENSION`].
+pub trait KhrExternalSemaphoreFdExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetSemaphoreFdKHR.html>
     #[inline]
     unsafe fn get_semaphore_fd_khr(
@@ -8568,14 +6984,10 @@ pub trait KhrExternalSemaphoreFdExtension: DeviceV1_0 {
     }
 }
 
-impl KhrExternalSemaphoreFdExtension for crate::Device {}
+impl<C: DeviceV1_0> KhrExternalSemaphoreFdExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_external_semaphore_win32.html>
-pub trait KhrExternalSemaphoreWin32Extension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_EXTERNAL_SEMAPHORE_WIN32_EXTENSION;
-
+/// The device-level commands added by [`KHR_EXTERNAL_SEMAPHORE_WIN32_EXTENSION`].
+pub trait KhrExternalSemaphoreWin32ExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetSemaphoreWin32HandleKHR.html>
     #[inline]
     unsafe fn get_semaphore_win32_handle_khr(
@@ -8616,32 +7028,10 @@ pub trait KhrExternalSemaphoreWin32Extension: DeviceV1_0 {
     }
 }
 
-impl KhrExternalSemaphoreWin32Extension for crate::Device {}
+impl<C: DeviceV1_0> KhrExternalSemaphoreWin32ExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_format_feature_flags2.html>
-pub trait KhrFormatFeatureFlags2Extension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_FORMAT_FEATURE_FLAGS2_EXTENSION;
-}
-
-impl KhrFormatFeatureFlags2Extension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_fragment_shader_barycentric.html>
-pub trait KhrFragmentShaderBarycentricExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_FRAGMENT_SHADER_BARYCENTRIC_EXTENSION;
-}
-
-impl KhrFragmentShaderBarycentricExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_fragment_shading_rate.html>
-pub trait KhrFragmentShadingRateExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_FRAGMENT_SHADING_RATE_EXTENSION;
-
+/// The device-level commands added by [`KHR_FRAGMENT_SHADING_RATE_EXTENSION`].
+pub trait KhrFragmentShadingRateExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdSetFragmentShadingRateKHR.html>
     #[inline]
     unsafe fn cmd_set_fragment_shading_rate_khr(
@@ -8656,7 +7046,12 @@ pub trait KhrFragmentShadingRateExtension: DeviceV1_0 {
             combiner_ops.as_ptr(),
         );
     }
+}
 
+impl<C: DeviceV1_0> KhrFragmentShadingRateExtensionDeviceCommands for C {}
+
+/// The instance-level commands added by [`KHR_FRAGMENT_SHADING_RATE_EXTENSION`].
+pub trait KhrFragmentShadingRateExtensionInstanceCommands: InstanceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetPhysicalDeviceFragmentShadingRatesKHR.html>
     #[inline]
     unsafe fn get_physical_device_fragment_shading_rates_khr(
@@ -8694,14 +7089,10 @@ pub trait KhrFragmentShadingRateExtension: DeviceV1_0 {
     }
 }
 
-impl KhrFragmentShadingRateExtension for crate::Device {}
+impl<C: InstanceV1_0> KhrFragmentShadingRateExtensionInstanceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_get_display_properties2.html>
-pub trait KhrGetDisplayProperties2Extension: InstanceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_GET_DISPLAY_PROPERTIES2_EXTENSION;
-
+/// The instance-level commands added by [`KHR_GET_DISPLAY_PROPERTIES2_EXTENSION`].
+pub trait KhrGetDisplayProperties2ExtensionInstanceCommands: InstanceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetDisplayModeProperties2KHR.html>
     #[inline]
     unsafe fn get_display_mode_properties2_khr(
@@ -8827,14 +7218,10 @@ pub trait KhrGetDisplayProperties2Extension: InstanceV1_0 {
     }
 }
 
-impl KhrGetDisplayProperties2Extension for crate::Instance {}
+impl<C: InstanceV1_0> KhrGetDisplayProperties2ExtensionInstanceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_get_memory_requirements2.html>
-pub trait KhrGetMemoryRequirements2Extension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_GET_MEMORY_REQUIREMENTS2_EXTENSION;
-
+/// The device-level commands added by [`KHR_GET_MEMORY_REQUIREMENTS2_EXTENSION`].
+pub trait KhrGetMemoryRequirements2ExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetBufferMemoryRequirements2KHR.html>
     #[inline]
     unsafe fn get_buffer_memory_requirements2_khr(
@@ -8897,14 +7284,10 @@ pub trait KhrGetMemoryRequirements2Extension: DeviceV1_0 {
     }
 }
 
-impl KhrGetMemoryRequirements2Extension for crate::Device {}
+impl<C: DeviceV1_0> KhrGetMemoryRequirements2ExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_get_physical_device_properties2.html>
-pub trait KhrGetPhysicalDeviceProperties2Extension: InstanceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION;
-
+/// The instance-level commands added by [`KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION`].
+pub trait KhrGetPhysicalDeviceProperties2ExtensionInstanceCommands: InstanceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetPhysicalDeviceFeatures2KHR.html>
     #[inline]
     unsafe fn get_physical_device_features2_khr(
@@ -9046,14 +7429,10 @@ pub trait KhrGetPhysicalDeviceProperties2Extension: InstanceV1_0 {
     }
 }
 
-impl KhrGetPhysicalDeviceProperties2Extension for crate::Instance {}
+impl<C: InstanceV1_0> KhrGetPhysicalDeviceProperties2ExtensionInstanceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_get_surface_capabilities2.html>
-pub trait KhrGetSurfaceCapabilities2Extension: InstanceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_GET_SURFACE_CAPABILITIES2_EXTENSION;
-
+/// The instance-level commands added by [`KHR_GET_SURFACE_CAPABILITIES2_EXTENSION`].
+pub trait KhrGetSurfaceCapabilities2ExtensionInstanceCommands: InstanceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetPhysicalDeviceSurfaceCapabilities2KHR.html>
     #[inline]
     unsafe fn get_physical_device_surface_capabilities2_khr(
@@ -9113,59 +7492,10 @@ pub trait KhrGetSurfaceCapabilities2Extension: InstanceV1_0 {
     }
 }
 
-impl KhrGetSurfaceCapabilities2Extension for crate::Instance {}
+impl<C: InstanceV1_0> KhrGetSurfaceCapabilities2ExtensionInstanceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_global_priority.html>
-pub trait KhrGlobalPriorityExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_GLOBAL_PRIORITY_EXTENSION;
-}
-
-impl KhrGlobalPriorityExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_image_format_list.html>
-pub trait KhrImageFormatListExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_IMAGE_FORMAT_LIST_EXTENSION;
-}
-
-impl KhrImageFormatListExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_imageless_framebuffer.html>
-pub trait KhrImagelessFramebufferExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_IMAGELESS_FRAMEBUFFER_EXTENSION;
-}
-
-impl KhrImagelessFramebufferExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_incremental_present.html>
-pub trait KhrIncrementalPresentExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_INCREMENTAL_PRESENT_EXTENSION;
-}
-
-impl KhrIncrementalPresentExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_index_type_uint8.html>
-pub trait KhrIndexTypeUint8Extension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_INDEX_TYPE_UINT8_EXTENSION;
-}
-
-impl KhrIndexTypeUint8Extension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_line_rasterization.html>
-pub trait KhrLineRasterizationExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_LINE_RASTERIZATION_EXTENSION;
-
+/// The device-level commands added by [`KHR_LINE_RASTERIZATION_EXTENSION`].
+pub trait KhrLineRasterizationExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdSetLineStippleKHR.html>
     #[inline]
     unsafe fn cmd_set_line_stipple_khr(
@@ -9182,23 +7512,10 @@ pub trait KhrLineRasterizationExtension: DeviceV1_0 {
     }
 }
 
-impl KhrLineRasterizationExtension for crate::Device {}
+impl<C: DeviceV1_0> KhrLineRasterizationExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_load_store_op_none.html>
-pub trait KhrLoadStoreOpNoneExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_LOAD_STORE_OP_NONE_EXTENSION;
-}
-
-impl KhrLoadStoreOpNoneExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_maintenance1.html>
-pub trait KhrMaintenance1Extension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_MAINTENANCE1_EXTENSION;
-
+/// The device-level commands added by [`KHR_MAINTENANCE1_EXTENSION`].
+pub trait KhrMaintenance1ExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkTrimCommandPoolKHR.html>
     #[inline]
     unsafe fn trim_command_pool_khr(&self, command_pool: CommandPool, flags: CommandPoolTrimFlags) {
@@ -9206,23 +7523,10 @@ pub trait KhrMaintenance1Extension: DeviceV1_0 {
     }
 }
 
-impl KhrMaintenance1Extension for crate::Device {}
+impl<C: DeviceV1_0> KhrMaintenance1ExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_maintenance2.html>
-pub trait KhrMaintenance2Extension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_MAINTENANCE2_EXTENSION;
-}
-
-impl KhrMaintenance2Extension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_maintenance3.html>
-pub trait KhrMaintenance3Extension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_MAINTENANCE3_EXTENSION;
-
+/// The device-level commands added by [`KHR_MAINTENANCE3_EXTENSION`].
+pub trait KhrMaintenance3ExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetDescriptorSetLayoutSupportKHR.html>
     #[inline]
     unsafe fn get_descriptor_set_layout_support_khr(
@@ -9238,14 +7542,10 @@ pub trait KhrMaintenance3Extension: DeviceV1_0 {
     }
 }
 
-impl KhrMaintenance3Extension for crate::Device {}
+impl<C: DeviceV1_0> KhrMaintenance3ExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_maintenance4.html>
-pub trait KhrMaintenance4Extension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_MAINTENANCE4_EXTENSION;
-
+/// The device-level commands added by [`KHR_MAINTENANCE4_EXTENSION`].
+pub trait KhrMaintenance4ExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetDeviceBufferMemoryRequirementsKHR.html>
     #[inline]
     unsafe fn get_device_buffer_memory_requirements_khr(
@@ -9312,14 +7612,10 @@ pub trait KhrMaintenance4Extension: DeviceV1_0 {
     }
 }
 
-impl KhrMaintenance4Extension for crate::Device {}
+impl<C: DeviceV1_0> KhrMaintenance4ExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_maintenance5.html>
-pub trait KhrMaintenance5Extension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_MAINTENANCE5_EXTENSION;
-
+/// The device-level commands added by [`KHR_MAINTENANCE5_EXTENSION`].
+pub trait KhrMaintenance5ExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdBindIndexBuffer2KHR.html>
     #[inline]
     unsafe fn cmd_bind_index_buffer2_khr(
@@ -9384,14 +7680,10 @@ pub trait KhrMaintenance5Extension: DeviceV1_0 {
     }
 }
 
-impl KhrMaintenance5Extension for crate::Device {}
+impl<C: DeviceV1_0> KhrMaintenance5ExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_maintenance6.html>
-pub trait KhrMaintenance6Extension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_MAINTENANCE6_EXTENSION;
-
+/// The device-level commands added by [`KHR_MAINTENANCE6_EXTENSION`].
+pub trait KhrMaintenance6ExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdBindDescriptorBufferEmbeddedSamplers2EXT.html>
     #[inline]
     unsafe fn cmd_bind_descriptor_buffer_embedded_samplers2_ext(
@@ -9471,41 +7763,10 @@ pub trait KhrMaintenance6Extension: DeviceV1_0 {
     }
 }
 
-impl KhrMaintenance6Extension for crate::Device {}
+impl<C: DeviceV1_0> KhrMaintenance6ExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_maintenance7.html>
-pub trait KhrMaintenance7Extension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_MAINTENANCE7_EXTENSION;
-}
-
-impl KhrMaintenance7Extension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_maintenance8.html>
-pub trait KhrMaintenance8Extension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_MAINTENANCE8_EXTENSION;
-}
-
-impl KhrMaintenance8Extension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_maintenance9.html>
-pub trait KhrMaintenance9Extension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_MAINTENANCE9_EXTENSION;
-}
-
-impl KhrMaintenance9Extension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_map_memory2.html>
-pub trait KhrMapMemory2Extension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_MAP_MEMORY2_EXTENSION;
-
+/// The device-level commands added by [`KHR_MAP_MEMORY2_EXTENSION`].
+pub trait KhrMapMemory2ExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkMapMemory2KHR.html>
     #[inline]
     unsafe fn map_memory2_khr(
@@ -9537,23 +7798,10 @@ pub trait KhrMapMemory2Extension: DeviceV1_0 {
     }
 }
 
-impl KhrMapMemory2Extension for crate::Device {}
+impl<C: DeviceV1_0> KhrMapMemory2ExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_multiview.html>
-pub trait KhrMultiviewExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_MULTIVIEW_EXTENSION;
-}
-
-impl KhrMultiviewExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_object_refresh.html>
-pub trait KhrObjectRefreshExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_OBJECT_REFRESH_EXTENSION;
-
+/// The device-level commands added by [`KHR_OBJECT_REFRESH_EXTENSION`].
+pub trait KhrObjectRefreshExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdRefreshObjectsKHR.html>
     #[inline]
     unsafe fn cmd_refresh_objects_khr(
@@ -9563,7 +7811,12 @@ pub trait KhrObjectRefreshExtension: DeviceV1_0 {
     ) {
         let __result = (self.commands().cmd_refresh_objects_khr)(command_buffer, refresh_objects);
     }
+}
 
+impl<C: DeviceV1_0> KhrObjectRefreshExtensionDeviceCommands for C {}
+
+/// The instance-level commands added by [`KHR_OBJECT_REFRESH_EXTENSION`].
+pub trait KhrObjectRefreshExtensionInstanceCommands: InstanceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetPhysicalDeviceRefreshableObjectTypesKHR.html>
     #[inline]
     unsafe fn get_physical_device_refreshable_object_types_khr(
@@ -9604,14 +7857,10 @@ pub trait KhrObjectRefreshExtension: DeviceV1_0 {
     }
 }
 
-impl KhrObjectRefreshExtension for crate::Device {}
+impl<C: InstanceV1_0> KhrObjectRefreshExtensionInstanceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_performance_query.html>
-pub trait KhrPerformanceQueryExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_PERFORMANCE_QUERY_EXTENSION;
-
+/// The device-level commands added by [`KHR_PERFORMANCE_QUERY_EXTENSION`].
+pub trait KhrPerformanceQueryExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkAcquireProfilingLockKHR.html>
     #[inline]
     unsafe fn acquire_profiling_lock_khr(
@@ -9627,6 +7876,17 @@ pub trait KhrPerformanceQueryExtension: DeviceV1_0 {
         }
     }
 
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkReleaseProfilingLockKHR.html>
+    #[inline]
+    unsafe fn release_profiling_lock_khr(&self) {
+        let __result = (self.commands().release_profiling_lock_khr)(self.handle());
+    }
+}
+
+impl<C: DeviceV1_0> KhrPerformanceQueryExtensionDeviceCommands for C {}
+
+/// The instance-level commands added by [`KHR_PERFORMANCE_QUERY_EXTENSION`].
+pub trait KhrPerformanceQueryExtensionInstanceCommands: InstanceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR.html>
     #[inline]
     unsafe fn enumerate_physical_device_queue_family_performance_query_counters_khr(
@@ -9693,22 +7953,12 @@ pub trait KhrPerformanceQueryExtension: DeviceV1_0 {
 
         num_passes.assume_init()
     }
-
-    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkReleaseProfilingLockKHR.html>
-    #[inline]
-    unsafe fn release_profiling_lock_khr(&self) {
-        let __result = (self.commands().release_profiling_lock_khr)(self.handle());
-    }
 }
 
-impl KhrPerformanceQueryExtension for crate::Device {}
+impl<C: InstanceV1_0> KhrPerformanceQueryExtensionInstanceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_pipeline_binary.html>
-pub trait KhrPipelineBinaryExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_PIPELINE_BINARY_EXTENSION;
-
+/// The device-level commands added by [`KHR_PIPELINE_BINARY_EXTENSION`].
+pub trait KhrPipelineBinaryExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCreatePipelineBinariesKHR.html>
     #[inline]
     unsafe fn create_pipeline_binaries_khr(
@@ -9823,14 +8073,10 @@ pub trait KhrPipelineBinaryExtension: DeviceV1_0 {
     }
 }
 
-impl KhrPipelineBinaryExtension for crate::Device {}
+impl<C: DeviceV1_0> KhrPipelineBinaryExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_pipeline_executable_properties.html>
-pub trait KhrPipelineExecutablePropertiesExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_PIPELINE_EXECUTABLE_PROPERTIES_EXTENSION;
-
+/// The device-level commands added by [`KHR_PIPELINE_EXECUTABLE_PROPERTIES_EXTENSION`].
+pub trait KhrPipelineExecutablePropertiesExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetPipelineExecutableInternalRepresentationsKHR.html>
     #[inline]
     unsafe fn get_pipeline_executable_internal_representations_khr(
@@ -9941,77 +8187,10 @@ pub trait KhrPipelineExecutablePropertiesExtension: DeviceV1_0 {
     }
 }
 
-impl KhrPipelineExecutablePropertiesExtension for crate::Device {}
+impl<C: DeviceV1_0> KhrPipelineExecutablePropertiesExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_pipeline_library.html>
-pub trait KhrPipelineLibraryExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_PIPELINE_LIBRARY_EXTENSION;
-}
-
-impl KhrPipelineLibraryExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_portability_enumeration.html>
-pub trait KhrPortabilityEnumerationExtension: InstanceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_PORTABILITY_ENUMERATION_EXTENSION;
-}
-
-impl KhrPortabilityEnumerationExtension for crate::Instance {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_portability_subset.html>
-///
-/// ## WARNING
-///
-/// This is a
-/// [provisional extension](https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/provisional-headers.html).
-/// Provisional extensions are not guaranteed to be backwards compatible and are
-/// not intended to be used in production applications.
-#[cfg(feature = "provisional")]
-pub trait KhrPortabilitySubsetExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_PORTABILITY_SUBSET_EXTENSION;
-}
-
-#[cfg(feature = "provisional")]
-impl KhrPortabilitySubsetExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_present_id.html>
-pub trait KhrPresentIdExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_PRESENT_ID_EXTENSION;
-}
-
-impl KhrPresentIdExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_present_id2.html>
-pub trait KhrPresentId2Extension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_PRESENT_ID2_EXTENSION;
-}
-
-impl KhrPresentId2Extension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_present_mode_fifo_latest_ready.html>
-pub trait KhrPresentModeFifoLatestReadyExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_PRESENT_MODE_FIFO_LATEST_READY_EXTENSION;
-}
-
-impl KhrPresentModeFifoLatestReadyExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_present_wait.html>
-pub trait KhrPresentWaitExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_PRESENT_WAIT_EXTENSION;
-
+/// The device-level commands added by [`KHR_PRESENT_WAIT_EXTENSION`].
+pub trait KhrPresentWaitExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkWaitForPresentKHR.html>
     #[inline]
     unsafe fn wait_for_present_khr(
@@ -10031,14 +8210,10 @@ pub trait KhrPresentWaitExtension: DeviceV1_0 {
     }
 }
 
-impl KhrPresentWaitExtension for crate::Device {}
+impl<C: DeviceV1_0> KhrPresentWaitExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_present_wait2.html>
-pub trait KhrPresentWait2Extension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_PRESENT_WAIT2_EXTENSION;
-
+/// The device-level commands added by [`KHR_PRESENT_WAIT2_EXTENSION`].
+pub trait KhrPresentWait2ExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkWaitForPresent2KHR.html>
     #[inline]
     unsafe fn wait_for_present2_khr(
@@ -10057,14 +8232,10 @@ pub trait KhrPresentWait2Extension: DeviceV1_0 {
     }
 }
 
-impl KhrPresentWait2Extension for crate::Device {}
+impl<C: DeviceV1_0> KhrPresentWait2ExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_push_descriptor.html>
-pub trait KhrPushDescriptorExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_PUSH_DESCRIPTOR_EXTENSION;
-
+/// The device-level commands added by [`KHR_PUSH_DESCRIPTOR_EXTENSION`].
+pub trait KhrPushDescriptorExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdPushDescriptorSetKHR.html>
     #[inline]
     unsafe fn cmd_push_descriptor_set_khr(
@@ -10105,23 +8276,10 @@ pub trait KhrPushDescriptorExtension: DeviceV1_0 {
     }
 }
 
-impl KhrPushDescriptorExtension for crate::Device {}
+impl<C: DeviceV1_0> KhrPushDescriptorExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_ray_query.html>
-pub trait KhrRayQueryExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_RAY_QUERY_EXTENSION;
-}
-
-impl KhrRayQueryExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_ray_tracing_maintenance1.html>
-pub trait KhrRayTracingMaintenance1Extension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_RAY_TRACING_MAINTENANCE1_EXTENSION;
-
+/// The device-level commands added by [`KHR_RAY_TRACING_MAINTENANCE1_EXTENSION`].
+pub trait KhrRayTracingMaintenance1ExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdTraceRaysIndirect2KHR.html>
     #[inline]
     unsafe fn cmd_trace_rays_indirect2_khr(
@@ -10134,14 +8292,10 @@ pub trait KhrRayTracingMaintenance1Extension: DeviceV1_0 {
     }
 }
 
-impl KhrRayTracingMaintenance1Extension for crate::Device {}
+impl<C: DeviceV1_0> KhrRayTracingMaintenance1ExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_ray_tracing_pipeline.html>
-pub trait KhrRayTracingPipelineExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_RAY_TRACING_PIPELINE_EXTENSION;
-
+/// The device-level commands added by [`KHR_RAY_TRACING_PIPELINE_EXTENSION`].
+pub trait KhrRayTracingPipelineExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdSetRayTracingPipelineStackSizeKHR.html>
     #[inline]
     unsafe fn cmd_set_ray_tracing_pipeline_stack_size_khr(
@@ -10302,50 +8456,10 @@ pub trait KhrRayTracingPipelineExtension: DeviceV1_0 {
     }
 }
 
-impl KhrRayTracingPipelineExtension for crate::Device {}
+impl<C: DeviceV1_0> KhrRayTracingPipelineExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_ray_tracing_position_fetch.html>
-pub trait KhrRayTracingPositionFetchExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_RAY_TRACING_POSITION_FETCH_EXTENSION;
-}
-
-impl KhrRayTracingPositionFetchExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_relaxed_block_layout.html>
-pub trait KhrRelaxedBlockLayoutExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_RELAXED_BLOCK_LAYOUT_EXTENSION;
-}
-
-impl KhrRelaxedBlockLayoutExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_robustness2.html>
-pub trait KhrRobustness2Extension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_ROBUSTNESS2_EXTENSION;
-}
-
-impl KhrRobustness2Extension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_sampler_mirror_clamp_to_edge.html>
-pub trait KhrSamplerMirrorClampToEdgeExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_SAMPLER_MIRROR_CLAMP_TO_EDGE_EXTENSION;
-}
-
-impl KhrSamplerMirrorClampToEdgeExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_sampler_ycbcr_conversion.html>
-pub trait KhrSamplerYcbcrConversionExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_SAMPLER_YCBCR_CONVERSION_EXTENSION;
-
+/// The device-level commands added by [`KHR_SAMPLER_YCBCR_CONVERSION_EXTENSION`].
+pub trait KhrSamplerYcbcrConversionExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCreateSamplerYcbcrConversionKHR.html>
     #[inline]
     unsafe fn create_sampler_ycbcr_conversion_khr(
@@ -10384,185 +8498,10 @@ pub trait KhrSamplerYcbcrConversionExtension: DeviceV1_0 {
     }
 }
 
-impl KhrSamplerYcbcrConversionExtension for crate::Device {}
+impl<C: DeviceV1_0> KhrSamplerYcbcrConversionExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_separate_depth_stencil_layouts.html>
-pub trait KhrSeparateDepthStencilLayoutsExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_SEPARATE_DEPTH_STENCIL_LAYOUTS_EXTENSION;
-}
-
-impl KhrSeparateDepthStencilLayoutsExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_shader_atomic_int64.html>
-pub trait KhrShaderAtomicInt64Extension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_SHADER_ATOMIC_INT64_EXTENSION;
-}
-
-impl KhrShaderAtomicInt64Extension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_shader_bfloat16.html>
-pub trait KhrShaderBfloat16Extension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_SHADER_BFLOAT16_EXTENSION;
-}
-
-impl KhrShaderBfloat16Extension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_shader_clock.html>
-pub trait KhrShaderClockExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_SHADER_CLOCK_EXTENSION;
-}
-
-impl KhrShaderClockExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_shader_draw_parameters.html>
-pub trait KhrShaderDrawParametersExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_SHADER_DRAW_PARAMETERS_EXTENSION;
-}
-
-impl KhrShaderDrawParametersExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_shader_expect_assume.html>
-pub trait KhrShaderExpectAssumeExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_SHADER_EXPECT_ASSUME_EXTENSION;
-}
-
-impl KhrShaderExpectAssumeExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_shader_float16_int8.html>
-pub trait KhrShaderFloat16Int8Extension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_SHADER_FLOAT16_INT8_EXTENSION;
-}
-
-impl KhrShaderFloat16Int8Extension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_shader_float_controls.html>
-pub trait KhrShaderFloatControlsExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_SHADER_FLOAT_CONTROLS_EXTENSION;
-}
-
-impl KhrShaderFloatControlsExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_shader_float_controls2.html>
-pub trait KhrShaderFloatControls2Extension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_SHADER_FLOAT_CONTROLS2_EXTENSION;
-}
-
-impl KhrShaderFloatControls2Extension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_shader_integer_dot_product.html>
-pub trait KhrShaderIntegerDotProductExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_SHADER_INTEGER_DOT_PRODUCT_EXTENSION;
-}
-
-impl KhrShaderIntegerDotProductExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_shader_maximal_reconvergence.html>
-pub trait KhrShaderMaximalReconvergenceExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_SHADER_MAXIMAL_RECONVERGENCE_EXTENSION;
-}
-
-impl KhrShaderMaximalReconvergenceExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_shader_non_semantic_info.html>
-pub trait KhrShaderNonSemanticInfoExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_SHADER_NON_SEMANTIC_INFO_EXTENSION;
-}
-
-impl KhrShaderNonSemanticInfoExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_shader_quad_control.html>
-pub trait KhrShaderQuadControlExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_SHADER_QUAD_CONTROL_EXTENSION;
-}
-
-impl KhrShaderQuadControlExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_shader_relaxed_extended_instruction.html>
-pub trait KhrShaderRelaxedExtendedInstructionExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_SHADER_RELAXED_EXTENDED_INSTRUCTION_EXTENSION;
-}
-
-impl KhrShaderRelaxedExtendedInstructionExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_shader_subgroup_extended_types.html>
-pub trait KhrShaderSubgroupExtendedTypesExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_SHADER_SUBGROUP_EXTENDED_TYPES_EXTENSION;
-}
-
-impl KhrShaderSubgroupExtendedTypesExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_shader_subgroup_rotate.html>
-pub trait KhrShaderSubgroupRotateExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_SHADER_SUBGROUP_ROTATE_EXTENSION;
-}
-
-impl KhrShaderSubgroupRotateExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_shader_subgroup_uniform_control_flow.html>
-pub trait KhrShaderSubgroupUniformControlFlowExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_SHADER_SUBGROUP_UNIFORM_CONTROL_FLOW_EXTENSION;
-}
-
-impl KhrShaderSubgroupUniformControlFlowExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_shader_terminate_invocation.html>
-pub trait KhrShaderTerminateInvocationExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_SHADER_TERMINATE_INVOCATION_EXTENSION;
-}
-
-impl KhrShaderTerminateInvocationExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_shader_untyped_pointers.html>
-pub trait KhrShaderUntypedPointersExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_SHADER_UNTYPED_POINTERS_EXTENSION;
-}
-
-impl KhrShaderUntypedPointersExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_shared_presentable_image.html>
-pub trait KhrSharedPresentableImageExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_SHARED_PRESENTABLE_IMAGE_EXTENSION;
-
+/// The device-level commands added by [`KHR_SHARED_PRESENTABLE_IMAGE_EXTENSION`].
+pub trait KhrSharedPresentableImageExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetSwapchainStatusKHR.html>
     #[inline]
     unsafe fn get_swapchain_status_khr(
@@ -10579,32 +8518,10 @@ pub trait KhrSharedPresentableImageExtension: DeviceV1_0 {
     }
 }
 
-impl KhrSharedPresentableImageExtension for crate::Device {}
+impl<C: DeviceV1_0> KhrSharedPresentableImageExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_spirv_1_4.html>
-pub trait KhrSpirv14Extension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_SPIRV_1_4_EXTENSION;
-}
-
-impl KhrSpirv14Extension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_storage_buffer_storage_class.html>
-pub trait KhrStorageBufferStorageClassExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_STORAGE_BUFFER_STORAGE_CLASS_EXTENSION;
-}
-
-impl KhrStorageBufferStorageClassExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_surface.html>
-pub trait KhrSurfaceExtension: InstanceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_SURFACE_EXTENSION;
-
+/// The instance-level commands added by [`KHR_SURFACE_EXTENSION`].
+pub trait KhrSurfaceExtensionInstanceCommands: InstanceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkDestroySurfaceKHR.html>
     #[inline]
     unsafe fn destroy_surface_khr(
@@ -10740,32 +8657,10 @@ pub trait KhrSurfaceExtension: InstanceV1_0 {
     }
 }
 
-impl KhrSurfaceExtension for crate::Instance {}
+impl<C: InstanceV1_0> KhrSurfaceExtensionInstanceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_surface_maintenance1.html>
-pub trait KhrSurfaceMaintenance1Extension: InstanceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_SURFACE_MAINTENANCE1_EXTENSION;
-}
-
-impl KhrSurfaceMaintenance1Extension for crate::Instance {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_surface_protected_capabilities.html>
-pub trait KhrSurfaceProtectedCapabilitiesExtension: InstanceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_SURFACE_PROTECTED_CAPABILITIES_EXTENSION;
-}
-
-impl KhrSurfaceProtectedCapabilitiesExtension for crate::Instance {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_swapchain.html>
-pub trait KhrSwapchainExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_SWAPCHAIN_EXTENSION;
-
+/// The device-level commands added by [`KHR_SWAPCHAIN_EXTENSION`].
+pub trait KhrSwapchainExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkAcquireNextImage2KHR.html>
     #[inline]
     unsafe fn acquire_next_image2_khr(
@@ -10890,41 +8785,6 @@ pub trait KhrSwapchainExtension: DeviceV1_0 {
         }
     }
 
-    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetPhysicalDevicePresentRectanglesKHR.html>
-    #[inline]
-    unsafe fn get_physical_device_present_rectangles_khr(
-        &self,
-        physical_device: PhysicalDevice,
-        surface: SurfaceKHR,
-    ) -> crate::VkResult<Vec<Rect2D>> {
-        let mut rect_count = 0;
-
-        (self.commands().get_physical_device_present_rectangles_khr)(
-            physical_device,
-            surface,
-            &mut rect_count,
-            ptr::null_mut(),
-        );
-
-        let mut rects = Vec::with_capacity(rect_count as usize);
-
-        let __result = (self.commands().get_physical_device_present_rectangles_khr)(
-            physical_device,
-            surface,
-            &mut rect_count,
-            rects.as_mut_ptr(),
-        );
-
-        debug_assert!(rects.capacity() == rect_count as usize);
-        rects.set_len(rect_count as usize);
-
-        if __result == Result::SUCCESS {
-            Ok(rects)
-        } else {
-            Err(__result.into())
-        }
-    }
-
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetSwapchainImagesKHR.html>
     #[inline]
     unsafe fn get_swapchain_images_khr(
@@ -10976,14 +8836,50 @@ pub trait KhrSwapchainExtension: DeviceV1_0 {
     }
 }
 
-impl KhrSwapchainExtension for crate::Device {}
+impl<C: DeviceV1_0> KhrSwapchainExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_swapchain_maintenance1.html>
-pub trait KhrSwapchainMaintenance1Extension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_SWAPCHAIN_MAINTENANCE1_EXTENSION;
+/// The instance-level commands added by [`KHR_SWAPCHAIN_EXTENSION`].
+pub trait KhrSwapchainExtensionInstanceCommands: InstanceV1_0 {
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetPhysicalDevicePresentRectanglesKHR.html>
+    #[inline]
+    unsafe fn get_physical_device_present_rectangles_khr(
+        &self,
+        physical_device: PhysicalDevice,
+        surface: SurfaceKHR,
+    ) -> crate::VkResult<Vec<Rect2D>> {
+        let mut rect_count = 0;
 
+        (self.commands().get_physical_device_present_rectangles_khr)(
+            physical_device,
+            surface,
+            &mut rect_count,
+            ptr::null_mut(),
+        );
+
+        let mut rects = Vec::with_capacity(rect_count as usize);
+
+        let __result = (self.commands().get_physical_device_present_rectangles_khr)(
+            physical_device,
+            surface,
+            &mut rect_count,
+            rects.as_mut_ptr(),
+        );
+
+        debug_assert!(rects.capacity() == rect_count as usize);
+        rects.set_len(rect_count as usize);
+
+        if __result == Result::SUCCESS {
+            Ok(rects)
+        } else {
+            Err(__result.into())
+        }
+    }
+}
+
+impl<C: InstanceV1_0> KhrSwapchainExtensionInstanceCommands for C {}
+
+/// The device-level commands added by [`KHR_SWAPCHAIN_MAINTENANCE1_EXTENSION`].
+pub trait KhrSwapchainMaintenance1ExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkReleaseSwapchainImagesKHR.html>
     #[inline]
     unsafe fn release_swapchain_images_khr(
@@ -11000,23 +8896,10 @@ pub trait KhrSwapchainMaintenance1Extension: DeviceV1_0 {
     }
 }
 
-impl KhrSwapchainMaintenance1Extension for crate::Device {}
+impl<C: DeviceV1_0> KhrSwapchainMaintenance1ExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_swapchain_mutable_format.html>
-pub trait KhrSwapchainMutableFormatExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_SWAPCHAIN_MUTABLE_FORMAT_EXTENSION;
-}
-
-impl KhrSwapchainMutableFormatExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_synchronization2.html>
-pub trait KhrSynchronization2Extension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_SYNCHRONIZATION2_EXTENSION;
-
+/// The device-level commands added by [`KHR_SYNCHRONIZATION2_EXTENSION`].
+pub trait KhrSynchronization2ExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdPipelineBarrier2KHR.html>
     #[inline]
     unsafe fn cmd_pipeline_barrier2_khr(
@@ -11101,14 +8984,10 @@ pub trait KhrSynchronization2Extension: DeviceV1_0 {
     }
 }
 
-impl KhrSynchronization2Extension for crate::Device {}
+impl<C: DeviceV1_0> KhrSynchronization2ExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_timeline_semaphore.html>
-pub trait KhrTimelineSemaphoreExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_TIMELINE_SEMAPHORE_EXTENSION;
-
+/// The device-level commands added by [`KHR_TIMELINE_SEMAPHORE_EXTENSION`].
+pub trait KhrTimelineSemaphoreExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetSemaphoreCounterValueKHR.html>
     #[inline]
     unsafe fn get_semaphore_counter_value_khr(&self, semaphore: Semaphore) -> crate::VkResult<u64> {
@@ -11159,77 +9038,10 @@ pub trait KhrTimelineSemaphoreExtension: DeviceV1_0 {
     }
 }
 
-impl KhrTimelineSemaphoreExtension for crate::Device {}
+impl<C: DeviceV1_0> KhrTimelineSemaphoreExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_unified_image_layouts.html>
-pub trait KhrUnifiedImageLayoutsExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_UNIFIED_IMAGE_LAYOUTS_EXTENSION;
-}
-
-impl KhrUnifiedImageLayoutsExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_uniform_buffer_standard_layout.html>
-pub trait KhrUniformBufferStandardLayoutExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_UNIFORM_BUFFER_STANDARD_LAYOUT_EXTENSION;
-}
-
-impl KhrUniformBufferStandardLayoutExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_variable_pointers.html>
-pub trait KhrVariablePointersExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_VARIABLE_POINTERS_EXTENSION;
-}
-
-impl KhrVariablePointersExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_vertex_attribute_divisor.html>
-pub trait KhrVertexAttributeDivisorExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_VERTEX_ATTRIBUTE_DIVISOR_EXTENSION;
-}
-
-impl KhrVertexAttributeDivisorExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_video_decode_av1.html>
-pub trait KhrVideoDecodeAv1Extension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_VIDEO_DECODE_AV1_EXTENSION;
-}
-
-impl KhrVideoDecodeAv1Extension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_video_decode_h264.html>
-pub trait KhrVideoDecodeH264Extension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_VIDEO_DECODE_H264_EXTENSION;
-}
-
-impl KhrVideoDecodeH264Extension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_video_decode_h265.html>
-pub trait KhrVideoDecodeH265Extension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_VIDEO_DECODE_H265_EXTENSION;
-}
-
-impl KhrVideoDecodeH265Extension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_video_decode_queue.html>
-pub trait KhrVideoDecodeQueueExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_VIDEO_DECODE_QUEUE_EXTENSION;
-
+/// The device-level commands added by [`KHR_VIDEO_DECODE_QUEUE_EXTENSION`].
+pub trait KhrVideoDecodeQueueExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdDecodeVideoKHR.html>
     #[inline]
     unsafe fn cmd_decode_video_khr(
@@ -11241,68 +9053,10 @@ pub trait KhrVideoDecodeQueueExtension: DeviceV1_0 {
     }
 }
 
-impl KhrVideoDecodeQueueExtension for crate::Device {}
+impl<C: DeviceV1_0> KhrVideoDecodeQueueExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_video_decode_vp9.html>
-pub trait KhrVideoDecodeVp9Extension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_VIDEO_DECODE_VP9_EXTENSION;
-}
-
-impl KhrVideoDecodeVp9Extension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_video_encode_av1.html>
-pub trait KhrVideoEncodeAv1Extension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_VIDEO_ENCODE_AV1_EXTENSION;
-}
-
-impl KhrVideoEncodeAv1Extension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_video_encode_h264.html>
-pub trait KhrVideoEncodeH264Extension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_VIDEO_ENCODE_H264_EXTENSION;
-}
-
-impl KhrVideoEncodeH264Extension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_video_encode_h265.html>
-pub trait KhrVideoEncodeH265Extension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_VIDEO_ENCODE_H265_EXTENSION;
-}
-
-impl KhrVideoEncodeH265Extension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_video_encode_intra_refresh.html>
-pub trait KhrVideoEncodeIntraRefreshExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_VIDEO_ENCODE_INTRA_REFRESH_EXTENSION;
-}
-
-impl KhrVideoEncodeIntraRefreshExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_video_encode_quantization_map.html>
-pub trait KhrVideoEncodeQuantizationMapExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_VIDEO_ENCODE_QUANTIZATION_MAP_EXTENSION;
-}
-
-impl KhrVideoEncodeQuantizationMapExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_video_encode_queue.html>
-pub trait KhrVideoEncodeQueueExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_VIDEO_ENCODE_QUEUE_EXTENSION;
-
+/// The device-level commands added by [`KHR_VIDEO_ENCODE_QUEUE_EXTENSION`].
+pub trait KhrVideoEncodeQueueExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdEncodeVideoKHR.html>
     #[inline]
     unsafe fn cmd_encode_video_khr(
@@ -11349,7 +9103,12 @@ pub trait KhrVideoEncodeQueueExtension: DeviceV1_0 {
             Err(__result.into())
         }
     }
+}
 
+impl<C: DeviceV1_0> KhrVideoEncodeQueueExtensionDeviceCommands for C {}
+
+/// The instance-level commands added by [`KHR_VIDEO_ENCODE_QUEUE_EXTENSION`].
+pub trait KhrVideoEncodeQueueExtensionInstanceCommands: InstanceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetPhysicalDeviceVideoEncodeQualityLevelPropertiesKHR.html>
     #[inline]
     unsafe fn get_physical_device_video_encode_quality_level_properties_khr(
@@ -11374,32 +9133,10 @@ pub trait KhrVideoEncodeQueueExtension: DeviceV1_0 {
     }
 }
 
-impl KhrVideoEncodeQueueExtension for crate::Device {}
+impl<C: InstanceV1_0> KhrVideoEncodeQueueExtensionInstanceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_video_maintenance1.html>
-pub trait KhrVideoMaintenance1Extension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_VIDEO_MAINTENANCE1_EXTENSION;
-}
-
-impl KhrVideoMaintenance1Extension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_video_maintenance2.html>
-pub trait KhrVideoMaintenance2Extension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_VIDEO_MAINTENANCE2_EXTENSION;
-}
-
-impl KhrVideoMaintenance2Extension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_video_queue.html>
-pub trait KhrVideoQueueExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_VIDEO_QUEUE_EXTENSION;
-
+/// The device-level commands added by [`KHR_VIDEO_QUEUE_EXTENSION`].
+pub trait KhrVideoQueueExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkBindVideoSessionMemoryKHR.html>
     #[inline]
     unsafe fn bind_video_session_memory_khr(
@@ -11526,6 +9263,65 @@ pub trait KhrVideoQueueExtension: DeviceV1_0 {
         );
     }
 
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetVideoSessionMemoryRequirementsKHR.html>
+    #[inline]
+    unsafe fn get_video_session_memory_requirements_khr(
+        &self,
+        video_session: VideoSessionKHR,
+    ) -> crate::VkResult<Vec<VideoSessionMemoryRequirementsKHR>> {
+        let mut memory_requirements_count = 0;
+
+        (self.commands().get_video_session_memory_requirements_khr)(
+            self.handle(),
+            video_session,
+            &mut memory_requirements_count,
+            ptr::null_mut(),
+        );
+
+        let mut memory_requirements = Vec::with_capacity(memory_requirements_count as usize);
+
+        let __result = (self.commands().get_video_session_memory_requirements_khr)(
+            self.handle(),
+            video_session,
+            &mut memory_requirements_count,
+            memory_requirements.as_mut_ptr(),
+        );
+
+        debug_assert!(memory_requirements.capacity() == memory_requirements_count as usize);
+        memory_requirements.set_len(memory_requirements_count as usize);
+
+        if __result == Result::SUCCESS {
+            Ok(memory_requirements)
+        } else {
+            Err(__result.into())
+        }
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkUpdateVideoSessionParametersKHR.html>
+    #[inline]
+    unsafe fn update_video_session_parameters_khr(
+        &self,
+        video_session_parameters: VideoSessionParametersKHR,
+        update_info: &VideoSessionParametersUpdateInfoKHR,
+    ) -> crate::VkResult<()> {
+        let __result = (self.commands().update_video_session_parameters_khr)(
+            self.handle(),
+            video_session_parameters,
+            update_info,
+        );
+
+        if __result == Result::SUCCESS {
+            Ok(())
+        } else {
+            Err(__result.into())
+        }
+    }
+}
+
+impl<C: DeviceV1_0> KhrVideoQueueExtensionDeviceCommands for C {}
+
+/// The instance-level commands added by [`KHR_VIDEO_QUEUE_EXTENSION`].
+pub trait KhrVideoQueueExtensionInstanceCommands: InstanceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetPhysicalDeviceVideoCapabilitiesKHR.html>
     #[inline]
     unsafe fn get_physical_device_video_capabilities_khr(
@@ -11585,79 +9381,12 @@ pub trait KhrVideoQueueExtension: DeviceV1_0 {
             Err(__result.into())
         }
     }
-
-    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetVideoSessionMemoryRequirementsKHR.html>
-    #[inline]
-    unsafe fn get_video_session_memory_requirements_khr(
-        &self,
-        video_session: VideoSessionKHR,
-    ) -> crate::VkResult<Vec<VideoSessionMemoryRequirementsKHR>> {
-        let mut memory_requirements_count = 0;
-
-        (self.commands().get_video_session_memory_requirements_khr)(
-            self.handle(),
-            video_session,
-            &mut memory_requirements_count,
-            ptr::null_mut(),
-        );
-
-        let mut memory_requirements = Vec::with_capacity(memory_requirements_count as usize);
-
-        let __result = (self.commands().get_video_session_memory_requirements_khr)(
-            self.handle(),
-            video_session,
-            &mut memory_requirements_count,
-            memory_requirements.as_mut_ptr(),
-        );
-
-        debug_assert!(memory_requirements.capacity() == memory_requirements_count as usize);
-        memory_requirements.set_len(memory_requirements_count as usize);
-
-        if __result == Result::SUCCESS {
-            Ok(memory_requirements)
-        } else {
-            Err(__result.into())
-        }
-    }
-
-    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkUpdateVideoSessionParametersKHR.html>
-    #[inline]
-    unsafe fn update_video_session_parameters_khr(
-        &self,
-        video_session_parameters: VideoSessionParametersKHR,
-        update_info: &VideoSessionParametersUpdateInfoKHR,
-    ) -> crate::VkResult<()> {
-        let __result = (self.commands().update_video_session_parameters_khr)(
-            self.handle(),
-            video_session_parameters,
-            update_info,
-        );
-
-        if __result == Result::SUCCESS {
-            Ok(())
-        } else {
-            Err(__result.into())
-        }
-    }
 }
 
-impl KhrVideoQueueExtension for crate::Device {}
+impl<C: InstanceV1_0> KhrVideoQueueExtensionInstanceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_vulkan_memory_model.html>
-pub trait KhrVulkanMemoryModelExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_VULKAN_MEMORY_MODEL_EXTENSION;
-}
-
-impl KhrVulkanMemoryModelExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_wayland_surface.html>
-pub trait KhrWaylandSurfaceExtension: InstanceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_WAYLAND_SURFACE_EXTENSION;
-
+/// The instance-level commands added by [`KHR_WAYLAND_SURFACE_EXTENSION`].
+pub trait KhrWaylandSurfaceExtensionInstanceCommands: InstanceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCreateWaylandSurfaceKHR.html>
     #[inline]
     unsafe fn create_wayland_surface_khr(
@@ -11701,23 +9430,10 @@ pub trait KhrWaylandSurfaceExtension: InstanceV1_0 {
     }
 }
 
-impl KhrWaylandSurfaceExtension for crate::Instance {}
+impl<C: InstanceV1_0> KhrWaylandSurfaceExtensionInstanceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_win32_keyed_mutex.html>
-pub trait KhrWin32KeyedMutexExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_WIN32_KEYED_MUTEX_EXTENSION;
-}
-
-impl KhrWin32KeyedMutexExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_win32_surface.html>
-pub trait KhrWin32SurfaceExtension: InstanceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_WIN32_SURFACE_EXTENSION;
-
+/// The instance-level commands added by [`KHR_WIN32_SURFACE_EXTENSION`].
+pub trait KhrWin32SurfaceExtensionInstanceCommands: InstanceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCreateWin32SurfaceKHR.html>
     #[inline]
     unsafe fn create_win32_surface_khr(
@@ -11759,23 +9475,10 @@ pub trait KhrWin32SurfaceExtension: InstanceV1_0 {
     }
 }
 
-impl KhrWin32SurfaceExtension for crate::Instance {}
+impl<C: InstanceV1_0> KhrWin32SurfaceExtensionInstanceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_workgroup_memory_explicit_layout.html>
-pub trait KhrWorkgroupMemoryExplicitLayoutExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_WORKGROUP_MEMORY_EXPLICIT_LAYOUT_EXTENSION;
-}
-
-impl KhrWorkgroupMemoryExplicitLayoutExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_xcb_surface.html>
-pub trait KhrXcbSurfaceExtension: InstanceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_XCB_SURFACE_EXTENSION;
-
+/// The instance-level commands added by [`KHR_XCB_SURFACE_EXTENSION`].
+pub trait KhrXcbSurfaceExtensionInstanceCommands: InstanceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCreateXcbSurfaceKHR.html>
     #[inline]
     unsafe fn create_xcb_surface_khr(
@@ -11821,14 +9524,10 @@ pub trait KhrXcbSurfaceExtension: InstanceV1_0 {
     }
 }
 
-impl KhrXcbSurfaceExtension for crate::Instance {}
+impl<C: InstanceV1_0> KhrXcbSurfaceExtensionInstanceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_xlib_surface.html>
-pub trait KhrXlibSurfaceExtension: InstanceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_XLIB_SURFACE_EXTENSION;
-
+/// The instance-level commands added by [`KHR_XLIB_SURFACE_EXTENSION`].
+pub trait KhrXlibSurfaceExtensionInstanceCommands: InstanceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCreateXlibSurfaceKHR.html>
     #[inline]
     unsafe fn create_xlib_surface_khr(
@@ -11875,51 +9574,10 @@ pub trait KhrXlibSurfaceExtension: InstanceV1_0 {
     }
 }
 
-impl KhrXlibSurfaceExtension for crate::Instance {}
+impl<C: InstanceV1_0> KhrXlibSurfaceExtensionInstanceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_zero_initialize_workgroup_memory.html>
-pub trait KhrZeroInitializeWorkgroupMemoryExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = KHR_ZERO_INITIALIZE_WORKGROUP_MEMORY_EXTENSION;
-}
-
-impl KhrZeroInitializeWorkgroupMemoryExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_LUNARG_direct_driver_loading.html>
-pub trait LunargDirectDriverLoadingExtension: InstanceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = LUNARG_DIRECT_DRIVER_LOADING_EXTENSION;
-}
-
-impl LunargDirectDriverLoadingExtension for crate::Instance {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_MESA_image_alignment_control.html>
-pub trait MesaImageAlignmentControlExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = MESA_IMAGE_ALIGNMENT_CONTROL_EXTENSION;
-}
-
-impl MesaImageAlignmentControlExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_MSFT_layered_driver.html>
-pub trait MsftLayeredDriverExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = MSFT_LAYERED_DRIVER_EXTENSION;
-}
-
-impl MsftLayeredDriverExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_MVK_ios_surface.html>
-#[deprecated(note = "deprecated in favor of `VK_EXT_metal_surface`")]
-pub trait MvkIosSurfaceExtension: InstanceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = MVK_IOS_SURFACE_EXTENSION;
-
+/// The instance-level commands added by [`MVK_IOS_SURFACE_EXTENSION`].
+pub trait MvkIosSurfaceExtensionInstanceCommands: InstanceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCreateIOSSurfaceMVK.html>
     #[inline]
     unsafe fn create_ios_surface_mvk(
@@ -11945,15 +9603,10 @@ pub trait MvkIosSurfaceExtension: InstanceV1_0 {
 }
 
 #[allow(deprecated)]
-impl MvkIosSurfaceExtension for crate::Instance {}
+impl<C: InstanceV1_0> MvkIosSurfaceExtensionInstanceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_MVK_macos_surface.html>
-#[deprecated(note = "deprecated in favor of `VK_EXT_metal_surface`")]
-pub trait MvkMacosSurfaceExtension: InstanceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = MVK_MACOS_SURFACE_EXTENSION;
-
+/// The instance-level commands added by [`MVK_MACOS_SURFACE_EXTENSION`].
+pub trait MvkMacosSurfaceExtensionInstanceCommands: InstanceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCreateMacOSSurfaceMVK.html>
     #[inline]
     unsafe fn create_mac_os_surface_mvk(
@@ -11979,14 +9632,10 @@ pub trait MvkMacosSurfaceExtension: InstanceV1_0 {
 }
 
 #[allow(deprecated)]
-impl MvkMacosSurfaceExtension for crate::Instance {}
+impl<C: InstanceV1_0> MvkMacosSurfaceExtensionInstanceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NN_vi_surface.html>
-pub trait NnViSurfaceExtension: InstanceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = NN_VI_SURFACE_EXTENSION;
-
+/// The instance-level commands added by [`NN_VI_SURFACE_EXTENSION`].
+pub trait NnViSurfaceExtensionInstanceCommands: InstanceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCreateViSurfaceNN.html>
     #[inline]
     unsafe fn create_vi_surface_nn(
@@ -12011,14 +9660,10 @@ pub trait NnViSurfaceExtension: InstanceV1_0 {
     }
 }
 
-impl NnViSurfaceExtension for crate::Instance {}
+impl<C: InstanceV1_0> NnViSurfaceExtensionInstanceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NVX_binary_import.html>
-pub trait NvxBinaryImportExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = NVX_BINARY_IMPORT_EXTENSION;
-
+/// The device-level commands added by [`NVX_BINARY_IMPORT_EXTENSION`].
+pub trait NvxBinaryImportExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdCuLaunchKernelNVX.html>
     #[inline]
     unsafe fn cmd_cu_launch_kernel_nvx(
@@ -12104,14 +9749,10 @@ pub trait NvxBinaryImportExtension: DeviceV1_0 {
     }
 }
 
-impl NvxBinaryImportExtension for crate::Device {}
+impl<C: DeviceV1_0> NvxBinaryImportExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NVX_image_view_handle.html>
-pub trait NvxImageViewHandleExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = NVX_IMAGE_VIEW_HANDLE_EXTENSION;
-
+/// The device-level commands added by [`NVX_IMAGE_VIEW_HANDLE_EXTENSION`].
+pub trait NvxImageViewHandleExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetImageViewAddressNVX.html>
     #[inline]
     unsafe fn get_image_view_address_nvx(
@@ -12146,23 +9787,10 @@ pub trait NvxImageViewHandleExtension: DeviceV1_0 {
     }
 }
 
-impl NvxImageViewHandleExtension for crate::Device {}
+impl<C: DeviceV1_0> NvxImageViewHandleExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NVX_multiview_per_view_attributes.html>
-pub trait NvxMultiviewPerViewAttributesExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = NVX_MULTIVIEW_PER_VIEW_ATTRIBUTES_EXTENSION;
-}
-
-impl NvxMultiviewPerViewAttributesExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_acquire_winrt_display.html>
-pub trait NvAcquireWinrtDisplayExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = NV_ACQUIRE_WINRT_DISPLAY_EXTENSION;
-
+/// The instance-level commands added by [`NV_ACQUIRE_WINRT_DISPLAY_EXTENSION`].
+pub trait NvAcquireWinrtDisplayExtensionInstanceCommands: InstanceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkAcquireWinrtDisplayNV.html>
     #[inline]
     unsafe fn acquire_winrt_display_nv(
@@ -12202,14 +9830,10 @@ pub trait NvAcquireWinrtDisplayExtension: DeviceV1_0 {
     }
 }
 
-impl NvAcquireWinrtDisplayExtension for crate::Device {}
+impl<C: InstanceV1_0> NvAcquireWinrtDisplayExtensionInstanceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_clip_space_w_scaling.html>
-pub trait NvClipSpaceWScalingExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = NV_CLIP_SPACE_W_SCALING_EXTENSION;
-
+/// The device-level commands added by [`NV_CLIP_SPACE_W_SCALING_EXTENSION`].
+pub trait NvClipSpaceWScalingExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdSetViewportWScalingNV.html>
     #[inline]
     unsafe fn cmd_set_viewport_w_scaling_nv(
@@ -12227,14 +9851,10 @@ pub trait NvClipSpaceWScalingExtension: DeviceV1_0 {
     }
 }
 
-impl NvClipSpaceWScalingExtension for crate::Device {}
+impl<C: DeviceV1_0> NvClipSpaceWScalingExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_cluster_acceleration_structure.html>
-pub trait NvClusterAccelerationStructureExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = NV_CLUSTER_ACCELERATION_STRUCTURE_EXTENSION;
-
+/// The device-level commands added by [`NV_CLUSTER_ACCELERATION_STRUCTURE_EXTENSION`].
+pub trait NvClusterAccelerationStructureExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdBuildClusterAccelerationStructureIndirectNV.html>
     #[inline]
     unsafe fn cmd_build_cluster_acceleration_structure_indirect_nv(
@@ -12264,32 +9884,10 @@ pub trait NvClusterAccelerationStructureExtension: DeviceV1_0 {
     }
 }
 
-impl NvClusterAccelerationStructureExtension for crate::Device {}
+impl<C: DeviceV1_0> NvClusterAccelerationStructureExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_command_buffer_inheritance.html>
-pub trait NvCommandBufferInheritanceExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = NV_COMMAND_BUFFER_INHERITANCE_EXTENSION;
-}
-
-impl NvCommandBufferInheritanceExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_compute_shader_derivatives.html>
-pub trait NvComputeShaderDerivativesExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = NV_COMPUTE_SHADER_DERIVATIVES_EXTENSION;
-}
-
-impl NvComputeShaderDerivativesExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_cooperative_matrix.html>
-pub trait NvCooperativeMatrixExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = NV_COOPERATIVE_MATRIX_EXTENSION;
-
+/// The instance-level commands added by [`NV_COOPERATIVE_MATRIX_EXTENSION`].
+pub trait NvCooperativeMatrixExtensionInstanceCommands: InstanceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetPhysicalDeviceCooperativeMatrixPropertiesNV.html>
     #[inline]
     unsafe fn get_physical_device_cooperative_matrix_properties_nv(
@@ -12327,14 +9925,10 @@ pub trait NvCooperativeMatrixExtension: DeviceV1_0 {
     }
 }
 
-impl NvCooperativeMatrixExtension for crate::Device {}
+impl<C: InstanceV1_0> NvCooperativeMatrixExtensionInstanceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_cooperative_matrix2.html>
-pub trait NvCooperativeMatrix2Extension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = NV_COOPERATIVE_MATRIX2_EXTENSION;
-
+/// The instance-level commands added by [`NV_COOPERATIVE_MATRIX2_EXTENSION`].
+pub trait NvCooperativeMatrix2ExtensionInstanceCommands: InstanceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetPhysicalDeviceCooperativeMatrixFlexibleDimensionsPropertiesNV.html>
     #[inline]
     unsafe fn get_physical_device_cooperative_matrix_flexible_dimensions_properties_nv(
@@ -12372,14 +9966,10 @@ pub trait NvCooperativeMatrix2Extension: DeviceV1_0 {
     }
 }
 
-impl NvCooperativeMatrix2Extension for crate::Device {}
+impl<C: InstanceV1_0> NvCooperativeMatrix2ExtensionInstanceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_cooperative_vector.html>
-pub trait NvCooperativeVectorExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = NV_COOPERATIVE_VECTOR_EXTENSION;
-
+/// The device-level commands added by [`NV_COOPERATIVE_VECTOR_EXTENSION`].
+pub trait NvCooperativeVectorExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdConvertCooperativeVectorMatrixNV.html>
     #[inline]
     unsafe fn cmd_convert_cooperative_vector_matrix_nv(
@@ -12408,7 +9998,12 @@ pub trait NvCooperativeVectorExtension: DeviceV1_0 {
             Err(__result.into())
         }
     }
+}
 
+impl<C: DeviceV1_0> NvCooperativeVectorExtensionDeviceCommands for C {}
+
+/// The instance-level commands added by [`NV_COOPERATIVE_VECTOR_EXTENSION`].
+pub trait NvCooperativeVectorExtensionInstanceCommands: InstanceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetPhysicalDeviceCooperativeVectorPropertiesNV.html>
     #[inline]
     unsafe fn get_physical_device_cooperative_vector_properties_nv(
@@ -12446,14 +10041,10 @@ pub trait NvCooperativeVectorExtension: DeviceV1_0 {
     }
 }
 
-impl NvCooperativeVectorExtension for crate::Device {}
+impl<C: InstanceV1_0> NvCooperativeVectorExtensionInstanceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_copy_memory_indirect.html>
-pub trait NvCopyMemoryIndirectExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = NV_COPY_MEMORY_INDIRECT_EXTENSION;
-
+/// The device-level commands added by [`NV_COPY_MEMORY_INDIRECT_EXTENSION`].
+pub trait NvCopyMemoryIndirectExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdCopyMemoryIndirectNV.html>
     #[inline]
     unsafe fn cmd_copy_memory_indirect_nv(
@@ -12495,23 +10086,10 @@ pub trait NvCopyMemoryIndirectExtension: DeviceV1_0 {
     }
 }
 
-impl NvCopyMemoryIndirectExtension for crate::Device {}
+impl<C: DeviceV1_0> NvCopyMemoryIndirectExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_corner_sampled_image.html>
-pub trait NvCornerSampledImageExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = NV_CORNER_SAMPLED_IMAGE_EXTENSION;
-}
-
-impl NvCornerSampledImageExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_coverage_reduction_mode.html>
-pub trait NvCoverageReductionModeExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = NV_COVERAGE_REDUCTION_MODE_EXTENSION;
-
+/// The instance-level commands added by [`NV_COVERAGE_REDUCTION_MODE_EXTENSION`].
+pub trait NvCoverageReductionModeExtensionInstanceCommands: InstanceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV.html>
     #[inline]
     unsafe fn get_physical_device_supported_framebuffer_mixed_samples_combinations_nv(
@@ -12549,22 +10127,10 @@ pub trait NvCoverageReductionModeExtension: DeviceV1_0 {
     }
 }
 
-impl NvCoverageReductionModeExtension for crate::Device {}
+impl<C: InstanceV1_0> NvCoverageReductionModeExtensionInstanceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_cuda_kernel_launch.html>
-///
-/// ## WARNING
-///
-/// This is a
-/// [provisional extension](https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/provisional-headers.html).
-/// Provisional extensions are not guaranteed to be backwards compatible and are
-/// not intended to be used in production applications.
-#[cfg(feature = "provisional")]
-pub trait NvCudaKernelLaunchExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = NV_CUDA_KERNEL_LAUNCH_EXTENSION;
-
+/// The device-level commands added by [`NV_CUDA_KERNEL_LAUNCH_EXTENSION`].
+pub trait NvCudaKernelLaunchExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdCudaLaunchKernelNV.html>
     #[inline]
     unsafe fn cmd_cuda_launch_kernel_nv(
@@ -12682,43 +10248,10 @@ pub trait NvCudaKernelLaunchExtension: DeviceV1_0 {
 }
 
 #[cfg(feature = "provisional")]
-impl NvCudaKernelLaunchExtension for crate::Device {}
+impl<C: DeviceV1_0> NvCudaKernelLaunchExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_dedicated_allocation.html>
-#[deprecated(note = "deprecated in favor of `VK_KHR_dedicated_allocation`")]
-pub trait NvDedicatedAllocationExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = NV_DEDICATED_ALLOCATION_EXTENSION;
-}
-
-#[allow(deprecated)]
-impl NvDedicatedAllocationExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_dedicated_allocation_image_aliasing.html>
-pub trait NvDedicatedAllocationImageAliasingExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = NV_DEDICATED_ALLOCATION_IMAGE_ALIASING_EXTENSION;
-}
-
-impl NvDedicatedAllocationImageAliasingExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_descriptor_pool_overallocation.html>
-pub trait NvDescriptorPoolOverallocationExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = NV_DESCRIPTOR_POOL_OVERALLOCATION_EXTENSION;
-}
-
-impl NvDescriptorPoolOverallocationExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_device_diagnostic_checkpoints.html>
-pub trait NvDeviceDiagnosticCheckpointsExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = NV_DEVICE_DIAGNOSTIC_CHECKPOINTS_EXTENSION;
-
+/// The device-level commands added by [`NV_DEVICE_DIAGNOSTIC_CHECKPOINTS_EXTENSION`].
+pub trait NvDeviceDiagnosticCheckpointsExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdSetCheckpointNV.html>
     #[inline]
     unsafe fn cmd_set_checkpoint_nv(
@@ -12780,23 +10313,10 @@ pub trait NvDeviceDiagnosticCheckpointsExtension: DeviceV1_0 {
     }
 }
 
-impl NvDeviceDiagnosticCheckpointsExtension for crate::Device {}
+impl<C: DeviceV1_0> NvDeviceDiagnosticCheckpointsExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_device_diagnostics_config.html>
-pub trait NvDeviceDiagnosticsConfigExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = NV_DEVICE_DIAGNOSTICS_CONFIG_EXTENSION;
-}
-
-impl NvDeviceDiagnosticsConfigExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_device_generated_commands.html>
-pub trait NvDeviceGeneratedCommandsExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = NV_DEVICE_GENERATED_COMMANDS_EXTENSION;
-
+/// The device-level commands added by [`NV_DEVICE_GENERATED_COMMANDS_EXTENSION`].
+pub trait NvDeviceGeneratedCommandsExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdBindPipelineShaderGroupNV.html>
     #[inline]
     unsafe fn cmd_bind_pipeline_shader_group_nv(
@@ -12896,14 +10416,10 @@ pub trait NvDeviceGeneratedCommandsExtension: DeviceV1_0 {
     }
 }
 
-impl NvDeviceGeneratedCommandsExtension for crate::Device {}
+impl<C: DeviceV1_0> NvDeviceGeneratedCommandsExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_device_generated_commands_compute.html>
-pub trait NvDeviceGeneratedCommandsComputeExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = NV_DEVICE_GENERATED_COMMANDS_COMPUTE_EXTENSION;
-
+/// The device-level commands added by [`NV_DEVICE_GENERATED_COMMANDS_COMPUTE_EXTENSION`].
+pub trait NvDeviceGeneratedCommandsComputeExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdUpdatePipelineIndirectBufferNV.html>
     #[inline]
     unsafe fn cmd_update_pipeline_indirect_buffer_nv(
@@ -12946,52 +10462,10 @@ pub trait NvDeviceGeneratedCommandsComputeExtension: DeviceV1_0 {
     }
 }
 
-impl NvDeviceGeneratedCommandsComputeExtension for crate::Device {}
+impl<C: DeviceV1_0> NvDeviceGeneratedCommandsComputeExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_displacement_micromap.html>
-///
-/// ## WARNING
-///
-/// This is a
-/// [provisional extension](https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/provisional-headers.html).
-/// Provisional extensions are not guaranteed to be backwards compatible and are
-/// not intended to be used in production applications.
-#[cfg(feature = "provisional")]
-#[deprecated(note = "deprecated in favor of `VK_NV_cluster_acceleration_structure`")]
-pub trait NvDisplacementMicromapExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = NV_DISPLACEMENT_MICROMAP_EXTENSION;
-}
-
-#[cfg(feature = "provisional")]
-#[allow(deprecated)]
-impl NvDisplacementMicromapExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_display_stereo.html>
-pub trait NvDisplayStereoExtension: InstanceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = NV_DISPLAY_STEREO_EXTENSION;
-}
-
-impl NvDisplayStereoExtension for crate::Instance {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_extended_sparse_address_space.html>
-pub trait NvExtendedSparseAddressSpaceExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = NV_EXTENDED_SPARSE_ADDRESS_SPACE_EXTENSION;
-}
-
-impl NvExtendedSparseAddressSpaceExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_external_compute_queue.html>
-pub trait NvExternalComputeQueueExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = NV_EXTERNAL_COMPUTE_QUEUE_EXTENSION;
-
+/// The device-level commands added by [`NV_EXTERNAL_COMPUTE_QUEUE_EXTENSION`].
+pub trait NvExternalComputeQueueExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCreateExternalComputeQueueNV.html>
     #[inline]
     unsafe fn create_external_compute_queue_nv(
@@ -13048,26 +10522,10 @@ pub trait NvExternalComputeQueueExtension: DeviceV1_0 {
     }
 }
 
-impl NvExternalComputeQueueExtension for crate::Device {}
+impl<C: DeviceV1_0> NvExternalComputeQueueExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_external_memory.html>
-#[deprecated(note = "deprecated in favor of `VK_KHR_external_memory`")]
-pub trait NvExternalMemoryExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = NV_EXTERNAL_MEMORY_EXTENSION;
-}
-
-#[allow(deprecated)]
-impl NvExternalMemoryExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_external_memory_capabilities.html>
-#[deprecated(note = "deprecated in favor of `VK_KHR_external_memory_capabilities`")]
-pub trait NvExternalMemoryCapabilitiesExtension: InstanceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = NV_EXTERNAL_MEMORY_CAPABILITIES_EXTENSION;
-
+/// The instance-level commands added by [`NV_EXTERNAL_MEMORY_CAPABILITIES_EXTENSION`].
+pub trait NvExternalMemoryCapabilitiesExtensionInstanceCommands: InstanceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetPhysicalDeviceExternalImageFormatPropertiesNV.html>
     #[inline]
     unsafe fn get_physical_device_external_image_format_properties_nv(
@@ -13105,14 +10563,10 @@ pub trait NvExternalMemoryCapabilitiesExtension: InstanceV1_0 {
 }
 
 #[allow(deprecated)]
-impl NvExternalMemoryCapabilitiesExtension for crate::Instance {}
+impl<C: InstanceV1_0> NvExternalMemoryCapabilitiesExtensionInstanceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_external_memory_rdma.html>
-pub trait NvExternalMemoryRdmaExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = NV_EXTERNAL_MEMORY_RDMA_EXTENSION;
-
+/// The device-level commands added by [`NV_EXTERNAL_MEMORY_RDMA_EXTENSION`].
+pub trait NvExternalMemoryRdmaExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetMemoryRemoteAddressNV.html>
     #[inline]
     unsafe fn get_memory_remote_address_nv(
@@ -13135,14 +10589,10 @@ pub trait NvExternalMemoryRdmaExtension: DeviceV1_0 {
     }
 }
 
-impl NvExternalMemoryRdmaExtension for crate::Device {}
+impl<C: DeviceV1_0> NvExternalMemoryRdmaExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_external_memory_sci_buf.html>
-pub trait NvExternalMemorySciBufExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = NV_EXTERNAL_MEMORY_SCI_BUF_EXTENSION;
-
+/// The device-level commands added by [`NV_EXTERNAL_MEMORY_SCI_BUF_EXTENSION`].
+pub trait NvExternalMemorySciBufExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetMemorySciBufNV.html>
     #[inline]
     unsafe fn get_memory_sci_buf_nv(
@@ -13163,7 +10613,12 @@ pub trait NvExternalMemorySciBufExtension: DeviceV1_0 {
             Err(__result.into())
         }
     }
+}
 
+impl<C: DeviceV1_0> NvExternalMemorySciBufExtensionDeviceCommands for C {}
+
+/// The instance-level commands added by [`NV_EXTERNAL_MEMORY_SCI_BUF_EXTENSION`].
+pub trait NvExternalMemorySciBufExtensionInstanceCommands: InstanceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetPhysicalDeviceExternalMemorySciBufPropertiesNV.html>
     #[inline]
     unsafe fn get_physical_device_external_memory_sci_buf_properties_nv(
@@ -13209,15 +10664,10 @@ pub trait NvExternalMemorySciBufExtension: DeviceV1_0 {
     }
 }
 
-impl NvExternalMemorySciBufExtension for crate::Device {}
+impl<C: InstanceV1_0> NvExternalMemorySciBufExtensionInstanceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_external_memory_win32.html>
-#[deprecated(note = "deprecated in favor of `VK_KHR_external_memory_win32`")]
-pub trait NvExternalMemoryWin32Extension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = NV_EXTERNAL_MEMORY_WIN32_EXTENSION;
-
+/// The device-level commands added by [`NV_EXTERNAL_MEMORY_WIN32_EXTENSION`].
+pub trait NvExternalMemoryWin32ExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetMemoryWin32HandleNV.html>
     #[inline]
     unsafe fn get_memory_win32_handle_nv(
@@ -13243,15 +10693,10 @@ pub trait NvExternalMemoryWin32Extension: DeviceV1_0 {
 }
 
 #[allow(deprecated)]
-impl NvExternalMemoryWin32Extension for crate::Device {}
+impl<C: DeviceV1_0> NvExternalMemoryWin32ExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_external_sci_sync.html>
-#[deprecated(note = "deprecated in favor of `VK_NV_external_sci_sync2`")]
-pub trait NvExternalSciSyncExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = NV_EXTERNAL_SCI_SYNC_EXTENSION;
-
+/// The device-level commands added by [`NV_EXTERNAL_SCI_SYNC_EXTENSION`].
+pub trait NvExternalSciSyncExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetFenceSciSyncFenceNV.html>
     #[inline]
     unsafe fn get_fence_sci_sync_fence_nv(
@@ -13289,27 +10734,6 @@ pub trait NvExternalSciSyncExtension: DeviceV1_0 {
 
         if __result == Result::SUCCESS {
             Ok(handle.assume_init())
-        } else {
-            Err(__result.into())
-        }
-    }
-
-    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetPhysicalDeviceSciSyncAttributesNV.html>
-    #[inline]
-    unsafe fn get_physical_device_sci_sync_attributes_nv(
-        &self,
-        physical_device: PhysicalDevice,
-        sci_sync_attributes_info: &SciSyncAttributesInfoNV,
-        attributes: NvSciSyncAttrList,
-    ) -> crate::VkResult<()> {
-        let __result = (self.commands().get_physical_device_sci_sync_attributes_nv)(
-            physical_device,
-            sci_sync_attributes_info,
-            attributes,
-        );
-
-        if __result == Result::SUCCESS {
-            Ok(())
         } else {
             Err(__result.into())
         }
@@ -13392,14 +10816,37 @@ pub trait NvExternalSciSyncExtension: DeviceV1_0 {
 }
 
 #[allow(deprecated)]
-impl NvExternalSciSyncExtension for crate::Device {}
+impl<C: DeviceV1_0> NvExternalSciSyncExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_external_sci_sync2.html>
-pub trait NvExternalSciSync2Extension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = NV_EXTERNAL_SCI_SYNC2_EXTENSION;
+/// The instance-level commands added by [`NV_EXTERNAL_SCI_SYNC_EXTENSION`].
+pub trait NvExternalSciSyncExtensionInstanceCommands: InstanceV1_0 {
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetPhysicalDeviceSciSyncAttributesNV.html>
+    #[inline]
+    unsafe fn get_physical_device_sci_sync_attributes_nv(
+        &self,
+        physical_device: PhysicalDevice,
+        sci_sync_attributes_info: &SciSyncAttributesInfoNV,
+        attributes: NvSciSyncAttrList,
+    ) -> crate::VkResult<()> {
+        let __result = (self.commands().get_physical_device_sci_sync_attributes_nv)(
+            physical_device,
+            sci_sync_attributes_info,
+            attributes,
+        );
 
+        if __result == Result::SUCCESS {
+            Ok(())
+        } else {
+            Err(__result.into())
+        }
+    }
+}
+
+#[allow(deprecated)]
+impl<C: InstanceV1_0> NvExternalSciSyncExtensionInstanceCommands for C {}
+
+/// The device-level commands added by [`NV_EXTERNAL_SCI_SYNC2_EXTENSION`].
+pub trait NvExternalSciSync2ExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCreateSemaphoreSciSyncPoolNV.html>
     #[inline]
     unsafe fn create_semaphore_sci_sync_pool_nv(
@@ -13479,27 +10926,6 @@ pub trait NvExternalSciSync2Extension: DeviceV1_0 {
         }
     }
 
-    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetPhysicalDeviceSciSyncAttributesNV.html>
-    #[inline]
-    unsafe fn get_physical_device_sci_sync_attributes_nv(
-        &self,
-        physical_device: PhysicalDevice,
-        sci_sync_attributes_info: &SciSyncAttributesInfoNV,
-        attributes: NvSciSyncAttrList,
-    ) -> crate::VkResult<()> {
-        let __result = (self.commands().get_physical_device_sci_sync_attributes_nv)(
-            physical_device,
-            sci_sync_attributes_info,
-            attributes,
-        );
-
-        if __result == Result::SUCCESS {
-            Ok(())
-        } else {
-            Err(__result.into())
-        }
-    }
-
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkImportFenceSciSyncFenceNV.html>
     #[inline]
     unsafe fn import_fence_sci_sync_fence_nv(
@@ -13537,41 +10963,36 @@ pub trait NvExternalSciSync2Extension: DeviceV1_0 {
     }
 }
 
-impl NvExternalSciSync2Extension for crate::Device {}
+impl<C: DeviceV1_0> NvExternalSciSync2ExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_fill_rectangle.html>
-pub trait NvFillRectangleExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = NV_FILL_RECTANGLE_EXTENSION;
+/// The instance-level commands added by [`NV_EXTERNAL_SCI_SYNC2_EXTENSION`].
+pub trait NvExternalSciSync2ExtensionInstanceCommands: InstanceV1_0 {
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetPhysicalDeviceSciSyncAttributesNV.html>
+    #[inline]
+    unsafe fn get_physical_device_sci_sync_attributes_nv(
+        &self,
+        physical_device: PhysicalDevice,
+        sci_sync_attributes_info: &SciSyncAttributesInfoNV,
+        attributes: NvSciSyncAttrList,
+    ) -> crate::VkResult<()> {
+        let __result = (self.commands().get_physical_device_sci_sync_attributes_nv)(
+            physical_device,
+            sci_sync_attributes_info,
+            attributes,
+        );
+
+        if __result == Result::SUCCESS {
+            Ok(())
+        } else {
+            Err(__result.into())
+        }
+    }
 }
 
-impl NvFillRectangleExtension for crate::Device {}
+impl<C: InstanceV1_0> NvExternalSciSync2ExtensionInstanceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_fragment_coverage_to_color.html>
-pub trait NvFragmentCoverageToColorExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = NV_FRAGMENT_COVERAGE_TO_COLOR_EXTENSION;
-}
-
-impl NvFragmentCoverageToColorExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_fragment_shader_barycentric.html>
-pub trait NvFragmentShaderBarycentricExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = NV_FRAGMENT_SHADER_BARYCENTRIC_EXTENSION;
-}
-
-impl NvFragmentShaderBarycentricExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_fragment_shading_rate_enums.html>
-pub trait NvFragmentShadingRateEnumsExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = NV_FRAGMENT_SHADING_RATE_ENUMS_EXTENSION;
-
+/// The device-level commands added by [`NV_FRAGMENT_SHADING_RATE_ENUMS_EXTENSION`].
+pub trait NvFragmentShadingRateEnumsExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdSetFragmentShadingRateEnumNV.html>
     #[inline]
     unsafe fn cmd_set_fragment_shading_rate_enum_nv(
@@ -13588,70 +11009,10 @@ pub trait NvFragmentShadingRateEnumsExtension: DeviceV1_0 {
     }
 }
 
-impl NvFragmentShadingRateEnumsExtension for crate::Device {}
+impl<C: DeviceV1_0> NvFragmentShadingRateEnumsExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_framebuffer_mixed_samples.html>
-pub trait NvFramebufferMixedSamplesExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = NV_FRAMEBUFFER_MIXED_SAMPLES_EXTENSION;
-}
-
-impl NvFramebufferMixedSamplesExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_geometry_shader_passthrough.html>
-pub trait NvGeometryShaderPassthroughExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = NV_GEOMETRY_SHADER_PASSTHROUGH_EXTENSION;
-}
-
-impl NvGeometryShaderPassthroughExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_glsl_shader.html>
-#[deprecated]
-pub trait NvGlslShaderExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = NV_GLSL_SHADER_EXTENSION;
-}
-
-#[allow(deprecated)]
-impl NvGlslShaderExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_inherited_viewport_scissor.html>
-pub trait NvInheritedViewportScissorExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = NV_INHERITED_VIEWPORT_SCISSOR_EXTENSION;
-}
-
-impl NvInheritedViewportScissorExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_linear_color_attachment.html>
-pub trait NvLinearColorAttachmentExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = NV_LINEAR_COLOR_ATTACHMENT_EXTENSION;
-}
-
-impl NvLinearColorAttachmentExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_low_latency.html>
-pub trait NvLowLatencyExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = NV_LOW_LATENCY_EXTENSION;
-}
-
-impl NvLowLatencyExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_low_latency2.html>
-pub trait NvLowLatency2Extension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = NV_LOW_LATENCY2_EXTENSION;
-
+/// The device-level commands added by [`NV_LOW_LATENCY2_EXTENSION`].
+pub trait NvLowLatency2ExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetLatencyTimingsNV.html>
     #[inline]
     unsafe fn get_latency_timings_nv(
@@ -13718,14 +11079,10 @@ pub trait NvLowLatency2Extension: DeviceV1_0 {
     }
 }
 
-impl NvLowLatency2Extension for crate::Device {}
+impl<C: DeviceV1_0> NvLowLatency2ExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_memory_decompression.html>
-pub trait NvMemoryDecompressionExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = NV_MEMORY_DECOMPRESSION_EXTENSION;
-
+/// The device-level commands added by [`NV_MEMORY_DECOMPRESSION_EXTENSION`].
+pub trait NvMemoryDecompressionExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdDecompressMemoryIndirectCountNV.html>
     #[inline]
     unsafe fn cmd_decompress_memory_indirect_count_nv(
@@ -13758,14 +11115,10 @@ pub trait NvMemoryDecompressionExtension: DeviceV1_0 {
     }
 }
 
-impl NvMemoryDecompressionExtension for crate::Device {}
+impl<C: DeviceV1_0> NvMemoryDecompressionExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_mesh_shader.html>
-pub trait NvMeshShaderExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = NV_MESH_SHADER_EXTENSION;
-
+/// The device-level commands added by [`NV_MESH_SHADER_EXTENSION`].
+pub trait NvMeshShaderExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdDrawMeshTasksIndirectCountNV.html>
     #[inline]
     unsafe fn cmd_draw_mesh_tasks_indirect_count_nv(
@@ -13821,14 +11174,10 @@ pub trait NvMeshShaderExtension: DeviceV1_0 {
     }
 }
 
-impl NvMeshShaderExtension for crate::Device {}
+impl<C: DeviceV1_0> NvMeshShaderExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_optical_flow.html>
-pub trait NvOpticalFlowExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = NV_OPTICAL_FLOW_EXTENSION;
-
+/// The device-level commands added by [`NV_OPTICAL_FLOW_EXTENSION`].
+pub trait NvOpticalFlowExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkBindOpticalFlowSessionImageNV.html>
     #[inline]
     unsafe fn bind_optical_flow_session_image_nv(
@@ -13901,7 +11250,12 @@ pub trait NvOpticalFlowExtension: DeviceV1_0 {
             allocator.map_or(ptr::null(), |v| v),
         );
     }
+}
 
+impl<C: DeviceV1_0> NvOpticalFlowExtensionDeviceCommands for C {}
+
+/// The instance-level commands added by [`NV_OPTICAL_FLOW_EXTENSION`].
+pub trait NvOpticalFlowExtensionInstanceCommands: InstanceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetPhysicalDeviceOpticalFlowImageFormatsNV.html>
     #[inline]
     unsafe fn get_physical_device_optical_flow_image_formats_nv(
@@ -13942,14 +11296,10 @@ pub trait NvOpticalFlowExtension: DeviceV1_0 {
     }
 }
 
-impl NvOpticalFlowExtension for crate::Device {}
+impl<C: InstanceV1_0> NvOpticalFlowExtensionInstanceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_partitioned_acceleration_structure.html>
-pub trait NvPartitionedAccelerationStructureExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = NV_PARTITIONED_ACCELERATION_STRUCTURE_EXTENSION;
-
+/// The device-level commands added by [`NV_PARTITIONED_ACCELERATION_STRUCTURE_EXTENSION`].
+pub trait NvPartitionedAccelerationStructureExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdBuildPartitionedAccelerationStructuresNV.html>
     #[inline]
     unsafe fn cmd_build_partitioned_acceleration_structures_nv(
@@ -13981,69 +11331,10 @@ pub trait NvPartitionedAccelerationStructureExtension: DeviceV1_0 {
     }
 }
 
-impl NvPartitionedAccelerationStructureExtension for crate::Device {}
+impl<C: DeviceV1_0> NvPartitionedAccelerationStructureExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_per_stage_descriptor_set.html>
-pub trait NvPerStageDescriptorSetExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = NV_PER_STAGE_DESCRIPTOR_SET_EXTENSION;
-}
-
-impl NvPerStageDescriptorSetExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_present_barrier.html>
-pub trait NvPresentBarrierExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = NV_PRESENT_BARRIER_EXTENSION;
-}
-
-impl NvPresentBarrierExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_present_metering.html>
-///
-/// ## WARNING
-///
-/// This is a
-/// [provisional extension](https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/provisional-headers.html).
-/// Provisional extensions are not guaranteed to be backwards compatible and are
-/// not intended to be used in production applications.
-#[cfg(feature = "provisional")]
-pub trait NvPresentMeteringExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = NV_PRESENT_METERING_EXTENSION;
-}
-
-#[cfg(feature = "provisional")]
-impl NvPresentMeteringExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_private_vendor_info.html>
-pub trait NvPrivateVendorInfoExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = NV_PRIVATE_VENDOR_INFO_EXTENSION;
-}
-
-impl NvPrivateVendorInfoExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_raw_access_chains.html>
-pub trait NvRawAccessChainsExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = NV_RAW_ACCESS_CHAINS_EXTENSION;
-}
-
-impl NvRawAccessChainsExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_ray_tracing.html>
-#[deprecated(note = "deprecated in favor of `VK_KHR_ray_tracing_pipeline`")]
-pub trait NvRayTracingExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = NV_RAY_TRACING_EXTENSION;
-
+/// The device-level commands added by [`NV_RAY_TRACING_EXTENSION`].
+pub trait NvRayTracingExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkBindAccelerationStructureMemoryNV.html>
     #[inline]
     unsafe fn bind_acceleration_structure_memory_nv(
@@ -14308,68 +11599,10 @@ pub trait NvRayTracingExtension: DeviceV1_0 {
 }
 
 #[allow(deprecated)]
-impl NvRayTracingExtension for crate::Device {}
+impl<C: DeviceV1_0> NvRayTracingExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_ray_tracing_invocation_reorder.html>
-pub trait NvRayTracingInvocationReorderExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = NV_RAY_TRACING_INVOCATION_REORDER_EXTENSION;
-}
-
-impl NvRayTracingInvocationReorderExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_ray_tracing_linear_swept_spheres.html>
-pub trait NvRayTracingLinearSweptSpheresExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = NV_RAY_TRACING_LINEAR_SWEPT_SPHERES_EXTENSION;
-}
-
-impl NvRayTracingLinearSweptSpheresExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_ray_tracing_motion_blur.html>
-pub trait NvRayTracingMotionBlurExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = NV_RAY_TRACING_MOTION_BLUR_EXTENSION;
-}
-
-impl NvRayTracingMotionBlurExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_ray_tracing_validation.html>
-pub trait NvRayTracingValidationExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = NV_RAY_TRACING_VALIDATION_EXTENSION;
-}
-
-impl NvRayTracingValidationExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_representative_fragment_test.html>
-pub trait NvRepresentativeFragmentTestExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = NV_REPRESENTATIVE_FRAGMENT_TEST_EXTENSION;
-}
-
-impl NvRepresentativeFragmentTestExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_sample_mask_override_coverage.html>
-pub trait NvSampleMaskOverrideCoverageExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = NV_SAMPLE_MASK_OVERRIDE_COVERAGE_EXTENSION;
-}
-
-impl NvSampleMaskOverrideCoverageExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_scissor_exclusive.html>
-pub trait NvScissorExclusiveExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = NV_SCISSOR_EXCLUSIVE_EXTENSION;
-
+/// The device-level commands added by [`NV_SCISSOR_EXCLUSIVE_EXTENSION`].
+pub trait NvScissorExclusiveExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdSetExclusiveScissorEnableNV.html>
     #[inline]
     unsafe fn cmd_set_exclusive_scissor_enable_nv(
@@ -14403,50 +11636,10 @@ pub trait NvScissorExclusiveExtension: DeviceV1_0 {
     }
 }
 
-impl NvScissorExclusiveExtension for crate::Device {}
+impl<C: DeviceV1_0> NvScissorExclusiveExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_shader_atomic_float16_vector.html>
-pub trait NvShaderAtomicFloat16VectorExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = NV_SHADER_ATOMIC_FLOAT16_VECTOR_EXTENSION;
-}
-
-impl NvShaderAtomicFloat16VectorExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_shader_image_footprint.html>
-pub trait NvShaderImageFootprintExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = NV_SHADER_IMAGE_FOOTPRINT_EXTENSION;
-}
-
-impl NvShaderImageFootprintExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_shader_sm_builtins.html>
-pub trait NvShaderSmBuiltinsExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = NV_SHADER_SM_BUILTINS_EXTENSION;
-}
-
-impl NvShaderSmBuiltinsExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_shader_subgroup_partitioned.html>
-pub trait NvShaderSubgroupPartitionedExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = NV_SHADER_SUBGROUP_PARTITIONED_EXTENSION;
-}
-
-impl NvShaderSubgroupPartitionedExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_shading_rate_image.html>
-pub trait NvShadingRateImageExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = NV_SHADING_RATE_IMAGE_EXTENSION;
-
+/// The device-level commands added by [`NV_SHADING_RATE_IMAGE_EXTENSION`].
+pub trait NvShadingRateImageExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdBindShadingRateImageNV.html>
     #[inline]
     unsafe fn cmd_bind_shading_rate_image_nv(
@@ -14495,41 +11688,10 @@ pub trait NvShadingRateImageExtension: DeviceV1_0 {
     }
 }
 
-impl NvShadingRateImageExtension for crate::Device {}
+impl<C: DeviceV1_0> NvShadingRateImageExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_viewport_array2.html>
-pub trait NvViewportArray2Extension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = NV_VIEWPORT_ARRAY2_EXTENSION;
-}
-
-impl NvViewportArray2Extension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_viewport_swizzle.html>
-pub trait NvViewportSwizzleExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = NV_VIEWPORT_SWIZZLE_EXTENSION;
-}
-
-impl NvViewportSwizzleExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_win32_keyed_mutex.html>
-pub trait NvWin32KeyedMutexExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = NV_WIN32_KEYED_MUTEX_EXTENSION;
-}
-
-impl NvWin32KeyedMutexExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_OHOS_surface.html>
-pub trait OhosSurfaceExtension: InstanceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = OHOS_SURFACE_EXTENSION;
-
+/// The instance-level commands added by [`OHOS_SURFACE_EXTENSION`].
+pub trait OhosSurfaceExtensionInstanceCommands: InstanceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCreateSurfaceOHOS.html>
     #[inline]
     unsafe fn create_surface_ohos(
@@ -14554,113 +11716,10 @@ pub trait OhosSurfaceExtension: InstanceV1_0 {
     }
 }
 
-impl OhosSurfaceExtension for crate::Instance {}
+impl<C: InstanceV1_0> OhosSurfaceExtensionInstanceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_QCOM_filter_cubic_clamp.html>
-pub trait QcomFilterCubicClampExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = QCOM_FILTER_CUBIC_CLAMP_EXTENSION;
-}
-
-impl QcomFilterCubicClampExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_QCOM_filter_cubic_weights.html>
-pub trait QcomFilterCubicWeightsExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = QCOM_FILTER_CUBIC_WEIGHTS_EXTENSION;
-}
-
-impl QcomFilterCubicWeightsExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_QCOM_fragment_density_map_offset.html>
-pub trait QcomFragmentDensityMapOffsetExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = QCOM_FRAGMENT_DENSITY_MAP_OFFSET_EXTENSION;
-}
-
-impl QcomFragmentDensityMapOffsetExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_QCOM_image_processing.html>
-pub trait QcomImageProcessingExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = QCOM_IMAGE_PROCESSING_EXTENSION;
-}
-
-impl QcomImageProcessingExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_QCOM_image_processing2.html>
-pub trait QcomImageProcessing2Extension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = QCOM_IMAGE_PROCESSING2_EXTENSION;
-}
-
-impl QcomImageProcessing2Extension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_QCOM_multiview_per_view_render_areas.html>
-pub trait QcomMultiviewPerViewRenderAreasExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = QCOM_MULTIVIEW_PER_VIEW_RENDER_AREAS_EXTENSION;
-}
-
-impl QcomMultiviewPerViewRenderAreasExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_QCOM_multiview_per_view_viewports.html>
-pub trait QcomMultiviewPerViewViewportsExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = QCOM_MULTIVIEW_PER_VIEW_VIEWPORTS_EXTENSION;
-}
-
-impl QcomMultiviewPerViewViewportsExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_QCOM_render_pass_shader_resolve.html>
-pub trait QcomRenderPassShaderResolveExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = QCOM_RENDER_PASS_SHADER_RESOLVE_EXTENSION;
-}
-
-impl QcomRenderPassShaderResolveExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_QCOM_render_pass_store_ops.html>
-pub trait QcomRenderPassStoreOpsExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = QCOM_RENDER_PASS_STORE_OPS_EXTENSION;
-}
-
-impl QcomRenderPassStoreOpsExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_QCOM_render_pass_transform.html>
-pub trait QcomRenderPassTransformExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = QCOM_RENDER_PASS_TRANSFORM_EXTENSION;
-}
-
-impl QcomRenderPassTransformExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_QCOM_rotated_copy_commands.html>
-pub trait QcomRotatedCopyCommandsExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = QCOM_ROTATED_COPY_COMMANDS_EXTENSION;
-}
-
-impl QcomRotatedCopyCommandsExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_QCOM_tile_memory_heap.html>
-pub trait QcomTileMemoryHeapExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = QCOM_TILE_MEMORY_HEAP_EXTENSION;
-
+/// The device-level commands added by [`QCOM_TILE_MEMORY_HEAP_EXTENSION`].
+pub trait QcomTileMemoryHeapExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdBindTileMemoryQCOM.html>
     #[inline]
     unsafe fn cmd_bind_tile_memory_qcom(
@@ -14675,14 +11734,10 @@ pub trait QcomTileMemoryHeapExtension: DeviceV1_0 {
     }
 }
 
-impl QcomTileMemoryHeapExtension for crate::Device {}
+impl<C: DeviceV1_0> QcomTileMemoryHeapExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_QCOM_tile_properties.html>
-pub trait QcomTilePropertiesExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = QCOM_TILE_PROPERTIES_EXTENSION;
-
+/// The device-level commands added by [`QCOM_TILE_PROPERTIES_EXTENSION`].
+pub trait QcomTilePropertiesExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetDynamicRenderingTilePropertiesQCOM.html>
     #[inline]
     unsafe fn get_dynamic_rendering_tile_properties_qcom(
@@ -14738,14 +11793,10 @@ pub trait QcomTilePropertiesExtension: DeviceV1_0 {
     }
 }
 
-impl QcomTilePropertiesExtension for crate::Device {}
+impl<C: DeviceV1_0> QcomTilePropertiesExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_QCOM_tile_shading.html>
-pub trait QcomTileShadingExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = QCOM_TILE_SHADING_EXTENSION;
-
+/// The device-level commands added by [`QCOM_TILE_SHADING_EXTENSION`].
+pub trait QcomTileShadingExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdBeginPerTileExecutionQCOM.html>
     #[inline]
     unsafe fn cmd_begin_per_tile_execution_qcom(
@@ -14781,23 +11832,10 @@ pub trait QcomTileShadingExtension: DeviceV1_0 {
     }
 }
 
-impl QcomTileShadingExtension for crate::Device {}
+impl<C: DeviceV1_0> QcomTileShadingExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_QCOM_ycbcr_degamma.html>
-pub trait QcomYcbcrDegammaExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = QCOM_YCBCR_DEGAMMA_EXTENSION;
-}
-
-impl QcomYcbcrDegammaExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_QNX_external_memory_screen_buffer.html>
-pub trait QnxExternalMemoryScreenBufferExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = QNX_EXTERNAL_MEMORY_SCREEN_BUFFER_EXTENSION;
-
+/// The device-level commands added by [`QNX_EXTERNAL_MEMORY_SCREEN_BUFFER_EXTENSION`].
+pub trait QnxExternalMemoryScreenBufferExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetScreenBufferPropertiesQNX.html>
     #[inline]
     unsafe fn get_screen_buffer_properties_qnx(
@@ -14816,14 +11854,10 @@ pub trait QnxExternalMemoryScreenBufferExtension: DeviceV1_0 {
     }
 }
 
-impl QnxExternalMemoryScreenBufferExtension for crate::Device {}
+impl<C: DeviceV1_0> QnxExternalMemoryScreenBufferExtensionDeviceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_QNX_screen_surface.html>
-pub trait QnxScreenSurfaceExtension: InstanceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = QNX_SCREEN_SURFACE_EXTENSION;
-
+/// The instance-level commands added by [`QNX_SCREEN_SURFACE_EXTENSION`].
+pub trait QnxScreenSurfaceExtensionInstanceCommands: InstanceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCreateScreenSurfaceQNX.html>
     #[inline]
     unsafe fn create_screen_surface_qnx(
@@ -14867,32 +11901,10 @@ pub trait QnxScreenSurfaceExtension: InstanceV1_0 {
     }
 }
 
-impl QnxScreenSurfaceExtension for crate::Instance {}
+impl<C: InstanceV1_0> QnxScreenSurfaceExtensionInstanceCommands for C {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_SEC_amigo_profiling.html>
-pub trait SecAmigoProfilingExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = SEC_AMIGO_PROFILING_EXTENSION;
-}
-
-impl SecAmigoProfilingExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_SEC_pipeline_cache_incremental_mode.html>
-pub trait SecPipelineCacheIncrementalModeExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = SEC_PIPELINE_CACHE_INCREMENTAL_MODE_EXTENSION;
-}
-
-impl SecPipelineCacheIncrementalModeExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_VALVE_descriptor_set_host_mapping.html>
-pub trait ValveDescriptorSetHostMappingExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = VALVE_DESCRIPTOR_SET_HOST_MAPPING_EXTENSION;
-
+/// The device-level commands added by [`VALVE_DESCRIPTOR_SET_HOST_MAPPING_EXTENSION`].
+pub trait ValveDescriptorSetHostMappingExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetDescriptorSetHostMappingVALVE.html>
     #[inline]
     unsafe fn get_descriptor_set_host_mapping_valve(
@@ -14927,31 +11939,4 @@ pub trait ValveDescriptorSetHostMappingExtension: DeviceV1_0 {
     }
 }
 
-impl ValveDescriptorSetHostMappingExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_VALVE_fragment_density_map_layered.html>
-pub trait ValveFragmentDensityMapLayeredExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = VALVE_FRAGMENT_DENSITY_MAP_LAYERED_EXTENSION;
-}
-
-impl ValveFragmentDensityMapLayeredExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_VALVE_mutable_descriptor_type.html>
-pub trait ValveMutableDescriptorTypeExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = VALVE_MUTABLE_DESCRIPTOR_TYPE_EXTENSION;
-}
-
-impl ValveMutableDescriptorTypeExtension for crate::Device {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_VALVE_video_encode_rgb_conversion.html>
-pub trait ValveVideoEncodeRgbConversionExtension: DeviceV1_0 {
-    /// The metadata for this extension.
-    #[allow(deprecated)]
-    const METADATA: Extension = VALVE_VIDEO_ENCODE_RGB_CONVERSION_EXTENSION;
-}
-
-impl ValveVideoEncodeRgbConversionExtension for crate::Device {}
+impl<C: DeviceV1_0> ValveDescriptorSetHostMappingExtensionDeviceCommands for C {}

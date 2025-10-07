@@ -33,7 +33,6 @@ pub struct DeviceCommands {
     pub acquire_next_image_khr: PFN_vkAcquireNextImageKHR,
     pub acquire_performance_configuration_intel: PFN_vkAcquirePerformanceConfigurationINTEL,
     pub acquire_profiling_lock_khr: PFN_vkAcquireProfilingLockKHR,
-    pub acquire_winrt_display_nv: PFN_vkAcquireWinrtDisplayNV,
     pub allocate_command_buffers: PFN_vkAllocateCommandBuffers,
     pub allocate_descriptor_sets: PFN_vkAllocateDescriptorSets,
     pub allocate_memory: PFN_vkAllocateMemory,
@@ -465,8 +464,6 @@ pub struct DeviceCommands {
     pub device_wait_idle: PFN_vkDeviceWaitIdle,
     pub display_power_control_ext: PFN_vkDisplayPowerControlEXT,
     pub end_command_buffer: PFN_vkEndCommandBuffer,
-    pub enumerate_physical_device_queue_family_performance_query_counters_khr:
-        PFN_vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR,
     pub export_metal_objects_ext: PFN_vkExportMetalObjectsEXT,
     pub flush_mapped_memory_ranges: PFN_vkFlushMappedMemoryRanges,
     pub free_command_buffers: PFN_vkFreeCommandBuffers,
@@ -594,49 +591,6 @@ pub struct DeviceCommands {
         PFN_vkGetPartitionedAccelerationStructuresBuildSizesNV,
     pub get_past_presentation_timing_google: PFN_vkGetPastPresentationTimingGOOGLE,
     pub get_performance_parameter_intel: PFN_vkGetPerformanceParameterINTEL,
-    pub get_physical_device_calibrateable_time_domains_ext:
-        PFN_vkGetPhysicalDeviceCalibrateableTimeDomainsEXT,
-    pub get_physical_device_calibrateable_time_domains_khr:
-        PFN_vkGetPhysicalDeviceCalibrateableTimeDomainsKHR,
-    pub get_physical_device_cooperative_matrix_flexible_dimensions_properties_nv:
-        PFN_vkGetPhysicalDeviceCooperativeMatrixFlexibleDimensionsPropertiesNV,
-    pub get_physical_device_cooperative_matrix_properties_khr:
-        PFN_vkGetPhysicalDeviceCooperativeMatrixPropertiesKHR,
-    pub get_physical_device_cooperative_matrix_properties_nv:
-        PFN_vkGetPhysicalDeviceCooperativeMatrixPropertiesNV,
-    pub get_physical_device_cooperative_vector_properties_nv:
-        PFN_vkGetPhysicalDeviceCooperativeVectorPropertiesNV,
-    pub get_physical_device_external_memory_sci_buf_properties_nv:
-        PFN_vkGetPhysicalDeviceExternalMemorySciBufPropertiesNV,
-    pub get_physical_device_external_tensor_properties_arm:
-        PFN_vkGetPhysicalDeviceExternalTensorPropertiesARM,
-    pub get_physical_device_fragment_shading_rates_khr:
-        PFN_vkGetPhysicalDeviceFragmentShadingRatesKHR,
-    pub get_physical_device_multisample_properties_ext:
-        PFN_vkGetPhysicalDeviceMultisamplePropertiesEXT,
-    pub get_physical_device_optical_flow_image_formats_nv:
-        PFN_vkGetPhysicalDeviceOpticalFlowImageFormatsNV,
-    pub get_physical_device_present_rectangles_khr: PFN_vkGetPhysicalDevicePresentRectanglesKHR,
-    pub get_physical_device_queue_family_data_graph_processing_engine_properties_arm:
-        PFN_vkGetPhysicalDeviceQueueFamilyDataGraphProcessingEnginePropertiesARM,
-    pub get_physical_device_queue_family_data_graph_properties_arm:
-        PFN_vkGetPhysicalDeviceQueueFamilyDataGraphPropertiesARM,
-    pub get_physical_device_queue_family_performance_query_passes_khr:
-        PFN_vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR,
-    pub get_physical_device_refreshable_object_types_khr:
-        PFN_vkGetPhysicalDeviceRefreshableObjectTypesKHR,
-    pub get_physical_device_sci_buf_attributes_nv: PFN_vkGetPhysicalDeviceSciBufAttributesNV,
-    pub get_physical_device_sci_sync_attributes_nv: PFN_vkGetPhysicalDeviceSciSyncAttributesNV,
-    pub get_physical_device_supported_framebuffer_mixed_samples_combinations_nv:
-        PFN_vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV,
-    pub get_physical_device_surface_present_modes2_ext:
-        PFN_vkGetPhysicalDeviceSurfacePresentModes2EXT,
-    pub get_physical_device_tool_properties_ext: PFN_vkGetPhysicalDeviceToolPropertiesEXT,
-    pub get_physical_device_video_capabilities_khr: PFN_vkGetPhysicalDeviceVideoCapabilitiesKHR,
-    pub get_physical_device_video_encode_quality_level_properties_khr:
-        PFN_vkGetPhysicalDeviceVideoEncodeQualityLevelPropertiesKHR,
-    pub get_physical_device_video_format_properties_khr:
-        PFN_vkGetPhysicalDeviceVideoFormatPropertiesKHR,
     pub get_pipeline_binary_data_khr: PFN_vkGetPipelineBinaryDataKHR,
     pub get_pipeline_cache_data: PFN_vkGetPipelineCacheData,
     pub get_pipeline_executable_internal_representations_khr:
@@ -684,7 +638,6 @@ pub struct DeviceCommands {
         PFN_vkGetTensorViewOpaqueCaptureDescriptorDataARM,
     pub get_validation_cache_data_ext: PFN_vkGetValidationCacheDataEXT,
     pub get_video_session_memory_requirements_khr: PFN_vkGetVideoSessionMemoryRequirementsKHR,
-    pub get_winrt_display_nv: PFN_vkGetWinrtDisplayNV,
     pub import_fence_fd_khr: PFN_vkImportFenceFdKHR,
     pub import_fence_sci_sync_fence_nv: PFN_vkImportFenceSciSyncFenceNV,
     pub import_fence_sci_sync_obj_nv: PFN_vkImportFenceSciSyncObjNV,
@@ -765,7 +718,6 @@ pub struct DeviceCommands {
 impl DeviceCommands {
     #[inline]
     pub unsafe fn load(
-        mut instance_loader: impl FnMut(*const c_char) -> Option<unsafe extern "system" fn()>,
         mut loader: impl FnMut(*const c_char) -> Option<unsafe extern "system" fn()>,
     ) -> Self {
         Self {
@@ -841,20 +793,6 @@ impl DeviceCommands {
                         _info: *const AcquireProfilingLockInfoKHR,
                     ) -> Result {
                         panic!("could not load vkAcquireProfilingLockKHR")
-                    }
-                    fallback
-                }
-            },
-            acquire_winrt_display_nv: {
-                let value = instance_loader(c"vkAcquireWinrtDisplayNV".as_ptr());
-                if let Some(value) = value {
-                    mem::transmute(value)
-                } else {
-                    unsafe extern "system" fn fallback(
-                        _physical_device: PhysicalDevice,
-                        _display: DisplayKHR,
-                    ) -> Result {
-                        panic!("could not load vkAcquireWinrtDisplayNV")
                     }
                     fallback
                 }
@@ -7308,25 +7246,6 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            enumerate_physical_device_queue_family_performance_query_counters_khr: {
-                let value = instance_loader(
-                    c"vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR".as_ptr(),
-                );
-                if let Some(value) = value {
-                    mem::transmute(value)
-                } else {
-                    unsafe extern "system" fn fallback(
-                        _physical_device: PhysicalDevice,
-                        _queue_family_index: u32,
-                        _counter_count: *mut u32,
-                        _counters: *mut PerformanceCounterKHR,
-                        _counter_descriptions: *mut PerformanceCounterDescriptionKHR,
-                    ) -> Result {
-                        panic!("could not load vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR")
-                    }
-                    fallback
-                }
-            },
             export_metal_objects_ext: {
                 let value = loader(c"vkExportMetalObjectsEXT".as_ptr());
                 if let Some(value) = value {
@@ -8985,398 +8904,6 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            get_physical_device_calibrateable_time_domains_ext: {
-                let value =
-                    instance_loader(c"vkGetPhysicalDeviceCalibrateableTimeDomainsEXT".as_ptr());
-                if let Some(value) = value {
-                    mem::transmute(value)
-                } else {
-                    unsafe extern "system" fn fallback(
-                        _physical_device: PhysicalDevice,
-                        _time_domain_count: *mut u32,
-                        _time_domains: *mut TimeDomainKHR,
-                    ) -> Result {
-                        panic!("could not load vkGetPhysicalDeviceCalibrateableTimeDomainsEXT")
-                    }
-                    fallback
-                }
-            },
-            get_physical_device_calibrateable_time_domains_khr: {
-                let value =
-                    instance_loader(c"vkGetPhysicalDeviceCalibrateableTimeDomainsKHR".as_ptr());
-                if let Some(value) = value {
-                    mem::transmute(value)
-                } else {
-                    unsafe extern "system" fn fallback(
-                        _physical_device: PhysicalDevice,
-                        _time_domain_count: *mut u32,
-                        _time_domains: *mut TimeDomainKHR,
-                    ) -> Result {
-                        panic!("could not load vkGetPhysicalDeviceCalibrateableTimeDomainsKHR")
-                    }
-                    fallback
-                }
-            },
-            get_physical_device_cooperative_matrix_flexible_dimensions_properties_nv: {
-                let value = instance_loader(
-                    c"vkGetPhysicalDeviceCooperativeMatrixFlexibleDimensionsPropertiesNV".as_ptr(),
-                );
-                if let Some(value) = value {
-                    mem::transmute(value)
-                } else {
-                    unsafe extern "system" fn fallback(
-                        _physical_device: PhysicalDevice,
-                        _property_count: *mut u32,
-                        _properties: *mut CooperativeMatrixFlexibleDimensionsPropertiesNV,
-                    ) -> Result {
-                        panic!("could not load vkGetPhysicalDeviceCooperativeMatrixFlexibleDimensionsPropertiesNV")
-                    }
-                    fallback
-                }
-            },
-            get_physical_device_cooperative_matrix_properties_khr: {
-                let value =
-                    instance_loader(c"vkGetPhysicalDeviceCooperativeMatrixPropertiesKHR".as_ptr());
-                if let Some(value) = value {
-                    mem::transmute(value)
-                } else {
-                    unsafe extern "system" fn fallback(
-                        _physical_device: PhysicalDevice,
-                        _property_count: *mut u32,
-                        _properties: *mut CooperativeMatrixPropertiesKHR,
-                    ) -> Result {
-                        panic!("could not load vkGetPhysicalDeviceCooperativeMatrixPropertiesKHR")
-                    }
-                    fallback
-                }
-            },
-            get_physical_device_cooperative_matrix_properties_nv: {
-                let value =
-                    instance_loader(c"vkGetPhysicalDeviceCooperativeMatrixPropertiesNV".as_ptr());
-                if let Some(value) = value {
-                    mem::transmute(value)
-                } else {
-                    unsafe extern "system" fn fallback(
-                        _physical_device: PhysicalDevice,
-                        _property_count: *mut u32,
-                        _properties: *mut CooperativeMatrixPropertiesNV,
-                    ) -> Result {
-                        panic!("could not load vkGetPhysicalDeviceCooperativeMatrixPropertiesNV")
-                    }
-                    fallback
-                }
-            },
-            get_physical_device_cooperative_vector_properties_nv: {
-                let value =
-                    instance_loader(c"vkGetPhysicalDeviceCooperativeVectorPropertiesNV".as_ptr());
-                if let Some(value) = value {
-                    mem::transmute(value)
-                } else {
-                    unsafe extern "system" fn fallback(
-                        _physical_device: PhysicalDevice,
-                        _property_count: *mut u32,
-                        _properties: *mut CooperativeVectorPropertiesNV,
-                    ) -> Result {
-                        panic!("could not load vkGetPhysicalDeviceCooperativeVectorPropertiesNV")
-                    }
-                    fallback
-                }
-            },
-            get_physical_device_external_memory_sci_buf_properties_nv: {
-                let value = instance_loader(
-                    c"vkGetPhysicalDeviceExternalMemorySciBufPropertiesNV".as_ptr(),
-                );
-                if let Some(value) = value {
-                    mem::transmute(value)
-                } else {
-                    unsafe extern "system" fn fallback(
-                        _physical_device: PhysicalDevice,
-                        _handle_type: ExternalMemoryHandleTypeFlags,
-                        _handle: NvSciBufObj,
-                        _memory_sci_buf_properties: *mut MemorySciBufPropertiesNV,
-                    ) -> Result {
-                        panic!("could not load vkGetPhysicalDeviceExternalMemorySciBufPropertiesNV")
-                    }
-                    fallback
-                }
-            },
-            get_physical_device_external_tensor_properties_arm: {
-                let value =
-                    instance_loader(c"vkGetPhysicalDeviceExternalTensorPropertiesARM".as_ptr());
-                if let Some(value) = value {
-                    mem::transmute(value)
-                } else {
-                    unsafe extern "system" fn fallback(
-                        _physical_device: PhysicalDevice,
-                        _external_tensor_info: *const PhysicalDeviceExternalTensorInfoARM,
-                        _external_tensor_properties: *mut ExternalTensorPropertiesARM,
-                    ) {
-                        panic!("could not load vkGetPhysicalDeviceExternalTensorPropertiesARM")
-                    }
-                    fallback
-                }
-            },
-            get_physical_device_fragment_shading_rates_khr: {
-                let value = instance_loader(c"vkGetPhysicalDeviceFragmentShadingRatesKHR".as_ptr());
-                if let Some(value) = value {
-                    mem::transmute(value)
-                } else {
-                    unsafe extern "system" fn fallback(
-                        _physical_device: PhysicalDevice,
-                        _fragment_shading_rate_count: *mut u32,
-                        _fragment_shading_rates: *mut PhysicalDeviceFragmentShadingRateKHR,
-                    ) -> Result {
-                        panic!("could not load vkGetPhysicalDeviceFragmentShadingRatesKHR")
-                    }
-                    fallback
-                }
-            },
-            get_physical_device_multisample_properties_ext: {
-                let value =
-                    instance_loader(c"vkGetPhysicalDeviceMultisamplePropertiesEXT".as_ptr());
-                if let Some(value) = value {
-                    mem::transmute(value)
-                } else {
-                    unsafe extern "system" fn fallback(
-                        _physical_device: PhysicalDevice,
-                        _samples: SampleCountFlags,
-                        _multisample_properties: *mut MultisamplePropertiesEXT,
-                    ) {
-                        panic!("could not load vkGetPhysicalDeviceMultisamplePropertiesEXT")
-                    }
-                    fallback
-                }
-            },
-            get_physical_device_optical_flow_image_formats_nv: {
-                let value =
-                    instance_loader(c"vkGetPhysicalDeviceOpticalFlowImageFormatsNV".as_ptr());
-                if let Some(value) = value {
-                    mem::transmute(value)
-                } else {
-                    unsafe extern "system" fn fallback(
-                        _physical_device: PhysicalDevice,
-                        _optical_flow_image_format_info: *const OpticalFlowImageFormatInfoNV,
-                        _format_count: *mut u32,
-                        _image_format_properties: *mut OpticalFlowImageFormatPropertiesNV,
-                    ) -> Result {
-                        panic!("could not load vkGetPhysicalDeviceOpticalFlowImageFormatsNV")
-                    }
-                    fallback
-                }
-            },
-            get_physical_device_present_rectangles_khr: {
-                let value = instance_loader(c"vkGetPhysicalDevicePresentRectanglesKHR".as_ptr());
-                if let Some(value) = value {
-                    mem::transmute(value)
-                } else {
-                    unsafe extern "system" fn fallback(
-                        _physical_device: PhysicalDevice,
-                        _surface: SurfaceKHR,
-                        _rect_count: *mut u32,
-                        _rects: *mut Rect2D,
-                    ) -> Result {
-                        panic!("could not load vkGetPhysicalDevicePresentRectanglesKHR")
-                    }
-                    fallback
-                }
-            },
-            get_physical_device_queue_family_data_graph_processing_engine_properties_arm: {
-                let value = instance_loader(
-                    c"vkGetPhysicalDeviceQueueFamilyDataGraphProcessingEnginePropertiesARM"
-                        .as_ptr(),
-                );
-                if let Some(value) = value {
-                    mem::transmute(value)
-                } else {
-                    unsafe extern "system" fn fallback(
-                        _physical_device: PhysicalDevice,
-                        _queue_family_data_graph_processing_engine_info: *const PhysicalDeviceQueueFamilyDataGraphProcessingEngineInfoARM,
-                        _queue_family_data_graph_processing_engine_properties: *mut QueueFamilyDataGraphProcessingEnginePropertiesARM,
-                    ) {
-                        panic!("could not load vkGetPhysicalDeviceQueueFamilyDataGraphProcessingEnginePropertiesARM")
-                    }
-                    fallback
-                }
-            },
-            get_physical_device_queue_family_data_graph_properties_arm: {
-                let value = instance_loader(
-                    c"vkGetPhysicalDeviceQueueFamilyDataGraphPropertiesARM".as_ptr(),
-                );
-                if let Some(value) = value {
-                    mem::transmute(value)
-                } else {
-                    unsafe extern "system" fn fallback(
-                        _physical_device: PhysicalDevice,
-                        _queue_family_index: u32,
-                        _queue_family_data_graph_property_count: *mut u32,
-                        _queue_family_data_graph_properties: *mut QueueFamilyDataGraphPropertiesARM,
-                    ) -> Result {
-                        panic!(
-                            "could not load vkGetPhysicalDeviceQueueFamilyDataGraphPropertiesARM"
-                        )
-                    }
-                    fallback
-                }
-            },
-            get_physical_device_queue_family_performance_query_passes_khr: {
-                let value = instance_loader(
-                    c"vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR".as_ptr(),
-                );
-                if let Some(value) = value {
-                    mem::transmute(value)
-                } else {
-                    unsafe extern "system" fn fallback(
-                        _physical_device: PhysicalDevice,
-                        _performance_query_create_info: *const QueryPoolPerformanceCreateInfoKHR,
-                        _num_passes: *mut u32,
-                    ) {
-                        panic!("could not load vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR")
-                    }
-                    fallback
-                }
-            },
-            get_physical_device_refreshable_object_types_khr: {
-                let value =
-                    instance_loader(c"vkGetPhysicalDeviceRefreshableObjectTypesKHR".as_ptr());
-                if let Some(value) = value {
-                    mem::transmute(value)
-                } else {
-                    unsafe extern "system" fn fallback(
-                        _physical_device: PhysicalDevice,
-                        _refreshable_object_type_count: *mut u32,
-                        _refreshable_object_types: *mut ObjectType,
-                    ) -> Result {
-                        panic!("could not load vkGetPhysicalDeviceRefreshableObjectTypesKHR")
-                    }
-                    fallback
-                }
-            },
-            get_physical_device_sci_buf_attributes_nv: {
-                let value = instance_loader(c"vkGetPhysicalDeviceSciBufAttributesNV".as_ptr());
-                if let Some(value) = value {
-                    mem::transmute(value)
-                } else {
-                    unsafe extern "system" fn fallback(
-                        _physical_device: PhysicalDevice,
-                        _attributes: NvSciBufAttrList,
-                    ) -> Result {
-                        panic!("could not load vkGetPhysicalDeviceSciBufAttributesNV")
-                    }
-                    fallback
-                }
-            },
-            get_physical_device_sci_sync_attributes_nv: {
-                let value = instance_loader(c"vkGetPhysicalDeviceSciSyncAttributesNV".as_ptr());
-                if let Some(value) = value {
-                    mem::transmute(value)
-                } else {
-                    unsafe extern "system" fn fallback(
-                        _physical_device: PhysicalDevice,
-                        _sci_sync_attributes_info: *const SciSyncAttributesInfoNV,
-                        _attributes: NvSciSyncAttrList,
-                    ) -> Result {
-                        panic!("could not load vkGetPhysicalDeviceSciSyncAttributesNV")
-                    }
-                    fallback
-                }
-            },
-            get_physical_device_supported_framebuffer_mixed_samples_combinations_nv: {
-                let value = instance_loader(
-                    c"vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV".as_ptr(),
-                );
-                if let Some(value) = value {
-                    mem::transmute(value)
-                } else {
-                    unsafe extern "system" fn fallback(
-                        _physical_device: PhysicalDevice,
-                        _combination_count: *mut u32,
-                        _combinations: *mut FramebufferMixedSamplesCombinationNV,
-                    ) -> Result {
-                        panic!("could not load vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV")
-                    }
-                    fallback
-                }
-            },
-            get_physical_device_surface_present_modes2_ext: {
-                let value = instance_loader(c"vkGetPhysicalDeviceSurfacePresentModes2EXT".as_ptr());
-                if let Some(value) = value {
-                    mem::transmute(value)
-                } else {
-                    unsafe extern "system" fn fallback(
-                        _physical_device: PhysicalDevice,
-                        _surface_info: *const PhysicalDeviceSurfaceInfo2KHR,
-                        _present_mode_count: *mut u32,
-                        _present_modes: *mut PresentModeKHR,
-                    ) -> Result {
-                        panic!("could not load vkGetPhysicalDeviceSurfacePresentModes2EXT")
-                    }
-                    fallback
-                }
-            },
-            get_physical_device_tool_properties_ext: {
-                let value = instance_loader(c"vkGetPhysicalDeviceToolPropertiesEXT".as_ptr());
-                if let Some(value) = value {
-                    mem::transmute(value)
-                } else {
-                    unsafe extern "system" fn fallback(
-                        _physical_device: PhysicalDevice,
-                        _tool_count: *mut u32,
-                        _tool_properties: *mut PhysicalDeviceToolProperties,
-                    ) -> Result {
-                        panic!("could not load vkGetPhysicalDeviceToolPropertiesEXT")
-                    }
-                    fallback
-                }
-            },
-            get_physical_device_video_capabilities_khr: {
-                let value = instance_loader(c"vkGetPhysicalDeviceVideoCapabilitiesKHR".as_ptr());
-                if let Some(value) = value {
-                    mem::transmute(value)
-                } else {
-                    unsafe extern "system" fn fallback(
-                        _physical_device: PhysicalDevice,
-                        _video_profile: *const VideoProfileInfoKHR,
-                        _capabilities: *mut VideoCapabilitiesKHR,
-                    ) -> Result {
-                        panic!("could not load vkGetPhysicalDeviceVideoCapabilitiesKHR")
-                    }
-                    fallback
-                }
-            },
-            get_physical_device_video_encode_quality_level_properties_khr: {
-                let value = instance_loader(
-                    c"vkGetPhysicalDeviceVideoEncodeQualityLevelPropertiesKHR".as_ptr(),
-                );
-                if let Some(value) = value {
-                    mem::transmute(value)
-                } else {
-                    unsafe extern "system" fn fallback(
-                        _physical_device: PhysicalDevice,
-                        _quality_level_info: *const PhysicalDeviceVideoEncodeQualityLevelInfoKHR,
-                        _quality_level_properties: *mut VideoEncodeQualityLevelPropertiesKHR,
-                    ) -> Result {
-                        panic!("could not load vkGetPhysicalDeviceVideoEncodeQualityLevelPropertiesKHR")
-                    }
-                    fallback
-                }
-            },
-            get_physical_device_video_format_properties_khr: {
-                let value =
-                    instance_loader(c"vkGetPhysicalDeviceVideoFormatPropertiesKHR".as_ptr());
-                if let Some(value) = value {
-                    mem::transmute(value)
-                } else {
-                    unsafe extern "system" fn fallback(
-                        _physical_device: PhysicalDevice,
-                        _video_format_info: *const PhysicalDeviceVideoFormatInfoKHR,
-                        _video_format_property_count: *mut u32,
-                        _video_format_properties: *mut VideoFormatPropertiesKHR,
-                    ) -> Result {
-                        panic!("could not load vkGetPhysicalDeviceVideoFormatPropertiesKHR")
-                    }
-                    fallback
-                }
-            },
             get_pipeline_binary_data_khr: {
                 let value = loader(c"vkGetPipelineBinaryDataKHR".as_ptr());
                 if let Some(value) = value {
@@ -10034,21 +9561,6 @@ impl DeviceCommands {
                         _memory_requirements: *mut VideoSessionMemoryRequirementsKHR,
                     ) -> Result {
                         panic!("could not load vkGetVideoSessionMemoryRequirementsKHR")
-                    }
-                    fallback
-                }
-            },
-            get_winrt_display_nv: {
-                let value = instance_loader(c"vkGetWinrtDisplayNV".as_ptr());
-                if let Some(value) = value {
-                    mem::transmute(value)
-                } else {
-                    unsafe extern "system" fn fallback(
-                        _physical_device: PhysicalDevice,
-                        _device_relative_id: u32,
-                        _display: *mut DisplayKHR,
-                    ) -> Result {
-                        panic!("could not load vkGetWinrtDisplayNV")
                     }
                     fallback
                 }
@@ -11206,6 +10718,7 @@ impl EntryCommands {
 #[derive(Copy, Clone)]
 pub struct InstanceCommands {
     pub acquire_drm_display_ext: PFN_vkAcquireDrmDisplayEXT,
+    pub acquire_winrt_display_nv: PFN_vkAcquireWinrtDisplayNV,
     pub acquire_xlib_display_ext: PFN_vkAcquireXlibDisplayEXT,
     pub cmd_begin_debug_utils_label_ext: PFN_vkCmdBeginDebugUtilsLabelEXT,
     pub cmd_end_debug_utils_label_ext: PFN_vkCmdEndDebugUtilsLabelEXT,
@@ -11239,6 +10752,8 @@ pub struct InstanceCommands {
     pub enumerate_device_layer_properties: PFN_vkEnumerateDeviceLayerProperties,
     pub enumerate_physical_device_groups: PFN_vkEnumeratePhysicalDeviceGroups,
     pub enumerate_physical_device_groups_khr: PFN_vkEnumeratePhysicalDeviceGroupsKHR,
+    pub enumerate_physical_device_queue_family_performance_query_counters_khr:
+        PFN_vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR,
     pub enumerate_physical_devices: PFN_vkEnumeratePhysicalDevices,
     pub get_display_mode_properties2_khr: PFN_vkGetDisplayModeProperties2KHR,
     pub get_display_mode_properties_khr: PFN_vkGetDisplayModePropertiesKHR,
@@ -11246,6 +10761,18 @@ pub struct InstanceCommands {
     pub get_display_plane_capabilities_khr: PFN_vkGetDisplayPlaneCapabilitiesKHR,
     pub get_display_plane_supported_displays_khr: PFN_vkGetDisplayPlaneSupportedDisplaysKHR,
     pub get_drm_display_ext: PFN_vkGetDrmDisplayEXT,
+    pub get_physical_device_calibrateable_time_domains_ext:
+        PFN_vkGetPhysicalDeviceCalibrateableTimeDomainsEXT,
+    pub get_physical_device_calibrateable_time_domains_khr:
+        PFN_vkGetPhysicalDeviceCalibrateableTimeDomainsKHR,
+    pub get_physical_device_cooperative_matrix_flexible_dimensions_properties_nv:
+        PFN_vkGetPhysicalDeviceCooperativeMatrixFlexibleDimensionsPropertiesNV,
+    pub get_physical_device_cooperative_matrix_properties_khr:
+        PFN_vkGetPhysicalDeviceCooperativeMatrixPropertiesKHR,
+    pub get_physical_device_cooperative_matrix_properties_nv:
+        PFN_vkGetPhysicalDeviceCooperativeMatrixPropertiesNV,
+    pub get_physical_device_cooperative_vector_properties_nv:
+        PFN_vkGetPhysicalDeviceCooperativeVectorPropertiesNV,
     pub get_physical_device_direct_fb_presentation_support_ext:
         PFN_vkGetPhysicalDeviceDirectFBPresentationSupportEXT,
     pub get_physical_device_display_plane_properties2_khr:
@@ -11264,16 +10791,22 @@ pub struct InstanceCommands {
         PFN_vkGetPhysicalDeviceExternalFencePropertiesKHR,
     pub get_physical_device_external_image_format_properties_nv:
         PFN_vkGetPhysicalDeviceExternalImageFormatPropertiesNV,
+    pub get_physical_device_external_memory_sci_buf_properties_nv:
+        PFN_vkGetPhysicalDeviceExternalMemorySciBufPropertiesNV,
     pub get_physical_device_external_semaphore_properties:
         PFN_vkGetPhysicalDeviceExternalSemaphoreProperties,
     pub get_physical_device_external_semaphore_properties_khr:
         PFN_vkGetPhysicalDeviceExternalSemaphorePropertiesKHR,
+    pub get_physical_device_external_tensor_properties_arm:
+        PFN_vkGetPhysicalDeviceExternalTensorPropertiesARM,
     pub get_physical_device_features: PFN_vkGetPhysicalDeviceFeatures,
     pub get_physical_device_features2: PFN_vkGetPhysicalDeviceFeatures2,
     pub get_physical_device_features2_khr: PFN_vkGetPhysicalDeviceFeatures2KHR,
     pub get_physical_device_format_properties: PFN_vkGetPhysicalDeviceFormatProperties,
     pub get_physical_device_format_properties2: PFN_vkGetPhysicalDeviceFormatProperties2,
     pub get_physical_device_format_properties2_khr: PFN_vkGetPhysicalDeviceFormatProperties2KHR,
+    pub get_physical_device_fragment_shading_rates_khr:
+        PFN_vkGetPhysicalDeviceFragmentShadingRatesKHR,
     pub get_physical_device_image_format_properties: PFN_vkGetPhysicalDeviceImageFormatProperties,
     pub get_physical_device_image_format_properties2: PFN_vkGetPhysicalDeviceImageFormatProperties2,
     pub get_physical_device_image_format_properties2_khr:
@@ -11281,13 +10814,28 @@ pub struct InstanceCommands {
     pub get_physical_device_memory_properties: PFN_vkGetPhysicalDeviceMemoryProperties,
     pub get_physical_device_memory_properties2: PFN_vkGetPhysicalDeviceMemoryProperties2,
     pub get_physical_device_memory_properties2_khr: PFN_vkGetPhysicalDeviceMemoryProperties2KHR,
+    pub get_physical_device_multisample_properties_ext:
+        PFN_vkGetPhysicalDeviceMultisamplePropertiesEXT,
+    pub get_physical_device_optical_flow_image_formats_nv:
+        PFN_vkGetPhysicalDeviceOpticalFlowImageFormatsNV,
+    pub get_physical_device_present_rectangles_khr: PFN_vkGetPhysicalDevicePresentRectanglesKHR,
     pub get_physical_device_properties: PFN_vkGetPhysicalDeviceProperties,
     pub get_physical_device_properties2: PFN_vkGetPhysicalDeviceProperties2,
     pub get_physical_device_properties2_khr: PFN_vkGetPhysicalDeviceProperties2KHR,
+    pub get_physical_device_queue_family_data_graph_processing_engine_properties_arm:
+        PFN_vkGetPhysicalDeviceQueueFamilyDataGraphProcessingEnginePropertiesARM,
+    pub get_physical_device_queue_family_data_graph_properties_arm:
+        PFN_vkGetPhysicalDeviceQueueFamilyDataGraphPropertiesARM,
+    pub get_physical_device_queue_family_performance_query_passes_khr:
+        PFN_vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR,
     pub get_physical_device_queue_family_properties: PFN_vkGetPhysicalDeviceQueueFamilyProperties,
     pub get_physical_device_queue_family_properties2: PFN_vkGetPhysicalDeviceQueueFamilyProperties2,
     pub get_physical_device_queue_family_properties2_khr:
         PFN_vkGetPhysicalDeviceQueueFamilyProperties2KHR,
+    pub get_physical_device_refreshable_object_types_khr:
+        PFN_vkGetPhysicalDeviceRefreshableObjectTypesKHR,
+    pub get_physical_device_sci_buf_attributes_nv: PFN_vkGetPhysicalDeviceSciBufAttributesNV,
+    pub get_physical_device_sci_sync_attributes_nv: PFN_vkGetPhysicalDeviceSciSyncAttributesNV,
     pub get_physical_device_screen_presentation_support_qnx:
         PFN_vkGetPhysicalDeviceScreenPresentationSupportQNX,
     pub get_physical_device_sparse_image_format_properties:
@@ -11296,6 +10844,8 @@ pub struct InstanceCommands {
         PFN_vkGetPhysicalDeviceSparseImageFormatProperties2,
     pub get_physical_device_sparse_image_format_properties2_khr:
         PFN_vkGetPhysicalDeviceSparseImageFormatProperties2KHR,
+    pub get_physical_device_supported_framebuffer_mixed_samples_combinations_nv:
+        PFN_vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV,
     pub get_physical_device_surface_capabilities2_ext:
         PFN_vkGetPhysicalDeviceSurfaceCapabilities2EXT,
     pub get_physical_device_surface_capabilities2_khr:
@@ -11303,10 +10853,18 @@ pub struct InstanceCommands {
     pub get_physical_device_surface_capabilities_khr: PFN_vkGetPhysicalDeviceSurfaceCapabilitiesKHR,
     pub get_physical_device_surface_formats2_khr: PFN_vkGetPhysicalDeviceSurfaceFormats2KHR,
     pub get_physical_device_surface_formats_khr: PFN_vkGetPhysicalDeviceSurfaceFormatsKHR,
+    pub get_physical_device_surface_present_modes2_ext:
+        PFN_vkGetPhysicalDeviceSurfacePresentModes2EXT,
     pub get_physical_device_surface_present_modes_khr:
         PFN_vkGetPhysicalDeviceSurfacePresentModesKHR,
     pub get_physical_device_surface_support_khr: PFN_vkGetPhysicalDeviceSurfaceSupportKHR,
     pub get_physical_device_tool_properties: PFN_vkGetPhysicalDeviceToolProperties,
+    pub get_physical_device_tool_properties_ext: PFN_vkGetPhysicalDeviceToolPropertiesEXT,
+    pub get_physical_device_video_capabilities_khr: PFN_vkGetPhysicalDeviceVideoCapabilitiesKHR,
+    pub get_physical_device_video_encode_quality_level_properties_khr:
+        PFN_vkGetPhysicalDeviceVideoEncodeQualityLevelPropertiesKHR,
+    pub get_physical_device_video_format_properties_khr:
+        PFN_vkGetPhysicalDeviceVideoFormatPropertiesKHR,
     pub get_physical_device_wayland_presentation_support_khr:
         PFN_vkGetPhysicalDeviceWaylandPresentationSupportKHR,
     pub get_physical_device_win32_presentation_support_khr:
@@ -11316,6 +10874,7 @@ pub struct InstanceCommands {
     pub get_physical_device_xlib_presentation_support_khr:
         PFN_vkGetPhysicalDeviceXlibPresentationSupportKHR,
     pub get_rand_r_output_display_ext: PFN_vkGetRandROutputDisplayEXT,
+    pub get_winrt_display_nv: PFN_vkGetWinrtDisplayNV,
     pub queue_begin_debug_utils_label_ext: PFN_vkQueueBeginDebugUtilsLabelEXT,
     pub queue_end_debug_utils_label_ext: PFN_vkQueueEndDebugUtilsLabelEXT,
     pub queue_insert_debug_utils_label_ext: PFN_vkQueueInsertDebugUtilsLabelEXT,
@@ -11342,6 +10901,20 @@ impl InstanceCommands {
                         _display: DisplayKHR,
                     ) -> Result {
                         panic!("could not load vkAcquireDrmDisplayEXT")
+                    }
+                    fallback
+                }
+            },
+            acquire_winrt_display_nv: {
+                let value = loader(c"vkAcquireWinrtDisplayNV".as_ptr());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _physical_device: PhysicalDevice,
+                        _display: DisplayKHR,
+                    ) -> Result {
+                        panic!("could not load vkAcquireWinrtDisplayNV")
                     }
                     fallback
                 }
@@ -11861,6 +11434,25 @@ impl InstanceCommands {
                     fallback
                 }
             },
+            enumerate_physical_device_queue_family_performance_query_counters_khr: {
+                let value = loader(
+                    c"vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR".as_ptr(),
+                );
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _physical_device: PhysicalDevice,
+                        _queue_family_index: u32,
+                        _counter_count: *mut u32,
+                        _counters: *mut PerformanceCounterKHR,
+                        _counter_descriptions: *mut PerformanceCounterDescriptionKHR,
+                    ) -> Result {
+                        panic!("could not load vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR")
+                    }
+                    fallback
+                }
+            },
             enumerate_physical_devices: {
                 let value = loader(c"vkEnumeratePhysicalDevices".as_ptr());
                 if let Some(value) = value {
@@ -11967,6 +11559,98 @@ impl InstanceCommands {
                         _display: *mut DisplayKHR,
                     ) -> Result {
                         panic!("could not load vkGetDrmDisplayEXT")
+                    }
+                    fallback
+                }
+            },
+            get_physical_device_calibrateable_time_domains_ext: {
+                let value = loader(c"vkGetPhysicalDeviceCalibrateableTimeDomainsEXT".as_ptr());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _physical_device: PhysicalDevice,
+                        _time_domain_count: *mut u32,
+                        _time_domains: *mut TimeDomainKHR,
+                    ) -> Result {
+                        panic!("could not load vkGetPhysicalDeviceCalibrateableTimeDomainsEXT")
+                    }
+                    fallback
+                }
+            },
+            get_physical_device_calibrateable_time_domains_khr: {
+                let value = loader(c"vkGetPhysicalDeviceCalibrateableTimeDomainsKHR".as_ptr());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _physical_device: PhysicalDevice,
+                        _time_domain_count: *mut u32,
+                        _time_domains: *mut TimeDomainKHR,
+                    ) -> Result {
+                        panic!("could not load vkGetPhysicalDeviceCalibrateableTimeDomainsKHR")
+                    }
+                    fallback
+                }
+            },
+            get_physical_device_cooperative_matrix_flexible_dimensions_properties_nv: {
+                let value = loader(
+                    c"vkGetPhysicalDeviceCooperativeMatrixFlexibleDimensionsPropertiesNV".as_ptr(),
+                );
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _physical_device: PhysicalDevice,
+                        _property_count: *mut u32,
+                        _properties: *mut CooperativeMatrixFlexibleDimensionsPropertiesNV,
+                    ) -> Result {
+                        panic!("could not load vkGetPhysicalDeviceCooperativeMatrixFlexibleDimensionsPropertiesNV")
+                    }
+                    fallback
+                }
+            },
+            get_physical_device_cooperative_matrix_properties_khr: {
+                let value = loader(c"vkGetPhysicalDeviceCooperativeMatrixPropertiesKHR".as_ptr());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _physical_device: PhysicalDevice,
+                        _property_count: *mut u32,
+                        _properties: *mut CooperativeMatrixPropertiesKHR,
+                    ) -> Result {
+                        panic!("could not load vkGetPhysicalDeviceCooperativeMatrixPropertiesKHR")
+                    }
+                    fallback
+                }
+            },
+            get_physical_device_cooperative_matrix_properties_nv: {
+                let value = loader(c"vkGetPhysicalDeviceCooperativeMatrixPropertiesNV".as_ptr());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _physical_device: PhysicalDevice,
+                        _property_count: *mut u32,
+                        _properties: *mut CooperativeMatrixPropertiesNV,
+                    ) -> Result {
+                        panic!("could not load vkGetPhysicalDeviceCooperativeMatrixPropertiesNV")
+                    }
+                    fallback
+                }
+            },
+            get_physical_device_cooperative_vector_properties_nv: {
+                let value = loader(c"vkGetPhysicalDeviceCooperativeVectorPropertiesNV".as_ptr());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _physical_device: PhysicalDevice,
+                        _property_count: *mut u32,
+                        _properties: *mut CooperativeVectorPropertiesNV,
+                    ) -> Result {
+                        panic!("could not load vkGetPhysicalDeviceCooperativeVectorPropertiesNV")
                     }
                     fallback
                 }
@@ -12126,6 +11810,22 @@ impl InstanceCommands {
                     fallback
                 }
             },
+            get_physical_device_external_memory_sci_buf_properties_nv: {
+                let value = loader(c"vkGetPhysicalDeviceExternalMemorySciBufPropertiesNV".as_ptr());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _physical_device: PhysicalDevice,
+                        _handle_type: ExternalMemoryHandleTypeFlags,
+                        _handle: NvSciBufObj,
+                        _memory_sci_buf_properties: *mut MemorySciBufPropertiesNV,
+                    ) -> Result {
+                        panic!("could not load vkGetPhysicalDeviceExternalMemorySciBufPropertiesNV")
+                    }
+                    fallback
+                }
+            },
             get_physical_device_external_semaphore_properties: {
                 let value = loader(c"vkGetPhysicalDeviceExternalSemaphoreProperties".as_ptr());
                 if let Some(value) = value {
@@ -12152,6 +11852,21 @@ impl InstanceCommands {
                         _external_semaphore_properties: *mut ExternalSemaphoreProperties,
                     ) {
                         panic!("could not load vkGetPhysicalDeviceExternalSemaphorePropertiesKHR")
+                    }
+                    fallback
+                }
+            },
+            get_physical_device_external_tensor_properties_arm: {
+                let value = loader(c"vkGetPhysicalDeviceExternalTensorPropertiesARM".as_ptr());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _physical_device: PhysicalDevice,
+                        _external_tensor_info: *const PhysicalDeviceExternalTensorInfoARM,
+                        _external_tensor_properties: *mut ExternalTensorPropertiesARM,
+                    ) {
+                        panic!("could not load vkGetPhysicalDeviceExternalTensorPropertiesARM")
                     }
                     fallback
                 }
@@ -12239,6 +11954,21 @@ impl InstanceCommands {
                         _format_properties: *mut FormatProperties2,
                     ) {
                         panic!("could not load vkGetPhysicalDeviceFormatProperties2KHR")
+                    }
+                    fallback
+                }
+            },
+            get_physical_device_fragment_shading_rates_khr: {
+                let value = loader(c"vkGetPhysicalDeviceFragmentShadingRatesKHR".as_ptr());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _physical_device: PhysicalDevice,
+                        _fragment_shading_rate_count: *mut u32,
+                        _fragment_shading_rates: *mut PhysicalDeviceFragmentShadingRateKHR,
+                    ) -> Result {
+                        panic!("could not load vkGetPhysicalDeviceFragmentShadingRatesKHR")
                     }
                     fallback
                 }
@@ -12334,6 +12064,53 @@ impl InstanceCommands {
                     fallback
                 }
             },
+            get_physical_device_multisample_properties_ext: {
+                let value = loader(c"vkGetPhysicalDeviceMultisamplePropertiesEXT".as_ptr());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _physical_device: PhysicalDevice,
+                        _samples: SampleCountFlags,
+                        _multisample_properties: *mut MultisamplePropertiesEXT,
+                    ) {
+                        panic!("could not load vkGetPhysicalDeviceMultisamplePropertiesEXT")
+                    }
+                    fallback
+                }
+            },
+            get_physical_device_optical_flow_image_formats_nv: {
+                let value = loader(c"vkGetPhysicalDeviceOpticalFlowImageFormatsNV".as_ptr());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _physical_device: PhysicalDevice,
+                        _optical_flow_image_format_info: *const OpticalFlowImageFormatInfoNV,
+                        _format_count: *mut u32,
+                        _image_format_properties: *mut OpticalFlowImageFormatPropertiesNV,
+                    ) -> Result {
+                        panic!("could not load vkGetPhysicalDeviceOpticalFlowImageFormatsNV")
+                    }
+                    fallback
+                }
+            },
+            get_physical_device_present_rectangles_khr: {
+                let value = loader(c"vkGetPhysicalDevicePresentRectanglesKHR".as_ptr());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _physical_device: PhysicalDevice,
+                        _surface: SurfaceKHR,
+                        _rect_count: *mut u32,
+                        _rects: *mut Rect2D,
+                    ) -> Result {
+                        panic!("could not load vkGetPhysicalDevicePresentRectanglesKHR")
+                    }
+                    fallback
+                }
+            },
             get_physical_device_properties: {
                 let value = loader(c"vkGetPhysicalDeviceProperties".as_ptr());
                 if let Some(value) = value {
@@ -12372,6 +12149,59 @@ impl InstanceCommands {
                         _properties: *mut PhysicalDeviceProperties2,
                     ) {
                         panic!("could not load vkGetPhysicalDeviceProperties2KHR")
+                    }
+                    fallback
+                }
+            },
+            get_physical_device_queue_family_data_graph_processing_engine_properties_arm: {
+                let value = loader(
+                    c"vkGetPhysicalDeviceQueueFamilyDataGraphProcessingEnginePropertiesARM"
+                        .as_ptr(),
+                );
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _physical_device: PhysicalDevice,
+                        _queue_family_data_graph_processing_engine_info: *const PhysicalDeviceQueueFamilyDataGraphProcessingEngineInfoARM,
+                        _queue_family_data_graph_processing_engine_properties: *mut QueueFamilyDataGraphProcessingEnginePropertiesARM,
+                    ) {
+                        panic!("could not load vkGetPhysicalDeviceQueueFamilyDataGraphProcessingEnginePropertiesARM")
+                    }
+                    fallback
+                }
+            },
+            get_physical_device_queue_family_data_graph_properties_arm: {
+                let value =
+                    loader(c"vkGetPhysicalDeviceQueueFamilyDataGraphPropertiesARM".as_ptr());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _physical_device: PhysicalDevice,
+                        _queue_family_index: u32,
+                        _queue_family_data_graph_property_count: *mut u32,
+                        _queue_family_data_graph_properties: *mut QueueFamilyDataGraphPropertiesARM,
+                    ) -> Result {
+                        panic!(
+                            "could not load vkGetPhysicalDeviceQueueFamilyDataGraphPropertiesARM"
+                        )
+                    }
+                    fallback
+                }
+            },
+            get_physical_device_queue_family_performance_query_passes_khr: {
+                let value =
+                    loader(c"vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR".as_ptr());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _physical_device: PhysicalDevice,
+                        _performance_query_create_info: *const QueryPoolPerformanceCreateInfoKHR,
+                        _num_passes: *mut u32,
+                    ) {
+                        panic!("could not load vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR")
                     }
                     fallback
                 }
@@ -12417,6 +12247,50 @@ impl InstanceCommands {
                         _queue_family_properties: *mut QueueFamilyProperties2,
                     ) {
                         panic!("could not load vkGetPhysicalDeviceQueueFamilyProperties2KHR")
+                    }
+                    fallback
+                }
+            },
+            get_physical_device_refreshable_object_types_khr: {
+                let value = loader(c"vkGetPhysicalDeviceRefreshableObjectTypesKHR".as_ptr());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _physical_device: PhysicalDevice,
+                        _refreshable_object_type_count: *mut u32,
+                        _refreshable_object_types: *mut ObjectType,
+                    ) -> Result {
+                        panic!("could not load vkGetPhysicalDeviceRefreshableObjectTypesKHR")
+                    }
+                    fallback
+                }
+            },
+            get_physical_device_sci_buf_attributes_nv: {
+                let value = loader(c"vkGetPhysicalDeviceSciBufAttributesNV".as_ptr());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _physical_device: PhysicalDevice,
+                        _attributes: NvSciBufAttrList,
+                    ) -> Result {
+                        panic!("could not load vkGetPhysicalDeviceSciBufAttributesNV")
+                    }
+                    fallback
+                }
+            },
+            get_physical_device_sci_sync_attributes_nv: {
+                let value = loader(c"vkGetPhysicalDeviceSciSyncAttributesNV".as_ptr());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _physical_device: PhysicalDevice,
+                        _sci_sync_attributes_info: *const SciSyncAttributesInfoNV,
+                        _attributes: NvSciSyncAttrList,
+                    ) -> Result {
+                        panic!("could not load vkGetPhysicalDeviceSciSyncAttributesNV")
                     }
                     fallback
                 }
@@ -12484,6 +12358,23 @@ impl InstanceCommands {
                         _properties: *mut SparseImageFormatProperties2,
                     ) {
                         panic!("could not load vkGetPhysicalDeviceSparseImageFormatProperties2KHR")
+                    }
+                    fallback
+                }
+            },
+            get_physical_device_supported_framebuffer_mixed_samples_combinations_nv: {
+                let value = loader(
+                    c"vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV".as_ptr(),
+                );
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _physical_device: PhysicalDevice,
+                        _combination_count: *mut u32,
+                        _combinations: *mut FramebufferMixedSamplesCombinationNV,
+                    ) -> Result {
+                        panic!("could not load vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV")
                     }
                     fallback
                 }
@@ -12565,6 +12456,22 @@ impl InstanceCommands {
                     fallback
                 }
             },
+            get_physical_device_surface_present_modes2_ext: {
+                let value = loader(c"vkGetPhysicalDeviceSurfacePresentModes2EXT".as_ptr());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _physical_device: PhysicalDevice,
+                        _surface_info: *const PhysicalDeviceSurfaceInfo2KHR,
+                        _present_mode_count: *mut u32,
+                        _present_modes: *mut PresentModeKHR,
+                    ) -> Result {
+                        panic!("could not load vkGetPhysicalDeviceSurfacePresentModes2EXT")
+                    }
+                    fallback
+                }
+            },
             get_physical_device_surface_present_modes_khr: {
                 let value = loader(c"vkGetPhysicalDeviceSurfacePresentModesKHR".as_ptr());
                 if let Some(value) = value {
@@ -12608,6 +12515,68 @@ impl InstanceCommands {
                         _tool_properties: *mut PhysicalDeviceToolProperties,
                     ) -> Result {
                         panic!("could not load vkGetPhysicalDeviceToolProperties")
+                    }
+                    fallback
+                }
+            },
+            get_physical_device_tool_properties_ext: {
+                let value = loader(c"vkGetPhysicalDeviceToolPropertiesEXT".as_ptr());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _physical_device: PhysicalDevice,
+                        _tool_count: *mut u32,
+                        _tool_properties: *mut PhysicalDeviceToolProperties,
+                    ) -> Result {
+                        panic!("could not load vkGetPhysicalDeviceToolPropertiesEXT")
+                    }
+                    fallback
+                }
+            },
+            get_physical_device_video_capabilities_khr: {
+                let value = loader(c"vkGetPhysicalDeviceVideoCapabilitiesKHR".as_ptr());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _physical_device: PhysicalDevice,
+                        _video_profile: *const VideoProfileInfoKHR,
+                        _capabilities: *mut VideoCapabilitiesKHR,
+                    ) -> Result {
+                        panic!("could not load vkGetPhysicalDeviceVideoCapabilitiesKHR")
+                    }
+                    fallback
+                }
+            },
+            get_physical_device_video_encode_quality_level_properties_khr: {
+                let value =
+                    loader(c"vkGetPhysicalDeviceVideoEncodeQualityLevelPropertiesKHR".as_ptr());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _physical_device: PhysicalDevice,
+                        _quality_level_info: *const PhysicalDeviceVideoEncodeQualityLevelInfoKHR,
+                        _quality_level_properties: *mut VideoEncodeQualityLevelPropertiesKHR,
+                    ) -> Result {
+                        panic!("could not load vkGetPhysicalDeviceVideoEncodeQualityLevelPropertiesKHR")
+                    }
+                    fallback
+                }
+            },
+            get_physical_device_video_format_properties_khr: {
+                let value = loader(c"vkGetPhysicalDeviceVideoFormatPropertiesKHR".as_ptr());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _physical_device: PhysicalDevice,
+                        _video_format_info: *const PhysicalDeviceVideoFormatInfoKHR,
+                        _video_format_property_count: *mut u32,
+                        _video_format_properties: *mut VideoFormatPropertiesKHR,
+                    ) -> Result {
+                        panic!("could not load vkGetPhysicalDeviceVideoFormatPropertiesKHR")
                     }
                     fallback
                 }
@@ -12685,6 +12654,21 @@ impl InstanceCommands {
                         _display: *mut DisplayKHR,
                     ) -> Result {
                         panic!("could not load vkGetRandROutputDisplayEXT")
+                    }
+                    fallback
+                }
+            },
+            get_winrt_display_nv: {
+                let value = loader(c"vkGetWinrtDisplayNV".as_ptr());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _physical_device: PhysicalDevice,
+                        _device_relative_id: u32,
+                        _display: *mut DisplayKHR,
+                    ) -> Result {
+                        panic!("could not load vkGetWinrtDisplayNV")
                     }
                     fallback
                 }
