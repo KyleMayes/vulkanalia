@@ -81,7 +81,7 @@ pub trait $name${extends?.let { ": $it" } ?: ""} {
     ${commands.joinToString("") { generateCommandWrapper(it) }}
 }
 
-impl $name for crate::${type.display} {
+impl${if (extends == null) "" else "<C: ${type.display}V1_0>"} $name for ${if (extends == null) "crate::${type.display}" else "C"} {
     ${if (extends == null) "#[inline] fn commands(&self) -> &${type.display}Commands { &self.commands }\n" else ""}
     ${if (handle && extends == null) "#[inline] fn handle(&self) -> ${type.display} { self.handle }\n" else ""}
 }

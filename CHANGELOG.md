@@ -1,6 +1,8 @@
 ## [0.31.0] - UNRELEASED
 
 ### Changed
+- Non-1.0 command traits are now implemented for any type that implements the 1.0 command trait
+  - For example: `vk::DeviceV1_1` is implemented for any type that implements `vk::DeviceV1_0`
 - **BREAKING:** `vk::DeviceCommands::load` no longer takes an instance-level loader function
 - **BREAKING:** Moved instance-level commands added by device extensions from `DeviceCommands` to `InstanceCommands`
 - **BREAKING:** Replaced extension traits with one extension commands trait per extension and type of command added by the extension
