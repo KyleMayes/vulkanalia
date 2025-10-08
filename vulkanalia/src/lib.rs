@@ -157,6 +157,10 @@ impl Version {
     pub const V1_1_0: Version = Version::new(1, 1, 0);
     /// The version for Vulkan `1.2.0`.
     pub const V1_2_0: Version = Version::new(1, 2, 0);
+    /// The version for Vulkan `1.3.0`.
+    pub const V1_3_0: Version = Version::new(1, 3, 0);
+    /// The version for Vulkan `1.4.0`.
+    pub const V1_4_0: Version = Version::new(1, 4, 0);
 
     /// Constructs a new Vulkan version.
     pub const fn new(major: u32, minor: u32, patch: u32) -> Self {
