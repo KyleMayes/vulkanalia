@@ -14,6 +14,7 @@ fun Registry.generateVersionTraits(): String {
     var versions =
         """
 use alloc::vec::Vec;
+use core::borrow::Borrow;
 use core::ffi::c_void;
 use core::mem::MaybeUninit;
 use core::ptr;
@@ -73,16 +74,63 @@ private fun Registry.generateVersionTrait(
     name: String,
     extends: String?,
     handle: Boolean,
-) = """
-/// Vulkan ${version.number} ${type.display.lowercase()} command wrappers.
-pub trait $name${extends?.let { ": $it" } ?: ""} {
-    ${if (extends == null) "fn commands(&self) -> &${type.display}Commands;\n" else ""}
-    ${if (handle && extends == null) "fn handle(&self) -> ${type.display};\n" else ""}
-    ${commands.joinToString("") { generateCommandWrapper(it) }}
+): String {
+    val doc = "Vulkan ${version.number} ${type.display.lowercase()} command wrappers."
+    val commandType = "${type.display}Commands"
+    val commandWrappers = commands.joinToString("") { generateCommandWrapper(it) }
+
+    return if (extends == null) {
+        // ======================================================================
+        // V1_0 version traits
+        // ======================================================================
+
+        val simpleImpl =
+            if (handle) {
+                """
+impl<C: Borrow<$commandType>> $name for (C, ${type.display}) {
+    #[inline] fn commands(&self) -> &$commandType { self.0.borrow() }
+    
+    #[inline] fn handle(&self) -> ${type.display} { self.1 }
+}
+                """
+            } else {
+                """
+impl<C: Borrow<$commandType>> $name for C {
+    #[inline] fn commands(&self) -> &$commandType { self.borrow() }
+}
+                """
+            }
+
+        """
+/// $doc
+pub trait $name {
+    fn commands(&self) -> &$commandType;
+
+    ${if (handle) "fn handle(&self) -> ${type.display};" else ""}
+
+    $commandWrappers
 }
 
-impl${if (extends == null) "" else "<C: ${type.display}V1_0>"} $name for ${if (extends == null) "crate::${type.display}" else "C"} {
-    ${if (extends == null) "#[inline] fn commands(&self) -> &${type.display}Commands { &self.commands }\n" else ""}
-    ${if (handle && extends == null) "#[inline] fn handle(&self) -> ${type.display} { self.handle }\n" else ""}
+impl $name for crate::${type.display} {
+    #[inline] fn commands(&self) -> &$commandType { &self.commands }
+    
+    ${if (handle) "#[inline] fn handle(&self) -> ${type.display} { self.handle }" else ""}
 }
-    """
+
+$simpleImpl
+        """
+    } else {
+        // ======================================================================
+        // V1_1+ version traits
+        // ======================================================================
+
+        """
+/// $doc
+pub trait $name: $extends {
+    $commandWrappers
+}
+
+impl<C: ${type.display}V1_0> $name for C {}
+        """
+    }
+}

@@ -21,6 +21,7 @@
 )]
 
 use alloc::vec::Vec;
+use core::borrow::Borrow;
 use core::ffi::c_void;
 use core::mem::MaybeUninit;
 use core::ptr;
@@ -114,6 +115,13 @@ impl EntryV1_0 for crate::Entry {
     #[inline]
     fn commands(&self) -> &EntryCommands {
         &self.commands
+    }
+}
+
+impl<C: Borrow<EntryCommands>> EntryV1_0 for C {
+    #[inline]
+    fn commands(&self) -> &EntryCommands {
+        self.borrow()
     }
 }
 
@@ -429,6 +437,18 @@ impl InstanceV1_0 for crate::Instance {
     #[inline]
     fn handle(&self) -> Instance {
         self.handle
+    }
+}
+
+impl<C: Borrow<InstanceCommands>> InstanceV1_0 for (C, Instance) {
+    #[inline]
+    fn commands(&self) -> &InstanceCommands {
+        self.0.borrow()
+    }
+
+    #[inline]
+    fn handle(&self) -> Instance {
+        self.1
     }
 }
 
@@ -2520,6 +2540,18 @@ impl DeviceV1_0 for crate::Device {
     #[inline]
     fn handle(&self) -> Device {
         self.handle
+    }
+}
+
+impl<C: Borrow<DeviceCommands>> DeviceV1_0 for (C, Device) {
+    #[inline]
+    fn commands(&self) -> &DeviceCommands {
+        self.0.borrow()
+    }
+
+    #[inline]
+    fn handle(&self) -> Device {
+        self.1
     }
 }
 
