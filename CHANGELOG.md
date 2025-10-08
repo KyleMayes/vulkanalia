@@ -1,5 +1,10 @@
 ## [0.31.0] - UNRELEASED
 
+### Added
+- Added implementation of `vk::EntryV1_0` for `vk::EntryCommands`
+- Added implementation of `vk::InstanceV1_0` for tuples of `vk::InstanceCommands` and `vk::Instance`
+- Added implementation of `vk::DeviceV1_0` for tuples of `vk::DeviceCommands` and `vk::Device`
+
 ### Changed
 - Non-1.0 command traits are now implemented for any type that implements the 1.0 command trait
   - For example: `vk::DeviceV1_1` is implemented for any type that implements `vk::DeviceV1_0`
