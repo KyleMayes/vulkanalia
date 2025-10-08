@@ -2,8 +2,18 @@
 
 package com.kylemayes.generator
 
+import com.fasterxml.jackson.databind.ObjectMapper
+import mu.KotlinLogging
+import org.apache.commons.codec.digest.DigestUtils
 import org.kohsuke.github.GHCommit
+import java.nio.charset.StandardCharsets
 import java.nio.file.Files
+import java.nio.file.Path
+import kotlin.io.path.createParentDirectories
+
+private val log = KotlinLogging.logger { /* */ }
+
+private val mapper = ObjectMapper()
 
 private val registryPath = RepositoryPath("KhronosGroup/Vulkan-Docs", "main", "xml/vk.xml")
 private val videoPath = RepositoryPath("KhronosGroup/Vulkan-Headers", "main", "include/vk_video")
@@ -69,20 +79,46 @@ data class RepositoryInputVersion<out T>(
 )
 
 /** Gets a generator input pulled from a GitHub repository. */
-private fun <T> getRepositoryInput(
+private inline fun <reified T> getRepositoryInput(
     context: GeneratorContext,
     locals: Map<RepositoryPath, String>,
     path: RepositoryPath,
-    get: (commit: GHCommit, path: RepositoryPath) -> T,
+    crossinline get: (commit: GHCommit, path: RepositoryPath) -> T,
 ): RepositoryInput<T> {
     val repository = context.github.getRepository(path.name)
     val latest = repository.queryCommits().from(path.branch).path(path.path).pageSize(1).list().first()
     val local = locals[path]?.let { repository.getCommit(it) } ?: latest
     return RepositoryInput(
         path = path,
-        local = RepositoryInputVersion(local, lazy { get(local, path) }),
-        latest = RepositoryInputVersion(latest, lazy { get(latest, path) }),
+        local = RepositoryInputVersion(local, lazy { getCached(local, path, get) }),
+        latest = RepositoryInputVersion(latest, lazy { getCached(latest, path, get) }),
     )
+}
+
+private inline fun <reified T> getCached(
+    commit: GHCommit,
+    path: RepositoryPath,
+    get: (commit: GHCommit, path: RepositoryPath) -> T,
+): T {
+    val key = DigestUtils.sha1Hex("${commit.shA1}-$path")
+    val file = Path.of(System.getProperty("java.io.tmpdir")).resolve("vk-input").resolve("$key.json")
+
+    try {
+        if (Files.exists(file)) {
+            log.info("Using cached value for $path.")
+            val json = Files.readString(file, StandardCharsets.UTF_8)
+            return mapper.readValue(json, T::class.java)
+        }
+    } catch (e: Exception) {
+        log.warn("Failed to load and parse cached value for $path.", e)
+    }
+
+    val value = get(commit, path)
+
+    file.createParentDirectories()
+    Files.writeString(file, mapper.writeValueAsString(value), StandardCharsets.UTF_8)
+
+    return value
 }
 
 /** Fetches the contents of a file for a generator input pulled from a GitHub repository. */
