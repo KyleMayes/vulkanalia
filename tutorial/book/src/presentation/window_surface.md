@@ -8,10 +8,11 @@ The `VK_KHR_surface` extension is an instance level extension and we've actually
 
 The window surface needs to be created right after the instance creation, because it can actually influence the physical device selection. The reason we postponed this is because window surfaces are part of the larger topic of render targets and presentation for which the explanation would have cluttered the basic setup. It should also be noted that window surfaces are an entirely optional component in Vulkan, if you just need off-screen rendering. Vulkan allows you to do that without hacks like creating an invisible window (necessary for OpenGL).
 
-While we can freely import types for extensions like the struct `vk::SurfaceKHR`, we need to import the `vulkanalia` extension trait for `VK_KHR_surface` before we can call any of the Vulkan commands added by the extension. Add the following import for `vk::KhrSurfaceExtension`:
+While we can freely import types for extensions like the struct `vk::SurfaceKHR`, we need to import the `vulkanalia` extension trait for `VK_KHR_surface` before we can call any of the Vulkan commands added by the extension. Add the following import for `vk::KhrSurfaceExtensionInstanceCommands`:
 
 ```rust,noplaypen
-use vulkanalia::vk::KhrSurfaceExtension;
+// Note: This trait was called `KhrSurfaceExtension` in versions of `vulkanalia` prior to `v0.31.0`.
+use vulkanalia::vk::KhrSurfaceExtensionInstanceCommands;
 ```
 
 ## Window surface creation
@@ -41,10 +42,11 @@ let info = vk::Win32SurfaceCreateInfoKHR::builder()
 
 The `WindowExtWindows` trait is imported from `winit` because it allows us to access platform-specific methods on the `winit` `Window` struct. In this case, it permits us to get the process and window handles for the window created by `winit`.
 
-After that the surface can be created with `create_win32_surface_khr`, which includes parameters for the surface creation details and custom allocators. Technically this is a WSI extension function, but it is so commonly used that the standard Vulkan loader includes it, so unlike other extensions you don't need to explicitly load it. However, we do need to import the `vulkanalia` extension trait for `VK_KHR_win32_surface` (`vk::KhrWin32SurfaceExtension`).
+After that the surface can be created with `create_win32_surface_khr`, which includes parameters for the surface creation details and custom allocators. Technically this is a WSI extension function, but it is so commonly used that the standard Vulkan loader includes it, so unlike other extensions you don't need to explicitly load it. However, we do need to import the `vulkanalia` extension trait for `VK_KHR_win32_surface` (`vk::KhrWin32SurfaceExtensionInstanceCommands`).
 
 ```rust,noplaypen
-use vk::KhrWin32SurfaceExtension;
+// Note: This trait was called `KhrWin32SurfaceExtension` in versions of `vulkanalia` prior to `v0.31.0`.
+use vk::KhrWin32SurfaceExtensionInstanceCommands;
 
 let surface = instance.create_win32_surface_khr(&info, None).unwrap();
 ```
@@ -152,7 +154,7 @@ let queue_infos = unique_indices
 And delete the previous `queue_infos` slice and take a reference to the `queue_infos` list for `vk::DeviceCreateInfo`:
 
 ```rust,noplaypen
-let info = vk::DeviceCreateInfo::builder()        
+let info = vk::DeviceCreateInfo::builder()
     .queue_create_infos(&queue_infos)
     .enabled_layer_names(&layers)
     .enabled_extension_names(&extensions)
