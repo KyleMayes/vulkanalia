@@ -5,6 +5,7 @@
 - Added implementation of `vk::InstanceV1_0` for tuples of `vk::InstanceCommands` and `vk::Instance`
 - Added implementation of `vk::DeviceV1_0` for tuples of `vk::DeviceCommands` and `vk::Device`
 - Added `Version::V1_3_0` and `Version::V1_4_0` associated constants
+- Added `layer` module to `vulkanalia-sys` which provides layer interface types
 
 ### Changed
 - Non-1.0 command traits are now implemented for any type that implements the 1.0 command trait

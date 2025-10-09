@@ -91,6 +91,7 @@ use core::iter;
 use core::ptr::NonNull;
 
 use crate::prelude::v1_0::*;
+use crate::vk::layer::{LayerDeviceCreateInfo, LayerInstanceCreateInfo};
 
 /// Creates an iterator over a Vulkan input pointer chain.
 ///
@@ -215,5 +216,37 @@ impl OutputChainPtr {
     /// requirements of that method.
     pub unsafe fn next(&self) -> Option<Self> {
         Self::new(self.as_base_ref().next.cast())
+    }
+}
+
+//================================================
+// Layer
+//================================================
+
+unsafe impl vk::InputChainStruct for LayerInstanceCreateInfo {
+    const TYPE: vk::StructureType = vk::StructureType::LOADER_INSTANCE_CREATE_INFO;
+
+    #[inline]
+    fn s_type(&self) -> vk::StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl vk::InputChainStruct for LayerDeviceCreateInfo {
+    const TYPE: vk::StructureType = vk::StructureType::LOADER_DEVICE_CREATE_INFO;
+
+    #[inline]
+    fn s_type(&self) -> vk::StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
     }
 }

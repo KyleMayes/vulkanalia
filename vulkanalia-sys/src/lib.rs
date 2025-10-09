@@ -35,6 +35,7 @@ mod typedefs;
 #[rustfmt::skip]
 mod unions;
 
+pub mod layer;
 #[rustfmt::skip]
 pub mod video;
 
