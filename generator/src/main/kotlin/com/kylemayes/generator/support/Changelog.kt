@@ -5,6 +5,7 @@ package com.kylemayes.generator.support
 import com.vladsch.flexmark.ast.BulletList
 import com.vladsch.flexmark.ast.Heading
 import com.vladsch.flexmark.parser.Parser
+import com.vladsch.flexmark.util.ast.Node
 import org.kohsuke.github.GHCommit
 import java.lang.StringBuilder
 
@@ -17,6 +18,7 @@ data class Changelog(
 data class Version(
     val version: String,
     val release: String?,
+    val prelude: String?,
     val sections: MutableList<Section>,
 )
 
@@ -43,6 +45,22 @@ fun parseMarkdown(markdown: String): Changelog {
         if (versionHeading.text.contains("[0.1.0]")) {
             break
         }
+
+        // Parse Prelude
+
+        val preludeNodes = mutableListOf<Node>()
+        while (children.peek() !is Heading) {
+            preludeNodes.add(children.next())
+        }
+
+        val prelude =
+            if (preludeNodes.isNotEmpty()) {
+                val first = preludeNodes.first()
+                val last = preludeNodes.last()
+                document.baseSubSequence(first.startOffset, last.endOffset).toString()
+            } else {
+                null
+            }
 
         // Parse Version
 
@@ -71,7 +89,7 @@ fun parseMarkdown(markdown: String): Changelog {
             sections.add(Section(name, changes))
         }
 
-        versions.add(Version(version, release, sections))
+        versions.add(Version(version, release, prelude, sections))
     }
 
     return Changelog(versions)
@@ -83,6 +101,8 @@ fun Changelog.generateMarkdown(): String {
 
     for (version in versions) {
         markdown.append("## [${version.version}] - ${version.release ?: "UNRELEASED"}\n\n")
+
+        version.prelude?.let { markdown.append("$it\n") }
 
         for (section in version.sections) {
             markdown.append("### ${section.name}\n")
@@ -119,7 +139,7 @@ fun Changelog.addBindingsUpdates(commit: GHCommit) {
     if (versions[0].release != null) {
         val latest = versions[0].version.split(".").map { it.toInt() }
         val next = "${latest[0]}.${latest[1] + 1}.0"
-        versions.add(0, Version(next, null, mutableListOf()))
+        versions.add(0, Version(next, null, null, mutableListOf()))
     }
 
     // Add a `Bindings Update` section if it does not exist.

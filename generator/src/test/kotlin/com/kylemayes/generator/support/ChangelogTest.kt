@@ -1,7 +1,6 @@
 package com.kylemayes.generator.support
 
 import org.apache.commons.text.StringEscapeUtils
-import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
@@ -19,11 +18,11 @@ class ChangelogTest {
     fun `Round Trip`() {
         val markdown = Files.readString(Path.of("../CHANGELOG.md"))
         val changelog = parseMarkdown(markdown)
-        assertEscapeEquals(markdown, changelog.generateMarkdown())
+        assertMarkdownEquals(markdown, changelog.generateMarkdown())
     }
 
     @ParameterizedTest
-    @CsvSource("released-bindings", "released-no-bindings", "unreleased-bindings", "unreleased-no-bindings")
+    @CsvSource("released-bindings", "released-no-bindings", "unreleased-bindings", "unreleased-no-bindings", "prelude")
     fun `Add Bindings Updates`(name: String) {
         val commit = Mockito.mock(GHCommit::class.java)
         Mockito.`when`(commit.shA1).thenReturn("f90136facacd25f016e523064f03713bdfe1b22d")
@@ -38,15 +37,19 @@ class ChangelogTest {
 
         val changelog = parseMarkdown(load("initial/$name.md"))
         changelog.addBindingsUpdates(commit)
-        assertEscapeEquals(load("expected/$name.md"), changelog.generateMarkdown())
+        assertMarkdownEquals(load("expected/$name.md"), changelog.generateMarkdown())
     }
 
-    private fun assertEscapeEquals(
+    private fun assertMarkdownEquals(
         expected: String,
         actual: String,
     ) {
         val expectedEscape = StringEscapeUtils.escapeJava(expected.replace(Regex("\r?\n"), "\n"))
         val actualEscape = StringEscapeUtils.escapeJava(actual.replace(Regex("\r?\n"), "\n"))
-        assertEquals(expectedEscape, actualEscape)
+        if (!expectedEscape.equals(actualEscape)) {
+            println("Expected: $expectedEscape")
+            println("Actual:   $actualEscape")
+            throw RuntimeException("Expected and actual Markdown did not match.")
+        }
     }
 }
