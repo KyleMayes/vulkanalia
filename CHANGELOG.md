@@ -6,6 +6,10 @@
 - Added implementation of `vk::DeviceV1_0` for tuples of `vk::DeviceCommands` and `vk::Device`
 - Added `Version::V1_3_0` and `Version::V1_4_0` associated constants
 - Added `layer` module to `vulkanalia-sys` which provides layer interface types
+- Added `Entry::from_commands` constructor method
+- Added `Instance::from_created` constructor method
+- Added `Device::from_created` constructor method
+- Added `Device::physical_device` method
 
 ### Changed
 - Non-1.0 command traits are now implemented for any type that implements the 1.0 command trait
