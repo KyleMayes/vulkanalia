@@ -140,7 +140,7 @@ pub trait $name${type.display}Commands: ${type.display}V1_0 {
 }
 
 $implAttributes
-impl<C: ${type.display}V1_0> $name${type.display}Commands for C { }
+impl<C: ${type.display}V1_0 + ?Sized> $name${type.display}Commands for C { }
     """
 }
 

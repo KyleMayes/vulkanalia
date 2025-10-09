@@ -130,7 +130,7 @@ pub trait $name: $extends {
     $commandWrappers
 }
 
-impl<C: ${type.display}V1_0> $name for C {}
+impl<C: ${type.display}V1_0 + ?Sized> $name for C {}
         """
     }
 }

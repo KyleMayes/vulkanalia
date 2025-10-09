@@ -172,7 +172,7 @@ pub trait AmdxShaderEnqueueExtensionDeviceCommands: DeviceV1_0 {
 }
 
 #[cfg(feature = "provisional")]
-impl<C: DeviceV1_0> AmdxShaderEnqueueExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> AmdxShaderEnqueueExtensionDeviceCommands for C {}
 
 /// The device-level commands added by [`AMD_ANTI_LAG_EXTENSION`].
 pub trait AmdAntiLagExtensionDeviceCommands: DeviceV1_0 {
@@ -183,7 +183,7 @@ pub trait AmdAntiLagExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> AmdAntiLagExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> AmdAntiLagExtensionDeviceCommands for C {}
 
 /// The device-level commands added by [`AMD_BUFFER_MARKER_EXTENSION`].
 pub trait AmdBufferMarkerExtensionDeviceCommands: DeviceV1_0 {
@@ -226,7 +226,7 @@ pub trait AmdBufferMarkerExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> AmdBufferMarkerExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> AmdBufferMarkerExtensionDeviceCommands for C {}
 
 /// The device-level commands added by [`AMD_DISPLAY_NATIVE_HDR_EXTENSION`].
 pub trait AmdDisplayNativeHdrExtensionDeviceCommands: DeviceV1_0 {
@@ -241,7 +241,7 @@ pub trait AmdDisplayNativeHdrExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> AmdDisplayNativeHdrExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> AmdDisplayNativeHdrExtensionDeviceCommands for C {}
 
 /// The device-level commands added by [`AMD_DRAW_INDIRECT_COUNT_EXTENSION`].
 pub trait AmdDrawIndirectCountExtensionDeviceCommands: DeviceV1_0 {
@@ -292,7 +292,7 @@ pub trait AmdDrawIndirectCountExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> AmdDrawIndirectCountExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> AmdDrawIndirectCountExtensionDeviceCommands for C {}
 
 /// The device-level commands added by [`AMD_SHADER_INFO_EXTENSION`].
 pub trait AmdShaderInfoExtensionDeviceCommands: DeviceV1_0 {
@@ -337,7 +337,7 @@ pub trait AmdShaderInfoExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> AmdShaderInfoExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> AmdShaderInfoExtensionDeviceCommands for C {}
 
 /// The device-level commands added by [`ANDROID_EXTERNAL_MEMORY_ANDROID_HARDWARE_BUFFER_EXTENSION`].
 pub trait AndroidExternalMemoryAndroidHardwareBufferExtensionDeviceCommands: DeviceV1_0 {
@@ -383,7 +383,10 @@ pub trait AndroidExternalMemoryAndroidHardwareBufferExtensionDeviceCommands: Dev
     }
 }
 
-impl<C: DeviceV1_0> AndroidExternalMemoryAndroidHardwareBufferExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> AndroidExternalMemoryAndroidHardwareBufferExtensionDeviceCommands
+    for C
+{
+}
 
 /// The device-level commands added by [`ARM_DATA_GRAPH_EXTENSION`].
 pub trait ArmDataGraphExtensionDeviceCommands: DeviceV1_0 {
@@ -602,7 +605,7 @@ pub trait ArmDataGraphExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> ArmDataGraphExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> ArmDataGraphExtensionDeviceCommands for C {}
 
 /// The instance-level commands added by [`ARM_DATA_GRAPH_EXTENSION`].
 pub trait ArmDataGraphExtensionInstanceCommands: InstanceV1_0 {
@@ -667,7 +670,7 @@ pub trait ArmDataGraphExtensionInstanceCommands: InstanceV1_0 {
     }
 }
 
-impl<C: InstanceV1_0> ArmDataGraphExtensionInstanceCommands for C {}
+impl<C: InstanceV1_0 + ?Sized> ArmDataGraphExtensionInstanceCommands for C {}
 
 /// The device-level commands added by [`ARM_TENSORS_EXTENSION`].
 pub trait ArmTensorsExtensionDeviceCommands: DeviceV1_0 {
@@ -847,7 +850,7 @@ pub trait ArmTensorsExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> ArmTensorsExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> ArmTensorsExtensionDeviceCommands for C {}
 
 /// The instance-level commands added by [`ARM_TENSORS_EXTENSION`].
 pub trait ArmTensorsExtensionInstanceCommands: InstanceV1_0 {
@@ -869,7 +872,7 @@ pub trait ArmTensorsExtensionInstanceCommands: InstanceV1_0 {
     }
 }
 
-impl<C: InstanceV1_0> ArmTensorsExtensionInstanceCommands for C {}
+impl<C: InstanceV1_0 + ?Sized> ArmTensorsExtensionInstanceCommands for C {}
 
 /// The instance-level commands added by [`EXT_ACQUIRE_DRM_DISPLAY_EXTENSION`].
 pub trait ExtAcquireDrmDisplayExtensionInstanceCommands: InstanceV1_0 {
@@ -915,7 +918,7 @@ pub trait ExtAcquireDrmDisplayExtensionInstanceCommands: InstanceV1_0 {
     }
 }
 
-impl<C: InstanceV1_0> ExtAcquireDrmDisplayExtensionInstanceCommands for C {}
+impl<C: InstanceV1_0 + ?Sized> ExtAcquireDrmDisplayExtensionInstanceCommands for C {}
 
 /// The instance-level commands added by [`EXT_ACQUIRE_XLIB_DISPLAY_EXTENSION`].
 pub trait ExtAcquireXlibDisplayExtensionInstanceCommands: InstanceV1_0 {
@@ -963,7 +966,7 @@ pub trait ExtAcquireXlibDisplayExtensionInstanceCommands: InstanceV1_0 {
     }
 }
 
-impl<C: InstanceV1_0> ExtAcquireXlibDisplayExtensionInstanceCommands for C {}
+impl<C: InstanceV1_0 + ?Sized> ExtAcquireXlibDisplayExtensionInstanceCommands for C {}
 
 /// The device-level commands added by [`EXT_ATTACHMENT_FEEDBACK_LOOP_DYNAMIC_STATE_EXTENSION`].
 pub trait ExtAttachmentFeedbackLoopDynamicStateExtensionDeviceCommands: DeviceV1_0 {
@@ -981,7 +984,7 @@ pub trait ExtAttachmentFeedbackLoopDynamicStateExtensionDeviceCommands: DeviceV1
     }
 }
 
-impl<C: DeviceV1_0> ExtAttachmentFeedbackLoopDynamicStateExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> ExtAttachmentFeedbackLoopDynamicStateExtensionDeviceCommands for C {}
 
 /// The device-level commands added by [`EXT_BUFFER_DEVICE_ADDRESS_EXTENSION`].
 pub trait ExtBufferDeviceAddressExtensionDeviceCommands: DeviceV1_0 {
@@ -998,7 +1001,7 @@ pub trait ExtBufferDeviceAddressExtensionDeviceCommands: DeviceV1_0 {
 }
 
 #[allow(deprecated)]
-impl<C: DeviceV1_0> ExtBufferDeviceAddressExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> ExtBufferDeviceAddressExtensionDeviceCommands for C {}
 
 /// The device-level commands added by [`EXT_CALIBRATED_TIMESTAMPS_EXTENSION`].
 pub trait ExtCalibratedTimestampsExtensionDeviceCommands: DeviceV1_0 {
@@ -1030,7 +1033,7 @@ pub trait ExtCalibratedTimestampsExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> ExtCalibratedTimestampsExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> ExtCalibratedTimestampsExtensionDeviceCommands for C {}
 
 /// The instance-level commands added by [`EXT_CALIBRATED_TIMESTAMPS_EXTENSION`].
 pub trait ExtCalibratedTimestampsExtensionInstanceCommands: InstanceV1_0 {
@@ -1071,7 +1074,7 @@ pub trait ExtCalibratedTimestampsExtensionInstanceCommands: InstanceV1_0 {
     }
 }
 
-impl<C: InstanceV1_0> ExtCalibratedTimestampsExtensionInstanceCommands for C {}
+impl<C: InstanceV1_0 + ?Sized> ExtCalibratedTimestampsExtensionInstanceCommands for C {}
 
 /// The device-level commands added by [`EXT_COLOR_WRITE_ENABLE_EXTENSION`].
 pub trait ExtColorWriteEnableExtensionDeviceCommands: DeviceV1_0 {
@@ -1090,7 +1093,7 @@ pub trait ExtColorWriteEnableExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> ExtColorWriteEnableExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> ExtColorWriteEnableExtensionDeviceCommands for C {}
 
 /// The device-level commands added by [`EXT_CONDITIONAL_RENDERING_EXTENSION`].
 pub trait ExtConditionalRenderingExtensionDeviceCommands: DeviceV1_0 {
@@ -1114,7 +1117,7 @@ pub trait ExtConditionalRenderingExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> ExtConditionalRenderingExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> ExtConditionalRenderingExtensionDeviceCommands for C {}
 
 /// The device-level commands added by [`EXT_DEBUG_MARKER_EXTENSION`].
 pub trait ExtDebugMarkerExtensionDeviceCommands: DeviceV1_0 {
@@ -1175,7 +1178,7 @@ pub trait ExtDebugMarkerExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> ExtDebugMarkerExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> ExtDebugMarkerExtensionDeviceCommands for C {}
 
 /// The instance-level commands added by [`EXT_DEBUG_REPORT_EXTENSION`].
 pub trait ExtDebugReportExtensionInstanceCommands: InstanceV1_0 {
@@ -1242,7 +1245,7 @@ pub trait ExtDebugReportExtensionInstanceCommands: InstanceV1_0 {
 }
 
 #[allow(deprecated)]
-impl<C: InstanceV1_0> ExtDebugReportExtensionInstanceCommands for C {}
+impl<C: InstanceV1_0 + ?Sized> ExtDebugReportExtensionInstanceCommands for C {}
 
 /// The instance-level commands added by [`EXT_DEBUG_UTILS_EXTENSION`].
 pub trait ExtDebugUtilsExtensionInstanceCommands: InstanceV1_0 {
@@ -1386,7 +1389,7 @@ pub trait ExtDebugUtilsExtensionInstanceCommands: InstanceV1_0 {
     }
 }
 
-impl<C: InstanceV1_0> ExtDebugUtilsExtensionInstanceCommands for C {}
+impl<C: InstanceV1_0 + ?Sized> ExtDebugUtilsExtensionInstanceCommands for C {}
 
 /// The device-level commands added by [`EXT_DEPTH_BIAS_CONTROL_EXTENSION`].
 pub trait ExtDepthBiasControlExtensionDeviceCommands: DeviceV1_0 {
@@ -1401,7 +1404,7 @@ pub trait ExtDepthBiasControlExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> ExtDepthBiasControlExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> ExtDepthBiasControlExtensionDeviceCommands for C {}
 
 /// The device-level commands added by [`EXT_DEPTH_CLAMP_CONTROL_EXTENSION`].
 pub trait ExtDepthClampControlExtensionDeviceCommands: DeviceV1_0 {
@@ -1421,7 +1424,7 @@ pub trait ExtDepthClampControlExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> ExtDepthClampControlExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> ExtDepthClampControlExtensionDeviceCommands for C {}
 
 /// The device-level commands added by [`EXT_DESCRIPTOR_BUFFER_EXTENSION`].
 pub trait ExtDescriptorBufferExtensionDeviceCommands: DeviceV1_0 {
@@ -1640,7 +1643,7 @@ pub trait ExtDescriptorBufferExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> ExtDescriptorBufferExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> ExtDescriptorBufferExtensionDeviceCommands for C {}
 
 /// The device-level commands added by [`EXT_DEVICE_FAULT_EXTENSION`].
 pub trait ExtDeviceFaultExtensionDeviceCommands: DeviceV1_0 {
@@ -1665,7 +1668,7 @@ pub trait ExtDeviceFaultExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> ExtDeviceFaultExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> ExtDeviceFaultExtensionDeviceCommands for C {}
 
 /// The device-level commands added by [`EXT_DEVICE_GENERATED_COMMANDS_EXTENSION`].
 pub trait ExtDeviceGeneratedCommandsExtensionDeviceCommands: DeviceV1_0 {
@@ -1820,7 +1823,7 @@ pub trait ExtDeviceGeneratedCommandsExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> ExtDeviceGeneratedCommandsExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> ExtDeviceGeneratedCommandsExtensionDeviceCommands for C {}
 
 /// The instance-level commands added by [`EXT_DIRECT_MODE_DISPLAY_EXTENSION`].
 pub trait ExtDirectModeDisplayExtensionInstanceCommands: InstanceV1_0 {
@@ -1841,7 +1844,7 @@ pub trait ExtDirectModeDisplayExtensionInstanceCommands: InstanceV1_0 {
     }
 }
 
-impl<C: InstanceV1_0> ExtDirectModeDisplayExtensionInstanceCommands for C {}
+impl<C: InstanceV1_0 + ?Sized> ExtDirectModeDisplayExtensionInstanceCommands for C {}
 
 /// The instance-level commands added by [`EXT_DIRECTFB_SURFACE_EXTENSION`].
 pub trait ExtDirectfbSurfaceExtensionInstanceCommands: InstanceV1_0 {
@@ -1888,7 +1891,7 @@ pub trait ExtDirectfbSurfaceExtensionInstanceCommands: InstanceV1_0 {
     }
 }
 
-impl<C: InstanceV1_0> ExtDirectfbSurfaceExtensionInstanceCommands for C {}
+impl<C: InstanceV1_0 + ?Sized> ExtDirectfbSurfaceExtensionInstanceCommands for C {}
 
 /// The device-level commands added by [`EXT_DISCARD_RECTANGLES_EXTENSION`].
 pub trait ExtDiscardRectanglesExtensionDeviceCommands: DeviceV1_0 {
@@ -1935,7 +1938,7 @@ pub trait ExtDiscardRectanglesExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> ExtDiscardRectanglesExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> ExtDiscardRectanglesExtensionDeviceCommands for C {}
 
 /// The device-level commands added by [`EXT_DISPLAY_CONTROL_EXTENSION`].
 pub trait ExtDisplayControlExtensionDeviceCommands: DeviceV1_0 {
@@ -2028,7 +2031,7 @@ pub trait ExtDisplayControlExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> ExtDisplayControlExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> ExtDisplayControlExtensionDeviceCommands for C {}
 
 /// The instance-level commands added by [`EXT_DISPLAY_SURFACE_COUNTER_EXTENSION`].
 pub trait ExtDisplaySurfaceCounterExtensionInstanceCommands: InstanceV1_0 {
@@ -2056,7 +2059,7 @@ pub trait ExtDisplaySurfaceCounterExtensionInstanceCommands: InstanceV1_0 {
     }
 }
 
-impl<C: InstanceV1_0> ExtDisplaySurfaceCounterExtensionInstanceCommands for C {}
+impl<C: InstanceV1_0 + ?Sized> ExtDisplaySurfaceCounterExtensionInstanceCommands for C {}
 
 /// The device-level commands added by [`EXT_EXTENDED_DYNAMIC_STATE_EXTENSION`].
 pub trait ExtExtendedDynamicStateExtensionDeviceCommands: DeviceV1_0 {
@@ -2222,7 +2225,7 @@ pub trait ExtExtendedDynamicStateExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> ExtExtendedDynamicStateExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> ExtExtendedDynamicStateExtensionDeviceCommands for C {}
 
 /// The device-level commands added by [`EXT_EXTENDED_DYNAMIC_STATE2_EXTENSION`].
 pub trait ExtExtendedDynamicState2ExtensionDeviceCommands: DeviceV1_0 {
@@ -2285,7 +2288,7 @@ pub trait ExtExtendedDynamicState2ExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> ExtExtendedDynamicState2ExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> ExtExtendedDynamicState2ExtensionDeviceCommands for C {}
 
 /// The device-level commands added by [`EXT_EXTENDED_DYNAMIC_STATE3_EXTENSION`].
 pub trait ExtExtendedDynamicState3ExtensionDeviceCommands: DeviceV1_0 {
@@ -2707,7 +2710,7 @@ pub trait ExtExtendedDynamicState3ExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> ExtExtendedDynamicState3ExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> ExtExtendedDynamicState3ExtensionDeviceCommands for C {}
 
 /// The device-level commands added by [`EXT_EXTERNAL_MEMORY_HOST_EXTENSION`].
 pub trait ExtExternalMemoryHostExtensionDeviceCommands: DeviceV1_0 {
@@ -2734,7 +2737,7 @@ pub trait ExtExternalMemoryHostExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> ExtExternalMemoryHostExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> ExtExternalMemoryHostExtensionDeviceCommands for C {}
 
 /// The device-level commands added by [`EXT_EXTERNAL_MEMORY_METAL_EXTENSION`].
 pub trait ExtExternalMemoryMetalExtensionDeviceCommands: DeviceV1_0 {
@@ -2782,7 +2785,7 @@ pub trait ExtExternalMemoryMetalExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> ExtExternalMemoryMetalExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> ExtExternalMemoryMetalExtensionDeviceCommands for C {}
 
 /// The device-level commands added by [`EXT_FRAGMENT_DENSITY_MAP_OFFSET_EXTENSION`].
 pub trait ExtFragmentDensityMapOffsetExtensionDeviceCommands: DeviceV1_0 {
@@ -2800,7 +2803,7 @@ pub trait ExtFragmentDensityMapOffsetExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> ExtFragmentDensityMapOffsetExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> ExtFragmentDensityMapOffsetExtensionDeviceCommands for C {}
 
 /// The device-level commands added by [`EXT_FULL_SCREEN_EXCLUSIVE_EXTENSION`].
 pub trait ExtFullScreenExclusiveExtensionDeviceCommands: DeviceV1_0 {
@@ -2858,7 +2861,7 @@ pub trait ExtFullScreenExclusiveExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> ExtFullScreenExclusiveExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> ExtFullScreenExclusiveExtensionDeviceCommands for C {}
 
 /// The instance-level commands added by [`EXT_FULL_SCREEN_EXCLUSIVE_EXTENSION`].
 pub trait ExtFullScreenExclusiveExtensionInstanceCommands: InstanceV1_0 {
@@ -2902,7 +2905,7 @@ pub trait ExtFullScreenExclusiveExtensionInstanceCommands: InstanceV1_0 {
     }
 }
 
-impl<C: InstanceV1_0> ExtFullScreenExclusiveExtensionInstanceCommands for C {}
+impl<C: InstanceV1_0 + ?Sized> ExtFullScreenExclusiveExtensionInstanceCommands for C {}
 
 /// The device-level commands added by [`EXT_HDR_METADATA_EXTENSION`].
 pub trait ExtHdrMetadataExtensionDeviceCommands: DeviceV1_0 {
@@ -2922,7 +2925,7 @@ pub trait ExtHdrMetadataExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> ExtHdrMetadataExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> ExtHdrMetadataExtensionDeviceCommands for C {}
 
 /// The instance-level commands added by [`EXT_HEADLESS_SURFACE_EXTENSION`].
 pub trait ExtHeadlessSurfaceExtensionInstanceCommands: InstanceV1_0 {
@@ -2950,7 +2953,7 @@ pub trait ExtHeadlessSurfaceExtensionInstanceCommands: InstanceV1_0 {
     }
 }
 
-impl<C: InstanceV1_0> ExtHeadlessSurfaceExtensionInstanceCommands for C {}
+impl<C: InstanceV1_0 + ?Sized> ExtHeadlessSurfaceExtensionInstanceCommands for C {}
 
 /// The device-level commands added by [`EXT_HOST_IMAGE_COPY_EXTENSION`].
 pub trait ExtHostImageCopyExtensionDeviceCommands: DeviceV1_0 {
@@ -3038,7 +3041,7 @@ pub trait ExtHostImageCopyExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> ExtHostImageCopyExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> ExtHostImageCopyExtensionDeviceCommands for C {}
 
 /// The device-level commands added by [`EXT_HOST_QUERY_RESET_EXTENSION`].
 pub trait ExtHostQueryResetExtensionDeviceCommands: DeviceV1_0 {
@@ -3059,7 +3062,7 @@ pub trait ExtHostQueryResetExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> ExtHostQueryResetExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> ExtHostQueryResetExtensionDeviceCommands for C {}
 
 /// The device-level commands added by [`EXT_IMAGE_COMPRESSION_CONTROL_EXTENSION`].
 pub trait ExtImageCompressionControlExtensionDeviceCommands: DeviceV1_0 {
@@ -3080,7 +3083,7 @@ pub trait ExtImageCompressionControlExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> ExtImageCompressionControlExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> ExtImageCompressionControlExtensionDeviceCommands for C {}
 
 /// The device-level commands added by [`EXT_IMAGE_DRM_FORMAT_MODIFIER_EXTENSION`].
 pub trait ExtImageDrmFormatModifierExtensionDeviceCommands: DeviceV1_0 {
@@ -3105,7 +3108,7 @@ pub trait ExtImageDrmFormatModifierExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> ExtImageDrmFormatModifierExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> ExtImageDrmFormatModifierExtensionDeviceCommands for C {}
 
 /// The device-level commands added by [`EXT_LINE_RASTERIZATION_EXTENSION`].
 pub trait ExtLineRasterizationExtensionDeviceCommands: DeviceV1_0 {
@@ -3125,7 +3128,7 @@ pub trait ExtLineRasterizationExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> ExtLineRasterizationExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> ExtLineRasterizationExtensionDeviceCommands for C {}
 
 /// The device-level commands added by [`EXT_MESH_SHADER_EXTENSION`].
 pub trait ExtMeshShaderExtensionDeviceCommands: DeviceV1_0 {
@@ -3189,7 +3192,7 @@ pub trait ExtMeshShaderExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> ExtMeshShaderExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> ExtMeshShaderExtensionDeviceCommands for C {}
 
 /// The device-level commands added by [`EXT_METAL_OBJECTS_EXTENSION`].
 pub trait ExtMetalObjectsExtensionDeviceCommands: DeviceV1_0 {
@@ -3201,7 +3204,7 @@ pub trait ExtMetalObjectsExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> ExtMetalObjectsExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> ExtMetalObjectsExtensionDeviceCommands for C {}
 
 /// The instance-level commands added by [`EXT_METAL_SURFACE_EXTENSION`].
 pub trait ExtMetalSurfaceExtensionInstanceCommands: InstanceV1_0 {
@@ -3229,7 +3232,7 @@ pub trait ExtMetalSurfaceExtensionInstanceCommands: InstanceV1_0 {
     }
 }
 
-impl<C: InstanceV1_0> ExtMetalSurfaceExtensionInstanceCommands for C {}
+impl<C: InstanceV1_0 + ?Sized> ExtMetalSurfaceExtensionInstanceCommands for C {}
 
 /// The device-level commands added by [`EXT_MULTI_DRAW_EXTENSION`].
 pub trait ExtMultiDrawExtensionDeviceCommands: DeviceV1_0 {
@@ -3276,7 +3279,7 @@ pub trait ExtMultiDrawExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> ExtMultiDrawExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> ExtMultiDrawExtensionDeviceCommands for C {}
 
 /// The device-level commands added by [`EXT_OPACITY_MICROMAP_EXTENSION`].
 pub trait ExtOpacityMicromapExtensionDeviceCommands: DeviceV1_0 {
@@ -3512,7 +3515,7 @@ pub trait ExtOpacityMicromapExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> ExtOpacityMicromapExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> ExtOpacityMicromapExtensionDeviceCommands for C {}
 
 /// The device-level commands added by [`EXT_PAGEABLE_DEVICE_LOCAL_MEMORY_EXTENSION`].
 pub trait ExtPageableDeviceLocalMemoryExtensionDeviceCommands: DeviceV1_0 {
@@ -3524,7 +3527,7 @@ pub trait ExtPageableDeviceLocalMemoryExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> ExtPageableDeviceLocalMemoryExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> ExtPageableDeviceLocalMemoryExtensionDeviceCommands for C {}
 
 /// The device-level commands added by [`EXT_PIPELINE_PROPERTIES_EXTENSION`].
 pub trait ExtPipelinePropertiesExtensionDeviceCommands: DeviceV1_0 {
@@ -3550,7 +3553,7 @@ pub trait ExtPipelinePropertiesExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> ExtPipelinePropertiesExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> ExtPipelinePropertiesExtensionDeviceCommands for C {}
 
 /// The device-level commands added by [`EXT_PRIVATE_DATA_EXTENSION`].
 pub trait ExtPrivateDataExtensionDeviceCommands: DeviceV1_0 {
@@ -3637,7 +3640,7 @@ pub trait ExtPrivateDataExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> ExtPrivateDataExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> ExtPrivateDataExtensionDeviceCommands for C {}
 
 /// The device-level commands added by [`EXT_SAMPLE_LOCATIONS_EXTENSION`].
 pub trait ExtSampleLocationsExtensionDeviceCommands: DeviceV1_0 {
@@ -3653,7 +3656,7 @@ pub trait ExtSampleLocationsExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> ExtSampleLocationsExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> ExtSampleLocationsExtensionDeviceCommands for C {}
 
 /// The instance-level commands added by [`EXT_SAMPLE_LOCATIONS_EXTENSION`].
 pub trait ExtSampleLocationsExtensionInstanceCommands: InstanceV1_0 {
@@ -3675,7 +3678,7 @@ pub trait ExtSampleLocationsExtensionInstanceCommands: InstanceV1_0 {
     }
 }
 
-impl<C: InstanceV1_0> ExtSampleLocationsExtensionInstanceCommands for C {}
+impl<C: InstanceV1_0 + ?Sized> ExtSampleLocationsExtensionInstanceCommands for C {}
 
 /// The device-level commands added by [`EXT_SHADER_MODULE_IDENTIFIER_EXTENSION`].
 pub trait ExtShaderModuleIdentifierExtensionDeviceCommands: DeviceV1_0 {
@@ -3708,7 +3711,7 @@ pub trait ExtShaderModuleIdentifierExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> ExtShaderModuleIdentifierExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> ExtShaderModuleIdentifierExtensionDeviceCommands for C {}
 
 /// The device-level commands added by [`EXT_SHADER_OBJECT_EXTENSION`].
 pub trait ExtShaderObjectExtensionDeviceCommands: DeviceV1_0 {
@@ -4468,7 +4471,7 @@ pub trait ExtShaderObjectExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> ExtShaderObjectExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> ExtShaderObjectExtensionDeviceCommands for C {}
 
 /// The device-level commands added by [`EXT_SWAPCHAIN_MAINTENANCE1_EXTENSION`].
 pub trait ExtSwapchainMaintenance1ExtensionDeviceCommands: DeviceV1_0 {
@@ -4488,7 +4491,7 @@ pub trait ExtSwapchainMaintenance1ExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> ExtSwapchainMaintenance1ExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> ExtSwapchainMaintenance1ExtensionDeviceCommands for C {}
 
 /// The instance-level commands added by [`EXT_TOOLING_INFO_EXTENSION`].
 pub trait ExtToolingInfoExtensionInstanceCommands: InstanceV1_0 {
@@ -4525,7 +4528,7 @@ pub trait ExtToolingInfoExtensionInstanceCommands: InstanceV1_0 {
     }
 }
 
-impl<C: InstanceV1_0> ExtToolingInfoExtensionInstanceCommands for C {}
+impl<C: InstanceV1_0 + ?Sized> ExtToolingInfoExtensionInstanceCommands for C {}
 
 /// The device-level commands added by [`EXT_TRANSFORM_FEEDBACK_EXTENSION`].
 pub trait ExtTransformFeedbackExtensionDeviceCommands: DeviceV1_0 {
@@ -4641,7 +4644,7 @@ pub trait ExtTransformFeedbackExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> ExtTransformFeedbackExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> ExtTransformFeedbackExtensionDeviceCommands for C {}
 
 /// The device-level commands added by [`EXT_VALIDATION_CACHE_EXTENSION`].
 pub trait ExtValidationCacheExtensionDeviceCommands: DeviceV1_0 {
@@ -4738,7 +4741,7 @@ pub trait ExtValidationCacheExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> ExtValidationCacheExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> ExtValidationCacheExtensionDeviceCommands for C {}
 
 /// The device-level commands added by [`EXT_VERTEX_INPUT_DYNAMIC_STATE_EXTENSION`].
 pub trait ExtVertexInputDynamicStateExtensionDeviceCommands: DeviceV1_0 {
@@ -4760,7 +4763,7 @@ pub trait ExtVertexInputDynamicStateExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> ExtVertexInputDynamicStateExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> ExtVertexInputDynamicStateExtensionDeviceCommands for C {}
 
 /// The device-level commands added by [`FUCHSIA_BUFFER_COLLECTION_EXTENSION`].
 pub trait FuchsiaBufferCollectionExtensionDeviceCommands: DeviceV1_0 {
@@ -4866,7 +4869,7 @@ pub trait FuchsiaBufferCollectionExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> FuchsiaBufferCollectionExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> FuchsiaBufferCollectionExtensionDeviceCommands for C {}
 
 /// The device-level commands added by [`FUCHSIA_EXTERNAL_MEMORY_EXTENSION`].
 pub trait FuchsiaExternalMemoryExtensionDeviceCommands: DeviceV1_0 {
@@ -4914,7 +4917,7 @@ pub trait FuchsiaExternalMemoryExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> FuchsiaExternalMemoryExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> FuchsiaExternalMemoryExtensionDeviceCommands for C {}
 
 /// The device-level commands added by [`FUCHSIA_EXTERNAL_SEMAPHORE_EXTENSION`].
 pub trait FuchsiaExternalSemaphoreExtensionDeviceCommands: DeviceV1_0 {
@@ -4958,7 +4961,7 @@ pub trait FuchsiaExternalSemaphoreExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> FuchsiaExternalSemaphoreExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> FuchsiaExternalSemaphoreExtensionDeviceCommands for C {}
 
 /// The instance-level commands added by [`FUCHSIA_IMAGEPIPE_SURFACE_EXTENSION`].
 pub trait FuchsiaImagepipeSurfaceExtensionInstanceCommands: InstanceV1_0 {
@@ -4986,7 +4989,7 @@ pub trait FuchsiaImagepipeSurfaceExtensionInstanceCommands: InstanceV1_0 {
     }
 }
 
-impl<C: InstanceV1_0> FuchsiaImagepipeSurfaceExtensionInstanceCommands for C {}
+impl<C: InstanceV1_0 + ?Sized> FuchsiaImagepipeSurfaceExtensionInstanceCommands for C {}
 
 /// The instance-level commands added by [`GGP_STREAM_DESCRIPTOR_SURFACE_EXTENSION`].
 pub trait GgpStreamDescriptorSurfaceExtensionInstanceCommands: InstanceV1_0 {
@@ -5014,7 +5017,7 @@ pub trait GgpStreamDescriptorSurfaceExtensionInstanceCommands: InstanceV1_0 {
     }
 }
 
-impl<C: InstanceV1_0> GgpStreamDescriptorSurfaceExtensionInstanceCommands for C {}
+impl<C: InstanceV1_0 + ?Sized> GgpStreamDescriptorSurfaceExtensionInstanceCommands for C {}
 
 /// The device-level commands added by [`GOOGLE_DISPLAY_TIMING_EXTENSION`].
 pub trait GoogleDisplayTimingExtensionDeviceCommands: DeviceV1_0 {
@@ -5074,7 +5077,7 @@ pub trait GoogleDisplayTimingExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> GoogleDisplayTimingExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> GoogleDisplayTimingExtensionDeviceCommands for C {}
 
 /// The device-level commands added by [`HUAWEI_CLUSTER_CULLING_SHADER_EXTENSION`].
 pub trait HuaweiClusterCullingShaderExtensionDeviceCommands: DeviceV1_0 {
@@ -5108,7 +5111,7 @@ pub trait HuaweiClusterCullingShaderExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> HuaweiClusterCullingShaderExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> HuaweiClusterCullingShaderExtensionDeviceCommands for C {}
 
 /// The device-level commands added by [`HUAWEI_INVOCATION_MASK_EXTENSION`].
 pub trait HuaweiInvocationMaskExtensionDeviceCommands: DeviceV1_0 {
@@ -5128,7 +5131,7 @@ pub trait HuaweiInvocationMaskExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> HuaweiInvocationMaskExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> HuaweiInvocationMaskExtensionDeviceCommands for C {}
 
 /// The device-level commands added by [`HUAWEI_SUBPASS_SHADING_EXTENSION`].
 pub trait HuaweiSubpassShadingExtensionDeviceCommands: DeviceV1_0 {
@@ -5162,7 +5165,7 @@ pub trait HuaweiSubpassShadingExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> HuaweiSubpassShadingExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> HuaweiSubpassShadingExtensionDeviceCommands for C {}
 
 /// The device-level commands added by [`INTEL_PERFORMANCE_QUERY_EXTENSION`].
 pub trait IntelPerformanceQueryExtensionDeviceCommands: DeviceV1_0 {
@@ -5315,7 +5318,7 @@ pub trait IntelPerformanceQueryExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> IntelPerformanceQueryExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> IntelPerformanceQueryExtensionDeviceCommands for C {}
 
 /// The device-level commands added by [`KHR_ACCELERATION_STRUCTURE_EXTENSION`].
 pub trait KhrAccelerationStructureExtensionDeviceCommands: DeviceV1_0 {
@@ -5613,7 +5616,7 @@ pub trait KhrAccelerationStructureExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> KhrAccelerationStructureExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> KhrAccelerationStructureExtensionDeviceCommands for C {}
 
 /// The instance-level commands added by [`KHR_ANDROID_SURFACE_EXTENSION`].
 pub trait KhrAndroidSurfaceExtensionInstanceCommands: InstanceV1_0 {
@@ -5641,7 +5644,7 @@ pub trait KhrAndroidSurfaceExtensionInstanceCommands: InstanceV1_0 {
     }
 }
 
-impl<C: InstanceV1_0> KhrAndroidSurfaceExtensionInstanceCommands for C {}
+impl<C: InstanceV1_0 + ?Sized> KhrAndroidSurfaceExtensionInstanceCommands for C {}
 
 /// The device-level commands added by [`KHR_BIND_MEMORY2_EXTENSION`].
 pub trait KhrBindMemory2ExtensionDeviceCommands: DeviceV1_0 {
@@ -5684,7 +5687,7 @@ pub trait KhrBindMemory2ExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> KhrBindMemory2ExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> KhrBindMemory2ExtensionDeviceCommands for C {}
 
 /// The device-level commands added by [`KHR_BUFFER_DEVICE_ADDRESS_EXTENSION`].
 pub trait KhrBufferDeviceAddressExtensionDeviceCommands: DeviceV1_0 {
@@ -5720,7 +5723,7 @@ pub trait KhrBufferDeviceAddressExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> KhrBufferDeviceAddressExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> KhrBufferDeviceAddressExtensionDeviceCommands for C {}
 
 /// The device-level commands added by [`KHR_CALIBRATED_TIMESTAMPS_EXTENSION`].
 pub trait KhrCalibratedTimestampsExtensionDeviceCommands: DeviceV1_0 {
@@ -5752,7 +5755,7 @@ pub trait KhrCalibratedTimestampsExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> KhrCalibratedTimestampsExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> KhrCalibratedTimestampsExtensionDeviceCommands for C {}
 
 /// The instance-level commands added by [`KHR_CALIBRATED_TIMESTAMPS_EXTENSION`].
 pub trait KhrCalibratedTimestampsExtensionInstanceCommands: InstanceV1_0 {
@@ -5793,7 +5796,7 @@ pub trait KhrCalibratedTimestampsExtensionInstanceCommands: InstanceV1_0 {
     }
 }
 
-impl<C: InstanceV1_0> KhrCalibratedTimestampsExtensionInstanceCommands for C {}
+impl<C: InstanceV1_0 + ?Sized> KhrCalibratedTimestampsExtensionInstanceCommands for C {}
 
 /// The instance-level commands added by [`KHR_COOPERATIVE_MATRIX_EXTENSION`].
 pub trait KhrCooperativeMatrixExtensionInstanceCommands: InstanceV1_0 {
@@ -5834,7 +5837,7 @@ pub trait KhrCooperativeMatrixExtensionInstanceCommands: InstanceV1_0 {
     }
 }
 
-impl<C: InstanceV1_0> KhrCooperativeMatrixExtensionInstanceCommands for C {}
+impl<C: InstanceV1_0 + ?Sized> KhrCooperativeMatrixExtensionInstanceCommands for C {}
 
 /// The device-level commands added by [`KHR_COPY_COMMANDS2_EXTENSION`].
 pub trait KhrCopyCommands2ExtensionDeviceCommands: DeviceV1_0 {
@@ -5905,7 +5908,7 @@ pub trait KhrCopyCommands2ExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> KhrCopyCommands2ExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> KhrCopyCommands2ExtensionDeviceCommands for C {}
 
 /// The device-level commands added by [`KHR_COPY_MEMORY_INDIRECT_EXTENSION`].
 pub trait KhrCopyMemoryIndirectExtensionDeviceCommands: DeviceV1_0 {
@@ -5936,7 +5939,7 @@ pub trait KhrCopyMemoryIndirectExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> KhrCopyMemoryIndirectExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> KhrCopyMemoryIndirectExtensionDeviceCommands for C {}
 
 /// The device-level commands added by [`KHR_CREATE_RENDERPASS2_EXTENSION`].
 pub trait KhrCreateRenderpass2ExtensionDeviceCommands: DeviceV1_0 {
@@ -6004,7 +6007,7 @@ pub trait KhrCreateRenderpass2ExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> KhrCreateRenderpass2ExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> KhrCreateRenderpass2ExtensionDeviceCommands for C {}
 
 /// The device-level commands added by [`KHR_DEFERRED_HOST_OPERATIONS_EXTENSION`].
 pub trait KhrDeferredHostOperationsExtensionDeviceCommands: DeviceV1_0 {
@@ -6087,7 +6090,7 @@ pub trait KhrDeferredHostOperationsExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> KhrDeferredHostOperationsExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> KhrDeferredHostOperationsExtensionDeviceCommands for C {}
 
 /// The device-level commands added by [`KHR_DESCRIPTOR_UPDATE_TEMPLATE_EXTENSION`].
 pub trait KhrDescriptorUpdateTemplateExtensionDeviceCommands: DeviceV1_0 {
@@ -6164,7 +6167,7 @@ pub trait KhrDescriptorUpdateTemplateExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> KhrDescriptorUpdateTemplateExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> KhrDescriptorUpdateTemplateExtensionDeviceCommands for C {}
 
 /// The device-level commands added by [`KHR_DEVICE_GROUP_EXTENSION`].
 pub trait KhrDeviceGroupExtensionDeviceCommands: DeviceV1_0 {
@@ -6279,7 +6282,7 @@ pub trait KhrDeviceGroupExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> KhrDeviceGroupExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> KhrDeviceGroupExtensionDeviceCommands for C {}
 
 /// The instance-level commands added by [`KHR_DEVICE_GROUP_EXTENSION`].
 pub trait KhrDeviceGroupExtensionInstanceCommands: InstanceV1_0 {
@@ -6319,7 +6322,7 @@ pub trait KhrDeviceGroupExtensionInstanceCommands: InstanceV1_0 {
     }
 }
 
-impl<C: InstanceV1_0> KhrDeviceGroupExtensionInstanceCommands for C {}
+impl<C: InstanceV1_0 + ?Sized> KhrDeviceGroupExtensionInstanceCommands for C {}
 
 /// The instance-level commands added by [`KHR_DEVICE_GROUP_CREATION_EXTENSION`].
 pub trait KhrDeviceGroupCreationExtensionInstanceCommands: InstanceV1_0 {
@@ -6358,7 +6361,7 @@ pub trait KhrDeviceGroupCreationExtensionInstanceCommands: InstanceV1_0 {
     }
 }
 
-impl<C: InstanceV1_0> KhrDeviceGroupCreationExtensionInstanceCommands for C {}
+impl<C: InstanceV1_0 + ?Sized> KhrDeviceGroupCreationExtensionInstanceCommands for C {}
 
 /// The instance-level commands added by [`KHR_DISPLAY_EXTENSION`].
 pub trait KhrDisplayExtensionInstanceCommands: InstanceV1_0 {
@@ -6574,7 +6577,7 @@ pub trait KhrDisplayExtensionInstanceCommands: InstanceV1_0 {
     }
 }
 
-impl<C: InstanceV1_0> KhrDisplayExtensionInstanceCommands for C {}
+impl<C: InstanceV1_0 + ?Sized> KhrDisplayExtensionInstanceCommands for C {}
 
 /// The device-level commands added by [`KHR_DISPLAY_SWAPCHAIN_EXTENSION`].
 pub trait KhrDisplaySwapchainExtensionDeviceCommands: DeviceV1_0 {
@@ -6605,7 +6608,7 @@ pub trait KhrDisplaySwapchainExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> KhrDisplaySwapchainExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> KhrDisplaySwapchainExtensionDeviceCommands for C {}
 
 /// The device-level commands added by [`KHR_DRAW_INDIRECT_COUNT_EXTENSION`].
 pub trait KhrDrawIndirectCountExtensionDeviceCommands: DeviceV1_0 {
@@ -6656,7 +6659,7 @@ pub trait KhrDrawIndirectCountExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> KhrDrawIndirectCountExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> KhrDrawIndirectCountExtensionDeviceCommands for C {}
 
 /// The device-level commands added by [`KHR_DYNAMIC_RENDERING_EXTENSION`].
 pub trait KhrDynamicRenderingExtensionDeviceCommands: DeviceV1_0 {
@@ -6677,7 +6680,7 @@ pub trait KhrDynamicRenderingExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> KhrDynamicRenderingExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> KhrDynamicRenderingExtensionDeviceCommands for C {}
 
 /// The device-level commands added by [`KHR_DYNAMIC_RENDERING_LOCAL_READ_EXTENSION`].
 pub trait KhrDynamicRenderingLocalReadExtensionDeviceCommands: DeviceV1_0 {
@@ -6710,7 +6713,7 @@ pub trait KhrDynamicRenderingLocalReadExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> KhrDynamicRenderingLocalReadExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> KhrDynamicRenderingLocalReadExtensionDeviceCommands for C {}
 
 /// The instance-level commands added by [`KHR_EXTERNAL_FENCE_CAPABILITIES_EXTENSION`].
 pub trait KhrExternalFenceCapabilitiesExtensionInstanceCommands: InstanceV1_0 {
@@ -6732,7 +6735,7 @@ pub trait KhrExternalFenceCapabilitiesExtensionInstanceCommands: InstanceV1_0 {
     }
 }
 
-impl<C: InstanceV1_0> KhrExternalFenceCapabilitiesExtensionInstanceCommands for C {}
+impl<C: InstanceV1_0 + ?Sized> KhrExternalFenceCapabilitiesExtensionInstanceCommands for C {}
 
 /// The device-level commands added by [`KHR_EXTERNAL_FENCE_FD_EXTENSION`].
 pub trait KhrExternalFenceFdExtensionDeviceCommands: DeviceV1_0 {
@@ -6767,7 +6770,7 @@ pub trait KhrExternalFenceFdExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> KhrExternalFenceFdExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> KhrExternalFenceFdExtensionDeviceCommands for C {}
 
 /// The device-level commands added by [`KHR_EXTERNAL_FENCE_WIN32_EXTENSION`].
 pub trait KhrExternalFenceWin32ExtensionDeviceCommands: DeviceV1_0 {
@@ -6811,7 +6814,7 @@ pub trait KhrExternalFenceWin32ExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> KhrExternalFenceWin32ExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> KhrExternalFenceWin32ExtensionDeviceCommands for C {}
 
 /// The instance-level commands added by [`KHR_EXTERNAL_MEMORY_CAPABILITIES_EXTENSION`].
 pub trait KhrExternalMemoryCapabilitiesExtensionInstanceCommands: InstanceV1_0 {
@@ -6833,7 +6836,7 @@ pub trait KhrExternalMemoryCapabilitiesExtensionInstanceCommands: InstanceV1_0 {
     }
 }
 
-impl<C: InstanceV1_0> KhrExternalMemoryCapabilitiesExtensionInstanceCommands for C {}
+impl<C: InstanceV1_0 + ?Sized> KhrExternalMemoryCapabilitiesExtensionInstanceCommands for C {}
 
 /// The device-level commands added by [`KHR_EXTERNAL_MEMORY_FD_EXTENSION`].
 pub trait KhrExternalMemoryFdExtensionDeviceCommands: DeviceV1_0 {
@@ -6875,7 +6878,7 @@ pub trait KhrExternalMemoryFdExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> KhrExternalMemoryFdExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> KhrExternalMemoryFdExtensionDeviceCommands for C {}
 
 /// The device-level commands added by [`KHR_EXTERNAL_MEMORY_WIN32_EXTENSION`].
 pub trait KhrExternalMemoryWin32ExtensionDeviceCommands: DeviceV1_0 {
@@ -6923,7 +6926,7 @@ pub trait KhrExternalMemoryWin32ExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> KhrExternalMemoryWin32ExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> KhrExternalMemoryWin32ExtensionDeviceCommands for C {}
 
 /// The instance-level commands added by [`KHR_EXTERNAL_SEMAPHORE_CAPABILITIES_EXTENSION`].
 pub trait KhrExternalSemaphoreCapabilitiesExtensionInstanceCommands: InstanceV1_0 {
@@ -6945,7 +6948,7 @@ pub trait KhrExternalSemaphoreCapabilitiesExtensionInstanceCommands: InstanceV1_
     }
 }
 
-impl<C: InstanceV1_0> KhrExternalSemaphoreCapabilitiesExtensionInstanceCommands for C {}
+impl<C: InstanceV1_0 + ?Sized> KhrExternalSemaphoreCapabilitiesExtensionInstanceCommands for C {}
 
 /// The device-level commands added by [`KHR_EXTERNAL_SEMAPHORE_FD_EXTENSION`].
 pub trait KhrExternalSemaphoreFdExtensionDeviceCommands: DeviceV1_0 {
@@ -6984,7 +6987,7 @@ pub trait KhrExternalSemaphoreFdExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> KhrExternalSemaphoreFdExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> KhrExternalSemaphoreFdExtensionDeviceCommands for C {}
 
 /// The device-level commands added by [`KHR_EXTERNAL_SEMAPHORE_WIN32_EXTENSION`].
 pub trait KhrExternalSemaphoreWin32ExtensionDeviceCommands: DeviceV1_0 {
@@ -7028,7 +7031,7 @@ pub trait KhrExternalSemaphoreWin32ExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> KhrExternalSemaphoreWin32ExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> KhrExternalSemaphoreWin32ExtensionDeviceCommands for C {}
 
 /// The device-level commands added by [`KHR_FRAGMENT_SHADING_RATE_EXTENSION`].
 pub trait KhrFragmentShadingRateExtensionDeviceCommands: DeviceV1_0 {
@@ -7048,7 +7051,7 @@ pub trait KhrFragmentShadingRateExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> KhrFragmentShadingRateExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> KhrFragmentShadingRateExtensionDeviceCommands for C {}
 
 /// The instance-level commands added by [`KHR_FRAGMENT_SHADING_RATE_EXTENSION`].
 pub trait KhrFragmentShadingRateExtensionInstanceCommands: InstanceV1_0 {
@@ -7089,7 +7092,7 @@ pub trait KhrFragmentShadingRateExtensionInstanceCommands: InstanceV1_0 {
     }
 }
 
-impl<C: InstanceV1_0> KhrFragmentShadingRateExtensionInstanceCommands for C {}
+impl<C: InstanceV1_0 + ?Sized> KhrFragmentShadingRateExtensionInstanceCommands for C {}
 
 /// The instance-level commands added by [`KHR_GET_DISPLAY_PROPERTIES2_EXTENSION`].
 pub trait KhrGetDisplayProperties2ExtensionInstanceCommands: InstanceV1_0 {
@@ -7218,7 +7221,7 @@ pub trait KhrGetDisplayProperties2ExtensionInstanceCommands: InstanceV1_0 {
     }
 }
 
-impl<C: InstanceV1_0> KhrGetDisplayProperties2ExtensionInstanceCommands for C {}
+impl<C: InstanceV1_0 + ?Sized> KhrGetDisplayProperties2ExtensionInstanceCommands for C {}
 
 /// The device-level commands added by [`KHR_GET_MEMORY_REQUIREMENTS2_EXTENSION`].
 pub trait KhrGetMemoryRequirements2ExtensionDeviceCommands: DeviceV1_0 {
@@ -7284,7 +7287,7 @@ pub trait KhrGetMemoryRequirements2ExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> KhrGetMemoryRequirements2ExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> KhrGetMemoryRequirements2ExtensionDeviceCommands for C {}
 
 /// The instance-level commands added by [`KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION`].
 pub trait KhrGetPhysicalDeviceProperties2ExtensionInstanceCommands: InstanceV1_0 {
@@ -7429,7 +7432,7 @@ pub trait KhrGetPhysicalDeviceProperties2ExtensionInstanceCommands: InstanceV1_0
     }
 }
 
-impl<C: InstanceV1_0> KhrGetPhysicalDeviceProperties2ExtensionInstanceCommands for C {}
+impl<C: InstanceV1_0 + ?Sized> KhrGetPhysicalDeviceProperties2ExtensionInstanceCommands for C {}
 
 /// The instance-level commands added by [`KHR_GET_SURFACE_CAPABILITIES2_EXTENSION`].
 pub trait KhrGetSurfaceCapabilities2ExtensionInstanceCommands: InstanceV1_0 {
@@ -7492,7 +7495,7 @@ pub trait KhrGetSurfaceCapabilities2ExtensionInstanceCommands: InstanceV1_0 {
     }
 }
 
-impl<C: InstanceV1_0> KhrGetSurfaceCapabilities2ExtensionInstanceCommands for C {}
+impl<C: InstanceV1_0 + ?Sized> KhrGetSurfaceCapabilities2ExtensionInstanceCommands for C {}
 
 /// The device-level commands added by [`KHR_LINE_RASTERIZATION_EXTENSION`].
 pub trait KhrLineRasterizationExtensionDeviceCommands: DeviceV1_0 {
@@ -7512,7 +7515,7 @@ pub trait KhrLineRasterizationExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> KhrLineRasterizationExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> KhrLineRasterizationExtensionDeviceCommands for C {}
 
 /// The device-level commands added by [`KHR_MAINTENANCE1_EXTENSION`].
 pub trait KhrMaintenance1ExtensionDeviceCommands: DeviceV1_0 {
@@ -7523,7 +7526,7 @@ pub trait KhrMaintenance1ExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> KhrMaintenance1ExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> KhrMaintenance1ExtensionDeviceCommands for C {}
 
 /// The device-level commands added by [`KHR_MAINTENANCE3_EXTENSION`].
 pub trait KhrMaintenance3ExtensionDeviceCommands: DeviceV1_0 {
@@ -7542,7 +7545,7 @@ pub trait KhrMaintenance3ExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> KhrMaintenance3ExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> KhrMaintenance3ExtensionDeviceCommands for C {}
 
 /// The device-level commands added by [`KHR_MAINTENANCE4_EXTENSION`].
 pub trait KhrMaintenance4ExtensionDeviceCommands: DeviceV1_0 {
@@ -7612,7 +7615,7 @@ pub trait KhrMaintenance4ExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> KhrMaintenance4ExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> KhrMaintenance4ExtensionDeviceCommands for C {}
 
 /// The device-level commands added by [`KHR_MAINTENANCE5_EXTENSION`].
 pub trait KhrMaintenance5ExtensionDeviceCommands: DeviceV1_0 {
@@ -7680,7 +7683,7 @@ pub trait KhrMaintenance5ExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> KhrMaintenance5ExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> KhrMaintenance5ExtensionDeviceCommands for C {}
 
 /// The device-level commands added by [`KHR_MAINTENANCE6_EXTENSION`].
 pub trait KhrMaintenance6ExtensionDeviceCommands: DeviceV1_0 {
@@ -7763,7 +7766,7 @@ pub trait KhrMaintenance6ExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> KhrMaintenance6ExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> KhrMaintenance6ExtensionDeviceCommands for C {}
 
 /// The device-level commands added by [`KHR_MAP_MEMORY2_EXTENSION`].
 pub trait KhrMapMemory2ExtensionDeviceCommands: DeviceV1_0 {
@@ -7798,7 +7801,7 @@ pub trait KhrMapMemory2ExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> KhrMapMemory2ExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> KhrMapMemory2ExtensionDeviceCommands for C {}
 
 /// The device-level commands added by [`KHR_OBJECT_REFRESH_EXTENSION`].
 pub trait KhrObjectRefreshExtensionDeviceCommands: DeviceV1_0 {
@@ -7813,7 +7816,7 @@ pub trait KhrObjectRefreshExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> KhrObjectRefreshExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> KhrObjectRefreshExtensionDeviceCommands for C {}
 
 /// The instance-level commands added by [`KHR_OBJECT_REFRESH_EXTENSION`].
 pub trait KhrObjectRefreshExtensionInstanceCommands: InstanceV1_0 {
@@ -7857,7 +7860,7 @@ pub trait KhrObjectRefreshExtensionInstanceCommands: InstanceV1_0 {
     }
 }
 
-impl<C: InstanceV1_0> KhrObjectRefreshExtensionInstanceCommands for C {}
+impl<C: InstanceV1_0 + ?Sized> KhrObjectRefreshExtensionInstanceCommands for C {}
 
 /// The device-level commands added by [`KHR_PERFORMANCE_QUERY_EXTENSION`].
 pub trait KhrPerformanceQueryExtensionDeviceCommands: DeviceV1_0 {
@@ -7883,7 +7886,7 @@ pub trait KhrPerformanceQueryExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> KhrPerformanceQueryExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> KhrPerformanceQueryExtensionDeviceCommands for C {}
 
 /// The instance-level commands added by [`KHR_PERFORMANCE_QUERY_EXTENSION`].
 pub trait KhrPerformanceQueryExtensionInstanceCommands: InstanceV1_0 {
@@ -7955,7 +7958,7 @@ pub trait KhrPerformanceQueryExtensionInstanceCommands: InstanceV1_0 {
     }
 }
 
-impl<C: InstanceV1_0> KhrPerformanceQueryExtensionInstanceCommands for C {}
+impl<C: InstanceV1_0 + ?Sized> KhrPerformanceQueryExtensionInstanceCommands for C {}
 
 /// The device-level commands added by [`KHR_PIPELINE_BINARY_EXTENSION`].
 pub trait KhrPipelineBinaryExtensionDeviceCommands: DeviceV1_0 {
@@ -8073,7 +8076,7 @@ pub trait KhrPipelineBinaryExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> KhrPipelineBinaryExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> KhrPipelineBinaryExtensionDeviceCommands for C {}
 
 /// The device-level commands added by [`KHR_PIPELINE_EXECUTABLE_PROPERTIES_EXTENSION`].
 pub trait KhrPipelineExecutablePropertiesExtensionDeviceCommands: DeviceV1_0 {
@@ -8187,7 +8190,7 @@ pub trait KhrPipelineExecutablePropertiesExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> KhrPipelineExecutablePropertiesExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> KhrPipelineExecutablePropertiesExtensionDeviceCommands for C {}
 
 /// The device-level commands added by [`KHR_PRESENT_WAIT_EXTENSION`].
 pub trait KhrPresentWaitExtensionDeviceCommands: DeviceV1_0 {
@@ -8210,7 +8213,7 @@ pub trait KhrPresentWaitExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> KhrPresentWaitExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> KhrPresentWaitExtensionDeviceCommands for C {}
 
 /// The device-level commands added by [`KHR_PRESENT_WAIT2_EXTENSION`].
 pub trait KhrPresentWait2ExtensionDeviceCommands: DeviceV1_0 {
@@ -8232,7 +8235,7 @@ pub trait KhrPresentWait2ExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> KhrPresentWait2ExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> KhrPresentWait2ExtensionDeviceCommands for C {}
 
 /// The device-level commands added by [`KHR_PUSH_DESCRIPTOR_EXTENSION`].
 pub trait KhrPushDescriptorExtensionDeviceCommands: DeviceV1_0 {
@@ -8276,7 +8279,7 @@ pub trait KhrPushDescriptorExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> KhrPushDescriptorExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> KhrPushDescriptorExtensionDeviceCommands for C {}
 
 /// The device-level commands added by [`KHR_RAY_TRACING_MAINTENANCE1_EXTENSION`].
 pub trait KhrRayTracingMaintenance1ExtensionDeviceCommands: DeviceV1_0 {
@@ -8292,7 +8295,7 @@ pub trait KhrRayTracingMaintenance1ExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> KhrRayTracingMaintenance1ExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> KhrRayTracingMaintenance1ExtensionDeviceCommands for C {}
 
 /// The device-level commands added by [`KHR_RAY_TRACING_PIPELINE_EXTENSION`].
 pub trait KhrRayTracingPipelineExtensionDeviceCommands: DeviceV1_0 {
@@ -8456,7 +8459,7 @@ pub trait KhrRayTracingPipelineExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> KhrRayTracingPipelineExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> KhrRayTracingPipelineExtensionDeviceCommands for C {}
 
 /// The device-level commands added by [`KHR_SAMPLER_YCBCR_CONVERSION_EXTENSION`].
 pub trait KhrSamplerYcbcrConversionExtensionDeviceCommands: DeviceV1_0 {
@@ -8498,7 +8501,7 @@ pub trait KhrSamplerYcbcrConversionExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> KhrSamplerYcbcrConversionExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> KhrSamplerYcbcrConversionExtensionDeviceCommands for C {}
 
 /// The device-level commands added by [`KHR_SHARED_PRESENTABLE_IMAGE_EXTENSION`].
 pub trait KhrSharedPresentableImageExtensionDeviceCommands: DeviceV1_0 {
@@ -8518,7 +8521,7 @@ pub trait KhrSharedPresentableImageExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> KhrSharedPresentableImageExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> KhrSharedPresentableImageExtensionDeviceCommands for C {}
 
 /// The instance-level commands added by [`KHR_SURFACE_EXTENSION`].
 pub trait KhrSurfaceExtensionInstanceCommands: InstanceV1_0 {
@@ -8657,7 +8660,7 @@ pub trait KhrSurfaceExtensionInstanceCommands: InstanceV1_0 {
     }
 }
 
-impl<C: InstanceV1_0> KhrSurfaceExtensionInstanceCommands for C {}
+impl<C: InstanceV1_0 + ?Sized> KhrSurfaceExtensionInstanceCommands for C {}
 
 /// The device-level commands added by [`KHR_SWAPCHAIN_EXTENSION`].
 pub trait KhrSwapchainExtensionDeviceCommands: DeviceV1_0 {
@@ -8836,7 +8839,7 @@ pub trait KhrSwapchainExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> KhrSwapchainExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> KhrSwapchainExtensionDeviceCommands for C {}
 
 /// The instance-level commands added by [`KHR_SWAPCHAIN_EXTENSION`].
 pub trait KhrSwapchainExtensionInstanceCommands: InstanceV1_0 {
@@ -8876,7 +8879,7 @@ pub trait KhrSwapchainExtensionInstanceCommands: InstanceV1_0 {
     }
 }
 
-impl<C: InstanceV1_0> KhrSwapchainExtensionInstanceCommands for C {}
+impl<C: InstanceV1_0 + ?Sized> KhrSwapchainExtensionInstanceCommands for C {}
 
 /// The device-level commands added by [`KHR_SWAPCHAIN_MAINTENANCE1_EXTENSION`].
 pub trait KhrSwapchainMaintenance1ExtensionDeviceCommands: DeviceV1_0 {
@@ -8896,7 +8899,7 @@ pub trait KhrSwapchainMaintenance1ExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> KhrSwapchainMaintenance1ExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> KhrSwapchainMaintenance1ExtensionDeviceCommands for C {}
 
 /// The device-level commands added by [`KHR_SYNCHRONIZATION2_EXTENSION`].
 pub trait KhrSynchronization2ExtensionDeviceCommands: DeviceV1_0 {
@@ -8984,7 +8987,7 @@ pub trait KhrSynchronization2ExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> KhrSynchronization2ExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> KhrSynchronization2ExtensionDeviceCommands for C {}
 
 /// The device-level commands added by [`KHR_TIMELINE_SEMAPHORE_EXTENSION`].
 pub trait KhrTimelineSemaphoreExtensionDeviceCommands: DeviceV1_0 {
@@ -9038,7 +9041,7 @@ pub trait KhrTimelineSemaphoreExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> KhrTimelineSemaphoreExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> KhrTimelineSemaphoreExtensionDeviceCommands for C {}
 
 /// The device-level commands added by [`KHR_VIDEO_DECODE_QUEUE_EXTENSION`].
 pub trait KhrVideoDecodeQueueExtensionDeviceCommands: DeviceV1_0 {
@@ -9053,7 +9056,7 @@ pub trait KhrVideoDecodeQueueExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> KhrVideoDecodeQueueExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> KhrVideoDecodeQueueExtensionDeviceCommands for C {}
 
 /// The device-level commands added by [`KHR_VIDEO_ENCODE_QUEUE_EXTENSION`].
 pub trait KhrVideoEncodeQueueExtensionDeviceCommands: DeviceV1_0 {
@@ -9105,7 +9108,7 @@ pub trait KhrVideoEncodeQueueExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> KhrVideoEncodeQueueExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> KhrVideoEncodeQueueExtensionDeviceCommands for C {}
 
 /// The instance-level commands added by [`KHR_VIDEO_ENCODE_QUEUE_EXTENSION`].
 pub trait KhrVideoEncodeQueueExtensionInstanceCommands: InstanceV1_0 {
@@ -9133,7 +9136,7 @@ pub trait KhrVideoEncodeQueueExtensionInstanceCommands: InstanceV1_0 {
     }
 }
 
-impl<C: InstanceV1_0> KhrVideoEncodeQueueExtensionInstanceCommands for C {}
+impl<C: InstanceV1_0 + ?Sized> KhrVideoEncodeQueueExtensionInstanceCommands for C {}
 
 /// The device-level commands added by [`KHR_VIDEO_QUEUE_EXTENSION`].
 pub trait KhrVideoQueueExtensionDeviceCommands: DeviceV1_0 {
@@ -9318,7 +9321,7 @@ pub trait KhrVideoQueueExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> KhrVideoQueueExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> KhrVideoQueueExtensionDeviceCommands for C {}
 
 /// The instance-level commands added by [`KHR_VIDEO_QUEUE_EXTENSION`].
 pub trait KhrVideoQueueExtensionInstanceCommands: InstanceV1_0 {
@@ -9383,7 +9386,7 @@ pub trait KhrVideoQueueExtensionInstanceCommands: InstanceV1_0 {
     }
 }
 
-impl<C: InstanceV1_0> KhrVideoQueueExtensionInstanceCommands for C {}
+impl<C: InstanceV1_0 + ?Sized> KhrVideoQueueExtensionInstanceCommands for C {}
 
 /// The instance-level commands added by [`KHR_WAYLAND_SURFACE_EXTENSION`].
 pub trait KhrWaylandSurfaceExtensionInstanceCommands: InstanceV1_0 {
@@ -9430,7 +9433,7 @@ pub trait KhrWaylandSurfaceExtensionInstanceCommands: InstanceV1_0 {
     }
 }
 
-impl<C: InstanceV1_0> KhrWaylandSurfaceExtensionInstanceCommands for C {}
+impl<C: InstanceV1_0 + ?Sized> KhrWaylandSurfaceExtensionInstanceCommands for C {}
 
 /// The instance-level commands added by [`KHR_WIN32_SURFACE_EXTENSION`].
 pub trait KhrWin32SurfaceExtensionInstanceCommands: InstanceV1_0 {
@@ -9475,7 +9478,7 @@ pub trait KhrWin32SurfaceExtensionInstanceCommands: InstanceV1_0 {
     }
 }
 
-impl<C: InstanceV1_0> KhrWin32SurfaceExtensionInstanceCommands for C {}
+impl<C: InstanceV1_0 + ?Sized> KhrWin32SurfaceExtensionInstanceCommands for C {}
 
 /// The instance-level commands added by [`KHR_XCB_SURFACE_EXTENSION`].
 pub trait KhrXcbSurfaceExtensionInstanceCommands: InstanceV1_0 {
@@ -9524,7 +9527,7 @@ pub trait KhrXcbSurfaceExtensionInstanceCommands: InstanceV1_0 {
     }
 }
 
-impl<C: InstanceV1_0> KhrXcbSurfaceExtensionInstanceCommands for C {}
+impl<C: InstanceV1_0 + ?Sized> KhrXcbSurfaceExtensionInstanceCommands for C {}
 
 /// The instance-level commands added by [`KHR_XLIB_SURFACE_EXTENSION`].
 pub trait KhrXlibSurfaceExtensionInstanceCommands: InstanceV1_0 {
@@ -9574,7 +9577,7 @@ pub trait KhrXlibSurfaceExtensionInstanceCommands: InstanceV1_0 {
     }
 }
 
-impl<C: InstanceV1_0> KhrXlibSurfaceExtensionInstanceCommands for C {}
+impl<C: InstanceV1_0 + ?Sized> KhrXlibSurfaceExtensionInstanceCommands for C {}
 
 /// The instance-level commands added by [`MVK_IOS_SURFACE_EXTENSION`].
 pub trait MvkIosSurfaceExtensionInstanceCommands: InstanceV1_0 {
@@ -9603,7 +9606,7 @@ pub trait MvkIosSurfaceExtensionInstanceCommands: InstanceV1_0 {
 }
 
 #[allow(deprecated)]
-impl<C: InstanceV1_0> MvkIosSurfaceExtensionInstanceCommands for C {}
+impl<C: InstanceV1_0 + ?Sized> MvkIosSurfaceExtensionInstanceCommands for C {}
 
 /// The instance-level commands added by [`MVK_MACOS_SURFACE_EXTENSION`].
 pub trait MvkMacosSurfaceExtensionInstanceCommands: InstanceV1_0 {
@@ -9632,7 +9635,7 @@ pub trait MvkMacosSurfaceExtensionInstanceCommands: InstanceV1_0 {
 }
 
 #[allow(deprecated)]
-impl<C: InstanceV1_0> MvkMacosSurfaceExtensionInstanceCommands for C {}
+impl<C: InstanceV1_0 + ?Sized> MvkMacosSurfaceExtensionInstanceCommands for C {}
 
 /// The instance-level commands added by [`NN_VI_SURFACE_EXTENSION`].
 pub trait NnViSurfaceExtensionInstanceCommands: InstanceV1_0 {
@@ -9660,7 +9663,7 @@ pub trait NnViSurfaceExtensionInstanceCommands: InstanceV1_0 {
     }
 }
 
-impl<C: InstanceV1_0> NnViSurfaceExtensionInstanceCommands for C {}
+impl<C: InstanceV1_0 + ?Sized> NnViSurfaceExtensionInstanceCommands for C {}
 
 /// The device-level commands added by [`NVX_BINARY_IMPORT_EXTENSION`].
 pub trait NvxBinaryImportExtensionDeviceCommands: DeviceV1_0 {
@@ -9749,7 +9752,7 @@ pub trait NvxBinaryImportExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> NvxBinaryImportExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> NvxBinaryImportExtensionDeviceCommands for C {}
 
 /// The device-level commands added by [`NVX_IMAGE_VIEW_HANDLE_EXTENSION`].
 pub trait NvxImageViewHandleExtensionDeviceCommands: DeviceV1_0 {
@@ -9787,7 +9790,7 @@ pub trait NvxImageViewHandleExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> NvxImageViewHandleExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> NvxImageViewHandleExtensionDeviceCommands for C {}
 
 /// The instance-level commands added by [`NV_ACQUIRE_WINRT_DISPLAY_EXTENSION`].
 pub trait NvAcquireWinrtDisplayExtensionInstanceCommands: InstanceV1_0 {
@@ -9830,7 +9833,7 @@ pub trait NvAcquireWinrtDisplayExtensionInstanceCommands: InstanceV1_0 {
     }
 }
 
-impl<C: InstanceV1_0> NvAcquireWinrtDisplayExtensionInstanceCommands for C {}
+impl<C: InstanceV1_0 + ?Sized> NvAcquireWinrtDisplayExtensionInstanceCommands for C {}
 
 /// The device-level commands added by [`NV_CLIP_SPACE_W_SCALING_EXTENSION`].
 pub trait NvClipSpaceWScalingExtensionDeviceCommands: DeviceV1_0 {
@@ -9851,7 +9854,7 @@ pub trait NvClipSpaceWScalingExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> NvClipSpaceWScalingExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> NvClipSpaceWScalingExtensionDeviceCommands for C {}
 
 /// The device-level commands added by [`NV_CLUSTER_ACCELERATION_STRUCTURE_EXTENSION`].
 pub trait NvClusterAccelerationStructureExtensionDeviceCommands: DeviceV1_0 {
@@ -9884,7 +9887,7 @@ pub trait NvClusterAccelerationStructureExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> NvClusterAccelerationStructureExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> NvClusterAccelerationStructureExtensionDeviceCommands for C {}
 
 /// The instance-level commands added by [`NV_COOPERATIVE_MATRIX_EXTENSION`].
 pub trait NvCooperativeMatrixExtensionInstanceCommands: InstanceV1_0 {
@@ -9925,7 +9928,7 @@ pub trait NvCooperativeMatrixExtensionInstanceCommands: InstanceV1_0 {
     }
 }
 
-impl<C: InstanceV1_0> NvCooperativeMatrixExtensionInstanceCommands for C {}
+impl<C: InstanceV1_0 + ?Sized> NvCooperativeMatrixExtensionInstanceCommands for C {}
 
 /// The instance-level commands added by [`NV_COOPERATIVE_MATRIX2_EXTENSION`].
 pub trait NvCooperativeMatrix2ExtensionInstanceCommands: InstanceV1_0 {
@@ -9966,7 +9969,7 @@ pub trait NvCooperativeMatrix2ExtensionInstanceCommands: InstanceV1_0 {
     }
 }
 
-impl<C: InstanceV1_0> NvCooperativeMatrix2ExtensionInstanceCommands for C {}
+impl<C: InstanceV1_0 + ?Sized> NvCooperativeMatrix2ExtensionInstanceCommands for C {}
 
 /// The device-level commands added by [`NV_COOPERATIVE_VECTOR_EXTENSION`].
 pub trait NvCooperativeVectorExtensionDeviceCommands: DeviceV1_0 {
@@ -10000,7 +10003,7 @@ pub trait NvCooperativeVectorExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> NvCooperativeVectorExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> NvCooperativeVectorExtensionDeviceCommands for C {}
 
 /// The instance-level commands added by [`NV_COOPERATIVE_VECTOR_EXTENSION`].
 pub trait NvCooperativeVectorExtensionInstanceCommands: InstanceV1_0 {
@@ -10041,7 +10044,7 @@ pub trait NvCooperativeVectorExtensionInstanceCommands: InstanceV1_0 {
     }
 }
 
-impl<C: InstanceV1_0> NvCooperativeVectorExtensionInstanceCommands for C {}
+impl<C: InstanceV1_0 + ?Sized> NvCooperativeVectorExtensionInstanceCommands for C {}
 
 /// The device-level commands added by [`NV_COPY_MEMORY_INDIRECT_EXTENSION`].
 pub trait NvCopyMemoryIndirectExtensionDeviceCommands: DeviceV1_0 {
@@ -10086,7 +10089,7 @@ pub trait NvCopyMemoryIndirectExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> NvCopyMemoryIndirectExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> NvCopyMemoryIndirectExtensionDeviceCommands for C {}
 
 /// The instance-level commands added by [`NV_COVERAGE_REDUCTION_MODE_EXTENSION`].
 pub trait NvCoverageReductionModeExtensionInstanceCommands: InstanceV1_0 {
@@ -10127,7 +10130,7 @@ pub trait NvCoverageReductionModeExtensionInstanceCommands: InstanceV1_0 {
     }
 }
 
-impl<C: InstanceV1_0> NvCoverageReductionModeExtensionInstanceCommands for C {}
+impl<C: InstanceV1_0 + ?Sized> NvCoverageReductionModeExtensionInstanceCommands for C {}
 
 /// The device-level commands added by [`NV_CUDA_KERNEL_LAUNCH_EXTENSION`].
 pub trait NvCudaKernelLaunchExtensionDeviceCommands: DeviceV1_0 {
@@ -10248,7 +10251,7 @@ pub trait NvCudaKernelLaunchExtensionDeviceCommands: DeviceV1_0 {
 }
 
 #[cfg(feature = "provisional")]
-impl<C: DeviceV1_0> NvCudaKernelLaunchExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> NvCudaKernelLaunchExtensionDeviceCommands for C {}
 
 /// The device-level commands added by [`NV_DEVICE_DIAGNOSTIC_CHECKPOINTS_EXTENSION`].
 pub trait NvDeviceDiagnosticCheckpointsExtensionDeviceCommands: DeviceV1_0 {
@@ -10313,7 +10316,7 @@ pub trait NvDeviceDiagnosticCheckpointsExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> NvDeviceDiagnosticCheckpointsExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> NvDeviceDiagnosticCheckpointsExtensionDeviceCommands for C {}
 
 /// The device-level commands added by [`NV_DEVICE_GENERATED_COMMANDS_EXTENSION`].
 pub trait NvDeviceGeneratedCommandsExtensionDeviceCommands: DeviceV1_0 {
@@ -10416,7 +10419,7 @@ pub trait NvDeviceGeneratedCommandsExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> NvDeviceGeneratedCommandsExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> NvDeviceGeneratedCommandsExtensionDeviceCommands for C {}
 
 /// The device-level commands added by [`NV_DEVICE_GENERATED_COMMANDS_COMPUTE_EXTENSION`].
 pub trait NvDeviceGeneratedCommandsComputeExtensionDeviceCommands: DeviceV1_0 {
@@ -10462,7 +10465,7 @@ pub trait NvDeviceGeneratedCommandsComputeExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> NvDeviceGeneratedCommandsComputeExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> NvDeviceGeneratedCommandsComputeExtensionDeviceCommands for C {}
 
 /// The device-level commands added by [`NV_EXTERNAL_COMPUTE_QUEUE_EXTENSION`].
 pub trait NvExternalComputeQueueExtensionDeviceCommands: DeviceV1_0 {
@@ -10522,7 +10525,7 @@ pub trait NvExternalComputeQueueExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> NvExternalComputeQueueExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> NvExternalComputeQueueExtensionDeviceCommands for C {}
 
 /// The instance-level commands added by [`NV_EXTERNAL_MEMORY_CAPABILITIES_EXTENSION`].
 pub trait NvExternalMemoryCapabilitiesExtensionInstanceCommands: InstanceV1_0 {
@@ -10563,7 +10566,7 @@ pub trait NvExternalMemoryCapabilitiesExtensionInstanceCommands: InstanceV1_0 {
 }
 
 #[allow(deprecated)]
-impl<C: InstanceV1_0> NvExternalMemoryCapabilitiesExtensionInstanceCommands for C {}
+impl<C: InstanceV1_0 + ?Sized> NvExternalMemoryCapabilitiesExtensionInstanceCommands for C {}
 
 /// The device-level commands added by [`NV_EXTERNAL_MEMORY_RDMA_EXTENSION`].
 pub trait NvExternalMemoryRdmaExtensionDeviceCommands: DeviceV1_0 {
@@ -10589,7 +10592,7 @@ pub trait NvExternalMemoryRdmaExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> NvExternalMemoryRdmaExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> NvExternalMemoryRdmaExtensionDeviceCommands for C {}
 
 /// The device-level commands added by [`NV_EXTERNAL_MEMORY_SCI_BUF_EXTENSION`].
 pub trait NvExternalMemorySciBufExtensionDeviceCommands: DeviceV1_0 {
@@ -10615,7 +10618,7 @@ pub trait NvExternalMemorySciBufExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> NvExternalMemorySciBufExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> NvExternalMemorySciBufExtensionDeviceCommands for C {}
 
 /// The instance-level commands added by [`NV_EXTERNAL_MEMORY_SCI_BUF_EXTENSION`].
 pub trait NvExternalMemorySciBufExtensionInstanceCommands: InstanceV1_0 {
@@ -10664,7 +10667,7 @@ pub trait NvExternalMemorySciBufExtensionInstanceCommands: InstanceV1_0 {
     }
 }
 
-impl<C: InstanceV1_0> NvExternalMemorySciBufExtensionInstanceCommands for C {}
+impl<C: InstanceV1_0 + ?Sized> NvExternalMemorySciBufExtensionInstanceCommands for C {}
 
 /// The device-level commands added by [`NV_EXTERNAL_MEMORY_WIN32_EXTENSION`].
 pub trait NvExternalMemoryWin32ExtensionDeviceCommands: DeviceV1_0 {
@@ -10693,7 +10696,7 @@ pub trait NvExternalMemoryWin32ExtensionDeviceCommands: DeviceV1_0 {
 }
 
 #[allow(deprecated)]
-impl<C: DeviceV1_0> NvExternalMemoryWin32ExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> NvExternalMemoryWin32ExtensionDeviceCommands for C {}
 
 /// The device-level commands added by [`NV_EXTERNAL_SCI_SYNC_EXTENSION`].
 pub trait NvExternalSciSyncExtensionDeviceCommands: DeviceV1_0 {
@@ -10816,7 +10819,7 @@ pub trait NvExternalSciSyncExtensionDeviceCommands: DeviceV1_0 {
 }
 
 #[allow(deprecated)]
-impl<C: DeviceV1_0> NvExternalSciSyncExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> NvExternalSciSyncExtensionDeviceCommands for C {}
 
 /// The instance-level commands added by [`NV_EXTERNAL_SCI_SYNC_EXTENSION`].
 pub trait NvExternalSciSyncExtensionInstanceCommands: InstanceV1_0 {
@@ -10843,7 +10846,7 @@ pub trait NvExternalSciSyncExtensionInstanceCommands: InstanceV1_0 {
 }
 
 #[allow(deprecated)]
-impl<C: InstanceV1_0> NvExternalSciSyncExtensionInstanceCommands for C {}
+impl<C: InstanceV1_0 + ?Sized> NvExternalSciSyncExtensionInstanceCommands for C {}
 
 /// The device-level commands added by [`NV_EXTERNAL_SCI_SYNC2_EXTENSION`].
 pub trait NvExternalSciSync2ExtensionDeviceCommands: DeviceV1_0 {
@@ -10963,7 +10966,7 @@ pub trait NvExternalSciSync2ExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> NvExternalSciSync2ExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> NvExternalSciSync2ExtensionDeviceCommands for C {}
 
 /// The instance-level commands added by [`NV_EXTERNAL_SCI_SYNC2_EXTENSION`].
 pub trait NvExternalSciSync2ExtensionInstanceCommands: InstanceV1_0 {
@@ -10989,7 +10992,7 @@ pub trait NvExternalSciSync2ExtensionInstanceCommands: InstanceV1_0 {
     }
 }
 
-impl<C: InstanceV1_0> NvExternalSciSync2ExtensionInstanceCommands for C {}
+impl<C: InstanceV1_0 + ?Sized> NvExternalSciSync2ExtensionInstanceCommands for C {}
 
 /// The device-level commands added by [`NV_FRAGMENT_SHADING_RATE_ENUMS_EXTENSION`].
 pub trait NvFragmentShadingRateEnumsExtensionDeviceCommands: DeviceV1_0 {
@@ -11009,7 +11012,7 @@ pub trait NvFragmentShadingRateEnumsExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> NvFragmentShadingRateEnumsExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> NvFragmentShadingRateEnumsExtensionDeviceCommands for C {}
 
 /// The device-level commands added by [`NV_LOW_LATENCY2_EXTENSION`].
 pub trait NvLowLatency2ExtensionDeviceCommands: DeviceV1_0 {
@@ -11079,7 +11082,7 @@ pub trait NvLowLatency2ExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> NvLowLatency2ExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> NvLowLatency2ExtensionDeviceCommands for C {}
 
 /// The device-level commands added by [`NV_MEMORY_DECOMPRESSION_EXTENSION`].
 pub trait NvMemoryDecompressionExtensionDeviceCommands: DeviceV1_0 {
@@ -11115,7 +11118,7 @@ pub trait NvMemoryDecompressionExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> NvMemoryDecompressionExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> NvMemoryDecompressionExtensionDeviceCommands for C {}
 
 /// The device-level commands added by [`NV_MESH_SHADER_EXTENSION`].
 pub trait NvMeshShaderExtensionDeviceCommands: DeviceV1_0 {
@@ -11174,7 +11177,7 @@ pub trait NvMeshShaderExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> NvMeshShaderExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> NvMeshShaderExtensionDeviceCommands for C {}
 
 /// The device-level commands added by [`NV_OPTICAL_FLOW_EXTENSION`].
 pub trait NvOpticalFlowExtensionDeviceCommands: DeviceV1_0 {
@@ -11252,7 +11255,7 @@ pub trait NvOpticalFlowExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> NvOpticalFlowExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> NvOpticalFlowExtensionDeviceCommands for C {}
 
 /// The instance-level commands added by [`NV_OPTICAL_FLOW_EXTENSION`].
 pub trait NvOpticalFlowExtensionInstanceCommands: InstanceV1_0 {
@@ -11296,7 +11299,7 @@ pub trait NvOpticalFlowExtensionInstanceCommands: InstanceV1_0 {
     }
 }
 
-impl<C: InstanceV1_0> NvOpticalFlowExtensionInstanceCommands for C {}
+impl<C: InstanceV1_0 + ?Sized> NvOpticalFlowExtensionInstanceCommands for C {}
 
 /// The device-level commands added by [`NV_PARTITIONED_ACCELERATION_STRUCTURE_EXTENSION`].
 pub trait NvPartitionedAccelerationStructureExtensionDeviceCommands: DeviceV1_0 {
@@ -11331,7 +11334,7 @@ pub trait NvPartitionedAccelerationStructureExtensionDeviceCommands: DeviceV1_0 
     }
 }
 
-impl<C: DeviceV1_0> NvPartitionedAccelerationStructureExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> NvPartitionedAccelerationStructureExtensionDeviceCommands for C {}
 
 /// The device-level commands added by [`NV_RAY_TRACING_EXTENSION`].
 pub trait NvRayTracingExtensionDeviceCommands: DeviceV1_0 {
@@ -11599,7 +11602,7 @@ pub trait NvRayTracingExtensionDeviceCommands: DeviceV1_0 {
 }
 
 #[allow(deprecated)]
-impl<C: DeviceV1_0> NvRayTracingExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> NvRayTracingExtensionDeviceCommands for C {}
 
 /// The device-level commands added by [`NV_SCISSOR_EXCLUSIVE_EXTENSION`].
 pub trait NvScissorExclusiveExtensionDeviceCommands: DeviceV1_0 {
@@ -11636,7 +11639,7 @@ pub trait NvScissorExclusiveExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> NvScissorExclusiveExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> NvScissorExclusiveExtensionDeviceCommands for C {}
 
 /// The device-level commands added by [`NV_SHADING_RATE_IMAGE_EXTENSION`].
 pub trait NvShadingRateImageExtensionDeviceCommands: DeviceV1_0 {
@@ -11688,7 +11691,7 @@ pub trait NvShadingRateImageExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> NvShadingRateImageExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> NvShadingRateImageExtensionDeviceCommands for C {}
 
 /// The instance-level commands added by [`OHOS_SURFACE_EXTENSION`].
 pub trait OhosSurfaceExtensionInstanceCommands: InstanceV1_0 {
@@ -11716,7 +11719,7 @@ pub trait OhosSurfaceExtensionInstanceCommands: InstanceV1_0 {
     }
 }
 
-impl<C: InstanceV1_0> OhosSurfaceExtensionInstanceCommands for C {}
+impl<C: InstanceV1_0 + ?Sized> OhosSurfaceExtensionInstanceCommands for C {}
 
 /// The device-level commands added by [`QCOM_TILE_MEMORY_HEAP_EXTENSION`].
 pub trait QcomTileMemoryHeapExtensionDeviceCommands: DeviceV1_0 {
@@ -11734,7 +11737,7 @@ pub trait QcomTileMemoryHeapExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> QcomTileMemoryHeapExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> QcomTileMemoryHeapExtensionDeviceCommands for C {}
 
 /// The device-level commands added by [`QCOM_TILE_PROPERTIES_EXTENSION`].
 pub trait QcomTilePropertiesExtensionDeviceCommands: DeviceV1_0 {
@@ -11793,7 +11796,7 @@ pub trait QcomTilePropertiesExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> QcomTilePropertiesExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> QcomTilePropertiesExtensionDeviceCommands for C {}
 
 /// The device-level commands added by [`QCOM_TILE_SHADING_EXTENSION`].
 pub trait QcomTileShadingExtensionDeviceCommands: DeviceV1_0 {
@@ -11832,7 +11835,7 @@ pub trait QcomTileShadingExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> QcomTileShadingExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> QcomTileShadingExtensionDeviceCommands for C {}
 
 /// The device-level commands added by [`QNX_EXTERNAL_MEMORY_SCREEN_BUFFER_EXTENSION`].
 pub trait QnxExternalMemoryScreenBufferExtensionDeviceCommands: DeviceV1_0 {
@@ -11854,7 +11857,7 @@ pub trait QnxExternalMemoryScreenBufferExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> QnxExternalMemoryScreenBufferExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> QnxExternalMemoryScreenBufferExtensionDeviceCommands for C {}
 
 /// The instance-level commands added by [`QNX_SCREEN_SURFACE_EXTENSION`].
 pub trait QnxScreenSurfaceExtensionInstanceCommands: InstanceV1_0 {
@@ -11901,7 +11904,7 @@ pub trait QnxScreenSurfaceExtensionInstanceCommands: InstanceV1_0 {
     }
 }
 
-impl<C: InstanceV1_0> QnxScreenSurfaceExtensionInstanceCommands for C {}
+impl<C: InstanceV1_0 + ?Sized> QnxScreenSurfaceExtensionInstanceCommands for C {}
 
 /// The device-level commands added by [`VALVE_DESCRIPTOR_SET_HOST_MAPPING_EXTENSION`].
 pub trait ValveDescriptorSetHostMappingExtensionDeviceCommands: DeviceV1_0 {
@@ -11939,4 +11942,4 @@ pub trait ValveDescriptorSetHostMappingExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
-impl<C: DeviceV1_0> ValveDescriptorSetHostMappingExtensionDeviceCommands for C {}
+impl<C: DeviceV1_0 + ?Sized> ValveDescriptorSetHostMappingExtensionDeviceCommands for C {}
