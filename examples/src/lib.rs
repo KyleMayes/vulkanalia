@@ -513,11 +513,13 @@ unsafe fn create_instance(window: &Window, entry: &Entry, data: &mut AppData) ->
         return Err(anyhow!("Validation layers requested but not supported."));
     }
 
-    let layers = if data.validation {
+    let mut layers = if data.validation {
         vec![VALIDATION_LAYER.as_ptr()]
     } else {
         Vec::new()
     };
+
+    layers.push(vk::ExtensionName::from_bytes(b"VK_LAYER_vulkanalia_layer_example").as_ptr());
 
     // Extensions
 
