@@ -1,5 +1,9 @@
 ## [0.31.0] - UNRELEASED
 
+> __This release contains breaking changes!__<br>
+> Most users will only be affected by the changes to the extension traits.<br>
+> Replace usages of the removed extension traits with the new instance-level or device-level command traits like shown in the examples below.
+
 ### Added
 - Added implementation of `vk::EntryV1_0` for `vk::EntryCommands`
 - Added implementation of `vk::InstanceV1_0` for tuples of `vk::InstanceCommands` and `vk::Instance`
