@@ -1,4 +1,4 @@
-## [0.31.0] - UNRELEASED
+## [0.31.0] - 2025-10-09
 
 > __This release contains breaking changes!__<br>
 > Most users will only be affected by the changes to the extension traits.<br>
