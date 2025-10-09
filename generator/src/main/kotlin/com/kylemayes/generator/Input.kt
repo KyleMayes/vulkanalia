@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import mu.KotlinLogging
 import org.apache.commons.codec.digest.DigestUtils
 import org.kohsuke.github.GHCommit
+import org.kohsuke.github.GHContent
 import java.nio.charset.StandardCharsets
 import java.nio.file.Files
 import java.nio.file.Path
@@ -125,14 +126,7 @@ private inline fun <reified T> getCached(
 private fun getFile(
     commit: GHCommit,
     path: RepositoryPath,
-): String {
-    val content = commit.owner.getFileContent(path.path, commit.shA1)
-    return if (content.size <= 1024 * 1024) {
-        content.read().readAllBytes().decodeToString()
-    } else {
-        commit.owner.getBlob(content.sha).read().readAllBytes().decodeToString()
-    }
-}
+): String = commit.owner.getFileContent(path.path, commit.shA1).readToString(commit)
 
 /** Fetches the contents of the files in a directory for a generator input pulled from a GitHub repository. */
 private fun getDirectory(
@@ -142,7 +136,16 @@ private fun getDirectory(
     return commit
         .owner
         .getDirectoryContent(path.path, commit.shA1)
-        .associate { it.name to it.read().readAllBytes().decodeToString() }
+        .associate { it.name to it.readToString(commit) }
+}
+
+/** Fetches the content of a file from a GitHub repository. */
+private fun GHContent.readToString(commit: GHCommit): String {
+    return if (size <= 1024 * 1024) {
+        read().readAllBytes().decodeToString()
+    } else {
+        commit.owner.getBlob(sha).read().readAllBytes().decodeToString()
+    }
 }
 
 // ===============================================
