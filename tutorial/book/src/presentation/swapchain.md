@@ -9,7 +9,8 @@ Vulkan does not have the concept of a "default framebuffer", hence it requires a
 Not all graphics cards are capable of presenting images directly to a screen for various reasons, for example because they are designed for servers and don't have any display outputs. Secondly, since image presentation is heavily tied into the window system and the surfaces associated with windows, it is not actually part of the Vulkan core. You have to enable the `VK_KHR_swapchain` device extension after querying for its support. Also, like before, you need to import the `vulkanalia` extension trait for `VK_KHR_swapchain`:
 
 ```rust,noplaypen
-use vulkanalia::vk::KhrSwapchainExtension;
+// Note: This trait was called `KhrSwapchainExtension` in versions of `vulkanalia` prior to `v0.31.0`.
+use vulkanalia::vk::KhrSwapchainExtensionDeviceCommands;
 ```
 
 Then we'll first extend the `check_physical_device` function to check if this extension is supported. We've previously seen how to list the extensions that are supported by a `vk::PhysicalDevice`, so doing that should be fairly straightforward.

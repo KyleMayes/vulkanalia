@@ -44,10 +44,11 @@ use std::collections::HashSet;
 use std::ffi::CStr;
 use std::os::raw::c_void;
 
-use vulkanalia::vk::ExtDebugUtilsExtension;
+// Note: This trait was called `ExtDebugUtilsExtension` in versions of `vulkanalia` prior to `v0.31.0`.
+use vulkanalia::vk::ExtDebugUtilsExtensionInstanceCommands;
 ```
 
-`HashSet` will be used for storing and querying supported layers and the other imports will be used in the function we will be writing to log messages from the validation layer with the exception of `vk::ExtDebugUtilsExtension` which provides the command wrappers for managing debugging functionality.
+`HashSet` will be used for storing and querying supported layers and the other imports will be used in the function we will be writing to log messages from the validation layer with the exception of `vk::ExtDebugUtilsExtensionInstanceCommands` which provides the command wrappers for managing debugging functionality.
 
 ## Using validation layers
 
