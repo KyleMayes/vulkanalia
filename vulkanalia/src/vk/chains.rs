@@ -12507,6 +12507,27 @@ unsafe impl OutputChainStruct for PhysicalDeviceShaderFloatControls2Features {
     }
 }
 
+unsafe impl InputChainStruct for PhysicalDeviceShaderFmaFeaturesKHR {
+    const TYPE: StructureType = StructureType::PHYSICAL_DEVICE_SHADER_FMA_FEATURES_KHR;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl OutputChainStruct for PhysicalDeviceShaderFmaFeaturesKHR {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
+        self.next
+    }
+}
+
 unsafe impl InputChainStruct for PhysicalDeviceShaderImageAtomicInt64FeaturesEXT {
     const TYPE: StructureType =
         StructureType::PHYSICAL_DEVICE_SHADER_IMAGE_ATOMIC_INT64_FEATURES_EXT;

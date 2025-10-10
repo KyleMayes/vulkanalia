@@ -1,3 +1,16 @@
+## [0.32.0] - UNRELEASED
+
+### Bindings Updates
+- [Merge branch 'main' of github.com:KhronosGroup/Vulkan-Docs into github-main](https://github.com/KhronosGroup/Vulkan-Docs/commit/d38733398a4bec673bd5d24c904d4739a45f020d)
+- [Create Antora spec nav.adoc from vkspec.adoc (#2589)](https://github.com/KhronosGroup/Vulkan-Docs/commit/6299b8ddede3fd8e37baae8255c41d9eec9c834d)
+- [Clean up `VK_QCOM_tile_shading.adoc` proposal (#2590)](https://github.com/KhronosGroup/Vulkan-Docs/commit/ce1eb7c4eb02db9182bed362024418556315bc09)
+- [Fix link typo per #2590.](https://github.com/KhronosGroup/Vulkan-Docs/commit/7fe2b623f13dabb885e35b953dd690f01093d4bb)
+- [Fix formatting in indirect_memory_copy_common.adoc (#2593)](https://github.com/KhronosGroup/Vulkan-Docs/commit/fa8768a1a02615c887ff7d8859671bac76363035)
+- [Fix malformed curved double quotes in `writing.adoc` (#2592)](https://github.com/KhronosGroup/Vulkan-Docs/commit/1992dbb91c95ee373b0fb9d8f792dabe3eb0127d)
+- [Fix some spelling errors (#2591)](https://github.com/KhronosGroup/Vulkan-Docs/commit/540e08ec7ccfd8b1e0574f331765526813966570)
+- [Add step to Github CI to match gitlab CI (#2599)](https://github.com/KhronosGroup/Vulkan-Docs/commit/a6fbb686ebb04b2262ad1b6951eccc1e63ce26ab)
+- [October 10, 2025 Vulkan 1.4.329 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/ac3d0660c45ecf86b2952b298d125270228150d1)
+
 ## [0.31.0] - 2025-10-09
 
 > __This release contains breaking changes!__<br>

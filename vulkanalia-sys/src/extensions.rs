@@ -4650,6 +4650,22 @@ pub const KHR_SHADER_FLOAT_CONTROLS2_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_VERSION_1_4"),
 };
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_shader_fma.html>
+#[allow(deprecated)]
+pub const KHR_SHADER_FMA_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_KHR_shader_fma"),
+    number: 580,
+    type_: "device",
+    author: "KHR",
+    contact: "Graeme Leese @gnl21",
+    platform: None,
+    required_extensions: None,
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_shader_integer_dot_product.html>
 #[allow(deprecated)]
 pub const KHR_SHADER_INTEGER_DOT_PRODUCT_EXTENSION: Extension = Extension {
