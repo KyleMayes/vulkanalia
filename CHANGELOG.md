@@ -1,5 +1,9 @@
 ## [0.32.0] - UNRELEASED
 
+### Added
+- Added `vk::layer::NegotiateLayerStructType` struct
+- Added `vk::layer::NegotiateLayerInterface` struct
+
 ### Bindings Updates
 - [Merge branch 'main' of github.com:KhronosGroup/Vulkan-Docs into github-main](https://github.com/KhronosGroup/Vulkan-Docs/commit/d38733398a4bec673bd5d24c904d4739a45f020d)
 - [Create Antora spec nav.adoc from vkspec.adoc (#2589)](https://github.com/KhronosGroup/Vulkan-Docs/commit/6299b8ddede3fd8e37baae8255c41d9eec9c834d)

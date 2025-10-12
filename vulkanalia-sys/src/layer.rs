@@ -64,6 +64,37 @@ impl fmt::Debug for LayerFunction {
     }
 }
 
+#[repr(transparent)]
+#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+pub struct NegotiateLayerStructType(i32);
+
+impl NegotiateLayerStructType {
+    pub const UNINTIALIZED: Self = Self(0);
+    pub const INTERFACE_STRUCT: Self = Self(1);
+
+    /// Constructs an instance of this enum with the supplied underlying value.
+    #[inline]
+    pub const fn from_raw(value: i32) -> Self {
+        Self(value)
+    }
+
+    /// Gets the underlying value for this enum instance.
+    #[inline]
+    pub const fn as_raw(self) -> i32 {
+        self.0
+    }
+}
+
+impl fmt::Debug for NegotiateLayerStructType {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self.0 {
+            0 => write!(f, "UNINTIALIZED"),
+            1 => write!(f, "INTERFACE_STRUCT"),
+            _ => self.0.fmt(f),
+        }
+    }
+}
+
 //================================================
 // Functions
 //================================================
@@ -170,4 +201,19 @@ pub struct LayerDeviceCreateInfo {
     pub next: *const c_void,
     pub function: LayerFunction,
     pub payload: LayerDeviceCreateInfoPayload,
+}
+
+//================================================
+// Negotiate Layer Interface
+//================================================
+
+#[repr(C)]
+#[derive(Copy, Clone, Debug)]
+pub struct NegotiateLayerInterface {
+    pub s_type: NegotiateLayerStructType,
+    pub next: *const c_void,
+    pub loader_layer_interface_version: u32,
+    pub get_instance_proc_addr: vk::PFN_vkGetInstanceProcAddr,
+    pub get_device_proc_addr: vk::PFN_vkGetDeviceProcAddr,
+    pub get_get_physical_device_proc_addr: PFN_vkGetPhysicalDeviceProcAddr,
 }
