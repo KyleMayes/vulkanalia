@@ -17569,6 +17569,7 @@ unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderExpectAssumeFeatures
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderFloat16Int8Features {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderFloat8FeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderFloatControls2Features {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderFmaFeaturesKHR {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderImageAtomicInt64FeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderImageFootprintFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderIntegerDotProductFeatures {}
@@ -48216,6 +48217,7 @@ unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderExpectAssumeF
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderFloat16Int8Features {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderFloat8FeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderFloatControls2Features {}
+unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderFmaFeaturesKHR {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderImageAtomicInt64FeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderImageFootprintFeaturesNV {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderIntegerDotProductFeatures {}
@@ -62579,6 +62581,76 @@ impl ops::DerefMut for PhysicalDeviceShaderFloatControls2FeaturesBuilder {
 
 unsafe impl Cast for PhysicalDeviceShaderFloatControls2FeaturesBuilder {
     type Target = PhysicalDeviceShaderFloatControls2Features;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceShaderFmaFeaturesKHR {
+    type Target = PhysicalDeviceShaderFmaFeaturesKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceShaderFmaFeaturesKHR {
+    type Builder = PhysicalDeviceShaderFmaFeaturesKHRBuilder;
+}
+
+/// A builder for a [`PhysicalDeviceShaderFmaFeaturesKHR`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceShaderFmaFeaturesKHRBuilder {
+    value: PhysicalDeviceShaderFmaFeaturesKHR,
+}
+
+impl PhysicalDeviceShaderFmaFeaturesKHRBuilder {
+    #[inline]
+    pub fn shader_fma_float16(mut self, shader_fma_float16: bool) -> Self {
+        self.value.shader_fma_float16 = shader_fma_float16 as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn shader_fma_float32(mut self, shader_fma_float32: bool) -> Self {
+        self.value.shader_fma_float32 = shader_fma_float32 as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn shader_fma_float64(mut self, shader_fma_float64: bool) -> Self {
+        self.value.shader_fma_float64 = shader_fma_float64 as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceShaderFmaFeaturesKHR {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceShaderFmaFeaturesKHRBuilder {
+    type Target = PhysicalDeviceShaderFmaFeaturesKHR;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceShaderFmaFeaturesKHRBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceShaderFmaFeaturesKHRBuilder {
+    type Target = PhysicalDeviceShaderFmaFeaturesKHR;
 
     #[inline]
     fn into(self) -> Self::Target {

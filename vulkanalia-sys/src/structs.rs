@@ -20588,6 +20588,33 @@ impl Default for PhysicalDeviceShaderFloatControls2Features {
 unsafe impl Send for PhysicalDeviceShaderFloatControls2Features {}
 unsafe impl Sync for PhysicalDeviceShaderFloatControls2Features {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderFmaFeaturesKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceShaderFmaFeaturesKHR {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub shader_fma_float16: Bool32,
+    pub shader_fma_float32: Bool32,
+    pub shader_fma_float64: Bool32,
+}
+
+impl Default for PhysicalDeviceShaderFmaFeaturesKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_SHADER_FMA_FEATURES_KHR,
+            next: ptr::null_mut(),
+            shader_fma_float16: Bool32::default(),
+            shader_fma_float32: Bool32::default(),
+            shader_fma_float64: Bool32::default(),
+        }
+    }
+}
+
+unsafe impl Send for PhysicalDeviceShaderFmaFeaturesKHR {}
+unsafe impl Sync for PhysicalDeviceShaderFmaFeaturesKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
