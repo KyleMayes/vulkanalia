@@ -3,6 +3,7 @@
 ### Added
 - Added `vk::layer::NegotiateLayerStructType` struct
 - Added `vk::layer::NegotiateLayerInterface` struct
+- Added `vk::DispatchableHandle::dispatch_key` method
 
 ### Bindings Updates
 - [Merge branch 'main' of github.com:KhronosGroup/Vulkan-Docs into github-main](https://github.com/KhronosGroup/Vulkan-Docs/commit/d38733398a4bec673bd5d24c904d4739a45f020d)
