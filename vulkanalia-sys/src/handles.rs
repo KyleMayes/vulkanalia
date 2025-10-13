@@ -20,10 +20,11 @@
     clippy::useless_transmute
 )]
 
+use core::ffi::c_void;
 use core::fmt;
 use core::hash::Hash;
 
-use crate::ObjectType;
+use crate::*;
 
 /// A Vulkan handle type.
 pub trait Handle: Copy + Clone + fmt::Debug + PartialEq + Eq + Hash + Default + Sized {
@@ -49,7 +50,28 @@ pub trait Handle: Copy + Clone + fmt::Debug + PartialEq + Eq + Hash + Default + 
 /// A [`Handle`] with a representation of `usize` (a pointer to an opaque type).
 ///
 /// <https://docs.vulkan.org/spec/latest/chapters/fundamentals.html#fundamentals-objectmodel-overview>
-pub trait DispatchableHandle: Handle<Repr = usize> {}
+pub trait DispatchableHandle: Handle<Repr = usize> {
+    /// Gets the dispatch key for this dispatchable handle.
+    ///
+    /// As described in the
+    /// [driver interface to the Vulkan loader](https://vulkan.lunarg.com/doc/view/latest/linux/LoaderDriverInterface.html#driver-dispatchable-object-creation),
+    /// all dispatchable handles created by Vulkan drivers can be cast to
+    /// `void**` (a.k.a., `*mut *mut c_void`). The Vulkan loader will always
+    /// replace the first entry in this array of pointers with a pointer to the
+    /// dispatch table (created and owned by the loader) for the dispatchable
+    /// handle. This guarantee can be used to extract a key from a dispatchable
+    /// handle that is stable and unique to an [`Instance`] or [`Device`] or the
+    /// [`Instance`] or [`Device`] another type of dispatchable device is
+    /// associated with (e.g., a [`CommandBuffer`] is associated with the
+    /// [`Device`] it was created for).
+    ///
+    /// # Safety
+    ///
+    /// This handle must be a valid Vulkan dispatchable handle.
+    unsafe fn dispatch_key(self) -> usize {
+        *(self.as_raw() as *mut *mut c_void) as usize
+    }
+}
 
 impl<H: Handle<Repr = usize>> DispatchableHandle for H {}
 
