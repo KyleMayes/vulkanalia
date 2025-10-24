@@ -111,8 +111,8 @@ impl ErrorCode {
     pub const VALIDATION_FAILED: Self = Self(-1000011001);
     pub const OUT_OF_POOL_MEMORY: Self = Self(-1000069000);
     pub const INVALID_EXTERNAL_HANDLE: Self = Self(-1000072003);
-    pub const FRAGMENTATION: Self = Self(-1000161000);
     pub const INVALID_OPAQUE_CAPTURE_ADDRESS: Self = Self(-1000257000);
+    pub const FRAGMENTATION: Self = Self(-1000161000);
     pub const NOT_PERMITTED: Self = Self(-1000174001);
     pub const SURFACE_LOST_KHR: Self = Self(-1000000000);
     pub const NATIVE_WINDOW_IN_USE_KHR: Self = Self(-1000000001);
