@@ -106,4 +106,5 @@ pub struct NvSciSyncFence {
 
 // Open Harmony OS
 
+pub type OHBufferHandle = c_void;
 pub type OHNativeWindow = c_void;
