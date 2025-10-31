@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 
-#![allow(clippy::missing_safety_doc)]
+#![allow(unsafe_op_in_unsafe_fn, clippy::missing_safety_doc)]
 
 use std::cell::RefCell;
 use std::collections::HashSet;
@@ -10,14 +10,14 @@ use std::mem::{self, size_of, size_of_val};
 use std::os::raw::c_void;
 use std::ptr::copy_nonoverlapping as memcpy;
 
-use anyhow::{anyhow, Result};
+use anyhow::{Result, anyhow};
 use log::*;
 use thiserror::Error;
+use vulkanalia::Version;
 use vulkanalia::bytecode::Bytecode;
-use vulkanalia::loader::{LibloadingLoader, LIBRARY};
+use vulkanalia::loader::{LIBRARY, LibloadingLoader};
 use vulkanalia::prelude::v1_0::*;
 use vulkanalia::window as vk_window;
-use vulkanalia::Version;
 use winit::dpi::LogicalSize;
 use winit::error::EventLoopError;
 use winit::event::{Event, WindowEvent};
