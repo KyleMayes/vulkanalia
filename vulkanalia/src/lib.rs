@@ -224,6 +224,10 @@ pub struct Entry {
 
 impl Entry {
     /// Loads a Vulkan entry point from previously loaded [`StaticCommands`].
+    ///
+    /// # Safety
+    ///
+    /// `static_commands` must contain valid Vulkan commands.
     #[inline]
     pub unsafe fn from_commands(static_commands: &StaticCommands) -> Self {
         let load = |n| (static_commands.get_instance_proc_addr)(vk::Instance::null(), n);
@@ -317,6 +321,10 @@ pub struct Instance {
 
 impl Instance {
     /// Loads a Vulkan instance from a previously created [`vk::Instance`].
+    ///
+    /// # Safety
+    ///
+    /// `instance` must have been created using `entry` and `info`.
     #[inline]
     pub unsafe fn from_created(
         entry: &Entry,
@@ -403,6 +411,10 @@ pub struct Device {
 
 impl Device {
     /// Loads a Vulkan device from a previously created [`vk::Device`].
+    ///
+    /// # Safety
+    ///
+    /// `device` must have been created using `entry`, `physical_device`, and `info`.
     #[inline]
     pub unsafe fn from_created(
         entry: &Entry,

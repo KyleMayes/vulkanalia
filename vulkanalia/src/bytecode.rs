@@ -51,7 +51,7 @@ pub struct Bytecode(*mut u8, usize);
 impl Bytecode {
     /// Copies a SPIR-V bytecode slice into a new 4-byte aligned SPIR-V bytecode buffer.
     pub fn new(bytecode: &[u8]) -> Result<Self, BytecodeError> {
-        if bytecode.is_empty() || bytecode.len() % 4 != 0 {
+        if bytecode.is_empty() || bytecode.len().is_multiple_of(4) {
             return Err(BytecodeError::Length(bytecode.len()));
         }
 
