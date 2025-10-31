@@ -1,5 +1,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
+#![allow(unsafe_op_in_unsafe_fn)]
+
 use std::mem;
 use std::ptr::copy_nonoverlapping as memcpy;
 

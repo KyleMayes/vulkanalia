@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 
-#![allow(clippy::missing_safety_doc)]
+#![allow(unsafe_op_in_unsafe_fn, clippy::missing_safety_doc)]
 
 use std::cell::RefCell;
 use std::collections::HashSet;
