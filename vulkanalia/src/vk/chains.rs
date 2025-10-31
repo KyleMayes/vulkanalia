@@ -2311,6 +2311,20 @@ unsafe impl InputChainStruct for DebugUtilsObjectTagInfoEXT {
     }
 }
 
+unsafe impl InputChainStruct for DecompressMemoryInfoEXT {
+    const TYPE: StructureType = StructureType::DECOMPRESS_MEMORY_INFO_EXT;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
 unsafe impl InputChainStruct for DedicatedAllocationBufferCreateInfoNV {
     const TYPE: StructureType = StructureType::DEDICATED_ALLOCATION_BUFFER_CREATE_INFO_NV;
 
@@ -3841,6 +3855,27 @@ unsafe impl OutputChainStruct for ExternalFormatANDROID {
     }
 }
 
+unsafe impl InputChainStruct for ExternalFormatOHOS {
+    const TYPE: StructureType = StructureType::EXTERNAL_FORMAT_OHOS;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl OutputChainStruct for ExternalFormatOHOS {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
+        self.next
+    }
+}
+
 unsafe impl InputChainStruct for ExternalFormatQNX {
     const TYPE: StructureType = StructureType::EXTERNAL_FORMAT_QNX;
 
@@ -5248,6 +5283,20 @@ unsafe impl InputChainStruct for ImportMetalTextureInfoEXT {
     }
 }
 
+unsafe impl InputChainStruct for ImportNativeBufferInfoOHOS {
+    const TYPE: StructureType = StructureType::IMPORT_NATIVE_BUFFER_INFO_OHOS;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
 unsafe impl InputChainStruct for ImportScreenBufferInfoQNX {
     const TYPE: StructureType = StructureType::IMPORT_SCREEN_BUFFER_INFO_QNX;
 
@@ -5752,6 +5801,20 @@ unsafe impl InputChainStruct for MemoryGetMetalHandleInfoEXT {
     }
 }
 
+unsafe impl InputChainStruct for MemoryGetNativeBufferInfoOHOS {
+    const TYPE: StructureType = StructureType::MEMORY_GET_NATIVE_BUFFER_INFO_OHOS;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
 unsafe impl InputChainStruct for MemoryGetRemoteAddressInfoNV {
     const TYPE: StructureType = StructureType::MEMORY_GET_REMOTE_ADDRESS_INFO_NV;
 
@@ -6159,6 +6222,83 @@ unsafe impl InputChainStruct for MutableDescriptorTypeCreateInfoEXT {
     }
 }
 
+unsafe impl InputChainStruct for NativeBufferFormatPropertiesOHOS {
+    const TYPE: StructureType = StructureType::NATIVE_BUFFER_FORMAT_PROPERTIES_OHOS;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl OutputChainStruct for NativeBufferFormatPropertiesOHOS {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
+        self.next
+    }
+}
+
+unsafe impl InputChainStruct for NativeBufferOHOS {
+    const TYPE: StructureType = StructureType::NATIVE_BUFFER_OHOS;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl InputChainStruct for NativeBufferPropertiesOHOS {
+    const TYPE: StructureType = StructureType::NATIVE_BUFFER_PROPERTIES_OHOS;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl OutputChainStruct for NativeBufferPropertiesOHOS {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
+        self.next
+    }
+}
+
+unsafe impl InputChainStruct for NativeBufferUsageOHOS {
+    const TYPE: StructureType = StructureType::NATIVE_BUFFER_USAGE_OHOS;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl OutputChainStruct for NativeBufferUsageOHOS {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
+        self.next
+    }
+}
+
 unsafe impl InputChainStruct for OpaqueCaptureDescriptorDataCreateInfoEXT {
     const TYPE: StructureType = StructureType::OPAQUE_CAPTURE_DESCRIPTOR_DATA_CREATE_INFO_EXT;
 
@@ -6359,6 +6499,48 @@ unsafe impl InputChainStruct for PerformanceConfigurationAcquireInfoINTEL {
 
     #[inline]
     fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl InputChainStruct for PerformanceCounterARM {
+    const TYPE: StructureType = StructureType::PERFORMANCE_COUNTER_ARM;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl OutputChainStruct for PerformanceCounterARM {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
+        self.next
+    }
+}
+
+unsafe impl InputChainStruct for PerformanceCounterDescriptionARM {
+    const TYPE: StructureType = StructureType::PERFORMANCE_COUNTER_DESCRIPTION_ARM;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl OutputChainStruct for PerformanceCounterDescriptionARM {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
         self.next
     }
 }
@@ -9882,6 +10064,48 @@ unsafe impl OutputChainStruct for PhysicalDeviceLinearColorAttachmentFeaturesNV 
     }
 }
 
+unsafe impl InputChainStruct for PhysicalDeviceMaintenance10FeaturesKHR {
+    const TYPE: StructureType = StructureType::PHYSICAL_DEVICE_MAINTENANCE_10_FEATURES_KHR;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl OutputChainStruct for PhysicalDeviceMaintenance10FeaturesKHR {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
+        self.next
+    }
+}
+
+unsafe impl InputChainStruct for PhysicalDeviceMaintenance10PropertiesKHR {
+    const TYPE: StructureType = StructureType::PHYSICAL_DEVICE_MAINTENANCE_10_PROPERTIES_KHR;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl OutputChainStruct for PhysicalDeviceMaintenance10PropertiesKHR {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
+        self.next
+    }
+}
+
 unsafe impl InputChainStruct for PhysicalDeviceMaintenance3Properties {
     const TYPE: StructureType = StructureType::PHYSICAL_DEVICE_MAINTENANCE_3_PROPERTIES;
 
@@ -10197,8 +10421,8 @@ unsafe impl OutputChainStruct for PhysicalDeviceMemoryBudgetPropertiesEXT {
     }
 }
 
-unsafe impl InputChainStruct for PhysicalDeviceMemoryDecompressionFeaturesNV {
-    const TYPE: StructureType = StructureType::PHYSICAL_DEVICE_MEMORY_DECOMPRESSION_FEATURES_NV;
+unsafe impl InputChainStruct for PhysicalDeviceMemoryDecompressionFeaturesEXT {
+    const TYPE: StructureType = StructureType::PHYSICAL_DEVICE_MEMORY_DECOMPRESSION_FEATURES_EXT;
 
     #[inline]
     fn s_type(&self) -> StructureType {
@@ -10211,15 +10435,15 @@ unsafe impl InputChainStruct for PhysicalDeviceMemoryDecompressionFeaturesNV {
     }
 }
 
-unsafe impl OutputChainStruct for PhysicalDeviceMemoryDecompressionFeaturesNV {
+unsafe impl OutputChainStruct for PhysicalDeviceMemoryDecompressionFeaturesEXT {
     #[inline]
     fn next_mut(&self) -> *mut c_void {
         self.next
     }
 }
 
-unsafe impl InputChainStruct for PhysicalDeviceMemoryDecompressionPropertiesNV {
-    const TYPE: StructureType = StructureType::PHYSICAL_DEVICE_MEMORY_DECOMPRESSION_PROPERTIES_NV;
+unsafe impl InputChainStruct for PhysicalDeviceMemoryDecompressionPropertiesEXT {
+    const TYPE: StructureType = StructureType::PHYSICAL_DEVICE_MEMORY_DECOMPRESSION_PROPERTIES_EXT;
 
     #[inline]
     fn s_type(&self) -> StructureType {
@@ -10232,7 +10456,7 @@ unsafe impl InputChainStruct for PhysicalDeviceMemoryDecompressionPropertiesNV {
     }
 }
 
-unsafe impl OutputChainStruct for PhysicalDeviceMemoryDecompressionPropertiesNV {
+unsafe impl OutputChainStruct for PhysicalDeviceMemoryDecompressionPropertiesEXT {
     #[inline]
     fn next_mut(&self) -> *mut c_void {
         self.next
@@ -10813,6 +11037,50 @@ unsafe impl OutputChainStruct for PhysicalDevicePerStageDescriptorSetFeaturesNV 
     }
 }
 
+unsafe impl InputChainStruct for PhysicalDevicePerformanceCountersByRegionFeaturesARM {
+    const TYPE: StructureType =
+        StructureType::PHYSICAL_DEVICE_PERFORMANCE_COUNTERS_BY_REGION_FEATURES_ARM;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl OutputChainStruct for PhysicalDevicePerformanceCountersByRegionFeaturesARM {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
+        self.next
+    }
+}
+
+unsafe impl InputChainStruct for PhysicalDevicePerformanceCountersByRegionPropertiesARM {
+    const TYPE: StructureType =
+        StructureType::PHYSICAL_DEVICE_PERFORMANCE_COUNTERS_BY_REGION_PROPERTIES_ARM;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl OutputChainStruct for PhysicalDevicePerformanceCountersByRegionPropertiesARM {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
+        self.next
+    }
+}
+
 unsafe impl InputChainStruct for PhysicalDevicePerformanceQueryFeaturesKHR {
     const TYPE: StructureType = StructureType::PHYSICAL_DEVICE_PERFORMANCE_QUERY_FEATURES_KHR;
 
@@ -11296,6 +11564,27 @@ unsafe impl InputChainStruct for PhysicalDevicePresentWaitFeaturesKHR {
 }
 
 unsafe impl OutputChainStruct for PhysicalDevicePresentWaitFeaturesKHR {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
+        self.next
+    }
+}
+
+unsafe impl InputChainStruct for PhysicalDevicePresentationPropertiesOHOS {
+    const TYPE: StructureType = StructureType::PHYSICAL_DEVICE_PRESENTATION_PROPERTIES_OHOS;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl OutputChainStruct for PhysicalDevicePresentationPropertiesOHOS {
     #[inline]
     fn next_mut(&self) -> *mut c_void {
         self.next
@@ -12078,6 +12367,27 @@ unsafe impl InputChainStruct for PhysicalDeviceSeparateDepthStencilLayoutsFeatur
 }
 
 unsafe impl OutputChainStruct for PhysicalDeviceSeparateDepthStencilLayoutsFeatures {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
+        self.next
+    }
+}
+
+unsafe impl InputChainStruct for PhysicalDeviceShader64BitIndexingFeaturesEXT {
+    const TYPE: StructureType = StructureType::PHYSICAL_DEVICE_SHADER_64_BIT_INDEXING_FEATURES_EXT;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl OutputChainStruct for PhysicalDeviceShader64BitIndexingFeaturesEXT {
     #[inline]
     fn next_mut(&self) -> *mut c_void {
         self.next
@@ -12973,6 +13283,28 @@ unsafe impl InputChainStruct for PhysicalDeviceShaderTileImagePropertiesEXT {
 }
 
 unsafe impl OutputChainStruct for PhysicalDeviceShaderTileImagePropertiesEXT {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
+        self.next
+    }
+}
+
+unsafe impl InputChainStruct for PhysicalDeviceShaderUniformBufferUnsizedArrayFeaturesEXT {
+    const TYPE: StructureType =
+        StructureType::PHYSICAL_DEVICE_SHADER_UNIFORM_BUFFER_UNSIZED_ARRAY_FEATURES_EXT;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl OutputChainStruct for PhysicalDeviceShaderUniformBufferUnsizedArrayFeaturesEXT {
     #[inline]
     fn next_mut(&self) -> *mut c_void {
         self.next
@@ -15820,6 +16152,28 @@ unsafe impl InputChainStruct for RenderPassMultiviewCreateInfo {
     }
 }
 
+unsafe impl InputChainStruct for RenderPassPerformanceCountersByRegionBeginInfoARM {
+    const TYPE: StructureType =
+        StructureType::RENDER_PASS_PERFORMANCE_COUNTERS_BY_REGION_BEGIN_INFO_ARM;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl OutputChainStruct for RenderPassPerformanceCountersByRegionBeginInfoARM {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
+        self.next
+    }
+}
+
 unsafe impl InputChainStruct for RenderPassSampleLocationsBeginInfoEXT {
     const TYPE: StructureType = StructureType::RENDER_PASS_SAMPLE_LOCATIONS_BEGIN_INFO_EXT;
 
@@ -15932,6 +16286,20 @@ unsafe impl InputChainStruct for RenderingAreaInfo {
     }
 }
 
+unsafe impl InputChainStruct for RenderingAttachmentFlagsInfoKHR {
+    const TYPE: StructureType = StructureType::RENDERING_ATTACHMENT_FLAGS_INFO_KHR;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
 unsafe impl InputChainStruct for RenderingAttachmentInfo {
     const TYPE: StructureType = StructureType::RENDERING_ATTACHMENT_INFO;
 
@@ -15960,8 +16328,8 @@ unsafe impl InputChainStruct for RenderingAttachmentLocationInfo {
     }
 }
 
-unsafe impl InputChainStruct for RenderingEndInfoEXT {
-    const TYPE: StructureType = StructureType::RENDERING_END_INFO_EXT;
+unsafe impl InputChainStruct for RenderingEndInfoKHR {
+    const TYPE: StructureType = StructureType::RENDERING_END_INFO_KHR;
 
     #[inline]
     fn s_type(&self) -> StructureType {
@@ -16032,6 +16400,20 @@ unsafe impl InputChainStruct for RenderingInputAttachmentIndexInfo {
 
 unsafe impl InputChainStruct for ResolveImageInfo2 {
     const TYPE: StructureType = StructureType::RESOLVE_IMAGE_INFO_2;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl InputChainStruct for ResolveImageModeInfoKHR {
+    const TYPE: StructureType = StructureType::RESOLVE_IMAGE_MODE_INFO_KHR;
 
     #[inline]
     fn s_type(&self) -> StructureType {
@@ -17119,6 +17501,20 @@ unsafe impl InputChainStruct for SwapchainCreateInfoKHR {
 
 unsafe impl InputChainStruct for SwapchainDisplayNativeHdrCreateInfoAMD {
     const TYPE: StructureType = StructureType::SWAPCHAIN_DISPLAY_NATIVE_HDR_CREATE_INFO_AMD;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl InputChainStruct for SwapchainImageCreateInfoOHOS {
+    const TYPE: StructureType = StructureType::SWAPCHAIN_IMAGE_CREATE_INFO_OHOS;
 
     #[inline]
     fn s_type(&self) -> StructureType {

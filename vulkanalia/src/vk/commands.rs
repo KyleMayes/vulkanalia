@@ -29,6 +29,7 @@ use super::*;
 #[derive(Copy, Clone)]
 pub struct DeviceCommands {
     pub acquire_full_screen_exclusive_mode_ext: PFN_vkAcquireFullScreenExclusiveModeEXT,
+    pub acquire_image_ohos: PFN_vkAcquireImageOHOS,
     pub acquire_next_image2_khr: PFN_vkAcquireNextImage2KHR,
     pub acquire_next_image_khr: PFN_vkAcquireNextImageKHR,
     pub acquire_performance_configuration_intel: PFN_vkAcquirePerformanceConfigurationINTEL,
@@ -133,6 +134,8 @@ pub struct DeviceCommands {
     pub cmd_debug_marker_end_ext: PFN_vkCmdDebugMarkerEndEXT,
     pub cmd_debug_marker_insert_ext: PFN_vkCmdDebugMarkerInsertEXT,
     pub cmd_decode_video_khr: PFN_vkCmdDecodeVideoKHR,
+    pub cmd_decompress_memory_ext: PFN_vkCmdDecompressMemoryEXT,
+    pub cmd_decompress_memory_indirect_count_ext: PFN_vkCmdDecompressMemoryIndirectCountEXT,
     pub cmd_decompress_memory_indirect_count_nv: PFN_vkCmdDecompressMemoryIndirectCountNV,
     pub cmd_decompress_memory_nv: PFN_vkCmdDecompressMemoryNV,
     pub cmd_dispatch: PFN_vkCmdDispatch,
@@ -175,6 +178,7 @@ pub struct DeviceCommands {
     pub cmd_end_render_pass2_khr: PFN_vkCmdEndRenderPass2KHR,
     pub cmd_end_rendering: PFN_vkCmdEndRendering,
     pub cmd_end_rendering2_ext: PFN_vkCmdEndRendering2EXT,
+    pub cmd_end_rendering2_khr: PFN_vkCmdEndRendering2KHR,
     pub cmd_end_rendering_khr: PFN_vkCmdEndRenderingKHR,
     pub cmd_end_transform_feedback_ext: PFN_vkCmdEndTransformFeedbackEXT,
     pub cmd_end_video_coding_khr: PFN_vkCmdEndVideoCodingKHR,
@@ -579,6 +583,7 @@ pub struct DeviceCommands {
     pub get_memory_host_pointer_properties_ext: PFN_vkGetMemoryHostPointerPropertiesEXT,
     pub get_memory_metal_handle_ext: PFN_vkGetMemoryMetalHandleEXT,
     pub get_memory_metal_handle_properties_ext: PFN_vkGetMemoryMetalHandlePropertiesEXT,
+    pub get_memory_native_buffer_ohos: PFN_vkGetMemoryNativeBufferOHOS,
     pub get_memory_remote_address_nv: PFN_vkGetMemoryRemoteAddressNV,
     pub get_memory_sci_buf_nv: PFN_vkGetMemorySciBufNV,
     pub get_memory_win32_handle_khr: PFN_vkGetMemoryWin32HandleKHR,
@@ -587,6 +592,7 @@ pub struct DeviceCommands {
     pub get_memory_zircon_handle_fuchsia: PFN_vkGetMemoryZirconHandleFUCHSIA,
     pub get_memory_zircon_handle_properties_fuchsia: PFN_vkGetMemoryZirconHandlePropertiesFUCHSIA,
     pub get_micromap_build_sizes_ext: PFN_vkGetMicromapBuildSizesEXT,
+    pub get_native_buffer_properties_ohos: PFN_vkGetNativeBufferPropertiesOHOS,
     pub get_partitioned_acceleration_structures_build_sizes_nv:
         PFN_vkGetPartitionedAccelerationStructuresBuildSizesNV,
     pub get_past_presentation_timing_google: PFN_vkGetPastPresentationTimingGOOGLE,
@@ -629,6 +635,7 @@ pub struct DeviceCommands {
     pub get_shader_module_create_info_identifier_ext: PFN_vkGetShaderModuleCreateInfoIdentifierEXT,
     pub get_shader_module_identifier_ext: PFN_vkGetShaderModuleIdentifierEXT,
     pub get_swapchain_counter_ext: PFN_vkGetSwapchainCounterEXT,
+    pub get_swapchain_gralloc_usage_ohos: PFN_vkGetSwapchainGrallocUsageOHOS,
     pub get_swapchain_images_khr: PFN_vkGetSwapchainImagesKHR,
     pub get_swapchain_status_khr: PFN_vkGetSwapchainStatusKHR,
     pub get_tensor_memory_requirements_arm: PFN_vkGetTensorMemoryRequirementsARM,
@@ -658,6 +665,7 @@ pub struct DeviceCommands {
     pub queue_notify_out_of_band_nv: PFN_vkQueueNotifyOutOfBandNV,
     pub queue_present_khr: PFN_vkQueuePresentKHR,
     pub queue_set_performance_configuration_intel: PFN_vkQueueSetPerformanceConfigurationINTEL,
+    pub queue_signal_release_image_ohos: PFN_vkQueueSignalReleaseImageOHOS,
     pub queue_submit: PFN_vkQueueSubmit,
     pub queue_submit2: PFN_vkQueueSubmit2,
     pub queue_submit2_khr: PFN_vkQueueSubmit2KHR,
@@ -731,6 +739,23 @@ impl DeviceCommands {
                         _swapchain: SwapchainKHR,
                     ) -> Result {
                         panic!("could not load vkAcquireFullScreenExclusiveModeEXT")
+                    }
+                    fallback
+                }
+            },
+            acquire_image_ohos: {
+                let value = loader(c"vkAcquireImageOHOS".as_ptr());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _image: Image,
+                        _native_fence_fd: i32,
+                        _semaphore: Semaphore,
+                        _fence: Fence,
+                    ) -> Result {
+                        panic!("could not load vkAcquireImageOHOS")
                     }
                     fallback
                 }
@@ -2236,6 +2261,38 @@ impl DeviceCommands {
                     fallback
                 }
             },
+            cmd_decompress_memory_ext: {
+                let value = loader(c"vkCmdDecompressMemoryEXT".as_ptr());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _decompress_memory_info_ext: *const DecompressMemoryInfoEXT,
+                    ) {
+                        panic!("could not load vkCmdDecompressMemoryEXT")
+                    }
+                    fallback
+                }
+            },
+            cmd_decompress_memory_indirect_count_ext: {
+                let value = loader(c"vkCmdDecompressMemoryIndirectCountEXT".as_ptr());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _decompression_method: MemoryDecompressionMethodFlagsEXT,
+                        _indirect_commands_address: DeviceAddress,
+                        _indirect_commands_count_address: DeviceAddress,
+                        _max_decompression_count: u32,
+                        _stride: u32,
+                    ) {
+                        panic!("could not load vkCmdDecompressMemoryIndirectCountEXT")
+                    }
+                    fallback
+                }
+            },
             cmd_decompress_memory_indirect_count_nv: {
                 let value = loader(c"vkCmdDecompressMemoryIndirectCountNV".as_ptr());
                 if let Some(value) = value {
@@ -2913,9 +2970,23 @@ impl DeviceCommands {
                 } else {
                     unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
-                        _rendering_end_info: *const RenderingEndInfoEXT,
+                        _rendering_end_info: *const RenderingEndInfoKHR,
                     ) {
                         panic!("could not load vkCmdEndRendering2EXT")
+                    }
+                    fallback
+                }
+            },
+            cmd_end_rendering2_khr: {
+                let value = loader(c"vkCmdEndRendering2KHR".as_ptr());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _rendering_end_info: *const RenderingEndInfoKHR,
+                    ) {
+                        panic!("could not load vkCmdEndRendering2KHR")
                     }
                     fallback
                 }
@@ -8734,6 +8805,21 @@ impl DeviceCommands {
                     fallback
                 }
             },
+            get_memory_native_buffer_ohos: {
+                let value = loader(c"vkGetMemoryNativeBufferOHOS".as_ptr());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _info: *const MemoryGetNativeBufferInfoOHOS,
+                        _buffer: *mut *mut OH_NativeBuffer,
+                    ) -> Result {
+                        panic!("could not load vkGetMemoryNativeBufferOHOS")
+                    }
+                    fallback
+                }
+            },
             get_memory_remote_address_nv: {
                 let value = loader(c"vkGetMemoryRemoteAddressNV".as_ptr());
                 if let Some(value) = value {
@@ -8854,6 +8940,21 @@ impl DeviceCommands {
                         _size_info: *mut MicromapBuildSizesInfoEXT,
                     ) {
                         panic!("could not load vkGetMicromapBuildSizesEXT")
+                    }
+                    fallback
+                }
+            },
+            get_native_buffer_properties_ohos: {
+                let value = loader(c"vkGetNativeBufferPropertiesOHOS".as_ptr());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _buffer: *const OH_NativeBuffer,
+                        _properties: *mut NativeBufferPropertiesOHOS,
+                    ) -> Result {
+                        panic!("could not load vkGetNativeBufferPropertiesOHOS")
                     }
                     fallback
                 }
@@ -9458,6 +9559,22 @@ impl DeviceCommands {
                     fallback
                 }
             },
+            get_swapchain_gralloc_usage_ohos: {
+                let value = loader(c"vkGetSwapchainGrallocUsageOHOS".as_ptr());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _format: Format,
+                        _image_usage: ImageUsageFlags,
+                        _gralloc_usage: *mut u64,
+                    ) -> Result {
+                        panic!("could not load vkGetSwapchainGrallocUsageOHOS")
+                    }
+                    fallback
+                }
+            },
             get_swapchain_images_khr: {
                 let value = loader(c"vkGetSwapchainImagesKHR".as_ptr());
                 if let Some(value) = value {
@@ -9855,6 +9972,23 @@ impl DeviceCommands {
                         _configuration: PerformanceConfigurationINTEL,
                     ) -> Result {
                         panic!("could not load vkQueueSetPerformanceConfigurationINTEL")
+                    }
+                    fallback
+                }
+            },
+            queue_signal_release_image_ohos: {
+                let value = loader(c"vkQueueSignalReleaseImageOHOS".as_ptr());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _queue: Queue,
+                        _wait_semaphore_count: u32,
+                        _wait_semaphores: *const Semaphore,
+                        _image: Image,
+                        _native_fence_fd: *mut i32,
+                    ) -> Result {
+                        panic!("could not load vkQueueSignalReleaseImageOHOS")
                     }
                     fallback
                 }
@@ -10752,6 +10886,8 @@ pub struct InstanceCommands {
     pub enumerate_device_layer_properties: PFN_vkEnumerateDeviceLayerProperties,
     pub enumerate_physical_device_groups: PFN_vkEnumeratePhysicalDeviceGroups,
     pub enumerate_physical_device_groups_khr: PFN_vkEnumeratePhysicalDeviceGroupsKHR,
+    pub enumerate_physical_device_queue_family_performance_counters_by_region_arm:
+        PFN_vkEnumeratePhysicalDeviceQueueFamilyPerformanceCountersByRegionARM,
     pub enumerate_physical_device_queue_family_performance_query_counters_khr:
         PFN_vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR,
     pub enumerate_physical_devices: PFN_vkEnumeratePhysicalDevices,
@@ -11430,6 +11566,25 @@ impl InstanceCommands {
                         _physical_device_group_properties: *mut PhysicalDeviceGroupProperties,
                     ) -> Result {
                         panic!("could not load vkEnumeratePhysicalDeviceGroupsKHR")
+                    }
+                    fallback
+                }
+            },
+            enumerate_physical_device_queue_family_performance_counters_by_region_arm: {
+                let value = loader(
+                    c"vkEnumeratePhysicalDeviceQueueFamilyPerformanceCountersByRegionARM".as_ptr(),
+                );
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _physical_device: PhysicalDevice,
+                        _queue_family_index: u32,
+                        _counter_count: *mut u32,
+                        _counters: *mut PerformanceCounterARM,
+                        _counter_descriptions: *mut PerformanceCounterDescriptionARM,
+                    ) -> Result {
+                        panic!("could not load vkEnumeratePhysicalDeviceQueueFamilyPerformanceCountersByRegionARM")
                     }
                     fallback
                 }
