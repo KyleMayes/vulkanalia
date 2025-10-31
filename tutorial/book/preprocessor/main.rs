@@ -5,7 +5,7 @@ use std::io;
 use std::process;
 use std::sync::atomic::{AtomicUsize, Ordering};
 
-use anyhow::{anyhow, Result};
+use anyhow::{Result, anyhow};
 use clap::{App, Arg, SubCommand};
 use log::*;
 use mdbook::book::BookItem;
@@ -86,7 +86,7 @@ fn load_index() -> HashMap<&'static str, &'static str> {
 }
 
 fn preprocess_item(item: &mut BookItem, index: &HashMap<&str, &str>) -> Result<()> {
-    if let BookItem::Chapter(ref mut chapter) = item {
+    if let BookItem::Chapter(chapter) = item {
         let parser = Parser::new(&chapter.content);
         let events = parser.into_iter().map(|e| map_event(e, index));
         let mut buffer = String::with_capacity(chapter.content.len() * 2);
