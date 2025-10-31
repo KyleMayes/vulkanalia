@@ -27,7 +27,7 @@
 //! ```
 
 #![no_std]
-#![allow(clippy::missing_safety_doc)]
+#![allow(unsafe_op_in_unsafe_fn, clippy::missing_safety_doc)]
 
 extern crate alloc;
 

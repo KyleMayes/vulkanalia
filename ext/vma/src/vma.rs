@@ -526,36 +526,36 @@ pub struct VmaVirtualAllocationInfo {
     #[doc = "Custom pointer associated with the allocation.\n\nSame value as passed in VmaVirtualAllocationCreateInfo::pUserData or to vmaSetVirtualAllocationUserData()."]
     pub pUserData: *mut ::core::ffi::c_void,
 }
-extern "C" {
+unsafe extern "C" {
     #[doc = "Creates #VmaAllocator object."]
     pub fn vmaCreateAllocator(
         pCreateInfo: *const VmaAllocatorCreateInfo,
         pAllocator: *mut VmaAllocator,
     ) -> Result;
 }
-extern "C" {
+unsafe extern "C" {
     #[doc = "Destroys allocator object."]
     pub fn vmaDestroyAllocator(allocator: VmaAllocator);
 }
-extern "C" {
+unsafe extern "C" {
     #[doc = "Returns information about existing #VmaAllocator object - handle to Vulkan device etc.\n\nIt might be useful if you want to keep just the #VmaAllocator handle and fetch other required handles to\n`VkPhysicalDevice`, `VkDevice` etc. every time using this function."]
     pub fn vmaGetAllocatorInfo(allocator: VmaAllocator, pAllocatorInfo: *mut VmaAllocatorInfo);
 }
-extern "C" {
+unsafe extern "C" {
     #[doc = "PhysicalDeviceProperties are fetched from physicalDevice by the allocator.\nYou can access it here, without fetching it again on your own."]
     pub fn vmaGetPhysicalDeviceProperties(
         allocator: VmaAllocator,
         ppPhysicalDeviceProperties: *mut *const PhysicalDeviceProperties,
     );
 }
-extern "C" {
+unsafe extern "C" {
     #[doc = "PhysicalDeviceMemoryProperties are fetched from physicalDevice by the allocator.\nYou can access it here, without fetching it again on your own."]
     pub fn vmaGetMemoryProperties(
         allocator: VmaAllocator,
         ppPhysicalDeviceMemoryProperties: *mut *const PhysicalDeviceMemoryProperties,
     );
 }
-extern "C" {
+unsafe extern "C" {
     #[doc = "Given Memory Type Index, returns Property Flags of this memory type.\n\nThis is just a convenience function. Same information can be obtained using\nvmaGetMemoryProperties()."]
     pub fn vmaGetMemoryTypeProperties(
         allocator: VmaAllocator,
@@ -563,19 +563,19 @@ extern "C" {
         pFlags: *mut MemoryPropertyFlags,
     );
 }
-extern "C" {
+unsafe extern "C" {
     #[doc = "Sets index of the current frame."]
     pub fn vmaSetCurrentFrameIndex(allocator: VmaAllocator, frameIndex: u32);
 }
-extern "C" {
+unsafe extern "C" {
     #[doc = "Retrieves statistics from current state of the Allocator.\n\nThis function is called \"calculate\" not \"get\" because it has to traverse all\ninternal data structures, so it may be quite slow. Use it for debugging purposes.\nFor faster but more brief statistics suitable to be called every frame or every allocation,\nuse vmaGetHeapBudgets().\n\nNote that when using allocator from multiple threads, returned information may immediately\nbecome outdated."]
     pub fn vmaCalculateStatistics(allocator: VmaAllocator, pStats: *mut VmaTotalStatistics);
 }
-extern "C" {
+unsafe extern "C" {
     #[doc = "Retrieves information about current memory usage and budget for all memory heaps.\n\n# Arguments\n\n* `allocator` -\n* `pBudgets` (direction out) - Must point to array with number of elements at least equal to number of memory heaps in physical device used.\n\nThis function is called \"get\" not \"calculate\" because it is very fast, suitable to be called\nevery frame or every allocation. For more detailed statistics use vmaCalculateStatistics().\n\nNote that when using allocator from multiple threads, returned information may immediately\nbecome outdated."]
     pub fn vmaGetHeapBudgets(allocator: VmaAllocator, pBudgets: *mut VmaBudget);
 }
-extern "C" {
+unsafe extern "C" {
     #[doc = "Helps to find memoryTypeIndex, given memoryTypeBits and VmaAllocationCreateInfo.\n\nThis algorithm tries to find a memory type that:\n\n- Is allowed by memoryTypeBits.\n- Contains all the flags from pAllocationCreateInfo->requiredFlags.\n- Matches intended usage.\n- Has as many flags from pAllocationCreateInfo->preferredFlags as possible.\n\n# Returns\n\nReturns VK_ERROR_FEATURE_NOT_PRESENT if not found. Receiving such result\nfrom this function or any other allocating function probably means that your\ndevice doesn't support any memory type with requested features for the specific\ntype of resource you want to use it for. Please check parameters of your\nresource, like image layout (OPTIMAL versus LINEAR) or mip level count."]
     pub fn vmaFindMemoryTypeIndex(
         allocator: VmaAllocator,
@@ -584,7 +584,7 @@ extern "C" {
         pMemoryTypeIndex: *mut u32,
     ) -> Result;
 }
-extern "C" {
+unsafe extern "C" {
     #[doc = "Helps to find memoryTypeIndex, given VkBufferCreateInfo and VmaAllocationCreateInfo.\n\nIt can be useful e.g. to determine value to be used as VmaPoolCreateInfo::memoryTypeIndex.\nIt internally creates a temporary, dummy buffer that never has memory bound."]
     pub fn vmaFindMemoryTypeIndexForBufferInfo(
         allocator: VmaAllocator,
@@ -593,7 +593,7 @@ extern "C" {
         pMemoryTypeIndex: *mut u32,
     ) -> Result;
 }
-extern "C" {
+unsafe extern "C" {
     #[doc = "Helps to find memoryTypeIndex, given VkImageCreateInfo and VmaAllocationCreateInfo.\n\nIt can be useful e.g. to determine value to be used as VmaPoolCreateInfo::memoryTypeIndex.\nIt internally creates a temporary, dummy image that never has memory bound."]
     pub fn vmaFindMemoryTypeIndexForImageInfo(
         allocator: VmaAllocator,
@@ -602,7 +602,7 @@ extern "C" {
         pMemoryTypeIndex: *mut u32,
     ) -> Result;
 }
-extern "C" {
+unsafe extern "C" {
     #[doc = "Allocates Vulkan device memory and creates #VmaPool object.\n\n# Arguments\n\n* `allocator` - Allocator object.\n* `pCreateInfo` - Parameters of pool to create.\n* `pPool` (direction out) - Handle to created pool."]
     pub fn vmaCreatePool(
         allocator: VmaAllocator,
@@ -610,11 +610,11 @@ extern "C" {
         pPool: *mut VmaPool,
     ) -> Result;
 }
-extern "C" {
+unsafe extern "C" {
     #[doc = "Destroys #VmaPool object and frees Vulkan device memory."]
     pub fn vmaDestroyPool(allocator: VmaAllocator, pool: VmaPool);
 }
-extern "C" {
+unsafe extern "C" {
     #[doc = "Retrieves statistics of existing #VmaPool object.\n\n# Arguments\n\n* `allocator` - Allocator object.\n* `pool` - Pool object.\n* `pPoolStats` (direction out) - Statistics of specified pool."]
     pub fn vmaGetPoolStatistics(
         allocator: VmaAllocator,
@@ -622,7 +622,7 @@ extern "C" {
         pPoolStats: *mut VmaStatistics,
     );
 }
-extern "C" {
+unsafe extern "C" {
     #[doc = "Retrieves detailed statistics of existing #VmaPool object.\n\n# Arguments\n\n* `allocator` - Allocator object.\n* `pool` - Pool object.\n* `pPoolStats` (direction out) - Statistics of specified pool."]
     pub fn vmaCalculatePoolStatistics(
         allocator: VmaAllocator,
@@ -630,11 +630,11 @@ extern "C" {
         pPoolStats: *mut VmaDetailedStatistics,
     );
 }
-extern "C" {
+unsafe extern "C" {
     #[doc = "Checks magic number in margins around all allocations in given memory pool in search for corruptions.\n\nCorruption detection is enabled only when `VMA_DEBUG_DETECT_CORRUPTION` macro is defined to nonzero,\n`VMA_DEBUG_MARGIN` is defined to nonzero and the pool is created in memory type that is\n`HOST_VISIBLE` and `HOST_COHERENT`. For more information, see [Corruption detection](debugging_memory_usage_corruption_detection).\n\nPossible return values:\n\n- `VK_ERROR_FEATURE_NOT_PRESENT` - corruption detection is not enabled for specified pool.\n- `VK_SUCCESS` - corruption detection has been performed and succeeded.\n- `VK_ERROR_UNKNOWN` - corruption detection has been performed and found memory corruptions around one of the allocations.\n`VMA_ASSERT` is also fired in that case.\n- Other value: Error returned by Vulkan, e.g. memory mapping failure."]
     pub fn vmaCheckPoolCorruption(allocator: VmaAllocator, pool: VmaPool) -> Result;
 }
-extern "C" {
+unsafe extern "C" {
     #[doc = "Retrieves name of a custom pool.\n\nAfter the call `ppName` is either null or points to an internally-owned null-terminated string\ncontaining name of the pool that was previously set. The pointer becomes invalid when the pool is\ndestroyed or its name is changed using vmaSetPoolName()."]
     pub fn vmaGetPoolName(
         allocator: VmaAllocator,
@@ -642,7 +642,7 @@ extern "C" {
         ppName: *mut *const ::core::ffi::c_char,
     );
 }
-extern "C" {
+unsafe extern "C" {
     #[doc = "Sets name of a custom pool.\n\n`pName` can be either null or pointer to a null-terminated string with new name for the pool.\nFunction makes internal copy of the string, so it can be changed or freed immediately after this call."]
     pub fn vmaSetPoolName(
         allocator: VmaAllocator,
@@ -650,7 +650,7 @@ extern "C" {
         pName: *const ::core::ffi::c_char,
     );
 }
-extern "C" {
+unsafe extern "C" {
     #[doc = "General purpose memory allocation.\n\n# Arguments\n\n* `allocator` -\n* `pVkMemoryRequirements` -\n* `pCreateInfo` -\n* `pAllocation` (direction out) - Handle to allocated memory.\n* `pAllocationInfo` (direction out) - Optional. Information about allocated memory. It can be later fetched using function vmaGetAllocationInfo().\n\nYou should free the memory using vmaFreeMemory() or vmaFreeMemoryPages().\n\nIt is recommended to use vmaAllocateMemoryForBuffer(), vmaAllocateMemoryForImage(),\nvmaCreateBuffer(), vmaCreateImage() instead whenever possible."]
     pub fn vmaAllocateMemory(
         allocator: VmaAllocator,
@@ -660,7 +660,7 @@ extern "C" {
         pAllocationInfo: *mut VmaAllocationInfo,
     ) -> Result;
 }
-extern "C" {
+unsafe extern "C" {
     #[doc = "General purpose memory allocation for multiple allocation objects at once.\n\n# Arguments\n\n* `allocator` - Allocator object.\n* `pVkMemoryRequirements` - Memory requirements for each allocation.\n* `pCreateInfo` - Creation parameters for each allocation.\n* `allocationCount` - Number of allocations to make.\n* `pAllocations` (direction out) - Pointer to array that will be filled with handles to created allocations.\n* `pAllocationInfo` (direction out) - Optional. Pointer to array that will be filled with parameters of created allocations.\n\nYou should free the memory using vmaFreeMemory() or vmaFreeMemoryPages().\n\nWord \"pages\" is just a suggestion to use this function to allocate pieces of memory needed for sparse binding.\nIt is just a general purpose allocation function able to make multiple allocations at once.\nIt may be internally optimized to be more efficient than calling vmaAllocateMemory() `allocationCount` times.\n\nAll allocations are made using same parameters. All of them are created out of the same memory pool and type.\nIf any allocation fails, all allocations already made within this function call are also freed, so that when\nreturned result is not `VK_SUCCESS`, `pAllocation` array is always entirely filled with `VK_NULL_HANDLE`."]
     pub fn vmaAllocateMemoryPages(
         allocator: VmaAllocator,
@@ -671,7 +671,7 @@ extern "C" {
         pAllocationInfo: *mut VmaAllocationInfo,
     ) -> Result;
 }
-extern "C" {
+unsafe extern "C" {
     #[doc = "Allocates memory suitable for given `VkBuffer`.\n\n# Arguments\n\n* `allocator` -\n* `buffer` -\n* `pCreateInfo` -\n* `pAllocation` (direction out) - Handle to allocated memory.\n* `pAllocationInfo` (direction out) - Optional. Information about allocated memory. It can be later fetched using function vmaGetAllocationInfo().\n\nIt only creates #VmaAllocation. To bind the memory to the buffer, use vmaBindBufferMemory().\n\nThis is a special-purpose function. In most cases you should use vmaCreateBuffer().\n\nYou must free the allocation using vmaFreeMemory() when no longer needed."]
     pub fn vmaAllocateMemoryForBuffer(
         allocator: VmaAllocator,
@@ -681,7 +681,7 @@ extern "C" {
         pAllocationInfo: *mut VmaAllocationInfo,
     ) -> Result;
 }
-extern "C" {
+unsafe extern "C" {
     #[doc = "Allocates memory suitable for given `VkImage`.\n\n# Arguments\n\n* `allocator` -\n* `image` -\n* `pCreateInfo` -\n* `pAllocation` (direction out) - Handle to allocated memory.\n* `pAllocationInfo` (direction out) - Optional. Information about allocated memory. It can be later fetched using function vmaGetAllocationInfo().\n\nIt only creates #VmaAllocation. To bind the memory to the buffer, use vmaBindImageMemory().\n\nThis is a special-purpose function. In most cases you should use vmaCreateImage().\n\nYou must free the allocation using vmaFreeMemory() when no longer needed."]
     pub fn vmaAllocateMemoryForImage(
         allocator: VmaAllocator,
@@ -691,11 +691,11 @@ extern "C" {
         pAllocationInfo: *mut VmaAllocationInfo,
     ) -> Result;
 }
-extern "C" {
+unsafe extern "C" {
     #[doc = "Frees memory previously allocated using vmaAllocateMemory(), vmaAllocateMemoryForBuffer(), or vmaAllocateMemoryForImage().\n\nPassing `VK_NULL_HANDLE` as `allocation` is valid. Such function call is just skipped."]
     pub fn vmaFreeMemory(allocator: VmaAllocator, allocation: VmaAllocation);
 }
-extern "C" {
+unsafe extern "C" {
     #[doc = "Frees memory and destroys multiple allocations.\n\nWord \"pages\" is just a suggestion to use this function to free pieces of memory used for sparse binding.\nIt is just a general purpose function to free memory and destroy allocations made using e.g. vmaAllocateMemory(),\nvmaAllocateMemoryPages() and other functions.\nIt may be internally optimized to be more efficient than calling vmaFreeMemory() `allocationCount` times.\n\nAllocations in `pAllocations` array can come from any memory pools and types.\nPassing `VK_NULL_HANDLE` as elements of `pAllocations` array is valid. Such entries are just skipped."]
     pub fn vmaFreeMemoryPages(
         allocator: VmaAllocator,
@@ -703,7 +703,7 @@ extern "C" {
         pAllocations: *const *mut VmaAllocation_T,
     );
 }
-extern "C" {
+unsafe extern "C" {
     #[doc = "Returns current information about specified allocation.\n\nCurrent parameters of given allocation are returned in `pAllocationInfo`.\n\nAlthough this function doesn't lock any mutex, so it should be quite efficient,\nyou should avoid calling it too often.\nYou can retrieve same VmaAllocationInfo structure while creating your resource, from function\nvmaCreateBuffer(), vmaCreateImage(). You can remember it if you are sure parameters don't change\n(e.g. due to defragmentation).\n\nThere is also a new function vmaGetAllocationInfo2() that offers extended information\nabout the allocation, returned using new structure #VmaAllocationInfo2."]
     pub fn vmaGetAllocationInfo(
         allocator: VmaAllocator,
@@ -711,7 +711,7 @@ extern "C" {
         pAllocationInfo: *mut VmaAllocationInfo,
     );
 }
-extern "C" {
+unsafe extern "C" {
     #[doc = "Returns extended information about specified allocation.\n\nCurrent parameters of given allocation are returned in `pAllocationInfo`.\nExtended parameters in structure #VmaAllocationInfo2 include memory block size\nand a flag telling whether the allocation has dedicated memory.\nIt can be useful e.g. for interop with OpenGL."]
     pub fn vmaGetAllocationInfo2(
         allocator: VmaAllocator,
@@ -719,7 +719,7 @@ extern "C" {
         pAllocationInfo: *mut VmaAllocationInfo2,
     );
 }
-extern "C" {
+unsafe extern "C" {
     #[doc = "Sets pUserData in given allocation to new value.\n\nThe value of pointer `pUserData` is copied to allocation's `pUserData`.\nIt is opaque, so you can use it however you want - e.g.\nas a pointer, ordinal number or some handle to you own data."]
     pub fn vmaSetAllocationUserData(
         allocator: VmaAllocator,
@@ -727,7 +727,7 @@ extern "C" {
         pUserData: *mut ::core::ffi::c_void,
     );
 }
-extern "C" {
+unsafe extern "C" {
     #[doc = "Sets pName in given allocation to new value.\n\n`pName` must be either null, or pointer to a null-terminated string. The function\nmakes local copy of the string and sets it as allocation's `pName`. String\npassed as pName doesn't need to be valid for whole lifetime of the allocation -\nyou can free it after this call. String previously pointed by allocation's\n`pName` is freed from memory."]
     pub fn vmaSetAllocationName(
         allocator: VmaAllocator,
@@ -735,7 +735,7 @@ extern "C" {
         pName: *const ::core::ffi::c_char,
     );
 }
-extern "C" {
+unsafe extern "C" {
     #[doc = "Given an allocation, returns Property Flags of its memory type.\n\nThis is just a convenience function. Same information can be obtained using\nvmaGetAllocationInfo() + vmaGetMemoryProperties()."]
     pub fn vmaGetAllocationMemoryProperties(
         allocator: VmaAllocator,
@@ -743,7 +743,7 @@ extern "C" {
         pFlags: *mut MemoryPropertyFlags,
     );
 }
-extern "C" {
+unsafe extern "C" {
     #[doc = "Maps memory represented by given allocation and returns pointer to it.\n\nMaps memory represented by given allocation to make it accessible to CPU code.\nWhen succeeded, `*ppData` contains pointer to first byte of this memory.\n\nIf the allocation is part of a bigger `VkDeviceMemory` block, returned pointer is\ncorrectly offsetted to the beginning of region assigned to this particular allocation.\nUnlike the result of `vkMapMemory`, it points to the allocation, not to the beginning of the whole block.\nYou should not add VmaAllocationInfo::offset to it!\n\nMapping is internally reference-counted and synchronized, so despite raw Vulkan\nfunction `vkMapMemory()` cannot be used to map same block of `VkDeviceMemory`\nmultiple times simultaneously, it is safe to call this function on allocations\nassigned to the same memory block. Actual Vulkan memory will be mapped on first\nmapping and unmapped on last unmapping.\n\nIf the function succeeded, you must call vmaUnmapMemory() to unmap the\nallocation when mapping is no longer needed or before freeing the allocation, at\nthe latest.\n\nIt also safe to call this function multiple times on the same allocation. You\nmust call vmaUnmapMemory() same number of times as you called vmaMapMemory().\n\nIt is also safe to call this function on allocation created with\n#VMA_ALLOCATION_CREATE_MAPPED_BIT flag. Its memory stays mapped all the time.\nYou must still call vmaUnmapMemory() same number of times as you called\nvmaMapMemory(). You must not call vmaUnmapMemory() additional time to free the\n\"0-th\" mapping made automatically due to #VMA_ALLOCATION_CREATE_MAPPED_BIT flag.\n\nThis function fails when used on allocation made in memory type that is not\n`HOST_VISIBLE`.\n\nThis function doesn't automatically flush or invalidate caches.\nIf the allocation is made from a memory types that is not `HOST_COHERENT`,\nyou also need to use vmaInvalidateAllocation() / vmaFlushAllocation(), as required by Vulkan specification."]
     pub fn vmaMapMemory(
         allocator: VmaAllocator,
@@ -751,11 +751,11 @@ extern "C" {
         ppData: *mut *mut ::core::ffi::c_void,
     ) -> Result;
 }
-extern "C" {
+unsafe extern "C" {
     #[doc = "Unmaps memory represented by given allocation, mapped previously using vmaMapMemory().\n\nFor details, see description of vmaMapMemory().\n\nThis function doesn't automatically flush or invalidate caches.\nIf the allocation is made from a memory types that is not `HOST_COHERENT`,\nyou also need to use vmaInvalidateAllocation() / vmaFlushAllocation(), as required by Vulkan specification."]
     pub fn vmaUnmapMemory(allocator: VmaAllocator, allocation: VmaAllocation);
 }
-extern "C" {
+unsafe extern "C" {
     #[doc = "Flushes memory of given allocation.\n\nCalls `vkFlushMappedMemoryRanges()` for memory associated with given range of given allocation.\nIt needs to be called after writing to a mapped memory for memory types that are not `HOST_COHERENT`.\nUnmap operation doesn't do that automatically.\n\n- `offset` must be relative to the beginning of allocation.\n- `size` can be `VK_WHOLE_SIZE`. It means all memory from `offset` the the end of given allocation.\n- `offset` and `size` don't have to be aligned.\nThey are internally rounded down/up to multiply of `nonCoherentAtomSize`.\n- If `size` is 0, this call is ignored.\n- If memory type that the `allocation` belongs to is not `HOST_VISIBLE` or it is `HOST_COHERENT`,\nthis call is ignored.\n\nWarning! `offset` and `size` are relative to the contents of given `allocation`.\nIf you mean whole allocation, you can pass 0 and `VK_WHOLE_SIZE`, respectively.\nDo not pass allocation's offset as `offset`!!!\n\nThis function returns the `VkResult` from `vkFlushMappedMemoryRanges` if it is\ncalled, otherwise `VK_SUCCESS`."]
     pub fn vmaFlushAllocation(
         allocator: VmaAllocator,
@@ -764,7 +764,7 @@ extern "C" {
         size: DeviceSize,
     ) -> Result;
 }
-extern "C" {
+unsafe extern "C" {
     #[doc = "Invalidates memory of given allocation.\n\nCalls `vkInvalidateMappedMemoryRanges()` for memory associated with given range of given allocation.\nIt needs to be called before reading from a mapped memory for memory types that are not `HOST_COHERENT`.\nMap operation doesn't do that automatically.\n\n- `offset` must be relative to the beginning of allocation.\n- `size` can be `VK_WHOLE_SIZE`. It means all memory from `offset` the the end of given allocation.\n- `offset` and `size` don't have to be aligned.\nThey are internally rounded down/up to multiply of `nonCoherentAtomSize`.\n- If `size` is 0, this call is ignored.\n- If memory type that the `allocation` belongs to is not `HOST_VISIBLE` or it is `HOST_COHERENT`,\nthis call is ignored.\n\nWarning! `offset` and `size` are relative to the contents of given `allocation`.\nIf you mean whole allocation, you can pass 0 and `VK_WHOLE_SIZE`, respectively.\nDo not pass allocation's offset as `offset`!!!\n\nThis function returns the `VkResult` from `vkInvalidateMappedMemoryRanges` if\nit is called, otherwise `VK_SUCCESS`."]
     pub fn vmaInvalidateAllocation(
         allocator: VmaAllocator,
@@ -773,7 +773,7 @@ extern "C" {
         size: DeviceSize,
     ) -> Result;
 }
-extern "C" {
+unsafe extern "C" {
     #[doc = "Flushes memory of given set of allocations.\n\nCalls `vkFlushMappedMemoryRanges()` for memory associated with given ranges of given allocations.\nFor more information, see documentation of vmaFlushAllocation().\n\n# Arguments\n\n* `allocator` -\n* `allocationCount` -\n* `allocations` -\n* `offsets` - If not null, it must point to an array of offsets of regions to flush, relative to the beginning of respective allocations. Null means all offsets are zero.\n* `sizes` - If not null, it must point to an array of sizes of regions to flush in respective allocations. Null means `VK_WHOLE_SIZE` for all allocations.\n\nThis function returns the `VkResult` from `vkFlushMappedMemoryRanges` if it is\ncalled, otherwise `VK_SUCCESS`."]
     pub fn vmaFlushAllocations(
         allocator: VmaAllocator,
@@ -783,7 +783,7 @@ extern "C" {
         sizes: *const DeviceSize,
     ) -> Result;
 }
-extern "C" {
+unsafe extern "C" {
     #[doc = "Invalidates memory of given set of allocations.\n\nCalls `vkInvalidateMappedMemoryRanges()` for memory associated with given ranges of given allocations.\nFor more information, see documentation of vmaInvalidateAllocation().\n\n# Arguments\n\n* `allocator` -\n* `allocationCount` -\n* `allocations` -\n* `offsets` - If not null, it must point to an array of offsets of regions to flush, relative to the beginning of respective allocations. Null means all offsets are zero.\n* `sizes` - If not null, it must point to an array of sizes of regions to flush in respective allocations. Null means `VK_WHOLE_SIZE` for all allocations.\n\nThis function returns the `VkResult` from `vkInvalidateMappedMemoryRanges` if it is\ncalled, otherwise `VK_SUCCESS`."]
     pub fn vmaInvalidateAllocations(
         allocator: VmaAllocator,
@@ -793,7 +793,7 @@ extern "C" {
         sizes: *const DeviceSize,
     ) -> Result;
 }
-extern "C" {
+unsafe extern "C" {
     #[doc = "Maps the allocation temporarily if needed, copies data from specified host pointer to it, and flushes the memory from the host caches if needed.\n\n# Arguments\n\n* `allocator` -\n* `pSrcHostPointer` - Pointer to the host data that become source of the copy.\n* `dstAllocation` - Handle to the allocation that becomes destination of the copy.\n* `dstAllocationLocalOffset` - Offset within `dstAllocation` where to write copied data, in bytes.\n* `size` - Number of bytes to copy.\n\nThis is a convenience function that allows to copy data from a host pointer to an allocation easily.\nSame behavior can be achieved by calling vmaMapMemory(), `memcpy()`, vmaUnmapMemory(), vmaFlushAllocation().\n\nThis function can be called only for allocations created in a memory type that has `VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT` flag.\nIt can be ensured e.g. by using #VMA_MEMORY_USAGE_AUTO and #VMA_ALLOCATION_CREATE_HOST_ACCESS_SEQUENTIAL_WRITE_BIT or\n#VMA_ALLOCATION_CREATE_HOST_ACCESS_RANDOM_BIT.\nOtherwise, the function will fail and generate a Validation Layers error.\n\n`dstAllocationLocalOffset` is relative to the contents of given `dstAllocation`.\nIf you mean whole allocation, you should pass 0.\nDo not pass allocation's offset within device memory block this parameter!"]
     pub fn vmaCopyMemoryToAllocation(
         allocator: VmaAllocator,
@@ -803,7 +803,7 @@ extern "C" {
         size: DeviceSize,
     ) -> Result;
 }
-extern "C" {
+unsafe extern "C" {
     #[doc = "Invalidates memory in the host caches if needed, maps the allocation temporarily if needed, and copies data from it to a specified host pointer.\n\n# Arguments\n\n* `allocator` -\n* `srcAllocation` - Handle to the allocation that becomes source of the copy.\n* `srcAllocationLocalOffset` - Offset within `srcAllocation` where to read copied data, in bytes.\n* `pDstHostPointer` - Pointer to the host memory that become destination of the copy.\n* `size` - Number of bytes to copy.\n\nThis is a convenience function that allows to copy data from an allocation to a host pointer easily.\nSame behavior can be achieved by calling vmaInvalidateAllocation(), vmaMapMemory(), `memcpy()`, vmaUnmapMemory().\n\nThis function should be called only for allocations created in a memory type that has `VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT`\nand `VK_MEMORY_PROPERTY_HOST_CACHED_BIT` flag.\nIt can be ensured e.g. by using #VMA_MEMORY_USAGE_AUTO and #VMA_ALLOCATION_CREATE_HOST_ACCESS_RANDOM_BIT.\nOtherwise, the function may fail and generate a Validation Layers error.\nIt may also work very slowly when reading from an uncached memory.\n\n`srcAllocationLocalOffset` is relative to the contents of given `srcAllocation`.\nIf you mean whole allocation, you should pass 0.\nDo not pass allocation's offset within device memory block as this parameter!"]
     pub fn vmaCopyAllocationToMemory(
         allocator: VmaAllocator,
@@ -813,11 +813,11 @@ extern "C" {
         size: DeviceSize,
     ) -> Result;
 }
-extern "C" {
+unsafe extern "C" {
     #[doc = "Checks magic number in margins around all allocations in given memory types (in both default and custom pools) in search for corruptions.\n\n# Arguments\n\n* `allocator` -\n* `memoryTypeBits` - Bit mask, where each bit set means that a memory type with that index should be checked.\n\nCorruption detection is enabled only when `VMA_DEBUG_DETECT_CORRUPTION` macro is defined to nonzero,\n`VMA_DEBUG_MARGIN` is defined to nonzero and only for memory types that are\n`HOST_VISIBLE` and `HOST_COHERENT`. For more information, see [Corruption detection](debugging_memory_usage_corruption_detection).\n\nPossible return values:\n\n- `VK_ERROR_FEATURE_NOT_PRESENT` - corruption detection is not enabled for any of specified memory types.\n- `VK_SUCCESS` - corruption detection has been performed and succeeded.\n- `VK_ERROR_UNKNOWN` - corruption detection has been performed and found memory corruptions around one of the allocations.\n`VMA_ASSERT` is also fired in that case.\n- Other value: Error returned by Vulkan, e.g. memory mapping failure."]
     pub fn vmaCheckCorruption(allocator: VmaAllocator, memoryTypeBits: u32) -> Result;
 }
-extern "C" {
+unsafe extern "C" {
     #[doc = "Begins defragmentation process.\n\n# Arguments\n\n* `allocator` - Allocator object.\n* `pInfo` - Structure filled with parameters of defragmentation.\n* `pContext` (direction out) - Context object that must be passed to vmaEndDefragmentation() to finish defragmentation.\n# Returns\n\n- `VK_SUCCESS` if defragmentation can begin.\n- `VK_ERROR_FEATURE_NOT_PRESENT` if defragmentation is not supported.\n\nFor more information about defragmentation, see documentation chapter:\n[Defragmentation](defragmentation)."]
     pub fn vmaBeginDefragmentation(
         allocator: VmaAllocator,
@@ -825,7 +825,7 @@ extern "C" {
         pContext: *mut VmaDefragmentationContext,
     ) -> Result;
 }
-extern "C" {
+unsafe extern "C" {
     #[doc = "Ends defragmentation process.\n\n# Arguments\n\n* `allocator` - Allocator object.\n* `context` - Context object that has been created by vmaBeginDefragmentation().\n* `pStats` (direction out) - Optional stats for the defragmentation. Can be null.\n\nUse this function to finish defragmentation started by vmaBeginDefragmentation()."]
     pub fn vmaEndDefragmentation(
         allocator: VmaAllocator,
@@ -833,7 +833,7 @@ extern "C" {
         pStats: *mut VmaDefragmentationStats,
     );
 }
-extern "C" {
+unsafe extern "C" {
     #[doc = "Starts single defragmentation pass.\n\n# Arguments\n\n* `allocator` - Allocator object.\n* `context` - Context object that has been created by vmaBeginDefragmentation().\n* `pPassInfo` (direction out) - Computed information for current pass.\n# Returns\n\n- `VK_SUCCESS` if no more moves are possible. Then you can omit call to vmaEndDefragmentationPass() and simply end whole defragmentation.\n- `VK_INCOMPLETE` if there are pending moves returned in `pPassInfo`. You need to perform them, call vmaEndDefragmentationPass(),\nand then preferably try another pass with vmaBeginDefragmentationPass()."]
     pub fn vmaBeginDefragmentationPass(
         allocator: VmaAllocator,
@@ -841,7 +841,7 @@ extern "C" {
         pPassInfo: *mut VmaDefragmentationPassMoveInfo,
     ) -> Result;
 }
-extern "C" {
+unsafe extern "C" {
     #[doc = "Ends single defragmentation pass.\n\n# Arguments\n\n* `allocator` - Allocator object.\n* `context` - Context object that has been created by vmaBeginDefragmentation().\n* `pPassInfo` - Computed information for current pass filled by vmaBeginDefragmentationPass() and possibly modified by you.\n\nReturns `VK_SUCCESS` if no more moves are possible or `VK_INCOMPLETE` if more defragmentations are possible.\n\nEnds incremental defragmentation pass and commits all defragmentation moves from `pPassInfo`.\nAfter this call:\n\n- Allocations at `pPassInfo[i].srcAllocation` that had `pPassInfo[i].operation ==` #VMA_DEFRAGMENTATION_MOVE_OPERATION_COPY\n(which is the default) will be pointing to the new destination place.\n- Allocation at `pPassInfo[i].srcAllocation` that had `pPassInfo[i].operation ==` #VMA_DEFRAGMENTATION_MOVE_OPERATION_DESTROY\nwill be freed.\n\nIf no more moves are possible you can end whole defragmentation."]
     pub fn vmaEndDefragmentationPass(
         allocator: VmaAllocator,
@@ -849,7 +849,7 @@ extern "C" {
         pPassInfo: *mut VmaDefragmentationPassMoveInfo,
     ) -> Result;
 }
-extern "C" {
+unsafe extern "C" {
     #[doc = "Binds buffer to allocation.\n\nBinds specified buffer to region of memory represented by specified allocation.\nGets `VkDeviceMemory` handle and offset from the allocation.\nIf you want to create a buffer, allocate memory for it and bind them together separately,\nyou should use this function for binding instead of standard `vkBindBufferMemory()`,\nbecause it ensures proper synchronization so that when a `VkDeviceMemory` object is used by multiple\nallocations, calls to `vkBind*Memory()` or `vkMapMemory()` won't happen from multiple threads simultaneously\n(which is illegal in Vulkan).\n\nIt is recommended to use function vmaCreateBuffer() instead of this one."]
     pub fn vmaBindBufferMemory(
         allocator: VmaAllocator,
@@ -857,7 +857,7 @@ extern "C" {
         buffer: Buffer,
     ) -> Result;
 }
-extern "C" {
+unsafe extern "C" {
     #[doc = "Binds buffer to allocation with additional parameters.\n\n# Arguments\n\n* `allocator` -\n* `allocation` -\n* `allocationLocalOffset` - Additional offset to be added while binding, relative to the beginning of the `allocation`. Normally it should be 0.\n* `buffer` -\n* `pNext` - A chain of structures to be attached to `VkBindBufferMemoryInfoKHR` structure used internally. Normally it should be null.\n\nThis function is similar to vmaBindBufferMemory(), but it provides additional parameters.\n\nIf `pNext` is not null, #VmaAllocator object must have been created with #VMA_ALLOCATOR_CREATE_KHR_BIND_MEMORY2_BIT flag\nor with VmaAllocatorCreateInfo::vulkanApiVersion `>= VK_API_VERSION_1_1`. Otherwise the call fails."]
     pub fn vmaBindBufferMemory2(
         allocator: VmaAllocator,
@@ -867,7 +867,7 @@ extern "C" {
         pNext: *const ::core::ffi::c_void,
     ) -> Result;
 }
-extern "C" {
+unsafe extern "C" {
     #[doc = "Binds image to allocation.\n\nBinds specified image to region of memory represented by specified allocation.\nGets `VkDeviceMemory` handle and offset from the allocation.\nIf you want to create an image, allocate memory for it and bind them together separately,\nyou should use this function for binding instead of standard `vkBindImageMemory()`,\nbecause it ensures proper synchronization so that when a `VkDeviceMemory` object is used by multiple\nallocations, calls to `vkBind*Memory()` or `vkMapMemory()` won't happen from multiple threads simultaneously\n(which is illegal in Vulkan).\n\nIt is recommended to use function vmaCreateImage() instead of this one."]
     pub fn vmaBindImageMemory(
         allocator: VmaAllocator,
@@ -875,7 +875,7 @@ extern "C" {
         image: Image,
     ) -> Result;
 }
-extern "C" {
+unsafe extern "C" {
     #[doc = "Binds image to allocation with additional parameters.\n\n# Arguments\n\n* `allocator` -\n* `allocation` -\n* `allocationLocalOffset` - Additional offset to be added while binding, relative to the beginning of the `allocation`. Normally it should be 0.\n* `image` -\n* `pNext` - A chain of structures to be attached to `VkBindImageMemoryInfoKHR` structure used internally. Normally it should be null.\n\nThis function is similar to vmaBindImageMemory(), but it provides additional parameters.\n\nIf `pNext` is not null, #VmaAllocator object must have been created with #VMA_ALLOCATOR_CREATE_KHR_BIND_MEMORY2_BIT flag\nor with VmaAllocatorCreateInfo::vulkanApiVersion `>= VK_API_VERSION_1_1`. Otherwise the call fails."]
     pub fn vmaBindImageMemory2(
         allocator: VmaAllocator,
@@ -885,7 +885,7 @@ extern "C" {
         pNext: *const ::core::ffi::c_void,
     ) -> Result;
 }
-extern "C" {
+unsafe extern "C" {
     #[doc = "Creates a new `VkBuffer`, allocates and binds memory for it.\n\n# Arguments\n\n* `allocator` -\n* `pBufferCreateInfo` -\n* `pAllocationCreateInfo` -\n* `pBuffer` (direction out) - Buffer that was created.\n* `pAllocation` (direction out) - Allocation that was created.\n* `pAllocationInfo` (direction out) - Optional. Information about allocated memory. It can be later fetched using function vmaGetAllocationInfo().\n\nThis function automatically:\n\n-# Creates buffer.\n-# Allocates appropriate memory for it.\n-# Binds the buffer with the memory.\n\nIf any of these operations fail, buffer and allocation are not created,\nreturned value is negative error code, `*pBuffer` and `*pAllocation` are null.\n\nIf the function succeeded, you must destroy both buffer and allocation when you\nno longer need them using either convenience function vmaDestroyBuffer() or\nseparately, using `vkDestroyBuffer()` and vmaFreeMemory().\n\nIf #VMA_ALLOCATOR_CREATE_KHR_DEDICATED_ALLOCATION_BIT flag was used,\nVK_KHR_dedicated_allocation extension is used internally to query driver whether\nit requires or prefers the new buffer to have dedicated allocation. If yes,\nand if dedicated allocation is possible\n(#VMA_ALLOCATION_CREATE_NEVER_ALLOCATE_BIT is not used), it creates dedicated\nallocation for this buffer, just like when using\n#VMA_ALLOCATION_CREATE_DEDICATED_MEMORY_BIT.\n\n> **Note:** This function creates a new `VkBuffer`. Sub-allocation of parts of one large buffer,\nalthough recommended as a good practice, is out of scope of this library and could be implemented\nby the user as a higher-level logic on top of VMA."]
     pub fn vmaCreateBuffer(
         allocator: VmaAllocator,
@@ -896,7 +896,7 @@ extern "C" {
         pAllocationInfo: *mut VmaAllocationInfo,
     ) -> Result;
 }
-extern "C" {
+unsafe extern "C" {
     #[doc = "Creates a buffer with additional minimum alignment.\n\nSimilar to vmaCreateBuffer() but provides additional parameter `minAlignment` which allows to specify custom,\nminimum alignment to be used when placing the buffer inside a larger memory block, which may be needed e.g.\nfor interop with OpenGL."]
     pub fn vmaCreateBufferWithAlignment(
         allocator: VmaAllocator,
@@ -908,7 +908,7 @@ extern "C" {
         pAllocationInfo: *mut VmaAllocationInfo,
     ) -> Result;
 }
-extern "C" {
+unsafe extern "C" {
     #[doc = "Creates a new `VkBuffer`, binds already created memory for it.\n\n# Arguments\n\n* `allocator` -\n* `allocation` - Allocation that provides memory to be used for binding new buffer to it.\n* `pBufferCreateInfo` -\n* `pBuffer` (direction out) - Buffer that was created.\n\nThis function automatically:\n\n-# Creates buffer.\n-# Binds the buffer with the supplied memory.\n\nIf any of these operations fail, buffer is not created,\nreturned value is negative error code and `*pBuffer` is null.\n\nIf the function succeeded, you must destroy the buffer when you\nno longer need it using `vkDestroyBuffer()`. If you want to also destroy the corresponding\nallocation you can use convenience function vmaDestroyBuffer().\n\n> **Note:** There is a new version of this function augmented with parameter `allocationLocalOffset` - see vmaCreateAliasingBuffer2()."]
     pub fn vmaCreateAliasingBuffer(
         allocator: VmaAllocator,
@@ -917,7 +917,7 @@ extern "C" {
         pBuffer: *mut Buffer,
     ) -> Result;
 }
-extern "C" {
+unsafe extern "C" {
     #[doc = "Creates a new `VkBuffer`, binds already created memory for it.\n\n# Arguments\n\n* `allocator` -\n* `allocation` - Allocation that provides memory to be used for binding new buffer to it.\n* `allocationLocalOffset` - Additional offset to be added while binding, relative to the beginning of the allocation. Normally it should be 0.\n* `pBufferCreateInfo` -\n* `pBuffer` (direction out) - Buffer that was created.\n\nThis function automatically:\n\n-# Creates buffer.\n-# Binds the buffer with the supplied memory.\n\nIf any of these operations fail, buffer is not created,\nreturned value is negative error code and `*pBuffer` is null.\n\nIf the function succeeded, you must destroy the buffer when you\nno longer need it using `vkDestroyBuffer()`. If you want to also destroy the corresponding\nallocation you can use convenience function vmaDestroyBuffer().\n\n> **Note:** This is a new version of the function augmented with parameter `allocationLocalOffset`."]
     pub fn vmaCreateAliasingBuffer2(
         allocator: VmaAllocator,
@@ -927,11 +927,11 @@ extern "C" {
         pBuffer: *mut Buffer,
     ) -> Result;
 }
-extern "C" {
+unsafe extern "C" {
     #[doc = "Destroys Vulkan buffer and frees allocated memory.\n\nThis is just a convenience function equivalent to:\n\nvkDestroyBuffer(device, buffer, allocationCallbacks);\nvmaFreeMemory(allocator, allocation);\nIt is safe to pass null as buffer and/or allocation."]
     pub fn vmaDestroyBuffer(allocator: VmaAllocator, buffer: Buffer, allocation: VmaAllocation);
 }
-extern "C" {
+unsafe extern "C" {
     #[doc = "Function similar to vmaCreateBuffer()."]
     pub fn vmaCreateImage(
         allocator: VmaAllocator,
@@ -942,7 +942,7 @@ extern "C" {
         pAllocationInfo: *mut VmaAllocationInfo,
     ) -> Result;
 }
-extern "C" {
+unsafe extern "C" {
     #[doc = "Function similar to vmaCreateAliasingBuffer() but for images."]
     pub fn vmaCreateAliasingImage(
         allocator: VmaAllocator,
@@ -951,7 +951,7 @@ extern "C" {
         pImage: *mut Image,
     ) -> Result;
 }
-extern "C" {
+unsafe extern "C" {
     #[doc = "Function similar to vmaCreateAliasingBuffer2() but for images."]
     pub fn vmaCreateAliasingImage2(
         allocator: VmaAllocator,
@@ -961,26 +961,26 @@ extern "C" {
         pImage: *mut Image,
     ) -> Result;
 }
-extern "C" {
+unsafe extern "C" {
     #[doc = "Destroys Vulkan image and frees allocated memory.\n\nThis is just a convenience function equivalent to:\n\nvkDestroyImage(device, image, allocationCallbacks);\nvmaFreeMemory(allocator, allocation);\nIt is safe to pass null as image and/or allocation."]
     pub fn vmaDestroyImage(allocator: VmaAllocator, image: Image, allocation: VmaAllocation);
 }
-extern "C" {
+unsafe extern "C" {
     #[doc = "Creates new #VmaVirtualBlock object.\n\n# Arguments\n\n* `pCreateInfo` - Parameters for creation.\n* `pVirtualBlock` (direction out) - Returned virtual block object or `VMA_NULL` if creation failed."]
     pub fn vmaCreateVirtualBlock(
         pCreateInfo: *const VmaVirtualBlockCreateInfo,
         pVirtualBlock: *mut VmaVirtualBlock,
     ) -> Result;
 }
-extern "C" {
+unsafe extern "C" {
     #[doc = "Destroys #VmaVirtualBlock object.\n\nPlease note that you should consciously handle virtual allocations that could remain unfreed in the block.\nYou should either free them individually using vmaVirtualFree() or call vmaClearVirtualBlock()\nif you are sure this is what you want. If you do neither, an assert is called.\n\nIf you keep pointers to some additional metadata associated with your virtual allocations in their `pUserData`,\ndon't forget to free them."]
     pub fn vmaDestroyVirtualBlock(virtualBlock: VmaVirtualBlock);
 }
-extern "C" {
+unsafe extern "C" {
     #[doc = "Returns true of the #VmaVirtualBlock is empty - contains 0 virtual allocations and has all its space available for new allocations."]
     pub fn vmaIsVirtualBlockEmpty(virtualBlock: VmaVirtualBlock) -> Bool32;
 }
-extern "C" {
+unsafe extern "C" {
     #[doc = "Returns information about a specific virtual allocation within a virtual block, like its size and `pUserData` pointer."]
     pub fn vmaGetVirtualAllocationInfo(
         virtualBlock: VmaVirtualBlock,
@@ -988,7 +988,7 @@ extern "C" {
         pVirtualAllocInfo: *mut VmaVirtualAllocationInfo,
     );
 }
-extern "C" {
+unsafe extern "C" {
     #[doc = "Allocates new virtual allocation inside given #VmaVirtualBlock.\n\nIf the allocation fails due to not enough free space available, `VK_ERROR_OUT_OF_DEVICE_MEMORY` is returned\n(despite the function doesn't ever allocate actual GPU memory).\n`pAllocation` is then set to `VK_NULL_HANDLE` and `pOffset`, if not null, it set to `UINT64_MAX`.\n\n# Arguments\n\n* `virtualBlock` - Virtual block\n* `pCreateInfo` - Parameters for the allocation\n* `pAllocation` (direction out) - Returned handle of the new allocation\n* `pOffset` (direction out) - Returned offset of the new allocation. Optional, can be null."]
     pub fn vmaVirtualAllocate(
         virtualBlock: VmaVirtualBlock,
@@ -997,15 +997,15 @@ extern "C" {
         pOffset: *mut DeviceSize,
     ) -> Result;
 }
-extern "C" {
+unsafe extern "C" {
     #[doc = "Frees virtual allocation inside given #VmaVirtualBlock.\n\nIt is correct to call this function with `allocation == VK_NULL_HANDLE` - it does nothing."]
     pub fn vmaVirtualFree(virtualBlock: VmaVirtualBlock, allocation: VmaVirtualAllocation);
 }
-extern "C" {
+unsafe extern "C" {
     #[doc = "Frees all virtual allocations inside given #VmaVirtualBlock.\n\nYou must either call this function or free each virtual allocation individually with vmaVirtualFree()\nbefore destroying a virtual block. Otherwise, an assert is called.\n\nIf you keep pointer to some additional metadata associated with your virtual allocation in its `pUserData`,\ndon't forget to free it as well."]
     pub fn vmaClearVirtualBlock(virtualBlock: VmaVirtualBlock);
 }
-extern "C" {
+unsafe extern "C" {
     #[doc = "Changes custom pointer associated with given virtual allocation."]
     pub fn vmaSetVirtualAllocationUserData(
         virtualBlock: VmaVirtualBlock,
@@ -1013,18 +1013,18 @@ extern "C" {
         pUserData: *mut ::core::ffi::c_void,
     );
 }
-extern "C" {
+unsafe extern "C" {
     #[doc = "Calculates and returns statistics about virtual allocations and memory usage in given #VmaVirtualBlock.\n\nThis function is fast to call. For more detailed statistics, see vmaCalculateVirtualBlockStatistics()."]
     pub fn vmaGetVirtualBlockStatistics(virtualBlock: VmaVirtualBlock, pStats: *mut VmaStatistics);
 }
-extern "C" {
+unsafe extern "C" {
     #[doc = "Calculates and returns detailed statistics about virtual allocations and memory usage in given #VmaVirtualBlock.\n\nThis function is slow to call. Use for debugging purposes.\nFor less detailed statistics, see vmaGetVirtualBlockStatistics()."]
     pub fn vmaCalculateVirtualBlockStatistics(
         virtualBlock: VmaVirtualBlock,
         pStats: *mut VmaDetailedStatistics,
     );
 }
-extern "C" {
+unsafe extern "C" {
     #[doc = "Builds and returns a null-terminated string in JSON format with information about given #VmaVirtualBlock.\n# Arguments\n\n* `virtualBlock` - Virtual block.\n* `ppStatsString` (direction out) - Returned string.\n* `detailedMap` - Pass `VK_FALSE` to only obtain statistics as returned by vmaCalculateVirtualBlockStatistics(). Pass `VK_TRUE` to also obtain full list of allocations and free spaces.\n\nReturned string must be freed using vmaFreeVirtualBlockStatsString()."]
     pub fn vmaBuildVirtualBlockStatsString(
         virtualBlock: VmaVirtualBlock,
@@ -1032,14 +1032,14 @@ extern "C" {
         detailedMap: Bool32,
     );
 }
-extern "C" {
+unsafe extern "C" {
     #[doc = "Frees a string returned by vmaBuildVirtualBlockStatsString()."]
     pub fn vmaFreeVirtualBlockStatsString(
         virtualBlock: VmaVirtualBlock,
         pStatsString: *mut ::core::ffi::c_char,
     );
 }
-extern "C" {
+unsafe extern "C" {
     #[doc = "Builds and returns statistics as a null-terminated string in JSON format.\n# Arguments\n\n* `allocator` -\n* `ppStatsString` (direction out) - Must be freed using vmaFreeStatsString() function.\n* `detailedMap` -"]
     pub fn vmaBuildStatsString(
         allocator: VmaAllocator,
@@ -1047,6 +1047,6 @@ extern "C" {
         detailedMap: Bool32,
     );
 }
-extern "C" {
+unsafe extern "C" {
     pub fn vmaFreeStatsString(allocator: VmaAllocator, pStatsString: *mut ::core::ffi::c_char);
 }

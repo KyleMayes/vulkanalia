@@ -7,9 +7,9 @@ use vulkanalia::prelude::v1_0::*;
 use vulkanalia::vk::{DeviceCommands, InstanceCommands};
 use vulkanalia::{ResultExt, Version};
 
+use crate::Allocation;
 use crate::flags::AllocatorCreateFlags;
 use crate::vma::*;
-use crate::Allocation;
 
 #[derive(Copy, Clone, Debug)]
 pub struct AllocatorOptions<'a> {
