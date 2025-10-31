@@ -108,3 +108,4 @@ pub struct NvSciSyncFence {
 
 pub type OHBufferHandle = c_void;
 pub type OHNativeWindow = c_void;
+pub type OH_NativeBuffer = c_void;
