@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       RUST_LOG: info
-      RUST_VERSION: 1.81.0
+      RUST_VERSION: 1.88.0
       MDBOOK_VERSION: 0.4.21
     steps:
       # Checkout
