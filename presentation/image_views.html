@@ -134,7 +134,7 @@
                     <main>
                         <h1 id="image-views"><a class="header" href="#image-views">Image views</a></h1>
 <p><strong>Code:</strong> <a href="https://github.com/KyleMayes/vulkanalia/tree/master/tutorial/src/07_image_views.rs">main.rs</a></p>
-<p>To use any <a href="https://docs.rs/vulkanalia/0.31.0/vulkanalia/vk/struct.Image.html"><code class="hljs">vk::Image</code></a>, including those in the swapchain, in the render pipeline we have to create a <a href="https://docs.rs/vulkanalia/0.31.0/vulkanalia/vk/struct.ImageView.html"><code class="hljs">vk::ImageView</code></a> object. An image view is quite literally a view into an image. It describes how to access the image and which part of the image to access, for example if it should be treated as a 2D texture depth texture without any mipmapping levels.</p>
+<p>To use any <a href="https://docs.rs/vulkanalia/0.32.0/vulkanalia/vk/struct.Image.html"><code class="hljs">vk::Image</code></a>, including those in the swapchain, in the render pipeline we have to create a <a href="https://docs.rs/vulkanalia/0.32.0/vulkanalia/vk/struct.ImageView.html"><code class="hljs">vk::ImageView</code></a> object. An image view is quite literally a view into an image. It describes how to access the image and which part of the image to access, for example if it should be treated as a 2D texture depth texture without any mipmapping levels.</p>
 <p>In this chapter we'll write a <code>create_swapchain_image_views</code> function that creates a basic image view for every image in the swapchain so that we can use them as color targets later on.</p>
 <p>First add an <code>AppData</code> field to store the image views in:</p>
 <pre><code class="language-rust noplaypen">struct AppData {
@@ -192,7 +192,7 @@ unsafe fn create_swapchain_image_views(
     .layer_count(1);
 </code></pre>
 <p>If you were working on a stereographic 3D application, then you would create a swapchain with multiple layers. You could then create multiple image views for each image representing the views for the left and right eyes by accessing different layers.</p>
-<p>We can now create a <a href="https://docs.rs/vulkanalia/0.31.0/vulkanalia/vk/struct.ImageViewCreateInfo.html"><code class="hljs">vk::ImageViewCreateInfo</code></a> struct which provides the parameters for image view creation.</p>
+<p>We can now create a <a href="https://docs.rs/vulkanalia/0.32.0/vulkanalia/vk/struct.ImageViewCreateInfo.html"><code class="hljs">vk::ImageViewCreateInfo</code></a> struct which provides the parameters for image view creation.</p>
 <pre><code class="language-rust noplaypen">let info = vk::ImageViewCreateInfo::builder()
     .image(*i)
     .view_type(vk::ImageViewType::_2D)
@@ -201,7 +201,7 @@ unsafe fn create_swapchain_image_views(
     .subresource_range(subresource_range);
 </code></pre>
 <p>The <code>view_type</code> and <code>format</code> fields specify how the image data should be interpreted. The <code>view_type</code> field allows you to treat images as 1D textures, 2D textures, 3D textures, and cube maps.</p>
-<p>Creating the image view is now a matter of calling <a href="https://docs.rs/vulkanalia/0.31.0/vulkanalia/vk/trait.DeviceV1_0.html#method.create_image_view"><code class="hljs">create_image_view</code></a>:</p>
+<p>Creating the image view is now a matter of calling <a href="https://docs.rs/vulkanalia/0.32.0/vulkanalia/vk/trait.DeviceV1_0.html#method.create_image_view"><code class="hljs">create_image_view</code></a>:</p>
 <pre><code class="language-rust noplaypen">device.create_image_view(&amp;info, None)
 </code></pre>
 <p>Unlike images, the image views were explicitly created by us, so we need to add a similar loop to destroy them again in <code>App::destroy</code>:</p>
