@@ -176,7 +176,7 @@ impl<const N: usize> StringArray<N> {
 
     /// Converts this string array to a UTF-8 string (lossily).
     #[inline]
-    pub fn to_string_lossy(&self) -> Cow<str> {
+    pub fn to_string_lossy(&self) -> Cow<'_, str> {
         let bytes = self.as_bytes();
         let nul = bytes.iter().position(|b| *b == b'\0');
         let end = nul.unwrap_or(N);
