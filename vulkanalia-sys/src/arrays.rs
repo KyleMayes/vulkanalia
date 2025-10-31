@@ -150,7 +150,7 @@ impl<const N: usize> StringArray<N> {
     /// * `ptr` must be a pointer to a null-terminated string
     #[inline]
     pub unsafe fn from_ptr(ptr: *const c_char) -> Self {
-        Self::from_cstr(CStr::from_ptr(ptr))
+        Self::from_cstr(unsafe { CStr::from_ptr(ptr) })
     }
 
     /// Gets the underlying character array for this string array.
