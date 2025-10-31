@@ -2,18 +2,19 @@
 
 #![allow(
     dead_code,
+    unsafe_op_in_unsafe_fn,
     unused_variables,
     clippy::manual_slice_size_calculation,
     clippy::too_many_arguments,
     clippy::unnecessary_wraps
 )]
 
-use anyhow::{anyhow, Result};
+use anyhow::{Result, anyhow};
 use log::*;
-use vulkanalia::loader::{LibloadingLoader, LIBRARY};
+use vulkanalia::Version;
+use vulkanalia::loader::{LIBRARY, LibloadingLoader};
 use vulkanalia::prelude::v1_0::*;
 use vulkanalia::window as vk_window;
-use vulkanalia::Version;
 use winit::dpi::LogicalSize;
 use winit::event::{Event, WindowEvent};
 use winit::event_loop::EventLoop;
