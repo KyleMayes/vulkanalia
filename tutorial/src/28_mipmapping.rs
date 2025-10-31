@@ -2,6 +2,7 @@
 
 #![allow(
     dead_code,
+    unsafe_op_in_unsafe_fn,
     unused_variables,
     clippy::manual_slice_size_calculation,
     clippy::too_many_arguments,

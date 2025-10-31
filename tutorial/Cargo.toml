@@ -2,7 +2,7 @@
 
 publish = false
 
-edition = "2021"
+edition = "2024"
 
 name = "tutorial"
 authors = ["Kyle Mayes <kyle@mayeses.com>"]
