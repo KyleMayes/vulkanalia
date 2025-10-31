@@ -56,6 +56,7 @@
 
 #![cfg_attr(not(feature = "std"), no_std)]
 #![cfg_attr(feature = "no_std_error", feature(error_in_core))]
+#![allow(unsafe_op_in_unsafe_fn)]
 
 extern crate alloc;
 
