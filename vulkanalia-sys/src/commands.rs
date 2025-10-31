@@ -35,6 +35,15 @@ pub type PFN_vkAcquireDrmDisplayEXT = unsafe extern "system" fn(
 pub type PFN_vkAcquireFullScreenExclusiveModeEXT =
     unsafe extern "system" fn(_device: Device, _swapchain: SwapchainKHR) -> Result;
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkAcquireImageOHOS.html>
+pub type PFN_vkAcquireImageOHOS = unsafe extern "system" fn(
+    _device: Device,
+    _image: Image,
+    _native_fence_fd: i32,
+    _semaphore: Semaphore,
+    _fence: Fence,
+) -> Result;
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkAcquireNextImage2KHR.html>
 pub type PFN_vkAcquireNextImage2KHR = unsafe extern "system" fn(
     _device: Device,
@@ -719,6 +728,22 @@ pub type PFN_vkCmdDecodeVideoKHR = unsafe extern "system" fn(
     _decode_info: *const VideoDecodeInfoKHR,
 );
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdDecompressMemoryEXT.html>
+pub type PFN_vkCmdDecompressMemoryEXT = unsafe extern "system" fn(
+    _command_buffer: CommandBuffer,
+    _decompress_memory_info_ext: *const DecompressMemoryInfoEXT,
+);
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdDecompressMemoryIndirectCountEXT.html>
+pub type PFN_vkCmdDecompressMemoryIndirectCountEXT = unsafe extern "system" fn(
+    _command_buffer: CommandBuffer,
+    _decompression_method: MemoryDecompressionMethodFlagsEXT,
+    _indirect_commands_address: DeviceAddress,
+    _indirect_commands_count_address: DeviceAddress,
+    _max_decompression_count: u32,
+    _stride: u32,
+);
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdDecompressMemoryIndirectCountNV.html>
 pub type PFN_vkCmdDecompressMemoryIndirectCountNV = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
@@ -1011,9 +1036,12 @@ pub type PFN_vkCmdEndRenderPass2KHR = PFN_vkCmdEndRenderPass2;
 pub type PFN_vkCmdEndRendering = unsafe extern "system" fn(_command_buffer: CommandBuffer);
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdEndRendering2EXT.html>
-pub type PFN_vkCmdEndRendering2EXT = unsafe extern "system" fn(
+pub type PFN_vkCmdEndRendering2EXT = PFN_vkCmdEndRendering2KHR;
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdEndRendering2KHR.html>
+pub type PFN_vkCmdEndRendering2KHR = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
-    _rendering_end_info: *const RenderingEndInfoEXT,
+    _rendering_end_info: *const RenderingEndInfoKHR,
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdEndRenderingKHR.html>
@@ -3094,6 +3122,16 @@ pub type PFN_vkEnumeratePhysicalDeviceGroups = unsafe extern "system" fn(
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkEnumeratePhysicalDeviceGroupsKHR.html>
 pub type PFN_vkEnumeratePhysicalDeviceGroupsKHR = PFN_vkEnumeratePhysicalDeviceGroups;
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkEnumeratePhysicalDeviceQueueFamilyPerformanceCountersByRegionARM.html>
+pub type PFN_vkEnumeratePhysicalDeviceQueueFamilyPerformanceCountersByRegionARM =
+    unsafe extern "system" fn(
+        _physical_device: PhysicalDevice,
+        _queue_family_index: u32,
+        _counter_count: *mut u32,
+        _counters: *mut PerformanceCounterARM,
+        _counter_descriptions: *mut PerformanceCounterDescriptionARM,
+    ) -> Result;
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR.html>
 pub type PFN_vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR =
     unsafe extern "system" fn(
@@ -3790,6 +3828,13 @@ pub type PFN_vkGetMemoryMetalHandlePropertiesEXT = unsafe extern "system" fn(
     _memory_metal_handle_properties: *mut MemoryMetalHandlePropertiesEXT,
 ) -> Result;
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetMemoryNativeBufferOHOS.html>
+pub type PFN_vkGetMemoryNativeBufferOHOS = unsafe extern "system" fn(
+    _device: Device,
+    _info: *const MemoryGetNativeBufferInfoOHOS,
+    _buffer: *mut *mut OH_NativeBuffer,
+) -> Result;
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetMemoryRemoteAddressNV.html>
 pub type PFN_vkGetMemoryRemoteAddressNV = unsafe extern "system" fn(
     _device: Device,
@@ -3849,6 +3894,13 @@ pub type PFN_vkGetMicromapBuildSizesEXT = unsafe extern "system" fn(
     _build_info: *const MicromapBuildInfoEXT,
     _size_info: *mut MicromapBuildSizesInfoEXT,
 );
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetNativeBufferPropertiesOHOS.html>
+pub type PFN_vkGetNativeBufferPropertiesOHOS = unsafe extern "system" fn(
+    _device: Device,
+    _buffer: *const OH_NativeBuffer,
+    _properties: *mut NativeBufferPropertiesOHOS,
+) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetPartitionedAccelerationStructuresBuildSizesNV.html>
 pub type PFN_vkGetPartitionedAccelerationStructuresBuildSizesNV = unsafe extern "system" fn(
@@ -4606,6 +4658,14 @@ pub type PFN_vkGetSwapchainCounterEXT = unsafe extern "system" fn(
     _counter_value: *mut u64,
 ) -> Result;
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetSwapchainGrallocUsageOHOS.html>
+pub type PFN_vkGetSwapchainGrallocUsageOHOS = unsafe extern "system" fn(
+    _device: Device,
+    _format: Format,
+    _image_usage: ImageUsageFlags,
+    _gralloc_usage: *mut u64,
+) -> Result;
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetSwapchainImagesKHR.html>
 pub type PFN_vkGetSwapchainImagesKHR = unsafe extern "system" fn(
     _device: Device,
@@ -4797,6 +4857,15 @@ pub type PFN_vkQueuePresentKHR =
 pub type PFN_vkQueueSetPerformanceConfigurationINTEL = unsafe extern "system" fn(
     _queue: Queue,
     _configuration: PerformanceConfigurationINTEL,
+) -> Result;
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkQueueSignalReleaseImageOHOS.html>
+pub type PFN_vkQueueSignalReleaseImageOHOS = unsafe extern "system" fn(
+    _queue: Queue,
+    _wait_semaphore_count: u32,
+    _wait_semaphores: *const Semaphore,
+    _image: Image,
+    _native_fence_fd: *mut i32,
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkQueueSubmit.html>

@@ -4932,6 +4932,43 @@ impl Default for DebugUtilsObjectTagInfoEXT {
 unsafe impl Send for DebugUtilsObjectTagInfoEXT {}
 unsafe impl Sync for DebugUtilsObjectTagInfoEXT {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDecompressMemoryInfoEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct DecompressMemoryInfoEXT {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub decompression_method: MemoryDecompressionMethodFlagsEXT,
+    pub region_count: u32,
+    pub regions: *const DecompressMemoryRegionEXT,
+}
+
+impl Default for DecompressMemoryInfoEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::DECOMPRESS_MEMORY_INFO_EXT,
+            next: ptr::null(),
+            decompression_method: MemoryDecompressionMethodFlagsEXT::default(),
+            region_count: u32::default(),
+            regions: ptr::null(),
+        }
+    }
+}
+
+unsafe impl Send for DecompressMemoryInfoEXT {}
+unsafe impl Sync for DecompressMemoryInfoEXT {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDecompressMemoryRegionEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
+pub struct DecompressMemoryRegionEXT {
+    pub src_address: DeviceAddress,
+    pub dst_address: DeviceAddress,
+    pub compressed_size: DeviceSize,
+    pub decompressed_size: DeviceSize,
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDecompressMemoryRegionNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
@@ -7754,6 +7791,29 @@ impl Default for ExternalFormatANDROID {
 unsafe impl Send for ExternalFormatANDROID {}
 unsafe impl Sync for ExternalFormatANDROID {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkExternalFormatOHOS.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct ExternalFormatOHOS {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub external_format: u64,
+}
+
+impl Default for ExternalFormatOHOS {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::EXTERNAL_FORMAT_OHOS,
+            next: ptr::null_mut(),
+            external_format: u64::default(),
+        }
+    }
+}
+
+unsafe impl Send for ExternalFormatOHOS {}
+unsafe impl Sync for ExternalFormatOHOS {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkExternalFormatQNX.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -10408,6 +10468,29 @@ impl Default for ImportMetalTextureInfoEXT {
 unsafe impl Send for ImportMetalTextureInfoEXT {}
 unsafe impl Sync for ImportMetalTextureInfoEXT {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImportNativeBufferInfoOHOS.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct ImportNativeBufferInfoOHOS {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub buffer: *mut OH_NativeBuffer,
+}
+
+impl Default for ImportNativeBufferInfoOHOS {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::IMPORT_NATIVE_BUFFER_INFO_OHOS,
+            next: ptr::null(),
+            buffer: ptr::null_mut(),
+        }
+    }
+}
+
+unsafe impl Send for ImportNativeBufferInfoOHOS {}
+unsafe impl Sync for ImportNativeBufferInfoOHOS {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImportScreenBufferInfoQNX.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -11458,6 +11541,29 @@ impl Default for MemoryGetMetalHandleInfoEXT {
 unsafe impl Send for MemoryGetMetalHandleInfoEXT {}
 unsafe impl Sync for MemoryGetMetalHandleInfoEXT {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMemoryGetNativeBufferInfoOHOS.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct MemoryGetNativeBufferInfoOHOS {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub memory: DeviceMemory,
+}
+
+impl Default for MemoryGetNativeBufferInfoOHOS {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::MEMORY_GET_NATIVE_BUFFER_INFO_OHOS,
+            next: ptr::null(),
+            memory: DeviceMemory::default(),
+        }
+    }
+}
+
+unsafe impl Send for MemoryGetNativeBufferInfoOHOS {}
+unsafe impl Sync for MemoryGetNativeBufferInfoOHOS {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMemoryGetRemoteAddressInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -12207,6 +12313,114 @@ impl Default for MutableDescriptorTypeListEXT {
 unsafe impl Send for MutableDescriptorTypeListEXT {}
 unsafe impl Sync for MutableDescriptorTypeListEXT {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkNativeBufferFormatPropertiesOHOS.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct NativeBufferFormatPropertiesOHOS {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub format: Format,
+    pub external_format: u64,
+    pub format_features: FormatFeatureFlags,
+    pub sampler_ycbcr_conversion_components: ComponentMapping,
+    pub suggested_ycbcr_model: SamplerYcbcrModelConversion,
+    pub suggested_ycbcr_range: SamplerYcbcrRange,
+    pub suggested_x_chroma_offset: ChromaLocation,
+    pub suggested_y_chroma_offset: ChromaLocation,
+}
+
+impl Default for NativeBufferFormatPropertiesOHOS {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::NATIVE_BUFFER_FORMAT_PROPERTIES_OHOS,
+            next: ptr::null_mut(),
+            format: Format::default(),
+            external_format: u64::default(),
+            format_features: FormatFeatureFlags::default(),
+            sampler_ycbcr_conversion_components: ComponentMapping::default(),
+            suggested_ycbcr_model: SamplerYcbcrModelConversion::default(),
+            suggested_ycbcr_range: SamplerYcbcrRange::default(),
+            suggested_x_chroma_offset: ChromaLocation::default(),
+            suggested_y_chroma_offset: ChromaLocation::default(),
+        }
+    }
+}
+
+unsafe impl Send for NativeBufferFormatPropertiesOHOS {}
+unsafe impl Sync for NativeBufferFormatPropertiesOHOS {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkNativeBufferOHOS.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct NativeBufferOHOS {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub handle: *mut OHBufferHandle,
+}
+
+impl Default for NativeBufferOHOS {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::NATIVE_BUFFER_OHOS,
+            next: ptr::null(),
+            handle: ptr::null_mut(),
+        }
+    }
+}
+
+unsafe impl Send for NativeBufferOHOS {}
+unsafe impl Sync for NativeBufferOHOS {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkNativeBufferPropertiesOHOS.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct NativeBufferPropertiesOHOS {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub allocation_size: DeviceSize,
+    pub memory_type_bits: u32,
+}
+
+impl Default for NativeBufferPropertiesOHOS {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::NATIVE_BUFFER_PROPERTIES_OHOS,
+            next: ptr::null_mut(),
+            allocation_size: DeviceSize::default(),
+            memory_type_bits: u32::default(),
+        }
+    }
+}
+
+unsafe impl Send for NativeBufferPropertiesOHOS {}
+unsafe impl Sync for NativeBufferPropertiesOHOS {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkNativeBufferUsageOHOS.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct NativeBufferUsageOHOS {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub ohos_native_buffer_usage: u64,
+}
+
+impl Default for NativeBufferUsageOHOS {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::NATIVE_BUFFER_USAGE_OHOS,
+            next: ptr::null_mut(),
+            ohos_native_buffer_usage: u64::default(),
+        }
+    }
+}
+
+unsafe impl Send for NativeBufferUsageOHOS {}
+unsafe impl Sync for NativeBufferUsageOHOS {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkOffset2D.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
@@ -12570,6 +12784,54 @@ impl Default for PerformanceConfigurationAcquireInfoINTEL {
 
 unsafe impl Send for PerformanceConfigurationAcquireInfoINTEL {}
 unsafe impl Sync for PerformanceConfigurationAcquireInfoINTEL {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPerformanceCounterARM.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PerformanceCounterARM {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub counter_id: u32,
+}
+
+impl Default for PerformanceCounterARM {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PERFORMANCE_COUNTER_ARM,
+            next: ptr::null_mut(),
+            counter_id: u32::default(),
+        }
+    }
+}
+
+unsafe impl Send for PerformanceCounterARM {}
+unsafe impl Sync for PerformanceCounterARM {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPerformanceCounterDescriptionARM.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PerformanceCounterDescriptionARM {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub flags: PerformanceCounterDescriptionFlagsARM,
+    pub name: StringArray<MAX_DESCRIPTION_SIZE>,
+}
+
+impl Default for PerformanceCounterDescriptionARM {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PERFORMANCE_COUNTER_DESCRIPTION_ARM,
+            next: ptr::null_mut(),
+            flags: PerformanceCounterDescriptionFlagsARM::default(),
+            name: StringArray::default(),
+        }
+    }
+}
+
+unsafe impl Send for PerformanceCounterDescriptionARM {}
+unsafe impl Sync for PerformanceCounterDescriptionARM {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPerformanceCounterDescriptionKHR.html>
 #[repr(C)]
@@ -17308,6 +17570,56 @@ impl Default for PhysicalDeviceLinearColorAttachmentFeaturesNV {
 unsafe impl Send for PhysicalDeviceLinearColorAttachmentFeaturesNV {}
 unsafe impl Sync for PhysicalDeviceLinearColorAttachmentFeaturesNV {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceMaintenance10FeaturesKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceMaintenance10FeaturesKHR {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub maintenance10: Bool32,
+}
+
+impl Default for PhysicalDeviceMaintenance10FeaturesKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_MAINTENANCE_10_FEATURES_KHR,
+            next: ptr::null_mut(),
+            maintenance10: Bool32::default(),
+        }
+    }
+}
+
+unsafe impl Send for PhysicalDeviceMaintenance10FeaturesKHR {}
+unsafe impl Sync for PhysicalDeviceMaintenance10FeaturesKHR {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceMaintenance10PropertiesKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceMaintenance10PropertiesKHR {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub rgba4_opaque_black_swizzled: Bool32,
+    pub resolve_srgb_format_applies_transfer_function: Bool32,
+    pub resolve_srgb_format_supports_transfer_function_control: Bool32,
+}
+
+impl Default for PhysicalDeviceMaintenance10PropertiesKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_MAINTENANCE_10_PROPERTIES_KHR,
+            next: ptr::null_mut(),
+            rgba4_opaque_black_swizzled: Bool32::default(),
+            resolve_srgb_format_applies_transfer_function: Bool32::default(),
+            resolve_srgb_format_supports_transfer_function_control: Bool32::default(),
+        }
+    }
+}
+
+unsafe impl Send for PhysicalDeviceMaintenance10PropertiesKHR {}
+unsafe impl Sync for PhysicalDeviceMaintenance10PropertiesKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceMaintenance3Properties.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -17691,53 +18003,53 @@ impl Default for PhysicalDeviceMemoryBudgetPropertiesEXT {
 unsafe impl Send for PhysicalDeviceMemoryBudgetPropertiesEXT {}
 unsafe impl Sync for PhysicalDeviceMemoryBudgetPropertiesEXT {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceMemoryDecompressionFeaturesNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceMemoryDecompressionFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
-pub struct PhysicalDeviceMemoryDecompressionFeaturesNV {
+pub struct PhysicalDeviceMemoryDecompressionFeaturesEXT {
     pub s_type: StructureType,
     pub next: *mut c_void,
     pub memory_decompression: Bool32,
 }
 
-impl Default for PhysicalDeviceMemoryDecompressionFeaturesNV {
+impl Default for PhysicalDeviceMemoryDecompressionFeaturesEXT {
     #[inline]
     fn default() -> Self {
         Self {
-            s_type: StructureType::PHYSICAL_DEVICE_MEMORY_DECOMPRESSION_FEATURES_NV,
+            s_type: StructureType::PHYSICAL_DEVICE_MEMORY_DECOMPRESSION_FEATURES_EXT,
             next: ptr::null_mut(),
             memory_decompression: Bool32::default(),
         }
     }
 }
 
-unsafe impl Send for PhysicalDeviceMemoryDecompressionFeaturesNV {}
-unsafe impl Sync for PhysicalDeviceMemoryDecompressionFeaturesNV {}
+unsafe impl Send for PhysicalDeviceMemoryDecompressionFeaturesEXT {}
+unsafe impl Sync for PhysicalDeviceMemoryDecompressionFeaturesEXT {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceMemoryDecompressionPropertiesNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceMemoryDecompressionPropertiesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
-pub struct PhysicalDeviceMemoryDecompressionPropertiesNV {
+pub struct PhysicalDeviceMemoryDecompressionPropertiesEXT {
     pub s_type: StructureType,
     pub next: *mut c_void,
-    pub decompression_methods: MemoryDecompressionMethodFlagsNV,
+    pub decompression_methods: MemoryDecompressionMethodFlagsEXT,
     pub max_decompression_indirect_count: u64,
 }
 
-impl Default for PhysicalDeviceMemoryDecompressionPropertiesNV {
+impl Default for PhysicalDeviceMemoryDecompressionPropertiesEXT {
     #[inline]
     fn default() -> Self {
         Self {
-            s_type: StructureType::PHYSICAL_DEVICE_MEMORY_DECOMPRESSION_PROPERTIES_NV,
+            s_type: StructureType::PHYSICAL_DEVICE_MEMORY_DECOMPRESSION_PROPERTIES_EXT,
             next: ptr::null_mut(),
-            decompression_methods: MemoryDecompressionMethodFlagsNV::default(),
+            decompression_methods: MemoryDecompressionMethodFlagsEXT::default(),
             max_decompression_indirect_count: u64::default(),
         }
     }
 }
 
-unsafe impl Send for PhysicalDeviceMemoryDecompressionPropertiesNV {}
-unsafe impl Sync for PhysicalDeviceMemoryDecompressionPropertiesNV {}
+unsafe impl Send for PhysicalDeviceMemoryDecompressionPropertiesEXT {}
+unsafe impl Sync for PhysicalDeviceMemoryDecompressionPropertiesEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceMemoryPriorityFeaturesEXT.html>
 #[repr(C)]
@@ -18503,6 +18815,60 @@ impl Default for PhysicalDevicePerStageDescriptorSetFeaturesNV {
 unsafe impl Send for PhysicalDevicePerStageDescriptorSetFeaturesNV {}
 unsafe impl Sync for PhysicalDevicePerStageDescriptorSetFeaturesNV {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDevicePerformanceCountersByRegionFeaturesARM.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDevicePerformanceCountersByRegionFeaturesARM {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub performance_counters_by_region: Bool32,
+}
+
+impl Default for PhysicalDevicePerformanceCountersByRegionFeaturesARM {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_PERFORMANCE_COUNTERS_BY_REGION_FEATURES_ARM,
+            next: ptr::null_mut(),
+            performance_counters_by_region: Bool32::default(),
+        }
+    }
+}
+
+unsafe impl Send for PhysicalDevicePerformanceCountersByRegionFeaturesARM {}
+unsafe impl Sync for PhysicalDevicePerformanceCountersByRegionFeaturesARM {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDevicePerformanceCountersByRegionPropertiesARM.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDevicePerformanceCountersByRegionPropertiesARM {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub max_per_region_performance_counters: u32,
+    pub performance_counter_region_size: Extent2D,
+    pub row_stride_alignment: u32,
+    pub region_alignment: u32,
+    pub identity_transform_order: Bool32,
+}
+
+impl Default for PhysicalDevicePerformanceCountersByRegionPropertiesARM {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_PERFORMANCE_COUNTERS_BY_REGION_PROPERTIES_ARM,
+            next: ptr::null_mut(),
+            max_per_region_performance_counters: u32::default(),
+            performance_counter_region_size: Extent2D::default(),
+            row_stride_alignment: u32::default(),
+            region_alignment: u32::default(),
+            identity_transform_order: Bool32::default(),
+        }
+    }
+}
+
+unsafe impl Send for PhysicalDevicePerformanceCountersByRegionPropertiesARM {}
+unsafe impl Sync for PhysicalDevicePerformanceCountersByRegionPropertiesARM {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDevicePerformanceQueryFeaturesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -19075,6 +19441,29 @@ impl Default for PhysicalDevicePresentWaitFeaturesKHR {
 
 unsafe impl Send for PhysicalDevicePresentWaitFeaturesKHR {}
 unsafe impl Sync for PhysicalDevicePresentWaitFeaturesKHR {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDevicePresentationPropertiesOHOS.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDevicePresentationPropertiesOHOS {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub shared_image: Bool32,
+}
+
+impl Default for PhysicalDevicePresentationPropertiesOHOS {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_PRESENTATION_PROPERTIES_OHOS,
+            next: ptr::null_mut(),
+            shared_image: Bool32::default(),
+        }
+    }
+}
+
+unsafe impl Send for PhysicalDevicePresentationPropertiesOHOS {}
+unsafe impl Sync for PhysicalDevicePresentationPropertiesOHOS {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDevicePrimitiveTopologyListRestartFeaturesEXT.html>
 #[repr(C)]
@@ -20020,6 +20409,29 @@ impl Default for PhysicalDeviceSeparateDepthStencilLayoutsFeatures {
 
 unsafe impl Send for PhysicalDeviceSeparateDepthStencilLayoutsFeatures {}
 unsafe impl Sync for PhysicalDeviceSeparateDepthStencilLayoutsFeatures {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShader64BitIndexingFeaturesEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceShader64BitIndexingFeaturesEXT {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub shader_64bit_indexing: Bool32,
+}
+
+impl Default for PhysicalDeviceShader64BitIndexingFeaturesEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_SHADER_64_BIT_INDEXING_FEATURES_EXT,
+            next: ptr::null_mut(),
+            shader_64bit_indexing: Bool32::default(),
+        }
+    }
+}
+
+unsafe impl Send for PhysicalDeviceShader64BitIndexingFeaturesEXT {}
+unsafe impl Sync for PhysicalDeviceShader64BitIndexingFeaturesEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderAtomicFloat16VectorFeaturesNV.html>
 #[repr(C)]
@@ -21140,6 +21552,29 @@ impl Default for PhysicalDeviceShaderTileImagePropertiesEXT {
 
 unsafe impl Send for PhysicalDeviceShaderTileImagePropertiesEXT {}
 unsafe impl Sync for PhysicalDeviceShaderTileImagePropertiesEXT {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderUniformBufferUnsizedArrayFeaturesEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceShaderUniformBufferUnsizedArrayFeaturesEXT {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub shader_uniform_buffer_unsized_array: Bool32,
+}
+
+impl Default for PhysicalDeviceShaderUniformBufferUnsizedArrayFeaturesEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_SHADER_UNIFORM_BUFFER_UNSIZED_ARRAY_FEATURES_EXT,
+            next: ptr::null_mut(),
+            shader_uniform_buffer_unsized_array: Bool32::default(),
+        }
+    }
+}
+
+unsafe impl Send for PhysicalDeviceShaderUniformBufferUnsizedArrayFeaturesEXT {}
+unsafe impl Sync for PhysicalDeviceShaderUniformBufferUnsizedArrayFeaturesEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderUntypedPointersFeaturesKHR.html>
 #[repr(C)]
@@ -26070,6 +26505,37 @@ impl Default for RenderPassMultiviewCreateInfo {
 unsafe impl Send for RenderPassMultiviewCreateInfo {}
 unsafe impl Sync for RenderPassMultiviewCreateInfo {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRenderPassPerformanceCountersByRegionBeginInfoARM.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct RenderPassPerformanceCountersByRegionBeginInfoARM {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub counter_address_count: u32,
+    pub counter_addresses: *const DeviceAddress,
+    pub serialize_regions: Bool32,
+    pub counter_index_count: u32,
+    pub counter_indices: *mut u32,
+}
+
+impl Default for RenderPassPerformanceCountersByRegionBeginInfoARM {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::RENDER_PASS_PERFORMANCE_COUNTERS_BY_REGION_BEGIN_INFO_ARM,
+            next: ptr::null_mut(),
+            counter_address_count: u32::default(),
+            counter_addresses: ptr::null(),
+            serialize_regions: Bool32::default(),
+            counter_index_count: u32::default(),
+            counter_indices: ptr::null_mut(),
+        }
+    }
+}
+
+unsafe impl Send for RenderPassPerformanceCountersByRegionBeginInfoARM {}
+unsafe impl Sync for RenderPassPerformanceCountersByRegionBeginInfoARM {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRenderPassSampleLocationsBeginInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -26283,6 +26749,29 @@ impl Default for RenderingAreaInfo {
 unsafe impl Send for RenderingAreaInfo {}
 unsafe impl Sync for RenderingAreaInfo {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRenderingAttachmentFlagsInfoKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct RenderingAttachmentFlagsInfoKHR {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub flags: RenderingAttachmentFlagsKHR,
+}
+
+impl Default for RenderingAttachmentFlagsInfoKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::RENDERING_ATTACHMENT_FLAGS_INFO_KHR,
+            next: ptr::null(),
+            flags: RenderingAttachmentFlagsKHR::default(),
+        }
+    }
+}
+
+unsafe impl Send for RenderingAttachmentFlagsInfoKHR {}
+unsafe impl Sync for RenderingAttachmentFlagsInfoKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRenderingAttachmentInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug)]
@@ -26345,26 +26834,26 @@ impl Default for RenderingAttachmentLocationInfo {
 unsafe impl Send for RenderingAttachmentLocationInfo {}
 unsafe impl Sync for RenderingAttachmentLocationInfo {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRenderingEndInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRenderingEndInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
-pub struct RenderingEndInfoEXT {
+pub struct RenderingEndInfoKHR {
     pub s_type: StructureType,
     pub next: *const c_void,
 }
 
-impl Default for RenderingEndInfoEXT {
+impl Default for RenderingEndInfoKHR {
     #[inline]
     fn default() -> Self {
         Self {
-            s_type: StructureType::RENDERING_END_INFO_EXT,
+            s_type: StructureType::RENDERING_END_INFO_KHR,
             next: ptr::null(),
         }
     }
 }
 
-unsafe impl Send for RenderingEndInfoEXT {}
-unsafe impl Sync for RenderingEndInfoEXT {}
+unsafe impl Send for RenderingEndInfoKHR {}
+unsafe impl Sync for RenderingEndInfoKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRenderingFragmentDensityMapAttachmentInfoEXT.html>
 #[repr(C)]
@@ -26516,6 +27005,33 @@ impl Default for ResolveImageInfo2 {
 
 unsafe impl Send for ResolveImageInfo2 {}
 unsafe impl Sync for ResolveImageInfo2 {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkResolveImageModeInfoKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct ResolveImageModeInfoKHR {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub flags: ResolveImageFlagsKHR,
+    pub resolve_mode: ResolveModeFlags,
+    pub stencil_resolve_mode: ResolveModeFlags,
+}
+
+impl Default for ResolveImageModeInfoKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::RESOLVE_IMAGE_MODE_INFO_KHR,
+            next: ptr::null(),
+            flags: ResolveImageFlagsKHR::default(),
+            resolve_mode: ResolveModeFlags::default(),
+            stencil_resolve_mode: ResolveModeFlags::default(),
+        }
+    }
+}
+
+unsafe impl Send for ResolveImageModeInfoKHR {}
+unsafe impl Sync for ResolveImageModeInfoKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSRTDataNV.html>
 #[repr(C)]
@@ -28670,6 +29186,29 @@ impl Default for SwapchainDisplayNativeHdrCreateInfoAMD {
 
 unsafe impl Send for SwapchainDisplayNativeHdrCreateInfoAMD {}
 unsafe impl Sync for SwapchainDisplayNativeHdrCreateInfoAMD {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSwapchainImageCreateInfoOHOS.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct SwapchainImageCreateInfoOHOS {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub usage: SwapchainImageUsageFlagsOHOS,
+}
+
+impl Default for SwapchainImageCreateInfoOHOS {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::SWAPCHAIN_IMAGE_CREATE_INFO_OHOS,
+            next: ptr::null(),
+            usage: SwapchainImageUsageFlagsOHOS::default(),
+        }
+    }
+}
+
+unsafe impl Send for SwapchainImageCreateInfoOHOS {}
+unsafe impl Sync for SwapchainImageCreateInfoOHOS {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSwapchainLatencyCreateInfoNV.html>
 #[repr(C)]
@@ -33197,6 +33736,11 @@ pub type PhysicalDeviceMaintenance5PropertiesKHR = PhysicalDeviceMaintenance5Pro
 pub type PhysicalDeviceMaintenance6FeaturesKHR = PhysicalDeviceMaintenance6Features;
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceMaintenance6PropertiesKHR.html>
 pub type PhysicalDeviceMaintenance6PropertiesKHR = PhysicalDeviceMaintenance6Properties;
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceMemoryDecompressionFeaturesNV.html>
+pub type PhysicalDeviceMemoryDecompressionFeaturesNV = PhysicalDeviceMemoryDecompressionFeaturesEXT;
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceMemoryDecompressionPropertiesNV.html>
+pub type PhysicalDeviceMemoryDecompressionPropertiesNV =
+    PhysicalDeviceMemoryDecompressionPropertiesEXT;
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceMemoryProperties2KHR.html>
 pub type PhysicalDeviceMemoryProperties2KHR = PhysicalDeviceMemoryProperties2;
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceMultiviewFeaturesKHR.html>
@@ -33377,6 +33921,8 @@ pub type RenderingAreaInfoKHR = RenderingAreaInfo;
 pub type RenderingAttachmentInfoKHR = RenderingAttachmentInfo;
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRenderingAttachmentLocationInfoKHR.html>
 pub type RenderingAttachmentLocationInfoKHR = RenderingAttachmentLocationInfo;
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRenderingEndInfoEXT.html>
+pub type RenderingEndInfoEXT = RenderingEndInfoKHR;
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRenderingInfoKHR.html>
 pub type RenderingInfoKHR = RenderingInfo;
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRenderingInputAttachmentIndexInfoKHR.html>

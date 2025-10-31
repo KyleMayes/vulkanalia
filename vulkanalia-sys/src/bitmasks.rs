@@ -137,6 +137,8 @@ bitflags! {
         const DATA_GRAPH_WRITE_ARM = 1 << 48;
         const SHADER_TILE_ATTACHMENT_READ_QCOM = 1 << 51;
         const SHADER_TILE_ATTACHMENT_WRITE_QCOM = 1 << 52;
+        const MEMORY_DECOMPRESSION_READ_EXT = 1 << 55;
+        const MEMORY_DECOMPRESSION_WRITE_EXT = 1 << 56;
     }
 }
 
@@ -180,6 +182,8 @@ bitflags! {
     #[derive(Default)]
     pub struct AttachmentDescriptionFlags: Flags {
         const MAY_ALIAS = 1;
+        const RESOLVE_SKIP_TRANSFER_FUNCTION_KHR = 1 << 1;
+        const RESOLVE_ENABLE_TRANSFER_FUNCTION_KHR = 1 << 2;
     }
 }
 
@@ -267,6 +271,7 @@ bitflags! {
         const TILE_MEMORY_QCOM = 1 << 27;
         const DATA_GRAPH_FOREIGN_DESCRIPTOR_ARM = 1 << 29;
         const PREPROCESS_BUFFER_EXT = 1 << 31;
+        const MEMORY_DECOMPRESSION_EXT = 1 << 32;
         const COMPRESSED_DATA_DGF1_AMDX = 1 << 33;
     }
 }
@@ -767,6 +772,7 @@ bitflags! {
         const RDMA_ADDRESS_NV = 1 << 12;
         const SCI_BUF_NV = 1 << 13;
         const SCREEN_BUFFER_QNX = 1 << 14;
+        const OH_NATIVE_BUFFER_OHOS = 1 << 15;
         const MTLBUFFER_EXT = 1 << 16;
         const MTLTEXTURE_EXT = 1 << 17;
         const MTLHEAP_EXT = 1 << 18;
@@ -921,6 +927,10 @@ bitflags! {
         const VIDEO_ENCODE_QUANTIZATION_DELTA_MAP_KHR = 1 << 49;
         const VIDEO_ENCODE_EMPHASIS_MAP_KHR = 1 << 50;
         const ACCELERATION_STRUCTURE_RADIUS_BUFFER_NV = 1 << 51;
+        const DEPTH_COPY_ON_COMPUTE_QUEUE_KHR = 1 << 52;
+        const DEPTH_COPY_ON_TRANSFER_QUEUE_KHR = 1 << 53;
+        const STENCIL_COPY_ON_COMPUTE_QUEUE_KHR = 1 << 54;
+        const STENCIL_COPY_ON_TRANSFER_QUEUE_KHR = 1 << 55;
         const COPY_IMAGE_INDIRECT_DST_KHR = 1 << 59;
     }
 }
@@ -1234,10 +1244,10 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMemoryDecompressionMethodFlagsNV.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMemoryDecompressionMethodFlagsEXT.html>
     #[repr(transparent)]
     #[derive(Default)]
-    pub struct MemoryDecompressionMethodFlagsNV: Flags {
+    pub struct MemoryDecompressionMethodFlagsEXT: Flags {
         const GDEFLATE_1_0 = 1;
     }
 }
@@ -1376,6 +1386,13 @@ bitflags! {
         const GENERIC_SRC = 1 << 2;
         const GENERIC_DST = 1 << 3;
     }
+}
+
+bitflags! {
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPerformanceCounterDescriptionFlagsARM.html>
+    #[repr(transparent)]
+    #[derive(Default)]
+    pub struct PerformanceCounterDescriptionFlagsARM: Flags { }
 }
 
 bitflags! {
@@ -1526,6 +1543,7 @@ bitflags! {
         const DISALLOW_OPACITY_MICROMAP_ARM = 1 << 37;
         const INDIRECT_BINDABLE_EXT = 1 << 38;
         const PER_LAYER_FRAGMENT_DENSITY_VALVE = 1 << 40;
+        const _64_BIT_INDEXING_EXT = 1 << 43;
     }
 }
 
@@ -1708,6 +1726,7 @@ bitflags! {
         const CLUSTER_CULLING_SHADER_HUAWEI = 1 << 41;
         const DATA_GRAPH_ARM = 1 << 42;
         const CONVERT_COOPERATIVE_VECTOR_MATRIX_NV = 1 << 44;
+        const MEMORY_DECOMPRESSION_EXT = 1 << 45;
         const COPY_INDIRECT_KHR = 1 << 46;
     }
 }
@@ -1857,6 +1876,17 @@ bitflags! {
 }
 
 bitflags! {
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRenderingAttachmentFlagsKHR.html>
+    #[repr(transparent)]
+    #[derive(Default)]
+    pub struct RenderingAttachmentFlagsKHR: Flags {
+        const INPUT_ATTACHMENT_FEEDBACK = 1;
+        const RESOLVE_SKIP_TRANSFER_FUNCTION = 1 << 1;
+        const RESOLVE_ENABLE_TRANSFER_FUNCTION = 1 << 2;
+    }
+}
+
+bitflags! {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRenderingFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
@@ -1867,6 +1897,17 @@ bitflags! {
         const ENABLE_LEGACY_DITHERING_EXT = 1 << 3;
         const CONTENTS_INLINE_KHR = 1 << 4;
         const PER_LAYER_FRAGMENT_DENSITY_VALVE = 1 << 5;
+        const LOCAL_READ_CONCURRENT_ACCESS_CONTROL_KHR = 1 << 8;
+    }
+}
+
+bitflags! {
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkResolveImageFlagsKHR.html>
+    #[repr(transparent)]
+    #[derive(Default)]
+    pub struct ResolveImageFlagsKHR: Flags {
+        const SKIP_TRANSFER_FUNCTION = 1;
+        const ENABLE_TRANSFER_FUNCTION = 1 << 1;
     }
 }
 
@@ -1964,6 +2005,7 @@ bitflags! {
         const FRAGMENT_SHADING_RATE_ATTACHMENT = 1 << 5;
         const FRAGMENT_DENSITY_MAP_ATTACHMENT = 1 << 6;
         const INDIRECT_BINDABLE = 1 << 7;
+        const _64_BIT_INDEXING = 1 << 15;
     }
 }
 
@@ -2127,6 +2169,15 @@ bitflags! {
         const DEFERRED_MEMORY_ALLOCATION = 1 << 3;
         const PRESENT_ID_2 = 1 << 6;
         const PRESENT_WAIT_2 = 1 << 7;
+    }
+}
+
+bitflags! {
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSwapchainImageUsageFlagsOHOS.html>
+    #[repr(transparent)]
+    #[derive(Default)]
+    pub struct SwapchainImageUsageFlagsOHOS: Flags {
+        const SHARED = 1;
     }
 }
 
@@ -2722,6 +2773,8 @@ pub type GeometryInstanceFlagsNV = GeometryInstanceFlagsKHR;
 pub type HostImageCopyFlagsEXT = HostImageCopyFlags;
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMemoryAllocateFlagsKHR.html>
 pub type MemoryAllocateFlagsKHR = MemoryAllocateFlags;
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMemoryDecompressionMethodFlagsNV.html>
+pub type MemoryDecompressionMethodFlagsNV = MemoryDecompressionMethodFlagsEXT;
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMemoryUnmapFlagsKHR.html>
 pub type MemoryUnmapFlagsKHR = MemoryUnmapFlags;
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPeerMemoryFeatureFlagsKHR.html>
