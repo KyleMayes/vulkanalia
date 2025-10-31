@@ -1,3 +1,8 @@
+## [0.33.0] - UNRELEASED
+
+### Changed
+- Bumped MSRV to 1.88
+
 ## [0.32.0] - 2025-10-30
 
 ### Added
