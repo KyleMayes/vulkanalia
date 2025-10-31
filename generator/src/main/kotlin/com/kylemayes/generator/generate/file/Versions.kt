@@ -7,7 +7,6 @@ import com.kylemayes.generator.generate.support.generateCommandWrapper
 import com.kylemayes.generator.generate.support.getCommandType
 import com.kylemayes.generator.registry.Command
 import com.kylemayes.generator.registry.Registry
-import com.kylemayes.generator.registry.Version
 
 /** Generates Rust traits and implementations for Vulkan versions. */
 fun Registry.generateVersionTraits(): String {
@@ -23,16 +22,19 @@ use super::*;
         """
 
     var previousSuffix: String? = null
-    for (version in this.versions.values) {
-        val suffix = version.number.toString().replace('.', '_')
+    for (group in this.versions.values.groupBy { it.number }) {
+        val groupNumber = group.value.first().number
+        val groupCommands = group.value.flatMap { it.require.commands }.toSet()
+
+        val suffix = groupNumber.toString().replace('.', '_')
         val commands =
             commands.values
-                .filter { version.require.commands.contains(it.name) }
+                .filter { groupCommands.contains(it.name) }
                 .groupBy { getCommandType(it) }
 
         versions +=
             generateVersionTrait(
-                version,
+                groupNumber,
                 commands[CommandType.ENTRY]?.sortedBy { it.name } ?: emptyList(),
                 CommandType.ENTRY,
                 "EntryV$suffix",
@@ -42,7 +44,7 @@ use super::*;
 
         versions +=
             generateVersionTrait(
-                version,
+                groupNumber,
                 commands[CommandType.INSTANCE]?.sortedBy { it.name } ?: emptyList(),
                 CommandType.INSTANCE,
                 "InstanceV$suffix",
@@ -52,7 +54,7 @@ use super::*;
 
         versions +=
             generateVersionTrait(
-                version,
+                groupNumber,
                 commands[CommandType.DEVICE]?.sortedBy { it.name } ?: emptyList(),
                 CommandType.DEVICE,
                 "DeviceV$suffix",
@@ -68,14 +70,14 @@ use super::*;
 
 /** Generates a Rust trait and implementation for a Vulkan version and command type. */
 private fun Registry.generateVersionTrait(
-    version: Version,
+    number: Float,
     commands: List<Command>,
     type: CommandType,
     name: String,
     extends: String?,
     handle: Boolean,
 ): String {
-    val doc = "Vulkan ${version.number} ${type.display.lowercase()} command wrappers."
+    val doc = "Vulkan $number ${type.display.lowercase()} command wrappers."
     val commandType = "${type.display}Commands"
     val commandWrappers = commands.joinToString("") { generateCommandWrapper(it) }
 
@@ -89,7 +91,7 @@ private fun Registry.generateVersionTrait(
                 """
 impl<C: Borrow<$commandType>> $name for (C, ${type.display}) {
     #[inline] fn commands(&self) -> &$commandType { self.0.borrow() }
-    
+
     #[inline] fn handle(&self) -> ${type.display} { self.1 }
 }
                 """
@@ -113,7 +115,7 @@ pub trait $name {
 
 impl $name for crate::${type.display} {
     #[inline] fn commands(&self) -> &$commandType { &self.commands }
-    
+
     ${if (handle) "#[inline] fn handle(&self) -> ${type.display} { self.handle }" else ""}
 }
 
