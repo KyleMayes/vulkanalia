@@ -144,7 +144,7 @@
 <ul>
 <li>A graphics card and driver compatible with Vulkan (<a href="https://developer.nvidia.com/vulkan-driver">NVIDIA</a>, <a href="http://www.amd.com/en-us/innovations/software-technologies/technologies-gaming/vulkan">AMD</a>, <a href="https://software.intel.com/en-us/blogs/2016/03/14/new-intel-vulkan-beta-1540204404-graphics-driver-for-windows-78110-1540">Intel</a>)</li>
 <li>Experience with Rust</li>
-<li>Rust 1.81 or later</li>
+<li>Rust 1.88 or later</li>
 <li>Some existing experience with 3D computer graphics</li>
 </ul>
 <p>This tutorial will not assume knowledge of OpenGL or Direct3D concepts, but it does require you to know the basics of 3D computer graphics. It will not explain the math behind perspective projection, for example. See <a href="https://paroj.github.io/gltut/">this online book</a> for a great introduction of computer graphics concepts. Some other great computer graphics resources are:</p>
@@ -357,7 +357,7 @@ use vulkanalia::prelude::v1_2::*;
 <p>Vulkan allows you to enable extensive checks through a feature known as <em>validation layers</em>. Validation layers are pieces of code that can be inserted between the API and the graphics driver to do things like running extra checks on function parameters and tracking memory management problems. The nice thing is that you can enable them during development and then completely disable them when releasing your application for zero overhead. Anyone can write their own validation layers, but the Vulkan SDK by LunarG provides a standard set of validation layers that we'll be using in this tutorial. You also need to register a callback function to receive debug messages from the layers.</p>
 <p>Because Vulkan is so explicit about every operation and the validation layers are so extensive, it can actually be a lot easier to find out why your screen is black compared to OpenGL and Direct3D!</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="development-environment"><a class="header" href="#development-environment">Development environment</a></h1>
-<p>In this chapter we'll set up your environment for developing Vulkan applications by installing the Vulkan SDK for your operating system. This tutorial assumes you already have a working Rust (1.81+) development environment.</p>
+<p>In this chapter we'll set up your environment for developing Vulkan applications by installing the Vulkan SDK for your operating system. This tutorial assumes you already have a working Rust (1.88+) development environment.</p>
 <h2 id="cargo-project"><a class="header" href="#cargo-project">Cargo project</a></h2>
 <p>First let's create our Cargo project:</p>
 <p><code>cargo new vulkan-tutorial</code></p>
@@ -444,6 +444,7 @@ winit = &quot;0.29&quot;
 <p>In the <code>Development environment</code> chapter we created a Cargo project and added the necessary dependencies. In this chapter we will be replacing the code in the <code>src/main.rs</code> file with the following code:</p>
 <pre><pre class="playground"><code class="language-rust">#![allow(
     dead_code,
+    unsafe_op_in_unsafe_fn,
     unused_variables,
     clippy::too_many_arguments,
     clippy::unnecessary_wraps
