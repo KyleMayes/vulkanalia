@@ -2,8 +2,8 @@
 
 use core::mem;
 
-use vulkanalia::prelude::v1_0::*;
 use vulkanalia::ResultExt;
+use vulkanalia::prelude::v1_0::*;
 
 use crate::flags::{VirtualAllocationCreateFlags, VirtualBlockCreateFlags};
 use crate::vma::*;

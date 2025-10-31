@@ -3,8 +3,8 @@
 use alloc::vec::Vec;
 use core::mem;
 
-use vulkanalia::prelude::v1_0::*;
 use vulkanalia::ResultExt;
+use vulkanalia::prelude::v1_0::*;
 
 use crate::allocator::Allocator;
 use crate::enums::MemoryUsage;
