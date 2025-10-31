@@ -11,7 +11,7 @@
 
 use alloc::borrow::Cow;
 use alloc::string::String;
-use core::ffi::{c_char, CStr};
+use core::ffi::{CStr, c_char};
 use core::fmt;
 use core::hash;
 use core::ops;
@@ -150,7 +150,7 @@ impl<const N: usize> StringArray<N> {
     /// * `ptr` must be a pointer to a null-terminated string
     #[inline]
     pub unsafe fn from_ptr(ptr: *const c_char) -> Self {
-        Self::from_cstr(CStr::from_ptr(ptr))
+        Self::from_cstr(unsafe { CStr::from_ptr(ptr) })
     }
 
     /// Gets the underlying character array for this string array.
