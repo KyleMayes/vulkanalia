@@ -7,6 +7,7 @@ In the `Development environment` chapter we created a Cargo project and added th
 ```rust
 #![allow(
     dead_code,
+    unsafe_op_in_unsafe_fn,
     unused_variables,
     clippy::too_many_arguments,
     clippy::unnecessary_wraps

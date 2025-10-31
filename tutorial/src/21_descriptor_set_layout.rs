@@ -2,6 +2,7 @@
 
 #![allow(
     dead_code,
+    unsafe_op_in_unsafe_fn,
     unused_variables,
     clippy::manual_slice_size_calculation,
     clippy::too_many_arguments,
@@ -15,15 +16,15 @@ use std::os::raw::c_void;
 use std::ptr::copy_nonoverlapping as memcpy;
 use std::time::Instant;
 
-use anyhow::{anyhow, Result};
-use cgmath::{point3, vec2, vec3, Deg};
+use anyhow::{Result, anyhow};
+use cgmath::{Deg, point3, vec2, vec3};
 use log::*;
 use thiserror::Error;
+use vulkanalia::Version;
 use vulkanalia::bytecode::Bytecode;
-use vulkanalia::loader::{LibloadingLoader, LIBRARY};
+use vulkanalia::loader::{LIBRARY, LibloadingLoader};
 use vulkanalia::prelude::v1_0::*;
 use vulkanalia::window as vk_window;
-use vulkanalia::Version;
 use winit::dpi::LogicalSize;
 use winit::event::{Event, WindowEvent};
 use winit::event_loop::EventLoop;
