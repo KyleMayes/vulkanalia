@@ -1,6 +1,6 @@
 [package]
 
-edition = "2021"
+edition = "2024"
 
 name = "vulkanalia-sys"
 authors = ["Kyle Mayes <kyle@mayeses.com>"]

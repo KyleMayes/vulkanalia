@@ -69,7 +69,8 @@ pub trait DispatchableHandle: Handle<Repr = usize> {
     ///
     /// This handle must be a valid Vulkan dispatchable handle.
     unsafe fn dispatch_key(self) -> usize {
-        *(self.as_raw() as *mut *mut c_void) as usize
+        let pointer = self.as_raw() as *mut *mut c_void;
+        (unsafe { *pointer }) as usize
     }
 }
 
