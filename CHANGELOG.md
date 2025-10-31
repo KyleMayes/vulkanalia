@@ -1,4 +1,4 @@
-## [0.32.0] - UNRELEASED
+## [0.32.0] - 2025-10-30
 
 ### Added
 - Added `vk::layer::NegotiateLayerStructType` struct
