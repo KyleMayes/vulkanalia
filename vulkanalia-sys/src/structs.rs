@@ -4248,6 +4248,29 @@ impl Default for D3D12FenceSubmitInfoKHR {
 unsafe impl Send for D3D12FenceSubmitInfoKHR {}
 unsafe impl Sync for D3D12FenceSubmitInfoKHR {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDataGraphPipelineBuiltinModelCreateInfoQCOM.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct DataGraphPipelineBuiltinModelCreateInfoQCOM {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub operation: *const PhysicalDeviceDataGraphOperationSupportARM,
+}
+
+impl Default for DataGraphPipelineBuiltinModelCreateInfoQCOM {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::DATA_GRAPH_PIPELINE_BUILTIN_MODEL_CREATE_INFO_QCOM,
+            next: ptr::null(),
+            operation: ptr::null(),
+        }
+    }
+}
+
+unsafe impl Send for DataGraphPipelineBuiltinModelCreateInfoQCOM {}
+unsafe impl Sync for DataGraphPipelineBuiltinModelCreateInfoQCOM {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDataGraphPipelineCompilerControlCreateInfoARM.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -14261,6 +14284,29 @@ impl Default for PhysicalDeviceDataGraphFeaturesARM {
 unsafe impl Send for PhysicalDeviceDataGraphFeaturesARM {}
 unsafe impl Sync for PhysicalDeviceDataGraphFeaturesARM {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceDataGraphModelFeaturesQCOM.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceDataGraphModelFeaturesQCOM {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub data_graph_model: Bool32,
+}
+
+impl Default for PhysicalDeviceDataGraphModelFeaturesQCOM {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_DATA_GRAPH_MODEL_FEATURES_QCOM,
+            next: ptr::null(),
+            data_graph_model: Bool32::default(),
+        }
+    }
+}
+
+unsafe impl Send for PhysicalDeviceDataGraphModelFeaturesQCOM {}
+unsafe impl Sync for PhysicalDeviceDataGraphModelFeaturesQCOM {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceDataGraphOperationSupportARM.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
@@ -23713,6 +23759,17 @@ impl Default for PipelineCacheCreateInfo {
 
 unsafe impl Send for PipelineCacheCreateInfo {}
 unsafe impl Sync for PipelineCacheCreateInfo {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineCacheHeaderVersionDataGraphQCOM.html>
+#[repr(C)]
+#[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
+pub struct PipelineCacheHeaderVersionDataGraphQCOM {
+    pub header_size: u32,
+    pub header_version: PipelineCacheHeaderVersion,
+    pub cache_type: DataGraphModelCacheTypeQCOM,
+    pub cache_version: u32,
+    pub toolchain_version: [u32; DATA_GRAPH_MODEL_TOOLCHAIN_VERSION_LENGTH_QCOM],
+}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineCacheHeaderVersionOne.html>
 #[repr(C)]

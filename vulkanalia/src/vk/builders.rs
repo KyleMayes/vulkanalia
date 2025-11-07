@@ -13376,6 +13376,68 @@ unsafe impl Cast for D3D12FenceSubmitInfoKHRBuilder<'_> {
     }
 }
 
+unsafe impl Cast for DataGraphPipelineBuiltinModelCreateInfoQCOM {
+    type Target = DataGraphPipelineBuiltinModelCreateInfoQCOM;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl<'b> HasBuilder<'b> for DataGraphPipelineBuiltinModelCreateInfoQCOM {
+    type Builder = DataGraphPipelineBuiltinModelCreateInfoQCOMBuilder<'b>;
+}
+
+/// A builder for a [`DataGraphPipelineBuiltinModelCreateInfoQCOM`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct DataGraphPipelineBuiltinModelCreateInfoQCOMBuilder<'b> {
+    value: DataGraphPipelineBuiltinModelCreateInfoQCOM,
+    _marker: PhantomData<&'b ()>,
+}
+
+impl<'b> DataGraphPipelineBuiltinModelCreateInfoQCOMBuilder<'b> {
+    #[inline]
+    pub fn operation(
+        mut self,
+        operation: &'b impl Cast<Target = PhysicalDeviceDataGraphOperationSupportARM>,
+    ) -> Self {
+        self.value.operation = operation.as_ref();
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> DataGraphPipelineBuiltinModelCreateInfoQCOM {
+        self.value
+    }
+}
+
+impl ops::Deref for DataGraphPipelineBuiltinModelCreateInfoQCOMBuilder<'_> {
+    type Target = DataGraphPipelineBuiltinModelCreateInfoQCOM;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for DataGraphPipelineBuiltinModelCreateInfoQCOMBuilder<'_> {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for DataGraphPipelineBuiltinModelCreateInfoQCOMBuilder<'_> {
+    type Target = DataGraphPipelineBuiltinModelCreateInfoQCOM;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for DataGraphPipelineCompilerControlCreateInfoARM {
     type Target = DataGraphPipelineCompilerControlCreateInfoARM;
 
@@ -13589,6 +13651,7 @@ unsafe impl Cast for DataGraphPipelineConstantTensorSemiStructuredSparsityInfoAR
 
 /// A Vulkan struct that can be used to extend a [`DataGraphPipelineCreateInfoARM`].
 pub unsafe trait ExtendsDataGraphPipelineCreateInfoARM: fmt::Debug {}
+unsafe impl ExtendsDataGraphPipelineCreateInfoARM for DataGraphPipelineBuiltinModelCreateInfoQCOM {}
 unsafe impl ExtendsDataGraphPipelineCreateInfoARM
     for DataGraphPipelineCompilerControlCreateInfoARM
 {
@@ -17566,6 +17629,7 @@ unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceCubicWeightsFeaturesQCOM {
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceCudaKernelLaunchFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceCustomBorderColorFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceDataGraphFeaturesARM {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceDataGraphModelFeaturesQCOM {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceDenseGeometryFormatFeaturesAMDX {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceDepthBiasControlFeaturesEXT {}
@@ -43444,6 +43508,64 @@ unsafe impl Cast for PhysicalDeviceDataGraphFeaturesARMBuilder {
     }
 }
 
+unsafe impl Cast for PhysicalDeviceDataGraphModelFeaturesQCOM {
+    type Target = PhysicalDeviceDataGraphModelFeaturesQCOM;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceDataGraphModelFeaturesQCOM {
+    type Builder = PhysicalDeviceDataGraphModelFeaturesQCOMBuilder;
+}
+
+/// A builder for a [`PhysicalDeviceDataGraphModelFeaturesQCOM`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceDataGraphModelFeaturesQCOMBuilder {
+    value: PhysicalDeviceDataGraphModelFeaturesQCOM,
+}
+
+impl PhysicalDeviceDataGraphModelFeaturesQCOMBuilder {
+    #[inline]
+    pub fn data_graph_model(mut self, data_graph_model: bool) -> Self {
+        self.value.data_graph_model = data_graph_model as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceDataGraphModelFeaturesQCOM {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceDataGraphModelFeaturesQCOMBuilder {
+    type Target = PhysicalDeviceDataGraphModelFeaturesQCOM;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceDataGraphModelFeaturesQCOMBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceDataGraphModelFeaturesQCOMBuilder {
+    type Target = PhysicalDeviceDataGraphModelFeaturesQCOM;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for PhysicalDeviceDataGraphOperationSupportARM {
     type Target = PhysicalDeviceDataGraphOperationSupportARM;
 
@@ -48775,6 +48897,7 @@ unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceCubicWeightsFeature
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceCudaKernelLaunchFeaturesNV {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceCustomBorderColorFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceDataGraphFeaturesARM {}
+unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceDataGraphModelFeaturesQCOM {}
 unsafe impl ExtendsPhysicalDeviceFeatures2
     for PhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV
 {
@@ -72182,6 +72305,91 @@ impl ops::DerefMut for PipelineCacheCreateInfoBuilder<'_> {
 
 unsafe impl Cast for PipelineCacheCreateInfoBuilder<'_> {
     type Target = PipelineCacheCreateInfo;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PipelineCacheHeaderVersionDataGraphQCOM {
+    type Target = PipelineCacheHeaderVersionDataGraphQCOM;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PipelineCacheHeaderVersionDataGraphQCOM {
+    type Builder = PipelineCacheHeaderVersionDataGraphQCOMBuilder;
+}
+
+/// A builder for a [`PipelineCacheHeaderVersionDataGraphQCOM`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PipelineCacheHeaderVersionDataGraphQCOMBuilder {
+    value: PipelineCacheHeaderVersionDataGraphQCOM,
+}
+
+impl PipelineCacheHeaderVersionDataGraphQCOMBuilder {
+    #[inline]
+    pub fn header_size(mut self, header_size: u32) -> Self {
+        self.value.header_size = header_size;
+        self
+    }
+
+    #[inline]
+    pub fn header_version(mut self, header_version: PipelineCacheHeaderVersion) -> Self {
+        self.value.header_version = header_version;
+        self
+    }
+
+    #[inline]
+    pub fn cache_type(mut self, cache_type: DataGraphModelCacheTypeQCOM) -> Self {
+        self.value.cache_type = cache_type;
+        self
+    }
+
+    #[inline]
+    pub fn cache_version(mut self, cache_version: u32) -> Self {
+        self.value.cache_version = cache_version;
+        self
+    }
+
+    #[inline]
+    pub fn toolchain_version(
+        mut self,
+        toolchain_version: [u32; DATA_GRAPH_MODEL_TOOLCHAIN_VERSION_LENGTH_QCOM],
+    ) -> Self {
+        self.value.toolchain_version = toolchain_version;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PipelineCacheHeaderVersionDataGraphQCOM {
+        self.value
+    }
+}
+
+impl ops::Deref for PipelineCacheHeaderVersionDataGraphQCOMBuilder {
+    type Target = PipelineCacheHeaderVersionDataGraphQCOM;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PipelineCacheHeaderVersionDataGraphQCOMBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PipelineCacheHeaderVersionDataGraphQCOMBuilder {
+    type Target = PipelineCacheHeaderVersionDataGraphQCOM;
 
     #[inline]
     fn into(self) -> Self::Target {

@@ -3,6 +3,11 @@
 ### Changed
 - Bumped MSRV to 1.88
 
+### Bindings Updates
+- [Generate refpage aliases in Antora site build (#2610)](https://github.com/KhronosGroup/Vulkan-Docs/commit/1626c4df3f8f3b415d5a0cad387151a4a6b0498c)
+- [Fix VkPhysicalDeviceFragmentDensityMapLayeredFeaturesVALVE 'returnedonly="true"' (#2607)](https://github.com/KhronosGroup/Vulkan-Docs/commit/8e30b6ca28038dc37a7c610b62f2d99747a91123)
+- [November 7, 2025 Vulkan 1.4.332 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/09d464f85360160747c4ad6dc5a9841e15822aa5)
+
 ## [0.32.0] - 2025-10-30
 
 ### Added
