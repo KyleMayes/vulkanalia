@@ -5911,7 +5911,8 @@ pub trait KhrCooperativeMatrixExtensionInstanceCommands: InstanceV1_0 {
             ptr::null_mut(),
         );
 
-        let mut properties = Vec::with_capacity(property_count as usize);
+        let mut properties =
+            ::alloc::vec![CooperativeMatrixPropertiesKHR::default(); property_count as usize];
 
         let __result = (self
             .commands()
