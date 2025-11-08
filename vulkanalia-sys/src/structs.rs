@@ -5970,7 +5970,7 @@ unsafe impl Sync for DeviceGroupDeviceCreateInfo {}
 pub struct DeviceGroupPresentCapabilitiesKHR {
     pub s_type: StructureType,
     pub next: *mut c_void,
-    pub present_mask: [u32; MAX_DEVICE_GROUP_SIZE],
+    pub present_mask: [u32; MAX_DEVICE_GROUP_SIZE as usize],
     pub modes: DeviceGroupPresentModeFlagsKHR,
 }
 
@@ -16538,7 +16538,7 @@ pub struct PhysicalDeviceGroupProperties {
     pub s_type: StructureType,
     pub next: *mut c_void,
     pub physical_device_count: u32,
-    pub physical_devices: [PhysicalDevice; MAX_DEVICE_GROUP_SIZE],
+    pub physical_devices: [PhysicalDevice; MAX_DEVICE_GROUP_SIZE as usize],
     pub subset_allocation: Bool32,
 }
 
@@ -17984,8 +17984,8 @@ unsafe impl Sync for PhysicalDeviceMapMemoryPlacedPropertiesEXT {}
 pub struct PhysicalDeviceMemoryBudgetPropertiesEXT {
     pub s_type: StructureType,
     pub next: *mut c_void,
-    pub heap_budget: [DeviceSize; MAX_MEMORY_HEAPS],
-    pub heap_usage: [DeviceSize; MAX_MEMORY_HEAPS],
+    pub heap_budget: [DeviceSize; MAX_MEMORY_HEAPS as usize],
+    pub heap_usage: [DeviceSize; MAX_MEMORY_HEAPS as usize],
 }
 
 impl Default for PhysicalDeviceMemoryBudgetPropertiesEXT {
@@ -18079,9 +18079,9 @@ unsafe impl Sync for PhysicalDeviceMemoryPriorityFeaturesEXT {}
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceMemoryProperties {
     pub memory_type_count: u32,
-    pub memory_types: [MemoryType; MAX_MEMORY_TYPES],
+    pub memory_types: [MemoryType; MAX_MEMORY_TYPES as usize],
     pub memory_heap_count: u32,
-    pub memory_heaps: [MemoryHeap; MAX_MEMORY_HEAPS],
+    pub memory_heaps: [MemoryHeap; MAX_MEMORY_HEAPS as usize],
 }
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceMemoryProperties2.html>
@@ -25791,7 +25791,7 @@ pub struct QueueFamilyGlobalPriorityProperties {
     pub s_type: StructureType,
     pub next: *mut c_void,
     pub priority_count: u32,
-    pub priorities: [QueueGlobalPriority; MAX_GLOBAL_PRIORITY_SIZE],
+    pub priorities: [QueueGlobalPriority; MAX_GLOBAL_PRIORITY_SIZE as usize],
 }
 
 impl Default for QueueFamilyGlobalPriorityProperties {
@@ -30201,7 +30201,7 @@ pub struct VideoDecodeAV1PictureInfoKHR {
     pub s_type: StructureType,
     pub next: *const c_void,
     pub std_picture_info: *const video::StdVideoDecodeAV1PictureInfo,
-    pub reference_name_slot_indices: [i32; MAX_VIDEO_AV1_REFERENCES_PER_FRAME_KHR],
+    pub reference_name_slot_indices: [i32; MAX_VIDEO_AV1_REFERENCES_PER_FRAME_KHR as usize],
     pub frame_header_offset: u32,
     pub tile_count: u32,
     pub tile_offsets: *const u32,
@@ -30754,7 +30754,7 @@ pub struct VideoDecodeVP9PictureInfoKHR {
     pub s_type: StructureType,
     pub next: *const c_void,
     pub std_picture_info: *const video::StdVideoDecodeVP9PictureInfo,
-    pub reference_name_slot_indices: [i32; MAX_VIDEO_VP9_REFERENCES_PER_FRAME_KHR],
+    pub reference_name_slot_indices: [i32; MAX_VIDEO_VP9_REFERENCES_PER_FRAME_KHR as usize],
     pub uncompressed_header_offset: u32,
     pub compressed_header_offset: u32,
     pub tiles_offset: u32,
@@ -30941,7 +30941,7 @@ pub struct VideoEncodeAV1PictureInfoKHR {
     pub rate_control_group: VideoEncodeAV1RateControlGroupKHR,
     pub constant_q_index: u32,
     pub std_picture_info: *const video::StdVideoEncodeAV1PictureInfo,
-    pub reference_name_slot_indices: [i32; MAX_VIDEO_AV1_REFERENCES_PER_FRAME_KHR],
+    pub reference_name_slot_indices: [i32; MAX_VIDEO_AV1_REFERENCES_PER_FRAME_KHR as usize],
     pub primary_reference_cdf_only: Bool32,
     pub generate_obu_extension_header: Bool32,
 }

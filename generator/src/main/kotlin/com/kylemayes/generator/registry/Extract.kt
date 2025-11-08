@@ -621,7 +621,11 @@ data class ArrayType(val element: Type, val length: Identifier) : Type {
         when (element.getIdentifier()?.original) {
             "char" -> "StringArray<$length>"
             "uint8_t" -> "ByteArray<$length>"
-            else -> "[${element.generate()}; $length]"
+            else -> {
+                val constant = length.original.all { it.isDigit() }
+                val cast = if (constant) "" else " as usize"
+                "[${element.generate()}; $length$cast]"
+            }
         }
 
     override fun generateForCommand() = "*const ${element.generateForCommand()}"
