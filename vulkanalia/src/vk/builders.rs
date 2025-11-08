@@ -18693,7 +18693,7 @@ pub struct DeviceGroupPresentCapabilitiesKHRBuilder {
 
 impl DeviceGroupPresentCapabilitiesKHRBuilder {
     #[inline]
-    pub fn present_mask(mut self, present_mask: [u32; MAX_DEVICE_GROUP_SIZE]) -> Self {
+    pub fn present_mask(mut self, present_mask: [u32; MAX_DEVICE_GROUP_SIZE as usize]) -> Self {
         self.value.present_mask = present_mask;
         self
     }
@@ -50880,7 +50880,7 @@ impl PhysicalDeviceGroupPropertiesBuilder {
     #[inline]
     pub fn physical_devices(
         mut self,
-        physical_devices: [PhysicalDevice; MAX_DEVICE_GROUP_SIZE],
+        physical_devices: [PhysicalDevice; MAX_DEVICE_GROUP_SIZE as usize],
     ) -> Self {
         self.value.physical_devices = physical_devices;
         self
@@ -55302,13 +55302,13 @@ pub struct PhysicalDeviceMemoryBudgetPropertiesEXTBuilder {
 
 impl PhysicalDeviceMemoryBudgetPropertiesEXTBuilder {
     #[inline]
-    pub fn heap_budget(mut self, heap_budget: [DeviceSize; MAX_MEMORY_HEAPS]) -> Self {
+    pub fn heap_budget(mut self, heap_budget: [DeviceSize; MAX_MEMORY_HEAPS as usize]) -> Self {
         self.value.heap_budget = heap_budget;
         self
     }
 
     #[inline]
-    pub fn heap_usage(mut self, heap_usage: [DeviceSize; MAX_MEMORY_HEAPS]) -> Self {
+    pub fn heap_usage(mut self, heap_usage: [DeviceSize; MAX_MEMORY_HEAPS as usize]) -> Self {
         self.value.heap_usage = heap_usage;
         self
     }
@@ -55558,7 +55558,7 @@ impl PhysicalDeviceMemoryPropertiesBuilder {
     }
 
     #[inline]
-    pub fn memory_types(mut self, memory_types: [MemoryType; MAX_MEMORY_TYPES]) -> Self {
+    pub fn memory_types(mut self, memory_types: [MemoryType; MAX_MEMORY_TYPES as usize]) -> Self {
         self.value.memory_types = memory_types;
         self
     }
@@ -55570,7 +55570,7 @@ impl PhysicalDeviceMemoryPropertiesBuilder {
     }
 
     #[inline]
-    pub fn memory_heaps(mut self, memory_heaps: [MemoryHeap; MAX_MEMORY_HEAPS]) -> Self {
+    pub fn memory_heaps(mut self, memory_heaps: [MemoryHeap; MAX_MEMORY_HEAPS as usize]) -> Self {
         self.value.memory_heaps = memory_heaps;
         self
     }
@@ -78168,7 +78168,7 @@ impl QueueFamilyGlobalPriorityPropertiesBuilder {
     #[inline]
     pub fn priorities(
         mut self,
-        priorities: [QueueGlobalPriority; MAX_GLOBAL_PRIORITY_SIZE],
+        priorities: [QueueGlobalPriority; MAX_GLOBAL_PRIORITY_SIZE as usize],
     ) -> Self {
         self.value.priorities = priorities;
         self
@@ -91959,7 +91959,7 @@ impl<'b> VideoDecodeAV1PictureInfoKHRBuilder<'b> {
     #[inline]
     pub fn reference_name_slot_indices(
         mut self,
-        reference_name_slot_indices: [i32; MAX_VIDEO_AV1_REFERENCES_PER_FRAME_KHR],
+        reference_name_slot_indices: [i32; MAX_VIDEO_AV1_REFERENCES_PER_FRAME_KHR as usize],
     ) -> Self {
         self.value.reference_name_slot_indices = reference_name_slot_indices;
         self
@@ -93421,7 +93421,7 @@ impl<'b> VideoDecodeVP9PictureInfoKHRBuilder<'b> {
     #[inline]
     pub fn reference_name_slot_indices(
         mut self,
-        reference_name_slot_indices: [i32; MAX_VIDEO_VP9_REFERENCES_PER_FRAME_KHR],
+        reference_name_slot_indices: [i32; MAX_VIDEO_VP9_REFERENCES_PER_FRAME_KHR as usize],
     ) -> Self {
         self.value.reference_name_slot_indices = reference_name_slot_indices;
         self
@@ -94030,7 +94030,7 @@ impl<'b> VideoEncodeAV1PictureInfoKHRBuilder<'b> {
     #[inline]
     pub fn reference_name_slot_indices(
         mut self,
-        reference_name_slot_indices: [i32; MAX_VIDEO_AV1_REFERENCES_PER_FRAME_KHR],
+        reference_name_slot_indices: [i32; MAX_VIDEO_AV1_REFERENCES_PER_FRAME_KHR as usize],
     ) -> Self {
         self.value.reference_name_slot_indices = reference_name_slot_indices;
         self
