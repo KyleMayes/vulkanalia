@@ -326,7 +326,7 @@ pub trait AmdShaderInfoExtensionDeviceCommands: DeviceV1_0 {
             info.as_mut_ptr() as *mut c_void,
         );
 
-        debug_assert!(info.capacity() == info_size as usize);
+        debug_assert!(info.capacity() >= info_size as usize);
         info.set_len(info_size as usize);
 
         if __result == Result::SUCCESS {
@@ -519,7 +519,7 @@ pub trait ArmDataGraphExtensionDeviceCommands: DeviceV1_0 {
             properties.as_mut_ptr(),
         );
 
-        debug_assert!(properties.capacity() == properties_count as usize);
+        debug_assert!(properties.capacity() >= properties_count as usize);
         properties.set_len(properties_count as usize);
 
         if __result == Result::SUCCESS {
@@ -578,7 +578,7 @@ pub trait ArmDataGraphExtensionDeviceCommands: DeviceV1_0 {
             bind_point_requirements.as_mut_ptr(),
         );
 
-        debug_assert!(bind_point_requirements.capacity() == bind_point_requirement_count as usize);
+        debug_assert!(bind_point_requirements.capacity() >= bind_point_requirement_count as usize);
         bind_point_requirements.set_len(bind_point_requirement_count as usize);
 
         if __result == Result::SUCCESS {
@@ -658,7 +658,7 @@ pub trait ArmDataGraphExtensionInstanceCommands: InstanceV1_0 {
 
         debug_assert!(
             queue_family_data_graph_properties.capacity()
-                == queue_family_data_graph_property_count as usize
+                >= queue_family_data_graph_property_count as usize
         );
         queue_family_data_graph_properties.set_len(queue_family_data_graph_property_count as usize);
 
@@ -709,9 +709,9 @@ pub trait ArmPerformanceCountersByRegionExtensionInstanceCommands: InstanceV1_0 
             counter_descriptions.as_mut_ptr(),
         );
 
-        debug_assert!(counters.capacity() == counter_count as usize);
+        debug_assert!(counters.capacity() >= counter_count as usize);
         counters.set_len(counter_count as usize);
-        debug_assert!(counter_descriptions.capacity() == counter_count as usize);
+        debug_assert!(counter_descriptions.capacity() >= counter_count as usize);
         counter_descriptions.set_len(counter_count as usize);
 
         if __result == Result::SUCCESS {
@@ -1074,7 +1074,7 @@ pub trait ExtCalibratedTimestampsExtensionDeviceCommands: DeviceV1_0 {
             max_deviation.as_mut_ptr(),
         );
 
-        debug_assert!(timestamps.capacity() == timestamp_infos.len() as usize);
+        debug_assert!(timestamps.capacity() >= timestamp_infos.len() as usize);
         timestamps.set_len(timestamp_infos.len() as usize);
 
         if __result == Result::SUCCESS {
@@ -1115,7 +1115,7 @@ pub trait ExtCalibratedTimestampsExtensionInstanceCommands: InstanceV1_0 {
             time_domains.as_mut_ptr(),
         );
 
-        debug_assert!(time_domains.capacity() == time_domain_count as usize);
+        debug_assert!(time_domains.capacity() >= time_domain_count as usize);
         time_domains.set_len(time_domain_count as usize);
 
         if __result == Result::SUCCESS {
@@ -2949,7 +2949,7 @@ pub trait ExtFullScreenExclusiveExtensionInstanceCommands: InstanceV1_0 {
             present_modes.as_mut_ptr(),
         );
 
-        debug_assert!(present_modes.capacity() == present_mode_count as usize);
+        debug_assert!(present_modes.capacity() >= present_mode_count as usize);
         present_modes.set_len(present_mode_count as usize);
 
         if __result == Result::SUCCESS {
@@ -4555,7 +4555,7 @@ pub trait ExtShaderObjectExtensionDeviceCommands: DeviceV1_0 {
             data.as_mut_ptr() as *mut c_void,
         );
 
-        debug_assert!(data.capacity() == data_size as usize);
+        debug_assert!(data.capacity() >= data_size as usize);
         data.set_len(data_size as usize);
 
         if __result == Result::SUCCESS {
@@ -4612,7 +4612,7 @@ pub trait ExtToolingInfoExtensionInstanceCommands: InstanceV1_0 {
             tool_properties.as_mut_ptr(),
         );
 
-        debug_assert!(tool_properties.capacity() == tool_count as usize);
+        debug_assert!(tool_properties.capacity() >= tool_count as usize);
         tool_properties.set_len(tool_count as usize);
 
         if __result == Result::SUCCESS {
@@ -4804,7 +4804,7 @@ pub trait ExtValidationCacheExtensionDeviceCommands: DeviceV1_0 {
             data.as_mut_ptr() as *mut c_void,
         );
 
-        debug_assert!(data.capacity() == data_size as usize);
+        debug_assert!(data.capacity() >= data_size as usize);
         data.set_len(data_size as usize);
 
         if __result == Result::SUCCESS {
@@ -5140,7 +5140,7 @@ pub trait GoogleDisplayTimingExtensionDeviceCommands: DeviceV1_0 {
             presentation_timings.as_mut_ptr(),
         );
 
-        debug_assert!(presentation_timings.capacity() == presentation_timing_count as usize);
+        debug_assert!(presentation_timings.capacity() >= presentation_timing_count as usize);
         presentation_timings.set_len(presentation_timing_count as usize);
 
         if __result == Result::SUCCESS {
@@ -5839,7 +5839,7 @@ pub trait KhrCalibratedTimestampsExtensionDeviceCommands: DeviceV1_0 {
             max_deviation.as_mut_ptr(),
         );
 
-        debug_assert!(timestamps.capacity() == timestamp_infos.len() as usize);
+        debug_assert!(timestamps.capacity() >= timestamp_infos.len() as usize);
         timestamps.set_len(timestamp_infos.len() as usize);
 
         if __result == Result::SUCCESS {
@@ -5880,7 +5880,7 @@ pub trait KhrCalibratedTimestampsExtensionInstanceCommands: InstanceV1_0 {
             time_domains.as_mut_ptr(),
         );
 
-        debug_assert!(time_domains.capacity() == time_domain_count as usize);
+        debug_assert!(time_domains.capacity() >= time_domain_count as usize);
         time_domains.set_len(time_domain_count as usize);
 
         if __result == Result::SUCCESS {
@@ -5922,7 +5922,7 @@ pub trait KhrCooperativeMatrixExtensionInstanceCommands: InstanceV1_0 {
             properties.as_mut_ptr(),
         );
 
-        debug_assert!(properties.capacity() == property_count as usize);
+        debug_assert!(properties.capacity() >= property_count as usize);
         properties.set_len(property_count as usize);
 
         if __result == Result::SUCCESS {
@@ -6407,7 +6407,7 @@ pub trait KhrDeviceGroupExtensionInstanceCommands: InstanceV1_0 {
             rects.as_mut_ptr(),
         );
 
-        debug_assert!(rects.capacity() == rect_count as usize);
+        debug_assert!(rects.capacity() >= rect_count as usize);
         rects.set_len(rect_count as usize);
 
         if __result == Result::SUCCESS {
@@ -6445,7 +6445,7 @@ pub trait KhrDeviceGroupCreationExtensionInstanceCommands: InstanceV1_0 {
         );
 
         debug_assert!(
-            physical_device_group_properties.capacity() == physical_device_group_count as usize
+            physical_device_group_properties.capacity() >= physical_device_group_count as usize
         );
         physical_device_group_properties.set_len(physical_device_group_count as usize);
 
@@ -6535,7 +6535,7 @@ pub trait KhrDisplayExtensionInstanceCommands: InstanceV1_0 {
             properties.as_mut_ptr(),
         );
 
-        debug_assert!(properties.capacity() == property_count as usize);
+        debug_assert!(properties.capacity() >= property_count as usize);
         properties.set_len(property_count as usize);
 
         if __result == Result::SUCCESS {
@@ -6594,7 +6594,7 @@ pub trait KhrDisplayExtensionInstanceCommands: InstanceV1_0 {
             displays.as_mut_ptr(),
         );
 
-        debug_assert!(displays.capacity() == display_count as usize);
+        debug_assert!(displays.capacity() >= display_count as usize);
         displays.set_len(display_count as usize);
 
         if __result == Result::SUCCESS {
@@ -6630,7 +6630,7 @@ pub trait KhrDisplayExtensionInstanceCommands: InstanceV1_0 {
             properties.as_mut_ptr(),
         );
 
-        debug_assert!(properties.capacity() == property_count as usize);
+        debug_assert!(properties.capacity() >= property_count as usize);
         properties.set_len(property_count as usize);
 
         if __result == Result::SUCCESS {
@@ -6662,7 +6662,7 @@ pub trait KhrDisplayExtensionInstanceCommands: InstanceV1_0 {
             properties.as_mut_ptr(),
         );
 
-        debug_assert!(properties.capacity() == property_count as usize);
+        debug_assert!(properties.capacity() >= property_count as usize);
         properties.set_len(property_count as usize);
 
         if __result == Result::SUCCESS {
@@ -7177,7 +7177,7 @@ pub trait KhrFragmentShadingRateExtensionInstanceCommands: InstanceV1_0 {
             fragment_shading_rates.as_mut_ptr(),
         );
 
-        debug_assert!(fragment_shading_rates.capacity() == fragment_shading_rate_count as usize);
+        debug_assert!(fragment_shading_rates.capacity() >= fragment_shading_rate_count as usize);
         fragment_shading_rates.set_len(fragment_shading_rate_count as usize);
 
         if __result == Result::SUCCESS {
@@ -7217,7 +7217,7 @@ pub trait KhrGetDisplayProperties2ExtensionInstanceCommands: InstanceV1_0 {
             properties.as_mut_ptr(),
         );
 
-        debug_assert!(properties.capacity() == property_count as usize);
+        debug_assert!(properties.capacity() >= property_count as usize);
         properties.set_len(property_count as usize);
 
         if __result == Result::SUCCESS {
@@ -7274,7 +7274,7 @@ pub trait KhrGetDisplayProperties2ExtensionInstanceCommands: InstanceV1_0 {
             properties.as_mut_ptr(),
         );
 
-        debug_assert!(properties.capacity() == property_count as usize);
+        debug_assert!(properties.capacity() >= property_count as usize);
         properties.set_len(property_count as usize);
 
         if __result == Result::SUCCESS {
@@ -7306,7 +7306,7 @@ pub trait KhrGetDisplayProperties2ExtensionInstanceCommands: InstanceV1_0 {
             properties.as_mut_ptr(),
         );
 
-        debug_assert!(properties.capacity() == property_count as usize);
+        debug_assert!(properties.capacity() >= property_count as usize);
         properties.set_len(property_count as usize);
 
         if __result == Result::SUCCESS {
@@ -7375,7 +7375,7 @@ pub trait KhrGetMemoryRequirements2ExtensionDeviceCommands: DeviceV1_0 {
         );
 
         debug_assert!(
-            sparse_memory_requirements.capacity() == sparse_memory_requirement_count as usize
+            sparse_memory_requirements.capacity() >= sparse_memory_requirement_count as usize
         );
         sparse_memory_requirements.set_len(sparse_memory_requirement_count as usize);
 
@@ -7486,7 +7486,7 @@ pub trait KhrGetPhysicalDeviceProperties2ExtensionInstanceCommands: InstanceV1_0
             queue_family_properties.as_mut_ptr(),
         );
 
-        debug_assert!(queue_family_properties.capacity() == queue_family_property_count as usize);
+        debug_assert!(queue_family_properties.capacity() >= queue_family_property_count as usize);
         queue_family_properties.set_len(queue_family_property_count as usize);
 
         queue_family_properties
@@ -7521,7 +7521,7 @@ pub trait KhrGetPhysicalDeviceProperties2ExtensionInstanceCommands: InstanceV1_0
             properties.as_mut_ptr(),
         );
 
-        debug_assert!(properties.capacity() == property_count as usize);
+        debug_assert!(properties.capacity() >= property_count as usize);
         properties.set_len(property_count as usize);
 
         properties
@@ -7580,7 +7580,7 @@ pub trait KhrGetSurfaceCapabilities2ExtensionInstanceCommands: InstanceV1_0 {
             surface_formats.as_mut_ptr(),
         );
 
-        debug_assert!(surface_formats.capacity() == surface_format_count as usize);
+        debug_assert!(surface_formats.capacity() >= surface_format_count as usize);
         surface_formats.set_len(surface_format_count as usize);
 
         if __result == Result::SUCCESS {
@@ -7721,7 +7721,7 @@ pub trait KhrMaintenance4ExtensionDeviceCommands: DeviceV1_0 {
         );
 
         debug_assert!(
-            sparse_memory_requirements.capacity() == sparse_memory_requirement_count as usize
+            sparse_memory_requirements.capacity() >= sparse_memory_requirement_count as usize
         );
         sparse_memory_requirements.set_len(sparse_memory_requirement_count as usize);
 
@@ -7962,7 +7962,7 @@ pub trait KhrObjectRefreshExtensionInstanceCommands: InstanceV1_0 {
         );
 
         debug_assert!(
-            refreshable_object_types.capacity() == refreshable_object_type_count as usize
+            refreshable_object_types.capacity() >= refreshable_object_type_count as usize
         );
         refreshable_object_types.set_len(refreshable_object_type_count as usize);
 
@@ -8039,9 +8039,9 @@ pub trait KhrPerformanceQueryExtensionInstanceCommands: InstanceV1_0 {
             counter_descriptions.as_mut_ptr(),
         );
 
-        debug_assert!(counters.capacity() == counter_count as usize);
+        debug_assert!(counters.capacity() >= counter_count as usize);
         counters.set_len(counter_count as usize);
-        debug_assert!(counter_descriptions.capacity() == counter_count as usize);
+        debug_assert!(counter_descriptions.capacity() >= counter_count as usize);
         counter_descriptions.set_len(counter_count as usize);
 
         if __result == Result::SUCCESS {
@@ -8139,7 +8139,7 @@ pub trait KhrPipelineBinaryExtensionDeviceCommands: DeviceV1_0 {
             pipeline_binary_data.as_mut_ptr() as *mut c_void,
         );
 
-        debug_assert!(pipeline_binary_data.capacity() == pipeline_binary_data_size as usize);
+        debug_assert!(pipeline_binary_data.capacity() >= pipeline_binary_data_size as usize);
         pipeline_binary_data.set_len(pipeline_binary_data_size as usize);
 
         if __result == Result::SUCCESS {
@@ -8224,7 +8224,7 @@ pub trait KhrPipelineExecutablePropertiesExtensionDeviceCommands: DeviceV1_0 {
         );
 
         debug_assert!(
-            internal_representations.capacity() == internal_representation_count as usize
+            internal_representations.capacity() >= internal_representation_count as usize
         );
         internal_representations.set_len(internal_representation_count as usize);
 
@@ -8259,7 +8259,7 @@ pub trait KhrPipelineExecutablePropertiesExtensionDeviceCommands: DeviceV1_0 {
             properties.as_mut_ptr(),
         );
 
-        debug_assert!(properties.capacity() == executable_count as usize);
+        debug_assert!(properties.capacity() >= executable_count as usize);
         properties.set_len(executable_count as usize);
 
         if __result == Result::SUCCESS {
@@ -8293,7 +8293,7 @@ pub trait KhrPipelineExecutablePropertiesExtensionDeviceCommands: DeviceV1_0 {
             statistics.as_mut_ptr(),
         );
 
-        debug_assert!(statistics.capacity() == statistic_count as usize);
+        debug_assert!(statistics.capacity() >= statistic_count as usize);
         statistics.set_len(statistic_count as usize);
 
         if __result == Result::SUCCESS {
@@ -8700,7 +8700,7 @@ pub trait KhrSurfaceExtensionInstanceCommands: InstanceV1_0 {
             surface_formats.as_mut_ptr(),
         );
 
-        debug_assert!(surface_formats.capacity() == surface_format_count as usize);
+        debug_assert!(surface_formats.capacity() >= surface_format_count as usize);
         surface_formats.set_len(surface_format_count as usize);
 
         if __result == Result::SUCCESS {
@@ -8739,7 +8739,7 @@ pub trait KhrSurfaceExtensionInstanceCommands: InstanceV1_0 {
             present_modes.as_mut_ptr(),
         );
 
-        debug_assert!(present_modes.capacity() == present_mode_count as usize);
+        debug_assert!(present_modes.capacity() >= present_mode_count as usize);
         present_modes.set_len(present_mode_count as usize);
 
         if __result == Result::SUCCESS {
@@ -8926,7 +8926,7 @@ pub trait KhrSwapchainExtensionDeviceCommands: DeviceV1_0 {
             swapchain_images.as_mut_ptr(),
         );
 
-        debug_assert!(swapchain_images.capacity() == swapchain_image_count as usize);
+        debug_assert!(swapchain_images.capacity() >= swapchain_image_count as usize);
         swapchain_images.set_len(swapchain_image_count as usize);
 
         if __result == Result::SUCCESS {
@@ -8982,7 +8982,7 @@ pub trait KhrSwapchainExtensionInstanceCommands: InstanceV1_0 {
             rects.as_mut_ptr(),
         );
 
-        debug_assert!(rects.capacity() == rect_count as usize);
+        debug_assert!(rects.capacity() >= rect_count as usize);
         rects.set_len(rect_count as usize);
 
         if __result == Result::SUCCESS {
@@ -9211,7 +9211,7 @@ pub trait KhrVideoEncodeQueueExtensionDeviceCommands: DeviceV1_0 {
             data.as_mut_ptr() as *mut c_void,
         );
 
-        debug_assert!(data.capacity() == data_size as usize);
+        debug_assert!(data.capacity() >= data_size as usize);
         data.set_len(data_size as usize);
 
         if __result == Result::SUCCESS {
@@ -9404,7 +9404,7 @@ pub trait KhrVideoQueueExtensionDeviceCommands: DeviceV1_0 {
             memory_requirements.as_mut_ptr(),
         );
 
-        debug_assert!(memory_requirements.capacity() == memory_requirements_count as usize);
+        debug_assert!(memory_requirements.capacity() >= memory_requirements_count as usize);
         memory_requirements.set_len(memory_requirements_count as usize);
 
         if __result == Result::SUCCESS {
@@ -9489,7 +9489,7 @@ pub trait KhrVideoQueueExtensionInstanceCommands: InstanceV1_0 {
             video_format_properties.as_mut_ptr(),
         );
 
-        debug_assert!(video_format_properties.capacity() == video_format_property_count as usize);
+        debug_assert!(video_format_properties.capacity() >= video_format_property_count as usize);
         video_format_properties.set_len(video_format_property_count as usize);
 
         if __result == Result::SUCCESS {
@@ -10031,7 +10031,7 @@ pub trait NvCooperativeMatrixExtensionInstanceCommands: InstanceV1_0 {
             properties.as_mut_ptr(),
         );
 
-        debug_assert!(properties.capacity() == property_count as usize);
+        debug_assert!(properties.capacity() >= property_count as usize);
         properties.set_len(property_count as usize);
 
         if __result == Result::SUCCESS {
@@ -10072,7 +10072,7 @@ pub trait NvCooperativeMatrix2ExtensionInstanceCommands: InstanceV1_0 {
             properties.as_mut_ptr(),
         );
 
-        debug_assert!(properties.capacity() == property_count as usize);
+        debug_assert!(properties.capacity() >= property_count as usize);
         properties.set_len(property_count as usize);
 
         if __result == Result::SUCCESS {
@@ -10147,7 +10147,7 @@ pub trait NvCooperativeVectorExtensionInstanceCommands: InstanceV1_0 {
             properties.as_mut_ptr(),
         );
 
-        debug_assert!(properties.capacity() == property_count as usize);
+        debug_assert!(properties.capacity() >= property_count as usize);
         properties.set_len(property_count as usize);
 
         if __result == Result::SUCCESS {
@@ -10233,7 +10233,7 @@ pub trait NvCoverageReductionModeExtensionInstanceCommands: InstanceV1_0 {
             combinations.as_mut_ptr(),
         );
 
-        debug_assert!(combinations.capacity() == combination_count as usize);
+        debug_assert!(combinations.capacity() >= combination_count as usize);
         combinations.set_len(combination_count as usize);
 
         if __result == Result::SUCCESS {
@@ -10353,7 +10353,7 @@ pub trait NvCudaKernelLaunchExtensionDeviceCommands: DeviceV1_0 {
             cache_data.as_mut_ptr() as *mut c_void,
         );
 
-        debug_assert!(cache_data.capacity() == cache_size as usize);
+        debug_assert!(cache_data.capacity() >= cache_size as usize);
         cache_data.set_len(cache_size as usize);
 
         if __result == Result::SUCCESS {
@@ -10398,7 +10398,7 @@ pub trait NvDeviceDiagnosticCheckpointsExtensionDeviceCommands: DeviceV1_0 {
             checkpoint_data.as_mut_ptr(),
         );
 
-        debug_assert!(checkpoint_data.capacity() == checkpoint_data_count as usize);
+        debug_assert!(checkpoint_data.capacity() >= checkpoint_data_count as usize);
         checkpoint_data.set_len(checkpoint_data_count as usize);
 
         checkpoint_data
@@ -10423,7 +10423,7 @@ pub trait NvDeviceDiagnosticCheckpointsExtensionDeviceCommands: DeviceV1_0 {
             checkpoint_data.as_mut_ptr(),
         );
 
-        debug_assert!(checkpoint_data.capacity() == checkpoint_data_count as usize);
+        debug_assert!(checkpoint_data.capacity() >= checkpoint_data_count as usize);
         checkpoint_data.set_len(checkpoint_data_count as usize);
 
         checkpoint_data
@@ -11402,7 +11402,7 @@ pub trait NvOpticalFlowExtensionInstanceCommands: InstanceV1_0 {
             image_format_properties.as_mut_ptr(),
         );
 
-        debug_assert!(image_format_properties.capacity() == format_count as usize);
+        debug_assert!(image_format_properties.capacity() >= format_count as usize);
         image_format_properties.set_len(format_count as usize);
 
         if __result == Result::SUCCESS {
@@ -12019,7 +12019,7 @@ pub trait QcomTilePropertiesExtensionDeviceCommands: DeviceV1_0 {
             properties.as_mut_ptr(),
         );
 
-        debug_assert!(properties.capacity() == properties_count as usize);
+        debug_assert!(properties.capacity() >= properties_count as usize);
         properties.set_len(properties_count as usize);
 
         if __result == Result::SUCCESS {

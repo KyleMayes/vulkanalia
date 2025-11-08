@@ -76,7 +76,7 @@ pub trait EntryV1_0 {
             properties.as_mut_ptr(),
         );
 
-        debug_assert!(properties.capacity() == property_count as usize);
+        debug_assert!(properties.capacity() >= property_count as usize);
         properties.set_len(property_count as usize);
 
         if __result == Result::SUCCESS {
@@ -100,7 +100,7 @@ pub trait EntryV1_0 {
             properties.as_mut_ptr(),
         );
 
-        debug_assert!(properties.capacity() == property_count as usize);
+        debug_assert!(properties.capacity() >= property_count as usize);
         properties.set_len(property_count as usize);
 
         if __result == Result::SUCCESS {
@@ -187,7 +187,7 @@ pub trait InstanceV1_0 {
             properties.as_mut_ptr(),
         );
 
-        debug_assert!(properties.capacity() == property_count as usize);
+        debug_assert!(properties.capacity() >= property_count as usize);
         properties.set_len(property_count as usize);
 
         if __result == Result::SUCCESS {
@@ -219,7 +219,7 @@ pub trait InstanceV1_0 {
             properties.as_mut_ptr(),
         );
 
-        debug_assert!(properties.capacity() == property_count as usize);
+        debug_assert!(properties.capacity() >= property_count as usize);
         properties.set_len(property_count as usize);
 
         if __result == Result::SUCCESS {
@@ -248,7 +248,7 @@ pub trait InstanceV1_0 {
             physical_devices.as_mut_ptr(),
         );
 
-        debug_assert!(physical_devices.capacity() == physical_device_count as usize);
+        debug_assert!(physical_devices.capacity() >= physical_device_count as usize);
         physical_devices.set_len(physical_device_count as usize);
 
         if __result == Result::SUCCESS {
@@ -374,7 +374,7 @@ pub trait InstanceV1_0 {
             queue_family_properties.as_mut_ptr(),
         );
 
-        debug_assert!(queue_family_properties.capacity() == queue_family_property_count as usize);
+        debug_assert!(queue_family_properties.capacity() >= queue_family_property_count as usize);
         queue_family_properties.set_len(queue_family_property_count as usize);
 
         queue_family_properties
@@ -421,7 +421,7 @@ pub trait InstanceV1_0 {
             properties.as_mut_ptr(),
         );
 
-        debug_assert!(properties.capacity() == property_count as usize);
+        debug_assert!(properties.capacity() >= property_count as usize);
         properties.set_len(property_count as usize);
 
         properties
@@ -2173,7 +2173,7 @@ pub trait DeviceV1_0 {
         );
 
         debug_assert!(
-            sparse_memory_requirements.capacity() == sparse_memory_requirement_count as usize
+            sparse_memory_requirements.capacity() >= sparse_memory_requirement_count as usize
         );
         sparse_memory_requirements.set_len(sparse_memory_requirement_count as usize);
 
@@ -2223,7 +2223,7 @@ pub trait DeviceV1_0 {
             data.as_mut_ptr() as *mut c_void,
         );
 
-        debug_assert!(data.capacity() == data_size as usize);
+        debug_assert!(data.capacity() >= data_size as usize);
         data.set_len(data_size as usize);
 
         if __result == Result::SUCCESS {
@@ -2599,7 +2599,7 @@ pub trait InstanceV1_1: InstanceV1_0 {
         );
 
         debug_assert!(
-            physical_device_group_properties.capacity() == physical_device_group_count as usize
+            physical_device_group_properties.capacity() >= physical_device_group_count as usize
         );
         physical_device_group_properties.set_len(physical_device_group_count as usize);
 
@@ -2753,7 +2753,7 @@ pub trait InstanceV1_1: InstanceV1_0 {
             queue_family_properties.as_mut_ptr(),
         );
 
-        debug_assert!(queue_family_properties.capacity() == queue_family_property_count as usize);
+        debug_assert!(queue_family_properties.capacity() >= queue_family_property_count as usize);
         queue_family_properties.set_len(queue_family_property_count as usize);
 
         queue_family_properties
@@ -2788,7 +2788,7 @@ pub trait InstanceV1_1: InstanceV1_0 {
             properties.as_mut_ptr(),
         );
 
-        debug_assert!(properties.capacity() == property_count as usize);
+        debug_assert!(properties.capacity() >= property_count as usize);
         properties.set_len(property_count as usize);
 
         properties
@@ -3040,7 +3040,7 @@ pub trait DeviceV1_1: DeviceV1_0 {
         );
 
         debug_assert!(
-            sparse_memory_requirements.capacity() == sparse_memory_requirement_count as usize
+            sparse_memory_requirements.capacity() >= sparse_memory_requirement_count as usize
         );
         sparse_memory_requirements.set_len(sparse_memory_requirement_count as usize);
 
@@ -3306,7 +3306,7 @@ pub trait InstanceV1_3: InstanceV1_2 {
             tool_properties.as_mut_ptr(),
         );
 
-        debug_assert!(tool_properties.capacity() == tool_count as usize);
+        debug_assert!(tool_properties.capacity() >= tool_count as usize);
         tool_properties.set_len(tool_count as usize);
 
         if __result == Result::SUCCESS {
@@ -3746,7 +3746,7 @@ pub trait DeviceV1_3: DeviceV1_2 {
         );
 
         debug_assert!(
-            sparse_memory_requirements.capacity() == sparse_memory_requirement_count as usize
+            sparse_memory_requirements.capacity() >= sparse_memory_requirement_count as usize
         );
         sparse_memory_requirements.set_len(sparse_memory_requirement_count as usize);
 

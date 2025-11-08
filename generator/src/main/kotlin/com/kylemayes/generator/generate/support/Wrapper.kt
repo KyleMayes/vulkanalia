@@ -138,7 +138,7 @@ fun Registry.generateCommandWrapper(command: Command): String {
                         preActualStmts.add("let mut ${slice.name} = Vec::with_capacity($length as usize);")
                     }
 
-                    postActualStmts.add("debug_assert!(${slice.name}.capacity() == $length as usize);")
+                    postActualStmts.add("debug_assert!(${slice.name}.capacity() >= $length as usize);")
                     postActualStmts.add("${slice.name}.set_len($length as usize);")
                 } else {
                     // Input slice parameter.
