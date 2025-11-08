@@ -6780,6 +6780,22 @@ pub const OHOS_SURFACE_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_QCOM_data_graph_model.html>
+#[allow(deprecated)]
+pub const QCOM_DATA_GRAPH_MODEL_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_QCOM_data_graph_model"),
+    number: 630,
+    type_: "device",
+    author: "QCOM",
+    contact: "Matthew Netsch @mnetsch",
+    platform: None,
+    required_extensions: None,
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_QCOM_filter_cubic_clamp.html>
 #[allow(deprecated)]
 pub const QCOM_FILTER_CUBIC_CLAMP_EXTENSION: Extension = Extension {

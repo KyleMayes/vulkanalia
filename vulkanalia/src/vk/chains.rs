@@ -1964,6 +1964,20 @@ unsafe impl InputChainStruct for D3D12FenceSubmitInfoKHR {
     }
 }
 
+unsafe impl InputChainStruct for DataGraphPipelineBuiltinModelCreateInfoQCOM {
+    const TYPE: StructureType = StructureType::DATA_GRAPH_PIPELINE_BUILTIN_MODEL_CREATE_INFO_QCOM;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
 unsafe impl InputChainStruct for DataGraphPipelineCompilerControlCreateInfoARM {
     const TYPE: StructureType = StructureType::DATA_GRAPH_PIPELINE_COMPILER_CONTROL_CREATE_INFO_ARM;
 
@@ -7675,6 +7689,20 @@ unsafe impl InputChainStruct for PhysicalDeviceDataGraphFeaturesARM {
 unsafe impl OutputChainStruct for PhysicalDeviceDataGraphFeaturesARM {
     #[inline]
     fn next_mut(&self) -> *mut c_void {
+        self.next
+    }
+}
+
+unsafe impl InputChainStruct for PhysicalDeviceDataGraphModelFeaturesQCOM {
+    const TYPE: StructureType = StructureType::PHYSICAL_DEVICE_DATA_GRAPH_MODEL_FEATURES_QCOM;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
         self.next
     }
 }
