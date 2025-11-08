@@ -12,6 +12,9 @@ import com.kylemayes.generator.registry.isOpaquePointer
 import com.kylemayes.generator.registry.isPointer
 import com.kylemayes.generator.support.PeekableIterator
 
+/** These commands don't work with uninitialized `Vec`s for some reason. */
+private val defaultInitVecCommands = setOf("vkGetPhysicalDeviceCooperativeMatrixPropertiesKHR")
+
 /** Generates a more Rust-friendly wrapper method around a command for a version or extension trait. */
 fun Registry.generateCommandWrapper(command: Command): String {
     val type = getCommandType(command)
@@ -128,7 +131,13 @@ fun Registry.generateCommandWrapper(command: Command): String {
                     }
 
                     resultExprs.add(slice.name.value)
-                    preActualStmts.add("let mut ${slice.name} = Vec::with_capacity($length as usize);")
+
+                    if (defaultInitVecCommands.contains(command.name.original)) {
+                        preActualStmts.add("let mut ${slice.name} = ::alloc::vec![${pointee.generate()}::default(); $length as usize];")
+                    } else {
+                        preActualStmts.add("let mut ${slice.name} = Vec::with_capacity($length as usize);")
+                    }
+
                     postActualStmts.add("debug_assert!(${slice.name}.capacity() == $length as usize);")
                     postActualStmts.add("${slice.name}.set_len($length as usize);")
                 } else {

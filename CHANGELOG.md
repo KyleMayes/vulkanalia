@@ -3,6 +3,9 @@
 ### Changed
 - Bumped MSRV to 1.88
 
+### Fixed
+- Fixed validation errors and/or crashes when calling `vk::KhrCooperativeMatrixExtensionInstanceCommands::get_physical_device_cooperative_matrix_properties_khr`
+
 ## [0.32.0] - 2025-10-30
 
 ### Added
