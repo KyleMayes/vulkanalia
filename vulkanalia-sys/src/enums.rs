@@ -1389,6 +1389,36 @@ impl fmt::Debug for CubicFilterWeightsQCOM {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDataGraphModelCacheTypeQCOM.html>
+#[repr(transparent)]
+#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
+pub struct DataGraphModelCacheTypeQCOM(i32);
+
+impl DataGraphModelCacheTypeQCOM {
+    pub const GENERIC_BINARY: Self = Self(0);
+
+    /// Constructs an instance of this enum with the supplied underlying value.
+    #[inline]
+    pub const fn from_raw(value: i32) -> Self {
+        Self(value)
+    }
+
+    /// Gets the underlying value for this enum instance.
+    #[inline]
+    pub const fn as_raw(self) -> i32 {
+        self.0
+    }
+}
+
+impl fmt::Debug for DataGraphModelCacheTypeQCOM {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self.0 {
+            0 => write!(f, "GENERIC_BINARY"),
+            _ => self.0.fmt(f),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDataGraphPipelinePropertyARM.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
@@ -4562,6 +4592,8 @@ pub struct PhysicalDeviceDataGraphOperationTypeARM(i32);
 
 impl PhysicalDeviceDataGraphOperationTypeARM {
     pub const SPIRV_EXTENDED_INSTRUCTION_SET: Self = Self(0);
+    pub const NEURAL_MODEL_QCOM: Self = Self(1000629000);
+    pub const BUILTIN_MODEL_QCOM: Self = Self(1000629001);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -4580,6 +4612,8 @@ impl fmt::Debug for PhysicalDeviceDataGraphOperationTypeARM {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self.0 {
             0 => write!(f, "SPIRV_EXTENDED_INSTRUCTION_SET"),
+            1000629000 => write!(f, "NEURAL_MODEL_QCOM"),
+            1000629001 => write!(f, "BUILTIN_MODEL_QCOM"),
             _ => self.0.fmt(f),
         }
     }
@@ -4592,6 +4626,8 @@ pub struct PhysicalDeviceDataGraphProcessingEngineTypeARM(i32);
 
 impl PhysicalDeviceDataGraphProcessingEngineTypeARM {
     pub const DEFAULT: Self = Self(0);
+    pub const NEURAL_QCOM: Self = Self(1000629000);
+    pub const COMPUTE_QCOM: Self = Self(1000629001);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -4610,6 +4646,8 @@ impl fmt::Debug for PhysicalDeviceDataGraphProcessingEngineTypeARM {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self.0 {
             0 => write!(f, "DEFAULT"),
+            1000629000 => write!(f, "NEURAL_QCOM"),
+            1000629001 => write!(f, "COMPUTE_QCOM"),
             _ => self.0.fmt(f),
         }
     }
@@ -4738,6 +4776,7 @@ pub struct PipelineCacheHeaderVersion(i32);
 
 impl PipelineCacheHeaderVersion {
     pub const ONE: Self = Self(1);
+    pub const DATA_GRAPH_QCOM: Self = Self(1000629000);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -4756,6 +4795,7 @@ impl fmt::Debug for PipelineCacheHeaderVersion {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self.0 {
             1 => write!(f, "ONE"),
+            1000629000 => write!(f, "DATA_GRAPH_QCOM"),
             _ => self.0.fmt(f),
         }
     }
@@ -7318,6 +7358,8 @@ impl StructureType {
     pub const PHYSICAL_DEVICE_ZERO_INITIALIZE_DEVICE_MEMORY_FEATURES_EXT: Self = Self(1000620000);
     pub const PHYSICAL_DEVICE_PRESENT_MODE_FIFO_LATEST_READY_FEATURES_KHR: Self = Self(1000361000);
     pub const PHYSICAL_DEVICE_SHADER_64_BIT_INDEXING_FEATURES_EXT: Self = Self(1000627000);
+    pub const PHYSICAL_DEVICE_DATA_GRAPH_MODEL_FEATURES_QCOM: Self = Self(1000629000);
+    pub const DATA_GRAPH_PIPELINE_BUILTIN_MODEL_CREATE_INFO_QCOM: Self = Self(1000629001);
     pub const PHYSICAL_DEVICE_MAINTENANCE_10_FEATURES_KHR: Self = Self(1000630000);
     pub const PHYSICAL_DEVICE_MAINTENANCE_10_PROPERTIES_KHR: Self = Self(1000630001);
     pub const RENDERING_ATTACHMENT_FLAGS_INFO_KHR: Self = Self(1000630002);
@@ -8754,6 +8796,8 @@ impl fmt::Debug for StructureType {
                 "PHYSICAL_DEVICE_PRESENT_MODE_FIFO_LATEST_READY_FEATURES_KHR"
             ),
             1000627000 => write!(f, "PHYSICAL_DEVICE_SHADER_64_BIT_INDEXING_FEATURES_EXT"),
+            1000629000 => write!(f, "PHYSICAL_DEVICE_DATA_GRAPH_MODEL_FEATURES_QCOM"),
+            1000629001 => write!(f, "DATA_GRAPH_PIPELINE_BUILTIN_MODEL_CREATE_INFO_QCOM"),
             1000630000 => write!(f, "PHYSICAL_DEVICE_MAINTENANCE_10_FEATURES_KHR"),
             1000630001 => write!(f, "PHYSICAL_DEVICE_MAINTENANCE_10_PROPERTIES_KHR"),
             1000630002 => write!(f, "RENDERING_ATTACHMENT_FLAGS_INFO_KHR"),
