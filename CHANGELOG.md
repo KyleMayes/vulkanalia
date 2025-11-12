@@ -1,3 +1,8 @@
+## [0.34.0] - UNRELEASED
+
+### Bindings Updates
+- [Fix: make pNext non-const for returnedonly="true" structs (#2601)](https://github.com/KhronosGroup/Vulkan-Docs/commit/8fba3c11cdf6e22d87730e649ec8142b02f7fc53)
+
 ## [0.33.0] - 2025-11-07
 
 ### Changed

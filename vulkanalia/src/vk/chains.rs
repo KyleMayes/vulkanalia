@@ -70,6 +70,13 @@ unsafe impl InputChainStruct for AccelerationStructureBuildSizesInfoKHR {
     }
 }
 
+unsafe impl OutputChainStruct for AccelerationStructureBuildSizesInfoKHR {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
+        self.next
+    }
+}
+
 unsafe impl InputChainStruct for AccelerationStructureCaptureDescriptorDataInfoEXT {
     const TYPE: StructureType =
         StructureType::ACCELERATION_STRUCTURE_CAPTURE_DESCRIPTOR_DATA_INFO_EXT;
@@ -3253,6 +3260,13 @@ unsafe impl InputChainStruct for DisplayModeStereoPropertiesNV {
     }
 }
 
+unsafe impl OutputChainStruct for DisplayModeStereoPropertiesNV {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
+        self.next
+    }
+}
+
 unsafe impl InputChainStruct for DisplayNativeHdrSurfaceCapabilitiesAMD {
     const TYPE: StructureType = StructureType::DISPLAY_NATIVE_HDR_SURFACE_CAPABILITIES_AMD;
 
@@ -5591,6 +5605,13 @@ unsafe impl InputChainStruct for LatencyTimingsFrameReportNV {
     }
 }
 
+unsafe impl OutputChainStruct for LatencyTimingsFrameReportNV {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
+        self.next
+    }
+}
+
 unsafe impl InputChainStruct for LayerSettingsCreateInfoEXT {
     const TYPE: StructureType = StructureType::LAYER_SETTINGS_CREATE_INFO_EXT;
 
@@ -6372,6 +6393,13 @@ unsafe impl InputChainStruct for OpticalFlowImageFormatPropertiesNV {
 
     #[inline]
     fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl OutputChainStruct for OpticalFlowImageFormatPropertiesNV {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
         self.next
     }
 }
@@ -17499,6 +17527,13 @@ unsafe impl InputChainStruct for SurfaceProtectedCapabilitiesKHR {
     }
 }
 
+unsafe impl OutputChainStruct for SurfaceProtectedCapabilitiesKHR {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
+        self.next
+    }
+}
+
 unsafe impl InputChainStruct for SwapchainCounterCreateInfoEXT {
     const TYPE: StructureType = StructureType::SWAPCHAIN_COUNTER_CREATE_INFO_EXT;
 
@@ -17740,6 +17775,13 @@ unsafe impl InputChainStruct for TensorFormatPropertiesARM {
 
     #[inline]
     fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl OutputChainStruct for TensorFormatPropertiesARM {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
         self.next
     }
 }

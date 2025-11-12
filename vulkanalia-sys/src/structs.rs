@@ -92,7 +92,7 @@ pub struct AccelerationStructureBuildRangeInfoKHR {
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct AccelerationStructureBuildSizesInfoKHR {
     pub s_type: StructureType,
-    pub next: *const c_void,
+    pub next: *mut c_void,
     pub acceleration_structure_size: DeviceSize,
     pub update_scratch_size: DeviceSize,
     pub build_scratch_size: DeviceSize,
@@ -103,7 +103,7 @@ impl Default for AccelerationStructureBuildSizesInfoKHR {
     fn default() -> Self {
         Self {
             s_type: StructureType::ACCELERATION_STRUCTURE_BUILD_SIZES_INFO_KHR,
-            next: ptr::null(),
+            next: ptr::null_mut(),
             acceleration_structure_size: DeviceSize::default(),
             update_scratch_size: DeviceSize::default(),
             build_scratch_size: DeviceSize::default(),
@@ -6681,7 +6681,7 @@ pub struct DisplayModePropertiesKHR {
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct DisplayModeStereoPropertiesNV {
     pub s_type: StructureType,
-    pub next: *const c_void,
+    pub next: *mut c_void,
     pub hdmi_3d_supported: Bool32,
 }
 
@@ -6690,7 +6690,7 @@ impl Default for DisplayModeStereoPropertiesNV {
     fn default() -> Self {
         Self {
             s_type: StructureType::DISPLAY_MODE_STEREO_PROPERTIES_NV,
-            next: ptr::null(),
+            next: ptr::null_mut(),
             hdmi_3d_supported: Bool32::default(),
         }
     }
@@ -11108,7 +11108,7 @@ unsafe impl Sync for LatencySurfaceCapabilitiesNV {}
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct LatencyTimingsFrameReportNV {
     pub s_type: StructureType,
-    pub next: *const c_void,
+    pub next: *mut c_void,
     pub present_id: u64,
     pub input_sample_time_us: u64,
     pub sim_start_time_us: u64,
@@ -11130,7 +11130,7 @@ impl Default for LatencyTimingsFrameReportNV {
     fn default() -> Self {
         Self {
             s_type: StructureType::LATENCY_TIMINGS_FRAME_REPORT_NV,
-            next: ptr::null(),
+            next: ptr::null_mut(),
             present_id: u64::default(),
             input_sample_time_us: u64::default(),
             sim_start_time_us: u64::default(),
@@ -12539,7 +12539,7 @@ unsafe impl Sync for OpticalFlowImageFormatInfoNV {}
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct OpticalFlowImageFormatPropertiesNV {
     pub s_type: StructureType,
-    pub next: *const c_void,
+    pub next: *mut c_void,
     pub format: Format,
 }
 
@@ -12548,7 +12548,7 @@ impl Default for OpticalFlowImageFormatPropertiesNV {
     fn default() -> Self {
         Self {
             s_type: StructureType::OPTICAL_FLOW_IMAGE_FORMAT_PROPERTIES_NV,
-            next: ptr::null(),
+            next: ptr::null_mut(),
             format: Format::default(),
         }
     }
@@ -29127,7 +29127,7 @@ unsafe impl Sync for SurfacePresentScalingCapabilitiesKHR {}
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct SurfaceProtectedCapabilitiesKHR {
     pub s_type: StructureType,
-    pub next: *const c_void,
+    pub next: *mut c_void,
     pub supports_protected: Bool32,
 }
 
@@ -29136,7 +29136,7 @@ impl Default for SurfaceProtectedCapabilitiesKHR {
     fn default() -> Self {
         Self {
             s_type: StructureType::SURFACE_PROTECTED_CAPABILITIES_KHR,
-            next: ptr::null(),
+            next: ptr::null_mut(),
             supports_protected: Bool32::default(),
         }
     }
@@ -29584,7 +29584,7 @@ unsafe impl Sync for TensorDescriptionARM {}
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct TensorFormatPropertiesARM {
     pub s_type: StructureType,
-    pub next: *const c_void,
+    pub next: *mut c_void,
     pub optimal_tiling_tensor_features: FormatFeatureFlags2,
     pub linear_tiling_tensor_features: FormatFeatureFlags2,
 }
@@ -29594,7 +29594,7 @@ impl Default for TensorFormatPropertiesARM {
     fn default() -> Self {
         Self {
             s_type: StructureType::TENSOR_FORMAT_PROPERTIES_ARM,
-            next: ptr::null(),
+            next: ptr::null_mut(),
             optimal_tiling_tensor_features: FormatFeatureFlags2::default(),
             linear_tiling_tensor_features: FormatFeatureFlags2::default(),
         }
