@@ -908,6 +908,22 @@ pub const EXT_CUSTOM_BORDER_COLOR_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_custom_resolve.html>
+#[allow(deprecated)]
+pub const EXT_CUSTOM_RESOLVE_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_EXT_custom_resolve"),
+    number: 629,
+    type_: "device",
+    author: "EXT",
+    contact: "Mike Blumenkrantz @zmike",
+    platform: None,
+    required_extensions: None,
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_debug_marker.html>
 #[allow(deprecated)]
 pub const EXT_DEBUG_MARKER_EXTENSION: Extension = Extension {
@@ -2277,6 +2293,22 @@ pub const EXT_RASTERIZATION_ORDER_ATTACHMENT_ACCESS_EXTENSION: Extension = Exten
     type_: "device",
     author: "ARM",
     contact: "Jan-Harald Fredriksen @janharaldfredriksen-arm",
+    platform: None,
+    required_extensions: None,
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_ray_tracing_invocation_reorder.html>
+#[allow(deprecated)]
+pub const EXT_RAY_TRACING_INVOCATION_REORDER_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_EXT_ray_tracing_invocation_reorder"),
+    number: 582,
+    type_: "device",
+    author: "EXT",
+    contact: "Eric Werness @ewerness-nv",
     platform: None,
     required_extensions: None,
     required_version: None,
@@ -6505,7 +6537,7 @@ pub const NV_RAY_TRACING_INVOCATION_REORDER_EXTENSION: Extension = Extension {
     required_version: None,
     deprecated_by: None,
     obsoleted_by: None,
-    promoted_to: None,
+    promoted_to: Some("VK_EXT_ray_tracing_invocation_reorder"),
 };
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_ray_tracing_linear_swept_spheres.html>
@@ -6921,7 +6953,7 @@ pub const QCOM_RENDER_PASS_SHADER_RESOLVE_EXTENSION: Extension = Extension {
     required_version: None,
     deprecated_by: None,
     obsoleted_by: None,
-    promoted_to: None,
+    promoted_to: Some("VK_EXT_custom_resolve"),
 };
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_QCOM_render_pass_store_ops.html>

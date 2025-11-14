@@ -70,6 +70,13 @@ unsafe impl InputChainStruct for AccelerationStructureBuildSizesInfoKHR {
     }
 }
 
+unsafe impl OutputChainStruct for AccelerationStructureBuildSizesInfoKHR {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
+        self.next
+    }
+}
+
 unsafe impl InputChainStruct for AccelerationStructureCaptureDescriptorDataInfoEXT {
     const TYPE: StructureType =
         StructureType::ACCELERATION_STRUCTURE_CAPTURE_DESCRIPTOR_DATA_INFO_EXT;
@@ -661,6 +668,27 @@ unsafe impl InputChainStruct for AttachmentSampleCountInfoAMD {
 
     #[inline]
     fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl InputChainStruct for BeginCustomResolveInfoEXT {
+    const TYPE: StructureType = StructureType::BEGIN_CUSTOM_RESOLVE_INFO_EXT;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl OutputChainStruct for BeginCustomResolveInfoEXT {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
         self.next
     }
 }
@@ -1938,6 +1966,20 @@ unsafe impl InputChainStruct for CudaLaunchInfoNV {
 
 unsafe impl InputChainStruct for CudaModuleCreateInfoNV {
     const TYPE: StructureType = StructureType::CUDA_MODULE_CREATE_INFO_NV;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl InputChainStruct for CustomResolveCreateInfoEXT {
+    const TYPE: StructureType = StructureType::CUSTOM_RESOLVE_CREATE_INFO_EXT;
 
     #[inline]
     fn s_type(&self) -> StructureType {
@@ -3249,6 +3291,13 @@ unsafe impl InputChainStruct for DisplayModeStereoPropertiesNV {
 
     #[inline]
     fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl OutputChainStruct for DisplayModeStereoPropertiesNV {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
         self.next
     }
 }
@@ -5591,6 +5640,13 @@ unsafe impl InputChainStruct for LatencyTimingsFrameReportNV {
     }
 }
 
+unsafe impl OutputChainStruct for LatencyTimingsFrameReportNV {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
+        self.next
+    }
+}
+
 unsafe impl InputChainStruct for LayerSettingsCreateInfoEXT {
     const TYPE: StructureType = StructureType::LAYER_SETTINGS_CREATE_INFO_EXT;
 
@@ -6372,6 +6428,13 @@ unsafe impl InputChainStruct for OpticalFlowImageFormatPropertiesNV {
 
     #[inline]
     fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl OutputChainStruct for OpticalFlowImageFormatPropertiesNV {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
         self.next
     }
 }
@@ -7672,6 +7735,27 @@ unsafe impl OutputChainStruct for PhysicalDeviceCustomBorderColorPropertiesEXT {
     }
 }
 
+unsafe impl InputChainStruct for PhysicalDeviceCustomResolveFeaturesEXT {
+    const TYPE: StructureType = StructureType::PHYSICAL_DEVICE_CUSTOM_RESOLVE_FEATURES_EXT;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl OutputChainStruct for PhysicalDeviceCustomResolveFeaturesEXT {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
+        self.next
+    }
+}
+
 unsafe impl InputChainStruct for PhysicalDeviceDataGraphFeaturesARM {
     const TYPE: StructureType = StructureType::PHYSICAL_DEVICE_DATA_GRAPH_FEATURES_ARM;
 
@@ -7703,6 +7787,13 @@ unsafe impl InputChainStruct for PhysicalDeviceDataGraphModelFeaturesQCOM {
 
     #[inline]
     fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl OutputChainStruct for PhysicalDeviceDataGraphModelFeaturesQCOM {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
         self.next
     }
 }
@@ -11910,9 +12001,9 @@ unsafe impl OutputChainStruct for PhysicalDeviceRayQueryFeaturesKHR {
     }
 }
 
-unsafe impl InputChainStruct for PhysicalDeviceRayTracingInvocationReorderFeaturesNV {
+unsafe impl InputChainStruct for PhysicalDeviceRayTracingInvocationReorderFeaturesEXT {
     const TYPE: StructureType =
-        StructureType::PHYSICAL_DEVICE_RAY_TRACING_INVOCATION_REORDER_FEATURES_NV;
+        StructureType::PHYSICAL_DEVICE_RAY_TRACING_INVOCATION_REORDER_FEATURES_EXT;
 
     #[inline]
     fn s_type(&self) -> StructureType {
@@ -11925,7 +12016,29 @@ unsafe impl InputChainStruct for PhysicalDeviceRayTracingInvocationReorderFeatur
     }
 }
 
-unsafe impl OutputChainStruct for PhysicalDeviceRayTracingInvocationReorderFeaturesNV {
+unsafe impl OutputChainStruct for PhysicalDeviceRayTracingInvocationReorderFeaturesEXT {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
+        self.next
+    }
+}
+
+unsafe impl InputChainStruct for PhysicalDeviceRayTracingInvocationReorderPropertiesEXT {
+    const TYPE: StructureType =
+        StructureType::PHYSICAL_DEVICE_RAY_TRACING_INVOCATION_REORDER_PROPERTIES_EXT;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl OutputChainStruct for PhysicalDeviceRayTracingInvocationReorderPropertiesEXT {
     #[inline]
     fn next_mut(&self) -> *mut c_void {
         self.next
@@ -17499,6 +17612,13 @@ unsafe impl InputChainStruct for SurfaceProtectedCapabilitiesKHR {
     }
 }
 
+unsafe impl OutputChainStruct for SurfaceProtectedCapabilitiesKHR {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
+        self.next
+    }
+}
+
 unsafe impl InputChainStruct for SwapchainCounterCreateInfoEXT {
     const TYPE: StructureType = StructureType::SWAPCHAIN_COUNTER_CREATE_INFO_EXT;
 
@@ -17740,6 +17860,13 @@ unsafe impl InputChainStruct for TensorFormatPropertiesARM {
 
     #[inline]
     fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl OutputChainStruct for TensorFormatPropertiesARM {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
         self.next
     }
 }

@@ -4314,6 +4314,58 @@ unsafe impl Cast for BaseOutStructureBuilder {
     }
 }
 
+unsafe impl Cast for BeginCustomResolveInfoEXT {
+    type Target = BeginCustomResolveInfoEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for BeginCustomResolveInfoEXT {
+    type Builder = BeginCustomResolveInfoEXTBuilder;
+}
+
+/// A builder for a [`BeginCustomResolveInfoEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct BeginCustomResolveInfoEXTBuilder {
+    value: BeginCustomResolveInfoEXT,
+}
+
+impl BeginCustomResolveInfoEXTBuilder {
+    #[inline]
+    pub fn build(self) -> BeginCustomResolveInfoEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for BeginCustomResolveInfoEXTBuilder {
+    type Target = BeginCustomResolveInfoEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for BeginCustomResolveInfoEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for BeginCustomResolveInfoEXTBuilder {
+    type Target = BeginCustomResolveInfoEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for BindAccelerationStructureMemoryInfoNV {
     type Target = BindAccelerationStructureMemoryInfoNV;
 
@@ -9799,6 +9851,7 @@ unsafe impl ExtendsCommandBufferInheritanceInfo
 }
 unsafe impl ExtendsCommandBufferInheritanceInfo for CommandBufferInheritanceRenderingInfo {}
 unsafe impl ExtendsCommandBufferInheritanceInfo for CommandBufferInheritanceViewportScissorInfoNV {}
+unsafe impl ExtendsCommandBufferInheritanceInfo for CustomResolveCreateInfoEXT {}
 unsafe impl ExtendsCommandBufferInheritanceInfo for ExternalFormatANDROID {}
 unsafe impl ExtendsCommandBufferInheritanceInfo for ExternalFormatOHOS {}
 unsafe impl ExtendsCommandBufferInheritanceInfo for MultiviewPerViewAttributesInfoNVX {}
@@ -13290,6 +13343,84 @@ impl ops::DerefMut for CudaModuleCreateInfoNVBuilder<'_> {
 
 unsafe impl Cast for CudaModuleCreateInfoNVBuilder<'_> {
     type Target = CudaModuleCreateInfoNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for CustomResolveCreateInfoEXT {
+    type Target = CustomResolveCreateInfoEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl<'b> HasBuilder<'b> for CustomResolveCreateInfoEXT {
+    type Builder = CustomResolveCreateInfoEXTBuilder<'b>;
+}
+
+/// A builder for a [`CustomResolveCreateInfoEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct CustomResolveCreateInfoEXTBuilder<'b> {
+    value: CustomResolveCreateInfoEXT,
+    _marker: PhantomData<&'b ()>,
+}
+
+impl<'b> CustomResolveCreateInfoEXTBuilder<'b> {
+    #[inline]
+    pub fn custom_resolve(mut self, custom_resolve: bool) -> Self {
+        self.value.custom_resolve = custom_resolve as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn color_attachment_formats(mut self, color_attachment_formats: &'b [Format]) -> Self {
+        self.value.color_attachment_count = color_attachment_formats.len() as u32;
+        self.value.color_attachment_formats = color_attachment_formats.as_ptr();
+        self
+    }
+
+    #[inline]
+    pub fn depth_attachment_format(mut self, depth_attachment_format: Format) -> Self {
+        self.value.depth_attachment_format = depth_attachment_format;
+        self
+    }
+
+    #[inline]
+    pub fn stencil_attachment_format(mut self, stencil_attachment_format: Format) -> Self {
+        self.value.stencil_attachment_format = stencil_attachment_format;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> CustomResolveCreateInfoEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for CustomResolveCreateInfoEXTBuilder<'_> {
+    type Target = CustomResolveCreateInfoEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for CustomResolveCreateInfoEXTBuilder<'_> {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for CustomResolveCreateInfoEXTBuilder<'_> {
+    type Target = CustomResolveCreateInfoEXT;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -17628,6 +17759,7 @@ unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceCubicClampFeaturesQCOM {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceCubicWeightsFeaturesQCOM {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceCudaKernelLaunchFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceCustomBorderColorFeaturesEXT {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceCustomResolveFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceDataGraphFeaturesARM {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceDataGraphModelFeaturesQCOM {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV {}
@@ -17753,7 +17885,7 @@ unsafe impl ExtendsDeviceCreateInfo
 }
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceRawAccessChainsFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceRayQueryFeaturesKHR {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceRayTracingInvocationReorderFeaturesNV {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceRayTracingInvocationReorderFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceRayTracingLinearSweptSpheresFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceRayTracingMaintenance1FeaturesKHR {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceRayTracingMotionBlurFeaturesNV {}
@@ -27208,6 +27340,7 @@ unsafe impl Cast for GetLatencyMarkerInfoNVBuilder<'_> {
 /// A Vulkan struct that can be used to extend a [`GraphicsPipelineCreateInfo`].
 pub unsafe trait ExtendsGraphicsPipelineCreateInfo: fmt::Debug {}
 unsafe impl ExtendsGraphicsPipelineCreateInfo for AttachmentSampleCountInfoAMD {}
+unsafe impl ExtendsGraphicsPipelineCreateInfo for CustomResolveCreateInfoEXT {}
 unsafe impl ExtendsGraphicsPipelineCreateInfo for ExternalFormatANDROID {}
 unsafe impl ExtendsGraphicsPipelineCreateInfo for ExternalFormatOHOS {}
 unsafe impl ExtendsGraphicsPipelineCreateInfo for GraphicsPipelineLibraryCreateInfoEXT {}
@@ -43422,6 +43555,64 @@ unsafe impl Cast for PhysicalDeviceCustomBorderColorPropertiesEXTBuilder {
     }
 }
 
+unsafe impl Cast for PhysicalDeviceCustomResolveFeaturesEXT {
+    type Target = PhysicalDeviceCustomResolveFeaturesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceCustomResolveFeaturesEXT {
+    type Builder = PhysicalDeviceCustomResolveFeaturesEXTBuilder;
+}
+
+/// A builder for a [`PhysicalDeviceCustomResolveFeaturesEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceCustomResolveFeaturesEXTBuilder {
+    value: PhysicalDeviceCustomResolveFeaturesEXT,
+}
+
+impl PhysicalDeviceCustomResolveFeaturesEXTBuilder {
+    #[inline]
+    pub fn custom_resolve(mut self, custom_resolve: bool) -> Self {
+        self.value.custom_resolve = custom_resolve as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceCustomResolveFeaturesEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceCustomResolveFeaturesEXTBuilder {
+    type Target = PhysicalDeviceCustomResolveFeaturesEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceCustomResolveFeaturesEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceCustomResolveFeaturesEXTBuilder {
+    type Target = PhysicalDeviceCustomResolveFeaturesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for PhysicalDeviceDataGraphFeaturesARM {
     type Target = PhysicalDeviceDataGraphFeaturesARM;
 
@@ -48896,6 +49087,7 @@ unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceCubicClampFeaturesQ
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceCubicWeightsFeaturesQCOM {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceCudaKernelLaunchFeaturesNV {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceCustomBorderColorFeaturesEXT {}
+unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceCustomResolveFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceDataGraphFeaturesARM {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceDataGraphModelFeaturesQCOM {}
 unsafe impl ExtendsPhysicalDeviceFeatures2
@@ -49062,7 +49254,10 @@ unsafe impl ExtendsPhysicalDeviceFeatures2
 }
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceRawAccessChainsFeaturesNV {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceRayQueryFeaturesKHR {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceRayTracingInvocationReorderFeaturesNV {}
+unsafe impl ExtendsPhysicalDeviceFeatures2
+    for PhysicalDeviceRayTracingInvocationReorderFeaturesEXT
+{
+}
 unsafe impl ExtendsPhysicalDeviceFeatures2
     for PhysicalDeviceRayTracingLinearSweptSpheresFeaturesNV
 {
@@ -59920,6 +60115,10 @@ unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceProtectedMemoryPr
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceProvokingVertexPropertiesEXT {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDevicePushDescriptorProperties {}
 unsafe impl ExtendsPhysicalDeviceProperties2
+    for PhysicalDeviceRayTracingInvocationReorderPropertiesEXT
+{
+}
+unsafe impl ExtendsPhysicalDeviceProperties2
     for PhysicalDeviceRayTracingInvocationReorderPropertiesNV
 {
 }
@@ -60667,8 +60866,8 @@ unsafe impl Cast for PhysicalDeviceRayQueryFeaturesKHRBuilder {
     }
 }
 
-unsafe impl Cast for PhysicalDeviceRayTracingInvocationReorderFeaturesNV {
-    type Target = PhysicalDeviceRayTracingInvocationReorderFeaturesNV;
+unsafe impl Cast for PhysicalDeviceRayTracingInvocationReorderFeaturesEXT {
+    type Target = PhysicalDeviceRayTracingInvocationReorderFeaturesEXT;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -60676,18 +60875,18 @@ unsafe impl Cast for PhysicalDeviceRayTracingInvocationReorderFeaturesNV {
     }
 }
 
-impl HasBuilder<'static> for PhysicalDeviceRayTracingInvocationReorderFeaturesNV {
-    type Builder = PhysicalDeviceRayTracingInvocationReorderFeaturesNVBuilder;
+impl HasBuilder<'static> for PhysicalDeviceRayTracingInvocationReorderFeaturesEXT {
+    type Builder = PhysicalDeviceRayTracingInvocationReorderFeaturesEXTBuilder;
 }
 
-/// A builder for a [`PhysicalDeviceRayTracingInvocationReorderFeaturesNV`].
+/// A builder for a [`PhysicalDeviceRayTracingInvocationReorderFeaturesEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
-pub struct PhysicalDeviceRayTracingInvocationReorderFeaturesNVBuilder {
-    value: PhysicalDeviceRayTracingInvocationReorderFeaturesNV,
+pub struct PhysicalDeviceRayTracingInvocationReorderFeaturesEXTBuilder {
+    value: PhysicalDeviceRayTracingInvocationReorderFeaturesEXT,
 }
 
-impl PhysicalDeviceRayTracingInvocationReorderFeaturesNVBuilder {
+impl PhysicalDeviceRayTracingInvocationReorderFeaturesEXTBuilder {
     #[inline]
     pub fn ray_tracing_invocation_reorder(mut self, ray_tracing_invocation_reorder: bool) -> Self {
         self.value.ray_tracing_invocation_reorder = ray_tracing_invocation_reorder as Bool32;
@@ -60695,13 +60894,13 @@ impl PhysicalDeviceRayTracingInvocationReorderFeaturesNVBuilder {
     }
 
     #[inline]
-    pub fn build(self) -> PhysicalDeviceRayTracingInvocationReorderFeaturesNV {
+    pub fn build(self) -> PhysicalDeviceRayTracingInvocationReorderFeaturesEXT {
         self.value
     }
 }
 
-impl ops::Deref for PhysicalDeviceRayTracingInvocationReorderFeaturesNVBuilder {
-    type Target = PhysicalDeviceRayTracingInvocationReorderFeaturesNV;
+impl ops::Deref for PhysicalDeviceRayTracingInvocationReorderFeaturesEXTBuilder {
+    type Target = PhysicalDeviceRayTracingInvocationReorderFeaturesEXT;
 
     #[inline]
     fn deref(&self) -> &Self::Target {
@@ -60709,15 +60908,86 @@ impl ops::Deref for PhysicalDeviceRayTracingInvocationReorderFeaturesNVBuilder {
     }
 }
 
-impl ops::DerefMut for PhysicalDeviceRayTracingInvocationReorderFeaturesNVBuilder {
+impl ops::DerefMut for PhysicalDeviceRayTracingInvocationReorderFeaturesEXTBuilder {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl Cast for PhysicalDeviceRayTracingInvocationReorderFeaturesNVBuilder {
-    type Target = PhysicalDeviceRayTracingInvocationReorderFeaturesNV;
+unsafe impl Cast for PhysicalDeviceRayTracingInvocationReorderFeaturesEXTBuilder {
+    type Target = PhysicalDeviceRayTracingInvocationReorderFeaturesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceRayTracingInvocationReorderPropertiesEXT {
+    type Target = PhysicalDeviceRayTracingInvocationReorderPropertiesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceRayTracingInvocationReorderPropertiesEXT {
+    type Builder = PhysicalDeviceRayTracingInvocationReorderPropertiesEXTBuilder;
+}
+
+/// A builder for a [`PhysicalDeviceRayTracingInvocationReorderPropertiesEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceRayTracingInvocationReorderPropertiesEXTBuilder {
+    value: PhysicalDeviceRayTracingInvocationReorderPropertiesEXT,
+}
+
+impl PhysicalDeviceRayTracingInvocationReorderPropertiesEXTBuilder {
+    #[inline]
+    pub fn ray_tracing_invocation_reorder_reordering_hint(
+        mut self,
+        ray_tracing_invocation_reorder_reordering_hint: RayTracingInvocationReorderModeEXT,
+    ) -> Self {
+        self.value.ray_tracing_invocation_reorder_reordering_hint =
+            ray_tracing_invocation_reorder_reordering_hint;
+        self
+    }
+
+    #[inline]
+    pub fn max_shader_binding_table_record_index(
+        mut self,
+        max_shader_binding_table_record_index: u32,
+    ) -> Self {
+        self.value.max_shader_binding_table_record_index = max_shader_binding_table_record_index;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceRayTracingInvocationReorderPropertiesEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceRayTracingInvocationReorderPropertiesEXTBuilder {
+    type Target = PhysicalDeviceRayTracingInvocationReorderPropertiesEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceRayTracingInvocationReorderPropertiesEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceRayTracingInvocationReorderPropertiesEXTBuilder {
+    type Target = PhysicalDeviceRayTracingInvocationReorderPropertiesEXT;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -60749,7 +61019,7 @@ impl PhysicalDeviceRayTracingInvocationReorderPropertiesNVBuilder {
     #[inline]
     pub fn ray_tracing_invocation_reorder_reordering_hint(
         mut self,
-        ray_tracing_invocation_reorder_reordering_hint: RayTracingInvocationReorderModeNV,
+        ray_tracing_invocation_reorder_reordering_hint: RayTracingInvocationReorderModeEXT,
     ) -> Self {
         self.value.ray_tracing_invocation_reorder_reordering_hint =
             ray_tracing_invocation_reorder_reordering_hint;
@@ -84553,6 +84823,7 @@ unsafe impl Cast for SetStateFlagsIndirectCommandNVBuilder {
 
 /// A Vulkan struct that can be used to extend a [`ShaderCreateInfoEXT`].
 pub unsafe trait ExtendsShaderCreateInfoEXT: fmt::Debug {}
+unsafe impl ExtendsShaderCreateInfoEXT for CustomResolveCreateInfoEXT {}
 unsafe impl ExtendsShaderCreateInfoEXT for PipelineShaderStageRequiredSubgroupSizeCreateInfo {}
 unsafe impl ExtendsShaderCreateInfoEXT for ValidationFeaturesEXT {}
 

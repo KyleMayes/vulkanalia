@@ -1897,6 +1897,8 @@ bitflags! {
         const ENABLE_LEGACY_DITHERING_EXT = 1 << 3;
         const CONTENTS_INLINE_KHR = 1 << 4;
         const PER_LAYER_FRAGMENT_DENSITY_VALVE = 1 << 5;
+        const FRAGMENT_REGION_EXT = 1 << 6;
+        const CUSTOM_RESOLVE_EXT = 1 << 7;
         const LOCAL_READ_CONCURRENT_ACCESS_CONTROL_KHR = 1 << 8;
     }
 }
@@ -1922,6 +1924,7 @@ bitflags! {
         const MIN = 1 << 2;
         const MAX = 1 << 3;
         const EXTERNAL_FORMAT_DOWNSAMPLE_ANDROID = 1 << 4;
+        const CUSTOM_EXT = 1 << 5;
     }
 }
 
@@ -2115,8 +2118,8 @@ bitflags! {
     pub struct SubpassDescriptionFlags: Flags {
         const PER_VIEW_ATTRIBUTES_NVX = 1;
         const PER_VIEW_POSITION_X_ONLY_NVX = 1 << 1;
-        const FRAGMENT_REGION_QCOM = 1 << 2;
-        const SHADER_RESOLVE_QCOM = 1 << 3;
+        const FRAGMENT_REGION_EXT = 1 << 2;
+        const CUSTOM_RESOLVE_EXT = 1 << 3;
         const RASTERIZATION_ORDER_ATTACHMENT_COLOR_ACCESS_EXT = 1 << 4;
         const RASTERIZATION_ORDER_ATTACHMENT_DEPTH_ACCESS_EXT = 1 << 5;
         const RASTERIZATION_ORDER_ATTACHMENT_STENCIL_ACCESS_EXT = 1 << 6;

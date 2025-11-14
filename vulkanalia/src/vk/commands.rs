@@ -53,6 +53,7 @@ pub struct DeviceCommands {
     pub build_acceleration_structures_khr: PFN_vkBuildAccelerationStructuresKHR,
     pub build_micromaps_ext: PFN_vkBuildMicromapsEXT,
     pub cmd_begin_conditional_rendering_ext: PFN_vkCmdBeginConditionalRenderingEXT,
+    pub cmd_begin_custom_resolve_ext: PFN_vkCmdBeginCustomResolveEXT,
     pub cmd_begin_per_tile_execution_qcom: PFN_vkCmdBeginPerTileExecutionQCOM,
     pub cmd_begin_query: PFN_vkCmdBeginQuery,
     pub cmd_begin_query_indexed_ext: PFN_vkCmdBeginQueryIndexedEXT,
@@ -1109,6 +1110,20 @@ impl DeviceCommands {
                         _conditional_rendering_begin: *const ConditionalRenderingBeginInfoEXT,
                     ) {
                         panic!("could not load vkCmdBeginConditionalRenderingEXT")
+                    }
+                    fallback
+                }
+            },
+            cmd_begin_custom_resolve_ext: {
+                let value = loader(c"vkCmdBeginCustomResolveEXT".as_ptr());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _begin_custom_resolve_info: *const BeginCustomResolveInfoEXT,
+                    ) {
+                        panic!("could not load vkCmdBeginCustomResolveEXT")
                     }
                     fallback
                 }

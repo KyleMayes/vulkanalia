@@ -212,6 +212,12 @@ pub type PFN_vkCmdBeginConditionalRenderingEXT = unsafe extern "system" fn(
     _conditional_rendering_begin: *const ConditionalRenderingBeginInfoEXT,
 );
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdBeginCustomResolveEXT.html>
+pub type PFN_vkCmdBeginCustomResolveEXT = unsafe extern "system" fn(
+    _command_buffer: CommandBuffer,
+    _begin_custom_resolve_info: *const BeginCustomResolveInfoEXT,
+);
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdBeginDebugUtilsLabelEXT.html>
 pub type PFN_vkCmdBeginDebugUtilsLabelEXT = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
