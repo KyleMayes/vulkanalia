@@ -5301,12 +5301,12 @@ impl fmt::Debug for RasterizationOrderAMD {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRayTracingInvocationReorderModeNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRayTracingInvocationReorderModeEXT.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
-pub struct RayTracingInvocationReorderModeNV(i32);
+pub struct RayTracingInvocationReorderModeEXT(i32);
 
-impl RayTracingInvocationReorderModeNV {
+impl RayTracingInvocationReorderModeEXT {
     pub const NONE: Self = Self(0);
     pub const REORDER: Self = Self(1);
 
@@ -5323,7 +5323,7 @@ impl RayTracingInvocationReorderModeNV {
     }
 }
 
-impl fmt::Debug for RayTracingInvocationReorderModeNV {
+impl fmt::Debug for RayTracingInvocationReorderModeEXT {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self.0 {
             0 => write!(f, "NONE"),
@@ -7125,7 +7125,6 @@ impl StructureType {
     pub const SEMAPHORE_SCI_SYNC_CREATE_INFO_NV: Self = Self(1000489001);
     pub const PHYSICAL_DEVICE_EXTERNAL_SCI_SYNC_2_FEATURES_NV: Self = Self(1000489002);
     pub const DEVICE_SEMAPHORE_SCI_SYNC_POOL_RESERVATION_CREATE_INFO_NV: Self = Self(1000489003);
-    pub const PHYSICAL_DEVICE_RAY_TRACING_INVOCATION_REORDER_FEATURES_NV: Self = Self(1000490000);
     pub const PHYSICAL_DEVICE_RAY_TRACING_INVOCATION_REORDER_PROPERTIES_NV: Self = Self(1000490001);
     pub const PHYSICAL_DEVICE_COOPERATIVE_VECTOR_FEATURES_NV: Self = Self(1000491000);
     pub const PHYSICAL_DEVICE_COOPERATIVE_VECTOR_PROPERTIES_NV: Self = Self(1000491001);
@@ -7313,6 +7312,9 @@ impl StructureType {
     pub const PHYSICAL_DEVICE_IMAGE_ALIGNMENT_CONTROL_PROPERTIES_MESA: Self = Self(1000575001);
     pub const IMAGE_ALIGNMENT_CONTROL_CREATE_INFO_MESA: Self = Self(1000575002);
     pub const PHYSICAL_DEVICE_SHADER_FMA_FEATURES_KHR: Self = Self(1000579000);
+    pub const PHYSICAL_DEVICE_RAY_TRACING_INVOCATION_REORDER_FEATURES_EXT: Self = Self(1000581000);
+    pub const PHYSICAL_DEVICE_RAY_TRACING_INVOCATION_REORDER_PROPERTIES_EXT: Self =
+        Self(1000581001);
     pub const PHYSICAL_DEVICE_DEPTH_CLAMP_CONTROL_FEATURES_EXT: Self = Self(1000582000);
     pub const PIPELINE_VIEWPORT_DEPTH_CLAMP_CONTROL_CREATE_INFO_EXT: Self = Self(1000582001);
     pub const PHYSICAL_DEVICE_MAINTENANCE_9_FEATURES_KHR: Self = Self(1000584000);
@@ -7358,6 +7360,9 @@ impl StructureType {
     pub const PHYSICAL_DEVICE_ZERO_INITIALIZE_DEVICE_MEMORY_FEATURES_EXT: Self = Self(1000620000);
     pub const PHYSICAL_DEVICE_PRESENT_MODE_FIFO_LATEST_READY_FEATURES_KHR: Self = Self(1000361000);
     pub const PHYSICAL_DEVICE_SHADER_64_BIT_INDEXING_FEATURES_EXT: Self = Self(1000627000);
+    pub const PHYSICAL_DEVICE_CUSTOM_RESOLVE_FEATURES_EXT: Self = Self(1000628000);
+    pub const BEGIN_CUSTOM_RESOLVE_INFO_EXT: Self = Self(1000628001);
+    pub const CUSTOM_RESOLVE_CREATE_INFO_EXT: Self = Self(1000628002);
     pub const PHYSICAL_DEVICE_DATA_GRAPH_MODEL_FEATURES_QCOM: Self = Self(1000629000);
     pub const DATA_GRAPH_PIPELINE_BUILTIN_MODEL_CREATE_INFO_QCOM: Self = Self(1000629001);
     pub const PHYSICAL_DEVICE_MAINTENANCE_10_FEATURES_KHR: Self = Self(1000630000);
@@ -8453,10 +8458,6 @@ impl fmt::Debug for StructureType {
                 f,
                 "DEVICE_SEMAPHORE_SCI_SYNC_POOL_RESERVATION_CREATE_INFO_NV"
             ),
-            1000490000 => write!(
-                f,
-                "PHYSICAL_DEVICE_RAY_TRACING_INVOCATION_REORDER_FEATURES_NV"
-            ),
             1000490001 => write!(
                 f,
                 "PHYSICAL_DEVICE_RAY_TRACING_INVOCATION_REORDER_PROPERTIES_NV"
@@ -8723,6 +8724,14 @@ impl fmt::Debug for StructureType {
             1000575001 => write!(f, "PHYSICAL_DEVICE_IMAGE_ALIGNMENT_CONTROL_PROPERTIES_MESA"),
             1000575002 => write!(f, "IMAGE_ALIGNMENT_CONTROL_CREATE_INFO_MESA"),
             1000579000 => write!(f, "PHYSICAL_DEVICE_SHADER_FMA_FEATURES_KHR"),
+            1000581000 => write!(
+                f,
+                "PHYSICAL_DEVICE_RAY_TRACING_INVOCATION_REORDER_FEATURES_EXT"
+            ),
+            1000581001 => write!(
+                f,
+                "PHYSICAL_DEVICE_RAY_TRACING_INVOCATION_REORDER_PROPERTIES_EXT"
+            ),
             1000582000 => write!(f, "PHYSICAL_DEVICE_DEPTH_CLAMP_CONTROL_FEATURES_EXT"),
             1000582001 => write!(f, "PIPELINE_VIEWPORT_DEPTH_CLAMP_CONTROL_CREATE_INFO_EXT"),
             1000584000 => write!(f, "PHYSICAL_DEVICE_MAINTENANCE_9_FEATURES_KHR"),
@@ -8796,6 +8805,9 @@ impl fmt::Debug for StructureType {
                 "PHYSICAL_DEVICE_PRESENT_MODE_FIFO_LATEST_READY_FEATURES_KHR"
             ),
             1000627000 => write!(f, "PHYSICAL_DEVICE_SHADER_64_BIT_INDEXING_FEATURES_EXT"),
+            1000628000 => write!(f, "PHYSICAL_DEVICE_CUSTOM_RESOLVE_FEATURES_EXT"),
+            1000628001 => write!(f, "BEGIN_CUSTOM_RESOLVE_INFO_EXT"),
+            1000628002 => write!(f, "CUSTOM_RESOLVE_CREATE_INFO_EXT"),
             1000629000 => write!(f, "PHYSICAL_DEVICE_DATA_GRAPH_MODEL_FEATURES_QCOM"),
             1000629001 => write!(f, "DATA_GRAPH_PIPELINE_BUILTIN_MODEL_CREATE_INFO_QCOM"),
             1000630000 => write!(f, "PHYSICAL_DEVICE_MAINTENANCE_10_FEATURES_KHR"),
@@ -9447,6 +9459,8 @@ pub type PointClippingBehaviorKHR = PointClippingBehavior;
 pub type QueueGlobalPriorityEXT = QueueGlobalPriority;
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkQueueGlobalPriorityKHR.html>
 pub type QueueGlobalPriorityKHR = QueueGlobalPriority;
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRayTracingInvocationReorderModeNV.html>
+pub type RayTracingInvocationReorderModeNV = RayTracingInvocationReorderModeEXT;
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRayTracingShaderGroupTypeNV.html>
 pub type RayTracingShaderGroupTypeNV = RayTracingShaderGroupTypeKHR;
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSamplerReductionModeEXT.html>

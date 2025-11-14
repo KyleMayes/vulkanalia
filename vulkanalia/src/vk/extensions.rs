@@ -1171,6 +1171,24 @@ pub trait ExtConditionalRenderingExtensionDeviceCommands: DeviceV1_0 {
 
 impl<C: DeviceV1_0 + ?Sized> ExtConditionalRenderingExtensionDeviceCommands for C {}
 
+/// The device-level commands added by [`EXT_CUSTOM_RESOLVE_EXTENSION`].
+pub trait ExtCustomResolveExtensionDeviceCommands: DeviceV1_0 {
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdBeginCustomResolveEXT.html>
+    #[inline]
+    unsafe fn cmd_begin_custom_resolve_ext(
+        &self,
+        command_buffer: CommandBuffer,
+        begin_custom_resolve_info: Option<&BeginCustomResolveInfoEXT>,
+    ) {
+        let __result = (self.commands().cmd_begin_custom_resolve_ext)(
+            command_buffer,
+            begin_custom_resolve_info.map_or(ptr::null(), |v| v),
+        );
+    }
+}
+
+impl<C: DeviceV1_0 + ?Sized> ExtCustomResolveExtensionDeviceCommands for C {}
+
 /// The device-level commands added by [`EXT_DEBUG_MARKER_EXTENSION`].
 pub trait ExtDebugMarkerExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdDebugMarkerBeginEXT.html>
