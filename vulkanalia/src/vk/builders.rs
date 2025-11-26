@@ -7771,6 +7771,10 @@ unsafe impl Cast for BuildPartitionedAccelerationStructureInfoNVBuilder<'_> {
     }
 }
 
+/// A Vulkan struct that can be used to extend a [`CalibratedTimestampInfoKHR`].
+pub unsafe trait ExtendsCalibratedTimestampInfoKHR: fmt::Debug {}
+unsafe impl ExtendsCalibratedTimestampInfoKHR for SwapchainCalibratedTimestampInfoEXT {}
+
 unsafe impl Cast for CalibratedTimestampInfoKHR {
     type Target = CalibratedTimestampInfoKHR;
 
@@ -7780,18 +7784,28 @@ unsafe impl Cast for CalibratedTimestampInfoKHR {
     }
 }
 
-impl HasBuilder<'static> for CalibratedTimestampInfoKHR {
-    type Builder = CalibratedTimestampInfoKHRBuilder;
+impl<'b> HasBuilder<'b> for CalibratedTimestampInfoKHR {
+    type Builder = CalibratedTimestampInfoKHRBuilder<'b>;
 }
 
 /// A builder for a [`CalibratedTimestampInfoKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
-pub struct CalibratedTimestampInfoKHRBuilder {
+pub struct CalibratedTimestampInfoKHRBuilder<'b> {
     value: CalibratedTimestampInfoKHR,
+    _marker: PhantomData<&'b ()>,
 }
 
-impl CalibratedTimestampInfoKHRBuilder {
+impl<'b> CalibratedTimestampInfoKHRBuilder<'b> {
+    #[inline]
+    pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
+    where
+        T: ExtendsCalibratedTimestampInfoKHR,
+    {
+        self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
+        self
+    }
+
     #[inline]
     pub fn time_domain(mut self, time_domain: TimeDomainKHR) -> Self {
         self.value.time_domain = time_domain;
@@ -7804,7 +7818,7 @@ impl CalibratedTimestampInfoKHRBuilder {
     }
 }
 
-impl ops::Deref for CalibratedTimestampInfoKHRBuilder {
+impl ops::Deref for CalibratedTimestampInfoKHRBuilder<'_> {
     type Target = CalibratedTimestampInfoKHR;
 
     #[inline]
@@ -7813,14 +7827,14 @@ impl ops::Deref for CalibratedTimestampInfoKHRBuilder {
     }
 }
 
-impl ops::DerefMut for CalibratedTimestampInfoKHRBuilder {
+impl ops::DerefMut for CalibratedTimestampInfoKHRBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl Cast for CalibratedTimestampInfoKHRBuilder {
+unsafe impl Cast for CalibratedTimestampInfoKHRBuilder<'_> {
     type Target = CalibratedTimestampInfoKHR;
 
     #[inline]
@@ -17871,6 +17885,7 @@ unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePresentId2FeaturesKHR {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePresentIdFeaturesKHR {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePresentMeteringFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePresentModeFifoLatestReadyFeaturesKHR {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePresentTimingFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePresentWait2FeaturesKHR {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePresentWaitFeaturesKHR {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePrimitiveTopologyListRestartFeaturesEXT {}
@@ -39325,6 +39340,99 @@ unsafe impl Cast for PartitionedAccelerationStructureWritePartitionTranslationDa
     }
 }
 
+unsafe impl Cast for PastPresentationTimingEXT {
+    type Target = PastPresentationTimingEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl<'b> HasBuilder<'b> for PastPresentationTimingEXT {
+    type Builder = PastPresentationTimingEXTBuilder<'b>;
+}
+
+/// A builder for a [`PastPresentationTimingEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PastPresentationTimingEXTBuilder<'b> {
+    value: PastPresentationTimingEXT,
+    _marker: PhantomData<&'b ()>,
+}
+
+impl<'b> PastPresentationTimingEXTBuilder<'b> {
+    #[inline]
+    pub fn present_id(mut self, present_id: u64) -> Self {
+        self.value.present_id = present_id;
+        self
+    }
+
+    #[inline]
+    pub fn target_time(mut self, target_time: u64) -> Self {
+        self.value.target_time = target_time;
+        self
+    }
+
+    #[inline]
+    pub fn present_stages(
+        mut self,
+        present_stages: &'b mut [impl Cast<Target = PresentStageTimeEXT>],
+    ) -> Self {
+        self.value.present_stage_count = present_stages.len() as u32;
+        self.value.present_stages = present_stages.as_mut_ptr().cast();
+        self
+    }
+
+    #[inline]
+    pub fn time_domain(mut self, time_domain: TimeDomainKHR) -> Self {
+        self.value.time_domain = time_domain;
+        self
+    }
+
+    #[inline]
+    pub fn time_domain_id(mut self, time_domain_id: u64) -> Self {
+        self.value.time_domain_id = time_domain_id;
+        self
+    }
+
+    #[inline]
+    pub fn report_complete(mut self, report_complete: bool) -> Self {
+        self.value.report_complete = report_complete as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PastPresentationTimingEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for PastPresentationTimingEXTBuilder<'_> {
+    type Target = PastPresentationTimingEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PastPresentationTimingEXTBuilder<'_> {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PastPresentationTimingEXTBuilder<'_> {
+    type Target = PastPresentationTimingEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for PastPresentationTimingGOOGLE {
     type Target = PastPresentationTimingGOOGLE;
 
@@ -39400,6 +39508,145 @@ impl ops::DerefMut for PastPresentationTimingGOOGLEBuilder {
 
 unsafe impl Cast for PastPresentationTimingGOOGLEBuilder {
     type Target = PastPresentationTimingGOOGLE;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PastPresentationTimingInfoEXT {
+    type Target = PastPresentationTimingInfoEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PastPresentationTimingInfoEXT {
+    type Builder = PastPresentationTimingInfoEXTBuilder;
+}
+
+/// A builder for a [`PastPresentationTimingInfoEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PastPresentationTimingInfoEXTBuilder {
+    value: PastPresentationTimingInfoEXT,
+}
+
+impl PastPresentationTimingInfoEXTBuilder {
+    #[inline]
+    pub fn flags(mut self, flags: PastPresentationTimingFlagsEXT) -> Self {
+        self.value.flags = flags;
+        self
+    }
+
+    #[inline]
+    pub fn swapchain(mut self, swapchain: SwapchainKHR) -> Self {
+        self.value.swapchain = swapchain;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PastPresentationTimingInfoEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for PastPresentationTimingInfoEXTBuilder {
+    type Target = PastPresentationTimingInfoEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PastPresentationTimingInfoEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PastPresentationTimingInfoEXTBuilder {
+    type Target = PastPresentationTimingInfoEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PastPresentationTimingPropertiesEXT {
+    type Target = PastPresentationTimingPropertiesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl<'b> HasBuilder<'b> for PastPresentationTimingPropertiesEXT {
+    type Builder = PastPresentationTimingPropertiesEXTBuilder<'b>;
+}
+
+/// A builder for a [`PastPresentationTimingPropertiesEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PastPresentationTimingPropertiesEXTBuilder<'b> {
+    value: PastPresentationTimingPropertiesEXT,
+    _marker: PhantomData<&'b ()>,
+}
+
+impl<'b> PastPresentationTimingPropertiesEXTBuilder<'b> {
+    #[inline]
+    pub fn timing_properties_counter(mut self, timing_properties_counter: u64) -> Self {
+        self.value.timing_properties_counter = timing_properties_counter;
+        self
+    }
+
+    #[inline]
+    pub fn time_domains_counter(mut self, time_domains_counter: u64) -> Self {
+        self.value.time_domains_counter = time_domains_counter;
+        self
+    }
+
+    #[inline]
+    pub fn presentation_timings(
+        mut self,
+        presentation_timings: &'b mut [impl Cast<Target = PastPresentationTimingEXT>],
+    ) -> Self {
+        self.value.presentation_timing_count = presentation_timings.len() as u32;
+        self.value.presentation_timings = presentation_timings.as_mut_ptr().cast();
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PastPresentationTimingPropertiesEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for PastPresentationTimingPropertiesEXTBuilder<'_> {
+    type Target = PastPresentationTimingPropertiesEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PastPresentationTimingPropertiesEXTBuilder<'_> {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PastPresentationTimingPropertiesEXTBuilder<'_> {
+    type Target = PastPresentationTimingPropertiesEXT;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -49238,6 +49485,7 @@ unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDevicePresentId2FeaturesK
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDevicePresentIdFeaturesKHR {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDevicePresentMeteringFeaturesNV {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDevicePresentModeFifoLatestReadyFeaturesKHR {}
+unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDevicePresentTimingFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDevicePresentWait2FeaturesKHR {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDevicePresentWaitFeaturesKHR {}
 unsafe impl ExtendsPhysicalDeviceFeatures2
@@ -59485,6 +59733,76 @@ impl ops::DerefMut for PhysicalDevicePresentModeFifoLatestReadyFeaturesKHRBuilde
 
 unsafe impl Cast for PhysicalDevicePresentModeFifoLatestReadyFeaturesKHRBuilder {
     type Target = PhysicalDevicePresentModeFifoLatestReadyFeaturesKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDevicePresentTimingFeaturesEXT {
+    type Target = PhysicalDevicePresentTimingFeaturesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDevicePresentTimingFeaturesEXT {
+    type Builder = PhysicalDevicePresentTimingFeaturesEXTBuilder;
+}
+
+/// A builder for a [`PhysicalDevicePresentTimingFeaturesEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDevicePresentTimingFeaturesEXTBuilder {
+    value: PhysicalDevicePresentTimingFeaturesEXT,
+}
+
+impl PhysicalDevicePresentTimingFeaturesEXTBuilder {
+    #[inline]
+    pub fn present_timing(mut self, present_timing: bool) -> Self {
+        self.value.present_timing = present_timing as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn present_at_absolute_time(mut self, present_at_absolute_time: bool) -> Self {
+        self.value.present_at_absolute_time = present_at_absolute_time as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn present_at_relative_time(mut self, present_at_relative_time: bool) -> Self {
+        self.value.present_at_relative_time = present_at_relative_time as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDevicePresentTimingFeaturesEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDevicePresentTimingFeaturesEXTBuilder {
+    type Target = PhysicalDevicePresentTimingFeaturesEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDevicePresentTimingFeaturesEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDevicePresentTimingFeaturesEXTBuilder {
+    type Target = PhysicalDevicePresentTimingFeaturesEXT;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -77175,6 +77493,7 @@ unsafe impl ExtendsPresentInfoKHR for PresentId2KHR {}
 unsafe impl ExtendsPresentInfoKHR for PresentIdKHR {}
 unsafe impl ExtendsPresentInfoKHR for PresentRegionsKHR {}
 unsafe impl ExtendsPresentInfoKHR for PresentTimesInfoGOOGLE {}
+unsafe impl ExtendsPresentInfoKHR for PresentTimingsInfoEXT {}
 unsafe impl ExtendsPresentInfoKHR for SetPresentConfigNV {}
 unsafe impl ExtendsPresentInfoKHR for SwapchainPresentFenceInfoKHR {}
 unsafe impl ExtendsPresentInfoKHR for SwapchainPresentModeInfoKHR {}
@@ -77407,6 +77726,70 @@ unsafe impl Cast for PresentRegionsKHRBuilder<'_> {
     }
 }
 
+unsafe impl Cast for PresentStageTimeEXT {
+    type Target = PresentStageTimeEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PresentStageTimeEXT {
+    type Builder = PresentStageTimeEXTBuilder;
+}
+
+/// A builder for a [`PresentStageTimeEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PresentStageTimeEXTBuilder {
+    value: PresentStageTimeEXT,
+}
+
+impl PresentStageTimeEXTBuilder {
+    #[inline]
+    pub fn stage(mut self, stage: PresentStageFlagsEXT) -> Self {
+        self.value.stage = stage;
+        self
+    }
+
+    #[inline]
+    pub fn time(mut self, time: u64) -> Self {
+        self.value.time = time;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PresentStageTimeEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for PresentStageTimeEXTBuilder {
+    type Target = PresentStageTimeEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PresentStageTimeEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PresentStageTimeEXTBuilder {
+    type Target = PresentStageTimeEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for PresentTimeGOOGLE {
     type Target = PresentTimeGOOGLE;
 
@@ -77530,6 +77913,244 @@ impl ops::DerefMut for PresentTimesInfoGOOGLEBuilder<'_> {
 
 unsafe impl Cast for PresentTimesInfoGOOGLEBuilder<'_> {
     type Target = PresentTimesInfoGOOGLE;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PresentTimingInfoEXT {
+    type Target = PresentTimingInfoEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PresentTimingInfoEXT {
+    type Builder = PresentTimingInfoEXTBuilder;
+}
+
+/// A builder for a [`PresentTimingInfoEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PresentTimingInfoEXTBuilder {
+    value: PresentTimingInfoEXT,
+}
+
+impl PresentTimingInfoEXTBuilder {
+    #[inline]
+    pub fn flags(mut self, flags: PresentTimingInfoFlagsEXT) -> Self {
+        self.value.flags = flags;
+        self
+    }
+
+    #[inline]
+    pub fn target_time(mut self, target_time: u64) -> Self {
+        self.value.target_time = target_time;
+        self
+    }
+
+    #[inline]
+    pub fn time_domain_id(mut self, time_domain_id: u64) -> Self {
+        self.value.time_domain_id = time_domain_id;
+        self
+    }
+
+    #[inline]
+    pub fn present_stage_queries(mut self, present_stage_queries: PresentStageFlagsEXT) -> Self {
+        self.value.present_stage_queries = present_stage_queries;
+        self
+    }
+
+    #[inline]
+    pub fn target_time_domain_present_stage(
+        mut self,
+        target_time_domain_present_stage: PresentStageFlagsEXT,
+    ) -> Self {
+        self.value.target_time_domain_present_stage = target_time_domain_present_stage;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PresentTimingInfoEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for PresentTimingInfoEXTBuilder {
+    type Target = PresentTimingInfoEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PresentTimingInfoEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PresentTimingInfoEXTBuilder {
+    type Target = PresentTimingInfoEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PresentTimingSurfaceCapabilitiesEXT {
+    type Target = PresentTimingSurfaceCapabilitiesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PresentTimingSurfaceCapabilitiesEXT {
+    type Builder = PresentTimingSurfaceCapabilitiesEXTBuilder;
+}
+
+/// A builder for a [`PresentTimingSurfaceCapabilitiesEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PresentTimingSurfaceCapabilitiesEXTBuilder {
+    value: PresentTimingSurfaceCapabilitiesEXT,
+}
+
+impl PresentTimingSurfaceCapabilitiesEXTBuilder {
+    #[inline]
+    pub fn present_timing_supported(mut self, present_timing_supported: bool) -> Self {
+        self.value.present_timing_supported = present_timing_supported as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn present_at_absolute_time_supported(
+        mut self,
+        present_at_absolute_time_supported: bool,
+    ) -> Self {
+        self.value.present_at_absolute_time_supported =
+            present_at_absolute_time_supported as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn present_at_relative_time_supported(
+        mut self,
+        present_at_relative_time_supported: bool,
+    ) -> Self {
+        self.value.present_at_relative_time_supported =
+            present_at_relative_time_supported as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn present_stage_queries(mut self, present_stage_queries: PresentStageFlagsEXT) -> Self {
+        self.value.present_stage_queries = present_stage_queries;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PresentTimingSurfaceCapabilitiesEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for PresentTimingSurfaceCapabilitiesEXTBuilder {
+    type Target = PresentTimingSurfaceCapabilitiesEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PresentTimingSurfaceCapabilitiesEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PresentTimingSurfaceCapabilitiesEXTBuilder {
+    type Target = PresentTimingSurfaceCapabilitiesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PresentTimingsInfoEXT {
+    type Target = PresentTimingsInfoEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl<'b> HasBuilder<'b> for PresentTimingsInfoEXT {
+    type Builder = PresentTimingsInfoEXTBuilder<'b>;
+}
+
+/// A builder for a [`PresentTimingsInfoEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PresentTimingsInfoEXTBuilder<'b> {
+    value: PresentTimingsInfoEXT,
+    _marker: PhantomData<&'b ()>,
+}
+
+impl<'b> PresentTimingsInfoEXTBuilder<'b> {
+    #[inline]
+    pub fn swapchain_count(mut self, swapchain_count: u32) -> Self {
+        self.value.swapchain_count = swapchain_count;
+        self
+    }
+
+    #[inline]
+    pub fn timing_infos(
+        mut self,
+        timing_infos: &'b [impl Cast<Target = PresentTimingInfoEXT>],
+    ) -> Self {
+        self.value.swapchain_count = timing_infos.len() as u32;
+        self.value.timing_infos = timing_infos.as_ptr().cast();
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PresentTimingsInfoEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for PresentTimingsInfoEXTBuilder<'_> {
+    type Target = PresentTimingsInfoEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PresentTimingsInfoEXTBuilder<'_> {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PresentTimingsInfoEXTBuilder<'_> {
+    type Target = PresentTimingsInfoEXT;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -88093,6 +88714,7 @@ unsafe impl Cast for SurfaceCapabilities2EXTBuilder {
 pub unsafe trait ExtendsSurfaceCapabilities2KHR: fmt::Debug {}
 unsafe impl ExtendsSurfaceCapabilities2KHR for DisplayNativeHdrSurfaceCapabilitiesAMD {}
 unsafe impl ExtendsSurfaceCapabilities2KHR for LatencySurfaceCapabilitiesNV {}
+unsafe impl ExtendsSurfaceCapabilities2KHR for PresentTimingSurfaceCapabilitiesEXT {}
 unsafe impl ExtendsSurfaceCapabilities2KHR for SharedPresentSurfaceCapabilitiesKHR {}
 unsafe impl ExtendsSurfaceCapabilities2KHR for SurfaceCapabilitiesFullScreenExclusiveEXT {}
 unsafe impl ExtendsSurfaceCapabilities2KHR for SurfaceCapabilitiesPresentBarrierNV {}
@@ -89119,6 +89741,76 @@ unsafe impl Cast for SurfaceProtectedCapabilitiesKHRBuilder {
     }
 }
 
+unsafe impl Cast for SwapchainCalibratedTimestampInfoEXT {
+    type Target = SwapchainCalibratedTimestampInfoEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for SwapchainCalibratedTimestampInfoEXT {
+    type Builder = SwapchainCalibratedTimestampInfoEXTBuilder;
+}
+
+/// A builder for a [`SwapchainCalibratedTimestampInfoEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct SwapchainCalibratedTimestampInfoEXTBuilder {
+    value: SwapchainCalibratedTimestampInfoEXT,
+}
+
+impl SwapchainCalibratedTimestampInfoEXTBuilder {
+    #[inline]
+    pub fn swapchain(mut self, swapchain: SwapchainKHR) -> Self {
+        self.value.swapchain = swapchain;
+        self
+    }
+
+    #[inline]
+    pub fn present_stage(mut self, present_stage: PresentStageFlagsEXT) -> Self {
+        self.value.present_stage = present_stage;
+        self
+    }
+
+    #[inline]
+    pub fn time_domain_id(mut self, time_domain_id: u64) -> Self {
+        self.value.time_domain_id = time_domain_id;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> SwapchainCalibratedTimestampInfoEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for SwapchainCalibratedTimestampInfoEXTBuilder {
+    type Target = SwapchainCalibratedTimestampInfoEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for SwapchainCalibratedTimestampInfoEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for SwapchainCalibratedTimestampInfoEXTBuilder {
+    type Target = SwapchainCalibratedTimestampInfoEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for SwapchainCounterCreateInfoEXT {
     type Target = SwapchainCounterCreateInfoEXT;
 
@@ -89819,6 +90511,143 @@ impl ops::DerefMut for SwapchainPresentScalingCreateInfoKHRBuilder {
 
 unsafe impl Cast for SwapchainPresentScalingCreateInfoKHRBuilder {
     type Target = SwapchainPresentScalingCreateInfoKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for SwapchainTimeDomainPropertiesEXT {
+    type Target = SwapchainTimeDomainPropertiesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl<'b> HasBuilder<'b> for SwapchainTimeDomainPropertiesEXT {
+    type Builder = SwapchainTimeDomainPropertiesEXTBuilder<'b>;
+}
+
+/// A builder for a [`SwapchainTimeDomainPropertiesEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct SwapchainTimeDomainPropertiesEXTBuilder<'b> {
+    value: SwapchainTimeDomainPropertiesEXT,
+    _marker: PhantomData<&'b ()>,
+}
+
+impl<'b> SwapchainTimeDomainPropertiesEXTBuilder<'b> {
+    #[inline]
+    pub fn time_domain_count(mut self, time_domain_count: u32) -> Self {
+        self.value.time_domain_count = time_domain_count;
+        self
+    }
+
+    #[inline]
+    pub fn time_domains(mut self, time_domains: &'b mut [TimeDomainKHR]) -> Self {
+        self.value.time_domain_count = time_domains.len() as u32;
+        self.value.time_domains = time_domains.as_mut_ptr();
+        self
+    }
+
+    #[inline]
+    pub fn time_domain_ids(mut self, time_domain_ids: &'b mut [u64]) -> Self {
+        self.value.time_domain_count = time_domain_ids.len() as u32;
+        self.value.time_domain_ids = time_domain_ids.as_mut_ptr();
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> SwapchainTimeDomainPropertiesEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for SwapchainTimeDomainPropertiesEXTBuilder<'_> {
+    type Target = SwapchainTimeDomainPropertiesEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for SwapchainTimeDomainPropertiesEXTBuilder<'_> {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for SwapchainTimeDomainPropertiesEXTBuilder<'_> {
+    type Target = SwapchainTimeDomainPropertiesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for SwapchainTimingPropertiesEXT {
+    type Target = SwapchainTimingPropertiesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for SwapchainTimingPropertiesEXT {
+    type Builder = SwapchainTimingPropertiesEXTBuilder;
+}
+
+/// A builder for a [`SwapchainTimingPropertiesEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct SwapchainTimingPropertiesEXTBuilder {
+    value: SwapchainTimingPropertiesEXT,
+}
+
+impl SwapchainTimingPropertiesEXTBuilder {
+    #[inline]
+    pub fn refresh_duration(mut self, refresh_duration: u64) -> Self {
+        self.value.refresh_duration = refresh_duration;
+        self
+    }
+
+    #[inline]
+    pub fn refresh_interval(mut self, refresh_interval: u64) -> Self {
+        self.value.refresh_interval = refresh_interval;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> SwapchainTimingPropertiesEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for SwapchainTimingPropertiesEXTBuilder {
+    type Target = SwapchainTimingPropertiesEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for SwapchainTimingPropertiesEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for SwapchainTimingPropertiesEXTBuilder {
+    type Target = SwapchainTimingPropertiesEXT;
 
     #[inline]
     fn into(self) -> Self::Target {
