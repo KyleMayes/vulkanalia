@@ -2205,6 +2205,22 @@ pub const EXT_PRESENT_MODE_FIFO_LATEST_READY_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_KHR_present_mode_fifo_latest_ready"),
 };
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_present_timing.html>
+#[allow(deprecated)]
+pub const EXT_PRESENT_TIMING_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_EXT_present_timing"),
+    number: 209,
+    type_: "device",
+    author: "EXT",
+    contact: "Lionel Duc @nvlduc",
+    platform: None,
+    required_extensions: None,
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_primitive_topology_list_restart.html>
 #[allow(deprecated)]
 pub const EXT_PRIMITIVE_TOPOLOGY_LIST_RESTART_EXTENSION: Extension = Extension {
