@@ -596,6 +596,7 @@ pub struct DeviceCommands {
     pub get_native_buffer_properties_ohos: PFN_vkGetNativeBufferPropertiesOHOS,
     pub get_partitioned_acceleration_structures_build_sizes_nv:
         PFN_vkGetPartitionedAccelerationStructuresBuildSizesNV,
+    pub get_past_presentation_timing_ext: PFN_vkGetPastPresentationTimingEXT,
     pub get_past_presentation_timing_google: PFN_vkGetPastPresentationTimingGOOGLE,
     pub get_performance_parameter_intel: PFN_vkGetPerformanceParameterINTEL,
     pub get_pipeline_binary_data_khr: PFN_vkGetPipelineBinaryDataKHR,
@@ -639,6 +640,8 @@ pub struct DeviceCommands {
     pub get_swapchain_gralloc_usage_ohos: PFN_vkGetSwapchainGrallocUsageOHOS,
     pub get_swapchain_images_khr: PFN_vkGetSwapchainImagesKHR,
     pub get_swapchain_status_khr: PFN_vkGetSwapchainStatusKHR,
+    pub get_swapchain_time_domain_properties_ext: PFN_vkGetSwapchainTimeDomainPropertiesEXT,
+    pub get_swapchain_timing_properties_ext: PFN_vkGetSwapchainTimingPropertiesEXT,
     pub get_tensor_memory_requirements_arm: PFN_vkGetTensorMemoryRequirementsARM,
     pub get_tensor_opaque_capture_descriptor_data_arm:
         PFN_vkGetTensorOpaqueCaptureDescriptorDataARM,
@@ -698,6 +701,7 @@ pub struct DeviceCommands {
     pub set_local_dimming_amd: PFN_vkSetLocalDimmingAMD,
     pub set_private_data: PFN_vkSetPrivateData,
     pub set_private_data_ext: PFN_vkSetPrivateDataEXT,
+    pub set_swapchain_present_timing_queue_size_ext: PFN_vkSetSwapchainPresentTimingQueueSizeEXT,
     pub signal_semaphore: PFN_vkSignalSemaphore,
     pub signal_semaphore_khr: PFN_vkSignalSemaphoreKHR,
     pub transition_image_layout: PFN_vkTransitionImageLayout,
@@ -8989,6 +8993,21 @@ impl DeviceCommands {
                     fallback
                 }
             },
+            get_past_presentation_timing_ext: {
+                let value = loader(c"vkGetPastPresentationTimingEXT".as_ptr());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _past_presentation_timing_info: *const PastPresentationTimingInfoEXT,
+                        _past_presentation_timing_properties: *mut PastPresentationTimingPropertiesEXT,
+                    ) -> Result {
+                        panic!("could not load vkGetPastPresentationTimingEXT")
+                    }
+                    fallback
+                }
+            },
             get_past_presentation_timing_google: {
                 let value = loader(c"vkGetPastPresentationTimingGOOGLE".as_ptr());
                 if let Some(value) = value {
@@ -9616,6 +9635,38 @@ impl DeviceCommands {
                         _swapchain: SwapchainKHR,
                     ) -> Result {
                         panic!("could not load vkGetSwapchainStatusKHR")
+                    }
+                    fallback
+                }
+            },
+            get_swapchain_time_domain_properties_ext: {
+                let value = loader(c"vkGetSwapchainTimeDomainPropertiesEXT".as_ptr());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _swapchain: SwapchainKHR,
+                        _swapchain_time_domain_properties: *mut SwapchainTimeDomainPropertiesEXT,
+                        _time_domains_counter: *mut u64,
+                    ) -> Result {
+                        panic!("could not load vkGetSwapchainTimeDomainPropertiesEXT")
+                    }
+                    fallback
+                }
+            },
+            get_swapchain_timing_properties_ext: {
+                let value = loader(c"vkGetSwapchainTimingPropertiesEXT".as_ptr());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _swapchain: SwapchainKHR,
+                        _swapchain_timing_properties: *mut SwapchainTimingPropertiesEXT,
+                        _swapchain_timing_properties_counter: *mut u64,
+                    ) -> Result {
+                        panic!("could not load vkGetSwapchainTimingPropertiesEXT")
                     }
                     fallback
                 }
@@ -10431,6 +10482,21 @@ impl DeviceCommands {
                         _data: u64,
                     ) -> Result {
                         panic!("could not load vkSetPrivateDataEXT")
+                    }
+                    fallback
+                }
+            },
+            set_swapchain_present_timing_queue_size_ext: {
+                let value = loader(c"vkSetSwapchainPresentTimingQueueSizeEXT".as_ptr());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _swapchain: SwapchainKHR,
+                        _size: u32,
+                    ) -> Result {
+                        panic!("could not load vkSetSwapchainPresentTimingQueueSizeEXT")
                     }
                     fallback
                 }

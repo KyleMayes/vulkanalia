@@ -5,6 +5,11 @@
 - [November 14, 2025 Vulkan 1.4.333 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/e554740a488b6733d4984252351eda7d69b1d9c2)
 - [Tweak to resolve Antora build failure](https://github.com/KhronosGroup/Vulkan-Docs/commit/20522cd15cca9e42cebfab747491349144bdd61c)
 - [November 21, 2025 Vulkan 1.4.334 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/6b230e5df318245bf8fa1124454ab1119e6e6bc5)
+- [Fix typos in `resources.adoc` chapter (#2622)](https://github.com/KhronosGroup/Vulkan-Docs/commit/0a5f33b398204d21f0e11aa5da4b50dc8bf2424b)
+- [removeExtensions are now applied to platform headers too (#2616)](https://github.com/KhronosGroup/Vulkan-Docs/commit/69b9214999e3d15f0e87303fdb56a06bdec0765e)
+- [Add the VK_EXT_present_timing extension (#1364)](https://github.com/KhronosGroup/Vulkan-Docs/commit/bb1314e4ef2ade85ee50d23d2f9d635d63afdf38)
+- [November 28, 2025 Vulkan 1.4.335 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/60a4ad187cf3be4ede658f0fae7dd392192a314b)
+- [Fixed present bitmasks and enums link (#2624)](https://github.com/KhronosGroup/Vulkan-Docs/commit/8cce88b6c55f424059a5442e64dafd7d154e4b7b)
 
 ## [0.33.0] - 2025-11-07
 
