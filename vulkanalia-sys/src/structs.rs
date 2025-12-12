@@ -3184,6 +3184,31 @@ pub struct ComponentMapping {
     pub a: ComponentSwizzle,
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkComputeOccupancyPriorityParametersNV.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, PartialEq)]
+pub struct ComputeOccupancyPriorityParametersNV {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub occupancy_priority: f32,
+    pub occupancy_throttling: f32,
+}
+
+impl Default for ComputeOccupancyPriorityParametersNV {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::COMPUTE_OCCUPANCY_PRIORITY_PARAMETERS_NV,
+            next: ptr::null(),
+            occupancy_priority: f32::default(),
+            occupancy_throttling: f32::default(),
+        }
+    }
+}
+
+unsafe impl Send for ComputeOccupancyPriorityParametersNV {}
+unsafe impl Sync for ComputeOccupancyPriorityParametersNV {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkComputePipelineCreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -12784,6 +12809,41 @@ pub struct PartitionedAccelerationStructureWritePartitionTranslationDataNV {
     pub partition_translation: [f32; 3],
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPastPresentationTimingEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PastPresentationTimingEXT {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub present_id: u64,
+    pub target_time: u64,
+    pub present_stage_count: u32,
+    pub present_stages: *mut PresentStageTimeEXT,
+    pub time_domain: TimeDomainKHR,
+    pub time_domain_id: u64,
+    pub report_complete: Bool32,
+}
+
+impl Default for PastPresentationTimingEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PAST_PRESENTATION_TIMING_EXT,
+            next: ptr::null_mut(),
+            present_id: u64::default(),
+            target_time: u64::default(),
+            present_stage_count: u32::default(),
+            present_stages: ptr::null_mut(),
+            time_domain: TimeDomainKHR::default(),
+            time_domain_id: u64::default(),
+            report_complete: Bool32::default(),
+        }
+    }
+}
+
+unsafe impl Send for PastPresentationTimingEXT {}
+unsafe impl Sync for PastPresentationTimingEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPastPresentationTimingGOOGLE.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
@@ -12794,6 +12854,60 @@ pub struct PastPresentationTimingGOOGLE {
     pub earliest_present_time: u64,
     pub present_margin: u64,
 }
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPastPresentationTimingInfoEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PastPresentationTimingInfoEXT {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub flags: PastPresentationTimingFlagsEXT,
+    pub swapchain: SwapchainKHR,
+}
+
+impl Default for PastPresentationTimingInfoEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PAST_PRESENTATION_TIMING_INFO_EXT,
+            next: ptr::null(),
+            flags: PastPresentationTimingFlagsEXT::default(),
+            swapchain: SwapchainKHR::default(),
+        }
+    }
+}
+
+unsafe impl Send for PastPresentationTimingInfoEXT {}
+unsafe impl Sync for PastPresentationTimingInfoEXT {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPastPresentationTimingPropertiesEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PastPresentationTimingPropertiesEXT {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub timing_properties_counter: u64,
+    pub time_domains_counter: u64,
+    pub presentation_timing_count: u32,
+    pub presentation_timings: *mut PastPresentationTimingEXT,
+}
+
+impl Default for PastPresentationTimingPropertiesEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PAST_PRESENTATION_TIMING_PROPERTIES_EXT,
+            next: ptr::null_mut(),
+            timing_properties_counter: u64::default(),
+            time_domains_counter: u64::default(),
+            presentation_timing_count: u32::default(),
+            presentation_timings: ptr::null_mut(),
+        }
+    }
+}
+
+unsafe impl Send for PastPresentationTimingPropertiesEXT {}
+unsafe impl Sync for PastPresentationTimingPropertiesEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPerTileBeginInfoQCOM.html>
 #[repr(C)]
@@ -13721,6 +13835,29 @@ impl Default for PhysicalDeviceCommandBufferInheritanceFeaturesNV {
 
 unsafe impl Send for PhysicalDeviceCommandBufferInheritanceFeaturesNV {}
 unsafe impl Sync for PhysicalDeviceCommandBufferInheritanceFeaturesNV {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceComputeOccupancyPriorityFeaturesNV.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceComputeOccupancyPriorityFeaturesNV {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub compute_occupancy_priority: Bool32,
+}
+
+impl Default for PhysicalDeviceComputeOccupancyPriorityFeaturesNV {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_COMPUTE_OCCUPANCY_PRIORITY_FEATURES_NV,
+            next: ptr::null_mut(),
+            compute_occupancy_priority: Bool32::default(),
+        }
+    }
+}
+
+unsafe impl Send for PhysicalDeviceComputeOccupancyPriorityFeaturesNV {}
+unsafe impl Sync for PhysicalDeviceComputeOccupancyPriorityFeaturesNV {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceComputeShaderDerivativesFeaturesKHR.html>
 #[repr(C)]
@@ -19516,6 +19653,33 @@ impl Default for PhysicalDevicePresentModeFifoLatestReadyFeaturesKHR {
 
 unsafe impl Send for PhysicalDevicePresentModeFifoLatestReadyFeaturesKHR {}
 unsafe impl Sync for PhysicalDevicePresentModeFifoLatestReadyFeaturesKHR {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDevicePresentTimingFeaturesEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDevicePresentTimingFeaturesEXT {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub present_timing: Bool32,
+    pub present_at_absolute_time: Bool32,
+    pub present_at_relative_time: Bool32,
+}
+
+impl Default for PhysicalDevicePresentTimingFeaturesEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_PRESENT_TIMING_FEATURES_EXT,
+            next: ptr::null_mut(),
+            present_timing: Bool32::default(),
+            present_at_absolute_time: Bool32::default(),
+            present_at_relative_time: Bool32::default(),
+        }
+    }
+}
+
+unsafe impl Send for PhysicalDevicePresentTimingFeaturesEXT {}
+unsafe impl Sync for PhysicalDevicePresentTimingFeaturesEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDevicePresentWait2FeaturesKHR.html>
 #[repr(C)]
@@ -25540,6 +25704,14 @@ impl Default for PresentRegionsKHR {
 unsafe impl Send for PresentRegionsKHR {}
 unsafe impl Sync for PresentRegionsKHR {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPresentStageTimeEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
+pub struct PresentStageTimeEXT {
+    pub stage: PresentStageFlagsEXT,
+    pub time: u64,
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPresentTimeGOOGLE.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
@@ -25572,6 +25744,91 @@ impl Default for PresentTimesInfoGOOGLE {
 
 unsafe impl Send for PresentTimesInfoGOOGLE {}
 unsafe impl Sync for PresentTimesInfoGOOGLE {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPresentTimingInfoEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PresentTimingInfoEXT {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub flags: PresentTimingInfoFlagsEXT,
+    pub target_time: u64,
+    pub time_domain_id: u64,
+    pub present_stage_queries: PresentStageFlagsEXT,
+    pub target_time_domain_present_stage: PresentStageFlagsEXT,
+}
+
+impl Default for PresentTimingInfoEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PRESENT_TIMING_INFO_EXT,
+            next: ptr::null(),
+            flags: PresentTimingInfoFlagsEXT::default(),
+            target_time: u64::default(),
+            time_domain_id: u64::default(),
+            present_stage_queries: PresentStageFlagsEXT::default(),
+            target_time_domain_present_stage: PresentStageFlagsEXT::default(),
+        }
+    }
+}
+
+unsafe impl Send for PresentTimingInfoEXT {}
+unsafe impl Sync for PresentTimingInfoEXT {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPresentTimingSurfaceCapabilitiesEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PresentTimingSurfaceCapabilitiesEXT {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub present_timing_supported: Bool32,
+    pub present_at_absolute_time_supported: Bool32,
+    pub present_at_relative_time_supported: Bool32,
+    pub present_stage_queries: PresentStageFlagsEXT,
+}
+
+impl Default for PresentTimingSurfaceCapabilitiesEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PRESENT_TIMING_SURFACE_CAPABILITIES_EXT,
+            next: ptr::null_mut(),
+            present_timing_supported: Bool32::default(),
+            present_at_absolute_time_supported: Bool32::default(),
+            present_at_relative_time_supported: Bool32::default(),
+            present_stage_queries: PresentStageFlagsEXT::default(),
+        }
+    }
+}
+
+unsafe impl Send for PresentTimingSurfaceCapabilitiesEXT {}
+unsafe impl Sync for PresentTimingSurfaceCapabilitiesEXT {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPresentTimingsInfoEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PresentTimingsInfoEXT {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub swapchain_count: u32,
+    pub timing_infos: *const PresentTimingInfoEXT,
+}
+
+impl Default for PresentTimingsInfoEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PRESENT_TIMINGS_INFO_EXT,
+            next: ptr::null(),
+            swapchain_count: u32::default(),
+            timing_infos: ptr::null(),
+        }
+    }
+}
+
+unsafe impl Send for PresentTimingsInfoEXT {}
+unsafe impl Sync for PresentTimingsInfoEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPresentWait2InfoKHR.html>
 #[repr(C)]
@@ -29269,6 +29526,33 @@ impl Default for SurfaceProtectedCapabilitiesKHR {
 unsafe impl Send for SurfaceProtectedCapabilitiesKHR {}
 unsafe impl Sync for SurfaceProtectedCapabilitiesKHR {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSwapchainCalibratedTimestampInfoEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct SwapchainCalibratedTimestampInfoEXT {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub swapchain: SwapchainKHR,
+    pub present_stage: PresentStageFlagsEXT,
+    pub time_domain_id: u64,
+}
+
+impl Default for SwapchainCalibratedTimestampInfoEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::SWAPCHAIN_CALIBRATED_TIMESTAMP_INFO_EXT,
+            next: ptr::null(),
+            swapchain: SwapchainKHR::default(),
+            present_stage: PresentStageFlagsEXT::default(),
+            time_domain_id: u64::default(),
+        }
+    }
+}
+
+unsafe impl Send for SwapchainCalibratedTimestampInfoEXT {}
+unsafe impl Sync for SwapchainCalibratedTimestampInfoEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSwapchainCounterCreateInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -29538,6 +29822,58 @@ impl Default for SwapchainPresentScalingCreateInfoKHR {
 
 unsafe impl Send for SwapchainPresentScalingCreateInfoKHR {}
 unsafe impl Sync for SwapchainPresentScalingCreateInfoKHR {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSwapchainTimeDomainPropertiesEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct SwapchainTimeDomainPropertiesEXT {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub time_domain_count: u32,
+    pub time_domains: *mut TimeDomainKHR,
+    pub time_domain_ids: *mut u64,
+}
+
+impl Default for SwapchainTimeDomainPropertiesEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::SWAPCHAIN_TIME_DOMAIN_PROPERTIES_EXT,
+            next: ptr::null_mut(),
+            time_domain_count: u32::default(),
+            time_domains: ptr::null_mut(),
+            time_domain_ids: ptr::null_mut(),
+        }
+    }
+}
+
+unsafe impl Send for SwapchainTimeDomainPropertiesEXT {}
+unsafe impl Sync for SwapchainTimeDomainPropertiesEXT {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSwapchainTimingPropertiesEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct SwapchainTimingPropertiesEXT {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub refresh_duration: u64,
+    pub refresh_interval: u64,
+}
+
+impl Default for SwapchainTimingPropertiesEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::SWAPCHAIN_TIMING_PROPERTIES_EXT,
+            next: ptr::null_mut(),
+            refresh_duration: u64::default(),
+            refresh_interval: u64::default(),
+        }
+    }
+}
+
+unsafe impl Send for SwapchainTimingPropertiesEXT {}
+unsafe impl Sync for SwapchainTimingPropertiesEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSysmemColorSpaceFUCHSIA.html>
 #[repr(C)]

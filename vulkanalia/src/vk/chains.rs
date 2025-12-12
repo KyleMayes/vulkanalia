@@ -1488,6 +1488,20 @@ unsafe impl InputChainStruct for CommandPoolCreateInfo {
     }
 }
 
+unsafe impl InputChainStruct for ComputeOccupancyPriorityParametersNV {
+    const TYPE: StructureType = StructureType::COMPUTE_OCCUPANCY_PRIORITY_PARAMETERS_NV;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
 unsafe impl InputChainStruct for ComputePipelineCreateInfo {
     const TYPE: StructureType = StructureType::COMPUTE_PIPELINE_CREATE_INFO;
 
@@ -6538,6 +6552,62 @@ unsafe impl OutputChainStruct for PartitionedAccelerationStructureInstancesInput
     }
 }
 
+unsafe impl InputChainStruct for PastPresentationTimingEXT {
+    const TYPE: StructureType = StructureType::PAST_PRESENTATION_TIMING_EXT;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl OutputChainStruct for PastPresentationTimingEXT {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
+        self.next
+    }
+}
+
+unsafe impl InputChainStruct for PastPresentationTimingInfoEXT {
+    const TYPE: StructureType = StructureType::PAST_PRESENTATION_TIMING_INFO_EXT;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl InputChainStruct for PastPresentationTimingPropertiesEXT {
+    const TYPE: StructureType = StructureType::PAST_PRESENTATION_TIMING_PROPERTIES_EXT;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl OutputChainStruct for PastPresentationTimingPropertiesEXT {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
+        self.next
+    }
+}
+
 unsafe impl InputChainStruct for PerTileBeginInfoQCOM {
     const TYPE: StructureType = StructureType::PER_TILE_BEGIN_INFO_QCOM;
 
@@ -7243,6 +7313,28 @@ unsafe impl InputChainStruct for PhysicalDeviceCommandBufferInheritanceFeaturesN
 }
 
 unsafe impl OutputChainStruct for PhysicalDeviceCommandBufferInheritanceFeaturesNV {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
+        self.next
+    }
+}
+
+unsafe impl InputChainStruct for PhysicalDeviceComputeOccupancyPriorityFeaturesNV {
+    const TYPE: StructureType =
+        StructureType::PHYSICAL_DEVICE_COMPUTE_OCCUPANCY_PRIORITY_FEATURES_NV;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl OutputChainStruct for PhysicalDeviceComputeOccupancyPriorityFeaturesNV {
     #[inline]
     fn next_mut(&self) -> *mut c_void {
         self.next
@@ -11647,6 +11739,27 @@ unsafe impl OutputChainStruct for PhysicalDevicePresentModeFifoLatestReadyFeatur
     }
 }
 
+unsafe impl InputChainStruct for PhysicalDevicePresentTimingFeaturesEXT {
+    const TYPE: StructureType = StructureType::PHYSICAL_DEVICE_PRESENT_TIMING_FEATURES_EXT;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl OutputChainStruct for PhysicalDevicePresentTimingFeaturesEXT {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
+        self.next
+    }
+}
+
 unsafe impl InputChainStruct for PhysicalDevicePresentWait2FeaturesKHR {
     const TYPE: StructureType = StructureType::PHYSICAL_DEVICE_PRESENT_WAIT_2_FEATURES_KHR;
 
@@ -15704,6 +15817,55 @@ unsafe impl InputChainStruct for PresentTimesInfoGOOGLE {
     }
 }
 
+unsafe impl InputChainStruct for PresentTimingInfoEXT {
+    const TYPE: StructureType = StructureType::PRESENT_TIMING_INFO_EXT;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl InputChainStruct for PresentTimingSurfaceCapabilitiesEXT {
+    const TYPE: StructureType = StructureType::PRESENT_TIMING_SURFACE_CAPABILITIES_EXT;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl OutputChainStruct for PresentTimingSurfaceCapabilitiesEXT {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
+        self.next
+    }
+}
+
+unsafe impl InputChainStruct for PresentTimingsInfoEXT {
+    const TYPE: StructureType = StructureType::PRESENT_TIMINGS_INFO_EXT;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
 unsafe impl InputChainStruct for PresentWait2InfoKHR {
     const TYPE: StructureType = StructureType::PRESENT_WAIT_2_INFO_KHR;
 
@@ -17641,6 +17803,20 @@ unsafe impl OutputChainStruct for SurfaceProtectedCapabilitiesKHR {
     }
 }
 
+unsafe impl InputChainStruct for SwapchainCalibratedTimestampInfoEXT {
+    const TYPE: StructureType = StructureType::SWAPCHAIN_CALIBRATED_TIMESTAMP_INFO_EXT;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
 unsafe impl InputChainStruct for SwapchainCounterCreateInfoEXT {
     const TYPE: StructureType = StructureType::SWAPCHAIN_COUNTER_CREATE_INFO_EXT;
 
@@ -17784,6 +17960,48 @@ unsafe impl InputChainStruct for SwapchainPresentScalingCreateInfoKHR {
 
     #[inline]
     fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl InputChainStruct for SwapchainTimeDomainPropertiesEXT {
+    const TYPE: StructureType = StructureType::SWAPCHAIN_TIME_DOMAIN_PROPERTIES_EXT;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl OutputChainStruct for SwapchainTimeDomainPropertiesEXT {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
+        self.next
+    }
+}
+
+unsafe impl InputChainStruct for SwapchainTimingPropertiesEXT {
+    const TYPE: StructureType = StructureType::SWAPCHAIN_TIMING_PROPERTIES_EXT;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl OutputChainStruct for SwapchainTimingPropertiesEXT {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
         self.next
     }
 }

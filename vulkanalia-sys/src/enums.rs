@@ -5476,6 +5476,7 @@ impl Result {
     pub const ERROR_VIDEO_PROFILE_CODEC_NOT_SUPPORTED_KHR: Self = Self(-1000023004);
     pub const ERROR_VIDEO_STD_VERSION_NOT_SUPPORTED_KHR: Self = Self(-1000023005);
     pub const ERROR_INVALID_DRM_FORMAT_MODIFIER_PLANE_LAYOUT_EXT: Self = Self(-1000158000);
+    pub const ERROR_PRESENT_TIMING_QUEUE_FULL_EXT: Self = Self(-1000208000);
     pub const ERROR_FULL_SCREEN_EXCLUSIVE_MODE_LOST_EXT: Self = Self(-1000255000);
     pub const THREAD_IDLE_KHR: Self = Self(1000268000);
     pub const THREAD_DONE_KHR: Self = Self(1000268001);
@@ -5542,6 +5543,7 @@ impl fmt::Debug for Result {
             -1000023004 => write!(f, "ERROR_VIDEO_PROFILE_CODEC_NOT_SUPPORTED_KHR"),
             -1000023005 => write!(f, "ERROR_VIDEO_STD_VERSION_NOT_SUPPORTED_KHR"),
             -1000158000 => write!(f, "ERROR_INVALID_DRM_FORMAT_MODIFIER_PLANE_LAYOUT_EXT"),
+            -1000208000 => write!(f, "ERROR_PRESENT_TIMING_QUEUE_FULL_EXT"),
             -1000255000 => write!(f, "ERROR_FULL_SCREEN_EXCLUSIVE_MODE_LOST_EXT"),
             1000268000 => write!(f, "THREAD_IDLE_KHR"),
             1000268001 => write!(f, "THREAD_DONE_KHR"),
@@ -5599,6 +5601,7 @@ impl fmt::Display for Result {
             -1000023004 => write!(f, "Codec-specific parameters in a requested VkVideoProfileInfoKHR chain are not supported."),
             -1000023005 => write!(f, "The specified video Std header version is not supported."),
             -1000158000 => write!(f, "ERROR_INVALID_DRM_FORMAT_MODIFIER_PLANE_LAYOUT_EXT"),
+            -1000208000 => write!(f, "ERROR_PRESENT_TIMING_QUEUE_FULL_EXT"),
             -1000255000 => write!(f, "An operation on a swapchain created with VK_FULL_SCREEN_EXCLUSIVE_APPLICATION_CONTROLLED_EXT failed as it did not have exclusive full-screen access. This may occur due to implementation-dependent reasons, outside of the application's control."),
             1000268000 => write!(f, "A deferred operation is not complete but there is currently no work for this thread to do at the time of this call."),
             1000268001 => write!(f, "A deferred operation is not complete but there is no work remaining to assign to additional threads."),
@@ -6728,6 +6731,16 @@ impl StructureType {
     pub const QUEUE_FAMILY_CHECKPOINT_PROPERTIES_NV: Self = Self(1000206001);
     pub const QUEUE_FAMILY_CHECKPOINT_PROPERTIES_2_NV: Self = Self(1000314008);
     pub const CHECKPOINT_DATA_2_NV: Self = Self(1000314009);
+    pub const PHYSICAL_DEVICE_PRESENT_TIMING_FEATURES_EXT: Self = Self(1000208000);
+    pub const SWAPCHAIN_TIMING_PROPERTIES_EXT: Self = Self(1000208001);
+    pub const SWAPCHAIN_TIME_DOMAIN_PROPERTIES_EXT: Self = Self(1000208002);
+    pub const PRESENT_TIMINGS_INFO_EXT: Self = Self(1000208003);
+    pub const PRESENT_TIMING_INFO_EXT: Self = Self(1000208004);
+    pub const PAST_PRESENTATION_TIMING_INFO_EXT: Self = Self(1000208005);
+    pub const PAST_PRESENTATION_TIMING_PROPERTIES_EXT: Self = Self(1000208006);
+    pub const PAST_PRESENTATION_TIMING_EXT: Self = Self(1000208007);
+    pub const PRESENT_TIMING_SURFACE_CAPABILITIES_EXT: Self = Self(1000208008);
+    pub const SWAPCHAIN_CALIBRATED_TIMESTAMP_INFO_EXT: Self = Self(1000208009);
     pub const PHYSICAL_DEVICE_SHADER_INTEGER_FUNCTIONS_2_FEATURES_INTEL: Self = Self(1000209000);
     pub const QUERY_POOL_PERFORMANCE_QUERY_CREATE_INFO_INTEL: Self = Self(1000210000);
     pub const INITIALIZE_PERFORMANCE_API_INFO_INTEL: Self = Self(1000210001);
@@ -7374,6 +7387,8 @@ impl StructureType {
     pub const PHYSICAL_DEVICE_PIPELINE_CACHE_INCREMENTAL_MODE_FEATURES_SEC: Self = Self(1000637000);
     pub const PHYSICAL_DEVICE_SHADER_UNIFORM_BUFFER_UNSIZED_ARRAY_FEATURES_EXT: Self =
         Self(1000642000);
+    pub const COMPUTE_OCCUPANCY_PRIORITY_PARAMETERS_NV: Self = Self(1000645000);
+    pub const PHYSICAL_DEVICE_COMPUTE_OCCUPANCY_PRIORITY_FEATURES_NV: Self = Self(1000645001);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -7961,6 +7976,16 @@ impl fmt::Debug for StructureType {
             1000206001 => write!(f, "QUEUE_FAMILY_CHECKPOINT_PROPERTIES_NV"),
             1000314008 => write!(f, "QUEUE_FAMILY_CHECKPOINT_PROPERTIES_2_NV"),
             1000314009 => write!(f, "CHECKPOINT_DATA_2_NV"),
+            1000208000 => write!(f, "PHYSICAL_DEVICE_PRESENT_TIMING_FEATURES_EXT"),
+            1000208001 => write!(f, "SWAPCHAIN_TIMING_PROPERTIES_EXT"),
+            1000208002 => write!(f, "SWAPCHAIN_TIME_DOMAIN_PROPERTIES_EXT"),
+            1000208003 => write!(f, "PRESENT_TIMINGS_INFO_EXT"),
+            1000208004 => write!(f, "PRESENT_TIMING_INFO_EXT"),
+            1000208005 => write!(f, "PAST_PRESENTATION_TIMING_INFO_EXT"),
+            1000208006 => write!(f, "PAST_PRESENTATION_TIMING_PROPERTIES_EXT"),
+            1000208007 => write!(f, "PAST_PRESENTATION_TIMING_EXT"),
+            1000208008 => write!(f, "PRESENT_TIMING_SURFACE_CAPABILITIES_EXT"),
+            1000208009 => write!(f, "SWAPCHAIN_CALIBRATED_TIMESTAMP_INFO_EXT"),
             1000209000 => write!(
                 f,
                 "PHYSICAL_DEVICE_SHADER_INTEGER_FUNCTIONS_2_FEATURES_INTEL"
@@ -8828,6 +8853,8 @@ impl fmt::Debug for StructureType {
                 f,
                 "PHYSICAL_DEVICE_SHADER_UNIFORM_BUFFER_UNSIZED_ARRAY_FEATURES_EXT"
             ),
+            1000645000 => write!(f, "COMPUTE_OCCUPANCY_PRIORITY_PARAMETERS_NV"),
+            1000645001 => write!(f, "PHYSICAL_DEVICE_COMPUTE_OCCUPANCY_PRIORITY_FEATURES_NV"),
             _ => self.0.fmt(f),
         }
     }
@@ -9035,6 +9062,8 @@ impl TimeDomainKHR {
     pub const CLOCK_MONOTONIC: Self = Self(1);
     pub const CLOCK_MONOTONIC_RAW: Self = Self(2);
     pub const QUERY_PERFORMANCE_COUNTER: Self = Self(3);
+    pub const PRESENT_STAGE_LOCAL_EXT: Self = Self(1000208000);
+    pub const SWAPCHAIN_LOCAL_EXT: Self = Self(1000208001);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -9056,6 +9085,8 @@ impl fmt::Debug for TimeDomainKHR {
             1 => write!(f, "CLOCK_MONOTONIC"),
             2 => write!(f, "CLOCK_MONOTONIC_RAW"),
             3 => write!(f, "QUERY_PERFORMANCE_COUNTER"),
+            1000208000 => write!(f, "PRESENT_STAGE_LOCAL_EXT"),
+            1000208001 => write!(f, "SWAPCHAIN_LOCAL_EXT"),
             _ => self.0.fmt(f),
         }
     }
