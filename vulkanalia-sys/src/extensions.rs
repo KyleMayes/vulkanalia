@@ -2525,6 +2525,22 @@ pub const EXT_SHADER_IMAGE_ATOMIC_INT64_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_shader_long_vector.html>
+#[allow(deprecated)]
+pub const EXT_SHADER_LONG_VECTOR_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_EXT_shader_long_vector"),
+    number: 636,
+    type_: "device",
+    author: "EXT",
+    contact: "Jeff Bolz @jeffbolznv",
+    platform: None,
+    required_extensions: None,
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_shader_module_identifier.html>
 #[allow(deprecated)]
 pub const EXT_SHADER_MODULE_IDENTIFIER_EXTENSION: Extension = Extension {
@@ -2765,6 +2781,22 @@ pub const EXT_TEXEL_BUFFER_ALIGNMENT_EXTENSION: Extension = Extension {
     deprecated_by: None,
     obsoleted_by: None,
     promoted_to: Some("VK_VERSION_1_3"),
+};
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_texture_compression_astc_3d.html>
+#[allow(deprecated)]
+pub const EXT_TEXTURE_COMPRESSION_ASTC_3D_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_EXT_texture_compression_astc_3d"),
+    number: 289,
+    type_: "device",
+    author: "EXT",
+    contact: "Jan-Harald Fredriksen @janharaldfredriksen-arm",
+    platform: None,
+    required_extensions: None,
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
 };
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_texture_compression_astc_hdr.html>
@@ -6801,22 +6833,6 @@ pub const NV_WIN32_KEYED_MUTEX_EXTENSION: Extension = Extension {
 pub const OHOS_EXTERNAL_MEMORY_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_OHOS_external_memory"),
     number: 453,
-    type_: "device",
-    author: "HUAWEI",
-    contact: "Weilan Chen @wchen-h",
-    platform: Some("ohos"),
-    required_extensions: None,
-    required_version: None,
-    deprecated_by: None,
-    obsoleted_by: None,
-    promoted_to: None,
-};
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_OHOS_native_buffer.html>
-#[allow(deprecated)]
-pub const OHOS_NATIVE_BUFFER_EXTENSION: Extension = Extension {
-    name: ExtensionName::from_bytes(b"VK_OHOS_native_buffer"),
-    number: 589,
     type_: "device",
     author: "HUAWEI",
     contact: "Weilan Chen @wchen-h",

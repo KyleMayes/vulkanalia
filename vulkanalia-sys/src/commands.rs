@@ -35,15 +35,6 @@ pub type PFN_vkAcquireDrmDisplayEXT = unsafe extern "system" fn(
 pub type PFN_vkAcquireFullScreenExclusiveModeEXT =
     unsafe extern "system" fn(_device: Device, _swapchain: SwapchainKHR) -> Result;
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkAcquireImageOHOS.html>
-pub type PFN_vkAcquireImageOHOS = unsafe extern "system" fn(
-    _device: Device,
-    _image: Image,
-    _native_fence_fd: i32,
-    _semaphore: Semaphore,
-    _fence: Fence,
-) -> Result;
-
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkAcquireNextImage2KHR.html>
 pub type PFN_vkAcquireNextImage2KHR = unsafe extern "system" fn(
     _device: Device,
@@ -4677,14 +4668,6 @@ pub type PFN_vkGetSwapchainCounterEXT = unsafe extern "system" fn(
     _counter_value: *mut u64,
 ) -> Result;
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetSwapchainGrallocUsageOHOS.html>
-pub type PFN_vkGetSwapchainGrallocUsageOHOS = unsafe extern "system" fn(
-    _device: Device,
-    _format: Format,
-    _image_usage: ImageUsageFlags,
-    _gralloc_usage: *mut u64,
-) -> Result;
-
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetSwapchainImagesKHR.html>
 pub type PFN_vkGetSwapchainImagesKHR = unsafe extern "system" fn(
     _device: Device,
@@ -4892,15 +4875,6 @@ pub type PFN_vkQueuePresentKHR =
 pub type PFN_vkQueueSetPerformanceConfigurationINTEL = unsafe extern "system" fn(
     _queue: Queue,
     _configuration: PerformanceConfigurationINTEL,
-) -> Result;
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkQueueSignalReleaseImageOHOS.html>
-pub type PFN_vkQueueSignalReleaseImageOHOS = unsafe extern "system" fn(
-    _queue: Queue,
-    _wait_semaphore_count: u32,
-    _wait_semaphores: *const Semaphore,
-    _image: Image,
-    _native_fence_fd: *mut i32,
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkQueueSubmit.html>

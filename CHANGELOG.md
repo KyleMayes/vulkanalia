@@ -12,6 +12,7 @@
 - [Fixed present bitmasks and enums link (#2624)](https://github.com/KhronosGroup/Vulkan-Docs/commit/8cce88b6c55f424059a5442e64dafd7d154e4b7b)
 - [Add a NOTE to the <<interfaces-resources-layout, Offset and Stride (#2627)](https://github.com/KhronosGroup/Vulkan-Docs/commit/1a94d08d5653108839112c07c12ba88aefa29ddb)
 - [December 12, 2025 Vulkan 1.4.336 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/859d40c2360730c4d0d77cd227ca71c2c509b922)
+- [December 19, 2025 Vulkan 1.4.337 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/a0e5b1525597a57e40d00449522846c5d9a89699)
 
 ## [0.33.0] - 2025-11-07
 

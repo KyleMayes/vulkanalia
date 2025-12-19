@@ -29,7 +29,6 @@ use super::*;
 #[derive(Copy, Clone)]
 pub struct DeviceCommands {
     pub acquire_full_screen_exclusive_mode_ext: PFN_vkAcquireFullScreenExclusiveModeEXT,
-    pub acquire_image_ohos: PFN_vkAcquireImageOHOS,
     pub acquire_next_image2_khr: PFN_vkAcquireNextImage2KHR,
     pub acquire_next_image_khr: PFN_vkAcquireNextImageKHR,
     pub acquire_performance_configuration_intel: PFN_vkAcquirePerformanceConfigurationINTEL,
@@ -638,7 +637,6 @@ pub struct DeviceCommands {
     pub get_shader_module_create_info_identifier_ext: PFN_vkGetShaderModuleCreateInfoIdentifierEXT,
     pub get_shader_module_identifier_ext: PFN_vkGetShaderModuleIdentifierEXT,
     pub get_swapchain_counter_ext: PFN_vkGetSwapchainCounterEXT,
-    pub get_swapchain_gralloc_usage_ohos: PFN_vkGetSwapchainGrallocUsageOHOS,
     pub get_swapchain_images_khr: PFN_vkGetSwapchainImagesKHR,
     pub get_swapchain_status_khr: PFN_vkGetSwapchainStatusKHR,
     pub get_swapchain_time_domain_properties_ext: PFN_vkGetSwapchainTimeDomainPropertiesEXT,
@@ -670,7 +668,6 @@ pub struct DeviceCommands {
     pub queue_notify_out_of_band_nv: PFN_vkQueueNotifyOutOfBandNV,
     pub queue_present_khr: PFN_vkQueuePresentKHR,
     pub queue_set_performance_configuration_intel: PFN_vkQueueSetPerformanceConfigurationINTEL,
-    pub queue_signal_release_image_ohos: PFN_vkQueueSignalReleaseImageOHOS,
     pub queue_submit: PFN_vkQueueSubmit,
     pub queue_submit2: PFN_vkQueueSubmit2,
     pub queue_submit2_khr: PFN_vkQueueSubmit2KHR,
@@ -745,23 +742,6 @@ impl DeviceCommands {
                         _swapchain: SwapchainKHR,
                     ) -> Result {
                         panic!("could not load vkAcquireFullScreenExclusiveModeEXT")
-                    }
-                    fallback
-                }
-            },
-            acquire_image_ohos: {
-                let value = loader(c"vkAcquireImageOHOS".as_ptr());
-                if let Some(value) = value {
-                    mem::transmute(value)
-                } else {
-                    unsafe extern "system" fn fallback(
-                        _device: Device,
-                        _image: Image,
-                        _native_fence_fd: i32,
-                        _semaphore: Semaphore,
-                        _fence: Fence,
-                    ) -> Result {
-                        panic!("could not load vkAcquireImageOHOS")
                     }
                     fallback
                 }
@@ -9608,22 +9588,6 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            get_swapchain_gralloc_usage_ohos: {
-                let value = loader(c"vkGetSwapchainGrallocUsageOHOS".as_ptr());
-                if let Some(value) = value {
-                    mem::transmute(value)
-                } else {
-                    unsafe extern "system" fn fallback(
-                        _device: Device,
-                        _format: Format,
-                        _image_usage: ImageUsageFlags,
-                        _gralloc_usage: *mut u64,
-                    ) -> Result {
-                        panic!("could not load vkGetSwapchainGrallocUsageOHOS")
-                    }
-                    fallback
-                }
-            },
             get_swapchain_images_khr: {
                 let value = loader(c"vkGetSwapchainImagesKHR".as_ptr());
                 if let Some(value) = value {
@@ -10053,23 +10017,6 @@ impl DeviceCommands {
                         _configuration: PerformanceConfigurationINTEL,
                     ) -> Result {
                         panic!("could not load vkQueueSetPerformanceConfigurationINTEL")
-                    }
-                    fallback
-                }
-            },
-            queue_signal_release_image_ohos: {
-                let value = loader(c"vkQueueSignalReleaseImageOHOS".as_ptr());
-                if let Some(value) = value {
-                    mem::transmute(value)
-                } else {
-                    unsafe extern "system" fn fallback(
-                        _queue: Queue,
-                        _wait_semaphore_count: u32,
-                        _wait_semaphores: *const Semaphore,
-                        _image: Image,
-                        _native_fence_fd: *mut i32,
-                    ) -> Result {
-                        panic!("could not load vkQueueSignalReleaseImageOHOS")
                     }
                     fallback
                 }
