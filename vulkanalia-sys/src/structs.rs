@@ -12450,29 +12450,6 @@ impl Default for NativeBufferFormatPropertiesOHOS {
 unsafe impl Send for NativeBufferFormatPropertiesOHOS {}
 unsafe impl Sync for NativeBufferFormatPropertiesOHOS {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkNativeBufferOHOS.html>
-#[repr(C)]
-#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
-pub struct NativeBufferOHOS {
-    pub s_type: StructureType,
-    pub next: *const c_void,
-    pub handle: *mut OHBufferHandle,
-}
-
-impl Default for NativeBufferOHOS {
-    #[inline]
-    fn default() -> Self {
-        Self {
-            s_type: StructureType::NATIVE_BUFFER_OHOS,
-            next: ptr::null(),
-            handle: ptr::null_mut(),
-        }
-    }
-}
-
-unsafe impl Send for NativeBufferOHOS {}
-unsafe impl Sync for NativeBufferOHOS {}
-
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkNativeBufferPropertiesOHOS.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -19727,29 +19704,6 @@ impl Default for PhysicalDevicePresentWaitFeaturesKHR {
 unsafe impl Send for PhysicalDevicePresentWaitFeaturesKHR {}
 unsafe impl Sync for PhysicalDevicePresentWaitFeaturesKHR {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDevicePresentationPropertiesOHOS.html>
-#[repr(C)]
-#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
-pub struct PhysicalDevicePresentationPropertiesOHOS {
-    pub s_type: StructureType,
-    pub next: *mut c_void,
-    pub shared_image: Bool32,
-}
-
-impl Default for PhysicalDevicePresentationPropertiesOHOS {
-    #[inline]
-    fn default() -> Self {
-        Self {
-            s_type: StructureType::PHYSICAL_DEVICE_PRESENTATION_PROPERTIES_OHOS,
-            next: ptr::null_mut(),
-            shared_image: Bool32::default(),
-        }
-    }
-}
-
-unsafe impl Send for PhysicalDevicePresentationPropertiesOHOS {}
-unsafe impl Sync for PhysicalDevicePresentationPropertiesOHOS {}
-
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDevicePrimitiveTopologyListRestartFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -21504,6 +21458,52 @@ impl Default for PhysicalDeviceShaderIntegerFunctions2FeaturesINTEL {
 unsafe impl Send for PhysicalDeviceShaderIntegerFunctions2FeaturesINTEL {}
 unsafe impl Sync for PhysicalDeviceShaderIntegerFunctions2FeaturesINTEL {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderLongVectorFeaturesEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceShaderLongVectorFeaturesEXT {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub long_vector: Bool32,
+}
+
+impl Default for PhysicalDeviceShaderLongVectorFeaturesEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_SHADER_LONG_VECTOR_FEATURES_EXT,
+            next: ptr::null_mut(),
+            long_vector: Bool32::default(),
+        }
+    }
+}
+
+unsafe impl Send for PhysicalDeviceShaderLongVectorFeaturesEXT {}
+unsafe impl Sync for PhysicalDeviceShaderLongVectorFeaturesEXT {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderLongVectorPropertiesEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceShaderLongVectorPropertiesEXT {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub max_vector_components: u32,
+}
+
+impl Default for PhysicalDeviceShaderLongVectorPropertiesEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_SHADER_LONG_VECTOR_PROPERTIES_EXT,
+            next: ptr::null_mut(),
+            max_vector_components: u32::default(),
+        }
+    }
+}
+
+unsafe impl Send for PhysicalDeviceShaderLongVectorPropertiesEXT {}
+unsafe impl Sync for PhysicalDeviceShaderLongVectorPropertiesEXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderMaximalReconvergenceFeaturesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -22379,6 +22379,29 @@ impl Default for PhysicalDeviceTexelBufferAlignmentProperties {
 
 unsafe impl Send for PhysicalDeviceTexelBufferAlignmentProperties {}
 unsafe impl Sync for PhysicalDeviceTexelBufferAlignmentProperties {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceTextureCompressionASTC3DFeaturesEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceTextureCompressionASTC3DFeaturesEXT {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub textureCompressionASTC_3D: Bool32,
+}
+
+impl Default for PhysicalDeviceTextureCompressionASTC3DFeaturesEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_TEXTURE_COMPRESSION_ASTC_3D_FEATURES_EXT,
+            next: ptr::null_mut(),
+            textureCompressionASTC_3D: Bool32::default(),
+        }
+    }
+}
+
+unsafe impl Send for PhysicalDeviceTextureCompressionASTC3DFeaturesEXT {}
+unsafe impl Sync for PhysicalDeviceTextureCompressionASTC3DFeaturesEXT {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceTextureCompressionASTCHDRFeatures.html>
 #[repr(C)]
@@ -29651,29 +29674,6 @@ impl Default for SwapchainDisplayNativeHdrCreateInfoAMD {
 
 unsafe impl Send for SwapchainDisplayNativeHdrCreateInfoAMD {}
 unsafe impl Sync for SwapchainDisplayNativeHdrCreateInfoAMD {}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSwapchainImageCreateInfoOHOS.html>
-#[repr(C)]
-#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
-pub struct SwapchainImageCreateInfoOHOS {
-    pub s_type: StructureType,
-    pub next: *const c_void,
-    pub usage: SwapchainImageUsageFlagsOHOS,
-}
-
-impl Default for SwapchainImageCreateInfoOHOS {
-    #[inline]
-    fn default() -> Self {
-        Self {
-            s_type: StructureType::SWAPCHAIN_IMAGE_CREATE_INFO_OHOS,
-            next: ptr::null(),
-            usage: SwapchainImageUsageFlagsOHOS::default(),
-        }
-    }
-}
-
-unsafe impl Send for SwapchainImageCreateInfoOHOS {}
-unsafe impl Sync for SwapchainImageCreateInfoOHOS {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSwapchainLatencyCreateInfoNV.html>
 #[repr(C)]

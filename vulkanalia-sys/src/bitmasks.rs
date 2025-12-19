@@ -2209,15 +2209,6 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSwapchainImageUsageFlagsOHOS.html>
-    #[repr(transparent)]
-    #[derive(Default)]
-    pub struct SwapchainImageUsageFlagsOHOS: Flags {
-        const SHARED = 1;
-    }
-}
-
-bitflags! {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkTensorCreateFlagsARM.html>
     #[repr(transparent)]
     #[derive(Default)]

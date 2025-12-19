@@ -6327,20 +6327,6 @@ unsafe impl OutputChainStruct for NativeBufferFormatPropertiesOHOS {
     }
 }
 
-unsafe impl InputChainStruct for NativeBufferOHOS {
-    const TYPE: StructureType = StructureType::NATIVE_BUFFER_OHOS;
-
-    #[inline]
-    fn s_type(&self) -> StructureType {
-        self.s_type
-    }
-
-    #[inline]
-    fn next(&self) -> *const c_void {
-        self.next
-    }
-}
-
 unsafe impl InputChainStruct for NativeBufferPropertiesOHOS {
     const TYPE: StructureType = StructureType::NATIVE_BUFFER_PROPERTIES_OHOS;
 
@@ -11802,27 +11788,6 @@ unsafe impl OutputChainStruct for PhysicalDevicePresentWaitFeaturesKHR {
     }
 }
 
-unsafe impl InputChainStruct for PhysicalDevicePresentationPropertiesOHOS {
-    const TYPE: StructureType = StructureType::PHYSICAL_DEVICE_PRESENTATION_PROPERTIES_OHOS;
-
-    #[inline]
-    fn s_type(&self) -> StructureType {
-        self.s_type
-    }
-
-    #[inline]
-    fn next(&self) -> *const c_void {
-        self.next
-    }
-}
-
-unsafe impl OutputChainStruct for PhysicalDevicePresentationPropertiesOHOS {
-    #[inline]
-    fn next_mut(&self) -> *mut c_void {
-        self.next
-    }
-}
-
 unsafe impl InputChainStruct for PhysicalDevicePrimitiveTopologyListRestartFeaturesEXT {
     const TYPE: StructureType =
         StructureType::PHYSICAL_DEVICE_PRIMITIVE_TOPOLOGY_LIST_RESTART_FEATURES_EXT;
@@ -13222,6 +13187,48 @@ unsafe impl OutputChainStruct for PhysicalDeviceShaderIntegerFunctions2FeaturesI
     }
 }
 
+unsafe impl InputChainStruct for PhysicalDeviceShaderLongVectorFeaturesEXT {
+    const TYPE: StructureType = StructureType::PHYSICAL_DEVICE_SHADER_LONG_VECTOR_FEATURES_EXT;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl OutputChainStruct for PhysicalDeviceShaderLongVectorFeaturesEXT {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
+        self.next
+    }
+}
+
+unsafe impl InputChainStruct for PhysicalDeviceShaderLongVectorPropertiesEXT {
+    const TYPE: StructureType = StructureType::PHYSICAL_DEVICE_SHADER_LONG_VECTOR_PROPERTIES_EXT;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl OutputChainStruct for PhysicalDeviceShaderLongVectorPropertiesEXT {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
+        self.next
+    }
+}
+
 unsafe impl InputChainStruct for PhysicalDeviceShaderMaximalReconvergenceFeaturesKHR {
     const TYPE: StructureType =
         StructureType::PHYSICAL_DEVICE_SHADER_MAXIMAL_RECONVERGENCE_FEATURES_KHR;
@@ -13924,6 +13931,28 @@ unsafe impl InputChainStruct for PhysicalDeviceTexelBufferAlignmentProperties {
 }
 
 unsafe impl OutputChainStruct for PhysicalDeviceTexelBufferAlignmentProperties {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
+        self.next
+    }
+}
+
+unsafe impl InputChainStruct for PhysicalDeviceTextureCompressionASTC3DFeaturesEXT {
+    const TYPE: StructureType =
+        StructureType::PHYSICAL_DEVICE_TEXTURE_COMPRESSION_ASTC_3D_FEATURES_EXT;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl OutputChainStruct for PhysicalDeviceTextureCompressionASTC3DFeaturesEXT {
     #[inline]
     fn next_mut(&self) -> *mut c_void {
         self.next
@@ -17847,20 +17876,6 @@ unsafe impl InputChainStruct for SwapchainCreateInfoKHR {
 
 unsafe impl InputChainStruct for SwapchainDisplayNativeHdrCreateInfoAMD {
     const TYPE: StructureType = StructureType::SWAPCHAIN_DISPLAY_NATIVE_HDR_CREATE_INFO_AMD;
-
-    #[inline]
-    fn s_type(&self) -> StructureType {
-        self.s_type
-    }
-
-    #[inline]
-    fn next(&self) -> *const c_void {
-        self.next
-    }
-}
-
-unsafe impl InputChainStruct for SwapchainImageCreateInfoOHOS {
-    const TYPE: StructureType = StructureType::SWAPCHAIN_IMAGE_CREATE_INFO_OHOS;
 
     #[inline]
     fn s_type(&self) -> StructureType {
