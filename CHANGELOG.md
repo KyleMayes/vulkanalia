@@ -1,5 +1,9 @@
 ## [0.34.0] - UNRELEASED
 
+### Changed
+- Fixed command wrappers for commands that take `const void*` parameters for input buffers (e.g., `vkGetMemoryHostPointerPropertiesEXT`) to take `*const c_void` instead of `&c_void`
+- Fixed command wrappers for commands that take `void*` parameters for output buffers (e.g., `vkGetFenceSciSyncFenceNV`) to take `*mut c_void` instead of returning `c_void`
+
 ### Bindings Updates
 - [Fix: make pNext non-const for returnedonly="true" structs (#2601)](https://github.com/KhronosGroup/Vulkan-Docs/commit/8fba3c11cdf6e22d87730e649ec8142b02f7fc53)
 - [November 14, 2025 Vulkan 1.4.333 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/e554740a488b6733d4984252351eda7d69b1d9c2)

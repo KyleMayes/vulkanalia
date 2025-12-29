@@ -862,17 +862,16 @@ pub trait ArmTensorsExtensionDeviceCommands: DeviceV1_0 {
     unsafe fn get_tensor_opaque_capture_descriptor_data_arm(
         &self,
         info: &TensorCaptureDescriptorDataInfoARM,
-    ) -> crate::VkResult<c_void> {
-        let mut data = MaybeUninit::<c_void>::uninit();
-
+        data: *mut c_void,
+    ) -> crate::VkResult<()> {
         let __result = (self
             .commands()
             .get_tensor_opaque_capture_descriptor_data_arm)(
-            self.handle(), info, data.as_mut_ptr()
+            self.handle(), info, data
         );
 
         if __result == Result::SUCCESS {
-            Ok(data.assume_init())
+            Ok(())
         } else {
             Err(__result.into())
         }
@@ -883,19 +882,16 @@ pub trait ArmTensorsExtensionDeviceCommands: DeviceV1_0 {
     unsafe fn get_tensor_view_opaque_capture_descriptor_data_arm(
         &self,
         info: &TensorViewCaptureDescriptorDataInfoARM,
-    ) -> crate::VkResult<c_void> {
-        let mut data = MaybeUninit::<c_void>::uninit();
-
+        data: *mut c_void,
+    ) -> crate::VkResult<()> {
         let __result = (self
             .commands()
             .get_tensor_view_opaque_capture_descriptor_data_arm)(
-            self.handle(),
-            info,
-            data.as_mut_ptr(),
+            self.handle(), info, data
         );
 
         if __result == Result::SUCCESS {
-            Ok(data.assume_init())
+            Ok(())
         } else {
             Err(__result.into())
         }
@@ -1558,19 +1554,18 @@ pub trait ExtDescriptorBufferExtensionDeviceCommands: DeviceV1_0 {
     unsafe fn get_acceleration_structure_opaque_capture_descriptor_data_ext(
         &self,
         info: &AccelerationStructureCaptureDescriptorDataInfoEXT,
-    ) -> crate::VkResult<c_void> {
-        let mut data = MaybeUninit::<c_void>::uninit();
-
+        data: *mut c_void,
+    ) -> crate::VkResult<()> {
         let __result = (self
             .commands()
             .get_acceleration_structure_opaque_capture_descriptor_data_ext)(
             self.handle(),
             info,
-            data.as_mut_ptr(),
+            data,
         );
 
         if __result == Result::SUCCESS {
-            Ok(data.assume_init())
+            Ok(())
         } else {
             Err(__result.into())
         }
@@ -1581,17 +1576,16 @@ pub trait ExtDescriptorBufferExtensionDeviceCommands: DeviceV1_0 {
     unsafe fn get_buffer_opaque_capture_descriptor_data_ext(
         &self,
         info: &BufferCaptureDescriptorDataInfoEXT,
-    ) -> crate::VkResult<c_void> {
-        let mut data = MaybeUninit::<c_void>::uninit();
-
+        data: *mut c_void,
+    ) -> crate::VkResult<()> {
         let __result = (self
             .commands()
             .get_buffer_opaque_capture_descriptor_data_ext)(
-            self.handle(), info, data.as_mut_ptr()
+            self.handle(), info, data
         );
 
         if __result == Result::SUCCESS {
-            Ok(data.assume_init())
+            Ok(())
         } else {
             Err(__result.into())
         }
@@ -1650,17 +1644,16 @@ pub trait ExtDescriptorBufferExtensionDeviceCommands: DeviceV1_0 {
     unsafe fn get_image_opaque_capture_descriptor_data_ext(
         &self,
         info: &ImageCaptureDescriptorDataInfoEXT,
-    ) -> crate::VkResult<c_void> {
-        let mut data = MaybeUninit::<c_void>::uninit();
-
+        data: *mut c_void,
+    ) -> crate::VkResult<()> {
         let __result = (self.commands().get_image_opaque_capture_descriptor_data_ext)(
             self.handle(),
             info,
-            data.as_mut_ptr(),
+            data,
         );
 
         if __result == Result::SUCCESS {
-            Ok(data.assume_init())
+            Ok(())
         } else {
             Err(__result.into())
         }
@@ -1671,19 +1664,16 @@ pub trait ExtDescriptorBufferExtensionDeviceCommands: DeviceV1_0 {
     unsafe fn get_image_view_opaque_capture_descriptor_data_ext(
         &self,
         info: &ImageViewCaptureDescriptorDataInfoEXT,
-    ) -> crate::VkResult<c_void> {
-        let mut data = MaybeUninit::<c_void>::uninit();
-
+        data: *mut c_void,
+    ) -> crate::VkResult<()> {
         let __result = (self
             .commands()
             .get_image_view_opaque_capture_descriptor_data_ext)(
-            self.handle(),
-            info,
-            data.as_mut_ptr(),
+            self.handle(), info, data
         );
 
         if __result == Result::SUCCESS {
-            Ok(data.assume_init())
+            Ok(())
         } else {
             Err(__result.into())
         }
@@ -1694,19 +1684,16 @@ pub trait ExtDescriptorBufferExtensionDeviceCommands: DeviceV1_0 {
     unsafe fn get_sampler_opaque_capture_descriptor_data_ext(
         &self,
         info: &SamplerCaptureDescriptorDataInfoEXT,
-    ) -> crate::VkResult<c_void> {
-        let mut data = MaybeUninit::<c_void>::uninit();
-
+        data: *mut c_void,
+    ) -> crate::VkResult<()> {
         let __result = (self
             .commands()
             .get_sampler_opaque_capture_descriptor_data_ext)(
-            self.handle(),
-            info,
-            data.as_mut_ptr(),
+            self.handle(), info, data
         );
 
         if __result == Result::SUCCESS {
-            Ok(data.assume_init())
+            Ok(())
         } else {
             Err(__result.into())
         }
@@ -2792,7 +2779,7 @@ pub trait ExtExternalMemoryHostExtensionDeviceCommands: DeviceV1_0 {
     unsafe fn get_memory_host_pointer_properties_ext(
         &self,
         handle_type: ExternalMemoryHandleTypeFlags,
-        host_pointer: &c_void,
+        host_pointer: *const c_void,
         memory_host_pointer_properties: &mut MemoryHostPointerPropertiesEXT,
     ) -> crate::VkResult<()> {
         let __result = (self.commands().get_memory_host_pointer_properties_ext)(
@@ -2840,7 +2827,7 @@ pub trait ExtExternalMemoryMetalExtensionDeviceCommands: DeviceV1_0 {
     unsafe fn get_memory_metal_handle_properties_ext(
         &self,
         handle_type: ExternalMemoryHandleTypeFlags,
-        handle: &c_void,
+        handle: *const c_void,
         memory_metal_handle_properties: &mut MemoryMetalHandlePropertiesEXT,
     ) -> crate::VkResult<()> {
         let __result = (self.commands().get_memory_metal_handle_properties_ext)(
@@ -6310,7 +6297,7 @@ pub trait KhrDescriptorUpdateTemplateExtensionDeviceCommands: DeviceV1_0 {
         descriptor_update_template: DescriptorUpdateTemplate,
         layout: PipelineLayout,
         set: u32,
-        data: &c_void,
+        data: *const c_void,
     ) {
         let __result = (self.commands().cmd_push_descriptor_set_with_template_khr)(
             command_buffer,
@@ -6364,7 +6351,7 @@ pub trait KhrDescriptorUpdateTemplateExtensionDeviceCommands: DeviceV1_0 {
         &self,
         descriptor_set: DescriptorSet,
         descriptor_update_template: DescriptorUpdateTemplate,
-        data: &c_void,
+        data: *const c_void,
     ) {
         let __result = (self.commands().update_descriptor_set_with_template_khr)(
             self.handle(),
@@ -8493,7 +8480,7 @@ pub trait KhrPushDescriptorExtensionDeviceCommands: DeviceV1_0 {
         descriptor_update_template: DescriptorUpdateTemplate,
         layout: PipelineLayout,
         set: u32,
-        data: &c_void,
+        data: *const c_void,
     ) {
         let __result = (self.commands().cmd_push_descriptor_set_with_template_khr)(
             command_buffer,
@@ -10502,7 +10489,7 @@ pub trait NvDeviceDiagnosticCheckpointsExtensionDeviceCommands: DeviceV1_0 {
     unsafe fn cmd_set_checkpoint_nv(
         &self,
         command_buffer: CommandBuffer,
-        checkpoint_marker: &c_void,
+        checkpoint_marker: *const c_void,
     ) {
         let __result = (self.commands().cmd_set_checkpoint_nv)(command_buffer, checkpoint_marker);
     }
@@ -10754,16 +10741,10 @@ pub trait NvExternalComputeQueueExtensionDeviceCommands: DeviceV1_0 {
         &self,
         external_queue: ExternalComputeQueueNV,
         params: &mut ExternalComputeQueueDataParamsNV,
-    ) -> c_void {
-        let mut data = MaybeUninit::<c_void>::uninit();
-
-        let __result = (self.commands().get_external_compute_queue_data_nv)(
-            external_queue,
-            params,
-            data.as_mut_ptr(),
-        );
-
-        data.assume_init()
+        data: *mut c_void,
+    ) {
+        let __result =
+            (self.commands().get_external_compute_queue_data_nv)(external_queue, params, data);
     }
 }
 
@@ -10947,17 +10928,16 @@ pub trait NvExternalSciSyncExtensionDeviceCommands: DeviceV1_0 {
     unsafe fn get_fence_sci_sync_fence_nv(
         &self,
         get_sci_sync_handle_info: &FenceGetSciSyncInfoNV,
-    ) -> crate::VkResult<c_void> {
-        let mut handle = MaybeUninit::<c_void>::uninit();
-
+        handle: *mut c_void,
+    ) -> crate::VkResult<()> {
         let __result = (self.commands().get_fence_sci_sync_fence_nv)(
             self.handle(),
             get_sci_sync_handle_info,
-            handle.as_mut_ptr(),
+            handle,
         );
 
         if __result == Result::SUCCESS {
-            Ok(handle.assume_init())
+            Ok(())
         } else {
             Err(__result.into())
         }
@@ -10968,17 +10948,16 @@ pub trait NvExternalSciSyncExtensionDeviceCommands: DeviceV1_0 {
     unsafe fn get_fence_sci_sync_obj_nv(
         &self,
         get_sci_sync_handle_info: &FenceGetSciSyncInfoNV,
-    ) -> crate::VkResult<c_void> {
-        let mut handle = MaybeUninit::<c_void>::uninit();
-
+        handle: *mut c_void,
+    ) -> crate::VkResult<()> {
         let __result = (self.commands().get_fence_sci_sync_obj_nv)(
             self.handle(),
             get_sci_sync_handle_info,
-            handle.as_mut_ptr(),
+            handle,
         );
 
         if __result == Result::SUCCESS {
-            Ok(handle.assume_init())
+            Ok(())
         } else {
             Err(__result.into())
         }
@@ -10989,17 +10968,16 @@ pub trait NvExternalSciSyncExtensionDeviceCommands: DeviceV1_0 {
     unsafe fn get_semaphore_sci_sync_obj_nv(
         &self,
         get_sci_sync_info: &SemaphoreGetSciSyncInfoNV,
-    ) -> crate::VkResult<c_void> {
-        let mut handle = MaybeUninit::<c_void>::uninit();
-
+        handle: *mut c_void,
+    ) -> crate::VkResult<()> {
         let __result = (self.commands().get_semaphore_sci_sync_obj_nv)(
             self.handle(),
             get_sci_sync_info,
-            handle.as_mut_ptr(),
+            handle,
         );
 
         if __result == Result::SUCCESS {
-            Ok(handle.assume_init())
+            Ok(())
         } else {
             Err(__result.into())
         }
@@ -11134,17 +11112,16 @@ pub trait NvExternalSciSync2ExtensionDeviceCommands: DeviceV1_0 {
     unsafe fn get_fence_sci_sync_fence_nv(
         &self,
         get_sci_sync_handle_info: &FenceGetSciSyncInfoNV,
-    ) -> crate::VkResult<c_void> {
-        let mut handle = MaybeUninit::<c_void>::uninit();
-
+        handle: *mut c_void,
+    ) -> crate::VkResult<()> {
         let __result = (self.commands().get_fence_sci_sync_fence_nv)(
             self.handle(),
             get_sci_sync_handle_info,
-            handle.as_mut_ptr(),
+            handle,
         );
 
         if __result == Result::SUCCESS {
-            Ok(handle.assume_init())
+            Ok(())
         } else {
             Err(__result.into())
         }
@@ -11155,17 +11132,16 @@ pub trait NvExternalSciSync2ExtensionDeviceCommands: DeviceV1_0 {
     unsafe fn get_fence_sci_sync_obj_nv(
         &self,
         get_sci_sync_handle_info: &FenceGetSciSyncInfoNV,
-    ) -> crate::VkResult<c_void> {
-        let mut handle = MaybeUninit::<c_void>::uninit();
-
+        handle: *mut c_void,
+    ) -> crate::VkResult<()> {
         let __result = (self.commands().get_fence_sci_sync_obj_nv)(
             self.handle(),
             get_sci_sync_handle_info,
-            handle.as_mut_ptr(),
+            handle,
         );
 
         if __result == Result::SUCCESS {
-            Ok(handle.assume_init())
+            Ok(())
         } else {
             Err(__result.into())
         }
