@@ -3059,7 +3059,7 @@ pub trait DeviceV1_1: DeviceV1_0 {
         &self,
         descriptor_set: DescriptorSet,
         descriptor_update_template: DescriptorUpdateTemplate,
-        data: &c_void,
+        data: *const c_void,
     ) {
         let __result = (self.commands().update_descriptor_set_with_template)(
             self.handle(),
@@ -3914,7 +3914,7 @@ pub trait DeviceV1_4: DeviceV1_3 {
         descriptor_update_template: DescriptorUpdateTemplate,
         layout: PipelineLayout,
         set: u32,
-        data: &c_void,
+        data: *const c_void,
     ) {
         let __result = (self.commands().cmd_push_descriptor_set_with_template)(
             command_buffer,

@@ -683,10 +683,10 @@ fun Type.isPlatformPointer() = platformPointers.contains(getIdentifier()?.value)
 
 fun Type.isStringPointer() = getPointee()?.getIdentifier()?.value == "char"
 
-/** The types which are used in opaque pointers (i.e., `void` and `void` typedefs). */
+/** The C types which are used in opaque pointers (i.e., `void` and `void` typedefs). */
 private val opaque =
     setOf(
-        "c_void",
+        "void",
         "ANativeWindow",
         "AHardwareBuffer",
         "IDirectFB",
