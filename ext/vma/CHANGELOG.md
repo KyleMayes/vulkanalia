@@ -1,3 +1,8 @@
+## [0.8.0] - UNRELEASED
+
+### Fixed
+- Use standard commands instead of extension commands when using Vulkan 1.1+
+
 ## [0.7.0] - 2025-11-07
 
 ### Changed

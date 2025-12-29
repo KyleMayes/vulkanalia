@@ -48,7 +48,11 @@ pub struct Allocator(pub(crate) VmaAllocator);
 
 impl Allocator {
     pub unsafe fn new(options: &AllocatorOptions) -> VkResult<Self> {
-        let functions = get_functions(options.instance.commands(), options.device.commands());
+        let functions = get_functions(
+            options.instance.version(),
+            options.instance.commands(),
+            options.device.commands(),
+        );
 
         let heap_size_limits = if !options.heap_size_limits.is_empty() {
             options.heap_size_limits.as_ptr()
@@ -226,7 +230,11 @@ unsafe impl Send for Allocator {}
 unsafe impl Sync for Allocator {}
 
 #[rustfmt::skip]
-fn get_functions(instance: &InstanceCommands, device: &DeviceCommands) -> VmaVulkanFunctions {
+fn get_functions(
+    version: Version,
+    instance: &InstanceCommands,
+    device: &DeviceCommands,
+) -> VmaVulkanFunctions {
     extern "system" fn get_instance_proc_addr(
         _: vk::Instance,
         _: *const core::ffi::c_char,
@@ -241,7 +249,7 @@ fn get_functions(instance: &InstanceCommands, device: &DeviceCommands) -> VmaVul
         panic!("VMA_DYNAMIC_VULKAN_FUNCTIONS is not supported!")
     }
 
-    VmaVulkanFunctions {
+    let mut functions = VmaVulkanFunctions {
         vkGetInstanceProcAddr: get_instance_proc_addr,
         vkGetDeviceProcAddr: get_device_proc_addr,
         vkAllocateMemory: device.allocate_memory,
@@ -268,5 +276,16 @@ fn get_functions(instance: &InstanceCommands, device: &DeviceCommands) -> VmaVul
         vkInvalidateMappedMemoryRanges: device.invalidate_mapped_memory_ranges,
         vkMapMemory: device.map_memory,
         vkUnmapMemory: device.unmap_memory,
+    };
+
+    // Use standard functions for extensions that were adopted in 1.1.
+    if version >= Version::V1_1_0 {
+        functions.vkBindBufferMemory2KHR = device.bind_buffer_memory2;
+        functions.vkBindImageMemory2KHR = device.bind_image_memory2;
+        functions.vkGetBufferMemoryRequirements2KHR = device.get_buffer_memory_requirements2;
+        functions.vkGetImageMemoryRequirements2KHR = device.get_image_memory_requirements2;
+        functions.vkGetPhysicalDeviceMemoryProperties2KHR = instance.get_physical_device_memory_properties2;
     }
+
+    functions
 }
