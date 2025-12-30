@@ -10934,6 +10934,7 @@ pub struct InstanceCommands {
     pub enumerate_physical_device_queue_family_performance_query_counters_khr:
         PFN_vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR,
     pub enumerate_physical_devices: PFN_vkEnumeratePhysicalDevices,
+    pub get_device_proc_addr: PFN_vkGetDeviceProcAddr,
     pub get_display_mode_properties2_khr: PFN_vkGetDisplayModeProperties2KHR,
     pub get_display_mode_properties_khr: PFN_vkGetDisplayModePropertiesKHR,
     pub get_display_plane_capabilities2_khr: PFN_vkGetDisplayPlaneCapabilities2KHR,
@@ -11662,6 +11663,20 @@ impl InstanceCommands {
                         _physical_devices: *mut PhysicalDevice,
                     ) -> Result {
                         panic!("could not load vkEnumeratePhysicalDevices")
+                    }
+                    fallback
+                }
+            },
+            get_device_proc_addr: {
+                let value = loader(c"vkGetDeviceProcAddr".as_ptr());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _name: *const c_char,
+                    ) -> PFN_vkVoidFunction {
+                        panic!("could not load vkGetDeviceProcAddr")
                     }
                     fallback
                 }
@@ -12975,7 +12990,6 @@ impl InstanceCommands {
 /// Loaded Vulkan static commands.
 #[derive(Copy, Clone)]
 pub struct StaticCommands {
-    pub get_device_proc_addr: PFN_vkGetDeviceProcAddr,
     pub get_instance_proc_addr: PFN_vkGetInstanceProcAddr,
 }
 
@@ -12985,20 +12999,6 @@ impl StaticCommands {
         mut loader: impl FnMut(*const c_char) -> Option<unsafe extern "system" fn()>,
     ) -> Self {
         Self {
-            get_device_proc_addr: {
-                let value = loader(c"vkGetDeviceProcAddr".as_ptr());
-                if let Some(value) = value {
-                    mem::transmute(value)
-                } else {
-                    unsafe extern "system" fn fallback(
-                        _device: Device,
-                        _name: *const c_char,
-                    ) -> PFN_vkVoidFunction {
-                        panic!("could not load vkGetDeviceProcAddr")
-                    }
-                    fallback
-                }
-            },
             get_instance_proc_addr: {
                 let value = loader(c"vkGetInstanceProcAddr".as_ptr());
                 if let Some(value) = value {
