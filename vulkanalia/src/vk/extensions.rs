@@ -21,7 +21,7 @@
 )]
 
 use alloc::vec::Vec;
-use core::ffi::{c_int, c_void};
+use core::ffi::{c_int, c_void, CStr};
 use core::mem::MaybeUninit;
 use core::ptr;
 
@@ -1280,8 +1280,8 @@ pub trait ExtDebugReportExtensionInstanceCommands: InstanceV1_0 {
         object: u64,
         location: usize,
         message_code: i32,
-        layer_prefix: &[u8],
-        message: &[u8],
+        layer_prefix: &CStr,
+        message: &CStr,
     ) {
         let __result = (self.commands().debug_report_message_ext)(
             self.handle(),

@@ -110,7 +110,7 @@ pub const ${extension.name}_EXTENSION: Extension = Extension {
 fun Registry.generateExtensionTraits() =
     """
 use alloc::vec::Vec;
-use core::ffi::{c_int, c_void};
+use core::ffi::{c_int, c_void, CStr};
 use core::mem::MaybeUninit;
 use core::ptr;
 

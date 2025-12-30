@@ -182,7 +182,7 @@ The Rust signature of the wrapper for `vkEnumerateInstanceExtensionProperties` l
 ```rust,noplaypen
 unsafe fn enumerate_instance_extension_properties(
     &self,
-    layer_name: Option<&[u8]>,
+    layer_name: Option<&CStr>,
 ) -> VkResult<Vec<ExtensionProperties>>;
 ```
 

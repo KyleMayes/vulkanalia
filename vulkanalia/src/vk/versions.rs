@@ -22,7 +22,7 @@
 
 use alloc::vec::Vec;
 use core::borrow::Borrow;
-use core::ffi::c_void;
+use core::ffi::{c_void, CStr};
 use core::mem::MaybeUninit;
 use core::ptr;
 
@@ -58,7 +58,7 @@ pub trait EntryV1_0 {
     #[inline]
     unsafe fn enumerate_instance_extension_properties(
         &self,
-        layer_name: Option<&[u8]>,
+        layer_name: Option<&CStr>,
     ) -> crate::VkResult<Vec<ExtensionProperties>> {
         let mut property_count = 0;
 
@@ -167,7 +167,7 @@ pub trait InstanceV1_0 {
     unsafe fn enumerate_device_extension_properties(
         &self,
         physical_device: PhysicalDevice,
-        layer_name: Option<&[u8]>,
+        layer_name: Option<&CStr>,
     ) -> crate::VkResult<Vec<ExtensionProperties>> {
         let mut property_count = 0;
 
@@ -260,7 +260,7 @@ pub trait InstanceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetDeviceProcAddr.html>
     #[inline]
-    unsafe fn get_device_proc_addr(&self, device: Device, name: &[u8]) -> PFN_vkVoidFunction {
+    unsafe fn get_device_proc_addr(&self, device: Device, name: &CStr) -> PFN_vkVoidFunction {
         let __result = (self.commands().get_device_proc_addr)(device, name.as_ptr().cast());
 
         __result

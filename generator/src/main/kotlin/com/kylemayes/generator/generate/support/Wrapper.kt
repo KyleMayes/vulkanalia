@@ -160,11 +160,11 @@ fun Registry.generateCommandWrapper(command: Command): String {
             // String parameter.
             if (current.optional) {
                 // String parameter (optional).
-                params.add("${current.name}: Option<&[u8]>")
+                params.add("${current.name}: Option<&CStr>")
                 addArgument("${current.name}.map_or(ptr::null(), |v| v.as_ptr().cast())")
             } else {
                 // String parameter (required).
-                params.add("${current.name}: &[u8]")
+                params.add("${current.name}: &CStr")
                 addArgument("${current.name}.as_ptr().cast()")
             }
         } else if (current.arglen != null && current.arglen.size == 2) {

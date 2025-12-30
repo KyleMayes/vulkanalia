@@ -14,7 +14,7 @@ fun Registry.generateVersionTraits(): String {
         """
 use alloc::vec::Vec;
 use core::borrow::Borrow;
-use core::ffi::c_void;
+use core::ffi::{c_void, CStr};
 use core::mem::MaybeUninit;
 use core::ptr;
 
