@@ -258,6 +258,14 @@ pub trait InstanceV1_0 {
         }
     }
 
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetDeviceProcAddr.html>
+    #[inline]
+    unsafe fn get_device_proc_addr(&self, device: Device, name: &[u8]) -> PFN_vkVoidFunction {
+        let __result = (self.commands().get_device_proc_addr)(device, name.as_ptr().cast());
+
+        __result
+    }
+
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetPhysicalDeviceFeatures.html>
     #[inline]
     unsafe fn get_physical_device_features(

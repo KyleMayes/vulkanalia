@@ -7,10 +7,10 @@ import com.kylemayes.generator.registry.Registry
 import com.kylemayes.generator.registry.getIdentifier
 
 // The commands whose types cannot be determined by their extension membership or first parameter.
-private val STATIC = setOf("vkGetInstanceProcAddr", "vkGetDeviceProcAddr")
+private val STATIC = setOf("vkGetInstanceProcAddr")
 private val ENTRY =
     setOf("vkCreateInstance", "vkEnumerateInstanceExtensionProperties", "vkEnumerateInstanceLayerProperties", "vkEnumerateInstanceVersion")
-private val INSTANCE = setOf("vkCreateDevice")
+private val INSTANCE = setOf("vkGetDeviceProcAddr", "vkCreateDevice")
 
 /** A type of command which indicates how it is loaded. */
 enum class CommandType(val display: String) {

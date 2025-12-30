@@ -257,12 +257,8 @@ impl Entry {
         let raw = loader.load(b"vkGetInstanceProcAddr")?;
         let get_instance_proc_addr = mem::transmute::<F, vk::PFN_vkGetInstanceProcAddr>(raw);
 
-        let raw = loader.load(b"vkGetDeviceProcAddr")?;
-        let get_device_proc_addr = mem::transmute::<F, vk::PFN_vkGetDeviceProcAddr>(raw);
-
         let static_commands = StaticCommands {
             get_instance_proc_addr,
-            get_device_proc_addr,
         };
 
         let load = |n| get_instance_proc_addr(vk::Instance::null(), n);
@@ -296,7 +292,7 @@ impl Entry {
         allocator: Option<&vk::AllocationCallbacks>,
     ) -> VkResult<Instance> {
         let instance = EntryV1_0::create_instance(self, info, allocator)?;
-        Instance::from_created(self, info, instance)
+        Instance::from_created(&self.static_commands, info, instance)
     }
 }
 
@@ -312,7 +308,6 @@ unsafe impl Sync for Entry {}
 /// A Vulkan instance.
 #[derive(Clone)]
 pub struct Instance {
-    entry: Entry,
     handle: vk::Instance,
     commands: InstanceCommands,
     version: Version,
@@ -325,23 +320,22 @@ impl Instance {
     ///
     /// # Safety
     ///
-    /// `instance` must have been created using `entry` and `info`.
+    /// `instance` must have been created using `static_commands` and `info`.
     #[inline]
     pub unsafe fn from_created(
-        entry: &Entry,
+        static_commands: &StaticCommands,
         info: &vk::InstanceCreateInfo,
         instance: vk::Instance,
     ) -> VkResult<Self> {
-        let load = |n| (entry.static_commands.get_instance_proc_addr)(instance, n);
+        let load = |n| (static_commands.get_instance_proc_addr)(instance, n);
         let commands = InstanceCommands::load(load);
 
-        let version = get_version(entry.static_commands.get_instance_proc_addr)?;
+        let version = get_version(static_commands.get_instance_proc_addr)?;
 
         let extensions = get_names(info.enabled_extension_count, info.enabled_extension_names);
         let layers = get_names(info.enabled_layer_count, info.enabled_layer_names);
 
         Ok(Self {
-            entry: entry.clone(),
             handle: instance,
             commands,
             version,
@@ -383,7 +377,13 @@ impl Instance {
         allocator: Option<&vk::AllocationCallbacks>,
     ) -> VkResult<Device> {
         let device = InstanceV1_0::create_device(self, physical_device, info, allocator)?;
-        Device::from_created(&self.entry, physical_device, info, device)
+
+        Device::from_created(
+            self.commands.get_device_proc_addr,
+            physical_device,
+            info,
+            device,
+        )
     }
 }
 
@@ -415,15 +415,15 @@ impl Device {
     ///
     /// # Safety
     ///
-    /// `device` must have been created using `entry`, `physical_device`, and `info`.
+    /// `device` must have been created using `get_device_proc_addr`, `physical_device`, and `info`.
     #[inline]
     pub unsafe fn from_created(
-        entry: &Entry,
+        get_device_proc_addr: vk::PFN_vkGetDeviceProcAddr,
         physical_device: vk::PhysicalDevice,
         info: &vk::DeviceCreateInfo,
         device: vk::Device,
     ) -> VkResult<Self> {
-        let load = |n| (entry.static_commands.get_device_proc_addr)(device, n);
+        let load = |n| (get_device_proc_addr)(device, n);
         let commands = DeviceCommands::load(load);
 
         let extensions = get_names(info.enabled_extension_count, info.enabled_extension_names);

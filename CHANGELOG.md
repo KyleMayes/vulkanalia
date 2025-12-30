@@ -1,5 +1,11 @@
 ## [0.35.0] - UNRELEASEAD
 
+### Changed
+- Removed need for `PFN_vkGetDeviceProcAddr` function to create `StaticCommands` ([#388](https://github.com/KyleMayes/vulkanalia/issues/388))
+  - Moved `get_device_proc_addr` from `StaticCommands` to `InstanceCommands`
+  - `Instance::from_created` now takes a `&StaticCommands` instead of an `&Entry`
+  - `Device::from_created` now takes a `PFN_vkGetDeviceProcAddr` instead of an `&Entry`
+
 ### Added
 - Added `include_shader_code!` macro for including SPIR-V bytecode buffers
 
