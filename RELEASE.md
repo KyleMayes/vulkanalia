@@ -8,7 +8,7 @@
 
 4. Update `vulkanalia-sys` dependency version for `vulkanalia` crate
 
-5. Update `vulkanalia-vma` crate version
+5. Update `vulkanalia-vma` crate version and add/update `CHANGELOG.md` entry
 
 6. Update `vulkanalia` dependency version for `vulkanalia-vma` crate
 
