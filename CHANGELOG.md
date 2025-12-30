@@ -1,4 +1,4 @@
-## [0.34.0] - UNRELEASED
+## [0.34.0] - 2025-12-29
 
 ### Changed
 - Fixed command wrappers for commands that take `const void*` parameters for input buffers (e.g., `vkGetMemoryHostPointerPropertiesEXT`) to take `*const c_void` instead of `&c_void`

@@ -23,7 +23,7 @@ png = "0.17"
 pretty_env_logger = "0.5"
 thiserror = "1"
 tobj = { version = "3", features = ["log"] }
-vulkanalia = { path = "../vulkanalia", version = "=0.33.0", features = ["libloading", "provisional", "window"] }
+vulkanalia = { path = "../vulkanalia", version = "=0.34.0", features = ["libloading", "provisional", "window"] }
 winit = "0.29"
 
 [[bin]]

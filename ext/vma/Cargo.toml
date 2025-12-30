@@ -5,7 +5,7 @@ edition = "2024"
 name = "vulkanalia-vma"
 authors = ["Kyle Mayes <kyle@mayeses.com>"]
 
-version = "0.7.0"
+version = "0.8.0"
 
 readme = "README.md"
 license = "Apache-2.0"
@@ -29,7 +29,7 @@ bind = ["bindgen", "doxygen-rs"]
 [dependencies]
 
 bitflags = "2"
-vulkanalia = { path = "../../vulkanalia", version = "0.33", default-features = false }
+vulkanalia = { path = "../../vulkanalia", version = "0.34", default-features = false }
 
 [build-dependencies]
 

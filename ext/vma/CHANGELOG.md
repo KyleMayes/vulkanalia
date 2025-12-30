@@ -1,4 +1,4 @@
-## [0.8.0] - UNRELEASED
+## [0.8.0] - 2025-12-29
 
 ### Fixed
 - Use standard commands instead of extension commands when using Vulkan 1.1+
