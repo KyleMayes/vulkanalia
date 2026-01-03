@@ -24,7 +24,7 @@ For users new to Vulkan, there is a complete adaptation of https://vulkan-tutori
 #### But wait, there's more!
 
 - Support for the Vulkan video extensions
-- Support for creating custom layers
+- Support for creating custom layers (see the [`layer`](layer/) directory for a simple example layer)
 - [`vulkanalia-vma`](https://docs.rs/vulkanalia-vma/latest/vulkanalia_vma) &ndash; an integration of [Vulkan Memory Allocator](https://github.com/GPUOpen-LibrariesAndSDKs/VulkanMemoryAllocator) with [`vulkanalia`](https://github.com/KyleMayes/vulkanalia)
 
 ## Cargo Features

@@ -5,6 +5,7 @@ resolver = "2"
 members = [
     "examples",
     "ext/vma",
+    "layer",
     "tutorial",
     "tutorial/book/preprocessor",
     "vulkanalia",

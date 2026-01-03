@@ -27,6 +27,8 @@ use winit::window::{Window, WindowBuilder};
 use vk::KhrSurfaceExtensionInstanceCommands;
 use vk::KhrSwapchainExtensionDeviceCommands;
 
+/// The name of the example layer.
+const EXAMPLE_LAYER: vk::ExtensionName = vk::ExtensionName::from_bytes(b"VK_LAYER_vulkanalia_layer_example");
 /// The required instance and device layer if validation is enabled.
 const VALIDATION_LAYER: vk::ExtensionName = vk::ExtensionName::from_bytes(b"VK_LAYER_KHRONOS_validation");
 
@@ -513,11 +515,16 @@ unsafe fn create_instance(window: &Window, entry: &Entry, data: &mut AppData) ->
         return Err(anyhow!("Validation layers requested but not supported."));
     }
 
-    let layers = if data.validation {
+    let mut layers = if data.validation {
         vec![VALIDATION_LAYER.as_ptr()]
     } else {
         Vec::new()
     };
+
+    if available_layers.contains(&EXAMPLE_LAYER) {
+        info!("Enabling example layer.");
+        layers.push(EXAMPLE_LAYER.as_ptr());
+    }
 
     // Extensions
 
