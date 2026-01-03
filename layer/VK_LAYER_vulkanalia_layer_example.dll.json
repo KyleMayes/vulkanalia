@@ -1,0 +1,15 @@
+{
+  "file_format_version" : "1.0.0",
+  "layer" : {
+    "name": "VK_LAYER_vulkanalia_layer_example",
+    "type": "GLOBAL",
+    "library_path": "..\\target\\debug\\vulkanalia_layer_example.dll",
+    "api_version": "1.0.0",
+    "implementation_version": "1",
+    "description": "Example Vulkan layer using vulkanalia.",
+    "functions": {
+      "vkGetInstanceProcAddr": "get_instance_proc_addr",
+      "vkGetDeviceProcAddr": "get_device_proc_addr"
+    }
+  }
+}

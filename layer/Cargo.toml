@@ -1,0 +1,25 @@
+[package]
+
+publish = false
+
+edition = "2024"
+
+name = "layer"
+authors = ["Kyle Mayes <kyle@mayeses.com>"]
+
+version = "0.1.0"
+
+readme = "README.md"
+license = "Apache-2.0"
+
+description = "Layer example."
+
+[lib]
+
+name = "vulkanalia_layer_example"
+crate-type = ["cdylib"]
+
+[dependencies]
+
+lazy_static = "1"
+vulkanalia = { path = "../vulkanalia" }
