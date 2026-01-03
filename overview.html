@@ -250,7 +250,7 @@ vkEnumerateInstanceExtensionProperties(NULL, &amp;pPropertyCount, pProperties.da
 <p>The Rust signature of the wrapper for <a href="https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkEnumerateInstanceExtensionProperties.html"><code class="hljs">vkEnumerateInstanceExtensionProperties</code></a> looks like this:</p>
 <pre><code class="language-rust noplaypen">unsafe fn enumerate_instance_extension_properties(
     &amp;self,
-    layer_name: Option&lt;&amp;[u8]&gt;,
+    layer_name: Option&lt;&amp;CStr&gt;,
 ) -&gt; VkResult&lt;Vec&lt;ExtensionProperties&gt;&gt;;
 </code></pre>
 <p>This command wrapper makes the usage of <a href="https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkEnumerateInstanceExtensionProperties.html"><code class="hljs">vkEnumerateInstanceExtensionProperties</code></a> from Rust easier, less error-prone, and more idiomatic in several ways:</p>
