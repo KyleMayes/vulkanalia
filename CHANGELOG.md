@@ -1,3 +1,8 @@
+## [0.35.0] - UNRELEASEAD
+
+### Added
+- Added `include_shader_code!` macro for including SPIR-V bytecode buffers
+
 ## [0.34.0] - 2025-12-29
 
 ### Changed
