@@ -273,12 +273,11 @@ let present_info = vk::PresentInfoKHR::builder()
 <p>Yay! Unfortunately, you'll see that when validation layers are enabled, the program crashes as soon as you close it. The messages printed to the terminal from <code>debug_callback</code> tell us why:</p>
 <p><img src="../images/semaphore_in_use.png" alt="" /></p>
 <p>Remember that all of the operations in <code>App::render</code> are asynchronous. That means that when we call <code>App::destroy</code> before exiting the loop in <code>main</code>, drawing and presentation operations may still be going on. Cleaning up resources while that is happening is a bad idea.</p>
-<p>To fix that problem, we should wait for the logical device to finish operations using <a href="https://docs.rs/vulkanalia/0.35.0/vulkanalia/vk/trait.DeviceV1_0.html#method.device_wait_idle"><code class="hljs">device_wait_idle</code></a> before calling <code>App::destroy</code>:</p>
-<pre><code class="language-rust noplaypen">Event::WindowEvent { event: WindowEvent::CloseRequested, .. } =&gt; {
-    destroying = true;
-    *control_flow = ControlFlow::Exit;
-    unsafe { app.device.device_wait_idle().unwrap(); }
-    unsafe { app.destroy(); }
+<p>To fix that problem, we should wait for the logical device to finish operations using <a href="https://docs.rs/vulkanalia/0.35.0/vulkanalia/vk/trait.DeviceV1_0.html#method.device_wait_idle"><code class="hljs">device_wait_idle</code></a> in <code>App::destroy</code> before actually destroying the app's Vulkan resources:</p>
+<pre><code class="language-rust noplaypen">unsafe fn destroy(&amp;mut self) {
+    self.device.device_wait_idle().unwrap();
+
+    // ...
 }
 </code></pre>
 <p>You can also wait for operations in a specific command queue to be finished with <a href="https://docs.rs/vulkanalia/0.35.0/vulkanalia/vk/trait.DeviceV1_0.html#method.queue_wait_idle"><code class="hljs">queue_wait_idle</code></a>. These functions can be used as a very rudimentary way to perform synchronization. You'll see that the program no longer crashes when closing the window (though you will see some errors related to synchronization if you have the validation layers enabled).</p>
