@@ -85,6 +85,11 @@ pub struct NvSciSyncFence {
 pub type OHBufferHandle = c_void;
 pub type OHNativeWindow = c_void;
 pub type OH_NativeBuffer = c_void;
+
+// UBM
+
+pub type ubm_device = c_void;
+pub type ubm_surface = c_void;
     """
 
 /** Generates a Rust type alias for a Vulkan typedef. */
