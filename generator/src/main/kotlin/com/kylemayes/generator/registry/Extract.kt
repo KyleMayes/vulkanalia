@@ -272,24 +272,19 @@ private fun extractVariant(e: Element) =
 data class Function(
     override val name: Identifier,
     override val api: String? = null,
-    val params: List<Type>,
+    val params: List<Param>,
     val result: Type?,
 ) : Entity
 
-private fun extractFunction(e: Element) =
-    Function(
-        name = e.getElementText("name")!!.intern(),
+private fun extractFunction(e: Element): Function {
+    val proto = e.getElement("proto")!!
+    return Function(
+        name = proto.getElementText("name")!!.intern(),
         api = e.getAttributeText("api"),
-        params = e.getElements("type", ::extractType),
-        result =
-            when (val type = e.textContent.substring(8, e.textContent.indexOf("(VKAPI_PTR")).trim()) {
-                "void" -> null
-                "void*" -> PointerType(IdentifierType("void".intern()), false)
-                "VkBool32" -> IdentifierType("VkBool32".intern())
-                "PFN_vkVoidFunction" -> IdentifierType("PFN_vkVoidFunction".intern())
-                else -> error("Unsupported function pointer result type ($type).")
-            },
+        params = e.getElements("param", ::extractParam),
+        result = extractType(proto.getElement("type")!!),
     )
+}
 
 // ===============================================
 // Handle
