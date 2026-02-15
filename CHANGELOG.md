@@ -1,4 +1,14 @@
-## [0.36.0] - UNRELEASED
+## [0.35.0] - UNRELEASEAD
+
+### Changed
+- Use `&CStr` instead of `&[u8]` for string parameters in command wrappers
+- Removed need for `PFN_vkGetDeviceProcAddr` function to create `StaticCommands` ([#388](https://github.com/KyleMayes/vulkanalia/issues/388))
+  - Moved `get_device_proc_addr` from `StaticCommands` to `InstanceCommands`
+  - `Instance::from_created` now takes a `&StaticCommands` instead of an `&Entry`
+  - `Device::from_created` now takes a `PFN_vkGetDeviceProcAddr` instead of an `&Entry`
+
+### Added
+- Added `include_shader_code!` macro for including SPIR-V bytecode buffers
 
 ### Bindings Updates
 - [CMake documentation to make things clearer](https://github.com/KhronosGroup/Vulkan-Headers/commit/df274657d83f3bd8c77aef816c1cbf27352a948b)
@@ -32,18 +42,6 @@
 - [Update reference from srcBuffer to srcImage (#2664)](https://github.com/KhronosGroup/Vulkan-Docs/commit/a95fd2d46c30d0f6515938291d7b260366df7a93)
 - [January 30, 2026 Vulkan 1.4.342 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/98b6c43a7672a68cdf2e3225b29577165c584fbf)
 - [February 6, 2026 Vulkan 1.4.343 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/fb8116669f76e26bdab4c7ad0bf1cafdeff484dc)
-
-## [0.35.0] - UNRELEASEAD
-
-### Changed
-- Use `&CStr` instead of `&[u8]` for string parameters in command wrappers
-- Removed need for `PFN_vkGetDeviceProcAddr` function to create `StaticCommands` ([#388](https://github.com/KyleMayes/vulkanalia/issues/388))
-  - Moved `get_device_proc_addr` from `StaticCommands` to `InstanceCommands`
-  - `Instance::from_created` now takes a `&StaticCommands` instead of an `&Entry`
-  - `Device::from_created` now takes a `PFN_vkGetDeviceProcAddr` instead of an `&Entry`
-
-### Added
-- Added `include_shader_code!` macro for including SPIR-V bytecode buffers
 
 ## [0.34.0] - 2025-12-29
 
