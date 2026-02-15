@@ -1719,6 +1719,56 @@ impl fmt::Debug for DepthClampModeEXT {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDescriptorMappingSourceEXT.html>
+#[repr(transparent)]
+#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
+pub struct DescriptorMappingSourceEXT(i32);
+
+impl DescriptorMappingSourceEXT {
+    pub const HEAP_WITH_CONSTANT_OFFSET: Self = Self(0);
+    pub const HEAP_WITH_PUSH_INDEX: Self = Self(1);
+    pub const HEAP_WITH_INDIRECT_INDEX: Self = Self(2);
+    pub const HEAP_WITH_INDIRECT_INDEX_ARRAY: Self = Self(3);
+    pub const RESOURCE_HEAP_DATA: Self = Self(4);
+    pub const PUSH_DATA: Self = Self(5);
+    pub const PUSH_ADDRESS: Self = Self(6);
+    pub const INDIRECT_ADDRESS: Self = Self(7);
+    pub const HEAP_WITH_SHADER_RECORD_INDEX: Self = Self(8);
+    pub const SHADER_RECORD_DATA: Self = Self(9);
+    pub const SHADER_RECORD_ADDRESS: Self = Self(10);
+
+    /// Constructs an instance of this enum with the supplied underlying value.
+    #[inline]
+    pub const fn from_raw(value: i32) -> Self {
+        Self(value)
+    }
+
+    /// Gets the underlying value for this enum instance.
+    #[inline]
+    pub const fn as_raw(self) -> i32 {
+        self.0
+    }
+}
+
+impl fmt::Debug for DescriptorMappingSourceEXT {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self.0 {
+            0 => write!(f, "HEAP_WITH_CONSTANT_OFFSET"),
+            1 => write!(f, "HEAP_WITH_PUSH_INDEX"),
+            2 => write!(f, "HEAP_WITH_INDIRECT_INDEX"),
+            3 => write!(f, "HEAP_WITH_INDIRECT_INDEX_ARRAY"),
+            4 => write!(f, "RESOURCE_HEAP_DATA"),
+            5 => write!(f, "PUSH_DATA"),
+            6 => write!(f, "PUSH_ADDRESS"),
+            7 => write!(f, "INDIRECT_ADDRESS"),
+            8 => write!(f, "HEAP_WITH_SHADER_RECORD_INDEX"),
+            9 => write!(f, "SHADER_RECORD_DATA"),
+            10 => write!(f, "SHADER_RECORD_ADDRESS"),
+            _ => self.0.fmt(f),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDescriptorType.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
@@ -2765,6 +2815,9 @@ impl Format {
     pub const ASTC_6X6X6_SRGB_BLOCK_EXT: Self = Self(1000288028);
     pub const ASTC_6X6X6_SFLOAT_BLOCK_EXT: Self = Self(1000288029);
     pub const R8_BOOL_ARM: Self = Self(1000460000);
+    pub const R16_SFLOAT_FPENCODING_BFLOAT16_ARM: Self = Self(1000460001);
+    pub const R8_SFLOAT_FPENCODING_FLOAT8E4M3_ARM: Self = Self(1000460002);
+    pub const R8_SFLOAT_FPENCODING_FLOAT8E5M2_ARM: Self = Self(1000460003);
     pub const R16G16_SFIXED5_NV: Self = Self(1000464000);
     pub const R10X6_UINT_PACK16_ARM: Self = Self(1000609000);
     pub const R10X6G10X6_UINT_2PACK16_ARM: Self = Self(1000609001);
@@ -3077,6 +3130,9 @@ impl fmt::Debug for Format {
             1000288028 => write!(f, "ASTC_6X6X6_SRGB_BLOCK_EXT"),
             1000288029 => write!(f, "ASTC_6X6X6_SFLOAT_BLOCK_EXT"),
             1000460000 => write!(f, "R8_BOOL_ARM"),
+            1000460001 => write!(f, "R16_SFLOAT_FPENCODING_BFLOAT16_ARM"),
+            1000460002 => write!(f, "R8_SFLOAT_FPENCODING_FLOAT8E4M3_ARM"),
+            1000460003 => write!(f, "R8_SFLOAT_FPENCODING_FLOAT8E5M2_ARM"),
             1000464000 => write!(f, "R16G16_SFIXED5_NV"),
             1000609000 => write!(f, "R10X6_UINT_PACK16_ARM"),
             1000609001 => write!(f, "R10X6G10X6_UINT_2PACK16_ARM"),
@@ -3581,6 +3637,8 @@ impl IndirectCommandsTokenTypeEXT {
     pub const DRAW_INDEXED_COUNT: Self = Self(7);
     pub const DRAW_COUNT: Self = Self(8);
     pub const DISPATCH: Self = Self(9);
+    pub const PUSH_DATA: Self = Self(1000135000);
+    pub const PUSH_DATA_SEQUENCE_INDEX: Self = Self(1000135001);
     pub const DRAW_MESH_TASKS_NV: Self = Self(1000202002);
     pub const DRAW_MESH_TASKS_COUNT_NV: Self = Self(1000202003);
     pub const DRAW_MESH_TASKS: Self = Self(1000328000);
@@ -3613,6 +3671,8 @@ impl fmt::Debug for IndirectCommandsTokenTypeEXT {
             7 => write!(f, "DRAW_INDEXED_COUNT"),
             8 => write!(f, "DRAW_COUNT"),
             9 => write!(f, "DISPATCH"),
+            1000135000 => write!(f, "PUSH_DATA"),
+            1000135001 => write!(f, "PUSH_DATA_SEQUENCE_INDEX"),
             1000202002 => write!(f, "DRAW_MESH_TASKS_NV"),
             1000202003 => write!(f, "DRAW_MESH_TASKS_COUNT_NV"),
             1000328000 => write!(f, "DRAW_MESH_TASKS"),
@@ -3637,6 +3697,7 @@ impl IndirectCommandsTokenTypeNV {
     pub const DRAW_INDEXED: Self = Self(5);
     pub const DRAW: Self = Self(6);
     pub const DRAW_TASKS: Self = Self(7);
+    pub const PUSH_DATA: Self = Self(1000135000);
     pub const DRAW_MESH_TASKS: Self = Self(1000328000);
     pub const PIPELINE: Self = Self(1000428003);
     pub const DISPATCH: Self = Self(1000428004);
@@ -3665,6 +3726,7 @@ impl fmt::Debug for IndirectCommandsTokenTypeNV {
             5 => write!(f, "DRAW_INDEXED"),
             6 => write!(f, "DRAW"),
             7 => write!(f, "DRAW_TASKS"),
+            1000135000 => write!(f, "PUSH_DATA"),
             1000328000 => write!(f, "DRAW_MESH_TASKS"),
             1000428003 => write!(f, "PIPELINE"),
             1000428004 => write!(f, "DISPATCH"),
@@ -6703,6 +6765,21 @@ impl StructureType {
     pub const EXECUTION_GRAPH_PIPELINE_SCRATCH_SIZE_AMDX: Self = Self(1000134002);
     pub const EXECUTION_GRAPH_PIPELINE_CREATE_INFO_AMDX: Self = Self(1000134003);
     pub const PIPELINE_SHADER_STAGE_NODE_CREATE_INFO_AMDX: Self = Self(1000134004);
+    pub const TEXEL_BUFFER_DESCRIPTOR_INFO_EXT: Self = Self(1000135000);
+    pub const IMAGE_DESCRIPTOR_INFO_EXT: Self = Self(1000135001);
+    pub const RESOURCE_DESCRIPTOR_INFO_EXT: Self = Self(1000135002);
+    pub const BIND_HEAP_INFO_EXT: Self = Self(1000135003);
+    pub const PUSH_DATA_INFO_EXT: Self = Self(1000135004);
+    pub const DESCRIPTOR_SET_AND_BINDING_MAPPING_EXT: Self = Self(1000135005);
+    pub const SHADER_DESCRIPTOR_SET_AND_BINDING_MAPPING_INFO_EXT: Self = Self(1000135006);
+    pub const OPAQUE_CAPTURE_DATA_CREATE_INFO_EXT: Self = Self(1000135007);
+    pub const PHYSICAL_DEVICE_DESCRIPTOR_HEAP_PROPERTIES_EXT: Self = Self(1000135008);
+    pub const PHYSICAL_DEVICE_DESCRIPTOR_HEAP_FEATURES_EXT: Self = Self(1000135009);
+    pub const COMMAND_BUFFER_INHERITANCE_DESCRIPTOR_HEAP_INFO_EXT: Self = Self(1000135010);
+    pub const SAMPLER_CUSTOM_BORDER_COLOR_INDEX_CREATE_INFO_EXT: Self = Self(1000135011);
+    pub const INDIRECT_COMMANDS_LAYOUT_PUSH_DATA_TOKEN_NV: Self = Self(1000135012);
+    pub const SUBSAMPLED_IMAGE_FORMAT_PROPERTIES_EXT: Self = Self(1000135013);
+    pub const PHYSICAL_DEVICE_DESCRIPTOR_HEAP_TENSOR_PROPERTIES_ARM: Self = Self(1000135014);
     pub const ATTACHMENT_SAMPLE_COUNT_INFO_AMD: Self = Self(1000044008);
     pub const PHYSICAL_DEVICE_SHADER_BFLOAT16_FEATURES_KHR: Self = Self(1000141000);
     pub const SAMPLE_LOCATIONS_INFO_EXT: Self = Self(1000143000);
@@ -6767,6 +6844,7 @@ impl StructureType {
     pub const PIPELINE_REPRESENTATIVE_FRAGMENT_TEST_STATE_CREATE_INFO_NV: Self = Self(1000166001);
     pub const PHYSICAL_DEVICE_IMAGE_VIEW_IMAGE_FORMAT_INFO_EXT: Self = Self(1000170000);
     pub const FILTER_CUBIC_IMAGE_VIEW_IMAGE_FORMAT_PROPERTIES_EXT: Self = Self(1000170001);
+    pub const PHYSICAL_DEVICE_COOPERATIVE_MATRIX_CONVERSION_FEATURES_QCOM: Self = Self(1000172000);
     pub const IMPORT_MEMORY_HOST_POINTER_INFO_EXT: Self = Self(1000178000);
     pub const MEMORY_HOST_POINTER_PROPERTIES_EXT: Self = Self(1000178001);
     pub const PHYSICAL_DEVICE_EXTERNAL_MEMORY_HOST_PROPERTIES_EXT: Self = Self(1000178002);
@@ -7217,6 +7295,7 @@ impl StructureType {
     pub const PHYSICAL_DEVICE_PIPELINE_LIBRARY_GROUP_HANDLES_FEATURES_EXT: Self = Self(1000498000);
     pub const PHYSICAL_DEVICE_DYNAMIC_RENDERING_UNUSED_ATTACHMENTS_FEATURES_EXT: Self =
         Self(1000499000);
+    pub const PHYSICAL_DEVICE_INTERNALLY_SYNCHRONIZED_QUEUES_FEATURES_KHR: Self = Self(1000504000);
     pub const LATENCY_SLEEP_MODE_INFO_NV: Self = Self(1000505000);
     pub const LATENCY_SLEEP_INFO_NV: Self = Self(1000505001);
     pub const SET_LATENCY_MARKER_INFO_NV: Self = Self(1000505002);
@@ -7387,6 +7466,9 @@ impl StructureType {
     pub const PHYSICAL_DEVICE_IMAGE_ALIGNMENT_CONTROL_PROPERTIES_MESA: Self = Self(1000575001);
     pub const IMAGE_ALIGNMENT_CONTROL_CREATE_INFO_MESA: Self = Self(1000575002);
     pub const PHYSICAL_DEVICE_SHADER_FMA_FEATURES_KHR: Self = Self(1000579000);
+    pub const PUSH_CONSTANT_BANK_INFO_NV: Self = Self(1000580000);
+    pub const PHYSICAL_DEVICE_PUSH_CONSTANT_BANK_FEATURES_NV: Self = Self(1000580001);
+    pub const PHYSICAL_DEVICE_PUSH_CONSTANT_BANK_PROPERTIES_NV: Self = Self(1000580002);
     pub const PHYSICAL_DEVICE_RAY_TRACING_INVOCATION_REORDER_FEATURES_EXT: Self = Self(1000581000);
     pub const PHYSICAL_DEVICE_RAY_TRACING_INVOCATION_REORDER_PROPERTIES_EXT: Self =
         Self(1000581001);
@@ -7449,6 +7531,8 @@ impl StructureType {
         Self(1000642000);
     pub const COMPUTE_OCCUPANCY_PRIORITY_PARAMETERS_NV: Self = Self(1000645000);
     pub const PHYSICAL_DEVICE_COMPUTE_OCCUPANCY_PRIORITY_FEATURES_NV: Self = Self(1000645001);
+    pub const PHYSICAL_DEVICE_SHADER_SUBGROUP_PARTITIONED_FEATURES_EXT: Self = Self(1000662000);
+    pub const UBM_SURFACE_CREATE_INFO_SEC: Self = Self(1000664000);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -7933,6 +8017,21 @@ impl fmt::Debug for StructureType {
             1000134002 => write!(f, "EXECUTION_GRAPH_PIPELINE_SCRATCH_SIZE_AMDX"),
             1000134003 => write!(f, "EXECUTION_GRAPH_PIPELINE_CREATE_INFO_AMDX"),
             1000134004 => write!(f, "PIPELINE_SHADER_STAGE_NODE_CREATE_INFO_AMDX"),
+            1000135000 => write!(f, "TEXEL_BUFFER_DESCRIPTOR_INFO_EXT"),
+            1000135001 => write!(f, "IMAGE_DESCRIPTOR_INFO_EXT"),
+            1000135002 => write!(f, "RESOURCE_DESCRIPTOR_INFO_EXT"),
+            1000135003 => write!(f, "BIND_HEAP_INFO_EXT"),
+            1000135004 => write!(f, "PUSH_DATA_INFO_EXT"),
+            1000135005 => write!(f, "DESCRIPTOR_SET_AND_BINDING_MAPPING_EXT"),
+            1000135006 => write!(f, "SHADER_DESCRIPTOR_SET_AND_BINDING_MAPPING_INFO_EXT"),
+            1000135007 => write!(f, "OPAQUE_CAPTURE_DATA_CREATE_INFO_EXT"),
+            1000135008 => write!(f, "PHYSICAL_DEVICE_DESCRIPTOR_HEAP_PROPERTIES_EXT"),
+            1000135009 => write!(f, "PHYSICAL_DEVICE_DESCRIPTOR_HEAP_FEATURES_EXT"),
+            1000135010 => write!(f, "COMMAND_BUFFER_INHERITANCE_DESCRIPTOR_HEAP_INFO_EXT"),
+            1000135011 => write!(f, "SAMPLER_CUSTOM_BORDER_COLOR_INDEX_CREATE_INFO_EXT"),
+            1000135012 => write!(f, "INDIRECT_COMMANDS_LAYOUT_PUSH_DATA_TOKEN_NV"),
+            1000135013 => write!(f, "SUBSAMPLED_IMAGE_FORMAT_PROPERTIES_EXT"),
+            1000135014 => write!(f, "PHYSICAL_DEVICE_DESCRIPTOR_HEAP_TENSOR_PROPERTIES_ARM"),
             1000044008 => write!(f, "ATTACHMENT_SAMPLE_COUNT_INFO_AMD"),
             1000141000 => write!(f, "PHYSICAL_DEVICE_SHADER_BFLOAT16_FEATURES_KHR"),
             1000143000 => write!(f, "SAMPLE_LOCATIONS_INFO_EXT"),
@@ -8009,6 +8108,10 @@ impl fmt::Debug for StructureType {
             ),
             1000170000 => write!(f, "PHYSICAL_DEVICE_IMAGE_VIEW_IMAGE_FORMAT_INFO_EXT"),
             1000170001 => write!(f, "FILTER_CUBIC_IMAGE_VIEW_IMAGE_FORMAT_PROPERTIES_EXT"),
+            1000172000 => write!(
+                f,
+                "PHYSICAL_DEVICE_COOPERATIVE_MATRIX_CONVERSION_FEATURES_QCOM"
+            ),
             1000178000 => write!(f, "IMPORT_MEMORY_HOST_POINTER_INFO_EXT"),
             1000178001 => write!(f, "MEMORY_HOST_POINTER_PROPERTIES_EXT"),
             1000178002 => write!(f, "PHYSICAL_DEVICE_EXTERNAL_MEMORY_HOST_PROPERTIES_EXT"),
@@ -8583,6 +8686,10 @@ impl fmt::Debug for StructureType {
                 f,
                 "PHYSICAL_DEVICE_DYNAMIC_RENDERING_UNUSED_ATTACHMENTS_FEATURES_EXT"
             ),
+            1000504000 => write!(
+                f,
+                "PHYSICAL_DEVICE_INTERNALLY_SYNCHRONIZED_QUEUES_FEATURES_KHR"
+            ),
             1000505000 => write!(f, "LATENCY_SLEEP_MODE_INFO_NV"),
             1000505001 => write!(f, "LATENCY_SLEEP_INFO_NV"),
             1000505002 => write!(f, "SET_LATENCY_MARKER_INFO_NV"),
@@ -8818,6 +8925,9 @@ impl fmt::Debug for StructureType {
             1000575001 => write!(f, "PHYSICAL_DEVICE_IMAGE_ALIGNMENT_CONTROL_PROPERTIES_MESA"),
             1000575002 => write!(f, "IMAGE_ALIGNMENT_CONTROL_CREATE_INFO_MESA"),
             1000579000 => write!(f, "PHYSICAL_DEVICE_SHADER_FMA_FEATURES_KHR"),
+            1000580000 => write!(f, "PUSH_CONSTANT_BANK_INFO_NV"),
+            1000580001 => write!(f, "PHYSICAL_DEVICE_PUSH_CONSTANT_BANK_FEATURES_NV"),
+            1000580002 => write!(f, "PHYSICAL_DEVICE_PUSH_CONSTANT_BANK_PROPERTIES_NV"),
             1000581000 => write!(
                 f,
                 "PHYSICAL_DEVICE_RAY_TRACING_INVOCATION_REORDER_FEATURES_EXT"
@@ -8918,6 +9028,11 @@ impl fmt::Debug for StructureType {
             ),
             1000645000 => write!(f, "COMPUTE_OCCUPANCY_PRIORITY_PARAMETERS_NV"),
             1000645001 => write!(f, "PHYSICAL_DEVICE_COMPUTE_OCCUPANCY_PRIORITY_FEATURES_NV"),
+            1000662000 => write!(
+                f,
+                "PHYSICAL_DEVICE_SHADER_SUBGROUP_PARTITIONED_FEATURES_EXT"
+            ),
+            1000664000 => write!(f, "UBM_SURFACE_CREATE_INFO_SEC"),
             _ => self.0.fmt(f),
         }
     }

@@ -164,6 +164,36 @@ impl fmt::Debug for DescriptorDataEXT {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDescriptorMappingSourceDataEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub union DescriptorMappingSourceDataEXT {
+    pub constant_offset: DescriptorMappingSourceConstantOffsetEXT,
+    pub push_index: DescriptorMappingSourcePushIndexEXT,
+    pub indirect_index: DescriptorMappingSourceIndirectIndexEXT,
+    pub indirect_index_array: DescriptorMappingSourceIndirectIndexArrayEXT,
+    pub heap_data: DescriptorMappingSourceHeapDataEXT,
+    pub push_data_offset: u32,
+    pub push_address_offset: u32,
+    pub indirect_address: DescriptorMappingSourceIndirectAddressEXT,
+    pub shader_record_index: DescriptorMappingSourceShaderRecordIndexEXT,
+    pub shader_record_data_offset: u32,
+    pub shader_record_address_offset: u32,
+}
+
+impl Default for DescriptorMappingSourceDataEXT {
+    #[inline]
+    fn default() -> Self {
+        unsafe { MaybeUninit::zeroed().assume_init() }
+    }
+}
+
+impl fmt::Debug for DescriptorMappingSourceDataEXT {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "DescriptorMappingSourceDataEXT")
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceOrHostAddressConstAMDX.html>
 #[repr(C)]
 #[derive(Copy, Clone)]
@@ -340,5 +370,28 @@ impl Default for PipelineExecutableStatisticValueKHR {
 impl fmt::Debug for PipelineExecutableStatisticValueKHR {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         write!(f, "PipelineExecutableStatisticValueKHR")
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkResourceDescriptorDataEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub union ResourceDescriptorDataEXT {
+    pub image: *const ImageDescriptorInfoEXT,
+    pub texel_buffer: *const TexelBufferDescriptorInfoEXT,
+    pub address_range: *const DeviceAddressRangeEXT,
+    pub tensor_arm: *const TensorViewCreateInfoARM,
+}
+
+impl Default for ResourceDescriptorDataEXT {
+    #[inline]
+    fn default() -> Self {
+        unsafe { MaybeUninit::zeroed().assume_init() }
+    }
+}
+
+impl fmt::Debug for ResourceDescriptorDataEXT {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "ResourceDescriptorDataEXT")
     }
 }
