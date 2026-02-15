@@ -209,14 +209,13 @@ Yay! Unfortunately, you'll see that when validation layers are enabled, the prog
 
 Remember that all of the operations in `App::render` are asynchronous. That means that when we call `App::destroy` before exiting the loop in `main`, drawing and presentation operations may still be going on. Cleaning up resources while that is happening is a bad idea.
 
-To fix that problem, we should wait for the logical device to finish operations using `device_wait_idle` before calling `App::destroy`:
+To fix that problem, we should wait for the logical device to finish operations using `device_wait_idle` in `App::destroy` before actually destroying the app's Vulkan resources:
 
 ```rust,noplaypen
-Event::WindowEvent { event: WindowEvent::CloseRequested, .. } => {
-    destroying = true;
-    *control_flow = ControlFlow::Exit;
-    unsafe { app.device.device_wait_idle().unwrap(); }
-    unsafe { app.destroy(); }
+unsafe fn destroy(&mut self) {
+    self.device.device_wait_idle().unwrap();
+
+    // ...
 }
 ```
 
