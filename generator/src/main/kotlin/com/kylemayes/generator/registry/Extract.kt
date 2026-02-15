@@ -278,11 +278,15 @@ data class Function(
 
 private fun extractFunction(e: Element): Function {
     val proto = e.getElement("proto")!!
+    val result = extractType(proto.getElement("type")!!)
     return Function(
         name = proto.getElementText("name")!!.intern(),
         api = e.getAttributeText("api"),
         params = e.getElements("param", ::extractParam),
-        result = extractType(proto.getElement("type")!!),
+        result = when {
+            (result is IdentifierType && result == IdentifierType("void".intern())) -> null
+            else -> result
+        },
     )
 }
 
