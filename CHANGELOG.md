@@ -1,4 +1,4 @@
-## [0.35.0] - UNRELEASEAD
+## [0.35.0] - 2026-02-15
 
 ### Changed
 - Use `&CStr` instead of `&[u8]` for string parameters in command wrappers

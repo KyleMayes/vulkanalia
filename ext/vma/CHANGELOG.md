@@ -1,4 +1,12 @@
+## [0.9.0] - 2026-02-15
+
+### Changed
+- Bumped `vulkanalia` version to `0.35`
+
 ## [0.8.0] - 2025-12-29
+
+### Changed
+- Bumped `vulkanalia` version to `0.34`
 
 ### Fixed
 - Use standard commands instead of extension commands when using Vulkan 1.1+
