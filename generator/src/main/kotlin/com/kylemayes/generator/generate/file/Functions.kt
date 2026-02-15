@@ -20,7 +20,7 @@ ${functions.values
 
 /** Generates a Rust type alias for a Vulkan function pointer type. */
 private fun Registry.generateFunction(function: Function): String {
-    val params = function.params.joinToString { it.generateForCommand() }
+    val params = function.params.joinToString { it.type.generateForCommand() }
     val result = function.result?.let { "-> ${it.generateForCommand()}" } ?: ""
     return """
 /// <${generateManualUrl(function)}>
