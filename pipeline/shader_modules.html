@@ -266,22 +266,22 @@ pause
 }
 </code></pre>
 <h2 id="creating-shader-modules"><a class="header" href="#creating-shader-modules">Creating shader modules</a></h2>
-<p>Before we can pass the code to the pipeline, we have to wrap it in a <a href="https://docs.rs/vulkanalia/0.34.0/vulkanalia/vk/struct.ShaderModule.html"><code class="hljs">vk::ShaderModule</code></a> object. Let's create a helper function <a href="https://docs.rs/vulkanalia/0.34.0/vulkanalia/vk/trait.DeviceV1_0.html#method.create_shader_module"><code class="hljs">create_shader_module</code></a> to do that.</p>
+<p>Before we can pass the code to the pipeline, we have to wrap it in a <a href="https://docs.rs/vulkanalia/0.35.0/vulkanalia/vk/struct.ShaderModule.html"><code class="hljs">vk::ShaderModule</code></a> object. Let's create a helper function <a href="https://docs.rs/vulkanalia/0.35.0/vulkanalia/vk/trait.DeviceV1_0.html#method.create_shader_module"><code class="hljs">create_shader_module</code></a> to do that.</p>
 <pre><code class="language-rust noplaypen">unsafe fn create_shader_module(
     device: &amp;Device,
     bytecode: &amp;[u8],
 ) -&gt; Result&lt;vk::ShaderModule&gt; {
 }
 </code></pre>
-<p>The function will take a slice containing the bytecode as parameter and create a <a href="https://docs.rs/vulkanalia/0.34.0/vulkanalia/vk/struct.ShaderModule.html"><code class="hljs">vk::ShaderModule</code></a> from it using our logical device.</p>
-<p>Creating a shader module is simple, we only need to specify the length of our bytecode slice and the bytecode slice itself. This information is specified in a <a href="https://docs.rs/vulkanalia/0.34.0/vulkanalia/vk/struct.ShaderModuleCreateInfo.html"><code class="hljs">vk::ShaderModuleCreateInfo</code></a> structure. The one catch is that the size of the bytecode is specified in bytes, but the bytecode slice expected by this struct is a <code>&amp;[u32]</code> instead of a <code>&amp;[u8]</code>. Therefore we will first need to convert our <code>&amp;[u8]</code> into an <code>&amp;[u32]</code>.</p>
-<p><code>vulkanalia</code> has a helper struct called <a href="https://docs.rs/vulkanalia/0.34.0/vulkanalia/bytecode/struct.Bytecode.html"><code class="hljs">Bytecode</code></a> that we will use to copy the shader bytecode into a new buffer that is guaranteed to have the correct alignment for an array of <code>u32</code>s. Add an import for this helper struct:</p>
+<p>The function will take a slice containing the bytecode as parameter and create a <a href="https://docs.rs/vulkanalia/0.35.0/vulkanalia/vk/struct.ShaderModule.html"><code class="hljs">vk::ShaderModule</code></a> from it using our logical device.</p>
+<p>Creating a shader module is simple, we only need to specify the length of our bytecode slice and the bytecode slice itself. This information is specified in a <a href="https://docs.rs/vulkanalia/0.35.0/vulkanalia/vk/struct.ShaderModuleCreateInfo.html"><code class="hljs">vk::ShaderModuleCreateInfo</code></a> structure. The one catch is that the size of the bytecode is specified in bytes, but the bytecode slice expected by this struct is a <code>&amp;[u32]</code> instead of a <code>&amp;[u8]</code>. Therefore we will first need to convert our <code>&amp;[u8]</code> into an <code>&amp;[u32]</code>.</p>
+<p><code>vulkanalia</code> has a helper struct called <a href="https://docs.rs/vulkanalia/0.35.0/vulkanalia/bytecode/struct.Bytecode.html"><code class="hljs">Bytecode</code></a> that we will use to copy the shader bytecode into a new buffer that is guaranteed to have the correct alignment for an array of <code>u32</code>s. Add an import for this helper struct:</p>
 <pre><code class="language-rust noplaypen">use vulkanalia::bytecode::Bytecode;
 </code></pre>
-<p>Getting back to our <a href="https://docs.rs/vulkanalia/0.34.0/vulkanalia/vk/trait.DeviceV1_0.html#method.create_shader_module"><code class="hljs">create_shader_module</code></a> function, <code>Bytecode::new</code> will return an error if the supplied byte slice has a length that is not a multiple of 4 or if the allocation of the aligned buffer fails. As long as you are providing valid shader bytecode this should never be a problem, so we'll just <code>unwrap</code> the result.</p>
+<p>Getting back to our <a href="https://docs.rs/vulkanalia/0.35.0/vulkanalia/vk/trait.DeviceV1_0.html#method.create_shader_module"><code class="hljs">create_shader_module</code></a> function, <code>Bytecode::new</code> will return an error if the supplied byte slice has a length that is not a multiple of 4 or if the allocation of the aligned buffer fails. As long as you are providing valid shader bytecode this should never be a problem, so we'll just <code>unwrap</code> the result.</p>
 <pre><code class="language-rust noplaypen">let bytecode = Bytecode::new(bytecode).unwrap();
 </code></pre>
-<p>We can then construct a <a href="https://docs.rs/vulkanalia/0.34.0/vulkanalia/vk/struct.ShaderModuleCreateInfo.html"><code class="hljs">vk::ShaderModuleCreateInfo</code></a> and use it to call <a href="https://docs.rs/vulkanalia/0.34.0/vulkanalia/vk/trait.DeviceV1_0.html#method.create_shader_module"><code class="hljs">create_shader_module</code></a> to create the shader module:</p>
+<p>We can then construct a <a href="https://docs.rs/vulkanalia/0.35.0/vulkanalia/vk/struct.ShaderModuleCreateInfo.html"><code class="hljs">vk::ShaderModuleCreateInfo</code></a> and use it to call <a href="https://docs.rs/vulkanalia/0.35.0/vulkanalia/vk/trait.DeviceV1_0.html#method.create_shader_module"><code class="hljs">create_shader_module</code></a> to create the shader module:</p>
 <pre><code class="language-rust noplaypen">let info = vk::ShaderModuleCreateInfo::builder()
     .code(bytecode.code())
     .code_size(bytecode.code_size());
@@ -299,7 +299,7 @@ Ok(device.create_shader_module(&amp;info, None)?)
 
     // ...
 </code></pre>
-<p>The cleanup should then happen at the end of the function by adding two calls to <a href="https://docs.rs/vulkanalia/0.34.0/vulkanalia/vk/trait.DeviceV1_0.html#method.destroy_shader_module"><code class="hljs">destroy_shader_module</code></a>. All of the remaining code in this chapter will be inserted before these lines.</p>
+<p>The cleanup should then happen at the end of the function by adding two calls to <a href="https://docs.rs/vulkanalia/0.35.0/vulkanalia/vk/trait.DeviceV1_0.html#method.destroy_shader_module"><code class="hljs">destroy_shader_module</code></a>. All of the remaining code in this chapter will be inserted before these lines.</p>
 <pre><code class="language-rust noplaypen">    // ...
 
     device.destroy_shader_module(vert_shader_module, None);
@@ -309,7 +309,7 @@ Ok(device.create_shader_module(&amp;info, None)?)
 }
 </code></pre>
 <h2 id="shader-stage-creation"><a class="header" href="#shader-stage-creation">Shader stage creation</a></h2>
-<p>To actually use the shaders we'll need to assign them to a specific pipeline stage through <a href="https://docs.rs/vulkanalia/0.34.0/vulkanalia/vk/struct.PipelineShaderStageCreateInfo.html"><code class="hljs">vk::PipelineShaderStageCreateInfo</code></a> structures as part of the actual pipeline creation process.</p>
+<p>To actually use the shaders we'll need to assign them to a specific pipeline stage through <a href="https://docs.rs/vulkanalia/0.35.0/vulkanalia/vk/struct.PipelineShaderStageCreateInfo.html"><code class="hljs">vk::PipelineShaderStageCreateInfo</code></a> structures as part of the actual pipeline creation process.</p>
 <p>We'll start by filling in the structure for the vertex shader, again in the <code>create_pipeline</code> function.</p>
 <pre><code class="language-rust noplaypen">let vert_stage = vk::PipelineShaderStageCreateInfo::builder()
     .stage(vk::ShaderStageFlags::VERTEX)

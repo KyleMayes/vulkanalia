@@ -153,7 +153,7 @@ unsafe fn create_render_pass(
 }
 </code></pre>
 <h2 id="attachment-description"><a class="header" href="#attachment-description">Attachment description</a></h2>
-<p>In our case we'll have just a single color buffer attachment represented by one of the images from the swapchain. This will be represented by a <a href="https://docs.rs/vulkanalia/0.34.0/vulkanalia/vk/struct.AttachmentDescription.html"><code class="hljs">vk::AttachmentDescription</code></a> which we will build in <code>create_render_pass</code>.</p>
+<p>In our case we'll have just a single color buffer attachment represented by one of the images from the swapchain. This will be represented by a <a href="https://docs.rs/vulkanalia/0.35.0/vulkanalia/vk/struct.AttachmentDescription.html"><code class="hljs">vk::AttachmentDescription</code></a> which we will build in <code>create_render_pass</code>.</p>
 <pre><code class="language-rust noplaypen">let color_attachment = vk::AttachmentDescription::builder()
     .format(data.swapchain_format)
     .samples(vk::SampleCountFlags::_1)
@@ -165,14 +165,14 @@ unsafe fn create_render_pass(
 </code></pre>
 <p>The <code>load_op</code> and <code>store_op</code> determine what to do with the data in the attachment before rendering and after rendering. We have the following choices for <code>load_op</code>:</p>
 <ul>
-<li><a href="https://docs.rs/vulkanalia/0.34.0/vulkanalia/vk/struct.AttachmentLoadOp.html#associatedconstant.LOAD"><code class="hljs">vk::AttachmentLoadOp::LOAD</code></a> – Preserve the existing contents of the attachment</li>
-<li><a href="https://docs.rs/vulkanalia/0.34.0/vulkanalia/vk/struct.AttachmentLoadOp.html#associatedconstant.CLEAR"><code class="hljs">vk::AttachmentLoadOp::CLEAR</code></a> – Clear the values to a constant at the start</li>
-<li><a href="https://docs.rs/vulkanalia/0.34.0/vulkanalia/vk/struct.AttachmentLoadOp.html#associatedconstant.DONT_CARE"><code class="hljs">vk::AttachmentLoadOp::DONT_CARE</code></a> – Existing contents are undefined; we don't care about them</li>
+<li><a href="https://docs.rs/vulkanalia/0.35.0/vulkanalia/vk/struct.AttachmentLoadOp.html#associatedconstant.LOAD"><code class="hljs">vk::AttachmentLoadOp::LOAD</code></a> – Preserve the existing contents of the attachment</li>
+<li><a href="https://docs.rs/vulkanalia/0.35.0/vulkanalia/vk/struct.AttachmentLoadOp.html#associatedconstant.CLEAR"><code class="hljs">vk::AttachmentLoadOp::CLEAR</code></a> – Clear the values to a constant at the start</li>
+<li><a href="https://docs.rs/vulkanalia/0.35.0/vulkanalia/vk/struct.AttachmentLoadOp.html#associatedconstant.DONT_CARE"><code class="hljs">vk::AttachmentLoadOp::DONT_CARE</code></a> – Existing contents are undefined; we don't care about them</li>
 </ul>
 <p>In our case we're going to use the clear operation to clear the framebuffer to black before drawing a new frame. There are only two possibilities for the <code>store_op</code>:</p>
 <ul>
-<li><a href="https://docs.rs/vulkanalia/0.34.0/vulkanalia/vk/struct.AttachmentStoreOp.html#associatedconstant.STORE"><code class="hljs">vk::AttachmentStoreOp::STORE</code></a> – Rendered contents will be stored in memory and can be read later</li>
-<li><a href="https://docs.rs/vulkanalia/0.34.0/vulkanalia/vk/struct.AttachmentStoreOp.html#associatedconstant.DONT_CARE"><code class="hljs">vk::AttachmentStoreOp::DONT_CARE</code></a> – Contents of the framebuffer will be undefined after the rendering operation</li>
+<li><a href="https://docs.rs/vulkanalia/0.35.0/vulkanalia/vk/struct.AttachmentStoreOp.html#associatedconstant.STORE"><code class="hljs">vk::AttachmentStoreOp::STORE</code></a> – Rendered contents will be stored in memory and can be read later</li>
+<li><a href="https://docs.rs/vulkanalia/0.35.0/vulkanalia/vk/struct.AttachmentStoreOp.html#associatedconstant.DONT_CARE"><code class="hljs">vk::AttachmentStoreOp::DONT_CARE</code></a> – Contents of the framebuffer will be undefined after the rendering operation</li>
 </ul>
 <p>We're interested in seeing the rendered triangle on the screen, so we're going with the store operation here.</p>
 <pre><code class="language-rust noplaypen">    .stencil_load_op(vk::AttachmentLoadOp::DONT_CARE)
@@ -182,24 +182,24 @@ unsafe fn create_render_pass(
 <pre><code class="language-rust noplaypen">    .initial_layout(vk::ImageLayout::UNDEFINED)
     .final_layout(vk::ImageLayout::PRESENT_SRC_KHR);
 </code></pre>
-<p>Textures and framebuffers in Vulkan are represented by <a href="https://docs.rs/vulkanalia/0.34.0/vulkanalia/vk/struct.Image.html"><code class="hljs">vk::Image</code></a> objects with a certain pixel format, however the layout of the pixels in memory can change based on what you're trying to do with an image.</p>
+<p>Textures and framebuffers in Vulkan are represented by <a href="https://docs.rs/vulkanalia/0.35.0/vulkanalia/vk/struct.Image.html"><code class="hljs">vk::Image</code></a> objects with a certain pixel format, however the layout of the pixels in memory can change based on what you're trying to do with an image.</p>
 <p>Some of the most common layouts are:</p>
 <ul>
-<li><a href="https://docs.rs/vulkanalia/0.34.0/vulkanalia/vk/struct.ImageLayout.html#associatedconstant.COLOR_ATTACHMENT_OPTIMAL"><code class="hljs">vk::ImageLayout::COLOR_ATTACHMENT_OPTIMAL</code></a> – Images used as color attachment</li>
-<li><a href="https://docs.rs/vulkanalia/0.34.0/vulkanalia/vk/struct.ImageLayout.html#associatedconstant.PRESENT_SRC_KHR"><code class="hljs">vk::ImageLayout::PRESENT_SRC_KHR</code></a> – Images to be presented in the swapchain</li>
-<li><a href="https://docs.rs/vulkanalia/0.34.0/vulkanalia/vk/struct.ImageLayout.html#associatedconstant.TRANSFER_DST_OPTIMAL"><code class="hljs">vk::ImageLayout::TRANSFER_DST_OPTIMAL</code></a> – Images to be used as destination for a memory copy operation</li>
+<li><a href="https://docs.rs/vulkanalia/0.35.0/vulkanalia/vk/struct.ImageLayout.html#associatedconstant.COLOR_ATTACHMENT_OPTIMAL"><code class="hljs">vk::ImageLayout::COLOR_ATTACHMENT_OPTIMAL</code></a> – Images used as color attachment</li>
+<li><a href="https://docs.rs/vulkanalia/0.35.0/vulkanalia/vk/struct.ImageLayout.html#associatedconstant.PRESENT_SRC_KHR"><code class="hljs">vk::ImageLayout::PRESENT_SRC_KHR</code></a> – Images to be presented in the swapchain</li>
+<li><a href="https://docs.rs/vulkanalia/0.35.0/vulkanalia/vk/struct.ImageLayout.html#associatedconstant.TRANSFER_DST_OPTIMAL"><code class="hljs">vk::ImageLayout::TRANSFER_DST_OPTIMAL</code></a> – Images to be used as destination for a memory copy operation</li>
 </ul>
 <p>We'll discuss this topic in more depth in the texturing chapter, but what's important to know right now is that images need to be transitioned to specific layouts that are suitable for the operation that they're going to be involved in next.</p>
-<p>The <code>initial_layout</code> specifies which layout the image will have before the render pass begins. The <code>final_layout</code> specifies the layout to automatically transition to when the render pass finishes. Using <a href="https://docs.rs/vulkanalia/0.34.0/vulkanalia/vk/struct.ImageLayout.html#associatedconstant.UNDEFINED"><code class="hljs">vk::ImageLayout::UNDEFINED</code></a> for <code>initial_layout</code> means that we don't care what previous layout the image was in. The caveat of this special value is that the contents of the image are not guaranteed to be preserved, but that doesn't matter since we're going to clear it anyway. We want the image to be ready for presentation using the swapchain after rendering, which is why we use <a href="https://docs.rs/vulkanalia/0.34.0/vulkanalia/vk/struct.ImageLayout.html#associatedconstant.PRESENT_SRC_KHR"><code class="hljs">vk::ImageLayout::PRESENT_SRC_KHR</code></a> as <code>final_layout</code>.</p>
+<p>The <code>initial_layout</code> specifies which layout the image will have before the render pass begins. The <code>final_layout</code> specifies the layout to automatically transition to when the render pass finishes. Using <a href="https://docs.rs/vulkanalia/0.35.0/vulkanalia/vk/struct.ImageLayout.html#associatedconstant.UNDEFINED"><code class="hljs">vk::ImageLayout::UNDEFINED</code></a> for <code>initial_layout</code> means that we don't care what previous layout the image was in. The caveat of this special value is that the contents of the image are not guaranteed to be preserved, but that doesn't matter since we're going to clear it anyway. We want the image to be ready for presentation using the swapchain after rendering, which is why we use <a href="https://docs.rs/vulkanalia/0.35.0/vulkanalia/vk/struct.ImageLayout.html#associatedconstant.PRESENT_SRC_KHR"><code class="hljs">vk::ImageLayout::PRESENT_SRC_KHR</code></a> as <code>final_layout</code>.</p>
 <h2 id="subpasses-and-attachment-references"><a class="header" href="#subpasses-and-attachment-references">Subpasses and attachment references</a></h2>
 <p>A single render pass can consist of multiple subpasses. Subpasses are subsequent rendering operations that depend on the contents of framebuffers in previous passes, for example a sequence of post-processing effects that are applied one after another. If you group these rendering operations into one render pass, then Vulkan is able to reorder the operations and conserve memory bandwidth for possibly better performance. For our very first triangle, however, we'll stick to a single subpass.</p>
-<p>Every subpass references one or more of the attachments that we've described using the structure in the previous sections. These references are themselves <a href="https://docs.rs/vulkanalia/0.34.0/vulkanalia/vk/struct.AttachmentReference.html"><code class="hljs">vk::AttachmentReference</code></a> structs that look like this:</p>
+<p>Every subpass references one or more of the attachments that we've described using the structure in the previous sections. These references are themselves <a href="https://docs.rs/vulkanalia/0.35.0/vulkanalia/vk/struct.AttachmentReference.html"><code class="hljs">vk::AttachmentReference</code></a> structs that look like this:</p>
 <pre><code class="language-rust noplaypen">let color_attachment_ref = vk::AttachmentReference::builder()
     .attachment(0)
     .layout(vk::ImageLayout::COLOR_ATTACHMENT_OPTIMAL);
 </code></pre>
-<p>The <code>attachment</code> parameter specifies which attachment to reference by its index in the attachment descriptions array. Our array consists of a single <a href="https://docs.rs/vulkanalia/0.34.0/vulkanalia/vk/struct.AttachmentDescription.html"><code class="hljs">vk::AttachmentDescription</code></a>, so its index is <code>0</code>. The <code>layout</code> specifies which layout we would like the attachment to have during a subpass that uses this reference. Vulkan will automatically transition the attachment to this layout when the subpass is started. We intend to use the attachment to function as a color buffer and the <a href="https://docs.rs/vulkanalia/0.34.0/vulkanalia/vk/struct.ImageLayout.html#associatedconstant.COLOR_ATTACHMENT_OPTIMAL"><code class="hljs">vk::ImageLayout::COLOR_ATTACHMENT_OPTIMAL</code></a> layout will give us the best performance, as its name implies.</p>
-<p>The subpass is described using a <a href="https://docs.rs/vulkanalia/0.34.0/vulkanalia/vk/struct.SubpassDescription.html"><code class="hljs">vk::SubpassDescription</code></a> structure:</p>
+<p>The <code>attachment</code> parameter specifies which attachment to reference by its index in the attachment descriptions array. Our array consists of a single <a href="https://docs.rs/vulkanalia/0.35.0/vulkanalia/vk/struct.AttachmentDescription.html"><code class="hljs">vk::AttachmentDescription</code></a>, so its index is <code>0</code>. The <code>layout</code> specifies which layout we would like the attachment to have during a subpass that uses this reference. Vulkan will automatically transition the attachment to this layout when the subpass is started. We intend to use the attachment to function as a color buffer and the <a href="https://docs.rs/vulkanalia/0.35.0/vulkanalia/vk/struct.ImageLayout.html#associatedconstant.COLOR_ATTACHMENT_OPTIMAL"><code class="hljs">vk::ImageLayout::COLOR_ATTACHMENT_OPTIMAL</code></a> layout will give us the best performance, as its name implies.</p>
+<p>The subpass is described using a <a href="https://docs.rs/vulkanalia/0.35.0/vulkanalia/vk/struct.SubpassDescription.html"><code class="hljs">vk::SubpassDescription</code></a> structure:</p>
 <pre><code class="language-rust noplaypen">let color_attachments = &amp;[color_attachment_ref];
 let subpass = vk::SubpassDescription::builder()
     .pipeline_bind_point(vk::PipelineBindPoint::GRAPHICS)
@@ -215,14 +215,14 @@ let subpass = vk::SubpassDescription::builder()
 <li><code>preserve_attachments</code> – Attachments that are not used by this subpass, but for which the data must be preserved</li>
 </ul>
 <h2 id="render-pass"><a class="header" href="#render-pass">Render pass</a></h2>
-<p>Now that the attachment and a basic subpass referencing it have been described, we can create the render pass itself. Create a new class member variable to hold the <a href="https://docs.rs/vulkanalia/0.34.0/vulkanalia/vk/struct.RenderPass.html"><code class="hljs">vk::RenderPass</code></a> object right above the <code>pipeline_layout</code> field in <code>AppData</code>:</p>
+<p>Now that the attachment and a basic subpass referencing it have been described, we can create the render pass itself. Create a new class member variable to hold the <a href="https://docs.rs/vulkanalia/0.35.0/vulkanalia/vk/struct.RenderPass.html"><code class="hljs">vk::RenderPass</code></a> object right above the <code>pipeline_layout</code> field in <code>AppData</code>:</p>
 <pre><code class="language-rust noplaypen">struct AppData {
     // ...
     render_pass: vk::RenderPass,
     pipeline_layout: vk::PipelineLayout,
 }
 </code></pre>
-<p>The render pass object can then be created by filling in the <a href="https://docs.rs/vulkanalia/0.34.0/vulkanalia/vk/struct.RenderPassCreateInfo.html"><code class="hljs">vk::RenderPassCreateInfo</code></a> structure with an array of attachments and subpasses. The <a href="https://docs.rs/vulkanalia/0.34.0/vulkanalia/vk/struct.AttachmentReference.html"><code class="hljs">vk::AttachmentReference</code></a> objects reference attachments using the indices of this array.</p>
+<p>The render pass object can then be created by filling in the <a href="https://docs.rs/vulkanalia/0.35.0/vulkanalia/vk/struct.RenderPassCreateInfo.html"><code class="hljs">vk::RenderPassCreateInfo</code></a> structure with an array of attachments and subpasses. The <a href="https://docs.rs/vulkanalia/0.35.0/vulkanalia/vk/struct.AttachmentReference.html"><code class="hljs">vk::AttachmentReference</code></a> objects reference attachments using the indices of this array.</p>
 <pre><code class="language-rust noplaypen">let attachments = &amp;[color_attachment];
 let subpasses = &amp;[subpass];
 let info = vk::RenderPassCreateInfo::builder()
