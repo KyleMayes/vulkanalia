@@ -1700,7 +1700,184 @@ pub trait ExtDescriptorBufferExtensionDeviceCommands: DeviceV1_0 {
     }
 }
 
+#[allow(deprecated)]
 impl<C: DeviceV1_0 + ?Sized> ExtDescriptorBufferExtensionDeviceCommands for C {}
+
+/// The device-level commands added by [`EXT_DESCRIPTOR_HEAP_EXTENSION`].
+pub trait ExtDescriptorHeapExtensionDeviceCommands: DeviceV1_0 {
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdBindResourceHeapEXT.html>
+    #[inline]
+    unsafe fn cmd_bind_resource_heap_ext(
+        &self,
+        command_buffer: CommandBuffer,
+        bind_info: &BindHeapInfoEXT,
+    ) {
+        let __result = (self.commands().cmd_bind_resource_heap_ext)(command_buffer, bind_info);
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdBindSamplerHeapEXT.html>
+    #[inline]
+    unsafe fn cmd_bind_sampler_heap_ext(
+        &self,
+        command_buffer: CommandBuffer,
+        bind_info: &BindHeapInfoEXT,
+    ) {
+        let __result = (self.commands().cmd_bind_sampler_heap_ext)(command_buffer, bind_info);
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdPushDataEXT.html>
+    #[inline]
+    unsafe fn cmd_push_data_ext(
+        &self,
+        command_buffer: CommandBuffer,
+        push_data_info: &PushDataInfoEXT,
+    ) {
+        let __result = (self.commands().cmd_push_data_ext)(command_buffer, push_data_info);
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetImageOpaqueCaptureDataEXT.html>
+    #[inline]
+    unsafe fn get_image_opaque_capture_data_ext(
+        &self,
+        images: &[Image],
+    ) -> crate::VkResult<Vec<HostAddressRangeEXT>> {
+        let mut datas = Vec::with_capacity(images.len() as usize);
+
+        let __result = (self.commands().get_image_opaque_capture_data_ext)(
+            self.handle(),
+            images.len() as u32,
+            images.as_ptr(),
+            datas.as_mut_ptr(),
+        );
+
+        debug_assert!(datas.capacity() >= images.len() as usize);
+        datas.set_len(images.len() as usize);
+
+        if __result == Result::SUCCESS {
+            Ok(datas)
+        } else {
+            Err(__result.into())
+        }
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetTensorOpaqueCaptureDataARM.html>
+    #[inline]
+    unsafe fn get_tensor_opaque_capture_data_arm(
+        &self,
+        tensors: &[TensorARM],
+    ) -> crate::VkResult<Vec<HostAddressRangeEXT>> {
+        let mut datas = Vec::with_capacity(tensors.len() as usize);
+
+        let __result = (self.commands().get_tensor_opaque_capture_data_arm)(
+            self.handle(),
+            tensors.len() as u32,
+            tensors.as_ptr(),
+            datas.as_mut_ptr(),
+        );
+
+        debug_assert!(datas.capacity() >= tensors.len() as usize);
+        datas.set_len(tensors.len() as usize);
+
+        if __result == Result::SUCCESS {
+            Ok(datas)
+        } else {
+            Err(__result.into())
+        }
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkRegisterCustomBorderColorEXT.html>
+    #[inline]
+    unsafe fn register_custom_border_color_ext(
+        &self,
+        border_color: &SamplerCustomBorderColorCreateInfoEXT,
+        request_index: bool,
+    ) -> crate::VkResult<u32> {
+        let mut index = MaybeUninit::<u32>::uninit();
+
+        let __result = (self.commands().register_custom_border_color_ext)(
+            self.handle(),
+            border_color,
+            request_index as Bool32,
+            index.as_mut_ptr(),
+        );
+
+        if __result == Result::SUCCESS {
+            Ok(index.assume_init())
+        } else {
+            Err(__result.into())
+        }
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkUnregisterCustomBorderColorEXT.html>
+    #[inline]
+    unsafe fn unregister_custom_border_color_ext(&self, index: u32) {
+        let __result = (self.commands().unregister_custom_border_color_ext)(self.handle(), index);
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkWriteResourceDescriptorsEXT.html>
+    #[inline]
+    unsafe fn write_resource_descriptors_ext(
+        &self,
+        resources: &[impl Cast<Target = ResourceDescriptorInfoEXT>],
+        descriptors: &[impl Cast<Target = HostAddressRangeEXT>],
+    ) -> crate::VkResult<()> {
+        let __result = (self.commands().write_resource_descriptors_ext)(
+            self.handle(),
+            resources.len() as u32,
+            resources.as_ptr().cast(),
+            descriptors.as_ptr().cast(),
+        );
+
+        if __result == Result::SUCCESS {
+            Ok(())
+        } else {
+            Err(__result.into())
+        }
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkWriteSamplerDescriptorsEXT.html>
+    #[inline]
+    unsafe fn write_sampler_descriptors_ext(
+        &self,
+        samplers: &[impl Cast<Target = SamplerCreateInfo>],
+        descriptors: &[impl Cast<Target = HostAddressRangeEXT>],
+    ) -> crate::VkResult<()> {
+        let __result = (self.commands().write_sampler_descriptors_ext)(
+            self.handle(),
+            samplers.len() as u32,
+            samplers.as_ptr().cast(),
+            descriptors.as_ptr().cast(),
+        );
+
+        if __result == Result::SUCCESS {
+            Ok(())
+        } else {
+            Err(__result.into())
+        }
+    }
+}
+
+impl<C: DeviceV1_0 + ?Sized> ExtDescriptorHeapExtensionDeviceCommands for C {}
+
+/// The instance-level commands added by [`EXT_DESCRIPTOR_HEAP_EXTENSION`].
+pub trait ExtDescriptorHeapExtensionInstanceCommands: InstanceV1_0 {
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetPhysicalDeviceDescriptorSizeEXT.html>
+    #[inline]
+    unsafe fn get_physical_device_descriptor_size_ext(
+        &self,
+        physical_device: PhysicalDevice,
+        descriptor_type: DescriptorType,
+    ) -> DeviceSize {
+        let __result = (self.commands().get_physical_device_descriptor_size_ext)(
+            physical_device,
+            descriptor_type,
+        );
+
+        __result
+    }
+}
+
+impl<C: InstanceV1_0 + ?Sized> ExtDescriptorHeapExtensionInstanceCommands for C {}
 
 /// The device-level commands added by [`EXT_DEVICE_FAULT_EXTENSION`].
 pub trait ExtDeviceFaultExtensionDeviceCommands: DeviceV1_0 {
@@ -9969,6 +10146,22 @@ impl<C: DeviceV1_0 + ?Sized> NvxBinaryImportExtensionDeviceCommands for C {}
 
 /// The device-level commands added by [`NVX_IMAGE_VIEW_HANDLE_EXTENSION`].
 pub trait NvxImageViewHandleExtensionDeviceCommands: DeviceV1_0 {
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetDeviceCombinedImageSamplerIndexNVX.html>
+    #[inline]
+    unsafe fn get_device_combined_image_sampler_index_nvx(
+        &self,
+        image_view_index: u64,
+        sampler_index: u64,
+    ) -> u64 {
+        let __result = (self.commands().get_device_combined_image_sampler_index_nvx)(
+            self.handle(),
+            image_view_index,
+            sampler_index,
+        );
+
+        __result
+    }
+
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetImageViewAddressNVX.html>
     #[inline]
     unsafe fn get_image_view_address_nvx(
@@ -12166,6 +12359,54 @@ pub trait QnxScreenSurfaceExtensionInstanceCommands: InstanceV1_0 {
 }
 
 impl<C: InstanceV1_0 + ?Sized> QnxScreenSurfaceExtensionInstanceCommands for C {}
+
+/// The instance-level commands added by [`SEC_UBM_SURFACE_EXTENSION`].
+pub trait SecUbmSurfaceExtensionInstanceCommands: InstanceV1_0 {
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCreateUbmSurfaceSEC.html>
+    #[inline]
+    unsafe fn create_ubm_surface_sec(
+        &self,
+        create_info: &UbmSurfaceCreateInfoSEC,
+        allocator: Option<&AllocationCallbacks>,
+    ) -> crate::VkResult<SurfaceKHR> {
+        let mut surface = MaybeUninit::<SurfaceKHR>::uninit();
+
+        let __result = (self.commands().create_ubm_surface_sec)(
+            self.handle(),
+            create_info,
+            allocator.map_or(ptr::null(), |v| v),
+            surface.as_mut_ptr(),
+        );
+
+        if __result == Result::SUCCESS {
+            Ok(surface.assume_init())
+        } else {
+            Err(__result.into())
+        }
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetPhysicalDeviceUbmPresentationSupportSEC.html>
+    #[inline]
+    unsafe fn get_physical_device_ubm_presentation_support_sec(
+        &self,
+        physical_device: PhysicalDevice,
+        queue_family_index: u32,
+    ) -> (Bool32, ubm_device) {
+        let mut ubm_device = MaybeUninit::<ubm_device>::uninit();
+
+        let __result = (self
+            .commands()
+            .get_physical_device_ubm_presentation_support_sec)(
+            physical_device,
+            queue_family_index,
+            ubm_device.as_mut_ptr(),
+        );
+
+        (__result, ubm_device.assume_init())
+    }
+}
+
+impl<C: InstanceV1_0 + ?Sized> SecUbmSurfaceExtensionInstanceCommands for C {}
 
 /// The device-level commands added by [`VALVE_DESCRIPTOR_SET_HOST_MAPPING_EXTENSION`].
 pub trait ValveDescriptorSetHostMappingExtensionDeviceCommands: DeviceV1_0 {

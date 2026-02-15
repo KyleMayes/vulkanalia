@@ -139,6 +139,8 @@ bitflags! {
         const SHADER_TILE_ATTACHMENT_WRITE_QCOM = 1 << 52;
         const MEMORY_DECOMPRESSION_READ_EXT = 1 << 55;
         const MEMORY_DECOMPRESSION_WRITE_EXT = 1 << 56;
+        const SAMPLER_HEAP_READ_EXT = 1 << 57;
+        const RESOURCE_HEAP_READ_EXT = 1 << 58;
     }
 }
 
@@ -234,6 +236,7 @@ bitflags! {
         const EXECUTION_GRAPH_SCRATCH_AMDX = 1 << 25;
         const PUSH_DESCRIPTORS_DESCRIPTOR_BUFFER_EXT = 1 << 26;
         const TILE_MEMORY_QCOM = 1 << 27;
+        const DESCRIPTOR_HEAP_EXT = 1 << 28;
     }
 }
 
@@ -269,6 +272,7 @@ bitflags! {
         const EXECUTION_GRAPH_SCRATCH_AMDX = 1 << 25;
         const PUSH_DESCRIPTORS_DESCRIPTOR_BUFFER_EXT = 1 << 26;
         const TILE_MEMORY_QCOM = 1 << 27;
+        const DESCRIPTOR_HEAP_EXT = 1 << 28;
         const DATA_GRAPH_FOREIGN_DESCRIPTOR_ARM = 1 << 29;
         const PREPROCESS_BUFFER_EXT = 1 << 31;
         const MEMORY_DECOMPRESSION_EXT = 1 << 32;
@@ -640,6 +644,7 @@ bitflags! {
     #[derive(Default)]
     pub struct DeviceQueueCreateFlags: Flags {
         const PROTECTED = 1;
+        const INTERNALLY_SYNCHRONIZED_KHR = 1 << 2;
     }
 }
 
@@ -1110,7 +1115,7 @@ bitflags! {
         const CORNER_SAMPLED_NV = 1 << 13;
         const SUBSAMPLED_EXT = 1 << 14;
         const FRAGMENT_DENSITY_MAP_OFFSET_EXT = 1 << 15;
-        const DESCRIPTOR_BUFFER_CAPTURE_REPLAY_EXT = 1 << 16;
+        const DESCRIPTOR_HEAP_CAPTURE_REPLAY_EXT = 1 << 16;
         const _2D_VIEW_COMPATIBLE_EXT = 1 << 17;
         const MULTISAMPLED_RENDER_TO_SINGLE_SAMPLED_EXT = 1 << 18;
         const VIDEO_PROFILE_INDEPENDENT_KHR = 1 << 20;
@@ -1550,6 +1555,7 @@ bitflags! {
         const EXECUTION_GRAPH_AMDX = 1 << 32;
         const RAY_TRACING_ALLOW_SPHERES_AND_LINEAR_SWEPT_SPHERES_NV = 1 << 33;
         const ENABLE_LEGACY_DITHERING_EXT = 1 << 34;
+        const DESCRIPTOR_HEAP_EXT = 1 << 36;
         const DISALLOW_OPACITY_MICROMAP_ARM = 1 << 37;
         const INDIRECT_BINDABLE_EXT = 1 << 38;
         const PER_LAYER_FRAGMENT_DENSITY_VALVE = 1 << 40;
@@ -2040,6 +2046,7 @@ bitflags! {
         const FRAGMENT_SHADING_RATE_ATTACHMENT = 1 << 5;
         const FRAGMENT_DENSITY_MAP_ATTACHMENT = 1 << 6;
         const INDIRECT_BINDABLE = 1 << 7;
+        const DESCRIPTOR_HEAP = 1 << 10;
         const _64_BIT_INDEXING = 1 << 15;
     }
 }
@@ -2098,6 +2105,25 @@ bitflags! {
 }
 
 bitflags! {
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSpirvResourceTypeFlagsEXT.html>
+    #[repr(transparent)]
+    #[derive(Default)]
+    pub struct SpirvResourceTypeFlagsEXT: Flags {
+        const SAMPLER = 1;
+        const SAMPLED_IMAGE = 1 << 1;
+        const READ_ONLY_IMAGE = 1 << 2;
+        const READ_WRITE_IMAGE = 1 << 3;
+        const COMBINED_SAMPLED_IMAGE = 1 << 4;
+        const UNIFORM_BUFFER = 1 << 5;
+        const READ_ONLY_STORAGE_BUFFER = 1 << 6;
+        const READ_WRITE_STORAGE_BUFFER = 1 << 7;
+        const ACCELERATION_STRUCTURE = 1 << 8;
+        const TENSOR_ARM = 1 << 9;
+        const ALL = i32::MAX as u32;
+    }
+}
+
+bitflags! {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkStencilFaceFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
@@ -2128,7 +2154,7 @@ bitflags! {
         const SHUFFLE_RELATIVE = 1 << 5;
         const CLUSTERED = 1 << 6;
         const QUAD = 1 << 7;
-        const PARTITIONED_NV = 1 << 8;
+        const PARTITIONED_EXT = 1 << 8;
         const ROTATE = 1 << 9;
         const ROTATE_CLUSTERED = 1 << 10;
     }
@@ -2216,6 +2242,7 @@ bitflags! {
         const MUTABLE_FORMAT = 1;
         const PROTECTED = 1 << 1;
         const DESCRIPTOR_BUFFER_CAPTURE_REPLAY = 1 << 2;
+        const DESCRIPTOR_HEAP_CAPTURE_REPLAY = 1 << 3;
     }
 }
 
@@ -2264,6 +2291,13 @@ bitflags! {
         const DEBUG_REPORTING_EXT = 1 << 5;
         const DEBUG_MARKERS_EXT = 1 << 6;
     }
+}
+
+bitflags! {
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkUbmSurfaceCreateFlagsSEC.html>
+    #[repr(transparent)]
+    #[derive(Default)]
+    pub struct UbmSurfaceCreateFlagsSEC: Flags { }
 }
 
 bitflags! {

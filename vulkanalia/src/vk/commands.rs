@@ -77,6 +77,8 @@ pub struct DeviceCommands {
     pub cmd_bind_invocation_mask_huawei: PFN_vkCmdBindInvocationMaskHUAWEI,
     pub cmd_bind_pipeline: PFN_vkCmdBindPipeline,
     pub cmd_bind_pipeline_shader_group_nv: PFN_vkCmdBindPipelineShaderGroupNV,
+    pub cmd_bind_resource_heap_ext: PFN_vkCmdBindResourceHeapEXT,
+    pub cmd_bind_sampler_heap_ext: PFN_vkCmdBindSamplerHeapEXT,
     pub cmd_bind_shaders_ext: PFN_vkCmdBindShadersEXT,
     pub cmd_bind_shading_rate_image_nv: PFN_vkCmdBindShadingRateImageNV,
     pub cmd_bind_tile_memory_qcom: PFN_vkCmdBindTileMemoryQCOM,
@@ -199,6 +201,7 @@ pub struct DeviceCommands {
     pub cmd_push_constants: PFN_vkCmdPushConstants,
     pub cmd_push_constants2: PFN_vkCmdPushConstants2,
     pub cmd_push_constants2_khr: PFN_vkCmdPushConstants2KHR,
+    pub cmd_push_data_ext: PFN_vkCmdPushDataEXT,
     pub cmd_push_descriptor_set: PFN_vkCmdPushDescriptorSet,
     pub cmd_push_descriptor_set2: PFN_vkCmdPushDescriptorSet2,
     pub cmd_push_descriptor_set2_khr: PFN_vkCmdPushDescriptorSet2KHR,
@@ -521,6 +524,7 @@ pub struct DeviceCommands {
         PFN_vkGetDeviceAccelerationStructureCompatibilityKHR,
     pub get_device_buffer_memory_requirements: PFN_vkGetDeviceBufferMemoryRequirements,
     pub get_device_buffer_memory_requirements_khr: PFN_vkGetDeviceBufferMemoryRequirementsKHR,
+    pub get_device_combined_image_sampler_index_nvx: PFN_vkGetDeviceCombinedImageSamplerIndexNVX,
     pub get_device_fault_info_ext: PFN_vkGetDeviceFaultInfoEXT,
     pub get_device_group_peer_memory_features: PFN_vkGetDeviceGroupPeerMemoryFeatures,
     pub get_device_group_peer_memory_features_khr: PFN_vkGetDeviceGroupPeerMemoryFeaturesKHR,
@@ -564,6 +568,7 @@ pub struct DeviceCommands {
     pub get_image_memory_requirements: PFN_vkGetImageMemoryRequirements,
     pub get_image_memory_requirements2: PFN_vkGetImageMemoryRequirements2,
     pub get_image_memory_requirements2_khr: PFN_vkGetImageMemoryRequirements2KHR,
+    pub get_image_opaque_capture_data_ext: PFN_vkGetImageOpaqueCaptureDataEXT,
     pub get_image_opaque_capture_descriptor_data_ext: PFN_vkGetImageOpaqueCaptureDescriptorDataEXT,
     pub get_image_sparse_memory_requirements: PFN_vkGetImageSparseMemoryRequirements,
     pub get_image_sparse_memory_requirements2: PFN_vkGetImageSparseMemoryRequirements2,
@@ -642,6 +647,7 @@ pub struct DeviceCommands {
     pub get_swapchain_time_domain_properties_ext: PFN_vkGetSwapchainTimeDomainPropertiesEXT,
     pub get_swapchain_timing_properties_ext: PFN_vkGetSwapchainTimingPropertiesEXT,
     pub get_tensor_memory_requirements_arm: PFN_vkGetTensorMemoryRequirementsARM,
+    pub get_tensor_opaque_capture_data_arm: PFN_vkGetTensorOpaqueCaptureDataARM,
     pub get_tensor_opaque_capture_descriptor_data_arm:
         PFN_vkGetTensorOpaqueCaptureDescriptorDataARM,
     pub get_tensor_view_opaque_capture_descriptor_data_arm:
@@ -672,6 +678,7 @@ pub struct DeviceCommands {
     pub queue_submit2: PFN_vkQueueSubmit2,
     pub queue_submit2_khr: PFN_vkQueueSubmit2KHR,
     pub queue_wait_idle: PFN_vkQueueWaitIdle,
+    pub register_custom_border_color_ext: PFN_vkRegisterCustomBorderColorEXT,
     pub register_device_event_ext: PFN_vkRegisterDeviceEventEXT,
     pub register_display_event_ext: PFN_vkRegisterDisplayEventEXT,
     pub release_captured_pipeline_data_khr: PFN_vkReleaseCapturedPipelineDataKHR,
@@ -710,6 +717,7 @@ pub struct DeviceCommands {
     pub unmap_memory: PFN_vkUnmapMemory,
     pub unmap_memory2: PFN_vkUnmapMemory2,
     pub unmap_memory2_khr: PFN_vkUnmapMemory2KHR,
+    pub unregister_custom_border_color_ext: PFN_vkUnregisterCustomBorderColorEXT,
     pub update_descriptor_set_with_template: PFN_vkUpdateDescriptorSetWithTemplate,
     pub update_descriptor_set_with_template_khr: PFN_vkUpdateDescriptorSetWithTemplateKHR,
     pub update_descriptor_sets: PFN_vkUpdateDescriptorSets,
@@ -724,6 +732,8 @@ pub struct DeviceCommands {
     pub write_acceleration_structures_properties_khr:
         PFN_vkWriteAccelerationStructuresPropertiesKHR,
     pub write_micromaps_properties_ext: PFN_vkWriteMicromapsPropertiesEXT,
+    pub write_resource_descriptors_ext: PFN_vkWriteResourceDescriptorsEXT,
+    pub write_sampler_descriptors_ext: PFN_vkWriteSamplerDescriptorsEXT,
 }
 
 impl DeviceCommands {
@@ -1449,6 +1459,34 @@ impl DeviceCommands {
                         _group_index: u32,
                     ) {
                         panic!("could not load vkCmdBindPipelineShaderGroupNV")
+                    }
+                    fallback
+                }
+            },
+            cmd_bind_resource_heap_ext: {
+                let value = loader(c"vkCmdBindResourceHeapEXT".as_ptr());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _bind_info: *const BindHeapInfoEXT,
+                    ) {
+                        panic!("could not load vkCmdBindResourceHeapEXT")
+                    }
+                    fallback
+                }
+            },
+            cmd_bind_sampler_heap_ext: {
+                let value = loader(c"vkCmdBindSamplerHeapEXT".as_ptr());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _bind_info: *const BindHeapInfoEXT,
+                    ) {
+                        panic!("could not load vkCmdBindSamplerHeapEXT")
                     }
                     fallback
                 }
@@ -3291,6 +3329,20 @@ impl DeviceCommands {
                         _push_constants_info: *const PushConstantsInfo,
                     ) {
                         panic!("could not load vkCmdPushConstants2KHR")
+                    }
+                    fallback
+                }
+            },
+            cmd_push_data_ext: {
+                let value = loader(c"vkCmdPushDataEXT".as_ptr());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _push_data_info: *const PushDataInfoEXT,
+                    ) {
+                        panic!("could not load vkCmdPushDataEXT")
                     }
                     fallback
                 }
@@ -7956,6 +8008,21 @@ impl DeviceCommands {
                     fallback
                 }
             },
+            get_device_combined_image_sampler_index_nvx: {
+                let value = loader(c"vkGetDeviceCombinedImageSamplerIndexNVX".as_ptr());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _image_view_index: u64,
+                        _sampler_index: u64,
+                    ) -> u64 {
+                        panic!("could not load vkGetDeviceCombinedImageSamplerIndexNVX")
+                    }
+                    fallback
+                }
+            },
             get_device_fault_info_ext: {
                 let value = loader(c"vkGetDeviceFaultInfoEXT".as_ptr());
                 if let Some(value) = value {
@@ -8522,6 +8589,22 @@ impl DeviceCommands {
                         _memory_requirements: *mut MemoryRequirements2,
                     ) {
                         panic!("could not load vkGetImageMemoryRequirements2KHR")
+                    }
+                    fallback
+                }
+            },
+            get_image_opaque_capture_data_ext: {
+                let value = loader(c"vkGetImageOpaqueCaptureDataEXT".as_ptr());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _image_count: u32,
+                        _images: *const Image,
+                        _datas: *mut HostAddressRangeEXT,
+                    ) -> Result {
+                        panic!("could not load vkGetImageOpaqueCaptureDataEXT")
                     }
                     fallback
                 }
@@ -9665,6 +9748,22 @@ impl DeviceCommands {
                     fallback
                 }
             },
+            get_tensor_opaque_capture_data_arm: {
+                let value = loader(c"vkGetTensorOpaqueCaptureDataARM".as_ptr());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _tensor_count: u32,
+                        _tensors: *const TensorARM,
+                        _datas: *mut HostAddressRangeEXT,
+                    ) -> Result {
+                        panic!("could not load vkGetTensorOpaqueCaptureDataARM")
+                    }
+                    fallback
+                }
+            },
             get_tensor_opaque_capture_descriptor_data_arm: {
                 let value = loader(c"vkGetTensorOpaqueCaptureDescriptorDataARM".as_ptr());
                 if let Some(value) = value {
@@ -10076,6 +10175,22 @@ impl DeviceCommands {
                 } else {
                     unsafe extern "system" fn fallback(_queue: Queue) -> Result {
                         panic!("could not load vkQueueWaitIdle")
+                    }
+                    fallback
+                }
+            },
+            register_custom_border_color_ext: {
+                let value = loader(c"vkRegisterCustomBorderColorEXT".as_ptr());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _border_color: *const SamplerCustomBorderColorCreateInfoEXT,
+                        _request_index: Bool32,
+                        _index: *mut u32,
+                    ) -> Result {
+                        panic!("could not load vkRegisterCustomBorderColorEXT")
                     }
                     fallback
                 }
@@ -10601,6 +10716,17 @@ impl DeviceCommands {
                     fallback
                 }
             },
+            unregister_custom_border_color_ext: {
+                let value = loader(c"vkUnregisterCustomBorderColorEXT".as_ptr());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(_device: Device, _index: u32) {
+                        panic!("could not load vkUnregisterCustomBorderColorEXT")
+                    }
+                    fallback
+                }
+            },
             update_descriptor_set_with_template: {
                 let value = loader(c"vkUpdateDescriptorSetWithTemplate".as_ptr());
                 if let Some(value) = value {
@@ -10813,6 +10939,38 @@ impl DeviceCommands {
                     fallback
                 }
             },
+            write_resource_descriptors_ext: {
+                let value = loader(c"vkWriteResourceDescriptorsEXT".as_ptr());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _resource_count: u32,
+                        _resources: *const ResourceDescriptorInfoEXT,
+                        _descriptors: *const HostAddressRangeEXT,
+                    ) -> Result {
+                        panic!("could not load vkWriteResourceDescriptorsEXT")
+                    }
+                    fallback
+                }
+            },
+            write_sampler_descriptors_ext: {
+                let value = loader(c"vkWriteSamplerDescriptorsEXT".as_ptr());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _sampler_count: u32,
+                        _samplers: *const SamplerCreateInfo,
+                        _descriptors: *const HostAddressRangeEXT,
+                    ) -> Result {
+                        panic!("could not load vkWriteSamplerDescriptorsEXT")
+                    }
+                    fallback
+                }
+            },
         }
     }
 }
@@ -10915,6 +11073,7 @@ pub struct InstanceCommands {
     pub create_screen_surface_qnx: PFN_vkCreateScreenSurfaceQNX,
     pub create_stream_descriptor_surface_ggp: PFN_vkCreateStreamDescriptorSurfaceGGP,
     pub create_surface_ohos: PFN_vkCreateSurfaceOHOS,
+    pub create_ubm_surface_sec: PFN_vkCreateUbmSurfaceSEC,
     pub create_vi_surface_nn: PFN_vkCreateViSurfaceNN,
     pub create_wayland_surface_khr: PFN_vkCreateWaylandSurfaceKHR,
     pub create_win32_surface_khr: PFN_vkCreateWin32SurfaceKHR,
@@ -10953,6 +11112,7 @@ pub struct InstanceCommands {
         PFN_vkGetPhysicalDeviceCooperativeMatrixPropertiesNV,
     pub get_physical_device_cooperative_vector_properties_nv:
         PFN_vkGetPhysicalDeviceCooperativeVectorPropertiesNV,
+    pub get_physical_device_descriptor_size_ext: PFN_vkGetPhysicalDeviceDescriptorSizeEXT,
     pub get_physical_device_direct_fb_presentation_support_ext:
         PFN_vkGetPhysicalDeviceDirectFBPresentationSupportEXT,
     pub get_physical_device_display_plane_properties2_khr:
@@ -11040,6 +11200,8 @@ pub struct InstanceCommands {
     pub get_physical_device_surface_support_khr: PFN_vkGetPhysicalDeviceSurfaceSupportKHR,
     pub get_physical_device_tool_properties: PFN_vkGetPhysicalDeviceToolProperties,
     pub get_physical_device_tool_properties_ext: PFN_vkGetPhysicalDeviceToolPropertiesEXT,
+    pub get_physical_device_ubm_presentation_support_sec:
+        PFN_vkGetPhysicalDeviceUbmPresentationSupportSEC,
     pub get_physical_device_video_capabilities_khr: PFN_vkGetPhysicalDeviceVideoCapabilitiesKHR,
     pub get_physical_device_video_encode_quality_level_properties_khr:
         PFN_vkGetPhysicalDeviceVideoEncodeQualityLevelPropertiesKHR,
@@ -11390,6 +11552,22 @@ impl InstanceCommands {
                         _surface: *mut SurfaceKHR,
                     ) -> Result {
                         panic!("could not load vkCreateSurfaceOHOS")
+                    }
+                    fallback
+                }
+            },
+            create_ubm_surface_sec: {
+                let value = loader(c"vkCreateUbmSurfaceSEC".as_ptr());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _instance: Instance,
+                        _create_info: *const UbmSurfaceCreateInfoSEC,
+                        _allocator: *const AllocationCallbacks,
+                        _surface: *mut SurfaceKHR,
+                    ) -> Result {
+                        panic!("could not load vkCreateUbmSurfaceSEC")
                     }
                     fallback
                 }
@@ -11864,6 +12042,20 @@ impl InstanceCommands {
                         _properties: *mut CooperativeVectorPropertiesNV,
                     ) -> Result {
                         panic!("could not load vkGetPhysicalDeviceCooperativeVectorPropertiesNV")
+                    }
+                    fallback
+                }
+            },
+            get_physical_device_descriptor_size_ext: {
+                let value = loader(c"vkGetPhysicalDeviceDescriptorSizeEXT".as_ptr());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _physical_device: PhysicalDevice,
+                        _descriptor_type: DescriptorType,
+                    ) -> DeviceSize {
+                        panic!("could not load vkGetPhysicalDeviceDescriptorSizeEXT")
                     }
                     fallback
                 }
@@ -12743,6 +12935,21 @@ impl InstanceCommands {
                         _tool_properties: *mut PhysicalDeviceToolProperties,
                     ) -> Result {
                         panic!("could not load vkGetPhysicalDeviceToolPropertiesEXT")
+                    }
+                    fallback
+                }
+            },
+            get_physical_device_ubm_presentation_support_sec: {
+                let value = loader(c"vkGetPhysicalDeviceUbmPresentationSupportSEC".as_ptr());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _physical_device: PhysicalDevice,
+                        _queue_family_index: u32,
+                        _ubm_device: *mut ubm_device,
+                    ) -> Bool32 {
+                        panic!("could not load vkGetPhysicalDeviceUbmPresentationSupportSEC")
                     }
                     fallback
                 }
