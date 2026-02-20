@@ -4401,7 +4401,7 @@ pub type PFN_vkGetPhysicalDeviceToolPropertiesEXT = PFN_vkGetPhysicalDeviceToolP
 pub type PFN_vkGetPhysicalDeviceUbmPresentationSupportSEC = unsafe extern "system" fn(
     _physical_device: PhysicalDevice,
     _queue_family_index: u32,
-    _ubm_device: *mut ubm_device,
+    _device: *mut ubm_device,
 ) -> Bool32;
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetPhysicalDeviceVideoCapabilitiesKHR.html>

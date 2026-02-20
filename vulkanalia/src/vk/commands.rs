@@ -12947,7 +12947,7 @@ impl InstanceCommands {
                     unsafe extern "system" fn fallback(
                         _physical_device: PhysicalDevice,
                         _queue_family_index: u32,
-                        _ubm_device: *mut ubm_device,
+                        _device: *mut ubm_device,
                     ) -> Bool32 {
                         panic!("could not load vkGetPhysicalDeviceUbmPresentationSupportSEC")
                     }

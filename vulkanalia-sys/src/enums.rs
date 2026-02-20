@@ -6436,12 +6436,12 @@ impl StructureType {
     pub const PHYSICAL_DEVICE_MULTIVIEW_FEATURES: Self = Self(1000053001);
     pub const PHYSICAL_DEVICE_MULTIVIEW_PROPERTIES: Self = Self(1000053002);
     pub const PHYSICAL_DEVICE_SHADER_DRAW_PARAMETERS_FEATURES: Self = Self(1000063000);
+    pub const PHYSICAL_DEVICE_DRIVER_PROPERTIES: Self = Self(1000196000);
     pub const PHYSICAL_DEVICE_VULKAN_1_1_FEATURES: Self = Self(49);
     pub const PHYSICAL_DEVICE_VULKAN_1_1_PROPERTIES: Self = Self(50);
     pub const PHYSICAL_DEVICE_VULKAN_1_2_FEATURES: Self = Self(51);
     pub const PHYSICAL_DEVICE_VULKAN_1_2_PROPERTIES: Self = Self(52);
     pub const IMAGE_FORMAT_LIST_CREATE_INFO: Self = Self(1000147000);
-    pub const PHYSICAL_DEVICE_DRIVER_PROPERTIES: Self = Self(1000196000);
     pub const PHYSICAL_DEVICE_VULKAN_MEMORY_MODEL_FEATURES: Self = Self(1000211000);
     pub const PHYSICAL_DEVICE_HOST_QUERY_RESET_FEATURES: Self = Self(1000261000);
     pub const PHYSICAL_DEVICE_TIMELINE_SEMAPHORE_FEATURES: Self = Self(1000207000);
@@ -7533,6 +7533,8 @@ impl StructureType {
     pub const PHYSICAL_DEVICE_COMPUTE_OCCUPANCY_PRIORITY_FEATURES_NV: Self = Self(1000645001);
     pub const PHYSICAL_DEVICE_SHADER_SUBGROUP_PARTITIONED_FEATURES_EXT: Self = Self(1000662000);
     pub const UBM_SURFACE_CREATE_INFO_SEC: Self = Self(1000664000);
+    pub const PHYSICAL_DEVICE_SHADER_MIXED_FLOAT_DOT_PRODUCT_FEATURES_VALVE: Self =
+        Self(1000673000);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -7664,12 +7666,12 @@ impl fmt::Debug for StructureType {
             1000053001 => write!(f, "PHYSICAL_DEVICE_MULTIVIEW_FEATURES"),
             1000053002 => write!(f, "PHYSICAL_DEVICE_MULTIVIEW_PROPERTIES"),
             1000063000 => write!(f, "PHYSICAL_DEVICE_SHADER_DRAW_PARAMETERS_FEATURES"),
+            1000196000 => write!(f, "PHYSICAL_DEVICE_DRIVER_PROPERTIES"),
             49 => write!(f, "PHYSICAL_DEVICE_VULKAN_1_1_FEATURES"),
             50 => write!(f, "PHYSICAL_DEVICE_VULKAN_1_1_PROPERTIES"),
             51 => write!(f, "PHYSICAL_DEVICE_VULKAN_1_2_FEATURES"),
             52 => write!(f, "PHYSICAL_DEVICE_VULKAN_1_2_PROPERTIES"),
             1000147000 => write!(f, "IMAGE_FORMAT_LIST_CREATE_INFO"),
-            1000196000 => write!(f, "PHYSICAL_DEVICE_DRIVER_PROPERTIES"),
             1000211000 => write!(f, "PHYSICAL_DEVICE_VULKAN_MEMORY_MODEL_FEATURES"),
             1000261000 => write!(f, "PHYSICAL_DEVICE_HOST_QUERY_RESET_FEATURES"),
             1000207000 => write!(f, "PHYSICAL_DEVICE_TIMELINE_SEMAPHORE_FEATURES"),
@@ -9033,6 +9035,10 @@ impl fmt::Debug for StructureType {
                 "PHYSICAL_DEVICE_SHADER_SUBGROUP_PARTITIONED_FEATURES_EXT"
             ),
             1000664000 => write!(f, "UBM_SURFACE_CREATE_INFO_SEC"),
+            1000673000 => write!(
+                f,
+                "PHYSICAL_DEVICE_SHADER_MIXED_FLOAT_DOT_PRODUCT_FEATURES_VALVE"
+            ),
             _ => self.0.fmt(f),
         }
     }

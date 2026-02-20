@@ -13499,6 +13499,28 @@ unsafe impl OutputChainStruct for PhysicalDeviceShaderMaximalReconvergenceFeatur
     }
 }
 
+unsafe impl InputChainStruct for PhysicalDeviceShaderMixedFloatDotProductFeaturesVALVE {
+    const TYPE: StructureType =
+        StructureType::PHYSICAL_DEVICE_SHADER_MIXED_FLOAT_DOT_PRODUCT_FEATURES_VALVE;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl OutputChainStruct for PhysicalDeviceShaderMixedFloatDotProductFeaturesVALVE {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
+        self.next
+    }
+}
+
 unsafe impl InputChainStruct for PhysicalDeviceShaderModuleIdentifierFeaturesEXT {
     const TYPE: StructureType =
         StructureType::PHYSICAL_DEVICE_SHADER_MODULE_IDENTIFIER_FEATURES_EXT;

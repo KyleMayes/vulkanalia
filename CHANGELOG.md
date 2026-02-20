@@ -1,3 +1,10 @@
+## [0.36.0] - UNRELEASED
+
+### Bindings Updates
+- [Removing extra double-quote at the end of a comment in `VkFormatFeatureFlagBits2` (#2680)](https://github.com/KhronosGroup/Vulkan-Docs/commit/5caf874c0d1ec519494beea83703c5478bfe92a1)
+- [Close #2675](https://github.com/KhronosGroup/Vulkan-Docs/commit/33eff7c90483e5d8ff66e15c06683a9d19772ea3)
+- [February 20, 2026 Vulkan 1.4.344 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/6aefabc0ad51073cf060e384ce43a59250d4d69c)
+
 ## [0.35.0] - 2026-02-15
 
 ### Changed

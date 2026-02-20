@@ -12392,17 +12392,17 @@ pub trait SecUbmSurfaceExtensionInstanceCommands: InstanceV1_0 {
         physical_device: PhysicalDevice,
         queue_family_index: u32,
     ) -> (Bool32, ubm_device) {
-        let mut ubm_device = MaybeUninit::<ubm_device>::uninit();
+        let mut device = MaybeUninit::<ubm_device>::uninit();
 
         let __result = (self
             .commands()
             .get_physical_device_ubm_presentation_support_sec)(
             physical_device,
             queue_family_index,
-            ubm_device.as_mut_ptr(),
+            device.as_mut_ptr(),
         );
 
-        (__result, ubm_device.assume_init())
+        (__result, device.assume_init())
     }
 }
 
