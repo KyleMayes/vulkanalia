@@ -22139,6 +22139,35 @@ impl Default for PhysicalDeviceShaderMaximalReconvergenceFeaturesKHR {
 unsafe impl Send for PhysicalDeviceShaderMaximalReconvergenceFeaturesKHR {}
 unsafe impl Sync for PhysicalDeviceShaderMaximalReconvergenceFeaturesKHR {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderMixedFloatDotProductFeaturesVALVE.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceShaderMixedFloatDotProductFeaturesVALVE {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub shader_mixed_float_dot_product_float16_acc_float32: Bool32,
+    pub shader_mixed_float_dot_product_float16_acc_float16: Bool32,
+    pub shader_mixed_float_dot_product_b_float16_acc: Bool32,
+    pub shader_mixed_float_dot_product_float8_acc_float32: Bool32,
+}
+
+impl Default for PhysicalDeviceShaderMixedFloatDotProductFeaturesVALVE {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_SHADER_MIXED_FLOAT_DOT_PRODUCT_FEATURES_VALVE,
+            next: ptr::null_mut(),
+            shader_mixed_float_dot_product_float16_acc_float32: Bool32::default(),
+            shader_mixed_float_dot_product_float16_acc_float16: Bool32::default(),
+            shader_mixed_float_dot_product_b_float16_acc: Bool32::default(),
+            shader_mixed_float_dot_product_float8_acc_float32: Bool32::default(),
+        }
+    }
+}
+
+unsafe impl Send for PhysicalDeviceShaderMixedFloatDotProductFeaturesVALVE {}
+unsafe impl Sync for PhysicalDeviceShaderMixedFloatDotProductFeaturesVALVE {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -31169,8 +31198,8 @@ pub struct UbmSurfaceCreateInfoSEC {
     pub s_type: StructureType,
     pub next: *const c_void,
     pub flags: UbmSurfaceCreateFlagsSEC,
-    pub ubm_device: *mut ubm_device,
-    pub ubm_surface: *mut ubm_surface,
+    pub device: *mut ubm_device,
+    pub surface: *mut ubm_surface,
 }
 
 impl Default for UbmSurfaceCreateInfoSEC {
@@ -31180,8 +31209,8 @@ impl Default for UbmSurfaceCreateInfoSEC {
             s_type: StructureType::UBM_SURFACE_CREATE_INFO_SEC,
             next: ptr::null(),
             flags: UbmSurfaceCreateFlagsSEC::default(),
-            ubm_device: ptr::null_mut(),
-            ubm_surface: ptr::null_mut(),
+            device: ptr::null_mut(),
+            surface: ptr::null_mut(),
         }
     }
 }

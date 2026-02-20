@@ -19017,6 +19017,7 @@ unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderIntegerDotProductFea
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderIntegerFunctions2FeaturesINTEL {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderLongVectorFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderMaximalReconvergenceFeaturesKHR {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderMixedFloatDotProductFeaturesVALVE {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderModuleIdentifierFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderObjectFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderQuadControlFeaturesKHR {}
@@ -51360,6 +51361,10 @@ unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderIntegerDotPro
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderIntegerFunctions2FeaturesINTEL {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderLongVectorFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderMaximalReconvergenceFeaturesKHR {}
+unsafe impl ExtendsPhysicalDeviceFeatures2
+    for PhysicalDeviceShaderMixedFloatDotProductFeaturesVALVE
+{
+}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderModuleIdentifierFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderObjectFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderQuadControlFeaturesKHR {}
@@ -67330,6 +67335,100 @@ impl ops::DerefMut for PhysicalDeviceShaderMaximalReconvergenceFeaturesKHRBuilde
 
 unsafe impl Cast for PhysicalDeviceShaderMaximalReconvergenceFeaturesKHRBuilder {
     type Target = PhysicalDeviceShaderMaximalReconvergenceFeaturesKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceShaderMixedFloatDotProductFeaturesVALVE {
+    type Target = PhysicalDeviceShaderMixedFloatDotProductFeaturesVALVE;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceShaderMixedFloatDotProductFeaturesVALVE {
+    type Builder = PhysicalDeviceShaderMixedFloatDotProductFeaturesVALVEBuilder;
+}
+
+/// A builder for a [`PhysicalDeviceShaderMixedFloatDotProductFeaturesVALVE`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceShaderMixedFloatDotProductFeaturesVALVEBuilder {
+    value: PhysicalDeviceShaderMixedFloatDotProductFeaturesVALVE,
+}
+
+impl PhysicalDeviceShaderMixedFloatDotProductFeaturesVALVEBuilder {
+    #[inline]
+    pub fn shader_mixed_float_dot_product_float16_acc_float32(
+        mut self,
+        shader_mixed_float_dot_product_float16_acc_float32: bool,
+    ) -> Self {
+        self.value
+            .shader_mixed_float_dot_product_float16_acc_float32 =
+            shader_mixed_float_dot_product_float16_acc_float32 as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn shader_mixed_float_dot_product_float16_acc_float16(
+        mut self,
+        shader_mixed_float_dot_product_float16_acc_float16: bool,
+    ) -> Self {
+        self.value
+            .shader_mixed_float_dot_product_float16_acc_float16 =
+            shader_mixed_float_dot_product_float16_acc_float16 as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn shader_mixed_float_dot_product_b_float16_acc(
+        mut self,
+        shader_mixed_float_dot_product_b_float16_acc: bool,
+    ) -> Self {
+        self.value.shader_mixed_float_dot_product_b_float16_acc =
+            shader_mixed_float_dot_product_b_float16_acc as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn shader_mixed_float_dot_product_float8_acc_float32(
+        mut self,
+        shader_mixed_float_dot_product_float8_acc_float32: bool,
+    ) -> Self {
+        self.value.shader_mixed_float_dot_product_float8_acc_float32 =
+            shader_mixed_float_dot_product_float8_acc_float32 as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceShaderMixedFloatDotProductFeaturesVALVE {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceShaderMixedFloatDotProductFeaturesVALVEBuilder {
+    type Target = PhysicalDeviceShaderMixedFloatDotProductFeaturesVALVE;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceShaderMixedFloatDotProductFeaturesVALVEBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceShaderMixedFloatDotProductFeaturesVALVEBuilder {
+    type Target = PhysicalDeviceShaderMixedFloatDotProductFeaturesVALVE;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -94775,14 +94874,14 @@ impl<'b> UbmSurfaceCreateInfoSECBuilder<'b> {
     }
 
     #[inline]
-    pub fn ubm_device(mut self, ubm_device: &'b mut ubm_device) -> Self {
-        self.value.ubm_device = ubm_device as *mut ubm_device;
+    pub fn device(mut self, device: &'b mut ubm_device) -> Self {
+        self.value.device = device as *mut ubm_device;
         self
     }
 
     #[inline]
-    pub fn ubm_surface(mut self, ubm_surface: &'b mut ubm_surface) -> Self {
-        self.value.ubm_surface = ubm_surface as *mut ubm_surface;
+    pub fn surface(mut self, surface: &'b mut ubm_surface) -> Self {
+        self.value.surface = surface as *mut ubm_surface;
         self
     }
 

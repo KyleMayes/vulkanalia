@@ -7325,6 +7325,22 @@ pub const VALVE_MUTABLE_DESCRIPTOR_TYPE_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_EXT_mutable_descriptor_type"),
 };
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_VALVE_shader_mixed_float_dot_product.html>
+#[allow(deprecated)]
+pub const VALVE_SHADER_MIXED_FLOAT_DOT_PRODUCT_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_VALVE_shader_mixed_float_dot_product"),
+    number: 674,
+    type_: "device",
+    author: "VALVE",
+    contact: "Georg Lehmann @DadSchoorse",
+    platform: None,
+    required_extensions: None,
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_VALVE_video_encode_rgb_conversion.html>
 #[allow(deprecated)]
 pub const VALVE_VIDEO_ENCODE_RGB_CONVERSION_EXTENSION: Extension = Extension {
