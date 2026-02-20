@@ -73,6 +73,9 @@ pub trait HasBuilder<'b> {
     }
 }
 
+/// A Vulkan struct that can be used to extend `T`
+pub unsafe trait Extends<T: InputChainStruct> {}
+
 /// Adds a base pointer chain with a new non-empty pointer chain.
 #[doc(hidden)]
 pub fn merge(base: *mut c_void, next: NonNull<BaseOutStructure>) -> *mut c_void {
@@ -175,9 +178,7 @@ private fun Registry.generateExtends(struct: Structure): String {
     }
 
     return """
-/// A Vulkan struct that can be used to extend a [`${struct.name}`].
-pub unsafe trait Extends${struct.name}: fmt::Debug { }
-${extends.joinToString("\n") { "unsafe impl Extends${struct.name} for $it { }" }}
+${extends.joinToString("\n") { "unsafe impl Extends<${struct.name}> for $it { }" }}
     """
 }
 
@@ -296,7 +297,7 @@ private fun Registry.generateNextMethod(struct: Structure): String {
 #[inline]
 pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
 where
-    T: Extends${struct.name}
+    T: Extends<${struct.name}>
 {
     self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
     self

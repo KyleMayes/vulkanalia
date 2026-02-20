@@ -49,15 +49,11 @@ fun Registry.indexEntities(): String {
     val versionCommands = mutableMapOf<Identifier, String>()
     val extensionCommands = mutableMapOf<Identifier, String>()
 
-    // Add builder structs and extends traits.
+    // Add builder structs.
 
     for (struct in structs.values) {
         val builder = "${struct.name}Builder"
         entities.addEntity("vk::$builder", "/vk/struct.$builder.html")
-        if (getStructExtensions().containsKey(struct.name)) {
-            val extends = "Extends${struct.name}"
-            entities.addEntity("vk::$extends", "/vk/trait.$extends.html")
-        }
     }
 
     // Add version traits.
