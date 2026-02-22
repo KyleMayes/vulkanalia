@@ -67,6 +67,9 @@ pub trait HasBuilder<'b> {
     }
 }
 
+/// A Vulkan struct that can be used to extend `T`
+pub unsafe trait Extends<T: InputChainStruct> {}
+
 /// Adds a base pointer chain with a new non-empty pointer chain.
 #[doc(hidden)]
 pub fn merge(base: *mut c_void, next: NonNull<BaseOutStructure>) -> *mut c_void {
@@ -508,10 +511,11 @@ unsafe impl Cast for AccelerationStructureCaptureDescriptorDataInfoEXTBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`AccelerationStructureCreateInfoKHR`].
-pub unsafe trait ExtendsAccelerationStructureCreateInfoKHR: fmt::Debug {}
-unsafe impl ExtendsAccelerationStructureCreateInfoKHR for AccelerationStructureMotionInfoNV {}
-unsafe impl ExtendsAccelerationStructureCreateInfoKHR for OpaqueCaptureDescriptorDataCreateInfoEXT {}
+unsafe impl Extends<AccelerationStructureCreateInfoKHR> for AccelerationStructureMotionInfoNV {}
+unsafe impl Extends<AccelerationStructureCreateInfoKHR>
+    for OpaqueCaptureDescriptorDataCreateInfoEXT
+{
+}
 
 unsafe impl Cast for AccelerationStructureCreateInfoKHR {
     type Target = AccelerationStructureCreateInfoKHR;
@@ -538,7 +542,7 @@ impl<'b> AccelerationStructureCreateInfoKHRBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsAccelerationStructureCreateInfoKHR,
+        T: Extends<AccelerationStructureCreateInfoKHR>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -611,9 +615,10 @@ unsafe impl Cast for AccelerationStructureCreateInfoKHRBuilder<'_> {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`AccelerationStructureCreateInfoNV`].
-pub unsafe trait ExtendsAccelerationStructureCreateInfoNV: fmt::Debug {}
-unsafe impl ExtendsAccelerationStructureCreateInfoNV for OpaqueCaptureDescriptorDataCreateInfoEXT {}
+unsafe impl Extends<AccelerationStructureCreateInfoNV>
+    for OpaqueCaptureDescriptorDataCreateInfoEXT
+{
+}
 
 unsafe impl Cast for AccelerationStructureCreateInfoNV {
     type Target = AccelerationStructureCreateInfoNV;
@@ -640,7 +645,7 @@ impl<'b> AccelerationStructureCreateInfoNVBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsAccelerationStructureCreateInfoNV,
+        T: Extends<AccelerationStructureCreateInfoNV>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -689,12 +694,7 @@ unsafe impl Cast for AccelerationStructureCreateInfoNVBuilder<'_> {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`AccelerationStructureDenseGeometryFormatTrianglesDataAMDX`].
-pub unsafe trait ExtendsAccelerationStructureDenseGeometryFormatTrianglesDataAMDX:
-    fmt::Debug
-{
-}
-unsafe impl ExtendsAccelerationStructureDenseGeometryFormatTrianglesDataAMDX
+unsafe impl Extends<AccelerationStructureDenseGeometryFormatTrianglesDataAMDX>
     for AccelerationStructureTrianglesOpacityMicromapEXT
 {
 }
@@ -724,7 +724,7 @@ impl<'b> AccelerationStructureDenseGeometryFormatTrianglesDataAMDXBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsAccelerationStructureDenseGeometryFormatTrianglesDataAMDX,
+        T: Extends<AccelerationStructureDenseGeometryFormatTrianglesDataAMDX>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -992,17 +992,18 @@ unsafe impl Cast for AccelerationStructureGeometryInstancesDataKHRBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`AccelerationStructureGeometryKHR`].
-pub unsafe trait ExtendsAccelerationStructureGeometryKHR: fmt::Debug {}
-unsafe impl ExtendsAccelerationStructureGeometryKHR
+unsafe impl Extends<AccelerationStructureGeometryKHR>
     for AccelerationStructureDenseGeometryFormatTrianglesDataAMDX
 {
 }
-unsafe impl ExtendsAccelerationStructureGeometryKHR
+unsafe impl Extends<AccelerationStructureGeometryKHR>
     for AccelerationStructureGeometryLinearSweptSpheresDataNV
 {
 }
-unsafe impl ExtendsAccelerationStructureGeometryKHR for AccelerationStructureGeometrySpheresDataNV {}
+unsafe impl Extends<AccelerationStructureGeometryKHR>
+    for AccelerationStructureGeometrySpheresDataNV
+{
+}
 
 unsafe impl Cast for AccelerationStructureGeometryKHR {
     type Target = AccelerationStructureGeometryKHR;
@@ -1029,7 +1030,7 @@ impl<'b> AccelerationStructureGeometryKHRBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsAccelerationStructureGeometryKHR,
+        T: Extends<AccelerationStructureGeometryKHR>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -1366,17 +1367,15 @@ unsafe impl Cast for AccelerationStructureGeometrySpheresDataNVBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`AccelerationStructureGeometryTrianglesDataKHR`].
-pub unsafe trait ExtendsAccelerationStructureGeometryTrianglesDataKHR: fmt::Debug {}
-unsafe impl ExtendsAccelerationStructureGeometryTrianglesDataKHR
+unsafe impl Extends<AccelerationStructureGeometryTrianglesDataKHR>
     for AccelerationStructureGeometryMotionTrianglesDataNV
 {
 }
-unsafe impl ExtendsAccelerationStructureGeometryTrianglesDataKHR
+unsafe impl Extends<AccelerationStructureGeometryTrianglesDataKHR>
     for AccelerationStructureTrianglesDisplacementMicromapNV
 {
 }
-unsafe impl ExtendsAccelerationStructureGeometryTrianglesDataKHR
+unsafe impl Extends<AccelerationStructureGeometryTrianglesDataKHR>
     for AccelerationStructureTrianglesOpacityMicromapEXT
 {
 }
@@ -1406,7 +1405,7 @@ impl<'b> AccelerationStructureGeometryTrianglesDataKHRBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsAccelerationStructureGeometryTrianglesDataKHR,
+        T: Extends<AccelerationStructureGeometryTrianglesDataKHR>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -2980,17 +2979,15 @@ unsafe impl Cast for AndroidHardwareBufferFormatResolvePropertiesANDROIDBuilder 
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`AndroidHardwareBufferPropertiesANDROID`].
-pub unsafe trait ExtendsAndroidHardwareBufferPropertiesANDROID: fmt::Debug {}
-unsafe impl ExtendsAndroidHardwareBufferPropertiesANDROID
+unsafe impl Extends<AndroidHardwareBufferPropertiesANDROID>
     for AndroidHardwareBufferFormatProperties2ANDROID
 {
 }
-unsafe impl ExtendsAndroidHardwareBufferPropertiesANDROID
+unsafe impl Extends<AndroidHardwareBufferPropertiesANDROID>
     for AndroidHardwareBufferFormatPropertiesANDROID
 {
 }
-unsafe impl ExtendsAndroidHardwareBufferPropertiesANDROID
+unsafe impl Extends<AndroidHardwareBufferPropertiesANDROID>
     for AndroidHardwareBufferFormatResolvePropertiesANDROID
 {
 }
@@ -3020,7 +3017,7 @@ impl<'b> AndroidHardwareBufferPropertiesANDROIDBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsAndroidHardwareBufferPropertiesANDROID,
+        T: Extends<AndroidHardwareBufferPropertiesANDROID>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -3330,9 +3327,7 @@ unsafe impl Cast for AntiLagPresentationInfoAMDBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`ApplicationInfo`].
-pub unsafe trait ExtendsApplicationInfo: fmt::Debug {}
-unsafe impl ExtendsApplicationInfo for ApplicationParametersEXT {}
+unsafe impl Extends<ApplicationInfo> for ApplicationParametersEXT {}
 
 unsafe impl Cast for ApplicationInfo {
     type Target = ApplicationInfo;
@@ -3359,7 +3354,7 @@ impl<'b> ApplicationInfoBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsApplicationInfo,
+        T: Extends<ApplicationInfo>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -3608,11 +3603,9 @@ unsafe impl Cast for AttachmentDescriptionBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`AttachmentDescription2`].
-pub unsafe trait ExtendsAttachmentDescription2: fmt::Debug {}
-unsafe impl ExtendsAttachmentDescription2 for AttachmentDescriptionStencilLayout {}
-unsafe impl ExtendsAttachmentDescription2 for ExternalFormatANDROID {}
-unsafe impl ExtendsAttachmentDescription2 for ExternalFormatOHOS {}
+unsafe impl Extends<AttachmentDescription2> for AttachmentDescriptionStencilLayout {}
+unsafe impl Extends<AttachmentDescription2> for ExternalFormatANDROID {}
+unsafe impl Extends<AttachmentDescription2> for ExternalFormatOHOS {}
 
 unsafe impl Cast for AttachmentDescription2 {
     type Target = AttachmentDescription2;
@@ -3639,7 +3632,7 @@ impl<'b> AttachmentDescription2Builder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsAttachmentDescription2,
+        T: Extends<AttachmentDescription2>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -3916,9 +3909,7 @@ unsafe impl Cast for AttachmentReferenceBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`AttachmentReference2`].
-pub unsafe trait ExtendsAttachmentReference2: fmt::Debug {}
-unsafe impl ExtendsAttachmentReference2 for AttachmentReferenceStencilLayout {}
+unsafe impl Extends<AttachmentReference2> for AttachmentReferenceStencilLayout {}
 
 unsafe impl Cast for AttachmentReference2 {
     type Target = AttachmentReference2;
@@ -3945,7 +3936,7 @@ impl<'b> AttachmentReference2Builder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsAttachmentReference2,
+        T: Extends<AttachmentReference2>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -4507,10 +4498,8 @@ unsafe impl Cast for BindBufferMemoryDeviceGroupInfoBuilder<'_> {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`BindBufferMemoryInfo`].
-pub unsafe trait ExtendsBindBufferMemoryInfo: fmt::Debug {}
-unsafe impl ExtendsBindBufferMemoryInfo for BindBufferMemoryDeviceGroupInfo {}
-unsafe impl ExtendsBindBufferMemoryInfo for BindMemoryStatus {}
+unsafe impl Extends<BindBufferMemoryInfo> for BindBufferMemoryDeviceGroupInfo {}
+unsafe impl Extends<BindBufferMemoryInfo> for BindMemoryStatus {}
 
 unsafe impl Cast for BindBufferMemoryInfo {
     type Target = BindBufferMemoryInfo;
@@ -4537,7 +4526,7 @@ impl<'b> BindBufferMemoryInfoBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsBindBufferMemoryInfo,
+        T: Extends<BindBufferMemoryInfo>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -4674,9 +4663,7 @@ unsafe impl Cast for BindDataGraphPipelineSessionMemoryInfoARMBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`BindDescriptorBufferEmbeddedSamplersInfoEXT`].
-pub unsafe trait ExtendsBindDescriptorBufferEmbeddedSamplersInfoEXT: fmt::Debug {}
-unsafe impl ExtendsBindDescriptorBufferEmbeddedSamplersInfoEXT for PipelineLayoutCreateInfo {}
+unsafe impl Extends<BindDescriptorBufferEmbeddedSamplersInfoEXT> for PipelineLayoutCreateInfo {}
 
 unsafe impl Cast for BindDescriptorBufferEmbeddedSamplersInfoEXT {
     type Target = BindDescriptorBufferEmbeddedSamplersInfoEXT;
@@ -4703,7 +4690,7 @@ impl<'b> BindDescriptorBufferEmbeddedSamplersInfoEXTBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsBindDescriptorBufferEmbeddedSamplersInfoEXT,
+        T: Extends<BindDescriptorBufferEmbeddedSamplersInfoEXT>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -4758,9 +4745,7 @@ unsafe impl Cast for BindDescriptorBufferEmbeddedSamplersInfoEXTBuilder<'_> {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`BindDescriptorSetsInfo`].
-pub unsafe trait ExtendsBindDescriptorSetsInfo: fmt::Debug {}
-unsafe impl ExtendsBindDescriptorSetsInfo for PipelineLayoutCreateInfo {}
+unsafe impl Extends<BindDescriptorSetsInfo> for PipelineLayoutCreateInfo {}
 
 unsafe impl Cast for BindDescriptorSetsInfo {
     type Target = BindDescriptorSetsInfo;
@@ -4787,7 +4772,7 @@ impl<'b> BindDescriptorSetsInfoBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsBindDescriptorSetsInfo,
+        T: Extends<BindDescriptorSetsInfo>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -4996,12 +4981,10 @@ unsafe impl Cast for BindImageMemoryDeviceGroupInfoBuilder<'_> {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`BindImageMemoryInfo`].
-pub unsafe trait ExtendsBindImageMemoryInfo: fmt::Debug {}
-unsafe impl ExtendsBindImageMemoryInfo for BindImageMemoryDeviceGroupInfo {}
-unsafe impl ExtendsBindImageMemoryInfo for BindImageMemorySwapchainInfoKHR {}
-unsafe impl ExtendsBindImageMemoryInfo for BindImagePlaneMemoryInfo {}
-unsafe impl ExtendsBindImageMemoryInfo for BindMemoryStatus {}
+unsafe impl Extends<BindImageMemoryInfo> for BindImageMemoryDeviceGroupInfo {}
+unsafe impl Extends<BindImageMemoryInfo> for BindImageMemorySwapchainInfoKHR {}
+unsafe impl Extends<BindImageMemoryInfo> for BindImagePlaneMemoryInfo {}
+unsafe impl Extends<BindImageMemoryInfo> for BindMemoryStatus {}
 
 unsafe impl Cast for BindImageMemoryInfo {
     type Target = BindImageMemoryInfo;
@@ -5028,7 +5011,7 @@ impl<'b> BindImageMemoryInfoBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsBindImageMemoryInfo,
+        T: Extends<BindImageMemoryInfo>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -5520,12 +5503,10 @@ unsafe impl Cast for BindShaderGroupIndirectCommandNVBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`BindSparseInfo`].
-pub unsafe trait ExtendsBindSparseInfo: fmt::Debug {}
-unsafe impl ExtendsBindSparseInfo for DeviceGroupBindSparseInfo {}
-unsafe impl ExtendsBindSparseInfo for FrameBoundaryEXT {}
-unsafe impl ExtendsBindSparseInfo for FrameBoundaryTensorsARM {}
-unsafe impl ExtendsBindSparseInfo for TimelineSemaphoreSubmitInfo {}
+unsafe impl Extends<BindSparseInfo> for DeviceGroupBindSparseInfo {}
+unsafe impl Extends<BindSparseInfo> for FrameBoundaryEXT {}
+unsafe impl Extends<BindSparseInfo> for FrameBoundaryTensorsARM {}
+unsafe impl Extends<BindSparseInfo> for TimelineSemaphoreSubmitInfo {}
 
 unsafe impl Cast for BindSparseInfo {
     type Target = BindSparseInfo;
@@ -5552,7 +5533,7 @@ impl<'b> BindSparseInfoBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsBindSparseInfo,
+        T: Extends<BindSparseInfo>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -5977,9 +5958,7 @@ unsafe impl Cast for BlitImageCubicWeightsInfoQCOMBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`BlitImageInfo2`].
-pub unsafe trait ExtendsBlitImageInfo2: fmt::Debug {}
-unsafe impl ExtendsBlitImageInfo2 for BlitImageCubicWeightsInfoQCOM {}
+unsafe impl Extends<BlitImageInfo2> for BlitImageCubicWeightsInfoQCOM {}
 
 unsafe impl Cast for BlitImageInfo2 {
     type Target = BlitImageInfo2;
@@ -6006,7 +5985,7 @@ impl<'b> BlitImageInfo2Builder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsBlitImageInfo2,
+        T: Extends<BlitImageInfo2>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -6756,16 +6735,14 @@ unsafe impl Cast for BufferCopy2Builder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`BufferCreateInfo`].
-pub unsafe trait ExtendsBufferCreateInfo: fmt::Debug {}
-unsafe impl ExtendsBufferCreateInfo for BufferCollectionBufferCreateInfoFUCHSIA {}
-unsafe impl ExtendsBufferCreateInfo for BufferDeviceAddressCreateInfoEXT {}
-unsafe impl ExtendsBufferCreateInfo for BufferOpaqueCaptureAddressCreateInfo {}
-unsafe impl ExtendsBufferCreateInfo for BufferUsageFlags2CreateInfo {}
-unsafe impl ExtendsBufferCreateInfo for DedicatedAllocationBufferCreateInfoNV {}
-unsafe impl ExtendsBufferCreateInfo for ExternalMemoryBufferCreateInfo {}
-unsafe impl ExtendsBufferCreateInfo for OpaqueCaptureDescriptorDataCreateInfoEXT {}
-unsafe impl ExtendsBufferCreateInfo for VideoProfileListInfoKHR {}
+unsafe impl Extends<BufferCreateInfo> for BufferCollectionBufferCreateInfoFUCHSIA {}
+unsafe impl Extends<BufferCreateInfo> for BufferDeviceAddressCreateInfoEXT {}
+unsafe impl Extends<BufferCreateInfo> for BufferOpaqueCaptureAddressCreateInfo {}
+unsafe impl Extends<BufferCreateInfo> for BufferUsageFlags2CreateInfo {}
+unsafe impl Extends<BufferCreateInfo> for DedicatedAllocationBufferCreateInfoNV {}
+unsafe impl Extends<BufferCreateInfo> for ExternalMemoryBufferCreateInfo {}
+unsafe impl Extends<BufferCreateInfo> for OpaqueCaptureDescriptorDataCreateInfoEXT {}
+unsafe impl Extends<BufferCreateInfo> for VideoProfileListInfoKHR {}
 
 unsafe impl Cast for BufferCreateInfo {
     type Target = BufferCreateInfo;
@@ -6792,7 +6769,7 @@ impl<'b> BufferCreateInfoBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsBufferCreateInfo,
+        T: Extends<BufferCreateInfo>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -7067,9 +7044,7 @@ unsafe impl Cast for BufferImageCopyBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`BufferImageCopy2`].
-pub unsafe trait ExtendsBufferImageCopy2: fmt::Debug {}
-unsafe impl ExtendsBufferImageCopy2 for CopyCommandTransformInfoQCOM {}
+unsafe impl Extends<BufferImageCopy2> for CopyCommandTransformInfoQCOM {}
 
 unsafe impl Cast for BufferImageCopy2 {
     type Target = BufferImageCopy2;
@@ -7096,7 +7071,7 @@ impl<'b> BufferImageCopy2Builder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsBufferImageCopy2,
+        T: Extends<BufferImageCopy2>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -7172,9 +7147,7 @@ unsafe impl Cast for BufferImageCopy2Builder<'_> {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`BufferMemoryBarrier`].
-pub unsafe trait ExtendsBufferMemoryBarrier: fmt::Debug {}
-unsafe impl ExtendsBufferMemoryBarrier for ExternalMemoryAcquireUnmodifiedEXT {}
+unsafe impl Extends<BufferMemoryBarrier> for ExternalMemoryAcquireUnmodifiedEXT {}
 
 unsafe impl Cast for BufferMemoryBarrier {
     type Target = BufferMemoryBarrier;
@@ -7201,7 +7174,7 @@ impl<'b> BufferMemoryBarrierBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsBufferMemoryBarrier,
+        T: Extends<BufferMemoryBarrier>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -7280,10 +7253,8 @@ unsafe impl Cast for BufferMemoryBarrierBuilder<'_> {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`BufferMemoryBarrier2`].
-pub unsafe trait ExtendsBufferMemoryBarrier2: fmt::Debug {}
-unsafe impl ExtendsBufferMemoryBarrier2 for ExternalMemoryAcquireUnmodifiedEXT {}
-unsafe impl ExtendsBufferMemoryBarrier2 for MemoryBarrierAccessFlags3KHR {}
+unsafe impl Extends<BufferMemoryBarrier2> for ExternalMemoryAcquireUnmodifiedEXT {}
+unsafe impl Extends<BufferMemoryBarrier2> for MemoryBarrierAccessFlags3KHR {}
 
 unsafe impl Cast for BufferMemoryBarrier2 {
     type Target = BufferMemoryBarrier2;
@@ -7310,7 +7281,7 @@ impl<'b> BufferMemoryBarrier2Builder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsBufferMemoryBarrier2,
+        T: Extends<BufferMemoryBarrier2>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -7575,10 +7546,8 @@ unsafe impl Cast for BufferUsageFlags2CreateInfoBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`BufferViewCreateInfo`].
-pub unsafe trait ExtendsBufferViewCreateInfo: fmt::Debug {}
-unsafe impl ExtendsBufferViewCreateInfo for BufferUsageFlags2CreateInfo {}
-unsafe impl ExtendsBufferViewCreateInfo for ExportMetalObjectCreateInfoEXT {}
+unsafe impl Extends<BufferViewCreateInfo> for BufferUsageFlags2CreateInfo {}
+unsafe impl Extends<BufferViewCreateInfo> for ExportMetalObjectCreateInfoEXT {}
 
 unsafe impl Cast for BufferViewCreateInfo {
     type Target = BufferViewCreateInfo;
@@ -7605,7 +7574,7 @@ impl<'b> BufferViewCreateInfoBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsBufferViewCreateInfo,
+        T: Extends<BufferViewCreateInfo>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -7840,9 +7809,7 @@ unsafe impl Cast for BuildPartitionedAccelerationStructureInfoNVBuilder<'_> {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`CalibratedTimestampInfoKHR`].
-pub unsafe trait ExtendsCalibratedTimestampInfoKHR: fmt::Debug {}
-unsafe impl ExtendsCalibratedTimestampInfoKHR for SwapchainCalibratedTimestampInfoEXT {}
+unsafe impl Extends<CalibratedTimestampInfoKHR> for SwapchainCalibratedTimestampInfoEXT {}
 
 unsafe impl Cast for CalibratedTimestampInfoKHR {
     type Target = CalibratedTimestampInfoKHR;
@@ -7869,7 +7836,7 @@ impl<'b> CalibratedTimestampInfoKHRBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsCalibratedTimestampInfoKHR,
+        T: Extends<CalibratedTimestampInfoKHR>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -9782,9 +9749,7 @@ unsafe impl Cast for CommandBufferAllocateInfoBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`CommandBufferBeginInfo`].
-pub unsafe trait ExtendsCommandBufferBeginInfo: fmt::Debug {}
-unsafe impl ExtendsCommandBufferBeginInfo for DeviceGroupCommandBufferBeginInfo {}
+unsafe impl Extends<CommandBufferBeginInfo> for DeviceGroupCommandBufferBeginInfo {}
 
 unsafe impl Cast for CommandBufferBeginInfo {
     type Target = CommandBufferBeginInfo;
@@ -9811,7 +9776,7 @@ impl<'b> CommandBufferBeginInfoBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsCommandBufferBeginInfo,
+        T: Extends<CommandBufferBeginInfo>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -9992,28 +9957,32 @@ unsafe impl Cast for CommandBufferInheritanceDescriptorHeapInfoEXTBuilder<'_> {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`CommandBufferInheritanceInfo`].
-pub unsafe trait ExtendsCommandBufferInheritanceInfo: fmt::Debug {}
-unsafe impl ExtendsCommandBufferInheritanceInfo for AttachmentSampleCountInfoAMD {}
-unsafe impl ExtendsCommandBufferInheritanceInfo
+unsafe impl Extends<CommandBufferInheritanceInfo> for AttachmentSampleCountInfoAMD {}
+unsafe impl Extends<CommandBufferInheritanceInfo>
     for CommandBufferInheritanceConditionalRenderingInfoEXT
 {
 }
-unsafe impl ExtendsCommandBufferInheritanceInfo for CommandBufferInheritanceDescriptorHeapInfoEXT {}
-unsafe impl ExtendsCommandBufferInheritanceInfo
+unsafe impl Extends<CommandBufferInheritanceInfo>
+    for CommandBufferInheritanceDescriptorHeapInfoEXT
+{
+}
+unsafe impl Extends<CommandBufferInheritanceInfo>
     for CommandBufferInheritanceRenderPassTransformInfoQCOM
 {
 }
-unsafe impl ExtendsCommandBufferInheritanceInfo for CommandBufferInheritanceRenderingInfo {}
-unsafe impl ExtendsCommandBufferInheritanceInfo for CommandBufferInheritanceViewportScissorInfoNV {}
-unsafe impl ExtendsCommandBufferInheritanceInfo for CustomResolveCreateInfoEXT {}
-unsafe impl ExtendsCommandBufferInheritanceInfo for ExternalFormatANDROID {}
-unsafe impl ExtendsCommandBufferInheritanceInfo for ExternalFormatOHOS {}
-unsafe impl ExtendsCommandBufferInheritanceInfo for MultiviewPerViewAttributesInfoNVX {}
-unsafe impl ExtendsCommandBufferInheritanceInfo for RenderPassTileShadingCreateInfoQCOM {}
-unsafe impl ExtendsCommandBufferInheritanceInfo for RenderingAttachmentLocationInfo {}
-unsafe impl ExtendsCommandBufferInheritanceInfo for RenderingInputAttachmentIndexInfo {}
-unsafe impl ExtendsCommandBufferInheritanceInfo for TileMemoryBindInfoQCOM {}
+unsafe impl Extends<CommandBufferInheritanceInfo> for CommandBufferInheritanceRenderingInfo {}
+unsafe impl Extends<CommandBufferInheritanceInfo>
+    for CommandBufferInheritanceViewportScissorInfoNV
+{
+}
+unsafe impl Extends<CommandBufferInheritanceInfo> for CustomResolveCreateInfoEXT {}
+unsafe impl Extends<CommandBufferInheritanceInfo> for ExternalFormatANDROID {}
+unsafe impl Extends<CommandBufferInheritanceInfo> for ExternalFormatOHOS {}
+unsafe impl Extends<CommandBufferInheritanceInfo> for MultiviewPerViewAttributesInfoNVX {}
+unsafe impl Extends<CommandBufferInheritanceInfo> for RenderPassTileShadingCreateInfoQCOM {}
+unsafe impl Extends<CommandBufferInheritanceInfo> for RenderingAttachmentLocationInfo {}
+unsafe impl Extends<CommandBufferInheritanceInfo> for RenderingInputAttachmentIndexInfo {}
+unsafe impl Extends<CommandBufferInheritanceInfo> for TileMemoryBindInfoQCOM {}
 
 unsafe impl Cast for CommandBufferInheritanceInfo {
     type Target = CommandBufferInheritanceInfo;
@@ -10040,7 +10009,7 @@ impl<'b> CommandBufferInheritanceInfoBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsCommandBufferInheritanceInfo,
+        T: Extends<CommandBufferInheritanceInfo>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -10338,9 +10307,7 @@ unsafe impl Cast for CommandBufferInheritanceViewportScissorInfoNVBuilder<'_> {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`CommandBufferSubmitInfo`].
-pub unsafe trait ExtendsCommandBufferSubmitInfo: fmt::Debug {}
-unsafe impl ExtendsCommandBufferSubmitInfo for RenderPassStripeSubmitInfoARM {}
+unsafe impl Extends<CommandBufferSubmitInfo> for RenderPassStripeSubmitInfoARM {}
 
 unsafe impl Cast for CommandBufferSubmitInfo {
     type Target = CommandBufferSubmitInfo;
@@ -10367,7 +10334,7 @@ impl<'b> CommandBufferSubmitInfoBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsCommandBufferSubmitInfo,
+        T: Extends<CommandBufferSubmitInfo>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -10416,9 +10383,7 @@ unsafe impl Cast for CommandBufferSubmitInfoBuilder<'_> {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`CommandPoolCreateInfo`].
-pub unsafe trait ExtendsCommandPoolCreateInfo: fmt::Debug {}
-unsafe impl ExtendsCommandPoolCreateInfo for DataGraphProcessingEngineCreateInfoARM {}
+unsafe impl Extends<CommandPoolCreateInfo> for DataGraphProcessingEngineCreateInfoARM {}
 
 unsafe impl Cast for CommandPoolCreateInfo {
     type Target = CommandPoolCreateInfo;
@@ -10445,7 +10410,7 @@ impl<'b> CommandPoolCreateInfoBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsCommandPoolCreateInfo,
+        T: Extends<CommandPoolCreateInfo>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -10634,15 +10599,13 @@ unsafe impl Cast for ComputeOccupancyPriorityParametersNVBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`ComputePipelineCreateInfo`].
-pub unsafe trait ExtendsComputePipelineCreateInfo: fmt::Debug {}
-unsafe impl ExtendsComputePipelineCreateInfo for ComputePipelineIndirectBufferInfoNV {}
-unsafe impl ExtendsComputePipelineCreateInfo for PipelineBinaryInfoKHR {}
-unsafe impl ExtendsComputePipelineCreateInfo for PipelineCompilerControlCreateInfoAMD {}
-unsafe impl ExtendsComputePipelineCreateInfo for PipelineCreateFlags2CreateInfo {}
-unsafe impl ExtendsComputePipelineCreateInfo for PipelineCreationFeedbackCreateInfo {}
-unsafe impl ExtendsComputePipelineCreateInfo for PipelineRobustnessCreateInfo {}
-unsafe impl ExtendsComputePipelineCreateInfo for SubpassShadingPipelineCreateInfoHUAWEI {}
+unsafe impl Extends<ComputePipelineCreateInfo> for ComputePipelineIndirectBufferInfoNV {}
+unsafe impl Extends<ComputePipelineCreateInfo> for PipelineBinaryInfoKHR {}
+unsafe impl Extends<ComputePipelineCreateInfo> for PipelineCompilerControlCreateInfoAMD {}
+unsafe impl Extends<ComputePipelineCreateInfo> for PipelineCreateFlags2CreateInfo {}
+unsafe impl Extends<ComputePipelineCreateInfo> for PipelineCreationFeedbackCreateInfo {}
+unsafe impl Extends<ComputePipelineCreateInfo> for PipelineRobustnessCreateInfo {}
+unsafe impl Extends<ComputePipelineCreateInfo> for SubpassShadingPipelineCreateInfoHUAWEI {}
 
 unsafe impl Cast for ComputePipelineCreateInfo {
     type Target = ComputePipelineCreateInfo;
@@ -10669,7 +10632,7 @@ impl<'b> ComputePipelineCreateInfoBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsComputePipelineCreateInfo,
+        T: Extends<ComputePipelineCreateInfo>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -13198,9 +13161,7 @@ unsafe impl Cast for CuLaunchInfoNVXBuilder<'_> {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`CuModuleCreateInfoNVX`].
-pub unsafe trait ExtendsCuModuleCreateInfoNVX: fmt::Debug {}
-unsafe impl ExtendsCuModuleCreateInfoNVX for CuModuleTexturingModeCreateInfoNVX {}
+unsafe impl Extends<CuModuleCreateInfoNVX> for CuModuleTexturingModeCreateInfoNVX {}
 
 unsafe impl Cast for CuModuleCreateInfoNVX {
     type Target = CuModuleCreateInfoNVX;
@@ -13227,7 +13188,7 @@ impl<'b> CuModuleCreateInfoNVXBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsCuModuleCreateInfoNVX,
+        T: Extends<CuModuleCreateInfoNVX>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -13847,13 +13808,11 @@ unsafe impl Cast for DataGraphPipelineCompilerControlCreateInfoARMBuilder<'_> {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`DataGraphPipelineConstantARM`].
-pub unsafe trait ExtendsDataGraphPipelineConstantARM: fmt::Debug {}
-unsafe impl ExtendsDataGraphPipelineConstantARM
+unsafe impl Extends<DataGraphPipelineConstantARM>
     for DataGraphPipelineConstantTensorSemiStructuredSparsityInfoARM
 {
 }
-unsafe impl ExtendsDataGraphPipelineConstantARM for TensorDescriptionARM {}
+unsafe impl Extends<DataGraphPipelineConstantARM> for TensorDescriptionARM {}
 
 unsafe impl Cast for DataGraphPipelineConstantARM {
     type Target = DataGraphPipelineConstantARM;
@@ -13880,7 +13839,7 @@ impl<'b> DataGraphPipelineConstantARMBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsDataGraphPipelineConstantARM,
+        T: Extends<DataGraphPipelineConstantARM>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -13999,18 +13958,19 @@ unsafe impl Cast for DataGraphPipelineConstantTensorSemiStructuredSparsityInfoAR
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`DataGraphPipelineCreateInfoARM`].
-pub unsafe trait ExtendsDataGraphPipelineCreateInfoARM: fmt::Debug {}
-unsafe impl ExtendsDataGraphPipelineCreateInfoARM for DataGraphPipelineBuiltinModelCreateInfoQCOM {}
-unsafe impl ExtendsDataGraphPipelineCreateInfoARM
+unsafe impl Extends<DataGraphPipelineCreateInfoARM>
+    for DataGraphPipelineBuiltinModelCreateInfoQCOM
+{
+}
+unsafe impl Extends<DataGraphPipelineCreateInfoARM>
     for DataGraphPipelineCompilerControlCreateInfoARM
 {
 }
-unsafe impl ExtendsDataGraphPipelineCreateInfoARM for DataGraphPipelineIdentifierCreateInfoARM {}
-unsafe impl ExtendsDataGraphPipelineCreateInfoARM for DataGraphPipelineShaderModuleCreateInfoARM {}
-unsafe impl ExtendsDataGraphPipelineCreateInfoARM for DataGraphProcessingEngineCreateInfoARM {}
-unsafe impl ExtendsDataGraphPipelineCreateInfoARM for PipelineCreationFeedbackCreateInfo {}
-unsafe impl ExtendsDataGraphPipelineCreateInfoARM for ShaderModuleCreateInfo {}
+unsafe impl Extends<DataGraphPipelineCreateInfoARM> for DataGraphPipelineIdentifierCreateInfoARM {}
+unsafe impl Extends<DataGraphPipelineCreateInfoARM> for DataGraphPipelineShaderModuleCreateInfoARM {}
+unsafe impl Extends<DataGraphPipelineCreateInfoARM> for DataGraphProcessingEngineCreateInfoARM {}
+unsafe impl Extends<DataGraphPipelineCreateInfoARM> for PipelineCreationFeedbackCreateInfo {}
+unsafe impl Extends<DataGraphPipelineCreateInfoARM> for ShaderModuleCreateInfo {}
 
 unsafe impl Cast for DataGraphPipelineCreateInfoARM {
     type Target = DataGraphPipelineCreateInfoARM;
@@ -14037,7 +13997,7 @@ impl<'b> DataGraphPipelineCreateInfoARMBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsDataGraphPipelineCreateInfoARM,
+        T: Extends<DataGraphPipelineCreateInfoARM>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -14350,9 +14310,7 @@ unsafe impl Cast for DataGraphPipelinePropertyQueryResultARMBuilder<'_> {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`DataGraphPipelineResourceInfoARM`].
-pub unsafe trait ExtendsDataGraphPipelineResourceInfoARM: fmt::Debug {}
-unsafe impl ExtendsDataGraphPipelineResourceInfoARM for TensorDescriptionARM {}
+unsafe impl Extends<DataGraphPipelineResourceInfoARM> for TensorDescriptionARM {}
 
 unsafe impl Cast for DataGraphPipelineResourceInfoARM {
     type Target = DataGraphPipelineResourceInfoARM;
@@ -14379,7 +14337,7 @@ impl<'b> DataGraphPipelineResourceInfoARMBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsDataGraphPipelineResourceInfoARM,
+        T: Extends<DataGraphPipelineResourceInfoARM>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -15202,9 +15160,7 @@ unsafe impl Cast for DebugUtilsLabelEXTBuilder<'_> {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`DebugUtilsMessengerCallbackDataEXT`].
-pub unsafe trait ExtendsDebugUtilsMessengerCallbackDataEXT: fmt::Debug {}
-unsafe impl ExtendsDebugUtilsMessengerCallbackDataEXT for DeviceAddressBindingCallbackDataEXT {}
+unsafe impl Extends<DebugUtilsMessengerCallbackDataEXT> for DeviceAddressBindingCallbackDataEXT {}
 
 unsafe impl Cast for DebugUtilsMessengerCallbackDataEXT {
     type Target = DebugUtilsMessengerCallbackDataEXT;
@@ -15231,7 +15187,7 @@ impl<'b> DebugUtilsMessengerCallbackDataEXTBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsDebugUtilsMessengerCallbackDataEXT,
+        T: Extends<DebugUtilsMessengerCallbackDataEXT>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -15964,10 +15920,8 @@ unsafe impl Cast for DedicatedAllocationMemoryAllocateInfoNVBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`DependencyInfo`].
-pub unsafe trait ExtendsDependencyInfo: fmt::Debug {}
-unsafe impl ExtendsDependencyInfo for TensorDependencyInfoARM {}
-unsafe impl ExtendsDependencyInfo for TensorMemoryBarrierARM {}
+unsafe impl Extends<DependencyInfo> for TensorDependencyInfoARM {}
+unsafe impl Extends<DependencyInfo> for TensorMemoryBarrierARM {}
 
 unsafe impl Cast for DependencyInfo {
     type Target = DependencyInfo;
@@ -15994,7 +15948,7 @@ impl<'b> DependencyInfoBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsDependencyInfo,
+        T: Extends<DependencyInfo>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -16067,9 +16021,7 @@ unsafe impl Cast for DependencyInfoBuilder<'_> {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`DepthBiasInfoEXT`].
-pub unsafe trait ExtendsDepthBiasInfoEXT: fmt::Debug {}
-unsafe impl ExtendsDepthBiasInfoEXT for DepthBiasRepresentationInfoEXT {}
+unsafe impl Extends<DepthBiasInfoEXT> for DepthBiasRepresentationInfoEXT {}
 
 unsafe impl Cast for DepthBiasInfoEXT {
     type Target = DepthBiasInfoEXT;
@@ -16096,7 +16048,7 @@ impl<'b> DepthBiasInfoEXTBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsDepthBiasInfoEXT,
+        T: Extends<DepthBiasInfoEXT>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -16352,10 +16304,8 @@ unsafe impl Cast for DescriptorAddressInfoEXTBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`DescriptorBufferBindingInfoEXT`].
-pub unsafe trait ExtendsDescriptorBufferBindingInfoEXT: fmt::Debug {}
-unsafe impl ExtendsDescriptorBufferBindingInfoEXT for BufferUsageFlags2CreateInfo {}
-unsafe impl ExtendsDescriptorBufferBindingInfoEXT
+unsafe impl Extends<DescriptorBufferBindingInfoEXT> for BufferUsageFlags2CreateInfo {}
+unsafe impl Extends<DescriptorBufferBindingInfoEXT>
     for DescriptorBufferBindingPushDescriptorBufferHandleEXT
 {
 }
@@ -16385,7 +16335,7 @@ impl<'b> DescriptorBufferBindingInfoEXTBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsDescriptorBufferBindingInfoEXT,
+        T: Extends<DescriptorBufferBindingInfoEXT>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -16562,9 +16512,7 @@ unsafe impl Cast for DescriptorBufferInfoBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`DescriptorGetInfoEXT`].
-pub unsafe trait ExtendsDescriptorGetInfoEXT: fmt::Debug {}
-unsafe impl ExtendsDescriptorGetInfoEXT for DescriptorGetTensorInfoARM {}
+unsafe impl Extends<DescriptorGetInfoEXT> for DescriptorGetTensorInfoARM {}
 
 unsafe impl Cast for DescriptorGetInfoEXT {
     type Target = DescriptorGetInfoEXT;
@@ -16591,7 +16539,7 @@ impl<'b> DescriptorGetInfoEXTBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsDescriptorGetInfoEXT,
+        T: Extends<DescriptorGetInfoEXT>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -17470,11 +17418,9 @@ unsafe impl Cast for DescriptorMappingSourceShaderRecordIndexEXTBuilder<'_> {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`DescriptorPoolCreateInfo`].
-pub unsafe trait ExtendsDescriptorPoolCreateInfo: fmt::Debug {}
-unsafe impl ExtendsDescriptorPoolCreateInfo for DataGraphProcessingEngineCreateInfoARM {}
-unsafe impl ExtendsDescriptorPoolCreateInfo for DescriptorPoolInlineUniformBlockCreateInfo {}
-unsafe impl ExtendsDescriptorPoolCreateInfo for MutableDescriptorTypeCreateInfoEXT {}
+unsafe impl Extends<DescriptorPoolCreateInfo> for DataGraphProcessingEngineCreateInfoARM {}
+unsafe impl Extends<DescriptorPoolCreateInfo> for DescriptorPoolInlineUniformBlockCreateInfo {}
+unsafe impl Extends<DescriptorPoolCreateInfo> for MutableDescriptorTypeCreateInfoEXT {}
 
 unsafe impl Cast for DescriptorPoolCreateInfo {
     type Target = DescriptorPoolCreateInfo;
@@ -17501,7 +17447,7 @@ impl<'b> DescriptorPoolCreateInfoBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsDescriptorPoolCreateInfo,
+        T: Extends<DescriptorPoolCreateInfo>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -17682,9 +17628,10 @@ unsafe impl Cast for DescriptorPoolSizeBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`DescriptorSetAllocateInfo`].
-pub unsafe trait ExtendsDescriptorSetAllocateInfo: fmt::Debug {}
-unsafe impl ExtendsDescriptorSetAllocateInfo for DescriptorSetVariableDescriptorCountAllocateInfo {}
+unsafe impl Extends<DescriptorSetAllocateInfo>
+    for DescriptorSetVariableDescriptorCountAllocateInfo
+{
+}
 
 unsafe impl Cast for DescriptorSetAllocateInfo {
     type Target = DescriptorSetAllocateInfo;
@@ -17711,7 +17658,7 @@ impl<'b> DescriptorSetAllocateInfoBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsDescriptorSetAllocateInfo,
+        T: Extends<DescriptorSetAllocateInfo>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -17761,9 +17708,7 @@ unsafe impl Cast for DescriptorSetAllocateInfoBuilder<'_> {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`DescriptorSetAndBindingMappingEXT`].
-pub unsafe trait ExtendsDescriptorSetAndBindingMappingEXT: fmt::Debug {}
-unsafe impl ExtendsDescriptorSetAndBindingMappingEXT for PushConstantBankInfoNV {}
+unsafe impl Extends<DescriptorSetAndBindingMappingEXT> for PushConstantBankInfoNV {}
 
 unsafe impl Cast for DescriptorSetAndBindingMappingEXT {
     type Target = DescriptorSetAndBindingMappingEXT;
@@ -17790,7 +17735,7 @@ impl<'b> DescriptorSetAndBindingMappingEXTBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsDescriptorSetAndBindingMappingEXT,
+        T: Extends<DescriptorSetAndBindingMappingEXT>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -18071,10 +18016,8 @@ unsafe impl Cast for DescriptorSetLayoutBindingFlagsCreateInfoBuilder<'_> {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`DescriptorSetLayoutCreateInfo`].
-pub unsafe trait ExtendsDescriptorSetLayoutCreateInfo: fmt::Debug {}
-unsafe impl ExtendsDescriptorSetLayoutCreateInfo for DescriptorSetLayoutBindingFlagsCreateInfo {}
-unsafe impl ExtendsDescriptorSetLayoutCreateInfo for MutableDescriptorTypeCreateInfoEXT {}
+unsafe impl Extends<DescriptorSetLayoutCreateInfo> for DescriptorSetLayoutBindingFlagsCreateInfo {}
+unsafe impl Extends<DescriptorSetLayoutCreateInfo> for MutableDescriptorTypeCreateInfoEXT {}
 
 unsafe impl Cast for DescriptorSetLayoutCreateInfo {
     type Target = DescriptorSetLayoutCreateInfo;
@@ -18101,7 +18044,7 @@ impl<'b> DescriptorSetLayoutCreateInfoBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsDescriptorSetLayoutCreateInfo,
+        T: Extends<DescriptorSetLayoutCreateInfo>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -18218,9 +18161,7 @@ unsafe impl Cast for DescriptorSetLayoutHostMappingInfoVALVEBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`DescriptorSetLayoutSupport`].
-pub unsafe trait ExtendsDescriptorSetLayoutSupport: fmt::Debug {}
-unsafe impl ExtendsDescriptorSetLayoutSupport
+unsafe impl Extends<DescriptorSetLayoutSupport>
     for DescriptorSetVariableDescriptorCountLayoutSupport
 {
 }
@@ -18250,7 +18191,7 @@ impl<'b> DescriptorSetLayoutSupportBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsDescriptorSetLayoutSupport,
+        T: Extends<DescriptorSetLayoutSupport>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -18797,280 +18738,293 @@ unsafe impl Cast for DeviceBufferMemoryRequirementsBuilder<'_> {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`DeviceCreateInfo`].
-pub unsafe trait ExtendsDeviceCreateInfo: fmt::Debug {}
-unsafe impl ExtendsDeviceCreateInfo for ApplicationParametersEXT {}
-unsafe impl ExtendsDeviceCreateInfo for DeviceDeviceMemoryReportCreateInfoEXT {}
-unsafe impl ExtendsDeviceCreateInfo for DeviceDiagnosticsConfigCreateInfoNV {}
-unsafe impl ExtendsDeviceCreateInfo for DeviceGroupDeviceCreateInfo {}
-unsafe impl ExtendsDeviceCreateInfo for DeviceMemoryOverallocationCreateInfoAMD {}
-unsafe impl ExtendsDeviceCreateInfo for DevicePipelineBinaryInternalCacheControlKHR {}
-unsafe impl ExtendsDeviceCreateInfo for DevicePrivateDataCreateInfo {}
-unsafe impl ExtendsDeviceCreateInfo for DeviceQueueShaderCoreControlCreateInfoARM {}
-unsafe impl ExtendsDeviceCreateInfo for DeviceSemaphoreSciSyncPoolReservationCreateInfoNV {}
-unsafe impl ExtendsDeviceCreateInfo for ExternalComputeQueueDeviceCreateInfoNV {}
-unsafe impl ExtendsDeviceCreateInfo for PerformanceQueryReservationInfoKHR {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDevice16BitStorageFeatures {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDevice4444FormatsFeaturesEXT {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDevice8BitStorageFeatures {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceASTCDecodeFeaturesEXT {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceAccelerationStructureFeaturesKHR {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceAddressBindingReportFeaturesEXT {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceAmigoProfilingFeaturesSEC {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceAntiLagFeaturesAMD {}
-unsafe impl ExtendsDeviceCreateInfo
+unsafe impl Extends<DeviceCreateInfo> for ApplicationParametersEXT {}
+unsafe impl Extends<DeviceCreateInfo> for DeviceDeviceMemoryReportCreateInfoEXT {}
+unsafe impl Extends<DeviceCreateInfo> for DeviceDiagnosticsConfigCreateInfoNV {}
+unsafe impl Extends<DeviceCreateInfo> for DeviceGroupDeviceCreateInfo {}
+unsafe impl Extends<DeviceCreateInfo> for DeviceMemoryOverallocationCreateInfoAMD {}
+unsafe impl Extends<DeviceCreateInfo> for DevicePipelineBinaryInternalCacheControlKHR {}
+unsafe impl Extends<DeviceCreateInfo> for DevicePrivateDataCreateInfo {}
+unsafe impl Extends<DeviceCreateInfo> for DeviceQueueShaderCoreControlCreateInfoARM {}
+unsafe impl Extends<DeviceCreateInfo> for DeviceSemaphoreSciSyncPoolReservationCreateInfoNV {}
+unsafe impl Extends<DeviceCreateInfo> for ExternalComputeQueueDeviceCreateInfoNV {}
+unsafe impl Extends<DeviceCreateInfo> for PerformanceQueryReservationInfoKHR {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDevice16BitStorageFeatures {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDevice4444FormatsFeaturesEXT {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDevice8BitStorageFeatures {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceASTCDecodeFeaturesEXT {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceAccelerationStructureFeaturesKHR {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceAddressBindingReportFeaturesEXT {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceAmigoProfilingFeaturesSEC {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceAntiLagFeaturesAMD {}
+unsafe impl Extends<DeviceCreateInfo>
     for PhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT
 {
 }
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceBlendOperationAdvancedFeaturesEXT {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceBorderColorSwizzleFeaturesEXT {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceBufferDeviceAddressFeatures {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceBufferDeviceAddressFeaturesEXT {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceClusterAccelerationStructureFeaturesNV {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceClusterCullingShaderFeaturesHUAWEI {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceCoherentMemoryFeaturesAMD {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceColorWriteEnableFeaturesEXT {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceCommandBufferInheritanceFeaturesNV {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceComputeOccupancyPriorityFeaturesNV {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceComputeShaderDerivativesFeaturesKHR {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceConditionalRenderingFeaturesEXT {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceCooperativeMatrix2FeaturesNV {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceCooperativeMatrixConversionFeaturesQCOM {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceCooperativeMatrixFeaturesKHR {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceCooperativeMatrixFeaturesNV {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceCooperativeVectorFeaturesNV {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceCopyMemoryIndirectFeaturesKHR {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceCopyMemoryIndirectFeaturesNV {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceCornerSampledImageFeaturesNV {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceCoverageReductionModeFeaturesNV {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceCubicClampFeaturesQCOM {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceCubicWeightsFeaturesQCOM {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceCudaKernelLaunchFeaturesNV {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceCustomBorderColorFeaturesEXT {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceCustomResolveFeaturesEXT {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceDataGraphFeaturesARM {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceDataGraphModelFeaturesQCOM {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceDenseGeometryFormatFeaturesAMDX {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceDepthBiasControlFeaturesEXT {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceDepthClampControlFeaturesEXT {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceDepthClampZeroOneFeaturesKHR {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceDepthClipControlFeaturesEXT {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceDepthClipEnableFeaturesEXT {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceDescriptorBufferFeaturesEXT {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceDescriptorBufferTensorFeaturesARM {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceDescriptorHeapFeaturesEXT {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceDescriptorIndexingFeatures {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceDescriptorPoolOverallocationFeaturesNV {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceDescriptorSetHostMappingFeaturesVALVE {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceDeviceGeneratedCommandsComputeFeaturesNV {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceDeviceGeneratedCommandsFeaturesEXT {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceDeviceGeneratedCommandsFeaturesNV {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceDeviceMemoryReportFeaturesEXT {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceDiagnosticsConfigFeaturesNV {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceDisplacementMicromapFeaturesNV {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceDynamicRenderingFeatures {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceDynamicRenderingLocalReadFeatures {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceExclusiveScissorFeaturesNV {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceExtendedDynamicState2FeaturesEXT {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceExtendedDynamicState3FeaturesEXT {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceExtendedDynamicStateFeaturesEXT {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceExtendedSparseAddressSpaceFeaturesNV {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceExternalFormatResolveFeaturesANDROID {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceExternalMemoryRDMAFeaturesNV {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceExternalMemorySciBufFeaturesNV {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceExternalMemoryScreenBufferFeaturesQNX {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceExternalSciSync2FeaturesNV {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceExternalSciSyncFeaturesNV {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceFaultFeaturesEXT {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceFeatures2 {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceFormatPackFeaturesARM {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceFragmentDensityMap2FeaturesEXT {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceFragmentDensityMapFeaturesEXT {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceFragmentDensityMapLayeredFeaturesVALVE {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceFragmentDensityMapOffsetFeaturesEXT {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceFragmentShaderBarycentricFeaturesKHR {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceFragmentShaderInterlockFeaturesEXT {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceFragmentShadingRateEnumsFeaturesNV {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceFragmentShadingRateFeaturesKHR {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceFrameBoundaryFeaturesEXT {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceGlobalPriorityQueryFeatures {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceGraphicsPipelineLibraryFeaturesEXT {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceHdrVividFeaturesHUAWEI {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceHostImageCopyFeatures {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceHostQueryResetFeatures {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceImage2DViewOf3DFeaturesEXT {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceImageAlignmentControlFeaturesMESA {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceImageCompressionControlFeaturesEXT {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceImageCompressionControlSwapchainFeaturesEXT {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceImageProcessing2FeaturesQCOM {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceImageProcessingFeaturesQCOM {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceImageRobustnessFeatures {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceImageSlicedViewOf3DFeaturesEXT {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceImageViewMinLodFeaturesEXT {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceImagelessFramebufferFeatures {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceIndexTypeUint8Features {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceInheritedViewportScissorFeaturesNV {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceInlineUniformBlockFeatures {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceInternallySynchronizedQueuesFeaturesKHR {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceInvocationMaskFeaturesHUAWEI {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceLegacyDitheringFeaturesEXT {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceLegacyVertexAttributesFeaturesEXT {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceLineRasterizationFeatures {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceLinearColorAttachmentFeaturesNV {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceMaintenance10FeaturesKHR {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceMaintenance4Features {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceMaintenance5Features {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceMaintenance6Features {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceMaintenance7FeaturesKHR {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceMaintenance8FeaturesKHR {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceMaintenance9FeaturesKHR {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceMapMemoryPlacedFeaturesEXT {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceMemoryDecompressionFeaturesEXT {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceMemoryPriorityFeaturesEXT {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceMeshShaderFeaturesEXT {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceMeshShaderFeaturesNV {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceMultiDrawFeaturesEXT {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXT {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceMultiviewFeatures {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOM {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceMutableDescriptorTypeFeaturesEXT {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceNestedCommandBufferFeaturesEXT {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceNonSeamlessCubeMapFeaturesEXT {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceOpacityMicromapFeaturesEXT {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceOpticalFlowFeaturesNV {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePageableDeviceLocalMemoryFeaturesEXT {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePartitionedAccelerationStructureFeaturesNV {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePerStageDescriptorSetFeaturesNV {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePerformanceCountersByRegionFeaturesARM {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePerformanceQueryFeaturesKHR {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePipelineBinaryFeaturesKHR {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePipelineCacheIncrementalModeFeaturesSEC {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePipelineCreationCacheControlFeatures {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePipelineExecutablePropertiesFeaturesKHR {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePipelineLibraryGroupHandlesFeaturesEXT {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePipelineOpacityMicromapFeaturesARM {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePipelinePropertiesFeaturesEXT {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePipelineProtectedAccessFeatures {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePipelineRobustnessFeatures {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePortabilitySubsetFeaturesKHR {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePresentBarrierFeaturesNV {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePresentId2FeaturesKHR {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePresentIdFeaturesKHR {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePresentMeteringFeaturesNV {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePresentModeFifoLatestReadyFeaturesKHR {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePresentTimingFeaturesEXT {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePresentWait2FeaturesKHR {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePresentWaitFeaturesKHR {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePrimitiveTopologyListRestartFeaturesEXT {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePrimitivesGeneratedQueryFeaturesEXT {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePrivateDataFeatures {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceProtectedMemoryFeatures {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceProvokingVertexFeaturesEXT {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePushConstantBankFeaturesNV {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceRGBA10X6FormatsFeaturesEXT {}
-unsafe impl ExtendsDeviceCreateInfo
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceBlendOperationAdvancedFeaturesEXT {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceBorderColorSwizzleFeaturesEXT {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceBufferDeviceAddressFeatures {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceBufferDeviceAddressFeaturesEXT {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceClusterAccelerationStructureFeaturesNV {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceClusterCullingShaderFeaturesHUAWEI {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceCoherentMemoryFeaturesAMD {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceColorWriteEnableFeaturesEXT {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceCommandBufferInheritanceFeaturesNV {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceComputeOccupancyPriorityFeaturesNV {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceComputeShaderDerivativesFeaturesKHR {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceConditionalRenderingFeaturesEXT {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceCooperativeMatrix2FeaturesNV {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceCooperativeMatrixConversionFeaturesQCOM {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceCooperativeMatrixFeaturesKHR {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceCooperativeMatrixFeaturesNV {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceCooperativeVectorFeaturesNV {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceCopyMemoryIndirectFeaturesKHR {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceCopyMemoryIndirectFeaturesNV {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceCornerSampledImageFeaturesNV {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceCoverageReductionModeFeaturesNV {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceCubicClampFeaturesQCOM {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceCubicWeightsFeaturesQCOM {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceCudaKernelLaunchFeaturesNV {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceCustomBorderColorFeaturesEXT {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceCustomResolveFeaturesEXT {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceDataGraphFeaturesARM {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceDataGraphModelFeaturesQCOM {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceDenseGeometryFormatFeaturesAMDX {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceDepthBiasControlFeaturesEXT {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceDepthClampControlFeaturesEXT {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceDepthClampZeroOneFeaturesKHR {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceDepthClipControlFeaturesEXT {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceDepthClipEnableFeaturesEXT {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceDescriptorBufferFeaturesEXT {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceDescriptorBufferTensorFeaturesARM {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceDescriptorHeapFeaturesEXT {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceDescriptorIndexingFeatures {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceDescriptorPoolOverallocationFeaturesNV {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceDescriptorSetHostMappingFeaturesVALVE {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceDeviceGeneratedCommandsComputeFeaturesNV {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceDeviceGeneratedCommandsFeaturesEXT {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceDeviceGeneratedCommandsFeaturesNV {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceDeviceMemoryReportFeaturesEXT {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceDiagnosticsConfigFeaturesNV {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceDisplacementMicromapFeaturesNV {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceDynamicRenderingFeatures {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceDynamicRenderingLocalReadFeatures {}
+unsafe impl Extends<DeviceCreateInfo>
+    for PhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT
+{
+}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceExclusiveScissorFeaturesNV {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceExtendedDynamicState2FeaturesEXT {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceExtendedDynamicState3FeaturesEXT {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceExtendedDynamicStateFeaturesEXT {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceExtendedSparseAddressSpaceFeaturesNV {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceExternalFormatResolveFeaturesANDROID {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceExternalMemoryRDMAFeaturesNV {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceExternalMemorySciBufFeaturesNV {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceExternalMemoryScreenBufferFeaturesQNX {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceExternalSciSync2FeaturesNV {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceExternalSciSyncFeaturesNV {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceFaultFeaturesEXT {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceFeatures2 {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceFormatPackFeaturesARM {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceFragmentDensityMap2FeaturesEXT {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceFragmentDensityMapFeaturesEXT {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceFragmentDensityMapLayeredFeaturesVALVE {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceFragmentDensityMapOffsetFeaturesEXT {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceFragmentShaderBarycentricFeaturesKHR {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceFragmentShaderInterlockFeaturesEXT {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceFragmentShadingRateEnumsFeaturesNV {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceFragmentShadingRateFeaturesKHR {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceFrameBoundaryFeaturesEXT {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceGlobalPriorityQueryFeatures {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceGraphicsPipelineLibraryFeaturesEXT {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceHdrVividFeaturesHUAWEI {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceHostImageCopyFeatures {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceHostQueryResetFeatures {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceImage2DViewOf3DFeaturesEXT {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceImageAlignmentControlFeaturesMESA {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceImageCompressionControlFeaturesEXT {}
+unsafe impl Extends<DeviceCreateInfo>
+    for PhysicalDeviceImageCompressionControlSwapchainFeaturesEXT
+{
+}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceImageProcessing2FeaturesQCOM {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceImageProcessingFeaturesQCOM {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceImageRobustnessFeatures {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceImageSlicedViewOf3DFeaturesEXT {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceImageViewMinLodFeaturesEXT {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceImagelessFramebufferFeatures {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceIndexTypeUint8Features {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceInheritedViewportScissorFeaturesNV {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceInlineUniformBlockFeatures {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceInternallySynchronizedQueuesFeaturesKHR {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceInvocationMaskFeaturesHUAWEI {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceLegacyDitheringFeaturesEXT {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceLegacyVertexAttributesFeaturesEXT {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceLineRasterizationFeatures {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceLinearColorAttachmentFeaturesNV {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceMaintenance10FeaturesKHR {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceMaintenance4Features {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceMaintenance5Features {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceMaintenance6Features {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceMaintenance7FeaturesKHR {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceMaintenance8FeaturesKHR {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceMaintenance9FeaturesKHR {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceMapMemoryPlacedFeaturesEXT {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceMemoryDecompressionFeaturesEXT {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceMemoryPriorityFeaturesEXT {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceMeshShaderFeaturesEXT {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceMeshShaderFeaturesNV {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceMultiDrawFeaturesEXT {}
+unsafe impl Extends<DeviceCreateInfo>
+    for PhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXT
+{
+}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceMultiviewFeatures {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOM {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceMutableDescriptorTypeFeaturesEXT {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceNestedCommandBufferFeaturesEXT {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceNonSeamlessCubeMapFeaturesEXT {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceOpacityMicromapFeaturesEXT {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceOpticalFlowFeaturesNV {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDevicePageableDeviceLocalMemoryFeaturesEXT {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDevicePartitionedAccelerationStructureFeaturesNV {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDevicePerStageDescriptorSetFeaturesNV {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDevicePerformanceCountersByRegionFeaturesARM {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDevicePerformanceQueryFeaturesKHR {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDevicePipelineBinaryFeaturesKHR {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDevicePipelineCacheIncrementalModeFeaturesSEC {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDevicePipelineCreationCacheControlFeatures {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDevicePipelineExecutablePropertiesFeaturesKHR {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDevicePipelineLibraryGroupHandlesFeaturesEXT {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDevicePipelineOpacityMicromapFeaturesARM {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDevicePipelinePropertiesFeaturesEXT {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDevicePipelineProtectedAccessFeatures {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDevicePipelineRobustnessFeatures {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDevicePortabilitySubsetFeaturesKHR {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDevicePresentBarrierFeaturesNV {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDevicePresentId2FeaturesKHR {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDevicePresentIdFeaturesKHR {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDevicePresentMeteringFeaturesNV {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDevicePresentModeFifoLatestReadyFeaturesKHR {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDevicePresentTimingFeaturesEXT {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDevicePresentWait2FeaturesKHR {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDevicePresentWaitFeaturesKHR {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDevicePrimitiveTopologyListRestartFeaturesEXT {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDevicePrimitivesGeneratedQueryFeaturesEXT {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDevicePrivateDataFeatures {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceProtectedMemoryFeatures {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceProvokingVertexFeaturesEXT {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDevicePushConstantBankFeaturesNV {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceRGBA10X6FormatsFeaturesEXT {}
+unsafe impl Extends<DeviceCreateInfo>
     for PhysicalDeviceRasterizationOrderAttachmentAccessFeaturesEXT
 {
 }
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceRawAccessChainsFeaturesNV {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceRayQueryFeaturesKHR {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceRayTracingInvocationReorderFeaturesEXT {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceRayTracingInvocationReorderFeaturesNV {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceRayTracingLinearSweptSpheresFeaturesNV {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceRayTracingMaintenance1FeaturesKHR {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceRayTracingMotionBlurFeaturesNV {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceRayTracingPipelineFeaturesKHR {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceRayTracingPositionFetchFeaturesKHR {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceRayTracingValidationFeaturesNV {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceRelaxedLineRasterizationFeaturesIMG {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceRenderPassStripedFeaturesARM {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceRepresentativeFragmentTestFeaturesNV {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceRobustness2FeaturesKHR {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceSamplerYcbcrConversionFeatures {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceScalarBlockLayoutFeatures {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceSchedulingControlsFeaturesARM {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceSeparateDepthStencilLayoutsFeatures {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShader64BitIndexingFeaturesEXT {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderAtomicFloat16VectorFeaturesNV {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderAtomicFloat2FeaturesEXT {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderAtomicFloatFeaturesEXT {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderAtomicInt64Features {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderBfloat16FeaturesKHR {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderClockFeaturesKHR {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderCoreBuiltinsFeaturesARM {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderDemoteToHelperInvocationFeatures {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderDrawParametersFeatures {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderEnqueueFeaturesAMDX {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderExpectAssumeFeatures {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderFloat16Int8Features {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderFloat8FeaturesEXT {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderFloatControls2Features {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderFmaFeaturesKHR {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderImageAtomicInt64FeaturesEXT {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderImageFootprintFeaturesNV {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderIntegerDotProductFeatures {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderIntegerFunctions2FeaturesINTEL {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderLongVectorFeaturesEXT {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderMaximalReconvergenceFeaturesKHR {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderMixedFloatDotProductFeaturesVALVE {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderModuleIdentifierFeaturesEXT {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderObjectFeaturesEXT {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderQuadControlFeaturesKHR {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHR {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderReplicatedCompositesFeaturesEXT {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderSMBuiltinsFeaturesNV {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderSubgroupExtendedTypesFeatures {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderSubgroupPartitionedFeaturesEXT {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderSubgroupRotateFeatures {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderTerminateInvocationFeatures {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderTileImageFeaturesEXT {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderUniformBufferUnsizedArrayFeaturesEXT {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderUntypedPointersFeaturesKHR {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShadingRateImageFeaturesNV {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceSubgroupSizeControlFeatures {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceSubpassMergeFeedbackFeaturesEXT {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceSubpassShadingFeaturesHUAWEI {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceSwapchainMaintenance1FeaturesKHR {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceSynchronization2Features {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceTensorFeaturesARM {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceTexelBufferAlignmentFeaturesEXT {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceTextureCompressionASTC3DFeaturesEXT {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceTextureCompressionASTCHDRFeatures {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceTileMemoryHeapFeaturesQCOM {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceTilePropertiesFeaturesQCOM {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceTileShadingFeaturesQCOM {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceTimelineSemaphoreFeatures {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceTransformFeedbackFeaturesEXT {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceUnifiedImageLayoutsFeaturesKHR {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceUniformBufferStandardLayoutFeatures {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceVariablePointersFeatures {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceVertexAttributeDivisorFeatures {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceVertexAttributeRobustnessFeaturesEXT {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceVertexInputDynamicStateFeaturesEXT {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceVideoDecodeVP9FeaturesKHR {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceVideoEncodeAV1FeaturesKHR {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceVideoEncodeIntraRefreshFeaturesKHR {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceVideoEncodeQuantizationMapFeaturesKHR {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceVideoEncodeRgbConversionFeaturesVALVE {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceVideoMaintenance1FeaturesKHR {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceVideoMaintenance2FeaturesKHR {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceVulkan11Features {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceVulkan12Features {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceVulkan13Features {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceVulkan14Features {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceVulkanMemoryModelFeatures {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceYcbcrDegammaFeaturesQCOM {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceYcbcrImageArraysFeaturesEXT {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceZeroInitializeDeviceMemoryFeaturesEXT {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceZeroInitializeWorkgroupMemoryFeatures {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceRawAccessChainsFeaturesNV {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceRayQueryFeaturesKHR {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceRayTracingInvocationReorderFeaturesEXT {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceRayTracingInvocationReorderFeaturesNV {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceRayTracingLinearSweptSpheresFeaturesNV {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceRayTracingMaintenance1FeaturesKHR {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceRayTracingMotionBlurFeaturesNV {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceRayTracingPipelineFeaturesKHR {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceRayTracingPositionFetchFeaturesKHR {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceRayTracingValidationFeaturesNV {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceRelaxedLineRasterizationFeaturesIMG {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceRenderPassStripedFeaturesARM {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceRepresentativeFragmentTestFeaturesNV {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceRobustness2FeaturesKHR {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceSamplerYcbcrConversionFeatures {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceScalarBlockLayoutFeatures {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceSchedulingControlsFeaturesARM {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceSeparateDepthStencilLayoutsFeatures {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceShader64BitIndexingFeaturesEXT {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceShaderAtomicFloat16VectorFeaturesNV {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceShaderAtomicFloat2FeaturesEXT {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceShaderAtomicFloatFeaturesEXT {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceShaderAtomicInt64Features {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceShaderBfloat16FeaturesKHR {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceShaderClockFeaturesKHR {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceShaderCoreBuiltinsFeaturesARM {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceShaderDemoteToHelperInvocationFeatures {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceShaderDrawParametersFeatures {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceShaderEnqueueFeaturesAMDX {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceShaderExpectAssumeFeatures {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceShaderFloat16Int8Features {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceShaderFloat8FeaturesEXT {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceShaderFloatControls2Features {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceShaderFmaFeaturesKHR {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceShaderImageAtomicInt64FeaturesEXT {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceShaderImageFootprintFeaturesNV {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceShaderIntegerDotProductFeatures {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceShaderIntegerFunctions2FeaturesINTEL {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceShaderLongVectorFeaturesEXT {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceShaderMaximalReconvergenceFeaturesKHR {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceShaderMixedFloatDotProductFeaturesVALVE {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceShaderModuleIdentifierFeaturesEXT {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceShaderObjectFeaturesEXT {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceShaderQuadControlFeaturesKHR {}
+unsafe impl Extends<DeviceCreateInfo>
+    for PhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHR
+{
+}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceShaderReplicatedCompositesFeaturesEXT {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceShaderSMBuiltinsFeaturesNV {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceShaderSubgroupExtendedTypesFeatures {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceShaderSubgroupPartitionedFeaturesEXT {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceShaderSubgroupRotateFeatures {}
+unsafe impl Extends<DeviceCreateInfo>
+    for PhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR
+{
+}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceShaderTerminateInvocationFeatures {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceShaderTileImageFeaturesEXT {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceShaderUniformBufferUnsizedArrayFeaturesEXT {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceShaderUntypedPointersFeaturesKHR {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceShadingRateImageFeaturesNV {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceSubgroupSizeControlFeatures {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceSubpassMergeFeedbackFeaturesEXT {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceSubpassShadingFeaturesHUAWEI {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceSwapchainMaintenance1FeaturesKHR {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceSynchronization2Features {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceTensorFeaturesARM {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceTexelBufferAlignmentFeaturesEXT {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceTextureCompressionASTC3DFeaturesEXT {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceTextureCompressionASTCHDRFeatures {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceTileMemoryHeapFeaturesQCOM {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceTilePropertiesFeaturesQCOM {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceTileShadingFeaturesQCOM {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceTimelineSemaphoreFeatures {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceTransformFeedbackFeaturesEXT {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceUnifiedImageLayoutsFeaturesKHR {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceUniformBufferStandardLayoutFeatures {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceVariablePointersFeatures {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceVertexAttributeDivisorFeatures {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceVertexAttributeRobustnessFeaturesEXT {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceVertexInputDynamicStateFeaturesEXT {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceVideoDecodeVP9FeaturesKHR {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceVideoEncodeAV1FeaturesKHR {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceVideoEncodeIntraRefreshFeaturesKHR {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceVideoEncodeQuantizationMapFeaturesKHR {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceVideoEncodeRgbConversionFeaturesVALVE {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceVideoMaintenance1FeaturesKHR {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceVideoMaintenance2FeaturesKHR {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceVulkan11Features {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceVulkan12Features {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceVulkan13Features {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceVulkan14Features {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceVulkanMemoryModelFeatures {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceYcbcrDegammaFeaturesQCOM {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceYcbcrImageArraysFeaturesEXT {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceZeroInitializeDeviceMemoryFeaturesEXT {}
+unsafe impl Extends<DeviceCreateInfo> for PhysicalDeviceZeroInitializeWorkgroupMemoryFeatures {}
 
 unsafe impl Cast for DeviceCreateInfo {
     type Target = DeviceCreateInfo;
@@ -19097,7 +19051,7 @@ impl<'b> DeviceCreateInfoBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsDeviceCreateInfo,
+        T: Extends<DeviceCreateInfo>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -20761,10 +20715,8 @@ unsafe impl Cast for DevicePrivateDataCreateInfoBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`DeviceQueueCreateInfo`].
-pub unsafe trait ExtendsDeviceQueueCreateInfo: fmt::Debug {}
-unsafe impl ExtendsDeviceQueueCreateInfo for DeviceQueueGlobalPriorityCreateInfo {}
-unsafe impl ExtendsDeviceQueueCreateInfo for DeviceQueueShaderCoreControlCreateInfoARM {}
+unsafe impl Extends<DeviceQueueCreateInfo> for DeviceQueueGlobalPriorityCreateInfo {}
+unsafe impl Extends<DeviceQueueCreateInfo> for DeviceQueueShaderCoreControlCreateInfoARM {}
 
 unsafe impl Cast for DeviceQueueCreateInfo {
     type Target = DeviceQueueCreateInfo;
@@ -20791,7 +20743,7 @@ impl<'b> DeviceQueueCreateInfoBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsDeviceQueueCreateInfo,
+        T: Extends<DeviceQueueCreateInfo>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -21814,9 +21766,7 @@ unsafe impl Cast for DisplayModeParametersKHRBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`DisplayModeProperties2KHR`].
-pub unsafe trait ExtendsDisplayModeProperties2KHR: fmt::Debug {}
-unsafe impl ExtendsDisplayModeProperties2KHR for DisplayModeStereoPropertiesNV {}
+unsafe impl Extends<DisplayModeProperties2KHR> for DisplayModeStereoPropertiesNV {}
 
 unsafe impl Cast for DisplayModeProperties2KHR {
     type Target = DisplayModeProperties2KHR;
@@ -21843,7 +21793,7 @@ impl<'b> DisplayModeProperties2KHRBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsDisplayModeProperties2KHR,
+        T: Extends<DisplayModeProperties2KHR>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -22716,9 +22666,7 @@ unsafe impl Cast for DisplayPropertiesKHRBuilder<'_> {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`DisplaySurfaceCreateInfoKHR`].
-pub unsafe trait ExtendsDisplaySurfaceCreateInfoKHR: fmt::Debug {}
-unsafe impl ExtendsDisplaySurfaceCreateInfoKHR for DisplaySurfaceStereoCreateInfoNV {}
+unsafe impl Extends<DisplaySurfaceCreateInfoKHR> for DisplaySurfaceStereoCreateInfoNV {}
 
 unsafe impl Cast for DisplaySurfaceCreateInfoKHR {
     type Target = DisplaySurfaceCreateInfoKHR;
@@ -22745,7 +22693,7 @@ impl<'b> DisplaySurfaceCreateInfoKHRBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsDisplaySurfaceCreateInfoKHR,
+        T: Extends<DisplaySurfaceCreateInfoKHR>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -23536,10 +23484,8 @@ unsafe impl Cast for DrmFormatModifierPropertiesListEXTBuilder<'_> {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`EventCreateInfo`].
-pub unsafe trait ExtendsEventCreateInfo: fmt::Debug {}
-unsafe impl ExtendsEventCreateInfo for ExportMetalObjectCreateInfoEXT {}
-unsafe impl ExtendsEventCreateInfo for ImportMetalSharedEventInfoEXT {}
+unsafe impl Extends<EventCreateInfo> for ExportMetalObjectCreateInfoEXT {}
+unsafe impl Extends<EventCreateInfo> for ImportMetalSharedEventInfoEXT {}
 
 unsafe impl Cast for EventCreateInfo {
     type Target = EventCreateInfo;
@@ -23566,7 +23512,7 @@ impl<'b> EventCreateInfoBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsEventCreateInfo,
+        T: Extends<EventCreateInfo>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -23609,10 +23555,8 @@ unsafe impl Cast for EventCreateInfoBuilder<'_> {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`ExecutionGraphPipelineCreateInfoAMDX`].
-pub unsafe trait ExtendsExecutionGraphPipelineCreateInfoAMDX: fmt::Debug {}
-unsafe impl ExtendsExecutionGraphPipelineCreateInfoAMDX for PipelineCompilerControlCreateInfoAMD {}
-unsafe impl ExtendsExecutionGraphPipelineCreateInfoAMDX for PipelineCreationFeedbackCreateInfo {}
+unsafe impl Extends<ExecutionGraphPipelineCreateInfoAMDX> for PipelineCompilerControlCreateInfoAMD {}
+unsafe impl Extends<ExecutionGraphPipelineCreateInfoAMDX> for PipelineCreationFeedbackCreateInfo {}
 
 unsafe impl Cast for ExecutionGraphPipelineCreateInfoAMDX {
     type Target = ExecutionGraphPipelineCreateInfoAMDX;
@@ -23639,7 +23583,7 @@ impl<'b> ExecutionGraphPipelineCreateInfoAMDXBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsExecutionGraphPipelineCreateInfoAMDX,
+        T: Extends<ExecutionGraphPipelineCreateInfoAMDX>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -24600,14 +24544,12 @@ unsafe impl Cast for ExportMetalObjectCreateInfoEXTBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`ExportMetalObjectsInfoEXT`].
-pub unsafe trait ExtendsExportMetalObjectsInfoEXT: fmt::Debug {}
-unsafe impl ExtendsExportMetalObjectsInfoEXT for ExportMetalBufferInfoEXT {}
-unsafe impl ExtendsExportMetalObjectsInfoEXT for ExportMetalCommandQueueInfoEXT {}
-unsafe impl ExtendsExportMetalObjectsInfoEXT for ExportMetalDeviceInfoEXT {}
-unsafe impl ExtendsExportMetalObjectsInfoEXT for ExportMetalIOSurfaceInfoEXT {}
-unsafe impl ExtendsExportMetalObjectsInfoEXT for ExportMetalSharedEventInfoEXT {}
-unsafe impl ExtendsExportMetalObjectsInfoEXT for ExportMetalTextureInfoEXT {}
+unsafe impl Extends<ExportMetalObjectsInfoEXT> for ExportMetalBufferInfoEXT {}
+unsafe impl Extends<ExportMetalObjectsInfoEXT> for ExportMetalCommandQueueInfoEXT {}
+unsafe impl Extends<ExportMetalObjectsInfoEXT> for ExportMetalDeviceInfoEXT {}
+unsafe impl Extends<ExportMetalObjectsInfoEXT> for ExportMetalIOSurfaceInfoEXT {}
+unsafe impl Extends<ExportMetalObjectsInfoEXT> for ExportMetalSharedEventInfoEXT {}
+unsafe impl Extends<ExportMetalObjectsInfoEXT> for ExportMetalTextureInfoEXT {}
 
 unsafe impl Cast for ExportMetalObjectsInfoEXT {
     type Target = ExportMetalObjectsInfoEXT;
@@ -24634,7 +24576,7 @@ impl<'b> ExportMetalObjectsInfoEXTBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsExportMetalObjectsInfoEXT,
+        T: Extends<ExportMetalObjectsInfoEXT>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -26357,11 +26299,9 @@ unsafe impl Cast for ExternalTensorPropertiesARMBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`FenceCreateInfo`].
-pub unsafe trait ExtendsFenceCreateInfo: fmt::Debug {}
-unsafe impl ExtendsFenceCreateInfo for ExportFenceCreateInfo {}
-unsafe impl ExtendsFenceCreateInfo for ExportFenceSciSyncInfoNV {}
-unsafe impl ExtendsFenceCreateInfo for ExportFenceWin32HandleInfoKHR {}
+unsafe impl Extends<FenceCreateInfo> for ExportFenceCreateInfo {}
+unsafe impl Extends<FenceCreateInfo> for ExportFenceSciSyncInfoNV {}
+unsafe impl Extends<FenceCreateInfo> for ExportFenceWin32HandleInfoKHR {}
 
 unsafe impl Cast for FenceCreateInfo {
     type Target = FenceCreateInfo;
@@ -26388,7 +26328,7 @@ impl<'b> FenceCreateInfoBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsFenceCreateInfo,
+        T: Extends<FenceCreateInfo>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -26757,13 +26697,11 @@ unsafe impl Cast for FormatPropertiesBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`FormatProperties2`].
-pub unsafe trait ExtendsFormatProperties2: fmt::Debug {}
-unsafe impl ExtendsFormatProperties2 for DrmFormatModifierPropertiesList2EXT {}
-unsafe impl ExtendsFormatProperties2 for DrmFormatModifierPropertiesListEXT {}
-unsafe impl ExtendsFormatProperties2 for FormatProperties3 {}
-unsafe impl ExtendsFormatProperties2 for SubpassResolvePerformanceQueryEXT {}
-unsafe impl ExtendsFormatProperties2 for TensorFormatPropertiesARM {}
+unsafe impl Extends<FormatProperties2> for DrmFormatModifierPropertiesList2EXT {}
+unsafe impl Extends<FormatProperties2> for DrmFormatModifierPropertiesListEXT {}
+unsafe impl Extends<FormatProperties2> for FormatProperties3 {}
+unsafe impl Extends<FormatProperties2> for SubpassResolvePerformanceQueryEXT {}
+unsafe impl Extends<FormatProperties2> for TensorFormatPropertiesARM {}
 
 unsafe impl Cast for FormatProperties2 {
     type Target = FormatProperties2;
@@ -26790,7 +26728,7 @@ impl<'b> FormatProperties2Builder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsFormatProperties2,
+        T: Extends<FormatProperties2>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -27300,9 +27238,7 @@ unsafe impl Cast for FramebufferAttachmentsCreateInfoBuilder<'_> {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`FramebufferCreateInfo`].
-pub unsafe trait ExtendsFramebufferCreateInfo: fmt::Debug {}
-unsafe impl ExtendsFramebufferCreateInfo for FramebufferAttachmentsCreateInfo {}
+unsafe impl Extends<FramebufferCreateInfo> for FramebufferAttachmentsCreateInfo {}
 
 unsafe impl Cast for FramebufferCreateInfo {
     type Target = FramebufferCreateInfo;
@@ -27329,7 +27265,7 @@ impl<'b> FramebufferCreateInfoBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsFramebufferCreateInfo,
+        T: Extends<FramebufferCreateInfo>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -27482,10 +27418,8 @@ unsafe impl Cast for FramebufferMixedSamplesCombinationNVBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`GeneratedCommandsInfoEXT`].
-pub unsafe trait ExtendsGeneratedCommandsInfoEXT: fmt::Debug {}
-unsafe impl ExtendsGeneratedCommandsInfoEXT for GeneratedCommandsPipelineInfoEXT {}
-unsafe impl ExtendsGeneratedCommandsInfoEXT for GeneratedCommandsShaderInfoEXT {}
+unsafe impl Extends<GeneratedCommandsInfoEXT> for GeneratedCommandsPipelineInfoEXT {}
+unsafe impl Extends<GeneratedCommandsInfoEXT> for GeneratedCommandsShaderInfoEXT {}
 
 unsafe impl Cast for GeneratedCommandsInfoEXT {
     type Target = GeneratedCommandsInfoEXT;
@@ -27512,7 +27446,7 @@ impl<'b> GeneratedCommandsInfoEXTBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsGeneratedCommandsInfoEXT,
+        T: Extends<GeneratedCommandsInfoEXT>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -27744,10 +27678,11 @@ unsafe impl Cast for GeneratedCommandsInfoNVBuilder<'_> {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`GeneratedCommandsMemoryRequirementsInfoEXT`].
-pub unsafe trait ExtendsGeneratedCommandsMemoryRequirementsInfoEXT: fmt::Debug {}
-unsafe impl ExtendsGeneratedCommandsMemoryRequirementsInfoEXT for GeneratedCommandsPipelineInfoEXT {}
-unsafe impl ExtendsGeneratedCommandsMemoryRequirementsInfoEXT for GeneratedCommandsShaderInfoEXT {}
+unsafe impl Extends<GeneratedCommandsMemoryRequirementsInfoEXT>
+    for GeneratedCommandsPipelineInfoEXT
+{
+}
+unsafe impl Extends<GeneratedCommandsMemoryRequirementsInfoEXT> for GeneratedCommandsShaderInfoEXT {}
 
 unsafe impl Cast for GeneratedCommandsMemoryRequirementsInfoEXT {
     type Target = GeneratedCommandsMemoryRequirementsInfoEXT;
@@ -27774,7 +27709,7 @@ impl<'b> GeneratedCommandsMemoryRequirementsInfoEXTBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsGeneratedCommandsMemoryRequirementsInfoEXT,
+        T: Extends<GeneratedCommandsMemoryRequirementsInfoEXT>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -28435,32 +28370,36 @@ unsafe impl Cast for GetLatencyMarkerInfoNVBuilder<'_> {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`GraphicsPipelineCreateInfo`].
-pub unsafe trait ExtendsGraphicsPipelineCreateInfo: fmt::Debug {}
-unsafe impl ExtendsGraphicsPipelineCreateInfo for AttachmentSampleCountInfoAMD {}
-unsafe impl ExtendsGraphicsPipelineCreateInfo for CustomResolveCreateInfoEXT {}
-unsafe impl ExtendsGraphicsPipelineCreateInfo for ExternalFormatANDROID {}
-unsafe impl ExtendsGraphicsPipelineCreateInfo for ExternalFormatOHOS {}
-unsafe impl ExtendsGraphicsPipelineCreateInfo for GraphicsPipelineLibraryCreateInfoEXT {}
-unsafe impl ExtendsGraphicsPipelineCreateInfo for GraphicsPipelineShaderGroupsCreateInfoNV {}
-unsafe impl ExtendsGraphicsPipelineCreateInfo for MultiviewPerViewAttributesInfoNVX {}
-unsafe impl ExtendsGraphicsPipelineCreateInfo for PipelineBinaryInfoKHR {}
-unsafe impl ExtendsGraphicsPipelineCreateInfo for PipelineCompilerControlCreateInfoAMD {}
-unsafe impl ExtendsGraphicsPipelineCreateInfo for PipelineCreateFlags2CreateInfo {}
-unsafe impl ExtendsGraphicsPipelineCreateInfo for PipelineCreationFeedbackCreateInfo {}
-unsafe impl ExtendsGraphicsPipelineCreateInfo for PipelineDiscardRectangleStateCreateInfoEXT {}
-unsafe impl ExtendsGraphicsPipelineCreateInfo for PipelineFragmentDensityMapLayeredCreateInfoVALVE {}
-unsafe impl ExtendsGraphicsPipelineCreateInfo for PipelineFragmentShadingRateEnumStateCreateInfoNV {}
-unsafe impl ExtendsGraphicsPipelineCreateInfo for PipelineFragmentShadingRateStateCreateInfoKHR {}
-unsafe impl ExtendsGraphicsPipelineCreateInfo for PipelineLibraryCreateInfoKHR {}
-unsafe impl ExtendsGraphicsPipelineCreateInfo for PipelineRenderingCreateInfo {}
-unsafe impl ExtendsGraphicsPipelineCreateInfo
+unsafe impl Extends<GraphicsPipelineCreateInfo> for AttachmentSampleCountInfoAMD {}
+unsafe impl Extends<GraphicsPipelineCreateInfo> for CustomResolveCreateInfoEXT {}
+unsafe impl Extends<GraphicsPipelineCreateInfo> for ExternalFormatANDROID {}
+unsafe impl Extends<GraphicsPipelineCreateInfo> for ExternalFormatOHOS {}
+unsafe impl Extends<GraphicsPipelineCreateInfo> for GraphicsPipelineLibraryCreateInfoEXT {}
+unsafe impl Extends<GraphicsPipelineCreateInfo> for GraphicsPipelineShaderGroupsCreateInfoNV {}
+unsafe impl Extends<GraphicsPipelineCreateInfo> for MultiviewPerViewAttributesInfoNVX {}
+unsafe impl Extends<GraphicsPipelineCreateInfo> for PipelineBinaryInfoKHR {}
+unsafe impl Extends<GraphicsPipelineCreateInfo> for PipelineCompilerControlCreateInfoAMD {}
+unsafe impl Extends<GraphicsPipelineCreateInfo> for PipelineCreateFlags2CreateInfo {}
+unsafe impl Extends<GraphicsPipelineCreateInfo> for PipelineCreationFeedbackCreateInfo {}
+unsafe impl Extends<GraphicsPipelineCreateInfo> for PipelineDiscardRectangleStateCreateInfoEXT {}
+unsafe impl Extends<GraphicsPipelineCreateInfo>
+    for PipelineFragmentDensityMapLayeredCreateInfoVALVE
+{
+}
+unsafe impl Extends<GraphicsPipelineCreateInfo>
+    for PipelineFragmentShadingRateEnumStateCreateInfoNV
+{
+}
+unsafe impl Extends<GraphicsPipelineCreateInfo> for PipelineFragmentShadingRateStateCreateInfoKHR {}
+unsafe impl Extends<GraphicsPipelineCreateInfo> for PipelineLibraryCreateInfoKHR {}
+unsafe impl Extends<GraphicsPipelineCreateInfo> for PipelineRenderingCreateInfo {}
+unsafe impl Extends<GraphicsPipelineCreateInfo>
     for PipelineRepresentativeFragmentTestStateCreateInfoNV
 {
 }
-unsafe impl ExtendsGraphicsPipelineCreateInfo for PipelineRobustnessCreateInfo {}
-unsafe impl ExtendsGraphicsPipelineCreateInfo for RenderingAttachmentLocationInfo {}
-unsafe impl ExtendsGraphicsPipelineCreateInfo for RenderingInputAttachmentIndexInfo {}
+unsafe impl Extends<GraphicsPipelineCreateInfo> for PipelineRobustnessCreateInfo {}
+unsafe impl Extends<GraphicsPipelineCreateInfo> for RenderingAttachmentLocationInfo {}
+unsafe impl Extends<GraphicsPipelineCreateInfo> for RenderingInputAttachmentIndexInfo {}
 
 unsafe impl Cast for GraphicsPipelineCreateInfo {
     type Target = GraphicsPipelineCreateInfo;
@@ -28487,7 +28426,7 @@ impl<'b> GraphicsPipelineCreateInfoBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsGraphicsPipelineCreateInfo,
+        T: Extends<GraphicsPipelineCreateInfo>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -28866,9 +28805,7 @@ unsafe impl Cast for GraphicsShaderGroupCreateInfoNVBuilder<'_> {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`HdrMetadataEXT`].
-pub unsafe trait ExtendsHdrMetadataEXT: fmt::Debug {}
-unsafe impl ExtendsHdrMetadataEXT for HdrVividDynamicMetadataHUAWEI {}
+unsafe impl Extends<HdrMetadataEXT> for HdrVividDynamicMetadataHUAWEI {}
 
 unsafe impl Cast for HdrMetadataEXT {
     type Target = HdrMetadataEXT;
@@ -28895,7 +28832,7 @@ impl<'b> HdrMetadataEXTBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsHdrMetadataEXT,
+        T: Extends<HdrMetadataEXT>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -29575,9 +29512,7 @@ unsafe impl Cast for ImageBlitBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`ImageBlit2`].
-pub unsafe trait ExtendsImageBlit2: fmt::Debug {}
-unsafe impl ExtendsImageBlit2 for CopyCommandTransformInfoQCOM {}
+unsafe impl Extends<ImageBlit2> for CopyCommandTransformInfoQCOM {}
 
 unsafe impl Cast for ImageBlit2 {
     type Target = ImageBlit2;
@@ -29604,7 +29539,7 @@ impl<'b> ImageBlit2Builder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsImageBlit2,
+        T: Extends<ImageBlit2>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -30122,29 +30057,27 @@ unsafe impl Cast for ImageCopy2Builder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`ImageCreateInfo`].
-pub unsafe trait ExtendsImageCreateInfo: fmt::Debug {}
-unsafe impl ExtendsImageCreateInfo for BufferCollectionImageCreateInfoFUCHSIA {}
-unsafe impl ExtendsImageCreateInfo for DedicatedAllocationImageCreateInfoNV {}
-unsafe impl ExtendsImageCreateInfo for ExportMetalObjectCreateInfoEXT {}
-unsafe impl ExtendsImageCreateInfo for ExternalFormatANDROID {}
-unsafe impl ExtendsImageCreateInfo for ExternalFormatOHOS {}
-unsafe impl ExtendsImageCreateInfo for ExternalFormatQNX {}
-unsafe impl ExtendsImageCreateInfo for ExternalMemoryImageCreateInfo {}
-unsafe impl ExtendsImageCreateInfo for ExternalMemoryImageCreateInfoNV {}
-unsafe impl ExtendsImageCreateInfo for ImageAlignmentControlCreateInfoMESA {}
-unsafe impl ExtendsImageCreateInfo for ImageCompressionControlEXT {}
-unsafe impl ExtendsImageCreateInfo for ImageDrmFormatModifierExplicitCreateInfoEXT {}
-unsafe impl ExtendsImageCreateInfo for ImageDrmFormatModifierListCreateInfoEXT {}
-unsafe impl ExtendsImageCreateInfo for ImageFormatListCreateInfo {}
-unsafe impl ExtendsImageCreateInfo for ImageStencilUsageCreateInfo {}
-unsafe impl ExtendsImageCreateInfo for ImageSwapchainCreateInfoKHR {}
-unsafe impl ExtendsImageCreateInfo for ImportMetalIOSurfaceInfoEXT {}
-unsafe impl ExtendsImageCreateInfo for ImportMetalTextureInfoEXT {}
-unsafe impl ExtendsImageCreateInfo for OpaqueCaptureDataCreateInfoEXT {}
-unsafe impl ExtendsImageCreateInfo for OpaqueCaptureDescriptorDataCreateInfoEXT {}
-unsafe impl ExtendsImageCreateInfo for OpticalFlowImageFormatInfoNV {}
-unsafe impl ExtendsImageCreateInfo for VideoProfileListInfoKHR {}
+unsafe impl Extends<ImageCreateInfo> for BufferCollectionImageCreateInfoFUCHSIA {}
+unsafe impl Extends<ImageCreateInfo> for DedicatedAllocationImageCreateInfoNV {}
+unsafe impl Extends<ImageCreateInfo> for ExportMetalObjectCreateInfoEXT {}
+unsafe impl Extends<ImageCreateInfo> for ExternalFormatANDROID {}
+unsafe impl Extends<ImageCreateInfo> for ExternalFormatOHOS {}
+unsafe impl Extends<ImageCreateInfo> for ExternalFormatQNX {}
+unsafe impl Extends<ImageCreateInfo> for ExternalMemoryImageCreateInfo {}
+unsafe impl Extends<ImageCreateInfo> for ExternalMemoryImageCreateInfoNV {}
+unsafe impl Extends<ImageCreateInfo> for ImageAlignmentControlCreateInfoMESA {}
+unsafe impl Extends<ImageCreateInfo> for ImageCompressionControlEXT {}
+unsafe impl Extends<ImageCreateInfo> for ImageDrmFormatModifierExplicitCreateInfoEXT {}
+unsafe impl Extends<ImageCreateInfo> for ImageDrmFormatModifierListCreateInfoEXT {}
+unsafe impl Extends<ImageCreateInfo> for ImageFormatListCreateInfo {}
+unsafe impl Extends<ImageCreateInfo> for ImageStencilUsageCreateInfo {}
+unsafe impl Extends<ImageCreateInfo> for ImageSwapchainCreateInfoKHR {}
+unsafe impl Extends<ImageCreateInfo> for ImportMetalIOSurfaceInfoEXT {}
+unsafe impl Extends<ImageCreateInfo> for ImportMetalTextureInfoEXT {}
+unsafe impl Extends<ImageCreateInfo> for OpaqueCaptureDataCreateInfoEXT {}
+unsafe impl Extends<ImageCreateInfo> for OpaqueCaptureDescriptorDataCreateInfoEXT {}
+unsafe impl Extends<ImageCreateInfo> for OpticalFlowImageFormatInfoNV {}
+unsafe impl Extends<ImageCreateInfo> for VideoProfileListInfoKHR {}
 
 unsafe impl Cast for ImageCreateInfo {
     type Target = ImageCreateInfo;
@@ -30171,7 +30104,7 @@ impl<'b> ImageCreateInfoBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsImageCreateInfo,
+        T: Extends<ImageCreateInfo>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -30768,17 +30701,15 @@ unsafe impl Cast for ImageFormatPropertiesBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`ImageFormatProperties2`].
-pub unsafe trait ExtendsImageFormatProperties2: fmt::Debug {}
-unsafe impl ExtendsImageFormatProperties2 for AndroidHardwareBufferUsageANDROID {}
-unsafe impl ExtendsImageFormatProperties2 for ExternalImageFormatProperties {}
-unsafe impl ExtendsImageFormatProperties2 for FilterCubicImageViewImageFormatPropertiesEXT {}
-unsafe impl ExtendsImageFormatProperties2 for HostImageCopyDevicePerformanceQuery {}
-unsafe impl ExtendsImageFormatProperties2 for ImageCompressionPropertiesEXT {}
-unsafe impl ExtendsImageFormatProperties2 for NativeBufferUsageOHOS {}
-unsafe impl ExtendsImageFormatProperties2 for SamplerYcbcrConversionImageFormatProperties {}
-unsafe impl ExtendsImageFormatProperties2 for SubsampledImageFormatPropertiesEXT {}
-unsafe impl ExtendsImageFormatProperties2 for TextureLODGatherFormatPropertiesAMD {}
+unsafe impl Extends<ImageFormatProperties2> for AndroidHardwareBufferUsageANDROID {}
+unsafe impl Extends<ImageFormatProperties2> for ExternalImageFormatProperties {}
+unsafe impl Extends<ImageFormatProperties2> for FilterCubicImageViewImageFormatPropertiesEXT {}
+unsafe impl Extends<ImageFormatProperties2> for HostImageCopyDevicePerformanceQuery {}
+unsafe impl Extends<ImageFormatProperties2> for ImageCompressionPropertiesEXT {}
+unsafe impl Extends<ImageFormatProperties2> for NativeBufferUsageOHOS {}
+unsafe impl Extends<ImageFormatProperties2> for SamplerYcbcrConversionImageFormatProperties {}
+unsafe impl Extends<ImageFormatProperties2> for SubsampledImageFormatPropertiesEXT {}
+unsafe impl Extends<ImageFormatProperties2> for TextureLODGatherFormatPropertiesAMD {}
 
 unsafe impl Cast for ImageFormatProperties2 {
     type Target = ImageFormatProperties2;
@@ -30805,7 +30736,7 @@ impl<'b> ImageFormatProperties2Builder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsImageFormatProperties2,
+        T: Extends<ImageFormatProperties2>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -30851,10 +30782,8 @@ unsafe impl Cast for ImageFormatProperties2Builder<'_> {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`ImageMemoryBarrier`].
-pub unsafe trait ExtendsImageMemoryBarrier: fmt::Debug {}
-unsafe impl ExtendsImageMemoryBarrier for ExternalMemoryAcquireUnmodifiedEXT {}
-unsafe impl ExtendsImageMemoryBarrier for SampleLocationsInfoEXT {}
+unsafe impl Extends<ImageMemoryBarrier> for ExternalMemoryAcquireUnmodifiedEXT {}
+unsafe impl Extends<ImageMemoryBarrier> for SampleLocationsInfoEXT {}
 
 unsafe impl Cast for ImageMemoryBarrier {
     type Target = ImageMemoryBarrier;
@@ -30881,7 +30810,7 @@ impl<'b> ImageMemoryBarrierBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsImageMemoryBarrier,
+        T: Extends<ImageMemoryBarrier>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -30969,11 +30898,9 @@ unsafe impl Cast for ImageMemoryBarrierBuilder<'_> {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`ImageMemoryBarrier2`].
-pub unsafe trait ExtendsImageMemoryBarrier2: fmt::Debug {}
-unsafe impl ExtendsImageMemoryBarrier2 for ExternalMemoryAcquireUnmodifiedEXT {}
-unsafe impl ExtendsImageMemoryBarrier2 for MemoryBarrierAccessFlags3KHR {}
-unsafe impl ExtendsImageMemoryBarrier2 for SampleLocationsInfoEXT {}
+unsafe impl Extends<ImageMemoryBarrier2> for ExternalMemoryAcquireUnmodifiedEXT {}
+unsafe impl Extends<ImageMemoryBarrier2> for MemoryBarrierAccessFlags3KHR {}
+unsafe impl Extends<ImageMemoryBarrier2> for SampleLocationsInfoEXT {}
 
 unsafe impl Cast for ImageMemoryBarrier2 {
     type Target = ImageMemoryBarrier2;
@@ -31000,7 +30927,7 @@ impl<'b> ImageMemoryBarrier2Builder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsImageMemoryBarrier2,
+        T: Extends<ImageMemoryBarrier2>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -31100,9 +31027,7 @@ unsafe impl Cast for ImageMemoryBarrier2Builder<'_> {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`ImageMemoryRequirementsInfo2`].
-pub unsafe trait ExtendsImageMemoryRequirementsInfo2: fmt::Debug {}
-unsafe impl ExtendsImageMemoryRequirementsInfo2 for ImagePlaneMemoryRequirementsInfo {}
+unsafe impl Extends<ImageMemoryRequirementsInfo2> for ImagePlaneMemoryRequirementsInfo {}
 
 unsafe impl Cast for ImageMemoryRequirementsInfo2 {
     type Target = ImageMemoryRequirementsInfo2;
@@ -31129,7 +31054,7 @@ impl<'b> ImageMemoryRequirementsInfo2Builder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsImageMemoryRequirementsInfo2,
+        T: Extends<ImageMemoryRequirementsInfo2>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -32205,16 +32130,14 @@ unsafe impl Cast for ImageViewCaptureDescriptorDataInfoEXTBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`ImageViewCreateInfo`].
-pub unsafe trait ExtendsImageViewCreateInfo: fmt::Debug {}
-unsafe impl ExtendsImageViewCreateInfo for ExportMetalObjectCreateInfoEXT {}
-unsafe impl ExtendsImageViewCreateInfo for ImageViewASTCDecodeModeEXT {}
-unsafe impl ExtendsImageViewCreateInfo for ImageViewMinLodCreateInfoEXT {}
-unsafe impl ExtendsImageViewCreateInfo for ImageViewSampleWeightCreateInfoQCOM {}
-unsafe impl ExtendsImageViewCreateInfo for ImageViewSlicedCreateInfoEXT {}
-unsafe impl ExtendsImageViewCreateInfo for ImageViewUsageCreateInfo {}
-unsafe impl ExtendsImageViewCreateInfo for OpaqueCaptureDescriptorDataCreateInfoEXT {}
-unsafe impl ExtendsImageViewCreateInfo for SamplerYcbcrConversionInfo {}
+unsafe impl Extends<ImageViewCreateInfo> for ExportMetalObjectCreateInfoEXT {}
+unsafe impl Extends<ImageViewCreateInfo> for ImageViewASTCDecodeModeEXT {}
+unsafe impl Extends<ImageViewCreateInfo> for ImageViewMinLodCreateInfoEXT {}
+unsafe impl Extends<ImageViewCreateInfo> for ImageViewSampleWeightCreateInfoQCOM {}
+unsafe impl Extends<ImageViewCreateInfo> for ImageViewSlicedCreateInfoEXT {}
+unsafe impl Extends<ImageViewCreateInfo> for ImageViewUsageCreateInfo {}
+unsafe impl Extends<ImageViewCreateInfo> for OpaqueCaptureDescriptorDataCreateInfoEXT {}
+unsafe impl Extends<ImageViewCreateInfo> for SamplerYcbcrConversionInfo {}
 
 unsafe impl Cast for ImageViewCreateInfo {
     type Target = ImageViewCreateInfo;
@@ -32241,7 +32164,7 @@ impl<'b> ImageViewCreateInfoBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsImageViewCreateInfo,
+        T: Extends<ImageViewCreateInfo>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -34228,9 +34151,7 @@ unsafe impl Cast for IndirectCommandsIndexBufferTokenEXTBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`IndirectCommandsLayoutCreateInfoEXT`].
-pub unsafe trait ExtendsIndirectCommandsLayoutCreateInfoEXT: fmt::Debug {}
-unsafe impl ExtendsIndirectCommandsLayoutCreateInfoEXT for PipelineLayoutCreateInfo {}
+unsafe impl Extends<IndirectCommandsLayoutCreateInfoEXT> for PipelineLayoutCreateInfo {}
 
 unsafe impl Cast for IndirectCommandsLayoutCreateInfoEXT {
     type Target = IndirectCommandsLayoutCreateInfoEXT;
@@ -34257,7 +34178,7 @@ impl<'b> IndirectCommandsLayoutCreateInfoEXTBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsIndirectCommandsLayoutCreateInfoEXT,
+        T: Extends<IndirectCommandsLayoutCreateInfoEXT>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -34474,9 +34395,7 @@ unsafe impl Cast for IndirectCommandsLayoutPushDataTokenNVBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`IndirectCommandsLayoutTokenEXT`].
-pub unsafe trait ExtendsIndirectCommandsLayoutTokenEXT: fmt::Debug {}
-unsafe impl ExtendsIndirectCommandsLayoutTokenEXT for PushConstantBankInfoNV {}
+unsafe impl Extends<IndirectCommandsLayoutTokenEXT> for PushConstantBankInfoNV {}
 
 unsafe impl Cast for IndirectCommandsLayoutTokenEXT {
     type Target = IndirectCommandsLayoutTokenEXT;
@@ -34503,7 +34422,7 @@ impl<'b> IndirectCommandsLayoutTokenEXTBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsIndirectCommandsLayoutTokenEXT,
+        T: Extends<IndirectCommandsLayoutTokenEXT>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -34558,9 +34477,7 @@ unsafe impl Cast for IndirectCommandsLayoutTokenEXTBuilder<'_> {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`IndirectCommandsLayoutTokenNV`].
-pub unsafe trait ExtendsIndirectCommandsLayoutTokenNV: fmt::Debug {}
-unsafe impl ExtendsIndirectCommandsLayoutTokenNV for IndirectCommandsLayoutPushDataTokenNV {}
+unsafe impl Extends<IndirectCommandsLayoutTokenNV> for IndirectCommandsLayoutPushDataTokenNV {}
 
 unsafe impl Cast for IndirectCommandsLayoutTokenNV {
     type Target = IndirectCommandsLayoutTokenNV;
@@ -34587,7 +34504,7 @@ impl<'b> IndirectCommandsLayoutTokenNVBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsIndirectCommandsLayoutTokenNV,
+        T: Extends<IndirectCommandsLayoutTokenNV>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -35293,15 +35210,13 @@ unsafe impl Cast for InputAttachmentAspectReferenceBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`InstanceCreateInfo`].
-pub unsafe trait ExtendsInstanceCreateInfo: fmt::Debug {}
-unsafe impl ExtendsInstanceCreateInfo for DebugReportCallbackCreateInfoEXT {}
-unsafe impl ExtendsInstanceCreateInfo for DebugUtilsMessengerCreateInfoEXT {}
-unsafe impl ExtendsInstanceCreateInfo for DirectDriverLoadingListLUNARG {}
-unsafe impl ExtendsInstanceCreateInfo for ExportMetalObjectCreateInfoEXT {}
-unsafe impl ExtendsInstanceCreateInfo for LayerSettingsCreateInfoEXT {}
-unsafe impl ExtendsInstanceCreateInfo for ValidationFeaturesEXT {}
-unsafe impl ExtendsInstanceCreateInfo for ValidationFlagsEXT {}
+unsafe impl Extends<InstanceCreateInfo> for DebugReportCallbackCreateInfoEXT {}
+unsafe impl Extends<InstanceCreateInfo> for DebugUtilsMessengerCreateInfoEXT {}
+unsafe impl Extends<InstanceCreateInfo> for DirectDriverLoadingListLUNARG {}
+unsafe impl Extends<InstanceCreateInfo> for ExportMetalObjectCreateInfoEXT {}
+unsafe impl Extends<InstanceCreateInfo> for LayerSettingsCreateInfoEXT {}
+unsafe impl Extends<InstanceCreateInfo> for ValidationFeaturesEXT {}
+unsafe impl Extends<InstanceCreateInfo> for ValidationFlagsEXT {}
 
 unsafe impl Cast for InstanceCreateInfo {
     type Target = InstanceCreateInfo;
@@ -35328,7 +35243,7 @@ impl<'b> InstanceCreateInfoBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsInstanceCreateInfo,
+        T: Extends<InstanceCreateInfo>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -36258,32 +36173,30 @@ unsafe impl Cast for MemoryAllocateFlagsInfoBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`MemoryAllocateInfo`].
-pub unsafe trait ExtendsMemoryAllocateInfo: fmt::Debug {}
-unsafe impl ExtendsMemoryAllocateInfo for DedicatedAllocationMemoryAllocateInfoNV {}
-unsafe impl ExtendsMemoryAllocateInfo for ExportMemoryAllocateInfo {}
-unsafe impl ExtendsMemoryAllocateInfo for ExportMemoryAllocateInfoNV {}
-unsafe impl ExtendsMemoryAllocateInfo for ExportMemorySciBufInfoNV {}
-unsafe impl ExtendsMemoryAllocateInfo for ExportMemoryWin32HandleInfoKHR {}
-unsafe impl ExtendsMemoryAllocateInfo for ExportMemoryWin32HandleInfoNV {}
-unsafe impl ExtendsMemoryAllocateInfo for ExportMetalObjectCreateInfoEXT {}
-unsafe impl ExtendsMemoryAllocateInfo for ImportAndroidHardwareBufferInfoANDROID {}
-unsafe impl ExtendsMemoryAllocateInfo for ImportMemoryBufferCollectionFUCHSIA {}
-unsafe impl ExtendsMemoryAllocateInfo for ImportMemoryFdInfoKHR {}
-unsafe impl ExtendsMemoryAllocateInfo for ImportMemoryHostPointerInfoEXT {}
-unsafe impl ExtendsMemoryAllocateInfo for ImportMemoryMetalHandleInfoEXT {}
-unsafe impl ExtendsMemoryAllocateInfo for ImportMemorySciBufInfoNV {}
-unsafe impl ExtendsMemoryAllocateInfo for ImportMemoryWin32HandleInfoKHR {}
-unsafe impl ExtendsMemoryAllocateInfo for ImportMemoryWin32HandleInfoNV {}
-unsafe impl ExtendsMemoryAllocateInfo for ImportMemoryZirconHandleInfoFUCHSIA {}
-unsafe impl ExtendsMemoryAllocateInfo for ImportMetalBufferInfoEXT {}
-unsafe impl ExtendsMemoryAllocateInfo for ImportNativeBufferInfoOHOS {}
-unsafe impl ExtendsMemoryAllocateInfo for ImportScreenBufferInfoQNX {}
-unsafe impl ExtendsMemoryAllocateInfo for MemoryAllocateFlagsInfo {}
-unsafe impl ExtendsMemoryAllocateInfo for MemoryDedicatedAllocateInfo {}
-unsafe impl ExtendsMemoryAllocateInfo for MemoryDedicatedAllocateInfoTensorARM {}
-unsafe impl ExtendsMemoryAllocateInfo for MemoryOpaqueCaptureAddressAllocateInfo {}
-unsafe impl ExtendsMemoryAllocateInfo for MemoryPriorityAllocateInfoEXT {}
+unsafe impl Extends<MemoryAllocateInfo> for DedicatedAllocationMemoryAllocateInfoNV {}
+unsafe impl Extends<MemoryAllocateInfo> for ExportMemoryAllocateInfo {}
+unsafe impl Extends<MemoryAllocateInfo> for ExportMemoryAllocateInfoNV {}
+unsafe impl Extends<MemoryAllocateInfo> for ExportMemorySciBufInfoNV {}
+unsafe impl Extends<MemoryAllocateInfo> for ExportMemoryWin32HandleInfoKHR {}
+unsafe impl Extends<MemoryAllocateInfo> for ExportMemoryWin32HandleInfoNV {}
+unsafe impl Extends<MemoryAllocateInfo> for ExportMetalObjectCreateInfoEXT {}
+unsafe impl Extends<MemoryAllocateInfo> for ImportAndroidHardwareBufferInfoANDROID {}
+unsafe impl Extends<MemoryAllocateInfo> for ImportMemoryBufferCollectionFUCHSIA {}
+unsafe impl Extends<MemoryAllocateInfo> for ImportMemoryFdInfoKHR {}
+unsafe impl Extends<MemoryAllocateInfo> for ImportMemoryHostPointerInfoEXT {}
+unsafe impl Extends<MemoryAllocateInfo> for ImportMemoryMetalHandleInfoEXT {}
+unsafe impl Extends<MemoryAllocateInfo> for ImportMemorySciBufInfoNV {}
+unsafe impl Extends<MemoryAllocateInfo> for ImportMemoryWin32HandleInfoKHR {}
+unsafe impl Extends<MemoryAllocateInfo> for ImportMemoryWin32HandleInfoNV {}
+unsafe impl Extends<MemoryAllocateInfo> for ImportMemoryZirconHandleInfoFUCHSIA {}
+unsafe impl Extends<MemoryAllocateInfo> for ImportMetalBufferInfoEXT {}
+unsafe impl Extends<MemoryAllocateInfo> for ImportNativeBufferInfoOHOS {}
+unsafe impl Extends<MemoryAllocateInfo> for ImportScreenBufferInfoQNX {}
+unsafe impl Extends<MemoryAllocateInfo> for MemoryAllocateFlagsInfo {}
+unsafe impl Extends<MemoryAllocateInfo> for MemoryDedicatedAllocateInfo {}
+unsafe impl Extends<MemoryAllocateInfo> for MemoryDedicatedAllocateInfoTensorARM {}
+unsafe impl Extends<MemoryAllocateInfo> for MemoryOpaqueCaptureAddressAllocateInfo {}
+unsafe impl Extends<MemoryAllocateInfo> for MemoryPriorityAllocateInfoEXT {}
 
 unsafe impl Cast for MemoryAllocateInfo {
     type Target = MemoryAllocateInfo;
@@ -36310,7 +36223,7 @@ impl<'b> MemoryAllocateInfoBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsMemoryAllocateInfo,
+        T: Extends<MemoryAllocateInfo>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -37429,9 +37342,7 @@ unsafe impl Cast for MemoryHostPointerPropertiesEXTBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`MemoryMapInfo`].
-pub unsafe trait ExtendsMemoryMapInfo: fmt::Debug {}
-unsafe impl ExtendsMemoryMapInfo for MemoryMapPlacedInfoEXT {}
+unsafe impl Extends<MemoryMapInfo> for MemoryMapPlacedInfoEXT {}
 
 unsafe impl Cast for MemoryMapInfo {
     type Target = MemoryMapInfo;
@@ -37458,7 +37369,7 @@ impl<'b> MemoryMapInfoBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsMemoryMapInfo,
+        T: Extends<MemoryMapInfo>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -37822,10 +37733,8 @@ unsafe impl Cast for MemoryRequirementsBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`MemoryRequirements2`].
-pub unsafe trait ExtendsMemoryRequirements2: fmt::Debug {}
-unsafe impl ExtendsMemoryRequirements2 for MemoryDedicatedRequirements {}
-unsafe impl ExtendsMemoryRequirements2 for TileMemoryRequirementsQCOM {}
+unsafe impl Extends<MemoryRequirements2> for MemoryDedicatedRequirements {}
+unsafe impl Extends<MemoryRequirements2> for TileMemoryRequirementsQCOM {}
 
 unsafe impl Cast for MemoryRequirements2 {
     type Target = MemoryRequirements2;
@@ -37852,7 +37761,7 @@ impl<'b> MemoryRequirements2Builder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsMemoryRequirements2,
+        T: Extends<MemoryRequirements2>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -39458,9 +39367,7 @@ unsafe impl Cast for NativeBufferFormatPropertiesOHOSBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`NativeBufferPropertiesOHOS`].
-pub unsafe trait ExtendsNativeBufferPropertiesOHOS: fmt::Debug {}
-unsafe impl ExtendsNativeBufferPropertiesOHOS for NativeBufferFormatPropertiesOHOS {}
+unsafe impl Extends<NativeBufferPropertiesOHOS> for NativeBufferFormatPropertiesOHOS {}
 
 unsafe impl Cast for NativeBufferPropertiesOHOS {
     type Target = NativeBufferPropertiesOHOS;
@@ -39487,7 +39394,7 @@ impl<'b> NativeBufferPropertiesOHOSBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsNativeBufferPropertiesOHOS,
+        T: Extends<NativeBufferPropertiesOHOS>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -40032,9 +39939,7 @@ unsafe impl Cast for OpticalFlowImageFormatPropertiesNVBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`OpticalFlowSessionCreateInfoNV`].
-pub unsafe trait ExtendsOpticalFlowSessionCreateInfoNV: fmt::Debug {}
-unsafe impl ExtendsOpticalFlowSessionCreateInfoNV for OpticalFlowSessionCreatePrivateDataInfoNV {}
+unsafe impl Extends<OpticalFlowSessionCreateInfoNV> for OpticalFlowSessionCreatePrivateDataInfoNV {}
 
 unsafe impl Cast for OpticalFlowSessionCreateInfoNV {
     type Target = OpticalFlowSessionCreateInfoNV;
@@ -40061,7 +39966,7 @@ impl<'b> OpticalFlowSessionCreateInfoNVBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsOpticalFlowSessionCreateInfoNV,
+        T: Extends<OpticalFlowSessionCreateInfoNV>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -40339,12 +40244,7 @@ unsafe impl Cast for PartitionedAccelerationStructureFlagsNVBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`PartitionedAccelerationStructureInstancesInputNV`].
-pub unsafe trait ExtendsPartitionedAccelerationStructureInstancesInputNV:
-    fmt::Debug
-{
-}
-unsafe impl ExtendsPartitionedAccelerationStructureInstancesInputNV
+unsafe impl Extends<PartitionedAccelerationStructureInstancesInputNV>
     for PartitionedAccelerationStructureFlagsNV
 {
 }
@@ -40374,7 +40274,7 @@ impl<'b> PartitionedAccelerationStructureInstancesInputNVBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsPartitionedAccelerationStructureInstancesInputNV,
+        T: Extends<PartitionedAccelerationStructureInstancesInputNV>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -43169,12 +43069,7 @@ unsafe impl Cast for PhysicalDeviceClusterAccelerationStructurePropertiesNVBuild
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`PhysicalDeviceClusterCullingShaderFeaturesHUAWEI`].
-pub unsafe trait ExtendsPhysicalDeviceClusterCullingShaderFeaturesHUAWEI:
-    fmt::Debug
-{
-}
-unsafe impl ExtendsPhysicalDeviceClusterCullingShaderFeaturesHUAWEI
+unsafe impl Extends<PhysicalDeviceClusterCullingShaderFeaturesHUAWEI>
     for PhysicalDeviceClusterCullingShaderVrsFeaturesHUAWEI
 {
 }
@@ -43204,7 +43099,7 @@ impl<'b> PhysicalDeviceClusterCullingShaderFeaturesHUAWEIBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsPhysicalDeviceClusterCullingShaderFeaturesHUAWEI,
+        T: Extends<PhysicalDeviceClusterCullingShaderFeaturesHUAWEI>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -49658,9 +49553,7 @@ unsafe impl Cast for PhysicalDeviceExtendedSparseAddressSpacePropertiesNVBuilder
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`PhysicalDeviceExternalBufferInfo`].
-pub unsafe trait ExtendsPhysicalDeviceExternalBufferInfo: fmt::Debug {}
-unsafe impl ExtendsPhysicalDeviceExternalBufferInfo for BufferUsageFlags2CreateInfo {}
+unsafe impl Extends<PhysicalDeviceExternalBufferInfo> for BufferUsageFlags2CreateInfo {}
 
 unsafe impl Cast for PhysicalDeviceExternalBufferInfo {
     type Target = PhysicalDeviceExternalBufferInfo;
@@ -49687,7 +49580,7 @@ impl<'b> PhysicalDeviceExternalBufferInfoBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsPhysicalDeviceExternalBufferInfo,
+        T: Extends<PhysicalDeviceExternalBufferInfo>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -50456,9 +50349,7 @@ unsafe impl Cast for PhysicalDeviceExternalSciSyncFeaturesNVBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`PhysicalDeviceExternalSemaphoreInfo`].
-pub unsafe trait ExtendsPhysicalDeviceExternalSemaphoreInfo: fmt::Debug {}
-unsafe impl ExtendsPhysicalDeviceExternalSemaphoreInfo for SemaphoreTypeCreateInfo {}
+unsafe impl Extends<PhysicalDeviceExternalSemaphoreInfo> for SemaphoreTypeCreateInfo {}
 
 unsafe impl Cast for PhysicalDeviceExternalSemaphoreInfo {
     type Target = PhysicalDeviceExternalSemaphoreInfo;
@@ -50485,7 +50376,7 @@ impl<'b> PhysicalDeviceExternalSemaphoreInfoBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsPhysicalDeviceExternalSemaphoreInfo,
+        T: Extends<PhysicalDeviceExternalSemaphoreInfo>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -51087,349 +50978,407 @@ unsafe impl Cast for PhysicalDeviceFeaturesBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`PhysicalDeviceFeatures2`].
-pub unsafe trait ExtendsPhysicalDeviceFeatures2: fmt::Debug {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDevice16BitStorageFeatures {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDevice4444FormatsFeaturesEXT {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDevice8BitStorageFeatures {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceASTCDecodeFeaturesEXT {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceAccelerationStructureFeaturesKHR {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceAddressBindingReportFeaturesEXT {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceAmigoProfilingFeaturesSEC {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceAntiLagFeaturesAMD {}
-unsafe impl ExtendsPhysicalDeviceFeatures2
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDevice16BitStorageFeatures {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDevice4444FormatsFeaturesEXT {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDevice8BitStorageFeatures {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceASTCDecodeFeaturesEXT {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceAccelerationStructureFeaturesKHR {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceAddressBindingReportFeaturesEXT {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceAmigoProfilingFeaturesSEC {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceAntiLagFeaturesAMD {}
+unsafe impl Extends<PhysicalDeviceFeatures2>
     for PhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT
 {
 }
-unsafe impl ExtendsPhysicalDeviceFeatures2
+unsafe impl Extends<PhysicalDeviceFeatures2>
     for PhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT
 {
 }
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceBlendOperationAdvancedFeaturesEXT {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceBorderColorSwizzleFeaturesEXT {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceBufferDeviceAddressFeatures {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceBufferDeviceAddressFeaturesEXT {}
-unsafe impl ExtendsPhysicalDeviceFeatures2
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceBlendOperationAdvancedFeaturesEXT {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceBorderColorSwizzleFeaturesEXT {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceBufferDeviceAddressFeatures {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceBufferDeviceAddressFeaturesEXT {}
+unsafe impl Extends<PhysicalDeviceFeatures2>
     for PhysicalDeviceClusterAccelerationStructureFeaturesNV
 {
 }
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceClusterCullingShaderFeaturesHUAWEI {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceCoherentMemoryFeaturesAMD {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceColorWriteEnableFeaturesEXT {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceCommandBufferInheritanceFeaturesNV {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceComputeOccupancyPriorityFeaturesNV {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceComputeShaderDerivativesFeaturesKHR {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceConditionalRenderingFeaturesEXT {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceCooperativeMatrix2FeaturesNV {}
-unsafe impl ExtendsPhysicalDeviceFeatures2
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceClusterCullingShaderFeaturesHUAWEI {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceCoherentMemoryFeaturesAMD {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceColorWriteEnableFeaturesEXT {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceCommandBufferInheritanceFeaturesNV {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceComputeOccupancyPriorityFeaturesNV {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceComputeShaderDerivativesFeaturesKHR {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceConditionalRenderingFeaturesEXT {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceCooperativeMatrix2FeaturesNV {}
+unsafe impl Extends<PhysicalDeviceFeatures2>
     for PhysicalDeviceCooperativeMatrixConversionFeaturesQCOM
 {
 }
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceCooperativeMatrixFeaturesKHR {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceCooperativeMatrixFeaturesNV {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceCooperativeVectorFeaturesNV {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceCopyMemoryIndirectFeaturesKHR {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceCopyMemoryIndirectFeaturesNV {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceCornerSampledImageFeaturesNV {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceCoverageReductionModeFeaturesNV {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceCubicClampFeaturesQCOM {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceCubicWeightsFeaturesQCOM {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceCudaKernelLaunchFeaturesNV {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceCustomBorderColorFeaturesEXT {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceCustomResolveFeaturesEXT {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceDataGraphFeaturesARM {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceDataGraphModelFeaturesQCOM {}
-unsafe impl ExtendsPhysicalDeviceFeatures2
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceCooperativeMatrixFeaturesKHR {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceCooperativeMatrixFeaturesNV {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceCooperativeVectorFeaturesNV {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceCopyMemoryIndirectFeaturesKHR {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceCopyMemoryIndirectFeaturesNV {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceCornerSampledImageFeaturesNV {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceCoverageReductionModeFeaturesNV {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceCubicClampFeaturesQCOM {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceCubicWeightsFeaturesQCOM {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceCudaKernelLaunchFeaturesNV {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceCustomBorderColorFeaturesEXT {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceCustomResolveFeaturesEXT {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceDataGraphFeaturesARM {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceDataGraphModelFeaturesQCOM {}
+unsafe impl Extends<PhysicalDeviceFeatures2>
     for PhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV
 {
 }
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceDenseGeometryFormatFeaturesAMDX {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceDepthBiasControlFeaturesEXT {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceDepthClampControlFeaturesEXT {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceDepthClampZeroOneFeaturesKHR {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceDepthClipControlFeaturesEXT {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceDepthClipEnableFeaturesEXT {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceDescriptorBufferFeaturesEXT {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceDescriptorBufferTensorFeaturesARM {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceDescriptorHeapFeaturesEXT {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceDescriptorIndexingFeatures {}
-unsafe impl ExtendsPhysicalDeviceFeatures2
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceDenseGeometryFormatFeaturesAMDX {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceDepthBiasControlFeaturesEXT {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceDepthClampControlFeaturesEXT {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceDepthClampZeroOneFeaturesKHR {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceDepthClipControlFeaturesEXT {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceDepthClipEnableFeaturesEXT {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceDescriptorBufferFeaturesEXT {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceDescriptorBufferTensorFeaturesARM {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceDescriptorHeapFeaturesEXT {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceDescriptorIndexingFeatures {}
+unsafe impl Extends<PhysicalDeviceFeatures2>
     for PhysicalDeviceDescriptorPoolOverallocationFeaturesNV
 {
 }
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceDescriptorSetHostMappingFeaturesVALVE {}
-unsafe impl ExtendsPhysicalDeviceFeatures2
+unsafe impl Extends<PhysicalDeviceFeatures2>
+    for PhysicalDeviceDescriptorSetHostMappingFeaturesVALVE
+{
+}
+unsafe impl Extends<PhysicalDeviceFeatures2>
     for PhysicalDeviceDeviceGeneratedCommandsComputeFeaturesNV
 {
 }
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceDeviceGeneratedCommandsFeaturesEXT {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceDeviceGeneratedCommandsFeaturesNV {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceDeviceMemoryReportFeaturesEXT {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceDiagnosticsConfigFeaturesNV {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceDisplacementMicromapFeaturesNV {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceDynamicRenderingFeatures {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceDynamicRenderingLocalReadFeatures {}
-unsafe impl ExtendsPhysicalDeviceFeatures2
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceDeviceGeneratedCommandsFeaturesEXT {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceDeviceGeneratedCommandsFeaturesNV {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceDeviceMemoryReportFeaturesEXT {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceDiagnosticsConfigFeaturesNV {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceDisplacementMicromapFeaturesNV {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceDynamicRenderingFeatures {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceDynamicRenderingLocalReadFeatures {}
+unsafe impl Extends<PhysicalDeviceFeatures2>
     for PhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT
 {
 }
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceExclusiveScissorFeaturesNV {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceExtendedDynamicState2FeaturesEXT {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceExtendedDynamicState3FeaturesEXT {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceExtendedDynamicStateFeaturesEXT {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceExtendedSparseAddressSpaceFeaturesNV {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceExternalFormatResolveFeaturesANDROID {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceExternalMemoryRDMAFeaturesNV {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceExternalMemorySciBufFeaturesNV {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceExternalMemoryScreenBufferFeaturesQNX {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceExternalSciSync2FeaturesNV {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceExternalSciSyncFeaturesNV {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceFaultFeaturesEXT {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceFormatPackFeaturesARM {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceFragmentDensityMap2FeaturesEXT {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceFragmentDensityMapFeaturesEXT {}
-unsafe impl ExtendsPhysicalDeviceFeatures2
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceExclusiveScissorFeaturesNV {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceExtendedDynamicState2FeaturesEXT {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceExtendedDynamicState3FeaturesEXT {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceExtendedDynamicStateFeaturesEXT {}
+unsafe impl Extends<PhysicalDeviceFeatures2>
+    for PhysicalDeviceExtendedSparseAddressSpaceFeaturesNV
+{
+}
+unsafe impl Extends<PhysicalDeviceFeatures2>
+    for PhysicalDeviceExternalFormatResolveFeaturesANDROID
+{
+}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceExternalMemoryRDMAFeaturesNV {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceExternalMemorySciBufFeaturesNV {}
+unsafe impl Extends<PhysicalDeviceFeatures2>
+    for PhysicalDeviceExternalMemoryScreenBufferFeaturesQNX
+{
+}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceExternalSciSync2FeaturesNV {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceExternalSciSyncFeaturesNV {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceFaultFeaturesEXT {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceFormatPackFeaturesARM {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceFragmentDensityMap2FeaturesEXT {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceFragmentDensityMapFeaturesEXT {}
+unsafe impl Extends<PhysicalDeviceFeatures2>
     for PhysicalDeviceFragmentDensityMapLayeredFeaturesVALVE
 {
 }
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceFragmentDensityMapOffsetFeaturesEXT {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceFragmentShaderBarycentricFeaturesKHR {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceFragmentShaderInterlockFeaturesEXT {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceFragmentShadingRateEnumsFeaturesNV {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceFragmentShadingRateFeaturesKHR {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceFrameBoundaryFeaturesEXT {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceGlobalPriorityQueryFeatures {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceGraphicsPipelineLibraryFeaturesEXT {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceHdrVividFeaturesHUAWEI {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceHostImageCopyFeatures {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceHostQueryResetFeatures {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceImage2DViewOf3DFeaturesEXT {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceImageAlignmentControlFeaturesMESA {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceImageCompressionControlFeaturesEXT {}
-unsafe impl ExtendsPhysicalDeviceFeatures2
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceFragmentDensityMapOffsetFeaturesEXT {}
+unsafe impl Extends<PhysicalDeviceFeatures2>
+    for PhysicalDeviceFragmentShaderBarycentricFeaturesKHR
+{
+}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceFragmentShaderInterlockFeaturesEXT {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceFragmentShadingRateEnumsFeaturesNV {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceFragmentShadingRateFeaturesKHR {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceFrameBoundaryFeaturesEXT {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceGlobalPriorityQueryFeatures {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceGraphicsPipelineLibraryFeaturesEXT {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceHdrVividFeaturesHUAWEI {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceHostImageCopyFeatures {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceHostQueryResetFeatures {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceImage2DViewOf3DFeaturesEXT {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceImageAlignmentControlFeaturesMESA {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceImageCompressionControlFeaturesEXT {}
+unsafe impl Extends<PhysicalDeviceFeatures2>
     for PhysicalDeviceImageCompressionControlSwapchainFeaturesEXT
 {
 }
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceImageProcessing2FeaturesQCOM {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceImageProcessingFeaturesQCOM {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceImageRobustnessFeatures {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceImageSlicedViewOf3DFeaturesEXT {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceImageViewMinLodFeaturesEXT {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceImagelessFramebufferFeatures {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceIndexTypeUint8Features {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceInheritedViewportScissorFeaturesNV {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceInlineUniformBlockFeatures {}
-unsafe impl ExtendsPhysicalDeviceFeatures2
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceImageProcessing2FeaturesQCOM {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceImageProcessingFeaturesQCOM {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceImageRobustnessFeatures {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceImageSlicedViewOf3DFeaturesEXT {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceImageViewMinLodFeaturesEXT {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceImagelessFramebufferFeatures {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceIndexTypeUint8Features {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceInheritedViewportScissorFeaturesNV {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceInlineUniformBlockFeatures {}
+unsafe impl Extends<PhysicalDeviceFeatures2>
     for PhysicalDeviceInternallySynchronizedQueuesFeaturesKHR
 {
 }
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceInvocationMaskFeaturesHUAWEI {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceLegacyDitheringFeaturesEXT {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceLegacyVertexAttributesFeaturesEXT {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceLineRasterizationFeatures {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceLinearColorAttachmentFeaturesNV {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceMaintenance10FeaturesKHR {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceMaintenance4Features {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceMaintenance5Features {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceMaintenance6Features {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceMaintenance7FeaturesKHR {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceMaintenance8FeaturesKHR {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceMaintenance9FeaturesKHR {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceMapMemoryPlacedFeaturesEXT {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceMemoryDecompressionFeaturesEXT {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceMemoryPriorityFeaturesEXT {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceMeshShaderFeaturesEXT {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceMeshShaderFeaturesNV {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceMultiDrawFeaturesEXT {}
-unsafe impl ExtendsPhysicalDeviceFeatures2
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceInvocationMaskFeaturesHUAWEI {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceLegacyDitheringFeaturesEXT {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceLegacyVertexAttributesFeaturesEXT {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceLineRasterizationFeatures {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceLinearColorAttachmentFeaturesNV {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceMaintenance10FeaturesKHR {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceMaintenance4Features {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceMaintenance5Features {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceMaintenance6Features {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceMaintenance7FeaturesKHR {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceMaintenance8FeaturesKHR {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceMaintenance9FeaturesKHR {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceMapMemoryPlacedFeaturesEXT {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceMemoryDecompressionFeaturesEXT {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceMemoryPriorityFeaturesEXT {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceMeshShaderFeaturesEXT {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceMeshShaderFeaturesNV {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceMultiDrawFeaturesEXT {}
+unsafe impl Extends<PhysicalDeviceFeatures2>
     for PhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXT
 {
 }
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceMultiviewFeatures {}
-unsafe impl ExtendsPhysicalDeviceFeatures2
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceMultiviewFeatures {}
+unsafe impl Extends<PhysicalDeviceFeatures2>
     for PhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOM
 {
 }
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceMutableDescriptorTypeFeaturesEXT {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceNestedCommandBufferFeaturesEXT {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceNonSeamlessCubeMapFeaturesEXT {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceOpacityMicromapFeaturesEXT {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceOpticalFlowFeaturesNV {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDevicePageableDeviceLocalMemoryFeaturesEXT {}
-unsafe impl ExtendsPhysicalDeviceFeatures2
+unsafe impl Extends<PhysicalDeviceFeatures2>
+    for PhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM
+{
+}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceMutableDescriptorTypeFeaturesEXT {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceNestedCommandBufferFeaturesEXT {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceNonSeamlessCubeMapFeaturesEXT {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceOpacityMicromapFeaturesEXT {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceOpticalFlowFeaturesNV {}
+unsafe impl Extends<PhysicalDeviceFeatures2>
+    for PhysicalDevicePageableDeviceLocalMemoryFeaturesEXT
+{
+}
+unsafe impl Extends<PhysicalDeviceFeatures2>
     for PhysicalDevicePartitionedAccelerationStructureFeaturesNV
 {
 }
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDevicePerStageDescriptorSetFeaturesNV {}
-unsafe impl ExtendsPhysicalDeviceFeatures2
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDevicePerStageDescriptorSetFeaturesNV {}
+unsafe impl Extends<PhysicalDeviceFeatures2>
     for PhysicalDevicePerformanceCountersByRegionFeaturesARM
 {
 }
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDevicePerformanceQueryFeaturesKHR {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDevicePipelineBinaryFeaturesKHR {}
-unsafe impl ExtendsPhysicalDeviceFeatures2
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDevicePerformanceQueryFeaturesKHR {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDevicePipelineBinaryFeaturesKHR {}
+unsafe impl Extends<PhysicalDeviceFeatures2>
     for PhysicalDevicePipelineCacheIncrementalModeFeaturesSEC
 {
 }
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDevicePipelineCreationCacheControlFeatures {}
-unsafe impl ExtendsPhysicalDeviceFeatures2
+unsafe impl Extends<PhysicalDeviceFeatures2>
+    for PhysicalDevicePipelineCreationCacheControlFeatures
+{
+}
+unsafe impl Extends<PhysicalDeviceFeatures2>
     for PhysicalDevicePipelineExecutablePropertiesFeaturesKHR
 {
 }
-unsafe impl ExtendsPhysicalDeviceFeatures2
+unsafe impl Extends<PhysicalDeviceFeatures2>
     for PhysicalDevicePipelineLibraryGroupHandlesFeaturesEXT
 {
 }
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDevicePipelineOpacityMicromapFeaturesARM {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDevicePipelinePropertiesFeaturesEXT {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDevicePipelineProtectedAccessFeatures {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDevicePipelineRobustnessFeatures {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDevicePortabilitySubsetFeaturesKHR {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDevicePresentBarrierFeaturesNV {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDevicePresentId2FeaturesKHR {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDevicePresentIdFeaturesKHR {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDevicePresentMeteringFeaturesNV {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDevicePresentModeFifoLatestReadyFeaturesKHR {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDevicePresentTimingFeaturesEXT {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDevicePresentWait2FeaturesKHR {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDevicePresentWaitFeaturesKHR {}
-unsafe impl ExtendsPhysicalDeviceFeatures2
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDevicePipelineOpacityMicromapFeaturesARM {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDevicePipelinePropertiesFeaturesEXT {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDevicePipelineProtectedAccessFeatures {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDevicePipelineRobustnessFeatures {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDevicePortabilitySubsetFeaturesKHR {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDevicePresentBarrierFeaturesNV {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDevicePresentId2FeaturesKHR {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDevicePresentIdFeaturesKHR {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDevicePresentMeteringFeaturesNV {}
+unsafe impl Extends<PhysicalDeviceFeatures2>
+    for PhysicalDevicePresentModeFifoLatestReadyFeaturesKHR
+{
+}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDevicePresentTimingFeaturesEXT {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDevicePresentWait2FeaturesKHR {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDevicePresentWaitFeaturesKHR {}
+unsafe impl Extends<PhysicalDeviceFeatures2>
     for PhysicalDevicePrimitiveTopologyListRestartFeaturesEXT
 {
 }
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDevicePrimitivesGeneratedQueryFeaturesEXT {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDevicePrivateDataFeatures {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceProtectedMemoryFeatures {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceProvokingVertexFeaturesEXT {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDevicePushConstantBankFeaturesNV {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceRGBA10X6FormatsFeaturesEXT {}
-unsafe impl ExtendsPhysicalDeviceFeatures2
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDevicePrimitivesGeneratedQueryFeaturesEXT {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDevicePrivateDataFeatures {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceProtectedMemoryFeatures {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceProvokingVertexFeaturesEXT {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDevicePushConstantBankFeaturesNV {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceRGBA10X6FormatsFeaturesEXT {}
+unsafe impl Extends<PhysicalDeviceFeatures2>
     for PhysicalDeviceRasterizationOrderAttachmentAccessFeaturesEXT
 {
 }
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceRawAccessChainsFeaturesNV {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceRayQueryFeaturesKHR {}
-unsafe impl ExtendsPhysicalDeviceFeatures2
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceRawAccessChainsFeaturesNV {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceRayQueryFeaturesKHR {}
+unsafe impl Extends<PhysicalDeviceFeatures2>
     for PhysicalDeviceRayTracingInvocationReorderFeaturesEXT
 {
 }
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceRayTracingInvocationReorderFeaturesNV {}
-unsafe impl ExtendsPhysicalDeviceFeatures2
+unsafe impl Extends<PhysicalDeviceFeatures2>
+    for PhysicalDeviceRayTracingInvocationReorderFeaturesNV
+{
+}
+unsafe impl Extends<PhysicalDeviceFeatures2>
     for PhysicalDeviceRayTracingLinearSweptSpheresFeaturesNV
 {
 }
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceRayTracingMaintenance1FeaturesKHR {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceRayTracingMotionBlurFeaturesNV {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceRayTracingPipelineFeaturesKHR {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceRayTracingPositionFetchFeaturesKHR {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceRayTracingValidationFeaturesNV {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceRelaxedLineRasterizationFeaturesIMG {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceRenderPassStripedFeaturesARM {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceRepresentativeFragmentTestFeaturesNV {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceRobustness2FeaturesKHR {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceSamplerYcbcrConversionFeatures {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceScalarBlockLayoutFeatures {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceSchedulingControlsFeaturesARM {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceSeparateDepthStencilLayoutsFeatures {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShader64BitIndexingFeaturesEXT {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderAtomicFloat16VectorFeaturesNV {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderAtomicFloat2FeaturesEXT {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderAtomicFloatFeaturesEXT {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderAtomicInt64Features {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderBfloat16FeaturesKHR {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderClockFeaturesKHR {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderCoreBuiltinsFeaturesARM {}
-unsafe impl ExtendsPhysicalDeviceFeatures2
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceRayTracingMaintenance1FeaturesKHR {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceRayTracingMotionBlurFeaturesNV {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceRayTracingPipelineFeaturesKHR {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceRayTracingPositionFetchFeaturesKHR {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceRayTracingValidationFeaturesNV {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceRelaxedLineRasterizationFeaturesIMG {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceRenderPassStripedFeaturesARM {}
+unsafe impl Extends<PhysicalDeviceFeatures2>
+    for PhysicalDeviceRepresentativeFragmentTestFeaturesNV
+{
+}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceRobustness2FeaturesKHR {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceSamplerYcbcrConversionFeatures {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceScalarBlockLayoutFeatures {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceSchedulingControlsFeaturesARM {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceSeparateDepthStencilLayoutsFeatures {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceShader64BitIndexingFeaturesEXT {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceShaderAtomicFloat16VectorFeaturesNV {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceShaderAtomicFloat2FeaturesEXT {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceShaderAtomicFloatFeaturesEXT {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceShaderAtomicInt64Features {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceShaderBfloat16FeaturesKHR {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceShaderClockFeaturesKHR {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceShaderCoreBuiltinsFeaturesARM {}
+unsafe impl Extends<PhysicalDeviceFeatures2>
     for PhysicalDeviceShaderDemoteToHelperInvocationFeatures
 {
 }
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderDrawParametersFeatures {}
-unsafe impl ExtendsPhysicalDeviceFeatures2
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceShaderDrawParametersFeatures {}
+unsafe impl Extends<PhysicalDeviceFeatures2>
     for PhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD
 {
 }
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderEnqueueFeaturesAMDX {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderExpectAssumeFeatures {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderFloat16Int8Features {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderFloat8FeaturesEXT {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderFloatControls2Features {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderFmaFeaturesKHR {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderImageAtomicInt64FeaturesEXT {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderImageFootprintFeaturesNV {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderIntegerDotProductFeatures {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderIntegerFunctions2FeaturesINTEL {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderLongVectorFeaturesEXT {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderMaximalReconvergenceFeaturesKHR {}
-unsafe impl ExtendsPhysicalDeviceFeatures2
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceShaderEnqueueFeaturesAMDX {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceShaderExpectAssumeFeatures {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceShaderFloat16Int8Features {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceShaderFloat8FeaturesEXT {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceShaderFloatControls2Features {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceShaderFmaFeaturesKHR {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceShaderImageAtomicInt64FeaturesEXT {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceShaderImageFootprintFeaturesNV {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceShaderIntegerDotProductFeatures {}
+unsafe impl Extends<PhysicalDeviceFeatures2>
+    for PhysicalDeviceShaderIntegerFunctions2FeaturesINTEL
+{
+}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceShaderLongVectorFeaturesEXT {}
+unsafe impl Extends<PhysicalDeviceFeatures2>
+    for PhysicalDeviceShaderMaximalReconvergenceFeaturesKHR
+{
+}
+unsafe impl Extends<PhysicalDeviceFeatures2>
     for PhysicalDeviceShaderMixedFloatDotProductFeaturesVALVE
 {
 }
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderModuleIdentifierFeaturesEXT {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderObjectFeaturesEXT {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderQuadControlFeaturesKHR {}
-unsafe impl ExtendsPhysicalDeviceFeatures2
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceShaderModuleIdentifierFeaturesEXT {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceShaderObjectFeaturesEXT {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceShaderQuadControlFeaturesKHR {}
+unsafe impl Extends<PhysicalDeviceFeatures2>
     for PhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHR
 {
 }
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderReplicatedCompositesFeaturesEXT {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderSMBuiltinsFeaturesNV {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderSubgroupExtendedTypesFeatures {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderSubgroupPartitionedFeaturesEXT {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderSubgroupRotateFeatures {}
-unsafe impl ExtendsPhysicalDeviceFeatures2
+unsafe impl Extends<PhysicalDeviceFeatures2>
+    for PhysicalDeviceShaderReplicatedCompositesFeaturesEXT
+{
+}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceShaderSMBuiltinsFeaturesNV {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceShaderSubgroupExtendedTypesFeatures {}
+unsafe impl Extends<PhysicalDeviceFeatures2>
+    for PhysicalDeviceShaderSubgroupPartitionedFeaturesEXT
+{
+}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceShaderSubgroupRotateFeatures {}
+unsafe impl Extends<PhysicalDeviceFeatures2>
     for PhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR
 {
 }
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderTerminateInvocationFeatures {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderTileImageFeaturesEXT {}
-unsafe impl ExtendsPhysicalDeviceFeatures2
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceShaderTerminateInvocationFeatures {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceShaderTileImageFeaturesEXT {}
+unsafe impl Extends<PhysicalDeviceFeatures2>
     for PhysicalDeviceShaderUniformBufferUnsizedArrayFeaturesEXT
 {
 }
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderUntypedPointersFeaturesKHR {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShadingRateImageFeaturesNV {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceSubgroupSizeControlFeatures {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceSubpassMergeFeedbackFeaturesEXT {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceSubpassShadingFeaturesHUAWEI {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceSwapchainMaintenance1FeaturesKHR {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceSynchronization2Features {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceTensorFeaturesARM {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceTexelBufferAlignmentFeaturesEXT {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceTextureCompressionASTC3DFeaturesEXT {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceTextureCompressionASTCHDRFeatures {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceTileMemoryHeapFeaturesQCOM {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceTilePropertiesFeaturesQCOM {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceTileShadingFeaturesQCOM {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceTimelineSemaphoreFeatures {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceTransformFeedbackFeaturesEXT {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceUnifiedImageLayoutsFeaturesKHR {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceUniformBufferStandardLayoutFeatures {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceVariablePointersFeatures {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceVertexAttributeDivisorFeatures {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceVertexAttributeRobustnessFeaturesEXT {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceVertexInputDynamicStateFeaturesEXT {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceVideoDecodeVP9FeaturesKHR {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceVideoEncodeAV1FeaturesKHR {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceVideoEncodeIntraRefreshFeaturesKHR {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceVideoEncodeQuantizationMapFeaturesKHR {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceVideoEncodeRgbConversionFeaturesVALVE {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceVideoMaintenance1FeaturesKHR {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceVideoMaintenance2FeaturesKHR {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceVulkan11Features {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceVulkan12Features {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceVulkan13Features {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceVulkan14Features {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceVulkanMemoryModelFeatures {}
-unsafe impl ExtendsPhysicalDeviceFeatures2
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceShaderUntypedPointersFeaturesKHR {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceShadingRateImageFeaturesNV {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceSubgroupSizeControlFeatures {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceSubpassMergeFeedbackFeaturesEXT {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceSubpassShadingFeaturesHUAWEI {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceSwapchainMaintenance1FeaturesKHR {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceSynchronization2Features {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceTensorFeaturesARM {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceTexelBufferAlignmentFeaturesEXT {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceTextureCompressionASTC3DFeaturesEXT {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceTextureCompressionASTCHDRFeatures {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceTileMemoryHeapFeaturesQCOM {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceTilePropertiesFeaturesQCOM {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceTileShadingFeaturesQCOM {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceTimelineSemaphoreFeatures {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceTransformFeedbackFeaturesEXT {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceUnifiedImageLayoutsFeaturesKHR {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceUniformBufferStandardLayoutFeatures {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceVariablePointersFeatures {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceVertexAttributeDivisorFeatures {}
+unsafe impl Extends<PhysicalDeviceFeatures2>
+    for PhysicalDeviceVertexAttributeRobustnessFeaturesEXT
+{
+}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceVertexInputDynamicStateFeaturesEXT {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceVideoDecodeVP9FeaturesKHR {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceVideoEncodeAV1FeaturesKHR {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceVideoEncodeIntraRefreshFeaturesKHR {}
+unsafe impl Extends<PhysicalDeviceFeatures2>
+    for PhysicalDeviceVideoEncodeQuantizationMapFeaturesKHR
+{
+}
+unsafe impl Extends<PhysicalDeviceFeatures2>
+    for PhysicalDeviceVideoEncodeRgbConversionFeaturesVALVE
+{
+}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceVideoMaintenance1FeaturesKHR {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceVideoMaintenance2FeaturesKHR {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceVulkan11Features {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceVulkan12Features {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceVulkan13Features {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceVulkan14Features {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceVulkanMemoryModelFeatures {}
+unsafe impl Extends<PhysicalDeviceFeatures2>
     for PhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR
 {
 }
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceYcbcrDegammaFeaturesQCOM {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceYcbcrImageArraysFeaturesEXT {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceZeroInitializeDeviceMemoryFeaturesEXT {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceZeroInitializeWorkgroupMemoryFeatures {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceYcbcrDegammaFeaturesQCOM {}
+unsafe impl Extends<PhysicalDeviceFeatures2> for PhysicalDeviceYcbcrImageArraysFeaturesEXT {}
+unsafe impl Extends<PhysicalDeviceFeatures2>
+    for PhysicalDeviceZeroInitializeDeviceMemoryFeaturesEXT
+{
+}
+unsafe impl Extends<PhysicalDeviceFeatures2>
+    for PhysicalDeviceZeroInitializeWorkgroupMemoryFeatures
+{
+}
 
 unsafe impl Cast for PhysicalDeviceFeatures2 {
     type Target = PhysicalDeviceFeatures2;
@@ -51456,7 +51405,7 @@ impl<'b> PhysicalDeviceFeatures2Builder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsPhysicalDeviceFeatures2,
+        T: Extends<PhysicalDeviceFeatures2>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -54031,16 +53980,17 @@ unsafe impl Cast for PhysicalDeviceImageDrmFormatModifierInfoEXTBuilder<'_> {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`PhysicalDeviceImageFormatInfo2`].
-pub unsafe trait ExtendsPhysicalDeviceImageFormatInfo2: fmt::Debug {}
-unsafe impl ExtendsPhysicalDeviceImageFormatInfo2 for ImageCompressionControlEXT {}
-unsafe impl ExtendsPhysicalDeviceImageFormatInfo2 for ImageFormatListCreateInfo {}
-unsafe impl ExtendsPhysicalDeviceImageFormatInfo2 for ImageStencilUsageCreateInfo {}
-unsafe impl ExtendsPhysicalDeviceImageFormatInfo2 for OpticalFlowImageFormatInfoNV {}
-unsafe impl ExtendsPhysicalDeviceImageFormatInfo2 for PhysicalDeviceExternalImageFormatInfo {}
-unsafe impl ExtendsPhysicalDeviceImageFormatInfo2 for PhysicalDeviceImageDrmFormatModifierInfoEXT {}
-unsafe impl ExtendsPhysicalDeviceImageFormatInfo2 for PhysicalDeviceImageViewImageFormatInfoEXT {}
-unsafe impl ExtendsPhysicalDeviceImageFormatInfo2 for VideoProfileListInfoKHR {}
+unsafe impl Extends<PhysicalDeviceImageFormatInfo2> for ImageCompressionControlEXT {}
+unsafe impl Extends<PhysicalDeviceImageFormatInfo2> for ImageFormatListCreateInfo {}
+unsafe impl Extends<PhysicalDeviceImageFormatInfo2> for ImageStencilUsageCreateInfo {}
+unsafe impl Extends<PhysicalDeviceImageFormatInfo2> for OpticalFlowImageFormatInfoNV {}
+unsafe impl Extends<PhysicalDeviceImageFormatInfo2> for PhysicalDeviceExternalImageFormatInfo {}
+unsafe impl Extends<PhysicalDeviceImageFormatInfo2>
+    for PhysicalDeviceImageDrmFormatModifierInfoEXT
+{
+}
+unsafe impl Extends<PhysicalDeviceImageFormatInfo2> for PhysicalDeviceImageViewImageFormatInfoEXT {}
+unsafe impl Extends<PhysicalDeviceImageFormatInfo2> for VideoProfileListInfoKHR {}
 
 unsafe impl Cast for PhysicalDeviceImageFormatInfo2 {
     type Target = PhysicalDeviceImageFormatInfo2;
@@ -54067,7 +54017,7 @@ impl<'b> PhysicalDeviceImageFormatInfo2Builder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsPhysicalDeviceImageFormatInfo2,
+        T: Extends<PhysicalDeviceImageFormatInfo2>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -55099,9 +55049,7 @@ unsafe impl Cast for PhysicalDeviceInvocationMaskFeaturesHUAWEIBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`PhysicalDeviceLayeredApiPropertiesKHR`].
-pub unsafe trait ExtendsPhysicalDeviceLayeredApiPropertiesKHR: fmt::Debug {}
-unsafe impl ExtendsPhysicalDeviceLayeredApiPropertiesKHR
+unsafe impl Extends<PhysicalDeviceLayeredApiPropertiesKHR>
     for PhysicalDeviceLayeredApiVulkanPropertiesKHR
 {
 }
@@ -55131,7 +55079,7 @@ impl<'b> PhysicalDeviceLayeredApiPropertiesKHRBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsPhysicalDeviceLayeredApiPropertiesKHR,
+        T: Extends<PhysicalDeviceLayeredApiPropertiesKHR>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -58046,9 +57994,7 @@ unsafe impl Cast for PhysicalDeviceMemoryPropertiesBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`PhysicalDeviceMemoryProperties2`].
-pub unsafe trait ExtendsPhysicalDeviceMemoryProperties2: fmt::Debug {}
-unsafe impl ExtendsPhysicalDeviceMemoryProperties2 for PhysicalDeviceMemoryBudgetPropertiesEXT {}
+unsafe impl Extends<PhysicalDeviceMemoryProperties2> for PhysicalDeviceMemoryBudgetPropertiesEXT {}
 
 unsafe impl Cast for PhysicalDeviceMemoryProperties2 {
     type Target = PhysicalDeviceMemoryProperties2;
@@ -58075,7 +58021,7 @@ impl<'b> PhysicalDeviceMemoryProperties2Builder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsPhysicalDeviceMemoryProperties2,
+        T: Extends<PhysicalDeviceMemoryProperties2>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -62121,177 +62067,202 @@ unsafe impl Cast for PhysicalDevicePropertiesBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`PhysicalDeviceProperties2`].
-pub unsafe trait ExtendsPhysicalDeviceProperties2: fmt::Debug {}
-unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceAccelerationStructurePropertiesKHR {}
-unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceBlendOperationAdvancedPropertiesEXT {}
-unsafe impl ExtendsPhysicalDeviceProperties2
+unsafe impl Extends<PhysicalDeviceProperties2>
+    for PhysicalDeviceAccelerationStructurePropertiesKHR
+{
+}
+unsafe impl Extends<PhysicalDeviceProperties2>
+    for PhysicalDeviceBlendOperationAdvancedPropertiesEXT
+{
+}
+unsafe impl Extends<PhysicalDeviceProperties2>
     for PhysicalDeviceClusterAccelerationStructurePropertiesNV
 {
 }
-unsafe impl ExtendsPhysicalDeviceProperties2
+unsafe impl Extends<PhysicalDeviceProperties2>
     for PhysicalDeviceClusterCullingShaderPropertiesHUAWEI
 {
 }
-unsafe impl ExtendsPhysicalDeviceProperties2
+unsafe impl Extends<PhysicalDeviceProperties2>
     for PhysicalDeviceComputeShaderDerivativesPropertiesKHR
 {
 }
-unsafe impl ExtendsPhysicalDeviceProperties2
+unsafe impl Extends<PhysicalDeviceProperties2>
     for PhysicalDeviceConservativeRasterizationPropertiesEXT
 {
 }
-unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceCooperativeMatrix2PropertiesNV {}
-unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceCooperativeMatrixPropertiesKHR {}
-unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceCooperativeMatrixPropertiesNV {}
-unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceCooperativeVectorPropertiesNV {}
-unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceCopyMemoryIndirectPropertiesKHR {}
-unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceCudaKernelLaunchPropertiesNV {}
-unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceCustomBorderColorPropertiesEXT {}
-unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceDepthStencilResolveProperties {}
-unsafe impl ExtendsPhysicalDeviceProperties2
+unsafe impl Extends<PhysicalDeviceProperties2> for PhysicalDeviceCooperativeMatrix2PropertiesNV {}
+unsafe impl Extends<PhysicalDeviceProperties2> for PhysicalDeviceCooperativeMatrixPropertiesKHR {}
+unsafe impl Extends<PhysicalDeviceProperties2> for PhysicalDeviceCooperativeMatrixPropertiesNV {}
+unsafe impl Extends<PhysicalDeviceProperties2> for PhysicalDeviceCooperativeVectorPropertiesNV {}
+unsafe impl Extends<PhysicalDeviceProperties2> for PhysicalDeviceCopyMemoryIndirectPropertiesKHR {}
+unsafe impl Extends<PhysicalDeviceProperties2> for PhysicalDeviceCudaKernelLaunchPropertiesNV {}
+unsafe impl Extends<PhysicalDeviceProperties2> for PhysicalDeviceCustomBorderColorPropertiesEXT {}
+unsafe impl Extends<PhysicalDeviceProperties2> for PhysicalDeviceDepthStencilResolveProperties {}
+unsafe impl Extends<PhysicalDeviceProperties2>
     for PhysicalDeviceDescriptorBufferDensityMapPropertiesEXT
 {
 }
-unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceDescriptorBufferPropertiesEXT {}
-unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceDescriptorBufferTensorPropertiesARM {}
-unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceDescriptorHeapPropertiesEXT {}
-unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceDescriptorHeapTensorPropertiesARM {}
-unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceDescriptorIndexingProperties {}
-unsafe impl ExtendsPhysicalDeviceProperties2
+unsafe impl Extends<PhysicalDeviceProperties2> for PhysicalDeviceDescriptorBufferPropertiesEXT {}
+unsafe impl Extends<PhysicalDeviceProperties2>
+    for PhysicalDeviceDescriptorBufferTensorPropertiesARM
+{
+}
+unsafe impl Extends<PhysicalDeviceProperties2> for PhysicalDeviceDescriptorHeapPropertiesEXT {}
+unsafe impl Extends<PhysicalDeviceProperties2> for PhysicalDeviceDescriptorHeapTensorPropertiesARM {}
+unsafe impl Extends<PhysicalDeviceProperties2> for PhysicalDeviceDescriptorIndexingProperties {}
+unsafe impl Extends<PhysicalDeviceProperties2>
     for PhysicalDeviceDeviceGeneratedCommandsPropertiesEXT
 {
 }
-unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceDeviceGeneratedCommandsPropertiesNV {}
-unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceDiscardRectanglePropertiesEXT {}
-unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceDisplacementMicromapPropertiesNV {}
-unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceDriverProperties {}
-unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceDrmPropertiesEXT {}
-unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceExtendedDynamicState3PropertiesEXT {}
-unsafe impl ExtendsPhysicalDeviceProperties2
+unsafe impl Extends<PhysicalDeviceProperties2>
+    for PhysicalDeviceDeviceGeneratedCommandsPropertiesNV
+{
+}
+unsafe impl Extends<PhysicalDeviceProperties2> for PhysicalDeviceDiscardRectanglePropertiesEXT {}
+unsafe impl Extends<PhysicalDeviceProperties2> for PhysicalDeviceDisplacementMicromapPropertiesNV {}
+unsafe impl Extends<PhysicalDeviceProperties2> for PhysicalDeviceDriverProperties {}
+unsafe impl Extends<PhysicalDeviceProperties2> for PhysicalDeviceDrmPropertiesEXT {}
+unsafe impl Extends<PhysicalDeviceProperties2>
+    for PhysicalDeviceExtendedDynamicState3PropertiesEXT
+{
+}
+unsafe impl Extends<PhysicalDeviceProperties2>
     for PhysicalDeviceExtendedSparseAddressSpacePropertiesNV
 {
 }
-unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceExternalComputeQueuePropertiesNV {}
-unsafe impl ExtendsPhysicalDeviceProperties2
+unsafe impl Extends<PhysicalDeviceProperties2> for PhysicalDeviceExternalComputeQueuePropertiesNV {}
+unsafe impl Extends<PhysicalDeviceProperties2>
     for PhysicalDeviceExternalFormatResolvePropertiesANDROID
 {
 }
-unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceExternalMemoryHostPropertiesEXT {}
-unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceFloatControlsProperties {}
-unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceFragmentDensityMap2PropertiesEXT {}
-unsafe impl ExtendsPhysicalDeviceProperties2
+unsafe impl Extends<PhysicalDeviceProperties2> for PhysicalDeviceExternalMemoryHostPropertiesEXT {}
+unsafe impl Extends<PhysicalDeviceProperties2> for PhysicalDeviceFloatControlsProperties {}
+unsafe impl Extends<PhysicalDeviceProperties2> for PhysicalDeviceFragmentDensityMap2PropertiesEXT {}
+unsafe impl Extends<PhysicalDeviceProperties2>
     for PhysicalDeviceFragmentDensityMapLayeredPropertiesVALVE
 {
 }
-unsafe impl ExtendsPhysicalDeviceProperties2
+unsafe impl Extends<PhysicalDeviceProperties2>
     for PhysicalDeviceFragmentDensityMapOffsetPropertiesEXT
 {
 }
-unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceFragmentDensityMapPropertiesEXT {}
-unsafe impl ExtendsPhysicalDeviceProperties2
+unsafe impl Extends<PhysicalDeviceProperties2> for PhysicalDeviceFragmentDensityMapPropertiesEXT {}
+unsafe impl Extends<PhysicalDeviceProperties2>
     for PhysicalDeviceFragmentShaderBarycentricPropertiesKHR
 {
 }
-unsafe impl ExtendsPhysicalDeviceProperties2
+unsafe impl Extends<PhysicalDeviceProperties2>
     for PhysicalDeviceFragmentShadingRateEnumsPropertiesNV
 {
 }
-unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceFragmentShadingRatePropertiesKHR {}
-unsafe impl ExtendsPhysicalDeviceProperties2
+unsafe impl Extends<PhysicalDeviceProperties2> for PhysicalDeviceFragmentShadingRatePropertiesKHR {}
+unsafe impl Extends<PhysicalDeviceProperties2>
     for PhysicalDeviceGraphicsPipelineLibraryPropertiesEXT
 {
 }
-unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceHostImageCopyProperties {}
-unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceIDProperties {}
-unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceImageAlignmentControlPropertiesMESA {}
-unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceImageProcessing2PropertiesQCOM {}
-unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceImageProcessingPropertiesQCOM {}
-unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceInlineUniformBlockProperties {}
-unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceLayeredApiPropertiesListKHR {}
-unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceLayeredDriverPropertiesMSFT {}
-unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceLegacyVertexAttributesPropertiesEXT {}
-unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceLineRasterizationProperties {}
-unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceMaintenance10PropertiesKHR {}
-unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceMaintenance3Properties {}
-unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceMaintenance4Properties {}
-unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceMaintenance5Properties {}
-unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceMaintenance6Properties {}
-unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceMaintenance7PropertiesKHR {}
-unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceMaintenance9PropertiesKHR {}
-unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceMapMemoryPlacedPropertiesEXT {}
-unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceMemoryDecompressionPropertiesEXT {}
-unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceMeshShaderPropertiesEXT {}
-unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceMeshShaderPropertiesNV {}
-unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceMultiDrawPropertiesEXT {}
-unsafe impl ExtendsPhysicalDeviceProperties2
+unsafe impl Extends<PhysicalDeviceProperties2> for PhysicalDeviceHostImageCopyProperties {}
+unsafe impl Extends<PhysicalDeviceProperties2> for PhysicalDeviceIDProperties {}
+unsafe impl Extends<PhysicalDeviceProperties2>
+    for PhysicalDeviceImageAlignmentControlPropertiesMESA
+{
+}
+unsafe impl Extends<PhysicalDeviceProperties2> for PhysicalDeviceImageProcessing2PropertiesQCOM {}
+unsafe impl Extends<PhysicalDeviceProperties2> for PhysicalDeviceImageProcessingPropertiesQCOM {}
+unsafe impl Extends<PhysicalDeviceProperties2> for PhysicalDeviceInlineUniformBlockProperties {}
+unsafe impl Extends<PhysicalDeviceProperties2> for PhysicalDeviceLayeredApiPropertiesListKHR {}
+unsafe impl Extends<PhysicalDeviceProperties2> for PhysicalDeviceLayeredDriverPropertiesMSFT {}
+unsafe impl Extends<PhysicalDeviceProperties2>
+    for PhysicalDeviceLegacyVertexAttributesPropertiesEXT
+{
+}
+unsafe impl Extends<PhysicalDeviceProperties2> for PhysicalDeviceLineRasterizationProperties {}
+unsafe impl Extends<PhysicalDeviceProperties2> for PhysicalDeviceMaintenance10PropertiesKHR {}
+unsafe impl Extends<PhysicalDeviceProperties2> for PhysicalDeviceMaintenance3Properties {}
+unsafe impl Extends<PhysicalDeviceProperties2> for PhysicalDeviceMaintenance4Properties {}
+unsafe impl Extends<PhysicalDeviceProperties2> for PhysicalDeviceMaintenance5Properties {}
+unsafe impl Extends<PhysicalDeviceProperties2> for PhysicalDeviceMaintenance6Properties {}
+unsafe impl Extends<PhysicalDeviceProperties2> for PhysicalDeviceMaintenance7PropertiesKHR {}
+unsafe impl Extends<PhysicalDeviceProperties2> for PhysicalDeviceMaintenance9PropertiesKHR {}
+unsafe impl Extends<PhysicalDeviceProperties2> for PhysicalDeviceMapMemoryPlacedPropertiesEXT {}
+unsafe impl Extends<PhysicalDeviceProperties2> for PhysicalDeviceMemoryDecompressionPropertiesEXT {}
+unsafe impl Extends<PhysicalDeviceProperties2> for PhysicalDeviceMeshShaderPropertiesEXT {}
+unsafe impl Extends<PhysicalDeviceProperties2> for PhysicalDeviceMeshShaderPropertiesNV {}
+unsafe impl Extends<PhysicalDeviceProperties2> for PhysicalDeviceMultiDrawPropertiesEXT {}
+unsafe impl Extends<PhysicalDeviceProperties2>
     for PhysicalDeviceMultiviewPerViewAttributesPropertiesNVX
 {
 }
-unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceMultiviewProperties {}
-unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceNestedCommandBufferPropertiesEXT {}
-unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceOpacityMicromapPropertiesEXT {}
-unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceOpticalFlowPropertiesNV {}
-unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDevicePCIBusInfoPropertiesEXT {}
-unsafe impl ExtendsPhysicalDeviceProperties2
+unsafe impl Extends<PhysicalDeviceProperties2> for PhysicalDeviceMultiviewProperties {}
+unsafe impl Extends<PhysicalDeviceProperties2> for PhysicalDeviceNestedCommandBufferPropertiesEXT {}
+unsafe impl Extends<PhysicalDeviceProperties2> for PhysicalDeviceOpacityMicromapPropertiesEXT {}
+unsafe impl Extends<PhysicalDeviceProperties2> for PhysicalDeviceOpticalFlowPropertiesNV {}
+unsafe impl Extends<PhysicalDeviceProperties2> for PhysicalDevicePCIBusInfoPropertiesEXT {}
+unsafe impl Extends<PhysicalDeviceProperties2>
     for PhysicalDevicePartitionedAccelerationStructurePropertiesNV
 {
 }
-unsafe impl ExtendsPhysicalDeviceProperties2
+unsafe impl Extends<PhysicalDeviceProperties2>
     for PhysicalDevicePerformanceCountersByRegionPropertiesARM
 {
 }
-unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDevicePerformanceQueryPropertiesKHR {}
-unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDevicePipelineBinaryPropertiesKHR {}
-unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDevicePipelineRobustnessProperties {}
-unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDevicePointClippingProperties {}
-unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDevicePortabilitySubsetPropertiesKHR {}
-unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceProtectedMemoryProperties {}
-unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceProvokingVertexPropertiesEXT {}
-unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDevicePushConstantBankPropertiesNV {}
-unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDevicePushDescriptorProperties {}
-unsafe impl ExtendsPhysicalDeviceProperties2
+unsafe impl Extends<PhysicalDeviceProperties2> for PhysicalDevicePerformanceQueryPropertiesKHR {}
+unsafe impl Extends<PhysicalDeviceProperties2> for PhysicalDevicePipelineBinaryPropertiesKHR {}
+unsafe impl Extends<PhysicalDeviceProperties2> for PhysicalDevicePipelineRobustnessProperties {}
+unsafe impl Extends<PhysicalDeviceProperties2> for PhysicalDevicePointClippingProperties {}
+unsafe impl Extends<PhysicalDeviceProperties2> for PhysicalDevicePortabilitySubsetPropertiesKHR {}
+unsafe impl Extends<PhysicalDeviceProperties2> for PhysicalDeviceProtectedMemoryProperties {}
+unsafe impl Extends<PhysicalDeviceProperties2> for PhysicalDeviceProvokingVertexPropertiesEXT {}
+unsafe impl Extends<PhysicalDeviceProperties2> for PhysicalDevicePushConstantBankPropertiesNV {}
+unsafe impl Extends<PhysicalDeviceProperties2> for PhysicalDevicePushDescriptorProperties {}
+unsafe impl Extends<PhysicalDeviceProperties2>
     for PhysicalDeviceRayTracingInvocationReorderPropertiesEXT
 {
 }
-unsafe impl ExtendsPhysicalDeviceProperties2
+unsafe impl Extends<PhysicalDeviceProperties2>
     for PhysicalDeviceRayTracingInvocationReorderPropertiesNV
 {
 }
-unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceRayTracingPipelinePropertiesKHR {}
-unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceRayTracingPropertiesNV {}
-unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceRenderPassStripedPropertiesARM {}
-unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceRobustness2PropertiesKHR {}
-unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceSampleLocationsPropertiesEXT {}
-unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceSamplerFilterMinmaxProperties {}
-unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceSchedulingControlsPropertiesARM {}
-unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceShaderCoreBuiltinsPropertiesARM {}
-unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceShaderCoreProperties2AMD {}
-unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceShaderCorePropertiesAMD {}
-unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceShaderCorePropertiesARM {}
-unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceShaderEnqueuePropertiesAMDX {}
-unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceShaderIntegerDotProductProperties {}
-unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceShaderLongVectorPropertiesEXT {}
-unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceShaderModuleIdentifierPropertiesEXT {}
-unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceShaderObjectPropertiesEXT {}
-unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceShaderSMBuiltinsPropertiesNV {}
-unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceShaderTileImagePropertiesEXT {}
-unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceShadingRateImagePropertiesNV {}
-unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceSubgroupProperties {}
-unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceSubgroupSizeControlProperties {}
-unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceSubpassShadingPropertiesHUAWEI {}
-unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceTensorPropertiesARM {}
-unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceTexelBufferAlignmentProperties {}
-unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceTileMemoryHeapPropertiesQCOM {}
-unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceTileShadingPropertiesQCOM {}
-unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceTimelineSemaphoreProperties {}
-unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceTransformFeedbackPropertiesEXT {}
-unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceVertexAttributeDivisorProperties {}
-unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceVertexAttributeDivisorPropertiesEXT {}
-unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceVulkan11Properties {}
-unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceVulkan12Properties {}
-unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceVulkan13Properties {}
-unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceVulkan14Properties {}
+unsafe impl Extends<PhysicalDeviceProperties2> for PhysicalDeviceRayTracingPipelinePropertiesKHR {}
+unsafe impl Extends<PhysicalDeviceProperties2> for PhysicalDeviceRayTracingPropertiesNV {}
+unsafe impl Extends<PhysicalDeviceProperties2> for PhysicalDeviceRenderPassStripedPropertiesARM {}
+unsafe impl Extends<PhysicalDeviceProperties2> for PhysicalDeviceRobustness2PropertiesKHR {}
+unsafe impl Extends<PhysicalDeviceProperties2> for PhysicalDeviceSampleLocationsPropertiesEXT {}
+unsafe impl Extends<PhysicalDeviceProperties2> for PhysicalDeviceSamplerFilterMinmaxProperties {}
+unsafe impl Extends<PhysicalDeviceProperties2> for PhysicalDeviceSchedulingControlsPropertiesARM {}
+unsafe impl Extends<PhysicalDeviceProperties2> for PhysicalDeviceShaderCoreBuiltinsPropertiesARM {}
+unsafe impl Extends<PhysicalDeviceProperties2> for PhysicalDeviceShaderCoreProperties2AMD {}
+unsafe impl Extends<PhysicalDeviceProperties2> for PhysicalDeviceShaderCorePropertiesAMD {}
+unsafe impl Extends<PhysicalDeviceProperties2> for PhysicalDeviceShaderCorePropertiesARM {}
+unsafe impl Extends<PhysicalDeviceProperties2> for PhysicalDeviceShaderEnqueuePropertiesAMDX {}
+unsafe impl Extends<PhysicalDeviceProperties2> for PhysicalDeviceShaderIntegerDotProductProperties {}
+unsafe impl Extends<PhysicalDeviceProperties2> for PhysicalDeviceShaderLongVectorPropertiesEXT {}
+unsafe impl Extends<PhysicalDeviceProperties2>
+    for PhysicalDeviceShaderModuleIdentifierPropertiesEXT
+{
+}
+unsafe impl Extends<PhysicalDeviceProperties2> for PhysicalDeviceShaderObjectPropertiesEXT {}
+unsafe impl Extends<PhysicalDeviceProperties2> for PhysicalDeviceShaderSMBuiltinsPropertiesNV {}
+unsafe impl Extends<PhysicalDeviceProperties2> for PhysicalDeviceShaderTileImagePropertiesEXT {}
+unsafe impl Extends<PhysicalDeviceProperties2> for PhysicalDeviceShadingRateImagePropertiesNV {}
+unsafe impl Extends<PhysicalDeviceProperties2> for PhysicalDeviceSubgroupProperties {}
+unsafe impl Extends<PhysicalDeviceProperties2> for PhysicalDeviceSubgroupSizeControlProperties {}
+unsafe impl Extends<PhysicalDeviceProperties2> for PhysicalDeviceSubpassShadingPropertiesHUAWEI {}
+unsafe impl Extends<PhysicalDeviceProperties2> for PhysicalDeviceTensorPropertiesARM {}
+unsafe impl Extends<PhysicalDeviceProperties2> for PhysicalDeviceTexelBufferAlignmentProperties {}
+unsafe impl Extends<PhysicalDeviceProperties2> for PhysicalDeviceTileMemoryHeapPropertiesQCOM {}
+unsafe impl Extends<PhysicalDeviceProperties2> for PhysicalDeviceTileShadingPropertiesQCOM {}
+unsafe impl Extends<PhysicalDeviceProperties2> for PhysicalDeviceTimelineSemaphoreProperties {}
+unsafe impl Extends<PhysicalDeviceProperties2> for PhysicalDeviceTransformFeedbackPropertiesEXT {}
+unsafe impl Extends<PhysicalDeviceProperties2> for PhysicalDeviceVertexAttributeDivisorProperties {}
+unsafe impl Extends<PhysicalDeviceProperties2>
+    for PhysicalDeviceVertexAttributeDivisorPropertiesEXT
+{
+}
+unsafe impl Extends<PhysicalDeviceProperties2> for PhysicalDeviceVulkan11Properties {}
+unsafe impl Extends<PhysicalDeviceProperties2> for PhysicalDeviceVulkan12Properties {}
+unsafe impl Extends<PhysicalDeviceProperties2> for PhysicalDeviceVulkan13Properties {}
+unsafe impl Extends<PhysicalDeviceProperties2> for PhysicalDeviceVulkan14Properties {}
 
 unsafe impl Cast for PhysicalDeviceProperties2 {
     type Target = PhysicalDeviceProperties2;
@@ -62318,7 +62289,7 @@ impl<'b> PhysicalDeviceProperties2Builder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsPhysicalDeviceProperties2,
+        T: Extends<PhysicalDeviceProperties2>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -69280,11 +69251,9 @@ unsafe impl Cast for PhysicalDeviceSubpassShadingPropertiesHUAWEIBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`PhysicalDeviceSurfaceInfo2KHR`].
-pub unsafe trait ExtendsPhysicalDeviceSurfaceInfo2KHR: fmt::Debug {}
-unsafe impl ExtendsPhysicalDeviceSurfaceInfo2KHR for SurfaceFullScreenExclusiveInfoEXT {}
-unsafe impl ExtendsPhysicalDeviceSurfaceInfo2KHR for SurfaceFullScreenExclusiveWin32InfoEXT {}
-unsafe impl ExtendsPhysicalDeviceSurfaceInfo2KHR for SurfacePresentModeKHR {}
+unsafe impl Extends<PhysicalDeviceSurfaceInfo2KHR> for SurfaceFullScreenExclusiveInfoEXT {}
+unsafe impl Extends<PhysicalDeviceSurfaceInfo2KHR> for SurfaceFullScreenExclusiveWin32InfoEXT {}
+unsafe impl Extends<PhysicalDeviceSurfaceInfo2KHR> for SurfacePresentModeKHR {}
 
 unsafe impl Cast for PhysicalDeviceSurfaceInfo2KHR {
     type Target = PhysicalDeviceSurfaceInfo2KHR;
@@ -69311,7 +69280,7 @@ impl<'b> PhysicalDeviceSurfaceInfo2KHRBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsPhysicalDeviceSurfaceInfo2KHR,
+        T: Extends<PhysicalDeviceSurfaceInfo2KHR>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -71665,9 +71634,7 @@ unsafe impl Cast for PhysicalDeviceVideoEncodeRgbConversionFeaturesVALVEBuilder 
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`PhysicalDeviceVideoFormatInfoKHR`].
-pub unsafe trait ExtendsPhysicalDeviceVideoFormatInfoKHR: fmt::Debug {}
-unsafe impl ExtendsPhysicalDeviceVideoFormatInfoKHR for VideoProfileListInfoKHR {}
+unsafe impl Extends<PhysicalDeviceVideoFormatInfoKHR> for VideoProfileListInfoKHR {}
 
 unsafe impl Cast for PhysicalDeviceVideoFormatInfoKHR {
     type Target = PhysicalDeviceVideoFormatInfoKHR;
@@ -71694,7 +71661,7 @@ impl<'b> PhysicalDeviceVideoFormatInfoKHRBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsPhysicalDeviceVideoFormatInfoKHR,
+        T: Extends<PhysicalDeviceVideoFormatInfoKHR>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -75580,13 +75547,11 @@ unsafe impl Cast for PipelineColorBlendAttachmentStateBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`PipelineColorBlendStateCreateInfo`].
-pub unsafe trait ExtendsPipelineColorBlendStateCreateInfo: fmt::Debug {}
-unsafe impl ExtendsPipelineColorBlendStateCreateInfo
+unsafe impl Extends<PipelineColorBlendStateCreateInfo>
     for PipelineColorBlendAdvancedStateCreateInfoEXT
 {
 }
-unsafe impl ExtendsPipelineColorBlendStateCreateInfo for PipelineColorWriteCreateInfoEXT {}
+unsafe impl Extends<PipelineColorBlendStateCreateInfo> for PipelineColorWriteCreateInfoEXT {}
 
 unsafe impl Cast for PipelineColorBlendStateCreateInfo {
     type Target = PipelineColorBlendStateCreateInfo;
@@ -75613,7 +75578,7 @@ impl<'b> PipelineColorBlendStateCreateInfoBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsPipelineColorBlendStateCreateInfo,
+        T: Extends<PipelineColorBlendStateCreateInfo>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -77371,18 +77336,19 @@ unsafe impl Cast for PipelineLibraryCreateInfoKHRBuilder<'_> {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`PipelineMultisampleStateCreateInfo`].
-pub unsafe trait ExtendsPipelineMultisampleStateCreateInfo: fmt::Debug {}
-unsafe impl ExtendsPipelineMultisampleStateCreateInfo
+unsafe impl Extends<PipelineMultisampleStateCreateInfo>
     for PipelineCoverageModulationStateCreateInfoNV
 {
 }
-unsafe impl ExtendsPipelineMultisampleStateCreateInfo
+unsafe impl Extends<PipelineMultisampleStateCreateInfo>
     for PipelineCoverageReductionStateCreateInfoNV
 {
 }
-unsafe impl ExtendsPipelineMultisampleStateCreateInfo for PipelineCoverageToColorStateCreateInfoNV {}
-unsafe impl ExtendsPipelineMultisampleStateCreateInfo
+unsafe impl Extends<PipelineMultisampleStateCreateInfo>
+    for PipelineCoverageToColorStateCreateInfoNV
+{
+}
+unsafe impl Extends<PipelineMultisampleStateCreateInfo>
     for PipelineSampleLocationsStateCreateInfoEXT
 {
 }
@@ -77412,7 +77378,7 @@ impl<'b> PipelineMultisampleStateCreateInfoBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsPipelineMultisampleStateCreateInfo,
+        T: Extends<PipelineMultisampleStateCreateInfo>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -77829,30 +77795,28 @@ unsafe impl Cast for PipelineRasterizationProvokingVertexStateCreateInfoEXTBuild
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`PipelineRasterizationStateCreateInfo`].
-pub unsafe trait ExtendsPipelineRasterizationStateCreateInfo: fmt::Debug {}
-unsafe impl ExtendsPipelineRasterizationStateCreateInfo for DepthBiasRepresentationInfoEXT {}
-unsafe impl ExtendsPipelineRasterizationStateCreateInfo
+unsafe impl Extends<PipelineRasterizationStateCreateInfo> for DepthBiasRepresentationInfoEXT {}
+unsafe impl Extends<PipelineRasterizationStateCreateInfo>
     for PipelineRasterizationConservativeStateCreateInfoEXT
 {
 }
-unsafe impl ExtendsPipelineRasterizationStateCreateInfo
+unsafe impl Extends<PipelineRasterizationStateCreateInfo>
     for PipelineRasterizationDepthClipStateCreateInfoEXT
 {
 }
-unsafe impl ExtendsPipelineRasterizationStateCreateInfo
+unsafe impl Extends<PipelineRasterizationStateCreateInfo>
     for PipelineRasterizationLineStateCreateInfo
 {
 }
-unsafe impl ExtendsPipelineRasterizationStateCreateInfo
+unsafe impl Extends<PipelineRasterizationStateCreateInfo>
     for PipelineRasterizationProvokingVertexStateCreateInfoEXT
 {
 }
-unsafe impl ExtendsPipelineRasterizationStateCreateInfo
+unsafe impl Extends<PipelineRasterizationStateCreateInfo>
     for PipelineRasterizationStateRasterizationOrderAMD
 {
 }
-unsafe impl ExtendsPipelineRasterizationStateCreateInfo
+unsafe impl Extends<PipelineRasterizationStateCreateInfo>
     for PipelineRasterizationStateStreamCreateInfoEXT
 {
 }
@@ -77882,7 +77846,7 @@ impl<'b> PipelineRasterizationStateCreateInfoBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsPipelineRasterizationStateCreateInfo,
+        T: Extends<PipelineRasterizationStateCreateInfo>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -78391,22 +78355,20 @@ unsafe impl Cast for PipelineSampleLocationsStateCreateInfoEXTBuilder<'_> {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`PipelineShaderStageCreateInfo`].
-pub unsafe trait ExtendsPipelineShaderStageCreateInfo: fmt::Debug {}
-unsafe impl ExtendsPipelineShaderStageCreateInfo for DebugUtilsObjectNameInfoEXT {}
-unsafe impl ExtendsPipelineShaderStageCreateInfo for PipelineRobustnessCreateInfo {}
-unsafe impl ExtendsPipelineShaderStageCreateInfo
+unsafe impl Extends<PipelineShaderStageCreateInfo> for DebugUtilsObjectNameInfoEXT {}
+unsafe impl Extends<PipelineShaderStageCreateInfo> for PipelineRobustnessCreateInfo {}
+unsafe impl Extends<PipelineShaderStageCreateInfo>
     for PipelineShaderStageModuleIdentifierCreateInfoEXT
 {
 }
-unsafe impl ExtendsPipelineShaderStageCreateInfo for PipelineShaderStageNodeCreateInfoAMDX {}
-unsafe impl ExtendsPipelineShaderStageCreateInfo
+unsafe impl Extends<PipelineShaderStageCreateInfo> for PipelineShaderStageNodeCreateInfoAMDX {}
+unsafe impl Extends<PipelineShaderStageCreateInfo>
     for PipelineShaderStageRequiredSubgroupSizeCreateInfo
 {
 }
-unsafe impl ExtendsPipelineShaderStageCreateInfo for ShaderDescriptorSetAndBindingMappingInfoEXT {}
-unsafe impl ExtendsPipelineShaderStageCreateInfo for ShaderModuleCreateInfo {}
-unsafe impl ExtendsPipelineShaderStageCreateInfo for ShaderModuleValidationCacheCreateInfoEXT {}
+unsafe impl Extends<PipelineShaderStageCreateInfo> for ShaderDescriptorSetAndBindingMappingInfoEXT {}
+unsafe impl Extends<PipelineShaderStageCreateInfo> for ShaderModuleCreateInfo {}
+unsafe impl Extends<PipelineShaderStageCreateInfo> for ShaderModuleValidationCacheCreateInfoEXT {}
 
 unsafe impl Cast for PipelineShaderStageCreateInfo {
     type Target = PipelineShaderStageCreateInfo;
@@ -78433,7 +78395,7 @@ impl<'b> PipelineShaderStageCreateInfoBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsPipelineShaderStageCreateInfo,
+        T: Extends<PipelineShaderStageCreateInfo>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -78744,9 +78706,7 @@ unsafe impl Cast for PipelineTessellationDomainOriginStateCreateInfoBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`PipelineTessellationStateCreateInfo`].
-pub unsafe trait ExtendsPipelineTessellationStateCreateInfo: fmt::Debug {}
-unsafe impl ExtendsPipelineTessellationStateCreateInfo
+unsafe impl Extends<PipelineTessellationStateCreateInfo>
     for PipelineTessellationDomainOriginStateCreateInfo
 {
 }
@@ -78776,7 +78736,7 @@ impl<'b> PipelineTessellationStateCreateInfoBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsPipelineTessellationStateCreateInfo,
+        T: Extends<PipelineTessellationStateCreateInfo>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -78888,9 +78848,7 @@ unsafe impl Cast for PipelineVertexInputDivisorStateCreateInfoBuilder<'_> {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`PipelineVertexInputStateCreateInfo`].
-pub unsafe trait ExtendsPipelineVertexInputStateCreateInfo: fmt::Debug {}
-unsafe impl ExtendsPipelineVertexInputStateCreateInfo
+unsafe impl Extends<PipelineVertexInputStateCreateInfo>
     for PipelineVertexInputDivisorStateCreateInfo
 {
 }
@@ -78920,7 +78878,7 @@ impl<'b> PipelineVertexInputStateCreateInfoBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsPipelineVertexInputStateCreateInfo,
+        T: Extends<PipelineVertexInputStateCreateInfo>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -79310,30 +79268,28 @@ unsafe impl Cast for PipelineViewportShadingRateImageStateCreateInfoNVBuilder<'_
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`PipelineViewportStateCreateInfo`].
-pub unsafe trait ExtendsPipelineViewportStateCreateInfo: fmt::Debug {}
-unsafe impl ExtendsPipelineViewportStateCreateInfo
+unsafe impl Extends<PipelineViewportStateCreateInfo>
     for PipelineViewportCoarseSampleOrderStateCreateInfoNV
 {
 }
-unsafe impl ExtendsPipelineViewportStateCreateInfo
+unsafe impl Extends<PipelineViewportStateCreateInfo>
     for PipelineViewportDepthClampControlCreateInfoEXT
 {
 }
-unsafe impl ExtendsPipelineViewportStateCreateInfo
+unsafe impl Extends<PipelineViewportStateCreateInfo>
     for PipelineViewportDepthClipControlCreateInfoEXT
 {
 }
-unsafe impl ExtendsPipelineViewportStateCreateInfo
+unsafe impl Extends<PipelineViewportStateCreateInfo>
     for PipelineViewportExclusiveScissorStateCreateInfoNV
 {
 }
-unsafe impl ExtendsPipelineViewportStateCreateInfo
+unsafe impl Extends<PipelineViewportStateCreateInfo>
     for PipelineViewportShadingRateImageStateCreateInfoNV
 {
 }
-unsafe impl ExtendsPipelineViewportStateCreateInfo for PipelineViewportSwizzleStateCreateInfoNV {}
-unsafe impl ExtendsPipelineViewportStateCreateInfo for PipelineViewportWScalingStateCreateInfoNV {}
+unsafe impl Extends<PipelineViewportStateCreateInfo> for PipelineViewportSwizzleStateCreateInfoNV {}
+unsafe impl Extends<PipelineViewportStateCreateInfo> for PipelineViewportWScalingStateCreateInfoNV {}
 
 unsafe impl Cast for PipelineViewportStateCreateInfo {
     type Target = PipelineViewportStateCreateInfo;
@@ -79360,7 +79316,7 @@ impl<'b> PipelineViewportStateCreateInfoBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsPipelineViewportStateCreateInfo,
+        T: Extends<PipelineViewportStateCreateInfo>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -79763,21 +79719,19 @@ unsafe impl Cast for PresentIdKHRBuilder<'_> {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`PresentInfoKHR`].
-pub unsafe trait ExtendsPresentInfoKHR: fmt::Debug {}
-unsafe impl ExtendsPresentInfoKHR for DeviceGroupPresentInfoKHR {}
-unsafe impl ExtendsPresentInfoKHR for DisplayPresentInfoKHR {}
-unsafe impl ExtendsPresentInfoKHR for FrameBoundaryEXT {}
-unsafe impl ExtendsPresentInfoKHR for FrameBoundaryTensorsARM {}
-unsafe impl ExtendsPresentInfoKHR for PresentFrameTokenGGP {}
-unsafe impl ExtendsPresentInfoKHR for PresentId2KHR {}
-unsafe impl ExtendsPresentInfoKHR for PresentIdKHR {}
-unsafe impl ExtendsPresentInfoKHR for PresentRegionsKHR {}
-unsafe impl ExtendsPresentInfoKHR for PresentTimesInfoGOOGLE {}
-unsafe impl ExtendsPresentInfoKHR for PresentTimingsInfoEXT {}
-unsafe impl ExtendsPresentInfoKHR for SetPresentConfigNV {}
-unsafe impl ExtendsPresentInfoKHR for SwapchainPresentFenceInfoKHR {}
-unsafe impl ExtendsPresentInfoKHR for SwapchainPresentModeInfoKHR {}
+unsafe impl Extends<PresentInfoKHR> for DeviceGroupPresentInfoKHR {}
+unsafe impl Extends<PresentInfoKHR> for DisplayPresentInfoKHR {}
+unsafe impl Extends<PresentInfoKHR> for FrameBoundaryEXT {}
+unsafe impl Extends<PresentInfoKHR> for FrameBoundaryTensorsARM {}
+unsafe impl Extends<PresentInfoKHR> for PresentFrameTokenGGP {}
+unsafe impl Extends<PresentInfoKHR> for PresentId2KHR {}
+unsafe impl Extends<PresentInfoKHR> for PresentIdKHR {}
+unsafe impl Extends<PresentInfoKHR> for PresentRegionsKHR {}
+unsafe impl Extends<PresentInfoKHR> for PresentTimesInfoGOOGLE {}
+unsafe impl Extends<PresentInfoKHR> for PresentTimingsInfoEXT {}
+unsafe impl Extends<PresentInfoKHR> for SetPresentConfigNV {}
+unsafe impl Extends<PresentInfoKHR> for SwapchainPresentFenceInfoKHR {}
+unsafe impl Extends<PresentInfoKHR> for SwapchainPresentModeInfoKHR {}
 
 unsafe impl Cast for PresentInfoKHR {
     type Target = PresentInfoKHR;
@@ -79804,7 +79758,7 @@ impl<'b> PresentInfoKHRBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsPresentInfoKHR,
+        T: Extends<PresentInfoKHR>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -80747,10 +80701,8 @@ unsafe impl Cast for PushConstantRangeBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`PushConstantsInfo`].
-pub unsafe trait ExtendsPushConstantsInfo: fmt::Debug {}
-unsafe impl ExtendsPushConstantsInfo for PipelineLayoutCreateInfo {}
-unsafe impl ExtendsPushConstantsInfo for PushConstantBankInfoNV {}
+unsafe impl Extends<PushConstantsInfo> for PipelineLayoutCreateInfo {}
+unsafe impl Extends<PushConstantsInfo> for PushConstantBankInfoNV {}
 
 unsafe impl Cast for PushConstantsInfo {
     type Target = PushConstantsInfo;
@@ -80777,7 +80729,7 @@ impl<'b> PushConstantsInfoBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsPushConstantsInfo,
+        T: Extends<PushConstantsInfo>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -80839,9 +80791,7 @@ unsafe impl Cast for PushConstantsInfoBuilder<'_> {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`PushDataInfoEXT`].
-pub unsafe trait ExtendsPushDataInfoEXT: fmt::Debug {}
-unsafe impl ExtendsPushDataInfoEXT for PushConstantBankInfoNV {}
+unsafe impl Extends<PushDataInfoEXT> for PushConstantBankInfoNV {}
 
 unsafe impl Cast for PushDataInfoEXT {
     type Target = PushDataInfoEXT;
@@ -80868,7 +80818,7 @@ impl<'b> PushDataInfoEXTBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsPushDataInfoEXT,
+        T: Extends<PushDataInfoEXT>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -80917,9 +80867,7 @@ unsafe impl Cast for PushDataInfoEXTBuilder<'_> {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`PushDescriptorSetInfo`].
-pub unsafe trait ExtendsPushDescriptorSetInfo: fmt::Debug {}
-unsafe impl ExtendsPushDescriptorSetInfo for PipelineLayoutCreateInfo {}
+unsafe impl Extends<PushDescriptorSetInfo> for PipelineLayoutCreateInfo {}
 
 unsafe impl Cast for PushDescriptorSetInfo {
     type Target = PushDescriptorSetInfo;
@@ -80946,7 +80894,7 @@ impl<'b> PushDescriptorSetInfoBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsPushDescriptorSetInfo,
+        T: Extends<PushDescriptorSetInfo>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -81011,9 +80959,7 @@ unsafe impl Cast for PushDescriptorSetInfoBuilder<'_> {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`PushDescriptorSetWithTemplateInfo`].
-pub unsafe trait ExtendsPushDescriptorSetWithTemplateInfo: fmt::Debug {}
-unsafe impl ExtendsPushDescriptorSetWithTemplateInfo for PipelineLayoutCreateInfo {}
+unsafe impl Extends<PushDescriptorSetWithTemplateInfo> for PipelineLayoutCreateInfo {}
 
 unsafe impl Cast for PushDescriptorSetWithTemplateInfo {
     type Target = PushDescriptorSetWithTemplateInfo;
@@ -81040,7 +80986,7 @@ impl<'b> PushDescriptorSetWithTemplateInfoBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsPushDescriptorSetWithTemplateInfo,
+        T: Extends<PushDescriptorSetWithTemplateInfo>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -81163,21 +81109,19 @@ unsafe impl Cast for QueryLowLatencySupportNVBuilder<'_> {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`QueryPoolCreateInfo`].
-pub unsafe trait ExtendsQueryPoolCreateInfo: fmt::Debug {}
-unsafe impl ExtendsQueryPoolCreateInfo for QueryPoolPerformanceCreateInfoKHR {}
-unsafe impl ExtendsQueryPoolCreateInfo for QueryPoolPerformanceQueryCreateInfoINTEL {}
-unsafe impl ExtendsQueryPoolCreateInfo for QueryPoolVideoEncodeFeedbackCreateInfoKHR {}
-unsafe impl ExtendsQueryPoolCreateInfo for VideoDecodeAV1ProfileInfoKHR {}
-unsafe impl ExtendsQueryPoolCreateInfo for VideoDecodeH264ProfileInfoKHR {}
-unsafe impl ExtendsQueryPoolCreateInfo for VideoDecodeH265ProfileInfoKHR {}
-unsafe impl ExtendsQueryPoolCreateInfo for VideoDecodeUsageInfoKHR {}
-unsafe impl ExtendsQueryPoolCreateInfo for VideoDecodeVP9ProfileInfoKHR {}
-unsafe impl ExtendsQueryPoolCreateInfo for VideoEncodeAV1ProfileInfoKHR {}
-unsafe impl ExtendsQueryPoolCreateInfo for VideoEncodeH264ProfileInfoKHR {}
-unsafe impl ExtendsQueryPoolCreateInfo for VideoEncodeH265ProfileInfoKHR {}
-unsafe impl ExtendsQueryPoolCreateInfo for VideoEncodeUsageInfoKHR {}
-unsafe impl ExtendsQueryPoolCreateInfo for VideoProfileInfoKHR {}
+unsafe impl Extends<QueryPoolCreateInfo> for QueryPoolPerformanceCreateInfoKHR {}
+unsafe impl Extends<QueryPoolCreateInfo> for QueryPoolPerformanceQueryCreateInfoINTEL {}
+unsafe impl Extends<QueryPoolCreateInfo> for QueryPoolVideoEncodeFeedbackCreateInfoKHR {}
+unsafe impl Extends<QueryPoolCreateInfo> for VideoDecodeAV1ProfileInfoKHR {}
+unsafe impl Extends<QueryPoolCreateInfo> for VideoDecodeH264ProfileInfoKHR {}
+unsafe impl Extends<QueryPoolCreateInfo> for VideoDecodeH265ProfileInfoKHR {}
+unsafe impl Extends<QueryPoolCreateInfo> for VideoDecodeUsageInfoKHR {}
+unsafe impl Extends<QueryPoolCreateInfo> for VideoDecodeVP9ProfileInfoKHR {}
+unsafe impl Extends<QueryPoolCreateInfo> for VideoEncodeAV1ProfileInfoKHR {}
+unsafe impl Extends<QueryPoolCreateInfo> for VideoEncodeH264ProfileInfoKHR {}
+unsafe impl Extends<QueryPoolCreateInfo> for VideoEncodeH265ProfileInfoKHR {}
+unsafe impl Extends<QueryPoolCreateInfo> for VideoEncodeUsageInfoKHR {}
+unsafe impl Extends<QueryPoolCreateInfo> for VideoProfileInfoKHR {}
 
 unsafe impl Cast for QueryPoolCreateInfo {
     type Target = QueryPoolCreateInfo;
@@ -81204,7 +81148,7 @@ impl<'b> QueryPoolCreateInfoBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsQueryPoolCreateInfo,
+        T: Extends<QueryPoolCreateInfo>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -81923,14 +81867,12 @@ unsafe impl Cast for QueueFamilyPropertiesBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`QueueFamilyProperties2`].
-pub unsafe trait ExtendsQueueFamilyProperties2: fmt::Debug {}
-unsafe impl ExtendsQueueFamilyProperties2 for QueueFamilyCheckpointProperties2NV {}
-unsafe impl ExtendsQueueFamilyProperties2 for QueueFamilyCheckpointPropertiesNV {}
-unsafe impl ExtendsQueueFamilyProperties2 for QueueFamilyGlobalPriorityProperties {}
-unsafe impl ExtendsQueueFamilyProperties2 for QueueFamilyOwnershipTransferPropertiesKHR {}
-unsafe impl ExtendsQueueFamilyProperties2 for QueueFamilyQueryResultStatusPropertiesKHR {}
-unsafe impl ExtendsQueueFamilyProperties2 for QueueFamilyVideoPropertiesKHR {}
+unsafe impl Extends<QueueFamilyProperties2> for QueueFamilyCheckpointProperties2NV {}
+unsafe impl Extends<QueueFamilyProperties2> for QueueFamilyCheckpointPropertiesNV {}
+unsafe impl Extends<QueueFamilyProperties2> for QueueFamilyGlobalPriorityProperties {}
+unsafe impl Extends<QueueFamilyProperties2> for QueueFamilyOwnershipTransferPropertiesKHR {}
+unsafe impl Extends<QueueFamilyProperties2> for QueueFamilyQueryResultStatusPropertiesKHR {}
+unsafe impl Extends<QueueFamilyProperties2> for QueueFamilyVideoPropertiesKHR {}
 
 unsafe impl Cast for QueueFamilyProperties2 {
     type Target = QueueFamilyProperties2;
@@ -81957,7 +81899,7 @@ impl<'b> QueueFamilyProperties2Builder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsQueueFamilyProperties2,
+        T: Extends<QueueFamilyProperties2>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -82184,13 +82126,11 @@ unsafe impl Cast for RayTracingPipelineClusterAccelerationStructureCreateInfoNVB
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`RayTracingPipelineCreateInfoKHR`].
-pub unsafe trait ExtendsRayTracingPipelineCreateInfoKHR: fmt::Debug {}
-unsafe impl ExtendsRayTracingPipelineCreateInfoKHR for PipelineBinaryInfoKHR {}
-unsafe impl ExtendsRayTracingPipelineCreateInfoKHR for PipelineCreateFlags2CreateInfo {}
-unsafe impl ExtendsRayTracingPipelineCreateInfoKHR for PipelineCreationFeedbackCreateInfo {}
-unsafe impl ExtendsRayTracingPipelineCreateInfoKHR for PipelineRobustnessCreateInfo {}
-unsafe impl ExtendsRayTracingPipelineCreateInfoKHR
+unsafe impl Extends<RayTracingPipelineCreateInfoKHR> for PipelineBinaryInfoKHR {}
+unsafe impl Extends<RayTracingPipelineCreateInfoKHR> for PipelineCreateFlags2CreateInfo {}
+unsafe impl Extends<RayTracingPipelineCreateInfoKHR> for PipelineCreationFeedbackCreateInfo {}
+unsafe impl Extends<RayTracingPipelineCreateInfoKHR> for PipelineRobustnessCreateInfo {}
+unsafe impl Extends<RayTracingPipelineCreateInfoKHR>
     for RayTracingPipelineClusterAccelerationStructureCreateInfoNV
 {
 }
@@ -82220,7 +82160,7 @@ impl<'b> RayTracingPipelineCreateInfoKHRBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsRayTracingPipelineCreateInfoKHR,
+        T: Extends<RayTracingPipelineCreateInfoKHR>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -82337,10 +82277,8 @@ unsafe impl Cast for RayTracingPipelineCreateInfoKHRBuilder<'_> {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`RayTracingPipelineCreateInfoNV`].
-pub unsafe trait ExtendsRayTracingPipelineCreateInfoNV: fmt::Debug {}
-unsafe impl ExtendsRayTracingPipelineCreateInfoNV for PipelineCreateFlags2CreateInfo {}
-unsafe impl ExtendsRayTracingPipelineCreateInfoNV for PipelineCreationFeedbackCreateInfo {}
+unsafe impl Extends<RayTracingPipelineCreateInfoNV> for PipelineCreateFlags2CreateInfo {}
+unsafe impl Extends<RayTracingPipelineCreateInfoNV> for PipelineCreationFeedbackCreateInfo {}
 
 unsafe impl Cast for RayTracingPipelineCreateInfoNV {
     type Target = RayTracingPipelineCreateInfoNV;
@@ -82367,7 +82305,7 @@ impl<'b> RayTracingPipelineCreateInfoNVBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsRayTracingPipelineCreateInfoNV,
+        T: Extends<RayTracingPipelineCreateInfoNV>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -83202,15 +83140,13 @@ unsafe impl Cast for RenderPassAttachmentBeginInfoBuilder<'_> {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`RenderPassBeginInfo`].
-pub unsafe trait ExtendsRenderPassBeginInfo: fmt::Debug {}
-unsafe impl ExtendsRenderPassBeginInfo for DeviceGroupRenderPassBeginInfo {}
-unsafe impl ExtendsRenderPassBeginInfo for MultiviewPerViewRenderAreasRenderPassBeginInfoQCOM {}
-unsafe impl ExtendsRenderPassBeginInfo for RenderPassAttachmentBeginInfo {}
-unsafe impl ExtendsRenderPassBeginInfo for RenderPassPerformanceCountersByRegionBeginInfoARM {}
-unsafe impl ExtendsRenderPassBeginInfo for RenderPassSampleLocationsBeginInfoEXT {}
-unsafe impl ExtendsRenderPassBeginInfo for RenderPassStripeBeginInfoARM {}
-unsafe impl ExtendsRenderPassBeginInfo for RenderPassTransformBeginInfoQCOM {}
+unsafe impl Extends<RenderPassBeginInfo> for DeviceGroupRenderPassBeginInfo {}
+unsafe impl Extends<RenderPassBeginInfo> for MultiviewPerViewRenderAreasRenderPassBeginInfoQCOM {}
+unsafe impl Extends<RenderPassBeginInfo> for RenderPassAttachmentBeginInfo {}
+unsafe impl Extends<RenderPassBeginInfo> for RenderPassPerformanceCountersByRegionBeginInfoARM {}
+unsafe impl Extends<RenderPassBeginInfo> for RenderPassSampleLocationsBeginInfoEXT {}
+unsafe impl Extends<RenderPassBeginInfo> for RenderPassStripeBeginInfoARM {}
+unsafe impl Extends<RenderPassBeginInfo> for RenderPassTransformBeginInfoQCOM {}
 
 unsafe impl Cast for RenderPassBeginInfo {
     type Target = RenderPassBeginInfo;
@@ -83237,7 +83173,7 @@ impl<'b> RenderPassBeginInfoBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsRenderPassBeginInfo,
+        T: Extends<RenderPassBeginInfo>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -83299,13 +83235,11 @@ unsafe impl Cast for RenderPassBeginInfoBuilder<'_> {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`RenderPassCreateInfo`].
-pub unsafe trait ExtendsRenderPassCreateInfo: fmt::Debug {}
-unsafe impl ExtendsRenderPassCreateInfo for RenderPassFragmentDensityMapCreateInfoEXT {}
-unsafe impl ExtendsRenderPassCreateInfo for RenderPassInputAttachmentAspectCreateInfo {}
-unsafe impl ExtendsRenderPassCreateInfo for RenderPassMultiviewCreateInfo {}
-unsafe impl ExtendsRenderPassCreateInfo for RenderPassTileShadingCreateInfoQCOM {}
-unsafe impl ExtendsRenderPassCreateInfo for TileMemorySizeInfoQCOM {}
+unsafe impl Extends<RenderPassCreateInfo> for RenderPassFragmentDensityMapCreateInfoEXT {}
+unsafe impl Extends<RenderPassCreateInfo> for RenderPassInputAttachmentAspectCreateInfo {}
+unsafe impl Extends<RenderPassCreateInfo> for RenderPassMultiviewCreateInfo {}
+unsafe impl Extends<RenderPassCreateInfo> for RenderPassTileShadingCreateInfoQCOM {}
+unsafe impl Extends<RenderPassCreateInfo> for TileMemorySizeInfoQCOM {}
 
 unsafe impl Cast for RenderPassCreateInfo {
     type Target = RenderPassCreateInfo;
@@ -83332,7 +83266,7 @@ impl<'b> RenderPassCreateInfoBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsRenderPassCreateInfo,
+        T: Extends<RenderPassCreateInfo>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -83402,13 +83336,11 @@ unsafe impl Cast for RenderPassCreateInfoBuilder<'_> {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`RenderPassCreateInfo2`].
-pub unsafe trait ExtendsRenderPassCreateInfo2: fmt::Debug {}
-unsafe impl ExtendsRenderPassCreateInfo2 for RenderPassCreationControlEXT {}
-unsafe impl ExtendsRenderPassCreateInfo2 for RenderPassCreationFeedbackCreateInfoEXT {}
-unsafe impl ExtendsRenderPassCreateInfo2 for RenderPassFragmentDensityMapCreateInfoEXT {}
-unsafe impl ExtendsRenderPassCreateInfo2 for RenderPassTileShadingCreateInfoQCOM {}
-unsafe impl ExtendsRenderPassCreateInfo2 for TileMemorySizeInfoQCOM {}
+unsafe impl Extends<RenderPassCreateInfo2> for RenderPassCreationControlEXT {}
+unsafe impl Extends<RenderPassCreateInfo2> for RenderPassCreationFeedbackCreateInfoEXT {}
+unsafe impl Extends<RenderPassCreateInfo2> for RenderPassFragmentDensityMapCreateInfoEXT {}
+unsafe impl Extends<RenderPassCreateInfo2> for RenderPassTileShadingCreateInfoQCOM {}
+unsafe impl Extends<RenderPassCreateInfo2> for TileMemorySizeInfoQCOM {}
 
 unsafe impl Cast for RenderPassCreateInfo2 {
     type Target = RenderPassCreateInfo2;
@@ -83435,7 +83367,7 @@ impl<'b> RenderPassCreateInfo2Builder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsRenderPassCreateInfo2,
+        T: Extends<RenderPassCreateInfo2>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -84686,10 +84618,8 @@ unsafe impl Cast for RenderingAttachmentFlagsInfoKHRBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`RenderingAttachmentInfo`].
-pub unsafe trait ExtendsRenderingAttachmentInfo: fmt::Debug {}
-unsafe impl ExtendsRenderingAttachmentInfo for AttachmentFeedbackLoopInfoEXT {}
-unsafe impl ExtendsRenderingAttachmentInfo for RenderingAttachmentFlagsInfoKHR {}
+unsafe impl Extends<RenderingAttachmentInfo> for AttachmentFeedbackLoopInfoEXT {}
+unsafe impl Extends<RenderingAttachmentInfo> for RenderingAttachmentFlagsInfoKHR {}
 
 unsafe impl Cast for RenderingAttachmentInfo {
     type Target = RenderingAttachmentInfo;
@@ -84716,7 +84646,7 @@ impl<'b> RenderingAttachmentInfoBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsRenderingAttachmentInfo,
+        T: Extends<RenderingAttachmentInfo>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -84861,9 +84791,7 @@ unsafe impl Cast for RenderingAttachmentLocationInfoBuilder<'_> {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`RenderingEndInfoKHR`].
-pub unsafe trait ExtendsRenderingEndInfoKHR: fmt::Debug {}
-unsafe impl ExtendsRenderingEndInfoKHR for RenderPassFragmentDensityMapOffsetEndInfoEXT {}
+unsafe impl Extends<RenderingEndInfoKHR> for RenderPassFragmentDensityMapOffsetEndInfoEXT {}
 
 unsafe impl Cast for RenderingEndInfoKHR {
     type Target = RenderingEndInfoKHR;
@@ -84890,7 +84818,7 @@ impl<'b> RenderingEndInfoKHRBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsRenderingEndInfoKHR,
+        T: Extends<RenderingEndInfoKHR>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -85064,18 +84992,16 @@ unsafe impl Cast for RenderingFragmentShadingRateAttachmentInfoKHRBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`RenderingInfo`].
-pub unsafe trait ExtendsRenderingInfo: fmt::Debug {}
-unsafe impl ExtendsRenderingInfo for DeviceGroupRenderPassBeginInfo {}
-unsafe impl ExtendsRenderingInfo for MultisampledRenderToSingleSampledInfoEXT {}
-unsafe impl ExtendsRenderingInfo for MultiviewPerViewAttributesInfoNVX {}
-unsafe impl ExtendsRenderingInfo for MultiviewPerViewRenderAreasRenderPassBeginInfoQCOM {}
-unsafe impl ExtendsRenderingInfo for RenderPassPerformanceCountersByRegionBeginInfoARM {}
-unsafe impl ExtendsRenderingInfo for RenderPassStripeBeginInfoARM {}
-unsafe impl ExtendsRenderingInfo for RenderPassTileShadingCreateInfoQCOM {}
-unsafe impl ExtendsRenderingInfo for RenderingFragmentDensityMapAttachmentInfoEXT {}
-unsafe impl ExtendsRenderingInfo for RenderingFragmentShadingRateAttachmentInfoKHR {}
-unsafe impl ExtendsRenderingInfo for TileMemorySizeInfoQCOM {}
+unsafe impl Extends<RenderingInfo> for DeviceGroupRenderPassBeginInfo {}
+unsafe impl Extends<RenderingInfo> for MultisampledRenderToSingleSampledInfoEXT {}
+unsafe impl Extends<RenderingInfo> for MultiviewPerViewAttributesInfoNVX {}
+unsafe impl Extends<RenderingInfo> for MultiviewPerViewRenderAreasRenderPassBeginInfoQCOM {}
+unsafe impl Extends<RenderingInfo> for RenderPassPerformanceCountersByRegionBeginInfoARM {}
+unsafe impl Extends<RenderingInfo> for RenderPassStripeBeginInfoARM {}
+unsafe impl Extends<RenderingInfo> for RenderPassTileShadingCreateInfoQCOM {}
+unsafe impl Extends<RenderingInfo> for RenderingFragmentDensityMapAttachmentInfoEXT {}
+unsafe impl Extends<RenderingInfo> for RenderingFragmentShadingRateAttachmentInfoKHR {}
+unsafe impl Extends<RenderingInfo> for TileMemorySizeInfoQCOM {}
 
 unsafe impl Cast for RenderingInfo {
     type Target = RenderingInfo;
@@ -85102,7 +85028,7 @@ impl<'b> RenderingInfoBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsRenderingInfo,
+        T: Extends<RenderingInfo>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -85275,9 +85201,7 @@ unsafe impl Cast for RenderingInputAttachmentIndexInfoBuilder<'_> {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`ResolveImageInfo2`].
-pub unsafe trait ExtendsResolveImageInfo2: fmt::Debug {}
-unsafe impl ExtendsResolveImageInfo2 for ResolveImageModeInfoKHR {}
+unsafe impl Extends<ResolveImageInfo2> for ResolveImageModeInfoKHR {}
 
 unsafe impl Cast for ResolveImageInfo2 {
     type Target = ResolveImageInfo2;
@@ -85304,7 +85228,7 @@ impl<'b> ResolveImageInfo2Builder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsResolveImageInfo2,
+        T: Extends<ResolveImageInfo2>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -85442,9 +85366,7 @@ unsafe impl Cast for ResolveImageModeInfoKHRBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`ResourceDescriptorInfoEXT`].
-pub unsafe trait ExtendsResourceDescriptorInfoEXT: fmt::Debug {}
-unsafe impl ExtendsResourceDescriptorInfoEXT for DebugUtilsObjectNameInfoEXT {}
+unsafe impl Extends<ResourceDescriptorInfoEXT> for DebugUtilsObjectNameInfoEXT {}
 
 unsafe impl Cast for ResourceDescriptorInfoEXT {
     type Target = ResourceDescriptorInfoEXT;
@@ -85471,7 +85393,7 @@ impl<'b> ResourceDescriptorInfoEXTBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsResourceDescriptorInfoEXT,
+        T: Extends<ResourceDescriptorInfoEXT>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -86002,17 +85924,15 @@ unsafe impl Cast for SamplerCaptureDescriptorDataInfoEXTBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`SamplerCreateInfo`].
-pub unsafe trait ExtendsSamplerCreateInfo: fmt::Debug {}
-unsafe impl ExtendsSamplerCreateInfo for DebugUtilsObjectNameInfoEXT {}
-unsafe impl ExtendsSamplerCreateInfo for OpaqueCaptureDescriptorDataCreateInfoEXT {}
-unsafe impl ExtendsSamplerCreateInfo for SamplerBlockMatchWindowCreateInfoQCOM {}
-unsafe impl ExtendsSamplerCreateInfo for SamplerBorderColorComponentMappingCreateInfoEXT {}
-unsafe impl ExtendsSamplerCreateInfo for SamplerCubicWeightsCreateInfoQCOM {}
-unsafe impl ExtendsSamplerCreateInfo for SamplerCustomBorderColorCreateInfoEXT {}
-unsafe impl ExtendsSamplerCreateInfo for SamplerCustomBorderColorIndexCreateInfoEXT {}
-unsafe impl ExtendsSamplerCreateInfo for SamplerReductionModeCreateInfo {}
-unsafe impl ExtendsSamplerCreateInfo for SamplerYcbcrConversionInfo {}
+unsafe impl Extends<SamplerCreateInfo> for DebugUtilsObjectNameInfoEXT {}
+unsafe impl Extends<SamplerCreateInfo> for OpaqueCaptureDescriptorDataCreateInfoEXT {}
+unsafe impl Extends<SamplerCreateInfo> for SamplerBlockMatchWindowCreateInfoQCOM {}
+unsafe impl Extends<SamplerCreateInfo> for SamplerBorderColorComponentMappingCreateInfoEXT {}
+unsafe impl Extends<SamplerCreateInfo> for SamplerCubicWeightsCreateInfoQCOM {}
+unsafe impl Extends<SamplerCreateInfo> for SamplerCustomBorderColorCreateInfoEXT {}
+unsafe impl Extends<SamplerCreateInfo> for SamplerCustomBorderColorIndexCreateInfoEXT {}
+unsafe impl Extends<SamplerCreateInfo> for SamplerReductionModeCreateInfo {}
+unsafe impl Extends<SamplerCreateInfo> for SamplerYcbcrConversionInfo {}
 
 unsafe impl Cast for SamplerCreateInfo {
     type Target = SamplerCreateInfo;
@@ -86039,7 +85959,7 @@ impl<'b> SamplerCreateInfoBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsSamplerCreateInfo,
+        T: Extends<SamplerCreateInfo>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -86410,12 +86330,10 @@ unsafe impl Cast for SamplerReductionModeCreateInfoBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`SamplerYcbcrConversionCreateInfo`].
-pub unsafe trait ExtendsSamplerYcbcrConversionCreateInfo: fmt::Debug {}
-unsafe impl ExtendsSamplerYcbcrConversionCreateInfo for ExternalFormatANDROID {}
-unsafe impl ExtendsSamplerYcbcrConversionCreateInfo for ExternalFormatOHOS {}
-unsafe impl ExtendsSamplerYcbcrConversionCreateInfo for ExternalFormatQNX {}
-unsafe impl ExtendsSamplerYcbcrConversionCreateInfo
+unsafe impl Extends<SamplerYcbcrConversionCreateInfo> for ExternalFormatANDROID {}
+unsafe impl Extends<SamplerYcbcrConversionCreateInfo> for ExternalFormatOHOS {}
+unsafe impl Extends<SamplerYcbcrConversionCreateInfo> for ExternalFormatQNX {}
+unsafe impl Extends<SamplerYcbcrConversionCreateInfo>
     for SamplerYcbcrConversionYcbcrDegammaCreateInfoQCOM
 {
 }
@@ -86445,7 +86363,7 @@ impl<'b> SamplerYcbcrConversionCreateInfoBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsSamplerYcbcrConversionCreateInfo,
+        T: Extends<SamplerYcbcrConversionCreateInfo>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -86890,9 +86808,7 @@ unsafe impl Cast for ScreenBufferFormatPropertiesQNXBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`ScreenBufferPropertiesQNX`].
-pub unsafe trait ExtendsScreenBufferPropertiesQNX: fmt::Debug {}
-unsafe impl ExtendsScreenBufferPropertiesQNX for ScreenBufferFormatPropertiesQNX {}
+unsafe impl Extends<ScreenBufferPropertiesQNX> for ScreenBufferFormatPropertiesQNX {}
 
 unsafe impl Cast for ScreenBufferPropertiesQNX {
     type Target = ScreenBufferPropertiesQNX;
@@ -86919,7 +86835,7 @@ impl<'b> ScreenBufferPropertiesQNXBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsScreenBufferPropertiesQNX,
+        T: Extends<ScreenBufferPropertiesQNX>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -87039,16 +86955,14 @@ unsafe impl Cast for ScreenSurfaceCreateInfoQNXBuilder<'_> {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`SemaphoreCreateInfo`].
-pub unsafe trait ExtendsSemaphoreCreateInfo: fmt::Debug {}
-unsafe impl ExtendsSemaphoreCreateInfo for ExportMetalObjectCreateInfoEXT {}
-unsafe impl ExtendsSemaphoreCreateInfo for ExportSemaphoreCreateInfo {}
-unsafe impl ExtendsSemaphoreCreateInfo for ExportSemaphoreSciSyncInfoNV {}
-unsafe impl ExtendsSemaphoreCreateInfo for ExportSemaphoreWin32HandleInfoKHR {}
-unsafe impl ExtendsSemaphoreCreateInfo for ImportMetalSharedEventInfoEXT {}
-unsafe impl ExtendsSemaphoreCreateInfo for QueryLowLatencySupportNV {}
-unsafe impl ExtendsSemaphoreCreateInfo for SemaphoreSciSyncCreateInfoNV {}
-unsafe impl ExtendsSemaphoreCreateInfo for SemaphoreTypeCreateInfo {}
+unsafe impl Extends<SemaphoreCreateInfo> for ExportMetalObjectCreateInfoEXT {}
+unsafe impl Extends<SemaphoreCreateInfo> for ExportSemaphoreCreateInfo {}
+unsafe impl Extends<SemaphoreCreateInfo> for ExportSemaphoreSciSyncInfoNV {}
+unsafe impl Extends<SemaphoreCreateInfo> for ExportSemaphoreWin32HandleInfoKHR {}
+unsafe impl Extends<SemaphoreCreateInfo> for ImportMetalSharedEventInfoEXT {}
+unsafe impl Extends<SemaphoreCreateInfo> for QueryLowLatencySupportNV {}
+unsafe impl Extends<SemaphoreCreateInfo> for SemaphoreSciSyncCreateInfoNV {}
+unsafe impl Extends<SemaphoreCreateInfo> for SemaphoreTypeCreateInfo {}
 
 unsafe impl Cast for SemaphoreCreateInfo {
     type Target = SemaphoreCreateInfo;
@@ -87075,7 +86989,7 @@ impl<'b> SemaphoreCreateInfoBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsSemaphoreCreateInfo,
+        T: Extends<SemaphoreCreateInfo>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -87774,9 +87688,7 @@ unsafe impl Cast for SemaphoreWaitInfoBuilder<'_> {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`SetDescriptorBufferOffsetsInfoEXT`].
-pub unsafe trait ExtendsSetDescriptorBufferOffsetsInfoEXT: fmt::Debug {}
-unsafe impl ExtendsSetDescriptorBufferOffsetsInfoEXT for PipelineLayoutCreateInfo {}
+unsafe impl Extends<SetDescriptorBufferOffsetsInfoEXT> for PipelineLayoutCreateInfo {}
 
 unsafe impl Cast for SetDescriptorBufferOffsetsInfoEXT {
     type Target = SetDescriptorBufferOffsetsInfoEXT;
@@ -87803,7 +87715,7 @@ impl<'b> SetDescriptorBufferOffsetsInfoEXTBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsSetDescriptorBufferOffsetsInfoEXT,
+        T: Extends<SetDescriptorBufferOffsetsInfoEXT>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -88058,12 +87970,10 @@ unsafe impl Cast for SetStateFlagsIndirectCommandNVBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`ShaderCreateInfoEXT`].
-pub unsafe trait ExtendsShaderCreateInfoEXT: fmt::Debug {}
-unsafe impl ExtendsShaderCreateInfoEXT for CustomResolveCreateInfoEXT {}
-unsafe impl ExtendsShaderCreateInfoEXT for PipelineShaderStageRequiredSubgroupSizeCreateInfo {}
-unsafe impl ExtendsShaderCreateInfoEXT for ShaderDescriptorSetAndBindingMappingInfoEXT {}
-unsafe impl ExtendsShaderCreateInfoEXT for ValidationFeaturesEXT {}
+unsafe impl Extends<ShaderCreateInfoEXT> for CustomResolveCreateInfoEXT {}
+unsafe impl Extends<ShaderCreateInfoEXT> for PipelineShaderStageRequiredSubgroupSizeCreateInfo {}
+unsafe impl Extends<ShaderCreateInfoEXT> for ShaderDescriptorSetAndBindingMappingInfoEXT {}
+unsafe impl Extends<ShaderCreateInfoEXT> for ValidationFeaturesEXT {}
 
 unsafe impl Cast for ShaderCreateInfoEXT {
     type Target = ShaderCreateInfoEXT;
@@ -88090,7 +88000,7 @@ impl<'b> ShaderCreateInfoEXTBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsShaderCreateInfoEXT,
+        T: Extends<ShaderCreateInfoEXT>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -88265,10 +88175,8 @@ unsafe impl Cast for ShaderDescriptorSetAndBindingMappingInfoEXTBuilder<'_> {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`ShaderModuleCreateInfo`].
-pub unsafe trait ExtendsShaderModuleCreateInfo: fmt::Debug {}
-unsafe impl ExtendsShaderModuleCreateInfo for ShaderModuleValidationCacheCreateInfoEXT {}
-unsafe impl ExtendsShaderModuleCreateInfo for ValidationFeaturesEXT {}
+unsafe impl Extends<ShaderModuleCreateInfo> for ShaderModuleValidationCacheCreateInfoEXT {}
+unsafe impl Extends<ShaderModuleCreateInfo> for ValidationFeaturesEXT {}
 
 unsafe impl Cast for ShaderModuleCreateInfo {
     type Target = ShaderModuleCreateInfo;
@@ -88295,7 +88203,7 @@ impl<'b> ShaderModuleCreateInfoBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsShaderModuleCreateInfo,
+        T: Extends<ShaderModuleCreateInfo>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -89925,19 +89833,17 @@ unsafe impl Cast for StridedDeviceAddressRegionKHRBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`SubmitInfo`].
-pub unsafe trait ExtendsSubmitInfo: fmt::Debug {}
-unsafe impl ExtendsSubmitInfo for AmigoProfilingSubmitInfoSEC {}
-unsafe impl ExtendsSubmitInfo for D3D12FenceSubmitInfoKHR {}
-unsafe impl ExtendsSubmitInfo for DeviceGroupSubmitInfo {}
-unsafe impl ExtendsSubmitInfo for FrameBoundaryEXT {}
-unsafe impl ExtendsSubmitInfo for FrameBoundaryTensorsARM {}
-unsafe impl ExtendsSubmitInfo for LatencySubmissionPresentIdNV {}
-unsafe impl ExtendsSubmitInfo for PerformanceQuerySubmitInfoKHR {}
-unsafe impl ExtendsSubmitInfo for ProtectedSubmitInfo {}
-unsafe impl ExtendsSubmitInfo for TimelineSemaphoreSubmitInfo {}
-unsafe impl ExtendsSubmitInfo for Win32KeyedMutexAcquireReleaseInfoKHR {}
-unsafe impl ExtendsSubmitInfo for Win32KeyedMutexAcquireReleaseInfoNV {}
+unsafe impl Extends<SubmitInfo> for AmigoProfilingSubmitInfoSEC {}
+unsafe impl Extends<SubmitInfo> for D3D12FenceSubmitInfoKHR {}
+unsafe impl Extends<SubmitInfo> for DeviceGroupSubmitInfo {}
+unsafe impl Extends<SubmitInfo> for FrameBoundaryEXT {}
+unsafe impl Extends<SubmitInfo> for FrameBoundaryTensorsARM {}
+unsafe impl Extends<SubmitInfo> for LatencySubmissionPresentIdNV {}
+unsafe impl Extends<SubmitInfo> for PerformanceQuerySubmitInfoKHR {}
+unsafe impl Extends<SubmitInfo> for ProtectedSubmitInfo {}
+unsafe impl Extends<SubmitInfo> for TimelineSemaphoreSubmitInfo {}
+unsafe impl Extends<SubmitInfo> for Win32KeyedMutexAcquireReleaseInfoKHR {}
+unsafe impl Extends<SubmitInfo> for Win32KeyedMutexAcquireReleaseInfoNV {}
 
 unsafe impl Cast for SubmitInfo {
     type Target = SubmitInfo;
@@ -89964,7 +89870,7 @@ impl<'b> SubmitInfoBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsSubmitInfo,
+        T: Extends<SubmitInfo>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -90029,14 +89935,12 @@ unsafe impl Cast for SubmitInfoBuilder<'_> {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`SubmitInfo2`].
-pub unsafe trait ExtendsSubmitInfo2: fmt::Debug {}
-unsafe impl ExtendsSubmitInfo2 for FrameBoundaryEXT {}
-unsafe impl ExtendsSubmitInfo2 for FrameBoundaryTensorsARM {}
-unsafe impl ExtendsSubmitInfo2 for LatencySubmissionPresentIdNV {}
-unsafe impl ExtendsSubmitInfo2 for PerformanceQuerySubmitInfoKHR {}
-unsafe impl ExtendsSubmitInfo2 for Win32KeyedMutexAcquireReleaseInfoKHR {}
-unsafe impl ExtendsSubmitInfo2 for Win32KeyedMutexAcquireReleaseInfoNV {}
+unsafe impl Extends<SubmitInfo2> for FrameBoundaryEXT {}
+unsafe impl Extends<SubmitInfo2> for FrameBoundaryTensorsARM {}
+unsafe impl Extends<SubmitInfo2> for LatencySubmissionPresentIdNV {}
+unsafe impl Extends<SubmitInfo2> for PerformanceQuerySubmitInfoKHR {}
+unsafe impl Extends<SubmitInfo2> for Win32KeyedMutexAcquireReleaseInfoKHR {}
+unsafe impl Extends<SubmitInfo2> for Win32KeyedMutexAcquireReleaseInfoNV {}
 
 unsafe impl Cast for SubmitInfo2 {
     type Target = SubmitInfo2;
@@ -90063,7 +89967,7 @@ impl<'b> SubmitInfo2Builder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsSubmitInfo2,
+        T: Extends<SubmitInfo2>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -90288,10 +90192,8 @@ unsafe impl Cast for SubpassDependencyBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`SubpassDependency2`].
-pub unsafe trait ExtendsSubpassDependency2: fmt::Debug {}
-unsafe impl ExtendsSubpassDependency2 for MemoryBarrier2 {}
-unsafe impl ExtendsSubpassDependency2 for MemoryBarrierAccessFlags3KHR {}
+unsafe impl Extends<SubpassDependency2> for MemoryBarrier2 {}
+unsafe impl Extends<SubpassDependency2> for MemoryBarrierAccessFlags3KHR {}
 
 unsafe impl Cast for SubpassDependency2 {
     type Target = SubpassDependency2;
@@ -90318,7 +90220,7 @@ impl<'b> SubpassDependency2Builder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsSubpassDependency2,
+        T: Extends<SubpassDependency2>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -90520,13 +90422,11 @@ unsafe impl Cast for SubpassDescriptionBuilder<'_> {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`SubpassDescription2`].
-pub unsafe trait ExtendsSubpassDescription2: fmt::Debug {}
-unsafe impl ExtendsSubpassDescription2 for FragmentShadingRateAttachmentInfoKHR {}
-unsafe impl ExtendsSubpassDescription2 for MultisampledRenderToSingleSampledInfoEXT {}
-unsafe impl ExtendsSubpassDescription2 for RenderPassCreationControlEXT {}
-unsafe impl ExtendsSubpassDescription2 for RenderPassSubpassFeedbackCreateInfoEXT {}
-unsafe impl ExtendsSubpassDescription2 for SubpassDescriptionDepthStencilResolve {}
+unsafe impl Extends<SubpassDescription2> for FragmentShadingRateAttachmentInfoKHR {}
+unsafe impl Extends<SubpassDescription2> for MultisampledRenderToSingleSampledInfoEXT {}
+unsafe impl Extends<SubpassDescription2> for RenderPassCreationControlEXT {}
+unsafe impl Extends<SubpassDescription2> for RenderPassSubpassFeedbackCreateInfoEXT {}
+unsafe impl Extends<SubpassDescription2> for SubpassDescriptionDepthStencilResolve {}
 
 unsafe impl Cast for SubpassDescription2 {
     type Target = SubpassDescription2;
@@ -90553,7 +90453,7 @@ impl<'b> SubpassDescription2Builder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsSubpassDescription2,
+        T: Extends<SubpassDescription2>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -90734,9 +90634,7 @@ unsafe impl Cast for SubpassDescriptionDepthStencilResolveBuilder<'_> {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`SubpassEndInfo`].
-pub unsafe trait ExtendsSubpassEndInfo: fmt::Debug {}
-unsafe impl ExtendsSubpassEndInfo for RenderPassFragmentDensityMapOffsetEndInfoEXT {}
+unsafe impl Extends<SubpassEndInfo> for RenderPassFragmentDensityMapOffsetEndInfoEXT {}
 
 unsafe impl Cast for SubpassEndInfo {
     type Target = SubpassEndInfo;
@@ -90763,7 +90661,7 @@ impl<'b> SubpassEndInfoBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsSubpassEndInfo,
+        T: Extends<SubpassEndInfo>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -91130,10 +91028,8 @@ unsafe impl Cast for SubresourceLayoutBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`SubresourceLayout2`].
-pub unsafe trait ExtendsSubresourceLayout2: fmt::Debug {}
-unsafe impl ExtendsSubresourceLayout2 for ImageCompressionPropertiesEXT {}
-unsafe impl ExtendsSubresourceLayout2 for SubresourceHostMemcpySize {}
+unsafe impl Extends<SubresourceLayout2> for ImageCompressionPropertiesEXT {}
+unsafe impl Extends<SubresourceLayout2> for SubresourceHostMemcpySize {}
 
 unsafe impl Cast for SubresourceLayout2 {
     type Target = SubresourceLayout2;
@@ -91160,7 +91056,7 @@ impl<'b> SubresourceLayout2Builder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsSubresourceLayout2,
+        T: Extends<SubresourceLayout2>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -91391,19 +91287,17 @@ unsafe impl Cast for SurfaceCapabilities2EXTBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`SurfaceCapabilities2KHR`].
-pub unsafe trait ExtendsSurfaceCapabilities2KHR: fmt::Debug {}
-unsafe impl ExtendsSurfaceCapabilities2KHR for DisplayNativeHdrSurfaceCapabilitiesAMD {}
-unsafe impl ExtendsSurfaceCapabilities2KHR for LatencySurfaceCapabilitiesNV {}
-unsafe impl ExtendsSurfaceCapabilities2KHR for PresentTimingSurfaceCapabilitiesEXT {}
-unsafe impl ExtendsSurfaceCapabilities2KHR for SharedPresentSurfaceCapabilitiesKHR {}
-unsafe impl ExtendsSurfaceCapabilities2KHR for SurfaceCapabilitiesFullScreenExclusiveEXT {}
-unsafe impl ExtendsSurfaceCapabilities2KHR for SurfaceCapabilitiesPresentBarrierNV {}
-unsafe impl ExtendsSurfaceCapabilities2KHR for SurfaceCapabilitiesPresentId2KHR {}
-unsafe impl ExtendsSurfaceCapabilities2KHR for SurfaceCapabilitiesPresentWait2KHR {}
-unsafe impl ExtendsSurfaceCapabilities2KHR for SurfacePresentModeCompatibilityKHR {}
-unsafe impl ExtendsSurfaceCapabilities2KHR for SurfacePresentScalingCapabilitiesKHR {}
-unsafe impl ExtendsSurfaceCapabilities2KHR for SurfaceProtectedCapabilitiesKHR {}
+unsafe impl Extends<SurfaceCapabilities2KHR> for DisplayNativeHdrSurfaceCapabilitiesAMD {}
+unsafe impl Extends<SurfaceCapabilities2KHR> for LatencySurfaceCapabilitiesNV {}
+unsafe impl Extends<SurfaceCapabilities2KHR> for PresentTimingSurfaceCapabilitiesEXT {}
+unsafe impl Extends<SurfaceCapabilities2KHR> for SharedPresentSurfaceCapabilitiesKHR {}
+unsafe impl Extends<SurfaceCapabilities2KHR> for SurfaceCapabilitiesFullScreenExclusiveEXT {}
+unsafe impl Extends<SurfaceCapabilities2KHR> for SurfaceCapabilitiesPresentBarrierNV {}
+unsafe impl Extends<SurfaceCapabilities2KHR> for SurfaceCapabilitiesPresentId2KHR {}
+unsafe impl Extends<SurfaceCapabilities2KHR> for SurfaceCapabilitiesPresentWait2KHR {}
+unsafe impl Extends<SurfaceCapabilities2KHR> for SurfacePresentModeCompatibilityKHR {}
+unsafe impl Extends<SurfaceCapabilities2KHR> for SurfacePresentScalingCapabilitiesKHR {}
+unsafe impl Extends<SurfaceCapabilities2KHR> for SurfaceProtectedCapabilitiesKHR {}
 
 unsafe impl Cast for SurfaceCapabilities2KHR {
     type Target = SurfaceCapabilities2KHR;
@@ -91430,7 +91324,7 @@ impl<'b> SurfaceCapabilities2KHRBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsSurfaceCapabilities2KHR,
+        T: Extends<SurfaceCapabilities2KHR>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -91891,9 +91785,7 @@ unsafe impl Cast for SurfaceCreateInfoOHOSBuilder<'_> {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`SurfaceFormat2KHR`].
-pub unsafe trait ExtendsSurfaceFormat2KHR: fmt::Debug {}
-unsafe impl ExtendsSurfaceFormat2KHR for ImageCompressionPropertiesEXT {}
+unsafe impl Extends<SurfaceFormat2KHR> for ImageCompressionPropertiesEXT {}
 
 unsafe impl Cast for SurfaceFormat2KHR {
     type Target = SurfaceFormat2KHR;
@@ -91920,7 +91812,7 @@ impl<'b> SurfaceFormat2KHRBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsSurfaceFormat2KHR,
+        T: Extends<SurfaceFormat2KHR>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -92550,19 +92442,17 @@ unsafe impl Cast for SwapchainCounterCreateInfoEXTBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`SwapchainCreateInfoKHR`].
-pub unsafe trait ExtendsSwapchainCreateInfoKHR: fmt::Debug {}
-unsafe impl ExtendsSwapchainCreateInfoKHR for DeviceGroupSwapchainCreateInfoKHR {}
-unsafe impl ExtendsSwapchainCreateInfoKHR for ImageCompressionControlEXT {}
-unsafe impl ExtendsSwapchainCreateInfoKHR for ImageFormatListCreateInfo {}
-unsafe impl ExtendsSwapchainCreateInfoKHR for SurfaceFullScreenExclusiveInfoEXT {}
-unsafe impl ExtendsSwapchainCreateInfoKHR for SurfaceFullScreenExclusiveWin32InfoEXT {}
-unsafe impl ExtendsSwapchainCreateInfoKHR for SwapchainCounterCreateInfoEXT {}
-unsafe impl ExtendsSwapchainCreateInfoKHR for SwapchainDisplayNativeHdrCreateInfoAMD {}
-unsafe impl ExtendsSwapchainCreateInfoKHR for SwapchainLatencyCreateInfoNV {}
-unsafe impl ExtendsSwapchainCreateInfoKHR for SwapchainPresentBarrierCreateInfoNV {}
-unsafe impl ExtendsSwapchainCreateInfoKHR for SwapchainPresentModesCreateInfoKHR {}
-unsafe impl ExtendsSwapchainCreateInfoKHR for SwapchainPresentScalingCreateInfoKHR {}
+unsafe impl Extends<SwapchainCreateInfoKHR> for DeviceGroupSwapchainCreateInfoKHR {}
+unsafe impl Extends<SwapchainCreateInfoKHR> for ImageCompressionControlEXT {}
+unsafe impl Extends<SwapchainCreateInfoKHR> for ImageFormatListCreateInfo {}
+unsafe impl Extends<SwapchainCreateInfoKHR> for SurfaceFullScreenExclusiveInfoEXT {}
+unsafe impl Extends<SwapchainCreateInfoKHR> for SurfaceFullScreenExclusiveWin32InfoEXT {}
+unsafe impl Extends<SwapchainCreateInfoKHR> for SwapchainCounterCreateInfoEXT {}
+unsafe impl Extends<SwapchainCreateInfoKHR> for SwapchainDisplayNativeHdrCreateInfoAMD {}
+unsafe impl Extends<SwapchainCreateInfoKHR> for SwapchainLatencyCreateInfoNV {}
+unsafe impl Extends<SwapchainCreateInfoKHR> for SwapchainPresentBarrierCreateInfoNV {}
+unsafe impl Extends<SwapchainCreateInfoKHR> for SwapchainPresentModesCreateInfoKHR {}
+unsafe impl Extends<SwapchainCreateInfoKHR> for SwapchainPresentScalingCreateInfoKHR {}
 
 unsafe impl Cast for SwapchainCreateInfoKHR {
     type Target = SwapchainCreateInfoKHR;
@@ -92589,7 +92479,7 @@ impl<'b> SwapchainCreateInfoKHRBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsSwapchainCreateInfoKHR,
+        T: Extends<SwapchainCreateInfoKHR>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -93474,11 +93364,9 @@ unsafe impl Cast for TensorCopyARMBuilder<'_> {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`TensorCreateInfoARM`].
-pub unsafe trait ExtendsTensorCreateInfoARM: fmt::Debug {}
-unsafe impl ExtendsTensorCreateInfoARM for ExternalMemoryTensorCreateInfoARM {}
-unsafe impl ExtendsTensorCreateInfoARM for OpaqueCaptureDataCreateInfoEXT {}
-unsafe impl ExtendsTensorCreateInfoARM for OpaqueCaptureDescriptorDataCreateInfoEXT {}
+unsafe impl Extends<TensorCreateInfoARM> for ExternalMemoryTensorCreateInfoARM {}
+unsafe impl Extends<TensorCreateInfoARM> for OpaqueCaptureDataCreateInfoEXT {}
+unsafe impl Extends<TensorCreateInfoARM> for OpaqueCaptureDescriptorDataCreateInfoEXT {}
 
 unsafe impl Cast for TensorCreateInfoARM {
     type Target = TensorCreateInfoARM;
@@ -93505,7 +93393,7 @@ impl<'b> TensorCreateInfoARMBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsTensorCreateInfoARM,
+        T: Extends<TensorCreateInfoARM>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -94009,9 +93897,7 @@ unsafe impl Cast for TensorViewCaptureDescriptorDataInfoARMBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`TensorViewCreateInfoARM`].
-pub unsafe trait ExtendsTensorViewCreateInfoARM: fmt::Debug {}
-unsafe impl ExtendsTensorViewCreateInfoARM for OpaqueCaptureDescriptorDataCreateInfoEXT {}
+unsafe impl Extends<TensorViewCreateInfoARM> for OpaqueCaptureDescriptorDataCreateInfoEXT {}
 
 unsafe impl Cast for TensorViewCreateInfoARM {
     type Target = TensorViewCreateInfoARM;
@@ -94038,7 +93924,7 @@ impl<'b> TensorViewCreateInfoARMBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsTensorViewCreateInfoARM,
+        T: Extends<TensorViewCreateInfoARM>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -95545,15 +95431,13 @@ unsafe impl Cast for ViSurfaceCreateInfoNNBuilder<'_> {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`VideoBeginCodingInfoKHR`].
-pub unsafe trait ExtendsVideoBeginCodingInfoKHR: fmt::Debug {}
-unsafe impl ExtendsVideoBeginCodingInfoKHR for VideoEncodeAV1GopRemainingFrameInfoKHR {}
-unsafe impl ExtendsVideoBeginCodingInfoKHR for VideoEncodeAV1RateControlInfoKHR {}
-unsafe impl ExtendsVideoBeginCodingInfoKHR for VideoEncodeH264GopRemainingFrameInfoKHR {}
-unsafe impl ExtendsVideoBeginCodingInfoKHR for VideoEncodeH264RateControlInfoKHR {}
-unsafe impl ExtendsVideoBeginCodingInfoKHR for VideoEncodeH265GopRemainingFrameInfoKHR {}
-unsafe impl ExtendsVideoBeginCodingInfoKHR for VideoEncodeH265RateControlInfoKHR {}
-unsafe impl ExtendsVideoBeginCodingInfoKHR for VideoEncodeRateControlInfoKHR {}
+unsafe impl Extends<VideoBeginCodingInfoKHR> for VideoEncodeAV1GopRemainingFrameInfoKHR {}
+unsafe impl Extends<VideoBeginCodingInfoKHR> for VideoEncodeAV1RateControlInfoKHR {}
+unsafe impl Extends<VideoBeginCodingInfoKHR> for VideoEncodeH264GopRemainingFrameInfoKHR {}
+unsafe impl Extends<VideoBeginCodingInfoKHR> for VideoEncodeH264RateControlInfoKHR {}
+unsafe impl Extends<VideoBeginCodingInfoKHR> for VideoEncodeH265GopRemainingFrameInfoKHR {}
+unsafe impl Extends<VideoBeginCodingInfoKHR> for VideoEncodeH265RateControlInfoKHR {}
+unsafe impl Extends<VideoBeginCodingInfoKHR> for VideoEncodeRateControlInfoKHR {}
 
 unsafe impl Cast for VideoBeginCodingInfoKHR {
     type Target = VideoBeginCodingInfoKHR;
@@ -95580,7 +95464,7 @@ impl<'b> VideoBeginCodingInfoKHRBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsVideoBeginCodingInfoKHR,
+        T: Extends<VideoBeginCodingInfoKHR>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -95648,23 +95532,21 @@ unsafe impl Cast for VideoBeginCodingInfoKHRBuilder<'_> {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`VideoCapabilitiesKHR`].
-pub unsafe trait ExtendsVideoCapabilitiesKHR: fmt::Debug {}
-unsafe impl ExtendsVideoCapabilitiesKHR for VideoDecodeAV1CapabilitiesKHR {}
-unsafe impl ExtendsVideoCapabilitiesKHR for VideoDecodeCapabilitiesKHR {}
-unsafe impl ExtendsVideoCapabilitiesKHR for VideoDecodeH264CapabilitiesKHR {}
-unsafe impl ExtendsVideoCapabilitiesKHR for VideoDecodeH265CapabilitiesKHR {}
-unsafe impl ExtendsVideoCapabilitiesKHR for VideoDecodeVP9CapabilitiesKHR {}
-unsafe impl ExtendsVideoCapabilitiesKHR for VideoEncodeAV1CapabilitiesKHR {}
-unsafe impl ExtendsVideoCapabilitiesKHR for VideoEncodeAV1QuantizationMapCapabilitiesKHR {}
-unsafe impl ExtendsVideoCapabilitiesKHR for VideoEncodeCapabilitiesKHR {}
-unsafe impl ExtendsVideoCapabilitiesKHR for VideoEncodeH264CapabilitiesKHR {}
-unsafe impl ExtendsVideoCapabilitiesKHR for VideoEncodeH264QuantizationMapCapabilitiesKHR {}
-unsafe impl ExtendsVideoCapabilitiesKHR for VideoEncodeH265CapabilitiesKHR {}
-unsafe impl ExtendsVideoCapabilitiesKHR for VideoEncodeH265QuantizationMapCapabilitiesKHR {}
-unsafe impl ExtendsVideoCapabilitiesKHR for VideoEncodeIntraRefreshCapabilitiesKHR {}
-unsafe impl ExtendsVideoCapabilitiesKHR for VideoEncodeQuantizationMapCapabilitiesKHR {}
-unsafe impl ExtendsVideoCapabilitiesKHR for VideoEncodeRgbConversionCapabilitiesVALVE {}
+unsafe impl Extends<VideoCapabilitiesKHR> for VideoDecodeAV1CapabilitiesKHR {}
+unsafe impl Extends<VideoCapabilitiesKHR> for VideoDecodeCapabilitiesKHR {}
+unsafe impl Extends<VideoCapabilitiesKHR> for VideoDecodeH264CapabilitiesKHR {}
+unsafe impl Extends<VideoCapabilitiesKHR> for VideoDecodeH265CapabilitiesKHR {}
+unsafe impl Extends<VideoCapabilitiesKHR> for VideoDecodeVP9CapabilitiesKHR {}
+unsafe impl Extends<VideoCapabilitiesKHR> for VideoEncodeAV1CapabilitiesKHR {}
+unsafe impl Extends<VideoCapabilitiesKHR> for VideoEncodeAV1QuantizationMapCapabilitiesKHR {}
+unsafe impl Extends<VideoCapabilitiesKHR> for VideoEncodeCapabilitiesKHR {}
+unsafe impl Extends<VideoCapabilitiesKHR> for VideoEncodeH264CapabilitiesKHR {}
+unsafe impl Extends<VideoCapabilitiesKHR> for VideoEncodeH264QuantizationMapCapabilitiesKHR {}
+unsafe impl Extends<VideoCapabilitiesKHR> for VideoEncodeH265CapabilitiesKHR {}
+unsafe impl Extends<VideoCapabilitiesKHR> for VideoEncodeH265QuantizationMapCapabilitiesKHR {}
+unsafe impl Extends<VideoCapabilitiesKHR> for VideoEncodeIntraRefreshCapabilitiesKHR {}
+unsafe impl Extends<VideoCapabilitiesKHR> for VideoEncodeQuantizationMapCapabilitiesKHR {}
+unsafe impl Extends<VideoCapabilitiesKHR> for VideoEncodeRgbConversionCapabilitiesVALVE {}
 
 unsafe impl Cast for VideoCapabilitiesKHR {
     type Target = VideoCapabilitiesKHR;
@@ -95691,7 +95573,7 @@ impl<'b> VideoCapabilitiesKHRBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsVideoCapabilitiesKHR,
+        T: Extends<VideoCapabilitiesKHR>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -95794,13 +95676,11 @@ unsafe impl Cast for VideoCapabilitiesKHRBuilder<'_> {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`VideoCodingControlInfoKHR`].
-pub unsafe trait ExtendsVideoCodingControlInfoKHR: fmt::Debug {}
-unsafe impl ExtendsVideoCodingControlInfoKHR for VideoEncodeAV1RateControlInfoKHR {}
-unsafe impl ExtendsVideoCodingControlInfoKHR for VideoEncodeH264RateControlInfoKHR {}
-unsafe impl ExtendsVideoCodingControlInfoKHR for VideoEncodeH265RateControlInfoKHR {}
-unsafe impl ExtendsVideoCodingControlInfoKHR for VideoEncodeQualityLevelInfoKHR {}
-unsafe impl ExtendsVideoCodingControlInfoKHR for VideoEncodeRateControlInfoKHR {}
+unsafe impl Extends<VideoCodingControlInfoKHR> for VideoEncodeAV1RateControlInfoKHR {}
+unsafe impl Extends<VideoCodingControlInfoKHR> for VideoEncodeH264RateControlInfoKHR {}
+unsafe impl Extends<VideoCodingControlInfoKHR> for VideoEncodeH265RateControlInfoKHR {}
+unsafe impl Extends<VideoCodingControlInfoKHR> for VideoEncodeQualityLevelInfoKHR {}
+unsafe impl Extends<VideoCodingControlInfoKHR> for VideoEncodeRateControlInfoKHR {}
 
 unsafe impl Cast for VideoCodingControlInfoKHR {
     type Target = VideoCodingControlInfoKHR;
@@ -95827,7 +95707,7 @@ impl<'b> VideoCodingControlInfoKHRBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsVideoCodingControlInfoKHR,
+        T: Extends<VideoCodingControlInfoKHR>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -97275,16 +97155,14 @@ unsafe impl Cast for VideoDecodeH265SessionParametersCreateInfoKHRBuilder<'_> {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`VideoDecodeInfoKHR`].
-pub unsafe trait ExtendsVideoDecodeInfoKHR: fmt::Debug {}
-unsafe impl ExtendsVideoDecodeInfoKHR for VideoDecodeAV1InlineSessionParametersInfoKHR {}
-unsafe impl ExtendsVideoDecodeInfoKHR for VideoDecodeAV1PictureInfoKHR {}
-unsafe impl ExtendsVideoDecodeInfoKHR for VideoDecodeH264InlineSessionParametersInfoKHR {}
-unsafe impl ExtendsVideoDecodeInfoKHR for VideoDecodeH264PictureInfoKHR {}
-unsafe impl ExtendsVideoDecodeInfoKHR for VideoDecodeH265InlineSessionParametersInfoKHR {}
-unsafe impl ExtendsVideoDecodeInfoKHR for VideoDecodeH265PictureInfoKHR {}
-unsafe impl ExtendsVideoDecodeInfoKHR for VideoDecodeVP9PictureInfoKHR {}
-unsafe impl ExtendsVideoDecodeInfoKHR for VideoInlineQueryInfoKHR {}
+unsafe impl Extends<VideoDecodeInfoKHR> for VideoDecodeAV1InlineSessionParametersInfoKHR {}
+unsafe impl Extends<VideoDecodeInfoKHR> for VideoDecodeAV1PictureInfoKHR {}
+unsafe impl Extends<VideoDecodeInfoKHR> for VideoDecodeH264InlineSessionParametersInfoKHR {}
+unsafe impl Extends<VideoDecodeInfoKHR> for VideoDecodeH264PictureInfoKHR {}
+unsafe impl Extends<VideoDecodeInfoKHR> for VideoDecodeH265InlineSessionParametersInfoKHR {}
+unsafe impl Extends<VideoDecodeInfoKHR> for VideoDecodeH265PictureInfoKHR {}
+unsafe impl Extends<VideoDecodeInfoKHR> for VideoDecodeVP9PictureInfoKHR {}
+unsafe impl Extends<VideoDecodeInfoKHR> for VideoInlineQueryInfoKHR {}
 
 unsafe impl Cast for VideoDecodeInfoKHR {
     type Target = VideoDecodeInfoKHR;
@@ -97311,7 +97189,7 @@ impl<'b> VideoDecodeInfoKHRBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsVideoDecodeInfoKHR,
+        T: Extends<VideoDecodeInfoKHR>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -101756,14 +101634,12 @@ unsafe impl Cast for VideoEncodeH265SessionParametersGetInfoKHRBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`VideoEncodeInfoKHR`].
-pub unsafe trait ExtendsVideoEncodeInfoKHR: fmt::Debug {}
-unsafe impl ExtendsVideoEncodeInfoKHR for VideoEncodeAV1PictureInfoKHR {}
-unsafe impl ExtendsVideoEncodeInfoKHR for VideoEncodeH264PictureInfoKHR {}
-unsafe impl ExtendsVideoEncodeInfoKHR for VideoEncodeH265PictureInfoKHR {}
-unsafe impl ExtendsVideoEncodeInfoKHR for VideoEncodeIntraRefreshInfoKHR {}
-unsafe impl ExtendsVideoEncodeInfoKHR for VideoEncodeQuantizationMapInfoKHR {}
-unsafe impl ExtendsVideoEncodeInfoKHR for VideoInlineQueryInfoKHR {}
+unsafe impl Extends<VideoEncodeInfoKHR> for VideoEncodeAV1PictureInfoKHR {}
+unsafe impl Extends<VideoEncodeInfoKHR> for VideoEncodeH264PictureInfoKHR {}
+unsafe impl Extends<VideoEncodeInfoKHR> for VideoEncodeH265PictureInfoKHR {}
+unsafe impl Extends<VideoEncodeInfoKHR> for VideoEncodeIntraRefreshInfoKHR {}
+unsafe impl Extends<VideoEncodeInfoKHR> for VideoEncodeQuantizationMapInfoKHR {}
+unsafe impl Extends<VideoEncodeInfoKHR> for VideoInlineQueryInfoKHR {}
 
 unsafe impl Cast for VideoEncodeInfoKHR {
     type Target = VideoEncodeInfoKHR;
@@ -101790,7 +101666,7 @@ impl<'b> VideoEncodeInfoKHRBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsVideoEncodeInfoKHR,
+        T: Extends<VideoEncodeInfoKHR>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -102168,17 +102044,15 @@ unsafe impl Cast for VideoEncodeQualityLevelInfoKHRBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`VideoEncodeQualityLevelPropertiesKHR`].
-pub unsafe trait ExtendsVideoEncodeQualityLevelPropertiesKHR: fmt::Debug {}
-unsafe impl ExtendsVideoEncodeQualityLevelPropertiesKHR
+unsafe impl Extends<VideoEncodeQualityLevelPropertiesKHR>
     for VideoEncodeAV1QualityLevelPropertiesKHR
 {
 }
-unsafe impl ExtendsVideoEncodeQualityLevelPropertiesKHR
+unsafe impl Extends<VideoEncodeQualityLevelPropertiesKHR>
     for VideoEncodeH264QualityLevelPropertiesKHR
 {
 }
-unsafe impl ExtendsVideoEncodeQualityLevelPropertiesKHR
+unsafe impl Extends<VideoEncodeQualityLevelPropertiesKHR>
     for VideoEncodeH265QualityLevelPropertiesKHR
 {
 }
@@ -102208,7 +102082,7 @@ impl<'b> VideoEncodeQualityLevelPropertiesKHRBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsVideoEncodeQualityLevelPropertiesKHR,
+        T: Extends<VideoEncodeQualityLevelPropertiesKHR>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -102545,11 +102419,9 @@ unsafe impl Cast for VideoEncodeRateControlInfoKHRBuilder<'_> {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`VideoEncodeRateControlLayerInfoKHR`].
-pub unsafe trait ExtendsVideoEncodeRateControlLayerInfoKHR: fmt::Debug {}
-unsafe impl ExtendsVideoEncodeRateControlLayerInfoKHR for VideoEncodeAV1RateControlLayerInfoKHR {}
-unsafe impl ExtendsVideoEncodeRateControlLayerInfoKHR for VideoEncodeH264RateControlLayerInfoKHR {}
-unsafe impl ExtendsVideoEncodeRateControlLayerInfoKHR for VideoEncodeH265RateControlLayerInfoKHR {}
+unsafe impl Extends<VideoEncodeRateControlLayerInfoKHR> for VideoEncodeAV1RateControlLayerInfoKHR {}
+unsafe impl Extends<VideoEncodeRateControlLayerInfoKHR> for VideoEncodeH264RateControlLayerInfoKHR {}
+unsafe impl Extends<VideoEncodeRateControlLayerInfoKHR> for VideoEncodeH265RateControlLayerInfoKHR {}
 
 unsafe impl Cast for VideoEncodeRateControlLayerInfoKHR {
     type Target = VideoEncodeRateControlLayerInfoKHR;
@@ -102576,7 +102448,7 @@ impl<'b> VideoEncodeRateControlLayerInfoKHRBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsVideoEncodeRateControlLayerInfoKHR,
+        T: Extends<VideoEncodeRateControlLayerInfoKHR>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -102780,13 +102652,11 @@ unsafe impl Cast for VideoEncodeSessionIntraRefreshCreateInfoKHRBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`VideoEncodeSessionParametersFeedbackInfoKHR`].
-pub unsafe trait ExtendsVideoEncodeSessionParametersFeedbackInfoKHR: fmt::Debug {}
-unsafe impl ExtendsVideoEncodeSessionParametersFeedbackInfoKHR
+unsafe impl Extends<VideoEncodeSessionParametersFeedbackInfoKHR>
     for VideoEncodeH264SessionParametersFeedbackInfoKHR
 {
 }
-unsafe impl ExtendsVideoEncodeSessionParametersFeedbackInfoKHR
+unsafe impl Extends<VideoEncodeSessionParametersFeedbackInfoKHR>
     for VideoEncodeH265SessionParametersFeedbackInfoKHR
 {
 }
@@ -102816,7 +102686,7 @@ impl<'b> VideoEncodeSessionParametersFeedbackInfoKHRBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsVideoEncodeSessionParametersFeedbackInfoKHR,
+        T: Extends<VideoEncodeSessionParametersFeedbackInfoKHR>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -102859,13 +102729,11 @@ unsafe impl Cast for VideoEncodeSessionParametersFeedbackInfoKHRBuilder<'_> {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`VideoEncodeSessionParametersGetInfoKHR`].
-pub unsafe trait ExtendsVideoEncodeSessionParametersGetInfoKHR: fmt::Debug {}
-unsafe impl ExtendsVideoEncodeSessionParametersGetInfoKHR
+unsafe impl Extends<VideoEncodeSessionParametersGetInfoKHR>
     for VideoEncodeH264SessionParametersGetInfoKHR
 {
 }
-unsafe impl ExtendsVideoEncodeSessionParametersGetInfoKHR
+unsafe impl Extends<VideoEncodeSessionParametersGetInfoKHR>
     for VideoEncodeH265SessionParametersGetInfoKHR
 {
 }
@@ -102895,7 +102763,7 @@ impl<'b> VideoEncodeSessionParametersGetInfoKHRBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsVideoEncodeSessionParametersGetInfoKHR,
+        T: Extends<VideoEncodeSessionParametersGetInfoKHR>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -103273,11 +103141,9 @@ unsafe impl Cast for VideoFormatH265QuantizationMapPropertiesKHRBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`VideoFormatPropertiesKHR`].
-pub unsafe trait ExtendsVideoFormatPropertiesKHR: fmt::Debug {}
-unsafe impl ExtendsVideoFormatPropertiesKHR for VideoFormatAV1QuantizationMapPropertiesKHR {}
-unsafe impl ExtendsVideoFormatPropertiesKHR for VideoFormatH265QuantizationMapPropertiesKHR {}
-unsafe impl ExtendsVideoFormatPropertiesKHR for VideoFormatQuantizationMapPropertiesKHR {}
+unsafe impl Extends<VideoFormatPropertiesKHR> for VideoFormatAV1QuantizationMapPropertiesKHR {}
+unsafe impl Extends<VideoFormatPropertiesKHR> for VideoFormatH265QuantizationMapPropertiesKHR {}
+unsafe impl Extends<VideoFormatPropertiesKHR> for VideoFormatQuantizationMapPropertiesKHR {}
 
 unsafe impl Cast for VideoFormatPropertiesKHR {
     type Target = VideoFormatPropertiesKHR;
@@ -103304,7 +103170,7 @@ impl<'b> VideoFormatPropertiesKHRBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsVideoFormatPropertiesKHR,
+        T: Extends<VideoFormatPropertiesKHR>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -103587,18 +103453,16 @@ unsafe impl Cast for VideoPictureResourceInfoKHRBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`VideoProfileInfoKHR`].
-pub unsafe trait ExtendsVideoProfileInfoKHR: fmt::Debug {}
-unsafe impl ExtendsVideoProfileInfoKHR for VideoDecodeAV1ProfileInfoKHR {}
-unsafe impl ExtendsVideoProfileInfoKHR for VideoDecodeH264ProfileInfoKHR {}
-unsafe impl ExtendsVideoProfileInfoKHR for VideoDecodeH265ProfileInfoKHR {}
-unsafe impl ExtendsVideoProfileInfoKHR for VideoDecodeUsageInfoKHR {}
-unsafe impl ExtendsVideoProfileInfoKHR for VideoDecodeVP9ProfileInfoKHR {}
-unsafe impl ExtendsVideoProfileInfoKHR for VideoEncodeAV1ProfileInfoKHR {}
-unsafe impl ExtendsVideoProfileInfoKHR for VideoEncodeH264ProfileInfoKHR {}
-unsafe impl ExtendsVideoProfileInfoKHR for VideoEncodeH265ProfileInfoKHR {}
-unsafe impl ExtendsVideoProfileInfoKHR for VideoEncodeProfileRgbConversionInfoVALVE {}
-unsafe impl ExtendsVideoProfileInfoKHR for VideoEncodeUsageInfoKHR {}
+unsafe impl Extends<VideoProfileInfoKHR> for VideoDecodeAV1ProfileInfoKHR {}
+unsafe impl Extends<VideoProfileInfoKHR> for VideoDecodeH264ProfileInfoKHR {}
+unsafe impl Extends<VideoProfileInfoKHR> for VideoDecodeH265ProfileInfoKHR {}
+unsafe impl Extends<VideoProfileInfoKHR> for VideoDecodeUsageInfoKHR {}
+unsafe impl Extends<VideoProfileInfoKHR> for VideoDecodeVP9ProfileInfoKHR {}
+unsafe impl Extends<VideoProfileInfoKHR> for VideoEncodeAV1ProfileInfoKHR {}
+unsafe impl Extends<VideoProfileInfoKHR> for VideoEncodeH264ProfileInfoKHR {}
+unsafe impl Extends<VideoProfileInfoKHR> for VideoEncodeH265ProfileInfoKHR {}
+unsafe impl Extends<VideoProfileInfoKHR> for VideoEncodeProfileRgbConversionInfoVALVE {}
+unsafe impl Extends<VideoProfileInfoKHR> for VideoEncodeUsageInfoKHR {}
 
 unsafe impl Cast for VideoProfileInfoKHR {
     type Target = VideoProfileInfoKHR;
@@ -103625,7 +103489,7 @@ impl<'b> VideoProfileInfoKHRBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsVideoProfileInfoKHR,
+        T: Extends<VideoProfileInfoKHR>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -103810,15 +103674,13 @@ unsafe impl Cast for VideoReferenceIntraRefreshInfoKHRBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`VideoReferenceSlotInfoKHR`].
-pub unsafe trait ExtendsVideoReferenceSlotInfoKHR: fmt::Debug {}
-unsafe impl ExtendsVideoReferenceSlotInfoKHR for VideoDecodeAV1DpbSlotInfoKHR {}
-unsafe impl ExtendsVideoReferenceSlotInfoKHR for VideoDecodeH264DpbSlotInfoKHR {}
-unsafe impl ExtendsVideoReferenceSlotInfoKHR for VideoDecodeH265DpbSlotInfoKHR {}
-unsafe impl ExtendsVideoReferenceSlotInfoKHR for VideoEncodeAV1DpbSlotInfoKHR {}
-unsafe impl ExtendsVideoReferenceSlotInfoKHR for VideoEncodeH264DpbSlotInfoKHR {}
-unsafe impl ExtendsVideoReferenceSlotInfoKHR for VideoEncodeH265DpbSlotInfoKHR {}
-unsafe impl ExtendsVideoReferenceSlotInfoKHR for VideoReferenceIntraRefreshInfoKHR {}
+unsafe impl Extends<VideoReferenceSlotInfoKHR> for VideoDecodeAV1DpbSlotInfoKHR {}
+unsafe impl Extends<VideoReferenceSlotInfoKHR> for VideoDecodeH264DpbSlotInfoKHR {}
+unsafe impl Extends<VideoReferenceSlotInfoKHR> for VideoDecodeH265DpbSlotInfoKHR {}
+unsafe impl Extends<VideoReferenceSlotInfoKHR> for VideoEncodeAV1DpbSlotInfoKHR {}
+unsafe impl Extends<VideoReferenceSlotInfoKHR> for VideoEncodeH264DpbSlotInfoKHR {}
+unsafe impl Extends<VideoReferenceSlotInfoKHR> for VideoEncodeH265DpbSlotInfoKHR {}
+unsafe impl Extends<VideoReferenceSlotInfoKHR> for VideoReferenceIntraRefreshInfoKHR {}
 
 unsafe impl Cast for VideoReferenceSlotInfoKHR {
     type Target = VideoReferenceSlotInfoKHR;
@@ -103845,7 +103707,7 @@ impl<'b> VideoReferenceSlotInfoKHRBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsVideoReferenceSlotInfoKHR,
+        T: Extends<VideoReferenceSlotInfoKHR>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -103897,13 +103759,11 @@ unsafe impl Cast for VideoReferenceSlotInfoKHRBuilder<'_> {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`VideoSessionCreateInfoKHR`].
-pub unsafe trait ExtendsVideoSessionCreateInfoKHR: fmt::Debug {}
-unsafe impl ExtendsVideoSessionCreateInfoKHR for VideoEncodeAV1SessionCreateInfoKHR {}
-unsafe impl ExtendsVideoSessionCreateInfoKHR for VideoEncodeH264SessionCreateInfoKHR {}
-unsafe impl ExtendsVideoSessionCreateInfoKHR for VideoEncodeH265SessionCreateInfoKHR {}
-unsafe impl ExtendsVideoSessionCreateInfoKHR for VideoEncodeSessionIntraRefreshCreateInfoKHR {}
-unsafe impl ExtendsVideoSessionCreateInfoKHR for VideoEncodeSessionRgbConversionCreateInfoVALVE {}
+unsafe impl Extends<VideoSessionCreateInfoKHR> for VideoEncodeAV1SessionCreateInfoKHR {}
+unsafe impl Extends<VideoSessionCreateInfoKHR> for VideoEncodeH264SessionCreateInfoKHR {}
+unsafe impl Extends<VideoSessionCreateInfoKHR> for VideoEncodeH265SessionCreateInfoKHR {}
+unsafe impl Extends<VideoSessionCreateInfoKHR> for VideoEncodeSessionIntraRefreshCreateInfoKHR {}
+unsafe impl Extends<VideoSessionCreateInfoKHR> for VideoEncodeSessionRgbConversionCreateInfoVALVE {}
 
 unsafe impl Cast for VideoSessionCreateInfoKHR {
     type Target = VideoSessionCreateInfoKHR;
@@ -103930,7 +103790,7 @@ impl<'b> VideoSessionCreateInfoKHRBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsVideoSessionCreateInfoKHR,
+        T: Extends<VideoSessionCreateInfoKHR>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -104094,34 +103954,32 @@ unsafe impl Cast for VideoSessionMemoryRequirementsKHRBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`VideoSessionParametersCreateInfoKHR`].
-pub unsafe trait ExtendsVideoSessionParametersCreateInfoKHR: fmt::Debug {}
-unsafe impl ExtendsVideoSessionParametersCreateInfoKHR
+unsafe impl Extends<VideoSessionParametersCreateInfoKHR>
     for VideoDecodeAV1SessionParametersCreateInfoKHR
 {
 }
-unsafe impl ExtendsVideoSessionParametersCreateInfoKHR
+unsafe impl Extends<VideoSessionParametersCreateInfoKHR>
     for VideoDecodeH264SessionParametersCreateInfoKHR
 {
 }
-unsafe impl ExtendsVideoSessionParametersCreateInfoKHR
+unsafe impl Extends<VideoSessionParametersCreateInfoKHR>
     for VideoDecodeH265SessionParametersCreateInfoKHR
 {
 }
-unsafe impl ExtendsVideoSessionParametersCreateInfoKHR
+unsafe impl Extends<VideoSessionParametersCreateInfoKHR>
     for VideoEncodeAV1SessionParametersCreateInfoKHR
 {
 }
-unsafe impl ExtendsVideoSessionParametersCreateInfoKHR
+unsafe impl Extends<VideoSessionParametersCreateInfoKHR>
     for VideoEncodeH264SessionParametersCreateInfoKHR
 {
 }
-unsafe impl ExtendsVideoSessionParametersCreateInfoKHR
+unsafe impl Extends<VideoSessionParametersCreateInfoKHR>
     for VideoEncodeH265SessionParametersCreateInfoKHR
 {
 }
-unsafe impl ExtendsVideoSessionParametersCreateInfoKHR for VideoEncodeQualityLevelInfoKHR {}
-unsafe impl ExtendsVideoSessionParametersCreateInfoKHR
+unsafe impl Extends<VideoSessionParametersCreateInfoKHR> for VideoEncodeQualityLevelInfoKHR {}
+unsafe impl Extends<VideoSessionParametersCreateInfoKHR>
     for VideoEncodeQuantizationMapSessionParametersCreateInfoKHR
 {
 }
@@ -104151,7 +104009,7 @@ impl<'b> VideoSessionParametersCreateInfoKHRBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsVideoSessionParametersCreateInfoKHR,
+        T: Extends<VideoSessionParametersCreateInfoKHR>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -104209,21 +104067,19 @@ unsafe impl Cast for VideoSessionParametersCreateInfoKHRBuilder<'_> {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`VideoSessionParametersUpdateInfoKHR`].
-pub unsafe trait ExtendsVideoSessionParametersUpdateInfoKHR: fmt::Debug {}
-unsafe impl ExtendsVideoSessionParametersUpdateInfoKHR
+unsafe impl Extends<VideoSessionParametersUpdateInfoKHR>
     for VideoDecodeH264SessionParametersAddInfoKHR
 {
 }
-unsafe impl ExtendsVideoSessionParametersUpdateInfoKHR
+unsafe impl Extends<VideoSessionParametersUpdateInfoKHR>
     for VideoDecodeH265SessionParametersAddInfoKHR
 {
 }
-unsafe impl ExtendsVideoSessionParametersUpdateInfoKHR
+unsafe impl Extends<VideoSessionParametersUpdateInfoKHR>
     for VideoEncodeH264SessionParametersAddInfoKHR
 {
 }
-unsafe impl ExtendsVideoSessionParametersUpdateInfoKHR
+unsafe impl Extends<VideoSessionParametersUpdateInfoKHR>
     for VideoEncodeH265SessionParametersAddInfoKHR
 {
 }
@@ -104253,7 +104109,7 @@ impl<'b> VideoSessionParametersUpdateInfoKHRBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsVideoSessionParametersUpdateInfoKHR,
+        T: Extends<VideoSessionParametersUpdateInfoKHR>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
@@ -104841,13 +104697,11 @@ unsafe impl Cast for Win32SurfaceCreateInfoKHRBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`WriteDescriptorSet`].
-pub unsafe trait ExtendsWriteDescriptorSet: fmt::Debug {}
-unsafe impl ExtendsWriteDescriptorSet for WriteDescriptorSetAccelerationStructureKHR {}
-unsafe impl ExtendsWriteDescriptorSet for WriteDescriptorSetAccelerationStructureNV {}
-unsafe impl ExtendsWriteDescriptorSet for WriteDescriptorSetInlineUniformBlock {}
-unsafe impl ExtendsWriteDescriptorSet for WriteDescriptorSetPartitionedAccelerationStructureNV {}
-unsafe impl ExtendsWriteDescriptorSet for WriteDescriptorSetTensorARM {}
+unsafe impl Extends<WriteDescriptorSet> for WriteDescriptorSetAccelerationStructureKHR {}
+unsafe impl Extends<WriteDescriptorSet> for WriteDescriptorSetAccelerationStructureNV {}
+unsafe impl Extends<WriteDescriptorSet> for WriteDescriptorSetInlineUniformBlock {}
+unsafe impl Extends<WriteDescriptorSet> for WriteDescriptorSetPartitionedAccelerationStructureNV {}
+unsafe impl Extends<WriteDescriptorSet> for WriteDescriptorSetTensorARM {}
 
 unsafe impl Cast for WriteDescriptorSet {
     type Target = WriteDescriptorSet;
@@ -104874,7 +104728,7 @@ impl<'b> WriteDescriptorSetBuilder<'b> {
     #[inline]
     pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
     where
-        T: ExtendsWriteDescriptorSet,
+        T: Extends<WriteDescriptorSet>,
     {
         self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self

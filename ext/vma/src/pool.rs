@@ -39,7 +39,7 @@ pub struct PoolOptions<'a> {
 impl<'a> PoolOptions<'a> {
     pub fn push_next<T>(mut self, next: &'a mut impl vk::Cast<Target = T>) -> Self
     where
-        T: vk::ExtendsMemoryAllocateInfo,
+        T: vk::Extends<vk::MemoryAllocateInfo>,
     {
         self.next = vk::merge(self.next, NonNull::from(next).cast());
         self
