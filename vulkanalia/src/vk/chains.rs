@@ -13370,6 +13370,49 @@ unsafe impl OutputChainStruct for PhysicalDeviceShaderImageFootprintFeaturesNV {
     }
 }
 
+unsafe impl InputChainStruct for PhysicalDeviceShaderInstrumentationFeaturesARM {
+    const TYPE: StructureType = StructureType::PHYSICAL_DEVICE_SHADER_INSTRUMENTATION_FEATURES_ARM;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl OutputChainStruct for PhysicalDeviceShaderInstrumentationFeaturesARM {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
+        self.next
+    }
+}
+
+unsafe impl InputChainStruct for PhysicalDeviceShaderInstrumentationPropertiesARM {
+    const TYPE: StructureType =
+        StructureType::PHYSICAL_DEVICE_SHADER_INSTRUMENTATION_PROPERTIES_ARM;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl OutputChainStruct for PhysicalDeviceShaderInstrumentationPropertiesARM {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
+        self.next
+    }
+}
+
 unsafe impl InputChainStruct for PhysicalDeviceShaderIntegerDotProductFeatures {
     const TYPE: StructureType = StructureType::PHYSICAL_DEVICE_SHADER_INTEGER_DOT_PRODUCT_FEATURES;
 
@@ -17616,6 +17659,48 @@ unsafe impl InputChainStruct for ShaderDescriptorSetAndBindingMappingInfoEXT {
 
     #[inline]
     fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl InputChainStruct for ShaderInstrumentationCreateInfoARM {
+    const TYPE: StructureType = StructureType::SHADER_INSTRUMENTATION_CREATE_INFO_ARM;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl OutputChainStruct for ShaderInstrumentationCreateInfoARM {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
+        self.next
+    }
+}
+
+unsafe impl InputChainStruct for ShaderInstrumentationMetricDescriptionARM {
+    const TYPE: StructureType = StructureType::SHADER_INSTRUMENTATION_METRIC_DESCRIPTION_ARM;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl OutputChainStruct for ShaderInstrumentationMetricDescriptionARM {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
         self.next
     }
 }

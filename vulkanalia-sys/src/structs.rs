@@ -21975,6 +21975,54 @@ impl Default for PhysicalDeviceShaderImageFootprintFeaturesNV {
 unsafe impl Send for PhysicalDeviceShaderImageFootprintFeaturesNV {}
 unsafe impl Sync for PhysicalDeviceShaderImageFootprintFeaturesNV {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderInstrumentationFeaturesARM.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceShaderInstrumentationFeaturesARM {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub shader_instrumentation: Bool32,
+}
+
+impl Default for PhysicalDeviceShaderInstrumentationFeaturesARM {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_SHADER_INSTRUMENTATION_FEATURES_ARM,
+            next: ptr::null_mut(),
+            shader_instrumentation: Bool32::default(),
+        }
+    }
+}
+
+unsafe impl Send for PhysicalDeviceShaderInstrumentationFeaturesARM {}
+unsafe impl Sync for PhysicalDeviceShaderInstrumentationFeaturesARM {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderInstrumentationPropertiesARM.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceShaderInstrumentationPropertiesARM {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub num_metrics: u32,
+    pub per_basic_block_granularity: Bool32,
+}
+
+impl Default for PhysicalDeviceShaderInstrumentationPropertiesARM {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_SHADER_INSTRUMENTATION_PROPERTIES_ARM,
+            next: ptr::null_mut(),
+            num_metrics: u32::default(),
+            per_basic_block_granularity: Bool32::default(),
+        }
+    }
+}
+
+unsafe impl Send for PhysicalDeviceShaderInstrumentationPropertiesARM {}
+unsafe impl Sync for PhysicalDeviceShaderInstrumentationPropertiesARM {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderIntegerDotProductFeatures.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -29172,6 +29220,62 @@ impl Default for ShaderDescriptorSetAndBindingMappingInfoEXT {
 
 unsafe impl Send for ShaderDescriptorSetAndBindingMappingInfoEXT {}
 unsafe impl Sync for ShaderDescriptorSetAndBindingMappingInfoEXT {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkShaderInstrumentationCreateInfoARM.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct ShaderInstrumentationCreateInfoARM {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+}
+
+impl Default for ShaderInstrumentationCreateInfoARM {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::SHADER_INSTRUMENTATION_CREATE_INFO_ARM,
+            next: ptr::null_mut(),
+        }
+    }
+}
+
+unsafe impl Send for ShaderInstrumentationCreateInfoARM {}
+unsafe impl Sync for ShaderInstrumentationCreateInfoARM {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkShaderInstrumentationMetricDataHeaderARM.html>
+#[repr(C)]
+#[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
+pub struct ShaderInstrumentationMetricDataHeaderARM {
+    pub result_index: u32,
+    pub result_sub_index: u32,
+    pub stages: ShaderStageFlags,
+    pub basic_block_index: u32,
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkShaderInstrumentationMetricDescriptionARM.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct ShaderInstrumentationMetricDescriptionARM {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub name: StringArray<MAX_DESCRIPTION_SIZE>,
+    pub description: StringArray<MAX_DESCRIPTION_SIZE>,
+}
+
+impl Default for ShaderInstrumentationMetricDescriptionARM {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::SHADER_INSTRUMENTATION_METRIC_DESCRIPTION_ARM,
+            next: ptr::null_mut(),
+            name: StringArray::default(),
+            description: StringArray::default(),
+        }
+    }
+}
+
+unsafe impl Send for ShaderInstrumentationMetricDescriptionARM {}
+unsafe impl Sync for ShaderInstrumentationMetricDescriptionARM {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkShaderModuleCreateInfo.html>
 #[repr(C)]

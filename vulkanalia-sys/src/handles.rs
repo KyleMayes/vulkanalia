@@ -2287,6 +2287,50 @@ impl fmt::Debug for ShaderEXT {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkShaderInstrumentationARM.html>
+#[repr(transparent)]
+#[derive(Copy, Clone, PartialEq, Eq, Hash)]
+pub struct ShaderInstrumentationARM(u64);
+
+impl Handle for ShaderInstrumentationARM {
+    type Repr = u64;
+
+    const TYPE: ObjectType = ObjectType::SHADER_INSTRUMENTATION_ARM;
+
+    #[inline]
+    fn null() -> Self {
+        Self(0)
+    }
+
+    #[inline]
+    fn from_raw(value: Self::Repr) -> Self {
+        Self(value)
+    }
+
+    #[inline]
+    fn as_raw(self) -> Self::Repr {
+        self.0
+    }
+
+    #[inline]
+    fn is_null(self) -> bool {
+        self.0 == 0
+    }
+}
+
+impl Default for ShaderInstrumentationARM {
+    #[inline]
+    fn default() -> Self {
+        Self::null()
+    }
+}
+
+impl fmt::Debug for ShaderInstrumentationARM {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "ShaderInstrumentationARM({:p})", self.0 as *const u8)
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkShaderModule.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, Hash)]
