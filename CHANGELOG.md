@@ -4,6 +4,9 @@
 - [Removing extra double-quote at the end of a comment in `VkFormatFeatureFlagBits2` (#2680)](https://github.com/KhronosGroup/Vulkan-Docs/commit/5caf874c0d1ec519494beea83703c5478bfe92a1)
 - [Close #2675](https://github.com/KhronosGroup/Vulkan-Docs/commit/33eff7c90483e5d8ff66e15c06683a9d19772ea3)
 - [February 20, 2026 Vulkan 1.4.344 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/6aefabc0ad51073cf060e384ce43a59250d4d69c)
+- [Reserve extension 678 (#2693)](https://github.com/KhronosGroup/Vulkan-Docs/commit/61ec2c24c40b6cc31a55e600d8bd3b33a7c7a307)
+- [docs: Fix types tag example (#2688)](https://github.com/KhronosGroup/Vulkan-Docs/commit/f27d8836e8ca5055e847115a3c83fb4c7ba99013)
+- [March 6, 2026 Vulkan 1.4.345 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/b0b699e446e3eab9bc0d6b192599871eecf25e1e)
 
 ## [0.35.0] - 2026-02-15
 

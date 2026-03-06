@@ -51,6 +51,7 @@ pub struct DeviceCommands {
     pub bind_video_session_memory_khr: PFN_vkBindVideoSessionMemoryKHR,
     pub build_acceleration_structures_khr: PFN_vkBuildAccelerationStructuresKHR,
     pub build_micromaps_ext: PFN_vkBuildMicromapsEXT,
+    pub clear_shader_instrumentation_metrics_arm: PFN_vkClearShaderInstrumentationMetricsARM,
     pub cmd_begin_conditional_rendering_ext: PFN_vkCmdBeginConditionalRenderingEXT,
     pub cmd_begin_custom_resolve_ext: PFN_vkCmdBeginCustomResolveEXT,
     pub cmd_begin_per_tile_execution_qcom: PFN_vkCmdBeginPerTileExecutionQCOM,
@@ -61,6 +62,7 @@ pub struct DeviceCommands {
     pub cmd_begin_render_pass2_khr: PFN_vkCmdBeginRenderPass2KHR,
     pub cmd_begin_rendering: PFN_vkCmdBeginRendering,
     pub cmd_begin_rendering_khr: PFN_vkCmdBeginRenderingKHR,
+    pub cmd_begin_shader_instrumentation_arm: PFN_vkCmdBeginShaderInstrumentationARM,
     pub cmd_begin_transform_feedback_ext: PFN_vkCmdBeginTransformFeedbackEXT,
     pub cmd_begin_video_coding_khr: PFN_vkCmdBeginVideoCodingKHR,
     pub cmd_bind_descriptor_buffer_embedded_samplers2_ext:
@@ -182,6 +184,7 @@ pub struct DeviceCommands {
     pub cmd_end_rendering2_ext: PFN_vkCmdEndRendering2EXT,
     pub cmd_end_rendering2_khr: PFN_vkCmdEndRendering2KHR,
     pub cmd_end_rendering_khr: PFN_vkCmdEndRenderingKHR,
+    pub cmd_end_shader_instrumentation_arm: PFN_vkCmdEndShaderInstrumentationARM,
     pub cmd_end_transform_feedback_ext: PFN_vkCmdEndTransformFeedbackEXT,
     pub cmd_end_video_coding_khr: PFN_vkCmdEndVideoCodingKHR,
     pub cmd_execute_commands: PFN_vkCmdExecuteCommands,
@@ -408,6 +411,7 @@ pub struct DeviceCommands {
     pub create_sampler_ycbcr_conversion_khr: PFN_vkCreateSamplerYcbcrConversionKHR,
     pub create_semaphore: PFN_vkCreateSemaphore,
     pub create_semaphore_sci_sync_pool_nv: PFN_vkCreateSemaphoreSciSyncPoolNV,
+    pub create_shader_instrumentation_arm: PFN_vkCreateShaderInstrumentationARM,
     pub create_shader_module: PFN_vkCreateShaderModule,
     pub create_shaders_ext: PFN_vkCreateShadersEXT,
     pub create_shared_swapchains_khr: PFN_vkCreateSharedSwapchainsKHR,
@@ -462,6 +466,7 @@ pub struct DeviceCommands {
     pub destroy_semaphore: PFN_vkDestroySemaphore,
     pub destroy_semaphore_sci_sync_pool_nv: PFN_vkDestroySemaphoreSciSyncPoolNV,
     pub destroy_shader_ext: PFN_vkDestroyShaderEXT,
+    pub destroy_shader_instrumentation_arm: PFN_vkDestroyShaderInstrumentationARM,
     pub destroy_shader_module: PFN_vkDestroyShaderModule,
     pub destroy_swapchain_khr: PFN_vkDestroySwapchainKHR,
     pub destroy_tensor_arm: PFN_vkDestroyTensorARM,
@@ -639,6 +644,7 @@ pub struct DeviceCommands {
     pub get_semaphore_zircon_handle_fuchsia: PFN_vkGetSemaphoreZirconHandleFUCHSIA,
     pub get_shader_binary_data_ext: PFN_vkGetShaderBinaryDataEXT,
     pub get_shader_info_amd: PFN_vkGetShaderInfoAMD,
+    pub get_shader_instrumentation_values_arm: PFN_vkGetShaderInstrumentationValuesARM,
     pub get_shader_module_create_info_identifier_ext: PFN_vkGetShaderModuleCreateInfoIdentifierEXT,
     pub get_shader_module_identifier_ext: PFN_vkGetShaderModuleIdentifierEXT,
     pub get_swapchain_counter_ext: PFN_vkGetSwapchainCounterEXT,
@@ -1095,6 +1101,20 @@ impl DeviceCommands {
                     fallback
                 }
             },
+            clear_shader_instrumentation_metrics_arm: {
+                let value = loader(c"vkClearShaderInstrumentationMetricsARM".as_ptr());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _instrumentation: ShaderInstrumentationARM,
+                    ) {
+                        panic!("could not load vkClearShaderInstrumentationMetricsARM")
+                    }
+                    fallback
+                }
+            },
             cmd_begin_conditional_rendering_ext: {
                 let value = loader(c"vkCmdBeginConditionalRenderingEXT".as_ptr());
                 if let Some(value) = value {
@@ -1239,6 +1259,20 @@ impl DeviceCommands {
                         _rendering_info: *const RenderingInfo,
                     ) {
                         panic!("could not load vkCmdBeginRenderingKHR")
+                    }
+                    fallback
+                }
+            },
+            cmd_begin_shader_instrumentation_arm: {
+                let value = loader(c"vkCmdBeginShaderInstrumentationARM".as_ptr());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _instrumentation: ShaderInstrumentationARM,
+                    ) {
+                        panic!("could not load vkCmdBeginShaderInstrumentationARM")
                     }
                     fallback
                 }
@@ -3036,6 +3070,17 @@ impl DeviceCommands {
                 } else {
                     unsafe extern "system" fn fallback(_command_buffer: CommandBuffer) {
                         panic!("could not load vkCmdEndRenderingKHR")
+                    }
+                    fallback
+                }
+            },
+            cmd_end_shader_instrumentation_arm: {
+                let value = loader(c"vkCmdEndShaderInstrumentationARM".as_ptr());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(_command_buffer: CommandBuffer) {
+                        panic!("could not load vkCmdEndShaderInstrumentationARM")
                     }
                     fallback
                 }
@@ -6424,6 +6469,22 @@ impl DeviceCommands {
                     fallback
                 }
             },
+            create_shader_instrumentation_arm: {
+                let value = loader(c"vkCreateShaderInstrumentationARM".as_ptr());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _create_info: *const ShaderInstrumentationCreateInfoARM,
+                        _allocator: *const AllocationCallbacks,
+                        _instrumentation: *mut ShaderInstrumentationARM,
+                    ) -> Result {
+                        panic!("could not load vkCreateShaderInstrumentationARM")
+                    }
+                    fallback
+                }
+            },
             create_shader_module: {
                 let value = loader(c"vkCreateShaderModule".as_ptr());
                 if let Some(value) = value {
@@ -7237,6 +7298,21 @@ impl DeviceCommands {
                         _allocator: *const AllocationCallbacks,
                     ) {
                         panic!("could not load vkDestroyShaderEXT")
+                    }
+                    fallback
+                }
+            },
+            destroy_shader_instrumentation_arm: {
+                let value = loader(c"vkDestroyShaderInstrumentationARM".as_ptr());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _instrumentation: ShaderInstrumentationARM,
+                        _allocator: *const AllocationCallbacks,
+                    ) {
+                        panic!("could not load vkDestroyShaderInstrumentationARM")
                     }
                     fallback
                 }
@@ -9625,6 +9701,23 @@ impl DeviceCommands {
                     fallback
                 }
             },
+            get_shader_instrumentation_values_arm: {
+                let value = loader(c"vkGetShaderInstrumentationValuesARM".as_ptr());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _instrumentation: ShaderInstrumentationARM,
+                        _metric_block_count: *mut u32,
+                        _metric_values: *mut c_void,
+                        _flags: ShaderInstrumentationValuesFlagsARM,
+                    ) -> Result {
+                        panic!("could not load vkGetShaderInstrumentationValuesARM")
+                    }
+                    fallback
+                }
+            },
             get_shader_module_create_info_identifier_ext: {
                 let value = loader(c"vkGetShaderModuleCreateInfoIdentifierEXT".as_ptr());
                 if let Some(value) = value {
@@ -11092,6 +11185,8 @@ pub struct InstanceCommands {
         PFN_vkEnumeratePhysicalDeviceQueueFamilyPerformanceCountersByRegionARM,
     pub enumerate_physical_device_queue_family_performance_query_counters_khr:
         PFN_vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR,
+    pub enumerate_physical_device_shader_instrumentation_metrics_arm:
+        PFN_vkEnumeratePhysicalDeviceShaderInstrumentationMetricsARM,
     pub enumerate_physical_devices: PFN_vkEnumeratePhysicalDevices,
     pub get_device_proc_addr: PFN_vkGetDeviceProcAddr,
     pub get_display_mode_properties2_khr: PFN_vkGetDisplayModeProperties2KHR,
@@ -11826,6 +11921,22 @@ impl InstanceCommands {
                         _counter_descriptions: *mut PerformanceCounterDescriptionKHR,
                     ) -> Result {
                         panic!("could not load vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR")
+                    }
+                    fallback
+                }
+            },
+            enumerate_physical_device_shader_instrumentation_metrics_arm: {
+                let value =
+                    loader(c"vkEnumeratePhysicalDeviceShaderInstrumentationMetricsARM".as_ptr());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _physical_device: PhysicalDevice,
+                        _description_count: *mut u32,
+                        _descriptions: *mut ShaderInstrumentationMetricDescriptionARM,
+                    ) -> Result {
+                        panic!("could not load vkEnumeratePhysicalDeviceShaderInstrumentationMetricsARM")
                     }
                     fallback
                 }

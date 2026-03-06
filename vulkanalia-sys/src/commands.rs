@@ -197,6 +197,10 @@ pub type PFN_vkBuildMicromapsEXT = unsafe extern "system" fn(
     _infos: *const MicromapBuildInfoEXT,
 ) -> Result;
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkClearShaderInstrumentationMetricsARM.html>
+pub type PFN_vkClearShaderInstrumentationMetricsARM =
+    unsafe extern "system" fn(_device: Device, _instrumentation: ShaderInstrumentationARM);
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdBeginConditionalRenderingEXT.html>
 pub type PFN_vkCmdBeginConditionalRenderingEXT = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
@@ -263,6 +267,12 @@ pub type PFN_vkCmdBeginRendering = unsafe extern "system" fn(
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdBeginRenderingKHR.html>
 pub type PFN_vkCmdBeginRenderingKHR = PFN_vkCmdBeginRendering;
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdBeginShaderInstrumentationARM.html>
+pub type PFN_vkCmdBeginShaderInstrumentationARM = unsafe extern "system" fn(
+    _command_buffer: CommandBuffer,
+    _instrumentation: ShaderInstrumentationARM,
+);
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdBeginTransformFeedbackEXT.html>
 pub type PFN_vkCmdBeginTransformFeedbackEXT = unsafe extern "system" fn(
@@ -1051,6 +1061,10 @@ pub type PFN_vkCmdEndRendering2KHR = unsafe extern "system" fn(
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdEndRenderingKHR.html>
 pub type PFN_vkCmdEndRenderingKHR = PFN_vkCmdEndRendering;
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdEndShaderInstrumentationARM.html>
+pub type PFN_vkCmdEndShaderInstrumentationARM =
+    unsafe extern "system" fn(_command_buffer: CommandBuffer);
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdEndTransformFeedbackEXT.html>
 pub type PFN_vkCmdEndTransformFeedbackEXT = unsafe extern "system" fn(
@@ -2572,6 +2586,14 @@ pub type PFN_vkCreateSemaphoreSciSyncPoolNV = unsafe extern "system" fn(
     _semaphore_pool: *mut SemaphoreSciSyncPoolNV,
 ) -> Result;
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCreateShaderInstrumentationARM.html>
+pub type PFN_vkCreateShaderInstrumentationARM = unsafe extern "system" fn(
+    _device: Device,
+    _create_info: *const ShaderInstrumentationCreateInfoARM,
+    _allocator: *const AllocationCallbacks,
+    _instrumentation: *mut ShaderInstrumentationARM,
+) -> Result;
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCreateShaderModule.html>
 pub type PFN_vkCreateShaderModule = unsafe extern "system" fn(
     _device: Device,
@@ -3035,6 +3057,13 @@ pub type PFN_vkDestroyShaderEXT = unsafe extern "system" fn(
     _allocator: *const AllocationCallbacks,
 );
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkDestroyShaderInstrumentationARM.html>
+pub type PFN_vkDestroyShaderInstrumentationARM = unsafe extern "system" fn(
+    _device: Device,
+    _instrumentation: ShaderInstrumentationARM,
+    _allocator: *const AllocationCallbacks,
+);
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkDestroyShaderModule.html>
 pub type PFN_vkDestroyShaderModule = unsafe extern "system" fn(
     _device: Device,
@@ -3165,6 +3194,14 @@ pub type PFN_vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR =
         _counter_count: *mut u32,
         _counters: *mut PerformanceCounterKHR,
         _counter_descriptions: *mut PerformanceCounterDescriptionKHR,
+    ) -> Result;
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkEnumeratePhysicalDeviceShaderInstrumentationMetricsARM.html>
+pub type PFN_vkEnumeratePhysicalDeviceShaderInstrumentationMetricsARM =
+    unsafe extern "system" fn(
+        _physical_device: PhysicalDevice,
+        _description_count: *mut u32,
+        _descriptions: *mut ShaderInstrumentationMetricDescriptionARM,
     ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkEnumeratePhysicalDevices.html>
@@ -4691,6 +4728,15 @@ pub type PFN_vkGetShaderInfoAMD = unsafe extern "system" fn(
     _info_type: ShaderInfoTypeAMD,
     _info_size: *mut usize,
     _info: *mut c_void,
+) -> Result;
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetShaderInstrumentationValuesARM.html>
+pub type PFN_vkGetShaderInstrumentationValuesARM = unsafe extern "system" fn(
+    _device: Device,
+    _instrumentation: ShaderInstrumentationARM,
+    _metric_block_count: *mut u32,
+    _metric_values: *mut c_void,
+    _flags: ShaderInstrumentationValuesFlagsARM,
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetShaderModuleCreateInfoIdentifierEXT.html>

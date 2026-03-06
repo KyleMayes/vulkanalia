@@ -19013,6 +19013,7 @@ unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderFloatControls2Featur
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderFmaFeaturesKHR {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderImageAtomicInt64FeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderImageFootprintFeaturesNV {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderInstrumentationFeaturesARM {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderIntegerDotProductFeatures {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderIntegerFunctions2FeaturesINTEL {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderLongVectorFeaturesEXT {}
@@ -51357,6 +51358,7 @@ unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderFloatControls
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderFmaFeaturesKHR {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderImageAtomicInt64FeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderImageFootprintFeaturesNV {}
+unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderInstrumentationFeaturesARM {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderIntegerDotProductFeatures {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderIntegerFunctions2FeaturesINTEL {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderLongVectorFeaturesEXT {}
@@ -62270,6 +62272,7 @@ unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceShaderCorePropert
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceShaderCorePropertiesAMD {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceShaderCorePropertiesARM {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceShaderEnqueuePropertiesAMDX {}
+unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceShaderInstrumentationPropertiesARM {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceShaderIntegerDotProductProperties {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceShaderLongVectorPropertiesEXT {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceShaderModuleIdentifierPropertiesEXT {}
@@ -66669,6 +66672,128 @@ impl ops::DerefMut for PhysicalDeviceShaderImageFootprintFeaturesNVBuilder {
 
 unsafe impl Cast for PhysicalDeviceShaderImageFootprintFeaturesNVBuilder {
     type Target = PhysicalDeviceShaderImageFootprintFeaturesNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceShaderInstrumentationFeaturesARM {
+    type Target = PhysicalDeviceShaderInstrumentationFeaturesARM;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceShaderInstrumentationFeaturesARM {
+    type Builder = PhysicalDeviceShaderInstrumentationFeaturesARMBuilder;
+}
+
+/// A builder for a [`PhysicalDeviceShaderInstrumentationFeaturesARM`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceShaderInstrumentationFeaturesARMBuilder {
+    value: PhysicalDeviceShaderInstrumentationFeaturesARM,
+}
+
+impl PhysicalDeviceShaderInstrumentationFeaturesARMBuilder {
+    #[inline]
+    pub fn shader_instrumentation(mut self, shader_instrumentation: bool) -> Self {
+        self.value.shader_instrumentation = shader_instrumentation as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceShaderInstrumentationFeaturesARM {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceShaderInstrumentationFeaturesARMBuilder {
+    type Target = PhysicalDeviceShaderInstrumentationFeaturesARM;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceShaderInstrumentationFeaturesARMBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceShaderInstrumentationFeaturesARMBuilder {
+    type Target = PhysicalDeviceShaderInstrumentationFeaturesARM;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceShaderInstrumentationPropertiesARM {
+    type Target = PhysicalDeviceShaderInstrumentationPropertiesARM;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceShaderInstrumentationPropertiesARM {
+    type Builder = PhysicalDeviceShaderInstrumentationPropertiesARMBuilder;
+}
+
+/// A builder for a [`PhysicalDeviceShaderInstrumentationPropertiesARM`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceShaderInstrumentationPropertiesARMBuilder {
+    value: PhysicalDeviceShaderInstrumentationPropertiesARM,
+}
+
+impl PhysicalDeviceShaderInstrumentationPropertiesARMBuilder {
+    #[inline]
+    pub fn num_metrics(mut self, num_metrics: u32) -> Self {
+        self.value.num_metrics = num_metrics;
+        self
+    }
+
+    #[inline]
+    pub fn per_basic_block_granularity(mut self, per_basic_block_granularity: bool) -> Self {
+        self.value.per_basic_block_granularity = per_basic_block_granularity as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceShaderInstrumentationPropertiesARM {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceShaderInstrumentationPropertiesARMBuilder {
+    type Target = PhysicalDeviceShaderInstrumentationPropertiesARM;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceShaderInstrumentationPropertiesARMBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceShaderInstrumentationPropertiesARMBuilder {
+    type Target = PhysicalDeviceShaderInstrumentationPropertiesARM;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -83974,14 +84099,9 @@ pub struct RenderPassPerformanceCountersByRegionBeginInfoARMBuilder<'b> {
 
 impl<'b> RenderPassPerformanceCountersByRegionBeginInfoARMBuilder<'b> {
     #[inline]
-    pub fn counter_address_count(mut self, counter_address_count: u32) -> Self {
-        self.value.counter_address_count = counter_address_count;
-        self
-    }
-
-    #[inline]
-    pub fn counter_addresses(mut self, counter_addresses: &'b DeviceAddress) -> Self {
-        self.value.counter_addresses = counter_addresses as *const DeviceAddress;
+    pub fn counter_addresses(mut self, counter_addresses: &'b [DeviceAddress]) -> Self {
+        self.value.counter_address_count = counter_addresses.len() as u32;
+        self.value.counter_addresses = counter_addresses.as_ptr();
         self
     }
 
@@ -83992,14 +84112,9 @@ impl<'b> RenderPassPerformanceCountersByRegionBeginInfoARMBuilder<'b> {
     }
 
     #[inline]
-    pub fn counter_index_count(mut self, counter_index_count: u32) -> Self {
-        self.value.counter_index_count = counter_index_count;
-        self
-    }
-
-    #[inline]
-    pub fn counter_indices(mut self, counter_indices: &'b mut u32) -> Self {
-        self.value.counter_indices = counter_indices as *mut u32;
+    pub fn counter_indices(mut self, counter_indices: &'b mut [u32]) -> Self {
+        self.value.counter_index_count = counter_indices.len() as u32;
+        self.value.counter_indices = counter_indices.as_mut_ptr();
         self
     }
 
@@ -88258,6 +88373,201 @@ impl ops::DerefMut for ShaderDescriptorSetAndBindingMappingInfoEXTBuilder<'_> {
 
 unsafe impl Cast for ShaderDescriptorSetAndBindingMappingInfoEXTBuilder<'_> {
     type Target = ShaderDescriptorSetAndBindingMappingInfoEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for ShaderInstrumentationCreateInfoARM {
+    type Target = ShaderInstrumentationCreateInfoARM;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for ShaderInstrumentationCreateInfoARM {
+    type Builder = ShaderInstrumentationCreateInfoARMBuilder;
+}
+
+/// A builder for a [`ShaderInstrumentationCreateInfoARM`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct ShaderInstrumentationCreateInfoARMBuilder {
+    value: ShaderInstrumentationCreateInfoARM,
+}
+
+impl ShaderInstrumentationCreateInfoARMBuilder {
+    #[inline]
+    pub fn build(self) -> ShaderInstrumentationCreateInfoARM {
+        self.value
+    }
+}
+
+impl ops::Deref for ShaderInstrumentationCreateInfoARMBuilder {
+    type Target = ShaderInstrumentationCreateInfoARM;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for ShaderInstrumentationCreateInfoARMBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for ShaderInstrumentationCreateInfoARMBuilder {
+    type Target = ShaderInstrumentationCreateInfoARM;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for ShaderInstrumentationMetricDataHeaderARM {
+    type Target = ShaderInstrumentationMetricDataHeaderARM;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for ShaderInstrumentationMetricDataHeaderARM {
+    type Builder = ShaderInstrumentationMetricDataHeaderARMBuilder;
+}
+
+/// A builder for a [`ShaderInstrumentationMetricDataHeaderARM`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct ShaderInstrumentationMetricDataHeaderARMBuilder {
+    value: ShaderInstrumentationMetricDataHeaderARM,
+}
+
+impl ShaderInstrumentationMetricDataHeaderARMBuilder {
+    #[inline]
+    pub fn result_index(mut self, result_index: u32) -> Self {
+        self.value.result_index = result_index;
+        self
+    }
+
+    #[inline]
+    pub fn result_sub_index(mut self, result_sub_index: u32) -> Self {
+        self.value.result_sub_index = result_sub_index;
+        self
+    }
+
+    #[inline]
+    pub fn stages(mut self, stages: ShaderStageFlags) -> Self {
+        self.value.stages = stages;
+        self
+    }
+
+    #[inline]
+    pub fn basic_block_index(mut self, basic_block_index: u32) -> Self {
+        self.value.basic_block_index = basic_block_index;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> ShaderInstrumentationMetricDataHeaderARM {
+        self.value
+    }
+}
+
+impl ops::Deref for ShaderInstrumentationMetricDataHeaderARMBuilder {
+    type Target = ShaderInstrumentationMetricDataHeaderARM;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for ShaderInstrumentationMetricDataHeaderARMBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for ShaderInstrumentationMetricDataHeaderARMBuilder {
+    type Target = ShaderInstrumentationMetricDataHeaderARM;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for ShaderInstrumentationMetricDescriptionARM {
+    type Target = ShaderInstrumentationMetricDescriptionARM;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for ShaderInstrumentationMetricDescriptionARM {
+    type Builder = ShaderInstrumentationMetricDescriptionARMBuilder;
+}
+
+/// A builder for a [`ShaderInstrumentationMetricDescriptionARM`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct ShaderInstrumentationMetricDescriptionARMBuilder {
+    value: ShaderInstrumentationMetricDescriptionARM,
+}
+
+impl ShaderInstrumentationMetricDescriptionARMBuilder {
+    #[inline]
+    pub fn name(mut self, name: impl Into<StringArray<MAX_DESCRIPTION_SIZE>>) -> Self {
+        self.value.name = name.into();
+        self
+    }
+
+    #[inline]
+    pub fn description(
+        mut self,
+        description: impl Into<StringArray<MAX_DESCRIPTION_SIZE>>,
+    ) -> Self {
+        self.value.description = description.into();
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> ShaderInstrumentationMetricDescriptionARM {
+        self.value
+    }
+}
+
+impl ops::Deref for ShaderInstrumentationMetricDescriptionARMBuilder {
+    type Target = ShaderInstrumentationMetricDescriptionARM;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for ShaderInstrumentationMetricDescriptionARMBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for ShaderInstrumentationMetricDescriptionARMBuilder {
+    type Target = ShaderInstrumentationMetricDescriptionARM;
 
     #[inline]
     fn into(self) -> Self::Target {

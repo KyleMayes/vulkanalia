@@ -724,6 +724,143 @@ pub trait ArmPerformanceCountersByRegionExtensionInstanceCommands: InstanceV1_0 
 
 impl<C: InstanceV1_0 + ?Sized> ArmPerformanceCountersByRegionExtensionInstanceCommands for C {}
 
+/// The device-level commands added by [`ARM_SHADER_INSTRUMENTATION_EXTENSION`].
+pub trait ArmShaderInstrumentationExtensionDeviceCommands: DeviceV1_0 {
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkClearShaderInstrumentationMetricsARM.html>
+    #[inline]
+    unsafe fn clear_shader_instrumentation_metrics_arm(
+        &self,
+        instrumentation: ShaderInstrumentationARM,
+    ) {
+        let __result = (self.commands().clear_shader_instrumentation_metrics_arm)(
+            self.handle(),
+            instrumentation,
+        );
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdBeginShaderInstrumentationARM.html>
+    #[inline]
+    unsafe fn cmd_begin_shader_instrumentation_arm(
+        &self,
+        command_buffer: CommandBuffer,
+        instrumentation: ShaderInstrumentationARM,
+    ) {
+        let __result =
+            (self.commands().cmd_begin_shader_instrumentation_arm)(command_buffer, instrumentation);
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdEndShaderInstrumentationARM.html>
+    #[inline]
+    unsafe fn cmd_end_shader_instrumentation_arm(&self, command_buffer: CommandBuffer) {
+        let __result = (self.commands().cmd_end_shader_instrumentation_arm)(command_buffer);
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCreateShaderInstrumentationARM.html>
+    #[inline]
+    unsafe fn create_shader_instrumentation_arm(
+        &self,
+        create_info: &ShaderInstrumentationCreateInfoARM,
+        allocator: Option<&AllocationCallbacks>,
+    ) -> crate::VkResult<ShaderInstrumentationARM> {
+        let mut instrumentation = MaybeUninit::<ShaderInstrumentationARM>::uninit();
+
+        let __result = (self.commands().create_shader_instrumentation_arm)(
+            self.handle(),
+            create_info,
+            allocator.map_or(ptr::null(), |v| v),
+            instrumentation.as_mut_ptr(),
+        );
+
+        if __result == Result::SUCCESS {
+            Ok(instrumentation.assume_init())
+        } else {
+            Err(__result.into())
+        }
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkDestroyShaderInstrumentationARM.html>
+    #[inline]
+    unsafe fn destroy_shader_instrumentation_arm(
+        &self,
+        instrumentation: ShaderInstrumentationARM,
+        allocator: Option<&AllocationCallbacks>,
+    ) {
+        let __result = (self.commands().destroy_shader_instrumentation_arm)(
+            self.handle(),
+            instrumentation,
+            allocator.map_or(ptr::null(), |v| v),
+        );
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetShaderInstrumentationValuesARM.html>
+    #[inline]
+    unsafe fn get_shader_instrumentation_values_arm(
+        &self,
+        instrumentation: ShaderInstrumentationARM,
+        metric_values: *mut c_void,
+        flags: ShaderInstrumentationValuesFlagsARM,
+    ) -> crate::VkResult<u32> {
+        let mut metric_block_count = MaybeUninit::<u32>::uninit();
+
+        let __result = (self.commands().get_shader_instrumentation_values_arm)(
+            self.handle(),
+            instrumentation,
+            metric_block_count.as_mut_ptr(),
+            metric_values,
+            flags,
+        );
+
+        if __result == Result::SUCCESS {
+            Ok(metric_block_count.assume_init())
+        } else {
+            Err(__result.into())
+        }
+    }
+}
+
+impl<C: DeviceV1_0 + ?Sized> ArmShaderInstrumentationExtensionDeviceCommands for C {}
+
+/// The instance-level commands added by [`ARM_SHADER_INSTRUMENTATION_EXTENSION`].
+pub trait ArmShaderInstrumentationExtensionInstanceCommands: InstanceV1_0 {
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkEnumeratePhysicalDeviceShaderInstrumentationMetricsARM.html>
+    #[inline]
+    unsafe fn enumerate_physical_device_shader_instrumentation_metrics_arm(
+        &self,
+        physical_device: PhysicalDevice,
+    ) -> crate::VkResult<Vec<ShaderInstrumentationMetricDescriptionARM>> {
+        let mut description_count = 0;
+
+        (self
+            .commands()
+            .enumerate_physical_device_shader_instrumentation_metrics_arm)(
+            physical_device,
+            &mut description_count,
+            ptr::null_mut(),
+        );
+
+        let mut descriptions = Vec::with_capacity(description_count as usize);
+
+        let __result = (self
+            .commands()
+            .enumerate_physical_device_shader_instrumentation_metrics_arm)(
+            physical_device,
+            &mut description_count,
+            descriptions.as_mut_ptr(),
+        );
+
+        debug_assert!(descriptions.capacity() >= description_count as usize);
+        descriptions.set_len(description_count as usize);
+
+        if __result == Result::SUCCESS {
+            Ok(descriptions)
+        } else {
+            Err(__result.into())
+        }
+    }
+}
+
+impl<C: InstanceV1_0 + ?Sized> ArmShaderInstrumentationExtensionInstanceCommands for C {}
+
 /// The device-level commands added by [`ARM_TENSORS_EXTENSION`].
 pub trait ArmTensorsExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkBindTensorMemoryARM.html>

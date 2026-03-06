@@ -4152,6 +4152,7 @@ impl ObjectType {
     pub const EXTERNAL_COMPUTE_QUEUE_NV: Self = Self(1000556000);
     pub const INDIRECT_COMMANDS_LAYOUT_EXT: Self = Self(1000572000);
     pub const INDIRECT_EXECUTION_SET_EXT: Self = Self(1000572001);
+    pub const SHADER_INSTRUMENTATION_ARM: Self = Self(1000607000);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -4228,6 +4229,7 @@ impl fmt::Debug for ObjectType {
             1000556000 => write!(f, "EXTERNAL_COMPUTE_QUEUE_NV"),
             1000572000 => write!(f, "INDIRECT_COMMANDS_LAYOUT_EXT"),
             1000572001 => write!(f, "INDIRECT_EXECUTION_SET_EXT"),
+            1000607000 => write!(f, "SHADER_INSTRUMENTATION_ARM"),
             _ => self.0.fmt(f),
         }
     }
@@ -7498,6 +7500,10 @@ impl StructureType {
     pub const PERFORMANCE_COUNTER_ARM: Self = Self(1000605002);
     pub const PERFORMANCE_COUNTER_DESCRIPTION_ARM: Self = Self(1000605003);
     pub const RENDER_PASS_PERFORMANCE_COUNTERS_BY_REGION_BEGIN_INFO_ARM: Self = Self(1000605004);
+    pub const PHYSICAL_DEVICE_SHADER_INSTRUMENTATION_FEATURES_ARM: Self = Self(1000607000);
+    pub const PHYSICAL_DEVICE_SHADER_INSTRUMENTATION_PROPERTIES_ARM: Self = Self(1000607001);
+    pub const SHADER_INSTRUMENTATION_CREATE_INFO_ARM: Self = Self(1000607002);
+    pub const SHADER_INSTRUMENTATION_METRIC_DESCRIPTION_ARM: Self = Self(1000607003);
     pub const PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_ROBUSTNESS_FEATURES_EXT: Self = Self(1000608000);
     pub const PHYSICAL_DEVICE_FORMAT_PACK_FEATURES_ARM: Self = Self(1000609000);
     pub const PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_LAYERED_FEATURES_VALVE: Self = Self(1000611000);
@@ -8972,6 +8978,10 @@ impl fmt::Debug for StructureType {
                 f,
                 "RENDER_PASS_PERFORMANCE_COUNTERS_BY_REGION_BEGIN_INFO_ARM"
             ),
+            1000607000 => write!(f, "PHYSICAL_DEVICE_SHADER_INSTRUMENTATION_FEATURES_ARM"),
+            1000607001 => write!(f, "PHYSICAL_DEVICE_SHADER_INSTRUMENTATION_PROPERTIES_ARM"),
+            1000607002 => write!(f, "SHADER_INSTRUMENTATION_CREATE_INFO_ARM"),
+            1000607003 => write!(f, "SHADER_INSTRUMENTATION_METRIC_DESCRIPTION_ARM"),
             1000608000 => write!(
                 f,
                 "PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_ROBUSTNESS_FEATURES_EXT"
