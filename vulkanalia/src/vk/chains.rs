@@ -92,6 +92,20 @@ unsafe impl InputChainStruct for AccelerationStructureCaptureDescriptorDataInfoE
     }
 }
 
+unsafe impl InputChainStruct for AccelerationStructureCreateInfo2KHR {
+    const TYPE: StructureType = StructureType::ACCELERATION_STRUCTURE_CREATE_INFO_2_KHR;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
 unsafe impl InputChainStruct for AccelerationStructureCreateInfoKHR {
     const TYPE: StructureType = StructureType::ACCELERATION_STRUCTURE_CREATE_INFO_KHR;
 
@@ -847,6 +861,20 @@ unsafe impl InputChainStruct for BindImagePlaneMemoryInfo {
     }
 }
 
+unsafe impl InputChainStruct for BindIndexBuffer3InfoKHR {
+    const TYPE: StructureType = StructureType::BIND_INDEX_BUFFER_3_INFO_KHR;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
 unsafe impl InputChainStruct for BindMemoryStatus {
     const TYPE: StructureType = StructureType::BIND_MEMORY_STATUS;
 
@@ -877,6 +905,34 @@ unsafe impl InputChainStruct for BindSparseInfo {
 
 unsafe impl InputChainStruct for BindTensorMemoryInfoARM {
     const TYPE: StructureType = StructureType::BIND_TENSOR_MEMORY_INFO_ARM;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl InputChainStruct for BindTransformFeedbackBuffer2InfoEXT {
+    const TYPE: StructureType = StructureType::BIND_TRANSFORM_FEEDBACK_BUFFER_2_INFO_EXT;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl InputChainStruct for BindVertexBuffer3InfoKHR {
+    const TYPE: StructureType = StructureType::BIND_VERTEX_BUFFER_3_INFO_KHR;
 
     #[inline]
     fn s_type(&self) -> StructureType {
@@ -1558,6 +1614,20 @@ unsafe impl InputChainStruct for ComputePipelineIndirectBufferInfoNV {
     }
 }
 
+unsafe impl InputChainStruct for ConditionalRenderingBeginInfo2EXT {
+    const TYPE: StructureType = StructureType::CONDITIONAL_RENDERING_BEGIN_INFO_2_EXT;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
 unsafe impl InputChainStruct for ConditionalRenderingBeginInfoEXT {
     const TYPE: StructureType = StructureType::CONDITIONAL_RENDERING_BEGIN_INFO_EXT;
 
@@ -1742,6 +1812,34 @@ unsafe impl InputChainStruct for CopyCommandTransformInfoQCOM {
 
 unsafe impl InputChainStruct for CopyDescriptorSet {
     const TYPE: StructureType = StructureType::COPY_DESCRIPTOR_SET;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl InputChainStruct for CopyDeviceMemoryImageInfoKHR {
+    const TYPE: StructureType = StructureType::COPY_DEVICE_MEMORY_IMAGE_INFO_KHR;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl InputChainStruct for CopyDeviceMemoryInfoKHR {
+    const TYPE: StructureType = StructureType::COPY_DEVICE_MEMORY_INFO_KHR;
 
     #[inline]
     fn s_type(&self) -> StructureType {
@@ -3070,6 +3168,34 @@ unsafe impl InputChainStruct for DeviceImageSubresourceInfo {
     }
 }
 
+unsafe impl InputChainStruct for DeviceMemoryCopyKHR {
+    const TYPE: StructureType = StructureType::DEVICE_MEMORY_COPY_KHR;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl InputChainStruct for DeviceMemoryImageCopyKHR {
+    const TYPE: StructureType = StructureType::DEVICE_MEMORY_IMAGE_COPY_KHR;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
 unsafe impl InputChainStruct for DeviceMemoryOpaqueCaptureAddressInfo {
     const TYPE: StructureType = StructureType::DEVICE_MEMORY_OPAQUE_CAPTURE_ADDRESS_INFO;
 
@@ -3276,6 +3402,20 @@ unsafe impl InputChainStruct for DirectDriverLoadingListLUNARG {
 
 unsafe impl InputChainStruct for DirectFBSurfaceCreateInfoEXT {
     const TYPE: StructureType = StructureType::DIRECTFB_SURFACE_CREATE_INFO_EXT;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl InputChainStruct for DispatchIndirect2InfoKHR {
+    const TYPE: StructureType = StructureType::DISPATCH_INDIRECT_2_INFO_KHR;
 
     #[inline]
     fn s_type(&self) -> StructureType {
@@ -3514,6 +3654,34 @@ unsafe impl InputChainStruct for DisplaySurfaceCreateInfoKHR {
 
 unsafe impl InputChainStruct for DisplaySurfaceStereoCreateInfoNV {
     const TYPE: StructureType = StructureType::DISPLAY_SURFACE_STEREO_CREATE_INFO_NV;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl InputChainStruct for DrawIndirect2InfoKHR {
+    const TYPE: StructureType = StructureType::DRAW_INDIRECT_2_INFO_KHR;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl InputChainStruct for DrawIndirectCount2InfoKHR {
+    const TYPE: StructureType = StructureType::DRAW_INDIRECT_COUNT_2_INFO_KHR;
 
     #[inline]
     fn s_type(&self) -> StructureType {
@@ -6088,6 +6256,20 @@ unsafe impl InputChainStruct for MemoryMapPlacedInfoEXT {
     }
 }
 
+unsafe impl InputChainStruct for MemoryMarkerInfoAMD {
+    const TYPE: StructureType = StructureType::MEMORY_MARKER_INFO_AMD;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
 unsafe impl InputChainStruct for MemoryMetalHandlePropertiesEXT {
     const TYPE: StructureType = StructureType::MEMORY_METAL_HANDLE_PROPERTIES_EXT;
 
@@ -6125,6 +6307,34 @@ unsafe impl InputChainStruct for MemoryOpaqueCaptureAddressAllocateInfo {
 
 unsafe impl InputChainStruct for MemoryPriorityAllocateInfoEXT {
     const TYPE: StructureType = StructureType::MEMORY_PRIORITY_ALLOCATE_INFO_EXT;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl InputChainStruct for MemoryRangeBarrierKHR {
+    const TYPE: StructureType = StructureType::MEMORY_RANGE_BARRIER_KHR;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl InputChainStruct for MemoryRangeBarriersInfoKHR {
+    const TYPE: StructureType = StructureType::MEMORY_RANGE_BARRIERS_INFO_KHR;
 
     #[inline]
     fn s_type(&self) -> StructureType {
@@ -8417,6 +8627,27 @@ unsafe impl InputChainStruct for PhysicalDeviceDescriptorSetHostMappingFeaturesV
 }
 
 unsafe impl OutputChainStruct for PhysicalDeviceDescriptorSetHostMappingFeaturesVALVE {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
+        self.next
+    }
+}
+
+unsafe impl InputChainStruct for PhysicalDeviceDeviceAddressCommandsFeaturesKHR {
+    const TYPE: StructureType = StructureType::PHYSICAL_DEVICE_DEVICE_ADDRESS_COMMANDS_FEATURES_KHR;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl OutputChainStruct for PhysicalDeviceDeviceAddressCommandsFeaturesKHR {
     #[inline]
     fn next_mut(&self) -> *mut c_void {
         self.next
@@ -13370,6 +13601,49 @@ unsafe impl OutputChainStruct for PhysicalDeviceShaderImageFootprintFeaturesNV {
     }
 }
 
+unsafe impl InputChainStruct for PhysicalDeviceShaderInstrumentationFeaturesARM {
+    const TYPE: StructureType = StructureType::PHYSICAL_DEVICE_SHADER_INSTRUMENTATION_FEATURES_ARM;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl OutputChainStruct for PhysicalDeviceShaderInstrumentationFeaturesARM {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
+        self.next
+    }
+}
+
+unsafe impl InputChainStruct for PhysicalDeviceShaderInstrumentationPropertiesARM {
+    const TYPE: StructureType =
+        StructureType::PHYSICAL_DEVICE_SHADER_INSTRUMENTATION_PROPERTIES_ARM;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl OutputChainStruct for PhysicalDeviceShaderInstrumentationPropertiesARM {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
+        self.next
+    }
+}
+
 unsafe impl InputChainStruct for PhysicalDeviceShaderIntegerDotProductFeatures {
     const TYPE: StructureType = StructureType::PHYSICAL_DEVICE_SHADER_INTEGER_DOT_PRODUCT_FEATURES;
 
@@ -17616,6 +17890,48 @@ unsafe impl InputChainStruct for ShaderDescriptorSetAndBindingMappingInfoEXT {
 
     #[inline]
     fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl InputChainStruct for ShaderInstrumentationCreateInfoARM {
+    const TYPE: StructureType = StructureType::SHADER_INSTRUMENTATION_CREATE_INFO_ARM;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl OutputChainStruct for ShaderInstrumentationCreateInfoARM {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
+        self.next
+    }
+}
+
+unsafe impl InputChainStruct for ShaderInstrumentationMetricDescriptionARM {
+    const TYPE: StructureType = StructureType::SHADER_INSTRUMENTATION_METRIC_DESCRIPTION_ARM;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl OutputChainStruct for ShaderInstrumentationMetricDescriptionARM {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
         self.next
     }
 }
