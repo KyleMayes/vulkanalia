@@ -161,6 +161,20 @@ bitflags! {
 }
 
 bitflags! {
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAddressCommandFlagsKHR.html>
+    #[repr(transparent)]
+    #[derive(Default)]
+    pub struct AddressCommandFlagsKHR: Flags {
+        const PROTECTED = 1;
+        const FULLY_BOUND = 1 << 1;
+        const STORAGE_BUFFER_USAGE = 1 << 2;
+        const UNKNOWN_STORAGE_BUFFER_USAGE = 1 << 3;
+        const TRANSFORM_FEEDBACK_BUFFER_USAGE = 1 << 4;
+        const UNKNOWN_TRANSFORM_FEEDBACK_BUFFER_USAGE = 1 << 5;
+    }
+}
+
+bitflags! {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAddressCopyFlagsKHR.html>
     #[repr(transparent)]
     #[derive(Default)]
@@ -1558,6 +1572,7 @@ bitflags! {
         const DESCRIPTOR_HEAP_EXT = 1 << 36;
         const DISALLOW_OPACITY_MICROMAP_ARM = 1 << 37;
         const INDIRECT_BINDABLE_EXT = 1 << 38;
+        const INSTRUMENT_SHADERS_ARM = 1 << 39;
         const PER_LAYER_FRAGMENT_DENSITY_VALVE = 1 << 40;
         const _64_BIT_INDEXING_EXT = 1 << 43;
     }
@@ -2047,8 +2062,16 @@ bitflags! {
         const FRAGMENT_DENSITY_MAP_ATTACHMENT = 1 << 6;
         const INDIRECT_BINDABLE = 1 << 7;
         const DESCRIPTOR_HEAP = 1 << 10;
+        const INSTRUMENT_SHADER_ARM = 1 << 11;
         const _64_BIT_INDEXING = 1 << 15;
     }
+}
+
+bitflags! {
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkShaderInstrumentationValuesFlagsARM.html>
+    #[repr(transparent)]
+    #[derive(Default)]
+    pub struct ShaderInstrumentationValuesFlagsARM: Flags { }
 }
 
 bitflags! {

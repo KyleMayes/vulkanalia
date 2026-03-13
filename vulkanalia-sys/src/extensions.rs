@@ -651,6 +651,22 @@ pub const ARM_SHADER_CORE_PROPERTIES_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_ARM_shader_instrumentation.html>
+#[allow(deprecated)]
+pub const ARM_SHADER_INSTRUMENTATION_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_ARM_shader_instrumentation"),
+    number: 608,
+    type_: "device",
+    author: "ARM",
+    contact: "Jan-Harald Fredriksen @janharaldfredriksen-arm",
+    platform: None,
+    required_extensions: None,
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_ARM_tensors.html>
 #[allow(deprecated)]
 pub const ARM_TENSORS_EXTENSION: Extension = Extension {
@@ -3619,6 +3635,22 @@ pub const KHR_DESCRIPTOR_UPDATE_TEMPLATE_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_VERSION_1_1"),
 };
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_device_address_commands.html>
+#[allow(deprecated)]
+pub const KHR_DEVICE_ADDRESS_COMMANDS_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_KHR_device_address_commands"),
+    number: 319,
+    type_: "device",
+    author: "KHR",
+    contact: "Tobias Hector @tobski",
+    platform: None,
+    required_extensions: None,
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_device_group.html>
 #[allow(deprecated)]
 pub const KHR_DEVICE_GROUP_EXTENSION: Extension = Extension {
@@ -6565,14 +6597,6 @@ pub const NV_PRESENT_BARRIER_EXTENSION: Extension = Extension {
 };
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_present_metering.html>
-///
-/// ## WARNING
-///
-/// This is a
-/// [provisional extension](https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/provisional-headers.html).
-/// Provisional extensions are not guaranteed to be backwards compatible and are
-/// not intended to be used in production applications.
-#[cfg(feature = "provisional")]
 #[allow(deprecated)]
 pub const NV_PRESENT_METERING_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_NV_present_metering"),
@@ -6580,7 +6604,7 @@ pub const NV_PRESENT_METERING_EXTENSION: Extension = Extension {
     type_: "device",
     author: "NV",
     contact: "Charles Hansen @chansen",
-    platform: Some("provisional"),
+    platform: None,
     required_extensions: None,
     required_version: None,
     deprecated_by: None,
