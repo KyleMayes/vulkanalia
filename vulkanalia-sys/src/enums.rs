@@ -1929,12 +1929,12 @@ impl fmt::Debug for DeviceEventTypeEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceFaultAddressTypeEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceFaultAddressTypeKHR.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
-pub struct DeviceFaultAddressTypeEXT(i32);
+pub struct DeviceFaultAddressTypeKHR(i32);
 
-impl DeviceFaultAddressTypeEXT {
+impl DeviceFaultAddressTypeKHR {
     pub const NONE: Self = Self(0);
     pub const READ_INVALID: Self = Self(1);
     pub const WRITE_INVALID: Self = Self(2);
@@ -1956,7 +1956,7 @@ impl DeviceFaultAddressTypeEXT {
     }
 }
 
-impl fmt::Debug for DeviceFaultAddressTypeEXT {
+impl fmt::Debug for DeviceFaultAddressTypeKHR {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self.0 {
             0 => write!(f, "NONE"),
@@ -1971,12 +1971,12 @@ impl fmt::Debug for DeviceFaultAddressTypeEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceFaultVendorBinaryHeaderVersionEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceFaultVendorBinaryHeaderVersionKHR.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
-pub struct DeviceFaultVendorBinaryHeaderVersionEXT(i32);
+pub struct DeviceFaultVendorBinaryHeaderVersionKHR(i32);
 
-impl DeviceFaultVendorBinaryHeaderVersionEXT {
+impl DeviceFaultVendorBinaryHeaderVersionKHR {
     pub const ONE: Self = Self(1);
 
     /// Constructs an instance of this enum with the supplied underlying value.
@@ -1992,7 +1992,7 @@ impl DeviceFaultVendorBinaryHeaderVersionEXT {
     }
 }
 
-impl fmt::Debug for DeviceFaultVendorBinaryHeaderVersionEXT {
+impl fmt::Debug for DeviceFaultVendorBinaryHeaderVersionKHR {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self.0 {
             1 => write!(f, "ONE"),
@@ -4152,6 +4152,7 @@ impl ObjectType {
     pub const EXTERNAL_COMPUTE_QUEUE_NV: Self = Self(1000556000);
     pub const INDIRECT_COMMANDS_LAYOUT_EXT: Self = Self(1000572000);
     pub const INDIRECT_EXECUTION_SET_EXT: Self = Self(1000572001);
+    pub const SHADER_INSTRUMENTATION_ARM: Self = Self(1000607000);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -4228,6 +4229,7 @@ impl fmt::Debug for ObjectType {
             1000556000 => write!(f, "EXTERNAL_COMPUTE_QUEUE_NV"),
             1000572000 => write!(f, "INDIRECT_COMMANDS_LAYOUT_EXT"),
             1000572001 => write!(f, "INDIRECT_EXECUTION_SET_EXT"),
+            1000607000 => write!(f, "SHADER_INSTRUMENTATION_ARM"),
             _ => self.0.fmt(f),
         }
     }
@@ -6903,6 +6905,10 @@ impl StructureType {
     pub const RENDERING_FRAGMENT_SHADING_RATE_ATTACHMENT_INFO_KHR: Self = Self(1000044006);
     pub const PHYSICAL_DEVICE_SHADER_CORE_PROPERTIES_2_AMD: Self = Self(1000227000);
     pub const PHYSICAL_DEVICE_COHERENT_MEMORY_FEATURES_AMD: Self = Self(1000229000);
+    pub const PHYSICAL_DEVICE_SHADER_CONSTANT_DATA_FEATURES_KHR: Self = Self(1000231000);
+    pub const PHYSICAL_DEVICE_SHADER_ABORT_FEATURES_KHR: Self = Self(1000233000);
+    pub const DEVICE_FAULT_SHADER_ABORT_MESSAGE_INFO_KHR: Self = Self(1000233001);
+    pub const PHYSICAL_DEVICE_SHADER_ABORT_PROPERTIES_KHR: Self = Self(1000233002);
     pub const PHYSICAL_DEVICE_SHADER_IMAGE_ATOMIC_INT64_FEATURES_EXT: Self = Self(1000234000);
     pub const PHYSICAL_DEVICE_SHADER_QUAD_CONTROL_FEATURES_KHR: Self = Self(1000235000);
     pub const PHYSICAL_DEVICE_MEMORY_BUDGET_PROPERTIES_EXT: Self = Self(1000237000);
@@ -7023,6 +7029,22 @@ impl StructureType {
     pub const DESCRIPTOR_BUFFER_BINDING_INFO_EXT: Self = Self(1000316011);
     pub const DESCRIPTOR_BUFFER_BINDING_PUSH_DESCRIPTOR_BUFFER_HANDLE_EXT: Self = Self(1000316012);
     pub const ACCELERATION_STRUCTURE_CAPTURE_DESCRIPTOR_DATA_INFO_EXT: Self = Self(1000316009);
+    pub const DEVICE_MEMORY_COPY_KHR: Self = Self(1000318000);
+    pub const COPY_DEVICE_MEMORY_INFO_KHR: Self = Self(1000318001);
+    pub const DEVICE_MEMORY_IMAGE_COPY_KHR: Self = Self(1000318002);
+    pub const COPY_DEVICE_MEMORY_IMAGE_INFO_KHR: Self = Self(1000318003);
+    pub const MEMORY_RANGE_BARRIERS_INFO_KHR: Self = Self(1000318004);
+    pub const MEMORY_RANGE_BARRIER_KHR: Self = Self(1000318005);
+    pub const PHYSICAL_DEVICE_DEVICE_ADDRESS_COMMANDS_FEATURES_KHR: Self = Self(1000318006);
+    pub const BIND_INDEX_BUFFER_3_INFO_KHR: Self = Self(1000318007);
+    pub const BIND_VERTEX_BUFFER_3_INFO_KHR: Self = Self(1000318008);
+    pub const DRAW_INDIRECT_2_INFO_KHR: Self = Self(1000318009);
+    pub const DRAW_INDIRECT_COUNT_2_INFO_KHR: Self = Self(1000318010);
+    pub const DISPATCH_INDIRECT_2_INFO_KHR: Self = Self(1000318011);
+    pub const CONDITIONAL_RENDERING_BEGIN_INFO_2_EXT: Self = Self(1000318012);
+    pub const BIND_TRANSFORM_FEEDBACK_BUFFER_2_INFO_EXT: Self = Self(1000318013);
+    pub const MEMORY_MARKER_INFO_AMD: Self = Self(1000318014);
+    pub const ACCELERATION_STRUCTURE_CREATE_INFO_2_KHR: Self = Self(1000318015);
     pub const PHYSICAL_DEVICE_GRAPHICS_PIPELINE_LIBRARY_FEATURES_EXT: Self = Self(1000320000);
     pub const PHYSICAL_DEVICE_GRAPHICS_PIPELINE_LIBRARY_PROPERTIES_EXT: Self = Self(1000320001);
     pub const GRAPHICS_PIPELINE_LIBRARY_CREATE_INFO_EXT: Self = Self(1000320002);
@@ -7460,6 +7482,10 @@ impl StructureType {
     pub const INDIRECT_EXECUTION_SET_SHADER_LAYOUT_INFO_EXT: Self = Self(1000572012);
     pub const GENERATED_COMMANDS_PIPELINE_INFO_EXT: Self = Self(1000572013);
     pub const GENERATED_COMMANDS_SHADER_INFO_EXT: Self = Self(1000572014);
+    pub const PHYSICAL_DEVICE_FAULT_FEATURES_KHR: Self = Self(1000573000);
+    pub const PHYSICAL_DEVICE_FAULT_PROPERTIES_KHR: Self = Self(1000573001);
+    pub const DEVICE_FAULT_INFO_KHR: Self = Self(1000573002);
+    pub const DEVICE_FAULT_DEBUG_INFO_KHR: Self = Self(1000573003);
     pub const PHYSICAL_DEVICE_MAINTENANCE_8_FEATURES_KHR: Self = Self(1000574000);
     pub const MEMORY_BARRIER_ACCESS_FLAGS_3_KHR: Self = Self(1000574002);
     pub const PHYSICAL_DEVICE_IMAGE_ALIGNMENT_CONTROL_FEATURES_MESA: Self = Self(1000575000);
@@ -7498,6 +7524,10 @@ impl StructureType {
     pub const PERFORMANCE_COUNTER_ARM: Self = Self(1000605002);
     pub const PERFORMANCE_COUNTER_DESCRIPTION_ARM: Self = Self(1000605003);
     pub const RENDER_PASS_PERFORMANCE_COUNTERS_BY_REGION_BEGIN_INFO_ARM: Self = Self(1000605004);
+    pub const PHYSICAL_DEVICE_SHADER_INSTRUMENTATION_FEATURES_ARM: Self = Self(1000607000);
+    pub const PHYSICAL_DEVICE_SHADER_INSTRUMENTATION_PROPERTIES_ARM: Self = Self(1000607001);
+    pub const SHADER_INSTRUMENTATION_CREATE_INFO_ARM: Self = Self(1000607002);
+    pub const SHADER_INSTRUMENTATION_METRIC_DESCRIPTION_ARM: Self = Self(1000607003);
     pub const PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_ROBUSTNESS_FEATURES_EXT: Self = Self(1000608000);
     pub const PHYSICAL_DEVICE_FORMAT_PACK_FEATURES_ARM: Self = Self(1000609000);
     pub const PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_LAYERED_FEATURES_VALVE: Self = Self(1000611000);
@@ -8178,6 +8208,10 @@ impl fmt::Debug for StructureType {
             1000044006 => write!(f, "RENDERING_FRAGMENT_SHADING_RATE_ATTACHMENT_INFO_KHR"),
             1000227000 => write!(f, "PHYSICAL_DEVICE_SHADER_CORE_PROPERTIES_2_AMD"),
             1000229000 => write!(f, "PHYSICAL_DEVICE_COHERENT_MEMORY_FEATURES_AMD"),
+            1000231000 => write!(f, "PHYSICAL_DEVICE_SHADER_CONSTANT_DATA_FEATURES_KHR"),
+            1000233000 => write!(f, "PHYSICAL_DEVICE_SHADER_ABORT_FEATURES_KHR"),
+            1000233001 => write!(f, "DEVICE_FAULT_SHADER_ABORT_MESSAGE_INFO_KHR"),
+            1000233002 => write!(f, "PHYSICAL_DEVICE_SHADER_ABORT_PROPERTIES_KHR"),
             1000234000 => write!(f, "PHYSICAL_DEVICE_SHADER_IMAGE_ATOMIC_INT64_FEATURES_EXT"),
             1000235000 => write!(f, "PHYSICAL_DEVICE_SHADER_QUAD_CONTROL_FEATURES_KHR"),
             1000237000 => write!(f, "PHYSICAL_DEVICE_MEMORY_BUDGET_PROPERTIES_EXT"),
@@ -8317,6 +8351,22 @@ impl fmt::Debug for StructureType {
                 "DESCRIPTOR_BUFFER_BINDING_PUSH_DESCRIPTOR_BUFFER_HANDLE_EXT"
             ),
             1000316009 => write!(f, "ACCELERATION_STRUCTURE_CAPTURE_DESCRIPTOR_DATA_INFO_EXT"),
+            1000318000 => write!(f, "DEVICE_MEMORY_COPY_KHR"),
+            1000318001 => write!(f, "COPY_DEVICE_MEMORY_INFO_KHR"),
+            1000318002 => write!(f, "DEVICE_MEMORY_IMAGE_COPY_KHR"),
+            1000318003 => write!(f, "COPY_DEVICE_MEMORY_IMAGE_INFO_KHR"),
+            1000318004 => write!(f, "MEMORY_RANGE_BARRIERS_INFO_KHR"),
+            1000318005 => write!(f, "MEMORY_RANGE_BARRIER_KHR"),
+            1000318006 => write!(f, "PHYSICAL_DEVICE_DEVICE_ADDRESS_COMMANDS_FEATURES_KHR"),
+            1000318007 => write!(f, "BIND_INDEX_BUFFER_3_INFO_KHR"),
+            1000318008 => write!(f, "BIND_VERTEX_BUFFER_3_INFO_KHR"),
+            1000318009 => write!(f, "DRAW_INDIRECT_2_INFO_KHR"),
+            1000318010 => write!(f, "DRAW_INDIRECT_COUNT_2_INFO_KHR"),
+            1000318011 => write!(f, "DISPATCH_INDIRECT_2_INFO_KHR"),
+            1000318012 => write!(f, "CONDITIONAL_RENDERING_BEGIN_INFO_2_EXT"),
+            1000318013 => write!(f, "BIND_TRANSFORM_FEEDBACK_BUFFER_2_INFO_EXT"),
+            1000318014 => write!(f, "MEMORY_MARKER_INFO_AMD"),
+            1000318015 => write!(f, "ACCELERATION_STRUCTURE_CREATE_INFO_2_KHR"),
             1000320000 => write!(f, "PHYSICAL_DEVICE_GRAPHICS_PIPELINE_LIBRARY_FEATURES_EXT"),
             1000320001 => write!(
                 f,
@@ -8921,6 +8971,10 @@ impl fmt::Debug for StructureType {
             1000572012 => write!(f, "INDIRECT_EXECUTION_SET_SHADER_LAYOUT_INFO_EXT"),
             1000572013 => write!(f, "GENERATED_COMMANDS_PIPELINE_INFO_EXT"),
             1000572014 => write!(f, "GENERATED_COMMANDS_SHADER_INFO_EXT"),
+            1000573000 => write!(f, "PHYSICAL_DEVICE_FAULT_FEATURES_KHR"),
+            1000573001 => write!(f, "PHYSICAL_DEVICE_FAULT_PROPERTIES_KHR"),
+            1000573002 => write!(f, "DEVICE_FAULT_INFO_KHR"),
+            1000573003 => write!(f, "DEVICE_FAULT_DEBUG_INFO_KHR"),
             1000574000 => write!(f, "PHYSICAL_DEVICE_MAINTENANCE_8_FEATURES_KHR"),
             1000574002 => write!(f, "MEMORY_BARRIER_ACCESS_FLAGS_3_KHR"),
             1000575000 => write!(f, "PHYSICAL_DEVICE_IMAGE_ALIGNMENT_CONTROL_FEATURES_MESA"),
@@ -8972,6 +9026,10 @@ impl fmt::Debug for StructureType {
                 f,
                 "RENDER_PASS_PERFORMANCE_COUNTERS_BY_REGION_BEGIN_INFO_ARM"
             ),
+            1000607000 => write!(f, "PHYSICAL_DEVICE_SHADER_INSTRUMENTATION_FEATURES_ARM"),
+            1000607001 => write!(f, "PHYSICAL_DEVICE_SHADER_INSTRUMENTATION_PROPERTIES_ARM"),
+            1000607002 => write!(f, "SHADER_INSTRUMENTATION_CREATE_INFO_ARM"),
+            1000607003 => write!(f, "SHADER_INSTRUMENTATION_METRIC_DESCRIPTION_ARM"),
             1000608000 => write!(
                 f,
                 "PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_ROBUSTNESS_FEATURES_EXT"
@@ -9661,6 +9719,10 @@ pub type ComponentTypeNV = ComponentTypeKHR;
 pub type CopyAccelerationStructureModeNV = CopyAccelerationStructureModeKHR;
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDescriptorUpdateTemplateTypeKHR.html>
 pub type DescriptorUpdateTemplateTypeKHR = DescriptorUpdateTemplateType;
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceFaultAddressTypeEXT.html>
+pub type DeviceFaultAddressTypeEXT = DeviceFaultAddressTypeKHR;
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceFaultVendorBinaryHeaderVersionEXT.html>
+pub type DeviceFaultVendorBinaryHeaderVersionEXT = DeviceFaultVendorBinaryHeaderVersionKHR;
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDriverIdKHR.html>
 pub type DriverIdKHR = DriverId;
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkGeometryTypeNV.html>

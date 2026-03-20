@@ -139,6 +139,35 @@ impl Default for AccelerationStructureCaptureDescriptorDataInfoEXT {
 unsafe impl Send for AccelerationStructureCaptureDescriptorDataInfoEXT {}
 unsafe impl Sync for AccelerationStructureCaptureDescriptorDataInfoEXT {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAccelerationStructureCreateInfo2KHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct AccelerationStructureCreateInfo2KHR {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub create_flags: AccelerationStructureCreateFlagsKHR,
+    pub address_range: DeviceAddressRangeKHR,
+    pub address_flags: AddressCommandFlagsKHR,
+    pub type_: AccelerationStructureTypeKHR,
+}
+
+impl Default for AccelerationStructureCreateInfo2KHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::ACCELERATION_STRUCTURE_CREATE_INFO_2_KHR,
+            next: ptr::null(),
+            create_flags: AccelerationStructureCreateFlagsKHR::default(),
+            address_range: DeviceAddressRangeKHR::default(),
+            address_flags: AddressCommandFlagsKHR::default(),
+            type_: AccelerationStructureTypeKHR::default(),
+        }
+    }
+}
+
+unsafe impl Send for AccelerationStructureCreateInfo2KHR {}
+unsafe impl Sync for AccelerationStructureCreateInfo2KHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAccelerationStructureCreateInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -1725,6 +1754,33 @@ impl Default for BindImagePlaneMemoryInfo {
 unsafe impl Send for BindImagePlaneMemoryInfo {}
 unsafe impl Sync for BindImagePlaneMemoryInfo {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBindIndexBuffer3InfoKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct BindIndexBuffer3InfoKHR {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub address_range: DeviceAddressRangeKHR,
+    pub address_flags: AddressCommandFlagsKHR,
+    pub index_type: IndexType,
+}
+
+impl Default for BindIndexBuffer3InfoKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::BIND_INDEX_BUFFER_3_INFO_KHR,
+            next: ptr::null(),
+            address_range: DeviceAddressRangeKHR::default(),
+            address_flags: AddressCommandFlagsKHR::default(),
+            index_type: IndexType::default(),
+        }
+    }
+}
+
+unsafe impl Send for BindIndexBuffer3InfoKHR {}
+unsafe impl Sync for BindIndexBuffer3InfoKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBindIndexBufferIndirectCommandEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
@@ -1847,6 +1903,58 @@ impl Default for BindTensorMemoryInfoARM {
 
 unsafe impl Send for BindTensorMemoryInfoARM {}
 unsafe impl Sync for BindTensorMemoryInfoARM {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBindTransformFeedbackBuffer2InfoEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct BindTransformFeedbackBuffer2InfoEXT {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub address_range: DeviceAddressRangeKHR,
+    pub address_flags: AddressCommandFlagsKHR,
+}
+
+impl Default for BindTransformFeedbackBuffer2InfoEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::BIND_TRANSFORM_FEEDBACK_BUFFER_2_INFO_EXT,
+            next: ptr::null(),
+            address_range: DeviceAddressRangeKHR::default(),
+            address_flags: AddressCommandFlagsKHR::default(),
+        }
+    }
+}
+
+unsafe impl Send for BindTransformFeedbackBuffer2InfoEXT {}
+unsafe impl Sync for BindTransformFeedbackBuffer2InfoEXT {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBindVertexBuffer3InfoKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct BindVertexBuffer3InfoKHR {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub set_stride: Bool32,
+    pub address_range: StridedDeviceAddressRangeKHR,
+    pub address_flags: AddressCommandFlagsKHR,
+}
+
+impl Default for BindVertexBuffer3InfoKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::BIND_VERTEX_BUFFER_3_INFO_KHR,
+            next: ptr::null(),
+            set_stride: Bool32::default(),
+            address_range: StridedDeviceAddressRangeKHR::default(),
+            address_flags: AddressCommandFlagsKHR::default(),
+        }
+    }
+}
+
+unsafe impl Send for BindVertexBuffer3InfoKHR {}
+unsafe impl Sync for BindVertexBuffer3InfoKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBindVertexBufferIndirectCommandEXT.html>
 #[repr(C)]
@@ -3319,6 +3427,33 @@ impl Default for ComputePipelineIndirectBufferInfoNV {
 unsafe impl Send for ComputePipelineIndirectBufferInfoNV {}
 unsafe impl Sync for ComputePipelineIndirectBufferInfoNV {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkConditionalRenderingBeginInfo2EXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct ConditionalRenderingBeginInfo2EXT {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub address_range: DeviceAddressRangeKHR,
+    pub address_flags: AddressCommandFlagsKHR,
+    pub flags: ConditionalRenderingFlagsEXT,
+}
+
+impl Default for ConditionalRenderingBeginInfo2EXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::CONDITIONAL_RENDERING_BEGIN_INFO_2_EXT,
+            next: ptr::null(),
+            address_range: DeviceAddressRangeKHR::default(),
+            address_flags: AddressCommandFlagsKHR::default(),
+            flags: ConditionalRenderingFlagsEXT::default(),
+        }
+    }
+}
+
+unsafe impl Send for ConditionalRenderingBeginInfo2EXT {}
+unsafe impl Sync for ConditionalRenderingBeginInfo2EXT {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkConditionalRenderingBeginInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -3722,6 +3857,58 @@ impl Default for CopyDescriptorSet {
 
 unsafe impl Send for CopyDescriptorSet {}
 unsafe impl Sync for CopyDescriptorSet {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCopyDeviceMemoryImageInfoKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct CopyDeviceMemoryImageInfoKHR {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub image: Image,
+    pub region_count: u32,
+    pub regions: *const DeviceMemoryImageCopyKHR,
+}
+
+impl Default for CopyDeviceMemoryImageInfoKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::COPY_DEVICE_MEMORY_IMAGE_INFO_KHR,
+            next: ptr::null(),
+            image: Image::default(),
+            region_count: u32::default(),
+            regions: ptr::null(),
+        }
+    }
+}
+
+unsafe impl Send for CopyDeviceMemoryImageInfoKHR {}
+unsafe impl Sync for CopyDeviceMemoryImageInfoKHR {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCopyDeviceMemoryInfoKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct CopyDeviceMemoryInfoKHR {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub region_count: u32,
+    pub regions: *const DeviceMemoryCopyKHR,
+}
+
+impl Default for CopyDeviceMemoryInfoKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::COPY_DEVICE_MEMORY_INFO_KHR,
+            next: ptr::null(),
+            region_count: u32::default(),
+            regions: ptr::null(),
+        }
+    }
+}
+
+unsafe impl Send for CopyDeviceMemoryInfoKHR {}
+unsafe impl Sync for CopyDeviceMemoryInfoKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCopyImageInfo2.html>
 #[repr(C)]
@@ -6032,10 +6219,10 @@ impl Default for DeviceAddressBindingCallbackDataEXT {
 unsafe impl Send for DeviceAddressBindingCallbackDataEXT {}
 unsafe impl Sync for DeviceAddressBindingCallbackDataEXT {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceAddressRangeEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceAddressRangeKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
-pub struct DeviceAddressRangeEXT {
+pub struct DeviceAddressRangeKHR {
     pub address: DeviceAddress,
     pub size: DeviceSize,
 }
@@ -6188,11 +6375,11 @@ impl Default for DeviceEventInfoEXT {
 unsafe impl Send for DeviceEventInfoEXT {}
 unsafe impl Sync for DeviceEventInfoEXT {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceFaultAddressInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceFaultAddressInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
-pub struct DeviceFaultAddressInfoEXT {
-    pub address_type: DeviceFaultAddressTypeEXT,
+pub struct DeviceFaultAddressInfoKHR {
+    pub address_type: DeviceFaultAddressTypeKHR,
     pub reported_address: DeviceAddress,
     pub address_precision: DeviceSize,
 }
@@ -6224,6 +6411,31 @@ impl Default for DeviceFaultCountsEXT {
 unsafe impl Send for DeviceFaultCountsEXT {}
 unsafe impl Sync for DeviceFaultCountsEXT {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceFaultDebugInfoKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct DeviceFaultDebugInfoKHR {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub vendor_binary_size: u32,
+    pub vendor_binary_data: *mut c_void,
+}
+
+impl Default for DeviceFaultDebugInfoKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::DEVICE_FAULT_DEBUG_INFO_KHR,
+            next: ptr::null_mut(),
+            vendor_binary_size: u32::default(),
+            vendor_binary_data: ptr::null_mut(),
+        }
+    }
+}
+
+unsafe impl Send for DeviceFaultDebugInfoKHR {}
+unsafe impl Sync for DeviceFaultDebugInfoKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceFaultInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -6231,8 +6443,8 @@ pub struct DeviceFaultInfoEXT {
     pub s_type: StructureType,
     pub next: *mut c_void,
     pub description: StringArray<MAX_DESCRIPTION_SIZE>,
-    pub address_infos: *mut DeviceFaultAddressInfoEXT,
-    pub vendor_infos: *mut DeviceFaultVendorInfoEXT,
+    pub address_infos: *mut DeviceFaultAddressInfoKHR,
+    pub vendor_infos: *mut DeviceFaultVendorInfoKHR,
     pub vendor_binary_data: *mut c_void,
 }
 
@@ -6253,12 +6465,70 @@ impl Default for DeviceFaultInfoEXT {
 unsafe impl Send for DeviceFaultInfoEXT {}
 unsafe impl Sync for DeviceFaultInfoEXT {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceFaultVendorBinaryHeaderVersionOneEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceFaultInfoKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct DeviceFaultInfoKHR {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub flags: DeviceFaultFlagsKHR,
+    pub group_id: u64,
+    pub description: StringArray<MAX_DESCRIPTION_SIZE>,
+    pub fault_address_info: DeviceFaultAddressInfoKHR,
+    pub instruction_address_info: DeviceFaultAddressInfoKHR,
+    pub vendor_info: DeviceFaultVendorInfoKHR,
+}
+
+impl Default for DeviceFaultInfoKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::DEVICE_FAULT_INFO_KHR,
+            next: ptr::null_mut(),
+            flags: DeviceFaultFlagsKHR::default(),
+            group_id: u64::default(),
+            description: StringArray::default(),
+            fault_address_info: DeviceFaultAddressInfoKHR::default(),
+            instruction_address_info: DeviceFaultAddressInfoKHR::default(),
+            vendor_info: DeviceFaultVendorInfoKHR::default(),
+        }
+    }
+}
+
+unsafe impl Send for DeviceFaultInfoKHR {}
+unsafe impl Sync for DeviceFaultInfoKHR {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceFaultShaderAbortMessageInfoKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct DeviceFaultShaderAbortMessageInfoKHR {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub message_data_size: u64,
+    pub message_data: *mut c_void,
+}
+
+impl Default for DeviceFaultShaderAbortMessageInfoKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::DEVICE_FAULT_SHADER_ABORT_MESSAGE_INFO_KHR,
+            next: ptr::null_mut(),
+            message_data_size: u64::default(),
+            message_data: ptr::null_mut(),
+        }
+    }
+}
+
+unsafe impl Send for DeviceFaultShaderAbortMessageInfoKHR {}
+unsafe impl Sync for DeviceFaultShaderAbortMessageInfoKHR {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceFaultVendorBinaryHeaderVersionOneKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
-pub struct DeviceFaultVendorBinaryHeaderVersionOneEXT {
+pub struct DeviceFaultVendorBinaryHeaderVersionOneKHR {
     pub header_size: u32,
-    pub header_version: DeviceFaultVendorBinaryHeaderVersionEXT,
+    pub header_version: DeviceFaultVendorBinaryHeaderVersionKHR,
     pub vendor_id: u32,
     pub device_id: u32,
     pub driver_version: u32,
@@ -6270,10 +6540,10 @@ pub struct DeviceFaultVendorBinaryHeaderVersionOneEXT {
     pub api_version: u32,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceFaultVendorInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceFaultVendorInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
-pub struct DeviceFaultVendorInfoEXT {
+pub struct DeviceFaultVendorInfoKHR {
     pub description: StringArray<MAX_DESCRIPTION_SIZE>,
     pub vendor_fault_code: u64,
     pub vendor_fault_data: u64,
@@ -6536,6 +6806,72 @@ impl Default for DeviceImageSubresourceInfo {
 
 unsafe impl Send for DeviceImageSubresourceInfo {}
 unsafe impl Sync for DeviceImageSubresourceInfo {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceMemoryCopyKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct DeviceMemoryCopyKHR {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub src_range: DeviceAddressRangeKHR,
+    pub src_flags: AddressCommandFlagsKHR,
+    pub dst_range: DeviceAddressRangeKHR,
+    pub dst_flags: AddressCommandFlagsKHR,
+}
+
+impl Default for DeviceMemoryCopyKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::DEVICE_MEMORY_COPY_KHR,
+            next: ptr::null(),
+            src_range: DeviceAddressRangeKHR::default(),
+            src_flags: AddressCommandFlagsKHR::default(),
+            dst_range: DeviceAddressRangeKHR::default(),
+            dst_flags: AddressCommandFlagsKHR::default(),
+        }
+    }
+}
+
+unsafe impl Send for DeviceMemoryCopyKHR {}
+unsafe impl Sync for DeviceMemoryCopyKHR {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceMemoryImageCopyKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct DeviceMemoryImageCopyKHR {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub address_range: DeviceAddressRangeKHR,
+    pub address_flags: AddressCommandFlagsKHR,
+    pub address_row_length: u32,
+    pub address_image_height: u32,
+    pub image_subresource: ImageSubresourceLayers,
+    pub image_layout: ImageLayout,
+    pub image_offset: Offset3D,
+    pub image_extent: Extent3D,
+}
+
+impl Default for DeviceMemoryImageCopyKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::DEVICE_MEMORY_IMAGE_COPY_KHR,
+            next: ptr::null(),
+            address_range: DeviceAddressRangeKHR::default(),
+            address_flags: AddressCommandFlagsKHR::default(),
+            address_row_length: u32::default(),
+            address_image_height: u32::default(),
+            image_subresource: ImageSubresourceLayers::default(),
+            image_layout: ImageLayout::default(),
+            image_offset: Offset3D::default(),
+            image_extent: Extent3D::default(),
+        }
+    }
+}
+
+unsafe impl Send for DeviceMemoryImageCopyKHR {}
+unsafe impl Sync for DeviceMemoryImageCopyKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceMemoryOpaqueCaptureAddressInfo.html>
 #[repr(C)]
@@ -6923,6 +7259,31 @@ pub struct DispatchGraphInfoAMDX {
     pub payloads: DeviceOrHostAddressConstAMDX,
     pub payload_stride: u64,
 }
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDispatchIndirect2InfoKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct DispatchIndirect2InfoKHR {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub address_range: DeviceAddressRangeKHR,
+    pub address_flags: AddressCommandFlagsKHR,
+}
+
+impl Default for DispatchIndirect2InfoKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::DISPATCH_INDIRECT_2_INFO_KHR,
+            next: ptr::null(),
+            address_range: DeviceAddressRangeKHR::default(),
+            address_flags: AddressCommandFlagsKHR::default(),
+        }
+    }
+}
+
+unsafe impl Send for DispatchIndirect2InfoKHR {}
+unsafe impl Sync for DispatchIndirect2InfoKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDispatchIndirectCommand.html>
 #[repr(C)]
@@ -7356,6 +7717,33 @@ pub struct DrawIndexedIndirectCommand {
     pub first_instance: u32,
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDrawIndirect2InfoKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct DrawIndirect2InfoKHR {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub address_range: StridedDeviceAddressRangeKHR,
+    pub address_flags: AddressCommandFlagsKHR,
+    pub draw_count: u32,
+}
+
+impl Default for DrawIndirect2InfoKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::DRAW_INDIRECT_2_INFO_KHR,
+            next: ptr::null(),
+            address_range: StridedDeviceAddressRangeKHR::default(),
+            address_flags: AddressCommandFlagsKHR::default(),
+            draw_count: u32::default(),
+        }
+    }
+}
+
+unsafe impl Send for DrawIndirect2InfoKHR {}
+unsafe impl Sync for DrawIndirect2InfoKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDrawIndirectCommand.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
@@ -7365,6 +7753,37 @@ pub struct DrawIndirectCommand {
     pub first_vertex: u32,
     pub first_instance: u32,
 }
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDrawIndirectCount2InfoKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct DrawIndirectCount2InfoKHR {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub address_range: StridedDeviceAddressRangeKHR,
+    pub address_flags: AddressCommandFlagsKHR,
+    pub count_address_range: DeviceAddressRangeKHR,
+    pub count_address_flags: AddressCommandFlagsKHR,
+    pub max_draw_count: u32,
+}
+
+impl Default for DrawIndirectCount2InfoKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::DRAW_INDIRECT_COUNT_2_INFO_KHR,
+            next: ptr::null(),
+            address_range: StridedDeviceAddressRangeKHR::default(),
+            address_flags: AddressCommandFlagsKHR::default(),
+            count_address_range: DeviceAddressRangeKHR::default(),
+            count_address_flags: AddressCommandFlagsKHR::default(),
+            max_draw_count: u32::default(),
+        }
+    }
+}
+
+unsafe impl Send for DrawIndirectCount2InfoKHR {}
+unsafe impl Sync for DrawIndirectCount2InfoKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDrawIndirectCountIndirectCommandEXT.html>
 #[repr(C)]
@@ -12227,6 +12646,35 @@ impl Default for MemoryMapPlacedInfoEXT {
 unsafe impl Send for MemoryMapPlacedInfoEXT {}
 unsafe impl Sync for MemoryMapPlacedInfoEXT {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMemoryMarkerInfoAMD.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct MemoryMarkerInfoAMD {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub stage: PipelineStageFlags2KHR,
+    pub dst_range: DeviceAddressRangeKHR,
+    pub dst_flags: AddressCommandFlagsKHR,
+    pub marker: u32,
+}
+
+impl Default for MemoryMarkerInfoAMD {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::MEMORY_MARKER_INFO_AMD,
+            next: ptr::null(),
+            stage: PipelineStageFlags2KHR::default(),
+            dst_range: DeviceAddressRangeKHR::default(),
+            dst_flags: AddressCommandFlagsKHR::default(),
+            marker: u32::default(),
+        }
+    }
+}
+
+unsafe impl Send for MemoryMarkerInfoAMD {}
+unsafe impl Sync for MemoryMarkerInfoAMD {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMemoryMetalHandlePropertiesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -12295,6 +12743,68 @@ impl Default for MemoryPriorityAllocateInfoEXT {
 
 unsafe impl Send for MemoryPriorityAllocateInfoEXT {}
 unsafe impl Sync for MemoryPriorityAllocateInfoEXT {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMemoryRangeBarrierKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct MemoryRangeBarrierKHR {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub src_stage_mask: PipelineStageFlags2,
+    pub src_access_mask: AccessFlags2,
+    pub dst_stage_mask: PipelineStageFlags2,
+    pub dst_access_mask: AccessFlags2,
+    pub src_queue_family_index: u32,
+    pub dst_queue_family_index: u32,
+    pub address_range: DeviceAddressRangeKHR,
+    pub address_flags: AddressCommandFlagsKHR,
+}
+
+impl Default for MemoryRangeBarrierKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::MEMORY_RANGE_BARRIER_KHR,
+            next: ptr::null(),
+            src_stage_mask: PipelineStageFlags2::default(),
+            src_access_mask: AccessFlags2::default(),
+            dst_stage_mask: PipelineStageFlags2::default(),
+            dst_access_mask: AccessFlags2::default(),
+            src_queue_family_index: u32::default(),
+            dst_queue_family_index: u32::default(),
+            address_range: DeviceAddressRangeKHR::default(),
+            address_flags: AddressCommandFlagsKHR::default(),
+        }
+    }
+}
+
+unsafe impl Send for MemoryRangeBarrierKHR {}
+unsafe impl Sync for MemoryRangeBarrierKHR {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMemoryRangeBarriersInfoKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct MemoryRangeBarriersInfoKHR {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub memory_range_barrier_count: u32,
+    pub memory_range_barriers: *const MemoryRangeBarrierKHR,
+}
+
+impl Default for MemoryRangeBarriersInfoKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::MEMORY_RANGE_BARRIERS_INFO_KHR,
+            next: ptr::null(),
+            memory_range_barrier_count: u32::default(),
+            memory_range_barriers: ptr::null(),
+        }
+    }
+}
+
+unsafe impl Send for MemoryRangeBarriersInfoKHR {}
+unsafe impl Sync for MemoryRangeBarriersInfoKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMemoryRequirements.html>
 #[repr(C)]
@@ -15609,6 +16119,29 @@ impl Default for PhysicalDeviceDescriptorSetHostMappingFeaturesVALVE {
 unsafe impl Send for PhysicalDeviceDescriptorSetHostMappingFeaturesVALVE {}
 unsafe impl Sync for PhysicalDeviceDescriptorSetHostMappingFeaturesVALVE {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceDeviceAddressCommandsFeaturesKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceDeviceAddressCommandsFeaturesKHR {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub device_address_commands: Bool32,
+}
+
+impl Default for PhysicalDeviceDeviceAddressCommandsFeaturesKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_DEVICE_ADDRESS_COMMANDS_FEATURES_KHR,
+            next: ptr::null_mut(),
+            device_address_commands: Bool32::default(),
+        }
+    }
+}
+
+unsafe impl Send for PhysicalDeviceDeviceAddressCommandsFeaturesKHR {}
+unsafe impl Sync for PhysicalDeviceDeviceAddressCommandsFeaturesKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceDeviceGeneratedCommandsComputeFeaturesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -16618,6 +17151,58 @@ impl Default for PhysicalDeviceFaultFeaturesEXT {
 
 unsafe impl Send for PhysicalDeviceFaultFeaturesEXT {}
 unsafe impl Sync for PhysicalDeviceFaultFeaturesEXT {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceFaultFeaturesKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceFaultFeaturesKHR {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub device_fault: Bool32,
+    pub device_fault_vendor_binary: Bool32,
+    pub device_fault_report_masked: Bool32,
+    pub device_fault_device_lost_on_masked: Bool32,
+}
+
+impl Default for PhysicalDeviceFaultFeaturesKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_FAULT_FEATURES_KHR,
+            next: ptr::null_mut(),
+            device_fault: Bool32::default(),
+            device_fault_vendor_binary: Bool32::default(),
+            device_fault_report_masked: Bool32::default(),
+            device_fault_device_lost_on_masked: Bool32::default(),
+        }
+    }
+}
+
+unsafe impl Send for PhysicalDeviceFaultFeaturesKHR {}
+unsafe impl Sync for PhysicalDeviceFaultFeaturesKHR {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceFaultPropertiesKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceFaultPropertiesKHR {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub max_device_fault_count: u32,
+}
+
+impl Default for PhysicalDeviceFaultPropertiesKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_FAULT_PROPERTIES_KHR,
+            next: ptr::null_mut(),
+            max_device_fault_count: u32::default(),
+        }
+    }
+}
+
+unsafe impl Send for PhysicalDeviceFaultPropertiesKHR {}
+unsafe impl Sync for PhysicalDeviceFaultPropertiesKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceFeatures.html>
 #[repr(C)]
@@ -21333,6 +21918,52 @@ impl Default for PhysicalDeviceShader64BitIndexingFeaturesEXT {
 unsafe impl Send for PhysicalDeviceShader64BitIndexingFeaturesEXT {}
 unsafe impl Sync for PhysicalDeviceShader64BitIndexingFeaturesEXT {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderAbortFeaturesKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceShaderAbortFeaturesKHR {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub shader_abort: Bool32,
+}
+
+impl Default for PhysicalDeviceShaderAbortFeaturesKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_SHADER_ABORT_FEATURES_KHR,
+            next: ptr::null_mut(),
+            shader_abort: Bool32::default(),
+        }
+    }
+}
+
+unsafe impl Send for PhysicalDeviceShaderAbortFeaturesKHR {}
+unsafe impl Sync for PhysicalDeviceShaderAbortFeaturesKHR {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderAbortPropertiesKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceShaderAbortPropertiesKHR {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub max_shader_abort_message_size: u64,
+}
+
+impl Default for PhysicalDeviceShaderAbortPropertiesKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_SHADER_ABORT_PROPERTIES_KHR,
+            next: ptr::null_mut(),
+            max_shader_abort_message_size: u64::default(),
+        }
+    }
+}
+
+unsafe impl Send for PhysicalDeviceShaderAbortPropertiesKHR {}
+unsafe impl Sync for PhysicalDeviceShaderAbortPropertiesKHR {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderAtomicFloat16VectorFeaturesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -21522,6 +22153,29 @@ impl Default for PhysicalDeviceShaderClockFeaturesKHR {
 
 unsafe impl Send for PhysicalDeviceShaderClockFeaturesKHR {}
 unsafe impl Sync for PhysicalDeviceShaderClockFeaturesKHR {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderConstantDataFeaturesKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceShaderConstantDataFeaturesKHR {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub shader_constant_data: Bool32,
+}
+
+impl Default for PhysicalDeviceShaderConstantDataFeaturesKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_SHADER_CONSTANT_DATA_FEATURES_KHR,
+            next: ptr::null_mut(),
+            shader_constant_data: Bool32::default(),
+        }
+    }
+}
+
+unsafe impl Send for PhysicalDeviceShaderConstantDataFeaturesKHR {}
+unsafe impl Sync for PhysicalDeviceShaderConstantDataFeaturesKHR {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderCoreBuiltinsFeaturesARM.html>
 #[repr(C)]
@@ -21974,6 +22628,54 @@ impl Default for PhysicalDeviceShaderImageFootprintFeaturesNV {
 
 unsafe impl Send for PhysicalDeviceShaderImageFootprintFeaturesNV {}
 unsafe impl Sync for PhysicalDeviceShaderImageFootprintFeaturesNV {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderInstrumentationFeaturesARM.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceShaderInstrumentationFeaturesARM {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub shader_instrumentation: Bool32,
+}
+
+impl Default for PhysicalDeviceShaderInstrumentationFeaturesARM {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_SHADER_INSTRUMENTATION_FEATURES_ARM,
+            next: ptr::null_mut(),
+            shader_instrumentation: Bool32::default(),
+        }
+    }
+}
+
+unsafe impl Send for PhysicalDeviceShaderInstrumentationFeaturesARM {}
+unsafe impl Sync for PhysicalDeviceShaderInstrumentationFeaturesARM {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderInstrumentationPropertiesARM.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceShaderInstrumentationPropertiesARM {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub num_metrics: u32,
+    pub per_basic_block_granularity: Bool32,
+}
+
+impl Default for PhysicalDeviceShaderInstrumentationPropertiesARM {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_SHADER_INSTRUMENTATION_PROPERTIES_ARM,
+            next: ptr::null_mut(),
+            num_metrics: u32::default(),
+            per_basic_block_granularity: Bool32::default(),
+        }
+    }
+}
+
+unsafe impl Send for PhysicalDeviceShaderInstrumentationPropertiesARM {}
+unsafe impl Sync for PhysicalDeviceShaderInstrumentationPropertiesARM {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderIntegerDotProductFeatures.html>
 #[repr(C)]
@@ -29173,6 +29875,62 @@ impl Default for ShaderDescriptorSetAndBindingMappingInfoEXT {
 unsafe impl Send for ShaderDescriptorSetAndBindingMappingInfoEXT {}
 unsafe impl Sync for ShaderDescriptorSetAndBindingMappingInfoEXT {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkShaderInstrumentationCreateInfoARM.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct ShaderInstrumentationCreateInfoARM {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+}
+
+impl Default for ShaderInstrumentationCreateInfoARM {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::SHADER_INSTRUMENTATION_CREATE_INFO_ARM,
+            next: ptr::null_mut(),
+        }
+    }
+}
+
+unsafe impl Send for ShaderInstrumentationCreateInfoARM {}
+unsafe impl Sync for ShaderInstrumentationCreateInfoARM {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkShaderInstrumentationMetricDataHeaderARM.html>
+#[repr(C)]
+#[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
+pub struct ShaderInstrumentationMetricDataHeaderARM {
+    pub result_index: u32,
+    pub result_sub_index: u32,
+    pub stages: ShaderStageFlags,
+    pub basic_block_index: u32,
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkShaderInstrumentationMetricDescriptionARM.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct ShaderInstrumentationMetricDescriptionARM {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub name: StringArray<MAX_DESCRIPTION_SIZE>,
+    pub description: StringArray<MAX_DESCRIPTION_SIZE>,
+}
+
+impl Default for ShaderInstrumentationMetricDescriptionARM {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::SHADER_INSTRUMENTATION_METRIC_DESCRIPTION_ARM,
+            next: ptr::null_mut(),
+            name: StringArray::default(),
+            description: StringArray::default(),
+        }
+    }
+}
+
+unsafe impl Send for ShaderInstrumentationMetricDescriptionARM {}
+unsafe impl Sync for ShaderInstrumentationMetricDescriptionARM {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkShaderModuleCreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -34900,8 +35658,16 @@ pub type DescriptorSetVariableDescriptorCountLayoutSupportEXT =
 pub type DescriptorUpdateTemplateCreateInfoKHR = DescriptorUpdateTemplateCreateInfo;
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDescriptorUpdateTemplateEntryKHR.html>
 pub type DescriptorUpdateTemplateEntryKHR = DescriptorUpdateTemplateEntry;
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceAddressRangeEXT.html>
+pub type DeviceAddressRangeEXT = DeviceAddressRangeKHR;
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceBufferMemoryRequirementsKHR.html>
 pub type DeviceBufferMemoryRequirementsKHR = DeviceBufferMemoryRequirements;
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceFaultAddressInfoEXT.html>
+pub type DeviceFaultAddressInfoEXT = DeviceFaultAddressInfoKHR;
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceFaultVendorBinaryHeaderVersionOneEXT.html>
+pub type DeviceFaultVendorBinaryHeaderVersionOneEXT = DeviceFaultVendorBinaryHeaderVersionOneKHR;
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceFaultVendorInfoEXT.html>
+pub type DeviceFaultVendorInfoEXT = DeviceFaultVendorInfoKHR;
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceGroupBindSparseInfoKHR.html>
 pub type DeviceGroupBindSparseInfoKHR = DeviceGroupBindSparseInfo;
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceGroupCommandBufferBeginInfoKHR.html>
