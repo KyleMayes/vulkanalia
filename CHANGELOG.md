@@ -4,6 +4,16 @@
 - [Removing extra double-quote at the end of a comment in `VkFormatFeatureFlagBits2` (#2680)](https://github.com/KhronosGroup/Vulkan-Docs/commit/5caf874c0d1ec519494beea83703c5478bfe92a1)
 - [Close #2675](https://github.com/KhronosGroup/Vulkan-Docs/commit/33eff7c90483e5d8ff66e15c06683a9d19772ea3)
 - [February 20, 2026 Vulkan 1.4.344 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/6aefabc0ad51073cf060e384ce43a59250d4d69c)
+- [Reserve extension 678 (#2693)](https://github.com/KhronosGroup/Vulkan-Docs/commit/61ec2c24c40b6cc31a55e600d8bd3b33a7c7a307)
+- [docs: Fix types tag example (#2688)](https://github.com/KhronosGroup/Vulkan-Docs/commit/f27d8836e8ca5055e847115a3c83fb4c7ba99013)
+- [March 6, 2026 Vulkan 1.4.345 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/b0b699e446e3eab9bc0d6b192599871eecf25e1e)
+- [doc: clarify VkStructureType naming to avoid double underscores (#2698)](https://github.com/KhronosGroup/Vulkan-Docs/commit/bde26d74616d75b24230f1c6265e13e3721c98a6)
+- [March 13, 2026 Vulkan 1.4.346 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/b71f0036e3f00fa0cda4d888a53f6081c62b4648)
+- [March 20, 2026 Vulkan 1.4.347 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/6c112cf1c56fec91d5aa4370fb62cfee25618684)
+- [Add explicit dependency on VkSurfaceTransformFlagsKHR to VK_KHR_surface (#2707)](https://github.com/KhronosGroup/Vulkan-Docs/commit/145b19c158b8fcbc660f70971f96d73f91da718c)
+- [Non-canonical type usages have been corrected (#2708)](https://github.com/KhronosGroup/Vulkan-Docs/commit/6c2ac8dac101e9040410707ebd65f98623054e75)
+- [Use links to github instead of internal gitlab (#2703)](https://github.com/KhronosGroup/Vulkan-Docs/commit/6536f0992741bd9ef9e1241b78198cb3569aa145)
+- [April 3, 2026 Vulkan 1.4.348 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/6019efe93eca7bfa7a692316d91a9465eb457d60)
 
 ## [0.35.0] - 2026-02-15
 
