@@ -161,6 +161,20 @@ bitflags! {
 }
 
 bitflags! {
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAddressCommandFlagsKHR.html>
+    #[repr(transparent)]
+    #[derive(Default)]
+    pub struct AddressCommandFlagsKHR: Flags {
+        const PROTECTED = 1;
+        const FULLY_BOUND = 1 << 1;
+        const STORAGE_BUFFER_USAGE = 1 << 2;
+        const UNKNOWN_STORAGE_BUFFER_USAGE = 1 << 3;
+        const TRANSFORM_FEEDBACK_BUFFER_USAGE = 1 << 4;
+        const UNKNOWN_TRANSFORM_FEEDBACK_BUFFER_USAGE = 1 << 5;
+    }
+}
+
+bitflags! {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAddressCopyFlagsKHR.html>
     #[repr(transparent)]
     #[derive(Default)]
@@ -457,6 +471,56 @@ bitflags! {
 }
 
 bitflags! {
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDataGraphOpticalFlowCreateFlagsARM.html>
+    #[repr(transparent)]
+    #[derive(Default)]
+    pub struct DataGraphOpticalFlowCreateFlagsARM: Flags {
+        const ENABLE_HINT = 1;
+        const ENABLE_COST = 1 << 1;
+        const RESERVED_30 = 1 << 30;
+    }
+}
+
+bitflags! {
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDataGraphOpticalFlowExecuteFlagsARM.html>
+    #[repr(transparent)]
+    #[derive(Default)]
+    pub struct DataGraphOpticalFlowExecuteFlagsARM: Flags {
+        const DISABLE_TEMPORAL_HINTS = 1;
+        const INPUT_UNCHANGED = 1 << 1;
+        const REFERENCE_UNCHANGED = 1 << 2;
+        const INPUT_IS_PREVIOUS_REFERENCE = 1 << 3;
+        const REFERENCE_IS_PREVIOUS_INPUT = 1 << 4;
+    }
+}
+
+bitflags! {
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDataGraphOpticalFlowGridSizeFlagsARM.html>
+    #[repr(transparent)]
+    #[derive(Default)]
+    pub struct DataGraphOpticalFlowGridSizeFlagsARM: Flags {
+        const UNKNOWN = 0;
+        const _1X1 = 1;
+        const _2X2 = 1 << 1;
+        const _4X4 = 1 << 2;
+        const _8X8 = 1 << 3;
+    }
+}
+
+bitflags! {
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDataGraphOpticalFlowImageUsageFlagsARM.html>
+    #[repr(transparent)]
+    #[derive(Default)]
+    pub struct DataGraphOpticalFlowImageUsageFlagsARM: Flags {
+        const UNKNOWN = 0;
+        const INPUT = 1;
+        const OUTPUT = 1 << 1;
+        const HINT = 1 << 2;
+        const COST = 1 << 3;
+    }
+}
+
+bitflags! {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDataGraphPipelineDispatchFlagsARM.html>
     #[repr(transparent)]
     #[derive(Default)]
@@ -469,6 +533,19 @@ bitflags! {
     #[derive(Default)]
     pub struct DataGraphPipelineSessionCreateFlagsARM: Flags {
         const PROTECTED = 1;
+        const OPTICAL_FLOW_CACHE = 1 << 1;
+    }
+}
+
+bitflags! {
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDataGraphTOSAQualityFlagsARM.html>
+    #[repr(transparent)]
+    #[derive(Default)]
+    pub struct DataGraphTOSAQualityFlagsARM: Flags {
+        const ACCELERATED = 1;
+        const CONFORMANT = 1 << 1;
+        const EXPERIMENTAL = 1 << 2;
+        const DEPRECATED = 1 << 3;
     }
 }
 
@@ -616,6 +693,20 @@ bitflags! {
         const ENABLE_RESOURCE_TRACKING = 1 << 1;
         const ENABLE_AUTOMATIC_CHECKPOINTS = 1 << 2;
         const ENABLE_SHADER_ERROR_REPORTING = 1 << 3;
+    }
+}
+
+bitflags! {
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceFaultFlagsKHR.html>
+    #[repr(transparent)]
+    #[derive(Default)]
+    pub struct DeviceFaultFlagsKHR: Flags {
+        const FLAG_DEVICE_LOST = 1;
+        const FLAG_MEMORY_ADDRESS = 1 << 1;
+        const FLAG_INSTRUCTION_ADDRESS = 1 << 2;
+        const FLAG_VENDOR = 1 << 3;
+        const FLAG_WATCHDOG_TIMEOUT = 1 << 4;
+        const FLAG_OVERFLOW = 1 << 5;
     }
 }
 
@@ -936,6 +1027,9 @@ bitflags! {
         const DEPTH_COPY_ON_TRANSFER_QUEUE_KHR = 1 << 53;
         const STENCIL_COPY_ON_COMPUTE_QUEUE_KHR = 1 << 54;
         const STENCIL_COPY_ON_TRANSFER_QUEUE_KHR = 1 << 55;
+        const DATA_GRAPH_OPTICAL_FLOW_IMAGE_ARM = 1 << 56;
+        const DATA_GRAPH_OPTICAL_FLOW_VECTOR_ARM = 1 << 57;
+        const DATA_GRAPH_OPTICAL_FLOW_COST_ARM = 1 << 58;
         const COPY_IMAGE_INDIRECT_DST_KHR = 1 << 59;
     }
 }
@@ -1119,6 +1213,7 @@ bitflags! {
         const _2D_VIEW_COMPATIBLE_EXT = 1 << 17;
         const MULTISAMPLED_RENDER_TO_SINGLE_SAMPLED_EXT = 1 << 18;
         const VIDEO_PROFILE_INDEPENDENT_KHR = 1 << 20;
+        const ALIAS_SINGLE_LAYER_DESCRIPTOR_KHR = 1 << 22;
     }
 }
 
@@ -1426,6 +1521,7 @@ bitflags! {
     #[derive(Default)]
     pub struct PhysicalDeviceSchedulingControlsFlagsARM: Flags {
         const SHADER_CORE_COUNT = 1;
+        const DISPATCH_PARAMETERS = 1 << 1;
     }
 }
 
@@ -1558,6 +1654,7 @@ bitflags! {
         const DESCRIPTOR_HEAP_EXT = 1 << 36;
         const DISALLOW_OPACITY_MICROMAP_ARM = 1 << 37;
         const INDIRECT_BINDABLE_EXT = 1 << 38;
+        const INSTRUMENT_SHADERS_ARM = 1 << 39;
         const PER_LAYER_FRAGMENT_DENSITY_VALVE = 1 << 40;
         const _64_BIT_INDEXING_EXT = 1 << 43;
     }
@@ -1611,6 +1708,7 @@ bitflags! {
     #[derive(Default)]
     pub struct PipelineLayoutCreateFlags: Flags {
         const INDEPENDENT_SETS_EXT = 1 << 1;
+        const NO_TASK_SHADER_KHR = 1 << 2;
     }
 }
 
@@ -2047,8 +2145,17 @@ bitflags! {
         const FRAGMENT_DENSITY_MAP_ATTACHMENT = 1 << 6;
         const INDIRECT_BINDABLE = 1 << 7;
         const DESCRIPTOR_HEAP = 1 << 10;
+        const INSTRUMENT_SHADER_ARM = 1 << 11;
         const _64_BIT_INDEXING = 1 << 15;
+        const INDEPENDENT_SETS_KHR = 1 << 18;
     }
+}
+
+bitflags! {
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkShaderInstrumentationValuesFlagsARM.html>
+    #[repr(transparent)]
+    #[derive(Default)]
+    pub struct ShaderInstrumentationValuesFlagsARM: Flags { }
 }
 
 bitflags! {

@@ -672,6 +672,113 @@ pub trait ArmDataGraphExtensionInstanceCommands: InstanceV1_0 {
 
 impl<C: InstanceV1_0 + ?Sized> ArmDataGraphExtensionInstanceCommands for C {}
 
+/// The instance-level commands added by [`ARM_DATA_GRAPH_INSTRUCTION_SET_TOSA_EXTENSION`].
+pub trait ArmDataGraphInstructionSetTosaExtensionInstanceCommands: InstanceV1_0 {
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetPhysicalDeviceQueueFamilyDataGraphEngineOperationPropertiesARM.html>
+    #[inline]
+    unsafe fn get_physical_device_queue_family_data_graph_engine_operation_properties_arm(
+        &self,
+        physical_device: PhysicalDevice,
+        queue_family_index: u32,
+        queue_family_data_graph_properties: &QueueFamilyDataGraphPropertiesARM,
+    ) -> crate::VkResult<BaseOutStructure> {
+        let mut properties = MaybeUninit::<BaseOutStructure>::uninit();
+
+        let __result = (self
+            .commands()
+            .get_physical_device_queue_family_data_graph_engine_operation_properties_arm)(
+            physical_device,
+            queue_family_index,
+            queue_family_data_graph_properties,
+            properties.as_mut_ptr(),
+        );
+
+        if __result == Result::SUCCESS {
+            Ok(properties.assume_init())
+        } else {
+            Err(__result.into())
+        }
+    }
+}
+
+impl<C: InstanceV1_0 + ?Sized> ArmDataGraphInstructionSetTosaExtensionInstanceCommands for C {}
+
+/// The instance-level commands added by [`ARM_DATA_GRAPH_OPTICAL_FLOW_EXTENSION`].
+pub trait ArmDataGraphOpticalFlowExtensionInstanceCommands: InstanceV1_0 {
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetPhysicalDeviceQueueFamilyDataGraphEngineOperationPropertiesARM.html>
+    #[inline]
+    unsafe fn get_physical_device_queue_family_data_graph_engine_operation_properties_arm(
+        &self,
+        physical_device: PhysicalDevice,
+        queue_family_index: u32,
+        queue_family_data_graph_properties: &QueueFamilyDataGraphPropertiesARM,
+    ) -> crate::VkResult<BaseOutStructure> {
+        let mut properties = MaybeUninit::<BaseOutStructure>::uninit();
+
+        let __result = (self
+            .commands()
+            .get_physical_device_queue_family_data_graph_engine_operation_properties_arm)(
+            physical_device,
+            queue_family_index,
+            queue_family_data_graph_properties,
+            properties.as_mut_ptr(),
+        );
+
+        if __result == Result::SUCCESS {
+            Ok(properties.assume_init())
+        } else {
+            Err(__result.into())
+        }
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetPhysicalDeviceQueueFamilyDataGraphOpticalFlowImageFormatsARM.html>
+    #[inline]
+    unsafe fn get_physical_device_queue_family_data_graph_optical_flow_image_formats_arm(
+        &self,
+        physical_device: PhysicalDevice,
+        queue_family_index: u32,
+        queue_family_data_graph_properties: &QueueFamilyDataGraphPropertiesARM,
+        optical_flow_image_format_info: &DataGraphOpticalFlowImageFormatInfoARM,
+    ) -> crate::VkResult<Vec<DataGraphOpticalFlowImageFormatPropertiesARM>> {
+        let mut format_count = 0;
+
+        (self
+            .commands()
+            .get_physical_device_queue_family_data_graph_optical_flow_image_formats_arm)(
+            physical_device,
+            queue_family_index,
+            queue_family_data_graph_properties,
+            optical_flow_image_format_info,
+            &mut format_count,
+            ptr::null_mut(),
+        );
+
+        let mut image_format_properties = Vec::with_capacity(format_count as usize);
+
+        let __result = (self
+            .commands()
+            .get_physical_device_queue_family_data_graph_optical_flow_image_formats_arm)(
+            physical_device,
+            queue_family_index,
+            queue_family_data_graph_properties,
+            optical_flow_image_format_info,
+            &mut format_count,
+            image_format_properties.as_mut_ptr(),
+        );
+
+        debug_assert!(image_format_properties.capacity() >= format_count as usize);
+        image_format_properties.set_len(format_count as usize);
+
+        if __result == Result::SUCCESS {
+            Ok(image_format_properties)
+        } else {
+            Err(__result.into())
+        }
+    }
+}
+
+impl<C: InstanceV1_0 + ?Sized> ArmDataGraphOpticalFlowExtensionInstanceCommands for C {}
+
 /// The instance-level commands added by [`ARM_PERFORMANCE_COUNTERS_BY_REGION_EXTENSION`].
 pub trait ArmPerformanceCountersByRegionExtensionInstanceCommands: InstanceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkEnumeratePhysicalDeviceQueueFamilyPerformanceCountersByRegionARM.html>
@@ -723,6 +830,159 @@ pub trait ArmPerformanceCountersByRegionExtensionInstanceCommands: InstanceV1_0 
 }
 
 impl<C: InstanceV1_0 + ?Sized> ArmPerformanceCountersByRegionExtensionInstanceCommands for C {}
+
+/// The device-level commands added by [`ARM_SCHEDULING_CONTROLS_EXTENSION`].
+pub trait ArmSchedulingControlsExtensionDeviceCommands: DeviceV1_0 {
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdSetDispatchParametersARM.html>
+    #[inline]
+    unsafe fn cmd_set_dispatch_parameters_arm(
+        &self,
+        command_buffer: CommandBuffer,
+        dispatch_parameters: &DispatchParametersARM,
+    ) {
+        let __result =
+            (self.commands().cmd_set_dispatch_parameters_arm)(command_buffer, dispatch_parameters);
+    }
+}
+
+impl<C: DeviceV1_0 + ?Sized> ArmSchedulingControlsExtensionDeviceCommands for C {}
+
+/// The device-level commands added by [`ARM_SHADER_INSTRUMENTATION_EXTENSION`].
+pub trait ArmShaderInstrumentationExtensionDeviceCommands: DeviceV1_0 {
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkClearShaderInstrumentationMetricsARM.html>
+    #[inline]
+    unsafe fn clear_shader_instrumentation_metrics_arm(
+        &self,
+        instrumentation: ShaderInstrumentationARM,
+    ) {
+        let __result = (self.commands().clear_shader_instrumentation_metrics_arm)(
+            self.handle(),
+            instrumentation,
+        );
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdBeginShaderInstrumentationARM.html>
+    #[inline]
+    unsafe fn cmd_begin_shader_instrumentation_arm(
+        &self,
+        command_buffer: CommandBuffer,
+        instrumentation: ShaderInstrumentationARM,
+    ) {
+        let __result =
+            (self.commands().cmd_begin_shader_instrumentation_arm)(command_buffer, instrumentation);
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdEndShaderInstrumentationARM.html>
+    #[inline]
+    unsafe fn cmd_end_shader_instrumentation_arm(&self, command_buffer: CommandBuffer) {
+        let __result = (self.commands().cmd_end_shader_instrumentation_arm)(command_buffer);
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCreateShaderInstrumentationARM.html>
+    #[inline]
+    unsafe fn create_shader_instrumentation_arm(
+        &self,
+        create_info: &ShaderInstrumentationCreateInfoARM,
+        allocator: Option<&AllocationCallbacks>,
+    ) -> crate::VkResult<ShaderInstrumentationARM> {
+        let mut instrumentation = MaybeUninit::<ShaderInstrumentationARM>::uninit();
+
+        let __result = (self.commands().create_shader_instrumentation_arm)(
+            self.handle(),
+            create_info,
+            allocator.map_or(ptr::null(), |v| v),
+            instrumentation.as_mut_ptr(),
+        );
+
+        if __result == Result::SUCCESS {
+            Ok(instrumentation.assume_init())
+        } else {
+            Err(__result.into())
+        }
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkDestroyShaderInstrumentationARM.html>
+    #[inline]
+    unsafe fn destroy_shader_instrumentation_arm(
+        &self,
+        instrumentation: ShaderInstrumentationARM,
+        allocator: Option<&AllocationCallbacks>,
+    ) {
+        let __result = (self.commands().destroy_shader_instrumentation_arm)(
+            self.handle(),
+            instrumentation,
+            allocator.map_or(ptr::null(), |v| v),
+        );
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetShaderInstrumentationValuesARM.html>
+    #[inline]
+    unsafe fn get_shader_instrumentation_values_arm(
+        &self,
+        instrumentation: ShaderInstrumentationARM,
+        metric_values: *mut c_void,
+        flags: ShaderInstrumentationValuesFlagsARM,
+    ) -> crate::VkResult<u32> {
+        let mut metric_block_count = MaybeUninit::<u32>::uninit();
+
+        let __result = (self.commands().get_shader_instrumentation_values_arm)(
+            self.handle(),
+            instrumentation,
+            metric_block_count.as_mut_ptr(),
+            metric_values,
+            flags,
+        );
+
+        if __result == Result::SUCCESS {
+            Ok(metric_block_count.assume_init())
+        } else {
+            Err(__result.into())
+        }
+    }
+}
+
+impl<C: DeviceV1_0 + ?Sized> ArmShaderInstrumentationExtensionDeviceCommands for C {}
+
+/// The instance-level commands added by [`ARM_SHADER_INSTRUMENTATION_EXTENSION`].
+pub trait ArmShaderInstrumentationExtensionInstanceCommands: InstanceV1_0 {
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkEnumeratePhysicalDeviceShaderInstrumentationMetricsARM.html>
+    #[inline]
+    unsafe fn enumerate_physical_device_shader_instrumentation_metrics_arm(
+        &self,
+        physical_device: PhysicalDevice,
+    ) -> crate::VkResult<Vec<ShaderInstrumentationMetricDescriptionARM>> {
+        let mut description_count = 0;
+
+        (self
+            .commands()
+            .enumerate_physical_device_shader_instrumentation_metrics_arm)(
+            physical_device,
+            &mut description_count,
+            ptr::null_mut(),
+        );
+
+        let mut descriptions = Vec::with_capacity(description_count as usize);
+
+        let __result = (self
+            .commands()
+            .enumerate_physical_device_shader_instrumentation_metrics_arm)(
+            physical_device,
+            &mut description_count,
+            descriptions.as_mut_ptr(),
+        );
+
+        debug_assert!(descriptions.capacity() >= description_count as usize);
+        descriptions.set_len(description_count as usize);
+
+        if __result == Result::SUCCESS {
+            Ok(descriptions)
+        } else {
+            Err(__result.into())
+        }
+    }
+}
+
+impl<C: InstanceV1_0 + ?Sized> ArmShaderInstrumentationExtensionInstanceCommands for C {}
 
 /// The device-level commands added by [`ARM_TENSORS_EXTENSION`].
 pub trait ArmTensorsExtensionDeviceCommands: DeviceV1_0 {
@@ -3809,7 +4069,7 @@ pub trait ExtPipelinePropertiesExtensionDeviceCommands: DeviceV1_0 {
     #[inline]
     unsafe fn get_pipeline_properties_ext(
         &self,
-        pipeline_info: &PipelineInfoEXT,
+        pipeline_info: &PipelineInfoKHR,
     ) -> crate::VkResult<BaseOutStructure> {
         let mut pipeline_properties = MaybeUninit::<BaseOutStructure>::uninit();
 
@@ -3922,6 +4182,24 @@ pub trait ExtPresentTimingExtensionDeviceCommands: DeviceV1_0 {
 }
 
 impl<C: DeviceV1_0 + ?Sized> ExtPresentTimingExtensionDeviceCommands for C {}
+
+/// The device-level commands added by [`EXT_PRIMITIVE_RESTART_INDEX_EXTENSION`].
+pub trait ExtPrimitiveRestartIndexExtensionDeviceCommands: DeviceV1_0 {
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdSetPrimitiveRestartIndexEXT.html>
+    #[inline]
+    unsafe fn cmd_set_primitive_restart_index_ext(
+        &self,
+        command_buffer: CommandBuffer,
+        primitive_restart_index: u32,
+    ) {
+        let __result = (self.commands().cmd_set_primitive_restart_index_ext)(
+            command_buffer,
+            primitive_restart_index,
+        );
+    }
+}
+
+impl<C: DeviceV1_0 + ?Sized> ExtPrimitiveRestartIndexExtensionDeviceCommands for C {}
 
 /// The device-level commands added by [`EXT_PRIVATE_DATA_EXTENSION`].
 pub trait ExtPrivateDataExtensionDeviceCommands: DeviceV1_0 {
@@ -6540,6 +6818,370 @@ pub trait KhrDescriptorUpdateTemplateExtensionDeviceCommands: DeviceV1_0 {
 }
 
 impl<C: DeviceV1_0 + ?Sized> KhrDescriptorUpdateTemplateExtensionDeviceCommands for C {}
+
+/// The device-level commands added by [`KHR_DEVICE_ADDRESS_COMMANDS_EXTENSION`].
+pub trait KhrDeviceAddressCommandsExtensionDeviceCommands: DeviceV1_0 {
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdBeginConditionalRendering2EXT.html>
+    #[inline]
+    unsafe fn cmd_begin_conditional_rendering2_ext(
+        &self,
+        command_buffer: CommandBuffer,
+        conditional_rendering_begin: &ConditionalRenderingBeginInfo2EXT,
+    ) {
+        let __result = (self.commands().cmd_begin_conditional_rendering2_ext)(
+            command_buffer,
+            conditional_rendering_begin,
+        );
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdBeginTransformFeedback2EXT.html>
+    #[inline]
+    unsafe fn cmd_begin_transform_feedback2_ext(
+        &self,
+        command_buffer: CommandBuffer,
+        first_counter_range: u32,
+        counter_infos: &[impl Cast<Target = BindTransformFeedbackBuffer2InfoEXT>],
+    ) {
+        let __result = (self.commands().cmd_begin_transform_feedback2_ext)(
+            command_buffer,
+            first_counter_range,
+            counter_infos.len() as u32,
+            counter_infos.as_ptr().cast(),
+        );
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdBindIndexBuffer3KHR.html>
+    #[inline]
+    unsafe fn cmd_bind_index_buffer3_khr(
+        &self,
+        command_buffer: CommandBuffer,
+        info: &BindIndexBuffer3InfoKHR,
+    ) {
+        let __result = (self.commands().cmd_bind_index_buffer3_khr)(command_buffer, info);
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdBindTransformFeedbackBuffers2EXT.html>
+    #[inline]
+    unsafe fn cmd_bind_transform_feedback_buffers2_ext(
+        &self,
+        command_buffer: CommandBuffer,
+        first_binding: u32,
+        binding_infos: &[impl Cast<Target = BindTransformFeedbackBuffer2InfoEXT>],
+    ) {
+        let __result = (self.commands().cmd_bind_transform_feedback_buffers2_ext)(
+            command_buffer,
+            first_binding,
+            binding_infos.len() as u32,
+            binding_infos.as_ptr().cast(),
+        );
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdBindVertexBuffers3KHR.html>
+    #[inline]
+    unsafe fn cmd_bind_vertex_buffers3_khr(
+        &self,
+        command_buffer: CommandBuffer,
+        first_binding: u32,
+        binding_infos: &[impl Cast<Target = BindVertexBuffer3InfoKHR>],
+    ) {
+        let __result = (self.commands().cmd_bind_vertex_buffers3_khr)(
+            command_buffer,
+            first_binding,
+            binding_infos.len() as u32,
+            binding_infos.as_ptr().cast(),
+        );
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdCopyImageToMemoryKHR.html>
+    #[inline]
+    unsafe fn cmd_copy_image_to_memory_khr(
+        &self,
+        command_buffer: CommandBuffer,
+        copy_memory_info: Option<&CopyDeviceMemoryImageInfoKHR>,
+    ) {
+        let __result = (self.commands().cmd_copy_image_to_memory_khr)(
+            command_buffer,
+            copy_memory_info.map_or(ptr::null(), |v| v),
+        );
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdCopyMemoryKHR.html>
+    #[inline]
+    unsafe fn cmd_copy_memory_khr(
+        &self,
+        command_buffer: CommandBuffer,
+        copy_memory_info: Option<&CopyDeviceMemoryInfoKHR>,
+    ) {
+        let __result = (self.commands().cmd_copy_memory_khr)(
+            command_buffer,
+            copy_memory_info.map_or(ptr::null(), |v| v),
+        );
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdCopyMemoryToImageKHR.html>
+    #[inline]
+    unsafe fn cmd_copy_memory_to_image_khr(
+        &self,
+        command_buffer: CommandBuffer,
+        copy_memory_info: Option<&CopyDeviceMemoryImageInfoKHR>,
+    ) {
+        let __result = (self.commands().cmd_copy_memory_to_image_khr)(
+            command_buffer,
+            copy_memory_info.map_or(ptr::null(), |v| v),
+        );
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdCopyQueryPoolResultsToMemoryKHR.html>
+    #[inline]
+    unsafe fn cmd_copy_query_pool_results_to_memory_khr(
+        &self,
+        command_buffer: CommandBuffer,
+        query_pool: QueryPool,
+        first_query: u32,
+        query_count: u32,
+        dst_range: &StridedDeviceAddressRangeKHR,
+        dst_flags: AddressCommandFlagsKHR,
+        query_result_flags: QueryResultFlags,
+    ) {
+        let __result = (self.commands().cmd_copy_query_pool_results_to_memory_khr)(
+            command_buffer,
+            query_pool,
+            first_query,
+            query_count,
+            dst_range,
+            dst_flags,
+            query_result_flags,
+        );
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdDispatchIndirect2KHR.html>
+    #[inline]
+    unsafe fn cmd_dispatch_indirect2_khr(
+        &self,
+        command_buffer: CommandBuffer,
+        info: &DispatchIndirect2InfoKHR,
+    ) {
+        let __result = (self.commands().cmd_dispatch_indirect2_khr)(command_buffer, info);
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdDrawIndexedIndirect2KHR.html>
+    #[inline]
+    unsafe fn cmd_draw_indexed_indirect2_khr(
+        &self,
+        command_buffer: CommandBuffer,
+        info: &DrawIndirect2InfoKHR,
+    ) {
+        let __result = (self.commands().cmd_draw_indexed_indirect2_khr)(command_buffer, info);
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdDrawIndexedIndirectCount2KHR.html>
+    #[inline]
+    unsafe fn cmd_draw_indexed_indirect_count2_khr(
+        &self,
+        command_buffer: CommandBuffer,
+        info: &DrawIndirectCount2InfoKHR,
+    ) {
+        let __result = (self.commands().cmd_draw_indexed_indirect_count2_khr)(command_buffer, info);
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdDrawIndirect2KHR.html>
+    #[inline]
+    unsafe fn cmd_draw_indirect2_khr(
+        &self,
+        command_buffer: CommandBuffer,
+        info: &DrawIndirect2InfoKHR,
+    ) {
+        let __result = (self.commands().cmd_draw_indirect2_khr)(command_buffer, info);
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdDrawIndirectByteCount2EXT.html>
+    #[inline]
+    unsafe fn cmd_draw_indirect_byte_count2_ext(
+        &self,
+        command_buffer: CommandBuffer,
+        instance_count: u32,
+        first_instance: u32,
+        counter_info: &BindTransformFeedbackBuffer2InfoEXT,
+        counter_offset: u32,
+        vertex_stride: u32,
+    ) {
+        let __result = (self.commands().cmd_draw_indirect_byte_count2_ext)(
+            command_buffer,
+            instance_count,
+            first_instance,
+            counter_info,
+            counter_offset,
+            vertex_stride,
+        );
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdDrawIndirectCount2KHR.html>
+    #[inline]
+    unsafe fn cmd_draw_indirect_count2_khr(
+        &self,
+        command_buffer: CommandBuffer,
+        info: &DrawIndirectCount2InfoKHR,
+    ) {
+        let __result = (self.commands().cmd_draw_indirect_count2_khr)(command_buffer, info);
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdDrawMeshTasksIndirect2EXT.html>
+    #[inline]
+    unsafe fn cmd_draw_mesh_tasks_indirect2_ext(
+        &self,
+        command_buffer: CommandBuffer,
+        info: &DrawIndirect2InfoKHR,
+    ) {
+        let __result = (self.commands().cmd_draw_mesh_tasks_indirect2_ext)(command_buffer, info);
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdDrawMeshTasksIndirectCount2EXT.html>
+    #[inline]
+    unsafe fn cmd_draw_mesh_tasks_indirect_count2_ext(
+        &self,
+        command_buffer: CommandBuffer,
+        info: &DrawIndirectCount2InfoKHR,
+    ) {
+        let __result =
+            (self.commands().cmd_draw_mesh_tasks_indirect_count2_ext)(command_buffer, info);
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdEndTransformFeedback2EXT.html>
+    #[inline]
+    unsafe fn cmd_end_transform_feedback2_ext(
+        &self,
+        command_buffer: CommandBuffer,
+        first_counter_range: u32,
+        counter_infos: &[impl Cast<Target = BindTransformFeedbackBuffer2InfoEXT>],
+    ) {
+        let __result = (self.commands().cmd_end_transform_feedback2_ext)(
+            command_buffer,
+            first_counter_range,
+            counter_infos.len() as u32,
+            counter_infos.as_ptr().cast(),
+        );
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdFillMemoryKHR.html>
+    #[inline]
+    unsafe fn cmd_fill_memory_khr(
+        &self,
+        command_buffer: CommandBuffer,
+        dst_range: &DeviceAddressRangeKHR,
+        dst_flags: AddressCommandFlagsKHR,
+        data: u32,
+    ) {
+        let __result =
+            (self.commands().cmd_fill_memory_khr)(command_buffer, dst_range, dst_flags, data);
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdUpdateMemoryKHR.html>
+    #[inline]
+    unsafe fn cmd_update_memory_khr(
+        &self,
+        command_buffer: CommandBuffer,
+        dst_range: &DeviceAddressRangeKHR,
+        dst_flags: AddressCommandFlagsKHR,
+        data: &[u8],
+    ) {
+        let __result = (self.commands().cmd_update_memory_khr)(
+            command_buffer,
+            dst_range,
+            dst_flags,
+            data.len() as DeviceSize,
+            data.as_ptr() as *const c_void,
+        );
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdWriteMarkerToMemoryAMD.html>
+    #[inline]
+    unsafe fn cmd_write_marker_to_memory_amd(
+        &self,
+        command_buffer: CommandBuffer,
+        info: &MemoryMarkerInfoAMD,
+    ) {
+        let __result = (self.commands().cmd_write_marker_to_memory_amd)(command_buffer, info);
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCreateAccelerationStructure2KHR.html>
+    #[inline]
+    unsafe fn create_acceleration_structure2_khr(
+        &self,
+        create_info: &AccelerationStructureCreateInfo2KHR,
+        allocator: Option<&AllocationCallbacks>,
+    ) -> crate::VkResult<AccelerationStructureKHR> {
+        let mut acceleration_structure = MaybeUninit::<AccelerationStructureKHR>::uninit();
+
+        let __result = (self.commands().create_acceleration_structure2_khr)(
+            self.handle(),
+            create_info,
+            allocator.map_or(ptr::null(), |v| v),
+            acceleration_structure.as_mut_ptr(),
+        );
+
+        if __result == Result::SUCCESS {
+            Ok(acceleration_structure.assume_init())
+        } else {
+            Err(__result.into())
+        }
+    }
+}
+
+impl<C: DeviceV1_0 + ?Sized> KhrDeviceAddressCommandsExtensionDeviceCommands for C {}
+
+/// The device-level commands added by [`KHR_DEVICE_FAULT_EXTENSION`].
+pub trait KhrDeviceFaultExtensionDeviceCommands: DeviceV1_0 {
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetDeviceFaultDebugInfoKHR.html>
+    #[inline]
+    unsafe fn get_device_fault_debug_info_khr(
+        &self,
+        debug_info: &mut DeviceFaultDebugInfoKHR,
+    ) -> crate::VkResult<()> {
+        let __result = (self.commands().get_device_fault_debug_info_khr)(self.handle(), debug_info);
+
+        if __result == Result::SUCCESS {
+            Ok(())
+        } else {
+            Err(__result.into())
+        }
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetDeviceFaultReportsKHR.html>
+    #[inline]
+    unsafe fn get_device_fault_reports_khr(
+        &self,
+        timeout: u64,
+    ) -> crate::VkSuccessResult<Vec<DeviceFaultInfoKHR>> {
+        let mut fault_counts = 0;
+
+        (self.commands().get_device_fault_reports_khr)(
+            self.handle(),
+            timeout,
+            &mut fault_counts,
+            ptr::null_mut(),
+        );
+
+        let mut fault_info = Vec::with_capacity(fault_counts as usize);
+
+        let __result = (self.commands().get_device_fault_reports_khr)(
+            self.handle(),
+            timeout,
+            &mut fault_counts,
+            fault_info.as_mut_ptr(),
+        );
+
+        debug_assert!(fault_info.capacity() >= fault_counts as usize);
+        fault_info.set_len(fault_counts as usize);
+
+        if __result >= Result::SUCCESS {
+            Ok((fault_info, __result.into()))
+        } else {
+            Err(__result.into())
+        }
+    }
+}
+
+impl<C: DeviceV1_0 + ?Sized> KhrDeviceFaultExtensionDeviceCommands for C {}
 
 /// The device-level commands added by [`KHR_DEVICE_GROUP_EXTENSION`].
 pub trait KhrDeviceGroupExtensionDeviceCommands: DeviceV1_0 {
@@ -11972,18 +12614,15 @@ pub trait NvRayTracingExtensionDeviceCommands: DeviceV1_0 {
     unsafe fn get_acceleration_structure_memory_requirements_nv(
         &self,
         info: &AccelerationStructureMemoryRequirementsInfoNV,
-    ) -> MemoryRequirements2KHR {
-        let mut memory_requirements = MaybeUninit::<MemoryRequirements2KHR>::uninit();
-
+        memory_requirements: &mut MemoryRequirements2,
+    ) {
         let __result = (self
             .commands()
             .get_acceleration_structure_memory_requirements_nv)(
             self.handle(),
             info,
-            memory_requirements.as_mut_ptr(),
+            memory_requirements,
         );
-
-        memory_requirements.assume_init()
     }
 
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetRayTracingShaderGroupHandlesNV.html>
@@ -12174,6 +12813,27 @@ pub trait OhosSurfaceExtensionInstanceCommands: InstanceV1_0 {
 }
 
 impl<C: InstanceV1_0 + ?Sized> OhosSurfaceExtensionInstanceCommands for C {}
+
+/// The device-level commands added by [`QCOM_QUEUE_PERF_HINT_EXTENSION`].
+pub trait QcomQueuePerfHintExtensionDeviceCommands: DeviceV1_0 {
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkQueueSetPerfHintQCOM.html>
+    #[inline]
+    unsafe fn queue_set_perf_hint_qcom(
+        &self,
+        queue: Queue,
+        perf_hint_info: &PerfHintInfoQCOM,
+    ) -> crate::VkResult<()> {
+        let __result = (self.commands().queue_set_perf_hint_qcom)(queue, perf_hint_info);
+
+        if __result == Result::SUCCESS {
+            Ok(())
+        } else {
+            Err(__result.into())
+        }
+    }
+}
+
+impl<C: DeviceV1_0 + ?Sized> QcomQueuePerfHintExtensionDeviceCommands for C {}
 
 /// The device-level commands added by [`QCOM_TILE_MEMORY_HEAP_EXTENSION`].
 pub trait QcomTileMemoryHeapExtensionDeviceCommands: DeviceV1_0 {
