@@ -30,6 +30,7 @@ pub const DATA_GRAPH_MODEL_TOOLCHAIN_VERSION_LENGTH_QCOM: i32 = 3;
 pub const FALSE: u32 = 0;
 pub const LOD_CLAMP_NONE: f32 = 1000.0;
 pub const LUID_SIZE: usize = 8;
+pub const MAX_DATA_GRAPH_TOSA_NAME_SIZE_ARM: usize = 128;
 pub const MAX_DESCRIPTION_SIZE: usize = 256;
 pub const MAX_DEVICE_GROUP_SIZE: usize = 32;
 pub const MAX_DRIVER_INFO_SIZE: usize = 256;
