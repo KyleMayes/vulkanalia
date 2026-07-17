@@ -2643,6 +2643,8 @@ pub struct StdVideoH264ChromaFormatIdc(pub ::core::ffi::c_int);
 pub const STD_VIDEO_H264_PROFILE_IDC_BASELINE: StdVideoH264ProfileIdc = StdVideoH264ProfileIdc(66);
 pub const STD_VIDEO_H264_PROFILE_IDC_MAIN: StdVideoH264ProfileIdc = StdVideoH264ProfileIdc(77);
 pub const STD_VIDEO_H264_PROFILE_IDC_HIGH: StdVideoH264ProfileIdc = StdVideoH264ProfileIdc(100);
+pub const STD_VIDEO_H264_PROFILE_IDC_HIGH_10: StdVideoH264ProfileIdc = StdVideoH264ProfileIdc(110);
+pub const STD_VIDEO_H264_PROFILE_IDC_HIGH_422: StdVideoH264ProfileIdc = StdVideoH264ProfileIdc(122);
 pub const STD_VIDEO_H264_PROFILE_IDC_HIGH_444_PREDICTIVE: StdVideoH264ProfileIdc =
     StdVideoH264ProfileIdc(244);
 pub const STD_VIDEO_H264_PROFILE_IDC_INVALID: StdVideoH264ProfileIdc =
