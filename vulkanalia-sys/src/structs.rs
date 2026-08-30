@@ -522,9 +522,9 @@ bitfields32! {
 #[derive(Copy, Clone, Default, Debug, PartialEq)]
 pub struct AccelerationStructureInstanceKHR {
     pub transform: TransformMatrixKHR,
-    pub acceleration_structure_reference: u64,
     pub bitfields0: AccelerationStructureInstanceKHRBitfields0,
     pub bitfields1: AccelerationStructureInstanceKHRBitfields1,
+    pub acceleration_structure_reference: u64,
 }
 
 bitfields32! {
@@ -547,9 +547,9 @@ bitfields32! {
 pub struct AccelerationStructureMatrixMotionInstanceNV {
     pub transform_t0: TransformMatrixKHR,
     pub transform_t1: TransformMatrixKHR,
-    pub acceleration_structure_reference: u64,
     pub bitfields0: AccelerationStructureMatrixMotionInstanceNVBitfields0,
     pub bitfields1: AccelerationStructureMatrixMotionInstanceNVBitfields1,
+    pub acceleration_structure_reference: u64,
 }
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAccelerationStructureMemoryRequirementsInfoNV.html>
@@ -631,9 +631,9 @@ bitfields32! {
 pub struct AccelerationStructureSRTMotionInstanceNV {
     pub transform_t0: SRTDataNV,
     pub transform_t1: SRTDataNV,
-    pub acceleration_structure_reference: u64,
     pub bitfields0: AccelerationStructureSRTMotionInstanceNVBitfields0,
     pub bitfields1: AccelerationStructureSRTMotionInstanceNVBitfields1,
+    pub acceleration_structure_reference: u64,
 }
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAccelerationStructureTrianglesDisplacementMicromapNV.html>
@@ -2650,6 +2650,7 @@ bitfields32! {
 pub struct ClusterAccelerationStructureBuildTriangleClusterInfoNV {
     pub cluster_id: u32,
     pub cluster_flags: ClusterAccelerationStructureClusterFlagsNV,
+    pub bitfields0: ClusterAccelerationStructureBuildTriangleClusterInfoNVBitfields0,
     pub base_geometry_index_and_geometry_flags:
         ClusterAccelerationStructureGeometryIndexAndGeometryFlagsNV,
     pub index_buffer_stride: u16,
@@ -2661,7 +2662,6 @@ pub struct ClusterAccelerationStructureBuildTriangleClusterInfoNV {
     pub geometry_index_and_flags_buffer: DeviceAddress,
     pub opacity_micromap_array: DeviceAddress,
     pub opacity_micromap_index_buffer: DeviceAddress,
-    pub bitfields0: ClusterAccelerationStructureBuildTriangleClusterInfoNVBitfields0,
 }
 
 bitfields32! {
@@ -2680,6 +2680,7 @@ bitfields32! {
 pub struct ClusterAccelerationStructureBuildTriangleClusterTemplateInfoNV {
     pub cluster_id: u32,
     pub cluster_flags: ClusterAccelerationStructureClusterFlagsNV,
+    pub bitfields0: ClusterAccelerationStructureBuildTriangleClusterTemplateInfoNVBitfields0,
     pub base_geometry_index_and_geometry_flags:
         ClusterAccelerationStructureGeometryIndexAndGeometryFlagsNV,
     pub index_buffer_stride: u16,
@@ -2692,7 +2693,6 @@ pub struct ClusterAccelerationStructureBuildTriangleClusterTemplateInfoNV {
     pub opacity_micromap_array: DeviceAddress,
     pub opacity_micromap_index_buffer: DeviceAddress,
     pub instantiation_bounding_box_limit: DeviceAddress,
-    pub bitfields0: ClusterAccelerationStructureBuildTriangleClusterTemplateInfoNVBitfields0,
 }
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkClusterAccelerationStructureClustersBottomLevelInputNV.html>
@@ -2823,9 +2823,9 @@ bitfields32! {
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct ClusterAccelerationStructureInstantiateClusterInfoNV {
     pub cluster_id_offset: u32,
+    pub bitfields0: ClusterAccelerationStructureInstantiateClusterInfoNVBitfields0,
     pub cluster_template_address: DeviceAddress,
     pub vertex_buffer: StridedDeviceAddressNV,
-    pub bitfields0: ClusterAccelerationStructureInstantiateClusterInfoNVBitfields0,
 }
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkClusterAccelerationStructureMoveObjectsInfoNV.html>

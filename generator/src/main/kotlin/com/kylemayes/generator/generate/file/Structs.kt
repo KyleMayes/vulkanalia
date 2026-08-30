@@ -34,16 +34,23 @@ ${generateAliases(structs.keys)}
 private fun Registry.generateStruct(struct: Structure): String {
     val derives = getStructDerives(struct)
 
-    val fields = mutableListOf<String>()
-    for (member in struct.members.filter { it.bits == null }) {
-        fields.add("pub ${member.name}: ${member.type.generate()}")
-    }
+    val structBitfields = getStructBitfields(struct)
+    val bitfields =
+        structBitfields.indexToMembers.map { (index, members) ->
+            generateBitfield("${struct.name}Bitfields$index", members)
+        }
 
-    val bitfields = mutableListOf<String>()
-    for ((index, members) in getStructBitfields(struct).indexToMembers) {
-        val name = "${struct.name}Bitfields$index"
-        fields.add("pub bitfields$index: $name")
-        bitfields.add(generateBitfield(name, members))
+    val fields = mutableListOf<String>()
+    val emittedBitfields = mutableSetOf<Int>()
+    for (member in struct.members) {
+        val bitfieldIndex = structBitfields.memberToIndex[member.name]
+        if (bitfieldIndex == null) {
+            fields.add("pub ${member.name}: ${member.type.generate()}")
+        } else if (emittedBitfields.add(bitfieldIndex)) {
+            fields.add(
+                "pub bitfields$bitfieldIndex: ${struct.name}Bitfields$bitfieldIndex",
+            )
+        }
     }
 
     val pointers = struct.members.any { m -> m.type.isPointer() }
