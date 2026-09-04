@@ -1271,6 +1271,50 @@ impl fmt::Debug for Framebuffer {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkGpaSessionAMD.html>
+#[repr(transparent)]
+#[derive(Copy, Clone, PartialEq, Eq, Hash)]
+pub struct GpaSessionAMD(u64);
+
+impl Handle for GpaSessionAMD {
+    type Repr = u64;
+
+    const TYPE: ObjectType = ObjectType::GPA_SESSION_AMD;
+
+    #[inline]
+    fn null() -> Self {
+        Self(0)
+    }
+
+    #[inline]
+    fn from_raw(value: Self::Repr) -> Self {
+        Self(value)
+    }
+
+    #[inline]
+    fn as_raw(self) -> Self::Repr {
+        self.0
+    }
+
+    #[inline]
+    fn is_null(self) -> bool {
+        self.0 == 0
+    }
+}
+
+impl Default for GpaSessionAMD {
+    #[inline]
+    fn default() -> Self {
+        Self::null()
+    }
+}
+
+impl fmt::Debug for GpaSessionAMD {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "GpaSessionAMD({:p})", self.0 as *const u8)
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImage.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, Hash)]
@@ -2284,6 +2328,50 @@ impl Default for ShaderEXT {
 impl fmt::Debug for ShaderEXT {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         write!(f, "ShaderEXT({:p})", self.0 as *const u8)
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkShaderInstrumentationARM.html>
+#[repr(transparent)]
+#[derive(Copy, Clone, PartialEq, Eq, Hash)]
+pub struct ShaderInstrumentationARM(u64);
+
+impl Handle for ShaderInstrumentationARM {
+    type Repr = u64;
+
+    const TYPE: ObjectType = ObjectType::SHADER_INSTRUMENTATION_ARM;
+
+    #[inline]
+    fn null() -> Self {
+        Self(0)
+    }
+
+    #[inline]
+    fn from_raw(value: Self::Repr) -> Self {
+        Self(value)
+    }
+
+    #[inline]
+    fn as_raw(self) -> Self::Repr {
+        self.0
+    }
+
+    #[inline]
+    fn is_null(self) -> bool {
+        self.0 == 0
+    }
+}
+
+impl Default for ShaderInstrumentationARM {
+    #[inline]
+    fn default() -> Self {
+        Self::null()
+    }
+}
+
+impl fmt::Debug for ShaderInstrumentationARM {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "ShaderInstrumentationARM({:p})", self.0 as *const u8)
     }
 }
 
