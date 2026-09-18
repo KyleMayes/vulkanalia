@@ -78,6 +78,8 @@
 - [August 28, 2026 Vulkan 1.4.361 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/20a9e5892e2aab7b9776b16a238b10fc8133090a)
 - [Add an interaction between KHR_maintenance11 and KHR_device_address_commands (#2804)](https://github.com/KhronosGroup/Vulkan-Docs/commit/a8c7ea3e0ee200b9dad138c9c891403f4ce24e2e)
 - [September 4, 2026 Vulkan 1.4.362 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/f84d432d5b8912362f96f581f29bbc4f3c8c7843)
+- [Fix Subgroup Scope Example (#2813)](https://github.com/KhronosGroup/Vulkan-Docs/commit/c25d402d7e53c587f1637045f385c6064db319f7)
+- [September 18, 2026 Vulkan 1.4.363 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/560d4305e8a6466fa7d07c83ca09429e4d010ff9)
 
 ## [0.35.0] - 2026-02-15
 
