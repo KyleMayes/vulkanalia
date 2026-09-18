@@ -19528,6 +19528,33 @@ impl Default for PhysicalDeviceIndexTypeUint8Features {
 unsafe impl Send for PhysicalDeviceIndexTypeUint8Features {}
 unsafe impl Sync for PhysicalDeviceIndexTypeUint8Features {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceInfoPropertiesINTEL.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceInfoPropertiesINTEL {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub device_ip_version_arch: u32,
+    pub device_ip_version_release: u32,
+    pub device_ip_version_revision: u32,
+}
+
+impl Default for PhysicalDeviceInfoPropertiesINTEL {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_INFO_PROPERTIES_INTEL,
+            next: ptr::null_mut(),
+            device_ip_version_arch: u32::default(),
+            device_ip_version_release: u32::default(),
+            device_ip_version_revision: u32::default(),
+        }
+    }
+}
+
+unsafe impl Send for PhysicalDeviceInfoPropertiesINTEL {}
+unsafe impl Sync for PhysicalDeviceInfoPropertiesINTEL {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceInheritedViewportScissorFeaturesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]

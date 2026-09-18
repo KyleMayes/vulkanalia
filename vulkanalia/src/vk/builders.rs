@@ -59560,6 +59560,76 @@ unsafe impl Cast for PhysicalDeviceIndexTypeUint8FeaturesBuilder {
     }
 }
 
+unsafe impl Cast for PhysicalDeviceInfoPropertiesINTEL {
+    type Target = PhysicalDeviceInfoPropertiesINTEL;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceInfoPropertiesINTEL {
+    type Builder = PhysicalDeviceInfoPropertiesINTELBuilder;
+}
+
+/// A builder for a [`PhysicalDeviceInfoPropertiesINTEL`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceInfoPropertiesINTELBuilder {
+    value: PhysicalDeviceInfoPropertiesINTEL,
+}
+
+impl PhysicalDeviceInfoPropertiesINTELBuilder {
+    #[inline]
+    pub fn device_ip_version_arch(mut self, device_ip_version_arch: u32) -> Self {
+        self.value.device_ip_version_arch = device_ip_version_arch;
+        self
+    }
+
+    #[inline]
+    pub fn device_ip_version_release(mut self, device_ip_version_release: u32) -> Self {
+        self.value.device_ip_version_release = device_ip_version_release;
+        self
+    }
+
+    #[inline]
+    pub fn device_ip_version_revision(mut self, device_ip_version_revision: u32) -> Self {
+        self.value.device_ip_version_revision = device_ip_version_revision;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceInfoPropertiesINTEL {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceInfoPropertiesINTELBuilder {
+    type Target = PhysicalDeviceInfoPropertiesINTEL;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceInfoPropertiesINTELBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceInfoPropertiesINTELBuilder {
+    type Target = PhysicalDeviceInfoPropertiesINTEL;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for PhysicalDeviceInheritedViewportScissorFeaturesNV {
     type Target = PhysicalDeviceInheritedViewportScissorFeaturesNV;
 
@@ -67397,6 +67467,7 @@ unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceIDProperties {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceImageAlignmentControlPropertiesMESA {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceImageProcessing2PropertiesQCOM {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceImageProcessingPropertiesQCOM {}
+unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceInfoPropertiesINTEL {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceInlineUniformBlockProperties {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceLayeredApiPropertiesListKHR {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceLayeredDriverPropertiesMSFT {}

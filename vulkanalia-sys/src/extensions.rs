@@ -3523,6 +3523,22 @@ pub const IMG_RELAXED_LINE_RASTERIZATION_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_INTEL_device_info.html>
+#[allow(deprecated)]
+pub const INTEL_DEVICE_INFO_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_INTEL_device_info"),
+    number: 709,
+    type_: "device",
+    author: "INTEL",
+    contact: "Jakub Szymczyk @jakubszy",
+    platform: None,
+    required_extensions: None,
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_INTEL_performance_query.html>
 #[allow(deprecated)]
 pub const INTEL_PERFORMANCE_QUERY_EXTENSION: Extension = Extension {
