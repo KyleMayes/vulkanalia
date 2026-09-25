@@ -39664,6 +39664,10 @@ unsafe impl Cast for MemoryBarrierBuilder {
     }
 }
 
+/// A Vulkan struct that can be used to extend a [`MemoryBarrier2`].
+pub unsafe trait ExtendsMemoryBarrier2: fmt::Debug {}
+unsafe impl ExtendsMemoryBarrier2 for MemoryBarrierAccessFlags3KHR {}
+
 unsafe impl Cast for MemoryBarrier2 {
     type Target = MemoryBarrier2;
 
@@ -39673,18 +39677,28 @@ unsafe impl Cast for MemoryBarrier2 {
     }
 }
 
-impl HasBuilder<'static> for MemoryBarrier2 {
-    type Builder = MemoryBarrier2Builder;
+impl<'b> HasBuilder<'b> for MemoryBarrier2 {
+    type Builder = MemoryBarrier2Builder<'b>;
 }
 
 /// A builder for a [`MemoryBarrier2`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
-pub struct MemoryBarrier2Builder {
+pub struct MemoryBarrier2Builder<'b> {
     value: MemoryBarrier2,
+    _marker: PhantomData<&'b ()>,
 }
 
-impl MemoryBarrier2Builder {
+impl<'b> MemoryBarrier2Builder<'b> {
+    #[inline]
+    pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
+    where
+        T: ExtendsMemoryBarrier2,
+    {
+        self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
+        self
+    }
+
     #[inline]
     pub fn src_stage_mask(mut self, src_stage_mask: PipelineStageFlags2) -> Self {
         self.value.src_stage_mask = src_stage_mask;
@@ -39715,7 +39729,7 @@ impl MemoryBarrier2Builder {
     }
 }
 
-impl ops::Deref for MemoryBarrier2Builder {
+impl ops::Deref for MemoryBarrier2Builder<'_> {
     type Target = MemoryBarrier2;
 
     #[inline]
@@ -39724,14 +39738,14 @@ impl ops::Deref for MemoryBarrier2Builder {
     }
 }
 
-impl ops::DerefMut for MemoryBarrier2Builder {
+impl ops::DerefMut for MemoryBarrier2Builder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl Cast for MemoryBarrier2Builder {
+unsafe impl Cast for MemoryBarrier2Builder<'_> {
     type Target = MemoryBarrier2;
 
     #[inline]
@@ -41069,6 +41083,10 @@ unsafe impl Cast for MemoryPriorityAllocateInfoEXTBuilder {
     }
 }
 
+/// A Vulkan struct that can be used to extend a [`MemoryRangeBarrierKHR`].
+pub unsafe trait ExtendsMemoryRangeBarrierKHR: fmt::Debug {}
+unsafe impl ExtendsMemoryRangeBarrierKHR for MemoryBarrierAccessFlags3KHR {}
+
 unsafe impl Cast for MemoryRangeBarrierKHR {
     type Target = MemoryRangeBarrierKHR;
 
@@ -41078,18 +41096,28 @@ unsafe impl Cast for MemoryRangeBarrierKHR {
     }
 }
 
-impl HasBuilder<'static> for MemoryRangeBarrierKHR {
-    type Builder = MemoryRangeBarrierKHRBuilder;
+impl<'b> HasBuilder<'b> for MemoryRangeBarrierKHR {
+    type Builder = MemoryRangeBarrierKHRBuilder<'b>;
 }
 
 /// A builder for a [`MemoryRangeBarrierKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
-pub struct MemoryRangeBarrierKHRBuilder {
+pub struct MemoryRangeBarrierKHRBuilder<'b> {
     value: MemoryRangeBarrierKHR,
+    _marker: PhantomData<&'b ()>,
 }
 
-impl MemoryRangeBarrierKHRBuilder {
+impl<'b> MemoryRangeBarrierKHRBuilder<'b> {
+    #[inline]
+    pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
+    where
+        T: ExtendsMemoryRangeBarrierKHR,
+    {
+        self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
+        self
+    }
+
     #[inline]
     pub fn src_stage_mask(mut self, src_stage_mask: PipelineStageFlags2) -> Self {
         self.value.src_stage_mask = src_stage_mask;
@@ -41147,7 +41175,7 @@ impl MemoryRangeBarrierKHRBuilder {
     }
 }
 
-impl ops::Deref for MemoryRangeBarrierKHRBuilder {
+impl ops::Deref for MemoryRangeBarrierKHRBuilder<'_> {
     type Target = MemoryRangeBarrierKHR;
 
     #[inline]
@@ -41156,14 +41184,14 @@ impl ops::Deref for MemoryRangeBarrierKHRBuilder {
     }
 }
 
-impl ops::DerefMut for MemoryRangeBarrierKHRBuilder {
+impl ops::DerefMut for MemoryRangeBarrierKHRBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl Cast for MemoryRangeBarrierKHRBuilder {
+unsafe impl Cast for MemoryRangeBarrierKHRBuilder<'_> {
     type Target = MemoryRangeBarrierKHR;
 
     #[inline]
@@ -41171,10 +41199,6 @@ unsafe impl Cast for MemoryRangeBarrierKHRBuilder {
         self.value
     }
 }
-
-/// A Vulkan struct that can be used to extend a [`MemoryRangeBarriersInfoKHR`].
-pub unsafe trait ExtendsMemoryRangeBarriersInfoKHR: fmt::Debug {}
-unsafe impl ExtendsMemoryRangeBarriersInfoKHR for MemoryBarrierAccessFlags3KHR {}
 
 unsafe impl Cast for MemoryRangeBarriersInfoKHR {
     type Target = MemoryRangeBarriersInfoKHR;
@@ -41198,15 +41222,6 @@ pub struct MemoryRangeBarriersInfoKHRBuilder<'b> {
 }
 
 impl<'b> MemoryRangeBarriersInfoKHRBuilder<'b> {
-    #[inline]
-    pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
-    where
-        T: ExtendsMemoryRangeBarriersInfoKHR,
-    {
-        self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
-        self
-    }
-
     #[inline]
     pub fn memory_range_barriers(
         mut self,
@@ -59560,6 +59575,76 @@ unsafe impl Cast for PhysicalDeviceIndexTypeUint8FeaturesBuilder {
     }
 }
 
+unsafe impl Cast for PhysicalDeviceInfoPropertiesINTEL {
+    type Target = PhysicalDeviceInfoPropertiesINTEL;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceInfoPropertiesINTEL {
+    type Builder = PhysicalDeviceInfoPropertiesINTELBuilder;
+}
+
+/// A builder for a [`PhysicalDeviceInfoPropertiesINTEL`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceInfoPropertiesINTELBuilder {
+    value: PhysicalDeviceInfoPropertiesINTEL,
+}
+
+impl PhysicalDeviceInfoPropertiesINTELBuilder {
+    #[inline]
+    pub fn device_ip_version_arch(mut self, device_ip_version_arch: u32) -> Self {
+        self.value.device_ip_version_arch = device_ip_version_arch;
+        self
+    }
+
+    #[inline]
+    pub fn device_ip_version_release(mut self, device_ip_version_release: u32) -> Self {
+        self.value.device_ip_version_release = device_ip_version_release;
+        self
+    }
+
+    #[inline]
+    pub fn device_ip_version_revision(mut self, device_ip_version_revision: u32) -> Self {
+        self.value.device_ip_version_revision = device_ip_version_revision;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceInfoPropertiesINTEL {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceInfoPropertiesINTELBuilder {
+    type Target = PhysicalDeviceInfoPropertiesINTEL;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceInfoPropertiesINTELBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceInfoPropertiesINTELBuilder {
+    type Target = PhysicalDeviceInfoPropertiesINTEL;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for PhysicalDeviceInheritedViewportScissorFeaturesNV {
     type Target = PhysicalDeviceInheritedViewportScissorFeaturesNV;
 
@@ -67397,6 +67482,7 @@ unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceIDProperties {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceImageAlignmentControlPropertiesMESA {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceImageProcessing2PropertiesQCOM {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceImageProcessingPropertiesQCOM {}
+unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceInfoPropertiesINTEL {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceInlineUniformBlockProperties {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceLayeredApiPropertiesListKHR {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceLayeredDriverPropertiesMSFT {}
@@ -82234,6 +82320,13 @@ unsafe impl Cast for PipelineCreateFlags2CreateInfoBuilder {
     }
 }
 
+/// A Vulkan struct that can be used to extend a [`PipelineCreateInfoKHR`].
+pub unsafe trait ExtendsPipelineCreateInfoKHR: fmt::Debug {}
+unsafe impl ExtendsPipelineCreateInfoKHR for ComputePipelineCreateInfo {}
+unsafe impl ExtendsPipelineCreateInfoKHR for ExecutionGraphPipelineCreateInfoAMDX {}
+unsafe impl ExtendsPipelineCreateInfoKHR for GraphicsPipelineCreateInfo {}
+unsafe impl ExtendsPipelineCreateInfoKHR for RayTracingPipelineCreateInfoKHR {}
+
 unsafe impl Cast for PipelineCreateInfoKHR {
     type Target = PipelineCreateInfoKHR;
 
@@ -82243,25 +82336,35 @@ unsafe impl Cast for PipelineCreateInfoKHR {
     }
 }
 
-impl HasBuilder<'static> for PipelineCreateInfoKHR {
-    type Builder = PipelineCreateInfoKHRBuilder;
+impl<'b> HasBuilder<'b> for PipelineCreateInfoKHR {
+    type Builder = PipelineCreateInfoKHRBuilder<'b>;
 }
 
 /// A builder for a [`PipelineCreateInfoKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
-pub struct PipelineCreateInfoKHRBuilder {
+pub struct PipelineCreateInfoKHRBuilder<'b> {
     value: PipelineCreateInfoKHR,
+    _marker: PhantomData<&'b ()>,
 }
 
-impl PipelineCreateInfoKHRBuilder {
+impl<'b> PipelineCreateInfoKHRBuilder<'b> {
+    #[inline]
+    pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
+    where
+        T: ExtendsPipelineCreateInfoKHR,
+    {
+        self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
+        self
+    }
+
     #[inline]
     pub fn build(self) -> PipelineCreateInfoKHR {
         self.value
     }
 }
 
-impl ops::Deref for PipelineCreateInfoKHRBuilder {
+impl ops::Deref for PipelineCreateInfoKHRBuilder<'_> {
     type Target = PipelineCreateInfoKHR;
 
     #[inline]
@@ -82270,14 +82373,14 @@ impl ops::Deref for PipelineCreateInfoKHRBuilder {
     }
 }
 
-impl ops::DerefMut for PipelineCreateInfoKHRBuilder {
+impl ops::DerefMut for PipelineCreateInfoKHRBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl Cast for PipelineCreateInfoKHRBuilder {
+unsafe impl Cast for PipelineCreateInfoKHRBuilder<'_> {
     type Target = PipelineCreateInfoKHR;
 
     #[inline]
@@ -94585,21 +94688,9 @@ impl<'b> ShaderCreateInfoEXTBuilder<'b> {
     }
 
     #[inline]
-    pub fn set_layout_count(mut self, set_layout_count: u32) -> Self {
-        self.value.set_layout_count = set_layout_count;
-        self
-    }
-
-    #[inline]
     pub fn set_layouts(mut self, set_layouts: &'b [DescriptorSetLayout]) -> Self {
         self.value.set_layout_count = set_layouts.len() as u32;
         self.value.set_layouts = set_layouts.as_ptr();
-        self
-    }
-
-    #[inline]
-    pub fn push_constant_range_count(mut self, push_constant_range_count: u32) -> Self {
-        self.value.push_constant_range_count = push_constant_range_count;
         self
     }
 
@@ -101477,21 +101568,9 @@ pub struct TimelineSemaphoreSubmitInfoBuilder<'b> {
 
 impl<'b> TimelineSemaphoreSubmitInfoBuilder<'b> {
     #[inline]
-    pub fn wait_semaphore_value_count(mut self, wait_semaphore_value_count: u32) -> Self {
-        self.value.wait_semaphore_value_count = wait_semaphore_value_count;
-        self
-    }
-
-    #[inline]
     pub fn wait_semaphore_values(mut self, wait_semaphore_values: &'b [u64]) -> Self {
         self.value.wait_semaphore_value_count = wait_semaphore_values.len() as u32;
         self.value.wait_semaphore_values = wait_semaphore_values.as_ptr();
-        self
-    }
-
-    #[inline]
-    pub fn signal_semaphore_value_count(mut self, signal_semaphore_value_count: u32) -> Self {
-        self.value.signal_semaphore_value_count = signal_semaphore_value_count;
         self
     }
 

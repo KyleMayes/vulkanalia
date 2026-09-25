@@ -11247,6 +11247,27 @@ unsafe impl OutputChainStruct for PhysicalDeviceIndexTypeUint8Features {
     }
 }
 
+unsafe impl InputChainStruct for PhysicalDeviceInfoPropertiesINTEL {
+    const TYPE: StructureType = StructureType::PHYSICAL_DEVICE_INFO_PROPERTIES_INTEL;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl OutputChainStruct for PhysicalDeviceInfoPropertiesINTEL {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
+        self.next
+    }
+}
+
 unsafe impl InputChainStruct for PhysicalDeviceInheritedViewportScissorFeaturesNV {
     const TYPE: StructureType =
         StructureType::PHYSICAL_DEVICE_INHERITED_VIEWPORT_SCISSOR_FEATURES_NV;
