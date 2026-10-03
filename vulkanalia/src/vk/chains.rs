@@ -8442,6 +8442,28 @@ unsafe impl InputChainStruct for PhysicalDeviceCooperativeMatrixInfo2EXT {
     }
 }
 
+unsafe impl InputChainStruct for PhysicalDeviceCooperativeMatrixLayoutsFeaturesARM {
+    const TYPE: StructureType =
+        StructureType::PHYSICAL_DEVICE_COOPERATIVE_MATRIX_LAYOUTS_FEATURES_ARM;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl OutputChainStruct for PhysicalDeviceCooperativeMatrixLayoutsFeaturesARM {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
+        self.next
+    }
+}
+
 unsafe impl InputChainStruct for PhysicalDeviceCooperativeMatrixMaintenance1FeaturesEXT {
     const TYPE: StructureType =
         StructureType::PHYSICAL_DEVICE_COOPERATIVE_MATRIX_MAINTENANCE_1_FEATURES_EXT;
@@ -11241,6 +11263,27 @@ unsafe impl InputChainStruct for PhysicalDeviceIndexTypeUint8Features {
 }
 
 unsafe impl OutputChainStruct for PhysicalDeviceIndexTypeUint8Features {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
+        self.next
+    }
+}
+
+unsafe impl InputChainStruct for PhysicalDeviceInfoPropertiesINTEL {
+    const TYPE: StructureType = StructureType::PHYSICAL_DEVICE_INFO_PROPERTIES_INTEL;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl OutputChainStruct for PhysicalDeviceInfoPropertiesINTEL {
     #[inline]
     fn next_mut(&self) -> *mut c_void {
         self.next

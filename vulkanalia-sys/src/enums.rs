@@ -2460,6 +2460,7 @@ impl DriverId {
     pub const MESA_GFXSTREAM: Self = Self(29);
     pub const APE_SOFT: Self = Self(30);
     pub const RESERVED_31: Self = Self(31);
+    pub const APEX: Self = Self(32);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -2508,6 +2509,7 @@ impl fmt::Debug for DriverId {
             29 => write!(f, "MESA_GFXSTREAM"),
             30 => write!(f, "APE_SOFT"),
             31 => write!(f, "RESERVED_31"),
+            32 => write!(f, "APEX"),
             _ => self.0.fmt(f),
         }
     }
@@ -8139,6 +8141,7 @@ impl StructureType {
     pub const PHYSICAL_DEVICE_EXTENDED_FLAGS_FEATURES_KHR: Self = Self(1000668004);
     pub const IMAGE_STENCIL_USAGE_2_CREATE_INFO_KHR: Self = Self(1000668005);
     pub const SHARED_PRESENT_SURFACE_CAPABILITIES_2_KHR: Self = Self(1000668006);
+    pub const PHYSICAL_DEVICE_COOPERATIVE_MATRIX_LAYOUTS_FEATURES_ARM: Self = Self(1000670000);
     pub const PHYSICAL_DEVICE_SHADER_OCP_MICROSCALING_TYPES_FEATURES_EXT: Self = Self(1000672000);
     pub const PHYSICAL_DEVICE_SHADER_MIXED_FLOAT_DOT_PRODUCT_FEATURES_VALVE: Self =
         Self(1000673000);
@@ -8154,6 +8157,7 @@ impl StructureType {
     pub const IMAGE_TILING_CONTROL_CREATE_INFO_EXT: Self = Self(1000687001);
     pub const PHYSICAL_DEVICE_COOPERATIVE_MATRIX_DECODE_VECTOR_FEATURES_NV: Self = Self(1000689000);
     pub const PHYSICAL_DEVICE_PRIVATE_DATA_BASE_HANDLE_FEATURES_NV: Self = Self(1000707000);
+    pub const PHYSICAL_DEVICE_INFO_PROPERTIES_INTEL: Self = Self(1000708000);
     pub const PHYSICAL_DEVICE_BUFFER_DEVICE_ADDRESS_ALLOCATION_ALIGNMENT_FEATURES_VALVE: Self =
         Self(1000709000);
     pub const PHYSICAL_DEVICE_BUFFER_DEVICE_ADDRESS_ALLOCATION_ALIGNMENT_PROPERTIES_VALVE: Self =
@@ -9759,6 +9763,7 @@ impl fmt::Debug for StructureType {
             1000668004 => write!(f, "PHYSICAL_DEVICE_EXTENDED_FLAGS_FEATURES_KHR"),
             1000668005 => write!(f, "IMAGE_STENCIL_USAGE_2_CREATE_INFO_KHR"),
             1000668006 => write!(f, "SHARED_PRESENT_SURFACE_CAPABILITIES_2_KHR"),
+            1000670000 => write!(f, "PHYSICAL_DEVICE_COOPERATIVE_MATRIX_LAYOUTS_FEATURES_ARM"),
             1000672000 => write!(
                 f,
                 "PHYSICAL_DEVICE_SHADER_OCP_MICROSCALING_TYPES_FEATURES_EXT"
@@ -9786,6 +9791,7 @@ impl fmt::Debug for StructureType {
                 "PHYSICAL_DEVICE_COOPERATIVE_MATRIX_DECODE_VECTOR_FEATURES_NV"
             ),
             1000707000 => write!(f, "PHYSICAL_DEVICE_PRIVATE_DATA_BASE_HANDLE_FEATURES_NV"),
+            1000708000 => write!(f, "PHYSICAL_DEVICE_INFO_PROPERTIES_INTEL"),
             1000709000 => write!(
                 f,
                 "PHYSICAL_DEVICE_BUFFER_DEVICE_ADDRESS_ALLOCATION_ALIGNMENT_FEATURES_VALVE"
@@ -10235,6 +10241,7 @@ impl VendorId {
     pub const POCL: Self = Self(65542);
     pub const MOBILEYE: Self = Self(65543);
     pub const APE: Self = Self(65544);
+    pub const APEX: Self = Self(65545);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -10261,6 +10268,7 @@ impl fmt::Debug for VendorId {
             65542 => write!(f, "POCL"),
             65543 => write!(f, "MOBILEYE"),
             65544 => write!(f, "APE"),
+            65545 => write!(f, "APEX"),
             _ => self.0.fmt(f),
         }
     }
