@@ -523,6 +523,22 @@ pub const ANDROID_EXTERNAL_MEMORY_ANDROID_HARDWARE_BUFFER_EXTENSION: Extension =
     promoted_to: None,
 };
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_ARM_cooperative_matrix_layouts.html>
+#[allow(deprecated)]
+pub const ARM_COOPERATIVE_MATRIX_LAYOUTS_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_ARM_cooperative_matrix_layouts"),
+    number: 671,
+    type_: "device",
+    author: "ARM",
+    contact: "Kevin Petit @kevinpetit",
+    platform: None,
+    required_extensions: None,
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_ARM_data_graph.html>
 #[allow(deprecated)]
 pub const ARM_DATA_GRAPH_EXTENSION: Extension = Extension {
@@ -3515,6 +3531,22 @@ pub const IMG_RELAXED_LINE_RASTERIZATION_EXTENSION: Extension = Extension {
     type_: "device",
     author: "IMG",
     contact: "James Fitzpatrick @jamesfitzpatrick",
+    platform: None,
+    required_extensions: None,
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_INTEL_device_info.html>
+#[allow(deprecated)]
+pub const INTEL_DEVICE_INFO_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_INTEL_device_info"),
+    number: 709,
+    type_: "device",
+    author: "INTEL",
+    contact: "Jakub Szymczyk @jakubszy",
     platform: None,
     required_extensions: None,
     required_version: None,
