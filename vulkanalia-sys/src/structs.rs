@@ -10312,6 +10312,33 @@ impl Default for HdrMetadataEXT {
 unsafe impl Send for HdrMetadataEXT {}
 unsafe impl Sync for HdrMetadataEXT {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkHdrSmpteSt209450GOOGLE.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct HdrSmpteSt209450GOOGLE {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub metadata_size: usize,
+    pub metadata: *const c_void,
+    pub power_preference: HdrSmpteSt209450PowerPreferenceGOOGLE,
+}
+
+impl Default for HdrSmpteSt209450GOOGLE {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::HDR_SMPTE_ST_209450_GOOGLE,
+            next: ptr::null(),
+            metadata_size: usize::default(),
+            metadata: ptr::null(),
+            power_preference: HdrSmpteSt209450PowerPreferenceGOOGLE::default(),
+        }
+    }
+}
+
+unsafe impl Send for HdrSmpteSt209450GOOGLE {}
+unsafe impl Sync for HdrSmpteSt209450GOOGLE {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkHdrVividDynamicMetadataHUAWEI.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -15802,6 +15829,29 @@ impl Default for PhysicalDeviceCooperativeMatrixInfo2EXT {
 unsafe impl Send for PhysicalDeviceCooperativeMatrixInfo2EXT {}
 unsafe impl Sync for PhysicalDeviceCooperativeMatrixInfo2EXT {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceCooperativeMatrixLayoutsFeaturesARM.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceCooperativeMatrixLayoutsFeaturesARM {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub cooperative_matrix_arm_layouts: Bool32,
+}
+
+impl Default for PhysicalDeviceCooperativeMatrixLayoutsFeaturesARM {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_COOPERATIVE_MATRIX_LAYOUTS_FEATURES_ARM,
+            next: ptr::null_mut(),
+            cooperative_matrix_arm_layouts: Bool32::default(),
+        }
+    }
+}
+
+unsafe impl Send for PhysicalDeviceCooperativeMatrixLayoutsFeaturesARM {}
+unsafe impl Sync for PhysicalDeviceCooperativeMatrixLayoutsFeaturesARM {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceCooperativeMatrixMaintenance1FeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -18928,6 +18978,29 @@ impl Default for PhysicalDeviceGroupProperties {
 unsafe impl Send for PhysicalDeviceGroupProperties {}
 unsafe impl Sync for PhysicalDeviceGroupProperties {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceHdrSmpteSt209450FeaturesGOOGLE.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceHdrSmpteSt209450FeaturesGOOGLE {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub hdr_smpte_st209450: Bool32,
+}
+
+impl Default for PhysicalDeviceHdrSmpteSt209450FeaturesGOOGLE {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_HDR_SMPTE_ST_209450_FEATURES_GOOGLE,
+            next: ptr::null_mut(),
+            hdr_smpte_st209450: Bool32::default(),
+        }
+    }
+}
+
+unsafe impl Send for PhysicalDeviceHdrSmpteSt209450FeaturesGOOGLE {}
+unsafe impl Sync for PhysicalDeviceHdrSmpteSt209450FeaturesGOOGLE {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceHdrVividFeaturesHUAWEI.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -19527,6 +19600,33 @@ impl Default for PhysicalDeviceIndexTypeUint8Features {
 
 unsafe impl Send for PhysicalDeviceIndexTypeUint8Features {}
 unsafe impl Sync for PhysicalDeviceIndexTypeUint8Features {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceInfoPropertiesINTEL.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceInfoPropertiesINTEL {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub device_ip_version_arch: u32,
+    pub device_ip_version_release: u32,
+    pub device_ip_version_revision: u32,
+}
+
+impl Default for PhysicalDeviceInfoPropertiesINTEL {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_INFO_PROPERTIES_INTEL,
+            next: ptr::null_mut(),
+            device_ip_version_arch: u32::default(),
+            device_ip_version_release: u32::default(),
+            device_ip_version_revision: u32::default(),
+        }
+    }
+}
+
+unsafe impl Send for PhysicalDeviceInfoPropertiesINTEL {}
+unsafe impl Sync for PhysicalDeviceInfoPropertiesINTEL {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceInheritedViewportScissorFeaturesNV.html>
 #[repr(C)]
@@ -32405,6 +32505,29 @@ impl Default for SurfaceCapabilitiesFullScreenExclusiveEXT {
 
 unsafe impl Send for SurfaceCapabilitiesFullScreenExclusiveEXT {}
 unsafe impl Sync for SurfaceCapabilitiesFullScreenExclusiveEXT {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSurfaceCapabilitiesHdrSmpteSt209450GOOGLE.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct SurfaceCapabilitiesHdrSmpteSt209450GOOGLE {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub hdr_smpte_st209450_supported: Bool32,
+}
+
+impl Default for SurfaceCapabilitiesHdrSmpteSt209450GOOGLE {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::SURFACE_CAPABILITIES_HDR_SMPTE_ST_209450_GOOGLE,
+            next: ptr::null_mut(),
+            hdr_smpte_st209450_supported: Bool32::default(),
+        }
+    }
+}
+
+unsafe impl Send for SurfaceCapabilitiesHdrSmpteSt209450GOOGLE {}
+unsafe impl Sync for SurfaceCapabilitiesHdrSmpteSt209450GOOGLE {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSurfaceCapabilitiesKHR.html>
 #[repr(C)]
