@@ -5181,6 +5181,20 @@ unsafe impl InputChainStruct for HdrMetadataEXT {
     }
 }
 
+unsafe impl InputChainStruct for HdrSmpteSt209450GOOGLE {
+    const TYPE: StructureType = StructureType::HDR_SMPTE_ST_209450_GOOGLE;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
 unsafe impl InputChainStruct for HdrVividDynamicMetadataHUAWEI {
     const TYPE: StructureType = StructureType::HDR_VIVID_DYNAMIC_METADATA_HUAWEI;
 
@@ -8442,6 +8456,28 @@ unsafe impl InputChainStruct for PhysicalDeviceCooperativeMatrixInfo2EXT {
     }
 }
 
+unsafe impl InputChainStruct for PhysicalDeviceCooperativeMatrixLayoutsFeaturesARM {
+    const TYPE: StructureType =
+        StructureType::PHYSICAL_DEVICE_COOPERATIVE_MATRIX_LAYOUTS_FEATURES_ARM;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl OutputChainStruct for PhysicalDeviceCooperativeMatrixLayoutsFeaturesARM {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
+        self.next
+    }
+}
+
 unsafe impl InputChainStruct for PhysicalDeviceCooperativeMatrixMaintenance1FeaturesEXT {
     const TYPE: StructureType =
         StructureType::PHYSICAL_DEVICE_COOPERATIVE_MATRIX_MAINTENANCE_1_FEATURES_EXT;
@@ -10753,6 +10789,27 @@ unsafe impl OutputChainStruct for PhysicalDeviceGroupProperties {
     }
 }
 
+unsafe impl InputChainStruct for PhysicalDeviceHdrSmpteSt209450FeaturesGOOGLE {
+    const TYPE: StructureType = StructureType::PHYSICAL_DEVICE_HDR_SMPTE_ST_209450_FEATURES_GOOGLE;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl OutputChainStruct for PhysicalDeviceHdrSmpteSt209450FeaturesGOOGLE {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
+        self.next
+    }
+}
+
 unsafe impl InputChainStruct for PhysicalDeviceHdrVividFeaturesHUAWEI {
     const TYPE: StructureType = StructureType::PHYSICAL_DEVICE_HDR_VIVID_FEATURES_HUAWEI;
 
@@ -11241,6 +11298,27 @@ unsafe impl InputChainStruct for PhysicalDeviceIndexTypeUint8Features {
 }
 
 unsafe impl OutputChainStruct for PhysicalDeviceIndexTypeUint8Features {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
+        self.next
+    }
+}
+
+unsafe impl InputChainStruct for PhysicalDeviceInfoPropertiesINTEL {
+    const TYPE: StructureType = StructureType::PHYSICAL_DEVICE_INFO_PROPERTIES_INTEL;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl OutputChainStruct for PhysicalDeviceInfoPropertiesINTEL {
     #[inline]
     fn next_mut(&self) -> *mut c_void {
         self.next
@@ -19687,6 +19765,27 @@ unsafe impl InputChainStruct for SurfaceCapabilitiesFullScreenExclusiveEXT {
 }
 
 unsafe impl OutputChainStruct for SurfaceCapabilitiesFullScreenExclusiveEXT {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
+        self.next
+    }
+}
+
+unsafe impl InputChainStruct for SurfaceCapabilitiesHdrSmpteSt209450GOOGLE {
+    const TYPE: StructureType = StructureType::SURFACE_CAPABILITIES_HDR_SMPTE_ST_209450_GOOGLE;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl OutputChainStruct for SurfaceCapabilitiesHdrSmpteSt209450GOOGLE {
     #[inline]
     fn next_mut(&self) -> *mut c_void {
         self.next
