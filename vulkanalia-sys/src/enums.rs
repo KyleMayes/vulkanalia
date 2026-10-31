@@ -2460,6 +2460,10 @@ impl DriverId {
     pub const MESA_GFXSTREAM: Self = Self(29);
     pub const APE_SOFT: Self = Self(30);
     pub const RESERVED_31: Self = Self(31);
+    pub const APEX: Self = Self(32);
+    pub const NIKKI: Self = Self(33);
+    pub const MOMOTEN: Self = Self(34);
+    pub const AURORA_BOREALIS: Self = Self(35);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -2508,6 +2512,10 @@ impl fmt::Debug for DriverId {
             29 => write!(f, "MESA_GFXSTREAM"),
             30 => write!(f, "APE_SOFT"),
             31 => write!(f, "RESERVED_31"),
+            32 => write!(f, "APEX"),
+            33 => write!(f, "NIKKI"),
+            34 => write!(f, "MOMOTEN"),
+            35 => write!(f, "AURORA_BOREALIS"),
             _ => self.0.fmt(f),
         }
     }
@@ -3788,6 +3796,38 @@ impl fmt::Debug for GpaSampleTypeAMD {
             0 => write!(f, "CUMULATIVE"),
             1 => write!(f, "TRACE"),
             2 => write!(f, "TIMING"),
+            _ => self.0.fmt(f),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkHdrSmpteSt209450PowerPreferenceGOOGLE.html>
+#[repr(transparent)]
+#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
+pub struct HdrSmpteSt209450PowerPreferenceGOOGLE(i32);
+
+impl HdrSmpteSt209450PowerPreferenceGOOGLE {
+    pub const HDR_SMPTE_ST_209450_POWER_PREFERENCE_COLOR_ACCURACY: Self = Self(0);
+    pub const HDR_SMPTE_ST_209450_POWER_PREFERENCE_LOW_POWER: Self = Self(1);
+
+    /// Constructs an instance of this enum with the supplied underlying value.
+    #[inline]
+    pub const fn from_raw(value: i32) -> Self {
+        Self(value)
+    }
+
+    /// Gets the underlying value for this enum instance.
+    #[inline]
+    pub const fn as_raw(self) -> i32 {
+        self.0
+    }
+}
+
+impl fmt::Debug for HdrSmpteSt209450PowerPreferenceGOOGLE {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self.0 {
+            0 => write!(f, "HDR_SMPTE_ST_209450_POWER_PREFERENCE_COLOR_ACCURACY"),
+            1 => write!(f, "HDR_SMPTE_ST_209450_POWER_PREFERENCE_LOW_POWER"),
             _ => self.0.fmt(f),
         }
     }
@@ -8139,6 +8179,7 @@ impl StructureType {
     pub const PHYSICAL_DEVICE_EXTENDED_FLAGS_FEATURES_KHR: Self = Self(1000668004);
     pub const IMAGE_STENCIL_USAGE_2_CREATE_INFO_KHR: Self = Self(1000668005);
     pub const SHARED_PRESENT_SURFACE_CAPABILITIES_2_KHR: Self = Self(1000668006);
+    pub const PHYSICAL_DEVICE_COOPERATIVE_MATRIX_LAYOUTS_FEATURES_ARM: Self = Self(1000670000);
     pub const PHYSICAL_DEVICE_SHADER_OCP_MICROSCALING_TYPES_FEATURES_EXT: Self = Self(1000672000);
     pub const PHYSICAL_DEVICE_SHADER_MIXED_FLOAT_DOT_PRODUCT_FEATURES_VALVE: Self =
         Self(1000673000);
@@ -8150,15 +8191,21 @@ impl StructureType {
     pub const PHYSICAL_DEVICE_DATA_GRAPH_NEURAL_ACCELERATOR_STATISTICS_FEATURES_ARM: Self =
         Self(1000676002);
     pub const PHYSICAL_DEVICE_PRIMITIVE_RESTART_INDEX_FEATURES_EXT: Self = Self(1000678000);
+    pub const PHYSICAL_DEVICE_MAINTENANCE_12_FEATURES_KHR: Self = Self(1000680000);
+    pub const PHYSICAL_DEVICE_MAINTENANCE_12_PROPERTIES_KHR: Self = Self(1000680001);
     pub const PHYSICAL_DEVICE_IMAGE_TILING_CONTROL_FEATURES_EXT: Self = Self(1000687000);
     pub const IMAGE_TILING_CONTROL_CREATE_INFO_EXT: Self = Self(1000687001);
     pub const PHYSICAL_DEVICE_COOPERATIVE_MATRIX_DECODE_VECTOR_FEATURES_NV: Self = Self(1000689000);
     pub const PHYSICAL_DEVICE_PRIVATE_DATA_BASE_HANDLE_FEATURES_NV: Self = Self(1000707000);
+    pub const PHYSICAL_DEVICE_INFO_PROPERTIES_INTEL: Self = Self(1000708000);
     pub const PHYSICAL_DEVICE_BUFFER_DEVICE_ADDRESS_ALLOCATION_ALIGNMENT_FEATURES_VALVE: Self =
         Self(1000709000);
     pub const PHYSICAL_DEVICE_BUFFER_DEVICE_ADDRESS_ALLOCATION_ALIGNMENT_PROPERTIES_VALVE: Self =
         Self(1000709001);
     pub const BUFFER_DEVICE_ADDRESS_ALIGNMENT_ALLOCATE_INFO_VALVE: Self = Self(1000709002);
+    pub const PHYSICAL_DEVICE_HDR_SMPTE_ST_209450_FEATURES_GOOGLE: Self = Self(1000718000);
+    pub const HDR_SMPTE_ST_209450_GOOGLE: Self = Self(1000718001);
+    pub const SURFACE_CAPABILITIES_HDR_SMPTE_ST_209450_GOOGLE: Self = Self(1000718002);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -9759,6 +9806,7 @@ impl fmt::Debug for StructureType {
             1000668004 => write!(f, "PHYSICAL_DEVICE_EXTENDED_FLAGS_FEATURES_KHR"),
             1000668005 => write!(f, "IMAGE_STENCIL_USAGE_2_CREATE_INFO_KHR"),
             1000668006 => write!(f, "SHARED_PRESENT_SURFACE_CAPABILITIES_2_KHR"),
+            1000670000 => write!(f, "PHYSICAL_DEVICE_COOPERATIVE_MATRIX_LAYOUTS_FEATURES_ARM"),
             1000672000 => write!(
                 f,
                 "PHYSICAL_DEVICE_SHADER_OCP_MICROSCALING_TYPES_FEATURES_EXT"
@@ -9779,6 +9827,8 @@ impl fmt::Debug for StructureType {
                 "PHYSICAL_DEVICE_DATA_GRAPH_NEURAL_ACCELERATOR_STATISTICS_FEATURES_ARM"
             ),
             1000678000 => write!(f, "PHYSICAL_DEVICE_PRIMITIVE_RESTART_INDEX_FEATURES_EXT"),
+            1000680000 => write!(f, "PHYSICAL_DEVICE_MAINTENANCE_12_FEATURES_KHR"),
+            1000680001 => write!(f, "PHYSICAL_DEVICE_MAINTENANCE_12_PROPERTIES_KHR"),
             1000687000 => write!(f, "PHYSICAL_DEVICE_IMAGE_TILING_CONTROL_FEATURES_EXT"),
             1000687001 => write!(f, "IMAGE_TILING_CONTROL_CREATE_INFO_EXT"),
             1000689000 => write!(
@@ -9786,6 +9836,7 @@ impl fmt::Debug for StructureType {
                 "PHYSICAL_DEVICE_COOPERATIVE_MATRIX_DECODE_VECTOR_FEATURES_NV"
             ),
             1000707000 => write!(f, "PHYSICAL_DEVICE_PRIVATE_DATA_BASE_HANDLE_FEATURES_NV"),
+            1000708000 => write!(f, "PHYSICAL_DEVICE_INFO_PROPERTIES_INTEL"),
             1000709000 => write!(
                 f,
                 "PHYSICAL_DEVICE_BUFFER_DEVICE_ADDRESS_ALLOCATION_ALIGNMENT_FEATURES_VALVE"
@@ -9795,6 +9846,9 @@ impl fmt::Debug for StructureType {
                 "PHYSICAL_DEVICE_BUFFER_DEVICE_ADDRESS_ALLOCATION_ALIGNMENT_PROPERTIES_VALVE"
             ),
             1000709002 => write!(f, "BUFFER_DEVICE_ADDRESS_ALIGNMENT_ALLOCATE_INFO_VALVE"),
+            1000718000 => write!(f, "PHYSICAL_DEVICE_HDR_SMPTE_ST_209450_FEATURES_GOOGLE"),
+            1000718001 => write!(f, "HDR_SMPTE_ST_209450_GOOGLE"),
+            1000718002 => write!(f, "SURFACE_CAPABILITIES_HDR_SMPTE_ST_209450_GOOGLE"),
             _ => self.0.fmt(f),
         }
     }
@@ -10235,6 +10289,7 @@ impl VendorId {
     pub const POCL: Self = Self(65542);
     pub const MOBILEYE: Self = Self(65543);
     pub const APE: Self = Self(65544);
+    pub const APEX: Self = Self(65545);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -10261,6 +10316,7 @@ impl fmt::Debug for VendorId {
             65542 => write!(f, "POCL"),
             65543 => write!(f, "MOBILEYE"),
             65544 => write!(f, "APE"),
+            65545 => write!(f, "APEX"),
             _ => self.0.fmt(f),
         }
     }
