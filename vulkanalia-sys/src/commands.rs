@@ -3564,6 +3564,10 @@ pub type PFN_vkGetClusterAccelerationStructureBuildSizesNV = unsafe extern "syst
     _size_info: *mut AccelerationStructureBuildSizesInfoKHR,
 );
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetCommandBufferInternalHandleNV.html>
+pub type PFN_vkGetCommandBufferInternalHandleNV =
+    unsafe extern "system" fn(_command_buffer: CommandBuffer, _handle: *mut VkInternalHandleNV);
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetCudaModuleCacheNV.html>
 pub type PFN_vkGetCudaModuleCacheNV = unsafe extern "system" fn(
     _device: Device,
@@ -3762,6 +3766,10 @@ pub type PFN_vkGetDeviceImageSubresourceLayout = unsafe extern "system" fn(
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetDeviceImageSubresourceLayoutKHR.html>
 pub type PFN_vkGetDeviceImageSubresourceLayoutKHR = PFN_vkGetDeviceImageSubresourceLayout;
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetDeviceInternalHandleNV.html>
+pub type PFN_vkGetDeviceInternalHandleNV =
+    unsafe extern "system" fn(_device: Device, _handle: *mut VkInternalHandleNV);
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetDeviceMemoryCommitment.html>
 pub type PFN_vkGetDeviceMemoryCommitment = unsafe extern "system" fn(
@@ -4459,6 +4467,10 @@ pub type PFN_vkGetPhysicalDeviceImageFormatProperties2 = unsafe extern "system" 
 pub type PFN_vkGetPhysicalDeviceImageFormatProperties2KHR =
     PFN_vkGetPhysicalDeviceImageFormatProperties2;
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetPhysicalDeviceInternalHandleNV.html>
+pub type PFN_vkGetPhysicalDeviceInternalHandleNV =
+    unsafe extern "system" fn(_physical_device: PhysicalDevice, _handle: *mut VkInternalHandleNV);
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetPhysicalDeviceMemoryProperties.html>
 pub type PFN_vkGetPhysicalDeviceMemoryProperties = unsafe extern "system" fn(
     _physical_device: PhysicalDevice,
@@ -4864,6 +4876,10 @@ pub type PFN_vkGetQueueCheckpointDataNV = unsafe extern "system" fn(
     _checkpoint_data_count: *mut u32,
     _checkpoint_data: *mut CheckpointDataNV,
 );
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetQueueInternalHandleNV.html>
+pub type PFN_vkGetQueueInternalHandleNV =
+    unsafe extern "system" fn(_queue: Queue, _handle: *mut VkInternalHandleNV);
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetRandROutputDisplayEXT.html>
 pub type PFN_vkGetRandROutputDisplayEXT = unsafe extern "system" fn(
