@@ -538,6 +538,7 @@ pub struct DeviceCommands {
     pub get_calibrated_timestamps_khr: PFN_vkGetCalibratedTimestampsKHR,
     pub get_cluster_acceleration_structure_build_sizes_nv:
         PFN_vkGetClusterAccelerationStructureBuildSizesNV,
+    pub get_command_buffer_internal_handle_nv: PFN_vkGetCommandBufferInternalHandleNV,
     pub get_cuda_module_cache_nv: PFN_vkGetCudaModuleCacheNV,
     pub get_data_graph_pipeline_available_properties_arm:
         PFN_vkGetDataGraphPipelineAvailablePropertiesARM,
@@ -576,6 +577,7 @@ pub struct DeviceCommands {
         PFN_vkGetDeviceImageSparseMemoryRequirementsKHR,
     pub get_device_image_subresource_layout: PFN_vkGetDeviceImageSubresourceLayout,
     pub get_device_image_subresource_layout_khr: PFN_vkGetDeviceImageSubresourceLayoutKHR,
+    pub get_device_internal_handle_nv: PFN_vkGetDeviceInternalHandleNV,
     pub get_device_memory_commitment: PFN_vkGetDeviceMemoryCommitment,
     pub get_device_memory_opaque_capture_address: PFN_vkGetDeviceMemoryOpaqueCaptureAddress,
     pub get_device_memory_opaque_capture_address_khr: PFN_vkGetDeviceMemoryOpaqueCaptureAddressKHR,
@@ -661,6 +663,7 @@ pub struct DeviceCommands {
     pub get_query_pool_results: PFN_vkGetQueryPoolResults,
     pub get_queue_checkpoint_data2_nv: PFN_vkGetQueueCheckpointData2NV,
     pub get_queue_checkpoint_data_nv: PFN_vkGetQueueCheckpointDataNV,
+    pub get_queue_internal_handle_nv: PFN_vkGetQueueInternalHandleNV,
     pub get_ray_tracing_capture_replay_shader_group_handles_khr:
         PFN_vkGetRayTracingCaptureReplayShaderGroupHandlesKHR,
     pub get_ray_tracing_shader_group_handles_khr: PFN_vkGetRayTracingShaderGroupHandlesKHR,
@@ -8332,6 +8335,20 @@ impl DeviceCommands {
                     fallback
                 }
             },
+            get_command_buffer_internal_handle_nv: {
+                let value = loader(c"vkGetCommandBufferInternalHandleNV".as_ptr());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _handle: *mut VkInternalHandleNV,
+                    ) {
+                        panic!("could not load vkGetCommandBufferInternalHandleNV")
+                    }
+                    fallback
+                }
+            },
             get_cuda_module_cache_nv: {
                 let value = loader(c"vkGetCudaModuleCacheNV".as_ptr());
                 if let Some(value) = value {
@@ -8820,6 +8837,20 @@ impl DeviceCommands {
                         _layout: *mut SubresourceLayout2,
                     ) {
                         panic!("could not load vkGetDeviceImageSubresourceLayoutKHR")
+                    }
+                    fallback
+                }
+            },
+            get_device_internal_handle_nv: {
+                let value = loader(c"vkGetDeviceInternalHandleNV".as_ptr());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _handle: *mut VkInternalHandleNV,
+                    ) {
+                        panic!("could not load vkGetDeviceInternalHandleNV")
                     }
                     fallback
                 }
@@ -10009,6 +10040,20 @@ impl DeviceCommands {
                         _checkpoint_data: *mut CheckpointDataNV,
                     ) {
                         panic!("could not load vkGetQueueCheckpointDataNV")
+                    }
+                    fallback
+                }
+            },
+            get_queue_internal_handle_nv: {
+                let value = loader(c"vkGetQueueInternalHandleNV".as_ptr());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _queue: Queue,
+                        _handle: *mut VkInternalHandleNV,
+                    ) {
+                        panic!("could not load vkGetQueueInternalHandleNV")
                     }
                     fallback
                 }
@@ -11968,6 +12013,7 @@ pub struct InstanceCommands {
     pub get_physical_device_image_format_properties2: PFN_vkGetPhysicalDeviceImageFormatProperties2,
     pub get_physical_device_image_format_properties2_khr:
         PFN_vkGetPhysicalDeviceImageFormatProperties2KHR,
+    pub get_physical_device_internal_handle_nv: PFN_vkGetPhysicalDeviceInternalHandleNV,
     pub get_physical_device_memory_properties: PFN_vkGetPhysicalDeviceMemoryProperties,
     pub get_physical_device_memory_properties2: PFN_vkGetPhysicalDeviceMemoryProperties2,
     pub get_physical_device_memory_properties2_khr: PFN_vkGetPhysicalDeviceMemoryProperties2KHR,
@@ -13276,6 +13322,20 @@ impl InstanceCommands {
                         _image_format_properties: *mut ImageFormatProperties2,
                     ) -> Result {
                         panic!("could not load vkGetPhysicalDeviceImageFormatProperties2KHR")
+                    }
+                    fallback
+                }
+            },
+            get_physical_device_internal_handle_nv: {
+                let value = loader(c"vkGetPhysicalDeviceInternalHandleNV".as_ptr());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _physical_device: PhysicalDevice,
+                        _handle: *mut VkInternalHandleNV,
+                    ) {
+                        panic!("could not load vkGetPhysicalDeviceInternalHandleNV")
                     }
                     fallback
                 }

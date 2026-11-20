@@ -12323,6 +12323,69 @@ pub trait NvFragmentShadingRateEnumsExtensionDeviceCommands: DeviceV1_0 {
 
 impl<C: DeviceV1_0 + ?Sized> NvFragmentShadingRateEnumsExtensionDeviceCommands for C {}
 
+/// The device-level commands added by [`NV_INTERNAL_HANDLE_EXTENSION`].
+pub trait NvInternalHandleExtensionDeviceCommands: DeviceV1_0 {
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetCommandBufferInternalHandleNV.html>
+    #[inline]
+    unsafe fn get_command_buffer_internal_handle_nv(
+        &self,
+        command_buffer: CommandBuffer,
+    ) -> VkInternalHandleNV {
+        let mut handle = MaybeUninit::<VkInternalHandleNV>::uninit();
+
+        let __result = (self.commands().get_command_buffer_internal_handle_nv)(
+            command_buffer,
+            handle.as_mut_ptr(),
+        );
+
+        handle.assume_init()
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetDeviceInternalHandleNV.html>
+    #[inline]
+    unsafe fn get_device_internal_handle_nv(&self) -> VkInternalHandleNV {
+        let mut handle = MaybeUninit::<VkInternalHandleNV>::uninit();
+
+        let __result =
+            (self.commands().get_device_internal_handle_nv)(self.handle(), handle.as_mut_ptr());
+
+        handle.assume_init()
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetQueueInternalHandleNV.html>
+    #[inline]
+    unsafe fn get_queue_internal_handle_nv(&self, queue: Queue) -> VkInternalHandleNV {
+        let mut handle = MaybeUninit::<VkInternalHandleNV>::uninit();
+
+        let __result = (self.commands().get_queue_internal_handle_nv)(queue, handle.as_mut_ptr());
+
+        handle.assume_init()
+    }
+}
+
+impl<C: DeviceV1_0 + ?Sized> NvInternalHandleExtensionDeviceCommands for C {}
+
+/// The instance-level commands added by [`NV_INTERNAL_HANDLE_EXTENSION`].
+pub trait NvInternalHandleExtensionInstanceCommands: InstanceV1_0 {
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetPhysicalDeviceInternalHandleNV.html>
+    #[inline]
+    unsafe fn get_physical_device_internal_handle_nv(
+        &self,
+        physical_device: PhysicalDevice,
+    ) -> VkInternalHandleNV {
+        let mut handle = MaybeUninit::<VkInternalHandleNV>::uninit();
+
+        let __result = (self.commands().get_physical_device_internal_handle_nv)(
+            physical_device,
+            handle.as_mut_ptr(),
+        );
+
+        handle.assume_init()
+    }
+}
+
+impl<C: InstanceV1_0 + ?Sized> NvInternalHandleExtensionInstanceCommands for C {}
+
 /// The device-level commands added by [`NV_LOW_LATENCY_EXTENSION`].
 pub trait NvLowLatencyExtensionDeviceCommands: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetLatencyTimingsLegacyNV.html>
