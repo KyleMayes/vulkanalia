@@ -81,6 +81,30 @@ pub const AMDX_DENSE_GEOMETRY_FORMAT_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_AMDX_multi_level_acceleration_structure.html>
+///
+/// ## WARNING
+///
+/// This is a
+/// [provisional extension](https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/provisional-headers.html).
+/// Provisional extensions are not guaranteed to be backwards compatible and are
+/// not intended to be used in production applications.
+#[cfg(feature = "provisional")]
+#[allow(deprecated)]
+pub const AMDX_MULTI_LEVEL_ACCELERATION_STRUCTURE_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_AMDX_multi_level_acceleration_structure"),
+    number: 649,
+    type_: "device",
+    author: "AMD",
+    contact: "Stu Smith @stu-s",
+    platform: Some("provisional"),
+    required_extensions: None,
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_AMDX_shader_enqueue.html>
 ///
 /// ## WARNING
@@ -516,6 +540,22 @@ pub const ANDROID_EXTERNAL_MEMORY_ANDROID_HARDWARE_BUFFER_EXTENSION: Extension =
     author: "ANDROID",
     contact: "Jesse Hall @critsec",
     platform: Some("android"),
+    required_extensions: None,
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_ARM_cooperative_matrix_layouts.html>
+#[allow(deprecated)]
+pub const ARM_COOPERATIVE_MATRIX_LAYOUTS_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_ARM_cooperative_matrix_layouts"),
+    number: 671,
+    type_: "device",
+    author: "ARM",
+    contact: "Kevin Petit @kevinpetit",
+    platform: None,
     required_extensions: None,
     required_version: None,
     deprecated_by: None,
@@ -3122,6 +3162,22 @@ pub const EXT_VALIDATION_FLAGS_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_vertex_address_binding_unrestricted.html>
+#[allow(deprecated)]
+pub const EXT_VERTEX_ADDRESS_BINDING_UNRESTRICTED_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_EXT_vertex_address_binding_unrestricted"),
+    number: 680,
+    type_: "device",
+    author: "EXT",
+    contact: "Mike Blumenkrantz @zmike",
+    platform: None,
+    required_extensions: None,
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_vertex_attribute_divisor.html>
 #[allow(deprecated)]
 pub const EXT_VERTEX_ATTRIBUTE_DIVISOR_EXTENSION: Extension = Extension {
@@ -3346,6 +3402,22 @@ pub const GOOGLE_DISPLAY_TIMING_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_GOOGLE_hdr_smpte_st_209450_metadata.html>
+#[allow(deprecated)]
+pub const GOOGLE_HDR_SMPTE_ST_209450_METADATA_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_GOOGLE_hdr_smpte_st_209450_metadata"),
+    number: 719,
+    type_: "device",
+    author: "GOOGLE",
+    contact: "Christopher Cameron @ccameron",
+    platform: None,
+    required_extensions: None,
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_GOOGLE_hlsl_functionality1.html>
 #[allow(deprecated)]
 pub const GOOGLE_HLSL_FUNCTIONALITY1_EXTENSION: Extension = Extension {
@@ -3515,6 +3587,22 @@ pub const IMG_RELAXED_LINE_RASTERIZATION_EXTENSION: Extension = Extension {
     type_: "device",
     author: "IMG",
     contact: "James Fitzpatrick @jamesfitzpatrick",
+    platform: None,
+    required_extensions: None,
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_INTEL_device_info.html>
+#[allow(deprecated)]
+pub const INTEL_DEVICE_INFO_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_INTEL_device_info"),
+    number: 709,
+    type_: "device",
+    author: "INTEL",
+    contact: "Jakub Szymczyk @jakubszy",
     platform: None,
     required_extensions: None,
     required_version: None,
@@ -4472,6 +4560,22 @@ pub const KHR_MAINTENANCE10_EXTENSION: Extension = Extension {
 pub const KHR_MAINTENANCE11_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_maintenance11"),
     number: 658,
+    type_: "device",
+    author: "KHR",
+    contact: "Mike Blumenkrantz @zmike",
+    platform: None,
+    required_extensions: None,
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_maintenance12.html>
+#[allow(deprecated)]
+pub const KHR_MAINTENANCE12_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_KHR_maintenance12"),
+    number: 681,
     type_: "device",
     author: "KHR",
     contact: "Mike Blumenkrantz @zmike",
@@ -6780,6 +6884,22 @@ pub const NV_INHERITED_VIEWPORT_SCISSOR_EXTENSION: Extension = Extension {
     type_: "device",
     author: "NV",
     contact: "David Zhao Akeley @akeley98",
+    platform: None,
+    required_extensions: None,
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_internal_handle.html>
+#[allow(deprecated)]
+pub const NV_INTERNAL_HANDLE_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_NV_internal_handle"),
+    number: 668,
+    type_: "device",
+    author: "NV",
+    contact: "Chris Lentini @clentini",
     platform: None,
     required_extensions: None,
     required_version: None,
